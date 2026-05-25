@@ -1,0 +1,496 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Métodos de Separación | Química 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #22C55E; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #22C55E; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #22C55E; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #22C55E; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(34,197,94,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(34,197,94,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(34,197,94,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #22C55E;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-quimica { width: 60px; height: 2px; background: linear-gradient(90deg, #22C55E, transparent); }
+    .method-card {
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s ease;
+    }
+    .method-card:hover {
+      border-color: rgba(34,197,94,0.2);
+    }
+    .sabias-que { border-left:3px solid #22C55E; background:rgba(34,197,94,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#22C55E; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Mezclas</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-leaf font-semibold">Separación</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Mezclas</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/separation-methods-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-quimica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-leaf" style="font-family: 'Inter', sans-serif;">Química · Mezclas</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Métodos de <span class="text-natura-leaf">Separación</span></h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">Cada mezcla se separa con la técnica adecuada. Conocé los métodos físicos para recuperar los componentes puros.</p>
+    <div class="flex flex-wrap gap-3 mt-5">
+      <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-3 py-1">Filtración</span>
+      <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-3 py-1">Destilación</span>
+      <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-3 py-1">Cromatografía</span>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-3xl mx-auto px-4 md:px-6 py-8 space-y-10">
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:split" data-width="22"></span>
+      ¿Por qué separar?
+    </h2>
+    <p class="article-dropcap text-natura-silver leading-relaxed mb-4">
+      Una de las propiedades más importantes de las mezclas es que sus componentes pueden separarse mediante <strong class="text-natura-leaf">métodos físicos</strong>. Esto las diferencia de los compuestos, que requieren reacciones químicas para descomponerse. Conocer estos métodos es fundamental tanto en el laboratorio como en la industria y en la vida cotidiana.
+    </p>
+    <div class="pull-quote">
+      &laquo;El arte de la química no es solo combinar sustancias, sino también saber separarlas para obtener materiales puros.&raquo;
+    </div>
+    <p class="text-natura-silver leading-relaxed">
+      Cada método de separación aprovecha una <strong class="text-white">propiedad física</strong> diferente: el tamaño de partícula, la densidad, el punto de ebullición, la solubilidad o las propiedades magnéticas. Elegir el método correcto depende de qué tipo de mezcla tenemos y qué componentes queremos separar.
+    </p>
+    <div class="figure-placeholder">
+      <span class="iconify text-3xl mb-2" data-icon="lucide:flask-round" data-width="36"></span>
+      <p>Ilustración: Técnicas de separación en el laboratorio.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-6 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:wrench" data-width="22"></span>
+      Métodos según el tipo de mezcla
+    </h2>
+
+    <div class="method-card bg-natura-dark rounded-lg p-5 mb-4">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-natura-leaf/10 flex items-center justify-center flex-shrink-0">
+          <span class="iconify text-natura-leaf text-xl" data-icon="lucide:filter" data-width="20"></span>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-white mb-1">Filtración</h3>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Para qué sirve?</strong> Separar un <strong class="text-natura-leaf">sólido insoluble</strong> de un <strong class="text-natura-leaf">líquido</strong>. Ejemplo clásico: arena y agua.</p>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Cómo funciona?</strong> La mezcla se hace pasar a través de un material poroso (papel de filtro, colador, tela) que retiene las partículas sólidas y deja pasar el líquido. El sólido retenido se llama <strong class="text-natura-leaf">residuo</strong> y el líquido que pasa se llama <strong class="text-natura-leaf">filtrado</strong>.</p>
+          <p class="text-natura-silverDark text-xs"><span class="iconify inline align-middle mr-1" data-icon="lucide:lightbulb" data-width="12"></span><em>En casa: colar los fideos, filtrar café, usar un colador de té.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-card bg-natura-dark rounded-lg p-5 mb-4">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-natura-leaf/10 flex items-center justify-center flex-shrink-0">
+          <span class="iconify text-natura-leaf text-xl" data-icon="lucide:wine" data-width="20"></span>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-white mb-1">Decantación</h3>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Para qué sirve?</strong> Separar <strong class="text-natura-leaf">líquidos inmiscibles</strong> (que no se mezclan) con distinta densidad. Ejemplo: agua y aceite.</p>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Cómo funciona?</strong> Se deja reposar la mezcla hasta que el líquido más denso va al fondo y el menos denso queda arriba. Luego se usa una <strong class="text-natura-leaf">ampolla de decantación</strong> (embudo con llave) para separar ambos líquidos abriendo la llave y dejando salir primero el líquido de abajo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-card bg-natura-dark rounded-lg p-5 mb-4">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-natura-leaf/10 flex items-center justify-center flex-shrink-0">
+          <span class="iconify text-natura-leaf text-xl" data-icon="lucide:grid" data-width="20"></span>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-white mb-1">Tamizado</h3>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Para qué sirve?</strong> Separar <strong class="text-natura-leaf">sólidos de distinto tamaño</strong>. Ejemplo: harina y piedritas, arena y grava.</p>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Cómo funciona?</strong> Se hace pasar la mezcla por un tamiz (colador de malla). Las partículas más pequeñas atraviesan los orificios y las más grandes quedan retenidas. Es uno de los métodos más antiguos usados por la humanidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-card bg-natura-dark rounded-lg p-5 mb-4">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-natura-leaf/10 flex items-center justify-center flex-shrink-0">
+          <span class="iconify text-natura-leaf text-xl" data-icon="lucide:magnet" data-width="20"></span>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-white mb-1">Imantación (separación magnética)</h3>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Para qué sirve?</strong> Separar mezclas donde <strong class="text-natura-leaf">un componente es magnético</strong> (hierro, níquel, cobalto). Ejemplo: arena con limaduras de hierro.</p>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Cómo funciona?</strong> Se acerca un imán a la mezcla y el material magnético es atraído, separándose del resto. Se usa industrialmente para reciclar metales y en minería.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-card bg-natura-dark rounded-lg p-5 mb-4">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-natura-leaf/10 flex items-center justify-center flex-shrink-0">
+          <span class="iconify text-natura-leaf text-xl" data-icon="lucide:flame" data-width="20"></span>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-white mb-1">Destilación</h3>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Para qué sirve?</strong> Separar <strong class="text-natura-leaf">líquidos con distinto punto de ebullición</strong> o un líquido de un sólido disuelto. Ejemplo: agua y alcohol, o separar agua de la sal disuelta.</p>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Cómo funciona?</strong> La mezcla se calienta. El componente con menor punto de ebullición se evapora primero. Ese vapor pasa por un tubo refrigerante (condensador) donde se enfría y vuelve a estado líquido, recogiéndose en otro recipiente. Es <strong class="text-natura-leaf">evaporación + condensación</strong>.</p>
+          <p class="text-natura-silverDark text-xs"><span class="iconify inline align-middle mr-1" data-icon="lucide:lightbulb" data-width="12"></span><em>Se usa para obtener agua destilada, bebidas alcohólicas, y en la refinación del petróleo (destilación fraccionada).</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-card bg-natura-dark rounded-lg p-5 mb-4">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-natura-leaf/10 flex items-center justify-center flex-shrink-0">
+          <span class="iconify text-natura-leaf text-xl" data-icon="lucide:palette" data-width="20"></span>
+        </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold text-white mb-1">Cromatografía</h3>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Para qué sirve?</strong> Separar componentes de una mezcla según su <strong class="text-natura-leaf">afinidad</strong> por un medio (fase estacionaria). Ejemplo clásico: separar los pigmentos de una tinta o de las hojas verdes.</p>
+          <p class="text-natura-silver text-base leading-relaxed mb-2"><strong class="text-white">¿Cómo funciona?</strong> Se coloca una gota de la mezcla sobre un papel de filtro y se sumerge el borde en un solvente. El solvente asciende por capilaridad y arrastra los componentes a distintas velocidades según su afinidad, separándolos en bandas de colores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:table" data-width="22"></span>
+      Tabla resumen
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="py-3 px-4 text-natura-leaf font-ui text-[11px] uppercase tracking-wider font-semibold">Método</th>
+            <th class="py-3 px-4 text-natura-leaf font-ui text-[11px] uppercase tracking-wider font-semibold">¿Qué separa?</th>
+            <th class="py-3 px-4 text-natura-leaf font-ui text-[11px] uppercase tracking-wider font-semibold">Propiedad usada</th>
+            <th class="py-3 px-4 text-natura-leaf font-ui text-[11px] uppercase tracking-wider font-semibold">Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4 text-white font-semibold">Filtración</td>
+            <td class="py-3 px-4 text-natura-silver">Sólido insoluble + líquido</td>
+            <td class="py-3 px-4 text-natura-silver">Tamaño de partícula</td>
+            <td class="py-3 px-4 text-natura-silver">Arena y agua</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4 text-white font-semibold">Decantación</td>
+            <td class="py-3 px-4 text-natura-silver">Líquidos inmiscibles</td>
+            <td class="py-3 px-4 text-natura-silver">Densidad</td>
+            <td class="py-3 px-4 text-natura-silver">Agua y aceite</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4 text-white font-semibold">Tamizado</td>
+            <td class="py-3 px-4 text-natura-silver">Sólidos de distinto tamaño</td>
+            <td class="py-3 px-4 text-natura-silver">Tamaño de partícula</td>
+            <td class="py-3 px-4 text-natura-silver">Harina y piedritas</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4 text-white font-semibold">Imantación</td>
+            <td class="py-3 px-4 text-natura-silver">Componente magnético</td>
+            <td class="py-3 px-4 text-natura-silver">Magnetismo</td>
+            <td class="py-3 px-4 text-natura-silver">Arena + limaduras de Fe</td>
+          </tr>
+          <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4 text-white font-semibold">Destilación</td>
+            <td class="py-3 px-4 text-natura-silver">Líquidos con distinto p.e.</td>
+            <td class="py-3 px-4 text-natura-silver">Punto de ebullición</td>
+            <td class="py-3 px-4 text-natura-silver">Agua y alcohol</td>
+          </tr>
+          <tr class="hover:bg-white/[0.02] transition-colors">
+            <td class="py-3 px-4 text-white font-semibold">Cromatografía</td>
+            <td class="py-3 px-4 text-natura-silver">Mezclas complejas</td>
+            <td class="py-3 px-4 text-natura-silver">Afinidad química</td>
+            <td class="py-3 px-4 text-natura-silver">Tintas, pigmentos</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="sabias-que">
+    <span class="sq-label">Sabías que...</span>
+    <p>La destilación se usa para separar el alcohol del agua. Como el alcohol hierve a 78°C y el agua a 100°C, se evaporan por separado. Este método permite producir bebidas destiladas y combustibles.</p>
+  </div>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:brain" data-width="22"></span>
+      Preguntas para pensar
+    </h2>
+    <div class="space-y-4">
+      <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+        <p class="text-natura-silver text-base leading-relaxed mb-2"><span class="text-natura-leaf font-ui font-bold mr-2">1.</span>Tenés una mezcla de agua, sal disuelta y arena. ¿Qué método(s) usarías para separar todos los componentes? Describí el orden.</p>
+        <details class="mt-2">
+          <summary class="text-natura-leaf text-xs font-ui cursor-pointer hover:text-white transition-colors">Ver respuesta</summary>
+          <p class="text-natura-silverDark text-base mt-2 leading-relaxed"><strong class="text-natura-silverLight">Paso 1: Filtración.</strong> La arena (sólido insoluble) queda en el filtro. El agua con sal disuelta pasa como filtrado. <strong class="text-natura-silverLight">Paso 2: Destilación (o evaporación).</strong> Se calienta el filtrado. El agua se evapora y se condensa (agua destilada) y la sal queda como residuo sólido. ¡Recuperamos los tres componentes!</p>
+        </details>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+        <p class="text-natura-silver text-base leading-relaxed mb-2"><span class="text-natura-leaf font-ui font-bold mr-2">2.</span>¿Qué diferencia hay entre evaporación y destilación como métodos de separación?</p>
+        <details class="mt-2">
+          <summary class="text-natura-leaf text-xs font-ui cursor-pointer hover:text-white transition-colors">Ver respuesta</summary>
+          <p class="text-natura-silverDark text-base mt-2 leading-relaxed">En la <strong class="text-natura-silverLight">evaporación</strong> el líquido se va y <strong class="text-natura-silverLight">no se recupera</strong> (solo obtenemos el sólido disuelto). En la <strong class="text-natura-silverLight">destilación</strong> el vapor se condensa y <strong class="text-natura-silverLight">se recuperan ambos componentes</strong> (el líquido destilado y lo que queda en el matraz). La destilación es más completa.</p>
+        </details>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+        <p class="text-natura-silver text-base leading-relaxed mb-2"><span class="text-natura-leaf font-ui font-bold mr-2">3.</span>¿Por qué no se puede usar filtración para separar agua con sal disuelta?</p>
+        <details class="mt-2">
+          <summary class="text-natura-leaf text-xs font-ui cursor-pointer hover:text-white transition-colors">Ver respuesta</summary>
+          <p class="text-natura-silverDark text-base mt-2 leading-relaxed">Porque la sal está <strong class="text-natura-silverLight">disuelta</strong>, no en suspensión. Las partículas de sal son tan pequeñas (iones Na? y Cl?) que atraviesan cualquier filtro. La filtración solo retiene partículas sólidas que no están disueltas. Para separar agua y sal necesitamos destilación o evaporación.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="tipos-mezclas.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-leaf transition-colors group">
+      <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Tipos de Mezclas</span>
+    </a>
+    <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+      <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+      <span>Mezclas</span>
+    </a>
+    <a href="mezclas-naturaleza.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-leaf transition-colors group">
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Naturaleza</span>
+      <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+    </a>
+  </div>
+
+</main>
+
+<footer class="border-t border-white/5 py-8 mt-4">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span> Inicio
+        </a>
+        <span class="text-natura-silverDark">·</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+        <span class="text-natura-silverDark">·</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Mezclas</a>
+      </div>
+      <p class="text-natura-silverDark text-xs font-ui">Ciencias Naturales · 1° año · Biología &amp; Química</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Sustancias",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/sustancias.html",c:"#22C55E"},
+    {n:"Materiales",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/materiales.html",c:"#22C55E"},
+    {n:"Medicion",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/medicion.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/separacion.html",c:"#22C55E"},
+    {n:"Mezclas en la naturaleza",u:"Quimica",s:"Mezclas",l:"../mezclas/mezclas-naturaleza.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Usos y contaminacion del agua",u:"Quimica",s:"Agua",l:"../agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion del agua",u:"Quimica",s:"Agua",l:"../agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Comportamiento de materiales",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento rectilineo uniforme",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos del movimiento",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecificas",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion de los animales",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Alimentacion humana",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/alimentacion.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Musculos",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/musculos.html",c:"#DC2626"},
+    {n:"Pancreas",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/pancreas.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Rinones",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/rinones.html",c:"#DC2626"},
+    {n:"Sistema urinario",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/urinario.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../podcast/",c:"#E8A87C"},
+    {n:"ESI - Educacion Sexual Integral",u:"ESI",s:"ESI",l:"../../esi.html",c:"#14B8A6"},
+    {n:"EAI - Educacion Ambiental Integral",u:"EAI",s:"EAI",l:"../../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas. Proba con otra palabra.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+
+</body>
+</html>

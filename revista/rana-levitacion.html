@@ -1,0 +1,482 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Rana que Voló — IG Nobel 2000 | Revista</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <!-- Playfair Display for headings (NG style), Cormorant Garamond for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            revista: {
+              bg: '#0C100E',
+              paper: '#141A16',
+              paperLight: '#1A221E',
+              gold: '#F97316',
+              goldLight: '#FB923C',
+              goldDark: '#EA580C',
+              text: '#D4D0C8',
+              textMuted: '#9A958A',
+              textDim: '#6B665E',
+              accent: '#8B5E3C',
+              red: '#C0392B',
+              line: '#2A2820',
+            }
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #F97316; color: #0C100E; }
+    body { font-family: '"Cormorant Garamond"', Georgia, serif; background: #0C100E; color: #D4D0C8; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0C100E; }
+    ::-webkit-scrollbar-thumb { background: #F97316; border-radius: 3px; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-fadeIn { animation: fadeIn 0.6s ease forwards; }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+
+    .article-dropcap::first-letter {
+      float: left;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem;
+      line-height: 0.75;
+      padding-right: 12px;
+      padding-top: 4px;
+      color: #F97316;
+      font-weight: 700;
+    }
+
+    .article-card {
+      border: 1px solid rgba(201, 169, 110, 0.1);
+      transition: all 0.4s ease;
+    }
+    .article-card:hover {
+      border-color: rgba(201, 169, 110, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .accent-line-revista {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, #F97316, transparent);
+    }
+
+    .figure-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: #9A958A;
+    }
+
+    .pullquote {
+      font-family: 'Playfair Display', Georgia, serif;
+      border-left: 3px solid #F97316;
+      padding-left: 20px;
+    }
+    .img-hover { transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: zoom-in; }
+    .img-hover:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+  .sabias-que { border-left:3px solid #F97316; background:rgba(249,115,22,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+  .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#F97316; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#D4D0C8; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(249,115,22,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#9A958A; }
+.search-overlay-results { margin-top:8px; background:#141A16; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#D4D0C8; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#9A958A; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#9A958A; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body class="min-h-screen" style="font-family: 'Cormorant Garamond', Georgia, serif; background: #0C100E; color: #D4D0C8;">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#F97316;width:0%;transition:width 0.15s ease-out;"></div>
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-revista-textDim" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-revista-textDim hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(12,16,14,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(249,115,22,0.1);">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="text-revista-textDim hover:text-revista-gold transition-colors flex items-center gap-1" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-revista-textDim">/</span>
+        <a href="index.html" class="text-revista-gold font-semibold" style="font-family: 'Inter', sans-serif; font-size: 12px;">Revista</a>
+        <span class="text-revista-textDim">/</span>
+        <span class="text-revista-text font-semibold" style="font-family: 'Inter', sans-serif; font-size: 12px;">La rana que voló</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-revista-textDim hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-revista-gold/15 text-revista-gold px-2.5 py-1">Ciencia + Humor</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-revista-textDim hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Revista</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero with full-width image -->
+<header class="relative flex items-end overflow-hidden" style="min-height: 75vh;">
+  <div class="absolute inset-0">
+    <img src="../assets/rana.png" class="w-full h-full object-cover object-top">
+    <div class="absolute inset-0" style="background: linear-gradient(0deg, rgba(12,16,14,0.95) 0%, rgba(12,16,14,0.4) 50%, rgba(12,16,14,0.1) 100%);"></div>
+  </div>
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-10 pb-16 pt-32">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/20 text-revista-goldLight px-2 py-0.5" style="font-family: 'Inter', sans-serif;">IG Nobel 2000 · Física</span>
+      <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">8 min de lectura</span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-3" style="font-family: 'Playfair Display', Georgia, serif;">La rana que voló</h1>
+    <p class="figure-caption">Recreación artística del experimento de levitación magnética con ranas vivas. Universidad de Nimega, 1997.</p>
+  </div>
+</header>
+
+<!-- Article Body -->
+<main class="max-w-3xl mx-auto px-4 md:px-6 pb-16">
+
+  <!-- Article Header -->
+  <div class="mb-10 animate-fadeInUp">
+    <p class="text-2xl md:text-3xl italic text-revista-textMuted leading-snug mb-6" style="font-family: 'Playfair Display', Georgia, serif;">Cómo un experimento absurdo con un sapo levitando terminó inspirando la exploración lunar</p>
+    <div class="flex items-center gap-4 text-sm">
+      <span class="text-revista-gold font-semibold" style="font-family: 'Playfair Display', Georgia, serif;">Revista Cs. Naturales</span>
+      <span class="text-revista-textDim">·</span>
+      <span class="text-revista-textDim" style="font-family: 'Inter', sans-serif;">Abril</span>
+    </div>
+    <div class="flex justify-start mt-6">
+      <div class="accent-line-revista"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: El experimento que hizo historia -->
+  <section class="mb-12 animate-fadeInUp delay-100">
+    <h2 class="text-2xl md:text-3xl font-bold text-revista-gold mb-6" style="font-family: 'Playfair Display', Georgia, serif;">El experimento que hizo historia</h2>
+
+    <p class="article-dropcap text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      En el año 2000, el físico ruso-holandés Andréy Gueim —investigador de la Universidad de Nimega, en Países Bajos— y el físico británico Michael Berry, de la Universidad de Bristol, recibieron el Premio IG Nobel de Física por un experimento que parecía salido de un truco de magia: hicieron levitar una rana viva usando un poderoso campo magnético.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      El experimento utilizaba un electroimán capaz de generar un campo de <strong class="text-revista-goldLight">16 teslas</strong>, una intensidad equivalente a <strong class="text-revista-goldLight">320.000 veces el campo magnético terrestre</strong>. Para ponerlo en perspectiva: el campo magnético de la Tierra es de apenas 0,00005 teslas. Un imán de heladera ronda los 0,01 teslas. Una máquina de resonancia magnética hospitalaria, unos 3 teslas.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      La rana —una pequeña rana de bosque— no sufrió daño alguno. Flotó pacíficamente en el centro del campo magnético, girando lentamente, completamente ajena al hecho de que estaba desafiando la gravedad. El video del experimento dio la vuelta al mundo y se convirtió en uno de los más icónicos de la historia de la ciencia.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      El IG Nobel es un premio que se otorga a investigaciones que <strong class="text-revista-goldLight">"primero hacen reír, y luego hacen pensar"</strong>. Nadie imaginaba entonces que ese experimento aparentemente ridículo iba a abrir la puerta a aplicaciones sorprendentes en la exploración espacial.
+    </p>
+  </section>
+
+  <!-- SECTION 2: ¿Cómo funciona? El diamagnetismo -->
+  <section class="mb-12 animate-fadeInUp delay-200">
+    <h2 class="text-2xl md:text-3xl font-bold text-revista-gold mb-6" style="font-family: 'Playfair Display', Georgia, serif;">¿Cómo funciona? El diamagnetismo</h2>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Para entender cómo una rana puede flotar sin trucos, hay que conocer una propiedad de la materia que suele pasarse por alto: el <strong class="text-revista-goldLight">diamagnetismo</strong>.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Todos los materiales son diamagnéticos en cierto grado. Esto significa que, cuando se los coloca en un campo magnético externo, generan un campo magnético opuesto muy débil. En otras palabras: <strong class="text-revista-goldLight">los materiales diamagnéticos son repelidos por los imanes</strong>.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      La fuerza que actúa sobre un material diamagnético en un campo magnético se describe matemáticamente así:
+    </p>
+
+    <!-- MathJax formula -->
+    <div class="my-6 py-6 px-6 bg-revista-paper border border-revista-line">
+      <p class="text-lg text-center text-revista-goldLight" style="font-family: 'Playfair Display', Georgia, serif;">$$\vec{F} = \nabla(\vec{m} \cdot \vec{B})$$</p>
+    </div>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Donde <span class="text-revista-goldLight">\(\vec{F}\)</span> es la fuerza magnética, <span class="text-revista-goldLight">\(\vec{m}\)</span> es el momento magnético inducido en el material, y <span class="text-revista-goldLight">\(\vec{B}\)</span> es el campo magnético aplicado. El símbolo <span class="text-revista-goldLight">\(\nabla\)</span> (nabla) indica que la fuerza depende de cómo <em>varía</em> el campo en el espacio —no solo de su intensidad, sino de su gradiente—.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      El agua es un material diamagnético. Y la rana, como casi todos los seres vivos, está compuesta en un 70% de agua. Con un campo magnético lo suficientemente intenso <strong class="text-revista-goldLight">y con la forma adecuada</strong> (un campo que varíe fuertemente en el espacio), la fuerza de repulsión magnética puede igualar el peso del animal.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      De forma más específica, la fuerza sobre un objeto diamagnético de volumen <span class="text-revista-goldLight">\(V\)</span> y susceptibilidad magnética <span class="text-revista-goldLight">\(\chi\)</span> se puede expresar como:
+    </p>
+
+    <!-- MathJax formula -->
+    <div class="my-6 py-6 px-6 bg-revista-paper border border-revista-line">
+      <p class="text-lg text-center text-revista-goldLight" style="font-family: 'Playfair Display', Georgia, serif;">$$F_m = \chi \cdot V \cdot \frac{B \cdot \nabla B}{\mu_0}$$</p>
+    </div>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Donde <span class="text-revista-goldLight">\(\mu_0\)</span> es la permeabilidad magnética del vacío (una constante universal). La conclusión práctica es simple: <strong class="text-revista-goldLight">si el campo magnético es suficientemente fuerte, cualquier cosa puede levitar</strong>. No es magia: es física.
+    </p>
+  </section>
+
+  <!-- Pullquote -->
+  <div class="my-12 animate-fadeIn">
+    <blockquote class="pullquote py-4 pr-4">
+      <p class="text-xl md:text-2xl italic leading-relaxed text-revista-goldLight" style="font-family: 'Playfair Display', Georgia, serif;">
+        "La ciencia no distingue entre preguntas serias y preguntas absurdas. Solo distingue entre buenas y malas respuestas."
+      </p>
+    </blockquote>
+  </div>
+
+  <!-- SECTION 3: Del IG Nobel al Nobel de verdad -->
+  <section class="mb-12 animate-fadeInUp delay-200">
+    <h2 class="text-2xl md:text-3xl font-bold text-revista-gold mb-6" style="font-family: 'Playfair Display', Georgia, serif;">Del IG Nobel al Nobel de verdad</h2>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Diez años después de hacer levitar una rana, en 2010, Andréy Gueim ganó el <strong class="text-revista-goldLight">Premio Nobel de Física</strong>. El motivo no fue el experimento de la rana, sino sus investigaciones pioneras sobre el <strong class="text-revista-goldLight">grafeno</strong>, un material bidimensional formado por una sola capa de átomos de carbono.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Junto con su colega Konstantín Novosiólov, Gueim logró aislar grafeno por primera vez usando un método sorprendentemente simple: <strong class="text-revista-goldLight">cinta adhesiva común</strong>. Pegaban y despegaban cinta sobre un bloque de grafito hasta obtener capas de un solo átomo de espesor.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Este logro convirtió a Andréy Gueim en la <strong class="text-revista-goldLight">única persona en la historia</strong> que ha ganado tanto el Premio IG Nobel como el Premio Nobel. Un recordatorio de que la ciencia a veces avanza por los caminos más inesperados, y que la curiosidad —incluso cuando parece absurda— puede llevar a descubrimientos extraordinarios.
+    </p>
+  </section>
+
+  <!-- Sidebar boxes in a grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 animate-fadeInUp delay-300">
+    <!-- Conexión con el currículum -->
+    <div class="bg-revista-paper p-5" style="border-left: 3px solid #F97316;">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="iconify text-revista-gold" data-icon="lucide:book-open" data-width="16"></span>
+        <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-revista-gold" style="font-family: 'Inter', sans-serif;">Conexión con el currículum</h4>
+      </div>
+      <p class="text-base text-revista-textMuted leading-relaxed" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+        Este experimento se relaciona con el <strong class="text-revista-goldLight">Eje 2 (Energía)</strong> del diseño curricular. Involucra conceptos de magnetismo, fuerzas a distancia, campo magnético terrestre y la interacción entre materia y energía.
+      </p>
+    </div>
+
+    <!-- Dato curioso -->
+    <div class="bg-revista-paper p-5" style="border-left: 3px solid #F97316;">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="iconify text-revista-gold" data-icon="lucide:zap" data-width="16"></span>
+        <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-revista-gold" style="font-family: 'Inter', sans-serif;">Dato curioso</h4>
+      </div>
+      <p class="text-base text-revista-textMuted leading-relaxed" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+        El campo de 16 teslas es tan intenso que <strong class="text-revista-goldLight">arrancaría objetos metálicos de tus bolsillos a metros de distancia</strong>. Por seguridad, el experimento se realizó en una sala especial sin ningún objeto ferromagnético.
+      </p>
+    </div>
+
+    <!-- ¿Sabías que...? -->
+    <div class="bg-revista-paper p-5" style="border-left: 3px solid #F97316;">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="iconify text-revista-gold" data-icon="lucide:lightbulb" data-width="16"></span>
+        <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-revista-gold" style="font-family: 'Inter', sans-serif;">¿Sabías que...?</h4>
+      </div>
+      <p class="text-base text-revista-textMuted leading-relaxed" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+        Todos los materiales son diamagnéticos. <strong class="text-revista-goldLight">Incluso los humanos podríamos levitar</strong> con un campo magnético lo suficientemente fuerte. El desafío técnico es generar campos de esa magnitud de forma segura.
+      </p>
+    </div>
+  </div>
+
+  <div class="sabias-que">
+    <span class="sq-label">Sabías que...</span>
+    <p>Andre Geim, el científico que hizo levitar una rana con imanes, es la única persona en la historia que ganó tanto el Premio Ig Nobel (en 2000, por la rana) como el Premio Nobel de Física (en 2010, por el descubrimiento del grafeno).</p>
+  </div>
+
+  <!-- SECTION 4: De una rana flotante a la Luna artificial -->
+  <section class="mb-12 animate-fadeInUp delay-200">
+    <h2 class="text-2xl md:text-3xl font-bold text-revista-gold mb-6" style="font-family: 'Playfair Display', Georgia, serif;">De una rana flotante a la Luna artificial</h2>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Lo que empezó como un experimento curioso terminó teniendo consecuencias impensadas. En 2022, científicos chinos construyeron una <strong class="text-revista-goldLight">cámara de simulación de gravedad lunar</strong> que utiliza campos magnéticos para reproducir las condiciones de baja gravedad de la superficie de la Luna.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      La instalación, desarrollada por la Universidad de Minería y Tecnología de China, usa un campo magnético potente para hacer levitar objetos y simular la gravedad lunar —que es apenas un sexto de la terrestre—. Esto permite probar equipos y materiales destinados a misiones lunares sin necesidad de viajar al espacio.
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text mb-5" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Los investigadores citaron explícitamente el experimento de Gueim con la rana como una de las inspiraciones para el proyecto. <strong class="text-revista-goldLight">Un experimento que parecía un chiste terminó ayudando a la humanidad a prepararse para explorar otros mundos.</strong>
+    </p>
+
+    <p class="text-lg leading-relaxed text-revista-text" style="font-family: 'Cormorant Garamond', Georgia, serif;">
+      Esta historia es un excelente ejemplo de cómo funciona realmente la ciencia: no como una línea recta de descubrimientos solemnes, sino como una red de curiosidades, errores, risas y hallazgos que se conectan de formas impredecibles.
+    </p>
+
+    <!-- Second image -->
+    <div class="mt-8">
+      <img src="../assets/rana2.png" alt="Ilustración de campo magnético y levitación" class="w-full block img-hover" style="border: 1px solid rgba(249,115,22,0.1);">
+      <p class="figure-caption mt-2">Representación artística: líneas de campo magnético alrededor de un objeto en levitación diamagnética.</p>
+    </div>
+  </section>
+
+  <!-- Article Footer -->
+  <div class="border-t border-revista-line pt-8 mt-12 animate-fadeIn">
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-2 py-1" style="font-family: 'Inter', sans-serif;">Magnetismo</span>
+      <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-2 py-1" style="font-family: 'Inter', sans-serif;">Diamagnetismo</span>
+      <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-2 py-1" style="font-family: 'Inter', sans-serif;">IG Nobel</span>
+      <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-2 py-1" style="font-family: 'Inter', sans-serif;">Física</span>
+      <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-2 py-1" style="font-family: 'Inter', sans-serif;">Premios Nobel</span>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex items-center justify-between">
+      <a href="index.html" class="text-revista-textDim hover:text-revista-gold transition-colors flex items-center gap-2 group" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="uppercase tracking-wider font-bold">Volver a Revista</span>
+      </a>
+      <div class="flex items-center gap-2 text-revista-textDim" style="font-family: 'Inter', sans-serif;">
+        <span class="iconify" data-icon="lucide:share-2" data-width="14"></span>
+        <span class="text-[11px] uppercase tracking-wider">Compartir</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="relative py-10 bg-revista-bg border-t border-revista-line">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+        <span class="font-bold text-sm tracking-wider text-white uppercase" style="font-family: 'Playfair Display', serif;">Revista</span>
+        <span class="text-[11px] text-revista-textDim ml-2">Cs. Naturales · 1° Año</span>
+      </div>
+      <div class="flex items-center gap-6" style="font-family: 'Inter', sans-serif;">
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-revista-textDim hover:text-revista-gold transition-colors">Inicio</a>
+        <span class="text-[11px] uppercase tracking-wider text-revista-textDim">Artículos de divulgación científica</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MathJax -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../unidades/quimica/materia-propiedades/que-es-la-materia.html",c:"#4ADE80"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../unidades/quimica/mezclas/tipos-mezclas.html",c:"#4ADE80"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../unidades/quimica/mezclas/separacion.html",c:"#4ADE80"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../unidades/quimica/agua/propiedades-agua.html",c:"#4ADE80"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../unidades/quimica/agua/ciclo-agua.html",c:"#4ADE80"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../unidades/quimica/agua/potabilizacion.html",c:"#4ADE80"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../unidades/fisica/energia/formas-energia.html",c:"#FBBF24"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../unidades/fisica/energia/transformaciones.html",c:"#FBBF24"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../unidades/fisica/calor-sonido/calor-temperatura.html",c:"#FBBF24"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../unidades/fisica/calor-sonido/ondas.html",c:"#FBBF24"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../unidades/fisica/movimientos/mru.html",c:"#FBBF24"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../unidades/fisica/movimientos/mruv.html",c:"#FBBF24"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/sol-planetas.html",c:"#FBBF24"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/tierra-luna.html",c:"#FBBF24"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/exploracion.html",c:"#FBBF24"},
+    {n:"Seres vivos",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/caracteristicas.html",c:"#34D399"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/clasificacion.html",c:"#34D399"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/ecosistemas.html",c:"#34D399"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../unidades/biologia/celulas/tipos-celulas.html",c:"#34D399"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../unidades/biologia/celulas/organelas.html",c:"#34D399"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../unidades/biologia/plantas/fotosintesis.html",c:"#34D399"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../unidades/biologia/plantas/germinacion.html",c:"#34D399"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/vertebrados.html",c:"#34D399"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/invertebrados.html",c:"#34D399"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/fauna-local.html",c:"#34D399"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/circulacion.html",c:"#34D399"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/digestion.html",c:"#34D399"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/respiracion.html",c:"#34D399"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/endocrino.html",c:"#34D399"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#F97316"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#4ADE80"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

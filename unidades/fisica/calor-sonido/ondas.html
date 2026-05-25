@@ -1,0 +1,489 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ondas: Luz y Sonido | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59,130,246,0.25); }
+    .sabias-que { border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Calor y Sonido</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Calor y Sonido</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/sound-waves/1200/400" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Calor y Sonido</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Ondas: Luz y Sonido</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">Descubrí qué son las ondas, cómo se miden y por qué la luz y el sonido se comportan de manera tan diferente.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/20 to-transparent"></div>
+<div class="max-w-3xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="space-y-12">
+
+    <!-- SECTION 1 -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">01</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">&iquest;Qué es una onda?</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Una onda es una perturbación que se propaga a través del espacio, transmitiendo energía sin transportar materia. Tirá una piedra a un estanque: las ondas viajan hacia afuera, pero el agua no se desplaza con ellas, solo sube y baja. Así funcionan todas las ondas: transportan energía, no materia.</p>
+      </div>
+
+      <div class="pull-quote">
+        "Una onda es una perturbación que transmite energía sin transportar materia."
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">Las ondas se clasifican en dos grandes grupos según si necesitan o no un medio material para propagarse:</p>
+
+      <div class="content-card p-5 rounded-sm mb-4">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Ondas mecánicas</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">Necesitan un medio material para propagarse. El sonido, las olas del mar y las ondas sísmicas son ejemplos. No pueden viajar en el vacío. Si estuvieras en el espacio, no podrías escuchar nada.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Ondas electromagnéticas</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">NO necesitan un medio material. Pueden viajar en el vacío. La luz visible, los rayos X, las ondas de radio y los rayos ultravioleta son ondas electromagnéticas. Todas viajan a 300.000 km/s en el vacío.</p>
+      </div>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">02</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Propiedades de las ondas</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Para describir una onda usamos cinco magnitudes fundamentales. Conocerlas nos permite comparar ondas diferentes y entender fenómenos como la música, los colores o las comunicaciones. Cada propiedad mide un aspecto distinto de la onda.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm mb-3">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Frecuencia (f)</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">Es el número de ciclos (oscilaciones completas) que ocurren en un segundo. Se mide en Hertz (Hz). 1 Hz = 1 ciclo por segundo. El oído humano puede escuchar sonidos entre 20 Hz y 20.000 Hz. La nota La estándar tiene una frecuencia de 440 Hz.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm mb-3">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Período (T)</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">Es el tiempo que tarda en completarse un ciclo completo. Se mide en segundos. El período y la frecuencia son inversos: T = 1/f. Si una onda tiene frecuencia de 440 Hz, su período es T = 1/440 ˜ 0,0023 segundos.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm mb-3">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Amplitud (A)</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">Es la máxima distancia que alcanza una partícula del medio respecto de su posición de equilibrio. En el sonido, la amplitud determina el volumen (sonidos fuertes o suaves). En la luz, la amplitud determina la intensidad o brillo.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm mb-3">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Longitud de onda (?)</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">Es la distancia entre dos puntos consecutivos que están en la misma fase de la onda, por ejemplo, entre dos crestas consecutivas. Se mide en metros. Las ondas de radio pueden tener longitudes de onda de kilómetros; los rayos gamma, del tamaño del núcleo atómico.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-1">Velocidad de propagación (v)</h3>
+        <p class="text-lg text-natura-silver leading-relaxed">Es la rapidez con que la onda viaja a través del medio. Depende exclusivamente de las propiedades del medio, no de la frecuencia ni de la amplitud. En el aire a 20°C, el sonido viaja a 340 m/s; en el agua, a 1.500 m/s; y en el acero, a más de 5.000 m/s.</p>
+      </div>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">03</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">La ecuación fundamental</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">La relación entre velocidad, longitud de onda y frecuencia es una de las ecuaciones más importantes en el estudio de las ondas. Esta ecuación se aplica tanto a ondas mecánicas como electromagnéticas y es la base para entender desde la música hasta las telecomunicaciones.</p>
+      </div>
+
+      <div class="text-center my-8 py-6 border border-natura-energy/15 rounded-sm bg-natura-dark/50">
+        <p class="text-natura-silverLight text-lg font-heading mb-2">Ecuación fundamental de las ondas:</p>
+        \[v = \lambda \cdot f\]
+        <p class="text-[11px] text-natura-silverDark mt-3" style="font-family: 'Inter', sans-serif;">
+          v = velocidad de propagación &nbsp;|&nbsp;
+          ? = longitud de onda &nbsp;|&nbsp;
+          f = frecuencia
+        </p>
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">La velocidad de una onda es igual al producto de su longitud de onda por su frecuencia. Esto significa que, para una velocidad fija, si la frecuencia aumenta, la longitud de onda disminuye, y viceversa.</p>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">Veamos un ejemplo concreto con el sonido. Una onda sonora correspondiente a la nota La (440 Hz) viaja a 340 m/s en el aire. Su longitud de onda será:</p>
+      <div class="text-center py-3 mb-4 border border-natura-energy/10 rounded-sm bg-natura-dark/30">
+        <p class="text-natura-silverLight font-heading">? = v / f = 340 / 440 ˜ 0,77 m</p>
+      </div>
+
+      <div class="sidebar-note">
+        <span class="note-label">Velocidad del sonido</span>
+        El sonido viaja más rápido en sólidos que en líquidos, y más rápido en líquidos que en gases. En el aire viaja a 340 m/s, pero en el acero supera los 5.000 m/s. ¡Por eso en las películas del oeste apoyaban la oreja en las vías para saber si venía el tren!
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed">Si la misma nota (440 Hz) se tocara dentro del agua, donde el sonido viaja a 1.500 m/s, su longitud de onda sería ? = 1500/440 ˜ 3,41 m. La frecuencia es la misma —seguimos escuchando un La— pero la longitud de onda cambió porque la velocidad del medio es diferente.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="animate-fadeInUp" style="animation-delay: 300ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">04</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Sonido vs. Luz</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">El sonido y la luz son probablemente las ondas con las que más interactuamos a diario, pero son fundamentalmente diferentes. Entender sus diferencias explica muchos fenómenos cotidianos que a veces damos por sentados.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+            <span class="iconify" data-icon="lucide:volume-2" data-width="18"></span> Sonido
+          </h3>
+          <ul class="space-y-2 text-base text-natura-silver" style="list-style: none;">
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Onda <strong class="text-natura-silverLight">mecánica</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Necesita un medio material</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span><strong class="text-natura-silverLight">No viaja en el vacío</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Velocidad en el aire: ˜ <strong class="text-natura-silverLight">340 m/s</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Onda longitudinal</span>
+            </li>
+          </ul>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+            <span class="iconify" data-icon="lucide:sun" data-width="18"></span> Luz
+          </h3>
+          <ul class="space-y-2 text-base text-natura-silver" style="list-style: none;">
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Onda <strong class="text-natura-silverLight">electromagnética</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>No necesita medio material</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span><strong class="text-natura-silverLight">Sí viaja en el vacío</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Velocidad en el vacío: ˜ <strong class="text-natura-silverLight">300.000 km/s</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-natura-energy mt-0.5">?</span>
+              <span>Onda transversal</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        "Por eso vemos el relámpago antes de escuchar el trueno: la luz viaja casi un millón de veces más rápido que el sonido."
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed">Durante una tormenta, la luz del relámpago viaja a 300.000 km/s y llega a nuestros ojos casi instantáneamente. El sonido del trueno, en cambio, viaja a solo 340 m/s. Si la tormenta está a 3,4 km de distancia, el trueno tarda 10 segundos en llegar. Contar los segundos entre el relámpago y el trueno y dividir por 3 da aproximadamente la distancia en kilómetros.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <div class="sabias-que">
+      <span class="sq-label">Sabías que...</span>
+      <p>El sonido no puede viajar por el espacio porque no hay aire ni medio material que lo transmita. Por eso las explosiones en Star Wars no deberían escucharse: en el vacío nadie puede oírte gritar.</p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <section class="animate-fadeInUp" style="animation-delay: 400ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">05</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Preguntas para pensar</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">1.</span> Si el sonido no viaja en el vacío, ¿por qué en las películas de ciencia ficción se escuchan explosiones en el espacio?</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">2.</span> Un músico toca una nota de 880 Hz. ¿Cuál es su longitud de onda en el aire? (v = 340 m/s). Usá la ecuación v = ? · f.</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">3.</span> ¿Por qué una radio FM y un control remoto de TV no interfieren entre sí si ambos usan ondas electromagnéticas?</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- NAVIGATION -->
+<div class="max-w-3xl mx-auto px-4 md:px-6 pb-10">
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="calor-temperatura.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Calor y Temperatura</span>
+    </a>
+    <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+      <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+      <span>Calor y Sonido</span>
+    </a>
+    <a href="materiales.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Luz y Materiales</span>
+      <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>

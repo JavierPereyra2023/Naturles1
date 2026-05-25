@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Sol y los Planetas — Sistema Solar | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59, 130, 246, 0.25); }
+    .highlight-box { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #3B82F6; border-left-color: #3B82F6; }
+    .toc-link:hover { color: white; }
+    .planet-card { border: 1px solid rgba(255,255,255,0.05); background: rgba(14, 20, 16, 0.6); transition: all 0.3s ease; }
+    .planet-card:hover { border-color: rgba(59, 130, 246, 0.3); transform: translateY(-3px); }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #3B82F6;
+    }
+    .pull-quote {
+      border-left: 4px solid #3B82F6; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(59,130,246,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #3B82F6;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(59,130,246,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.6; }
+    }
+    .star-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+    .sabias-que { border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+  <div class="star-particle" style="top:5%;left:10%;--dur:3s;--delay:0s;"></div>
+  <div class="star-particle" style="top:12%;left:25%;--dur:2.5s;--delay:0.5s;"></div>
+  <div class="star-particle" style="top:8%;left:45%;--dur:4s;--delay:1s;"></div>
+  <div class="star-particle" style="top:20%;left:65%;--dur:3.5s;--delay:0.3s;"></div>
+  <div class="star-particle" style="top:15%;left:80%;--dur:2.8s;--delay:1.5s;"></div>
+  <div class="star-particle" style="top:30%;left:5%;--dur:3.2s;--delay:0.7s;"></div>
+  <div class="star-particle" style="top:35%;left:90%;--dur:2.6s;--delay:0.2s;"></div>
+  <div class="star-particle" style="top:3%;left:55%;--dur:3.8s;--delay:1.2s;"></div>
+  <div class="star-particle" style="top:25%;left:35%;--dur:2.4s;--delay:0.9s;"></div>
+  <div class="star-particle" style="top:18%;left:72%;--dur:3.1s;--delay:0.4s;"></div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Sol y Planetas</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3 · Sem 16–18</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/sun-planets-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Eje 3 · El Sol y los Planetas</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        El Sol y <span class="text-natura-energy">los Planetas</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        El Sol es el centro de nuestro sistema. A su alrededor orbitan 8 planetas con características asombrosas y muy diferentes entre sí. Conozcamos nuestra vecindad cósmica.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Sol</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Planetas</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Órbitas</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Kepler</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <!-- SIDEBAR TOC -->
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta página</h3>
+        <nav class="space-y-0.5">
+          <a href="#el-sol" class="toc-link active" data-toc>01. El Sol, nuestra estrella</a>
+          <a href="#los-planetas" class="toc-link" data-toc>02. Los 8 planetas</a>
+          <a href="#movimientos" class="toc-link" data-toc>03. Movimientos planetarios</a>
+          <a href="#para-pensar" class="toc-link" data-toc>04. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. El Sol -->
+      <section id="el-sol" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El Sol, nuestra estrella</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El <strong class="text-white">Sol</strong> es una estrella de tipo espectral G2, tambien conocida como "enana amarilla". Contiene el <strong class="text-natura-energy">99,8% de la masa total</strong> del Sistema Solar. Todo lo demas —planetas, lunas, asteroides, cometas— representa apenas el 0,2% restante. El Sol no es un planeta ni una roca: es una enorme esfera de plasma donde ocurre la fusion nuclear.
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>El Sol es una estrella de tipo espectral G2. Contiene el 99,8% de la masa total del Sistema Solar.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 mb-6">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:calendar" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Edad</h4>
+            <p class="text-natura-silver text-xs"><strong class="text-natura-energy">4.600 millones</strong> de años</p>
+          </div>
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:thermometer" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Temperatura superficial</h4>
+            <p class="text-natura-silver text-xs">Aprox. <strong class="text-natura-energy">5.500°C</strong></p>
+          </div>
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:flame" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Temperatura del nucleo</h4>
+            <p class="text-natura-silver text-xs"><strong class="text-natura-energy">15 millones °C</strong></p>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">Dato curioso</span>
+          <p>La luz del Sol tarda <strong>8 minutos y 20 segundos</strong> en llegar a la Tierra. Si el Sol se apagara, no lo sabriamos hasta 8 minutos despues.</p>
+        </div>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+          La energia del Sol proviene de la <strong class="text-natura-energy">fusion nuclear</strong>: en su nucleo, los atomos de hidrogeno se fusionan para formar helio, liberando enormes cantidades de energia en forma de luz y calor. Cada segundo, el Sol convierte aproximadamente 600 millones de toneladas de hidrogeno en helio. Se estima que le queda combustible para otros <strong class="text-white">5.000 millones de años</strong> mas.
+        </p>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+          Sin el Sol, la Tierra seria un lugar oscuro, helado y sin vida. La fotosintesis de las plantas, el ciclo del agua, los vientos y hasta los combustibles fosiles que usamos —todos dependen directa o indirectamente de la energia solar. El Sol es, literalmente, la fuente de casi toda la energia que usamos.
+        </p>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. Los 8 planetas -->
+      <section id="los-planetas" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Los 8 planetas</h2>
+        </div>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6">
+          El Sistema Solar tiene <strong class="text-white">8 planetas</strong> (Pluton fue reclasificado como planeta enano en 2006 por la Union Astronomica Internacional). Se dividen en dos grupos bien diferenciados.
+        </p>
+
+        <!-- Planetas rocosos -->
+        <h3 class="font-heading font-semibold text-lg text-white mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-natura-energy/15 rounded flex items-center justify-center">
+            <span class="iconify text-natura-energy" data-icon="lucide:circle-dot" data-width="14"></span>
+          </span>
+          Planetas interiores (rocosos)
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="iconify text-white/80" data-icon="lucide:circle" data-width="24"></span>
+            </div>
+            <h4 class="font-heading font-semibold text-white mb-1">Mercurio</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">El mas pequeño y cercano al Sol. Sin atmosfera. Temperaturas extremas de <strong class="text-natura-energy">-180°C a 430°C</strong>.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">0,39 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">88 dias/ano</span>
+            </div>
+          </div>
+
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="iconify text-black/40" data-icon="lucide:circle" data-width="24"></span>
+            </div>
+            <h4 class="font-heading font-semibold text-white mb-1">Venus</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">Similar en tamaño a la Tierra. <strong class="text-natura-energy">Efecto invernadero extremo</strong>. Gira al reves (rotacion retrograda).</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">462°C</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">0,72 UA</span>
+            </div>
+          </div>
+
+          <div class="planet-card rounded-2xl p-5 text-center" style="border-color: rgba(59,130,246,0.2);">
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-green-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="iconify text-white/70" data-icon="lucide:circle" data-width="24"></span>
+            </div>
+            <h4 class="font-heading font-semibold text-natura-energy mb-1">Tierra</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">El unico con <strong class="text-natura-energy">agua liquida</strong> y vida confirmada. Un satelite natural: la <strong class="text-white">Luna</strong>.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-energy/15 text-natura-energy px-2 py-0.5 rounded-full">1 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">365 dias</span>
+            </div>
+          </div>
+
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="iconify text-white/70" data-icon="lucide:circle" data-width="24"></span>
+            </div>
+            <h4 class="font-heading font-semibold text-white mb-1">Marte</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">El <strong class="text-natura-leaf">"planeta rojo"</strong>. Monte Olimpo: el volcan mas alto del Sistema Solar. Color por oxido de hierro.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">1,5 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">687 dias</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asteroid Belt -->
+        <div class="highlight-box rounded-2xl p-5 mb-8">
+          <div class="flex items-center gap-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:spray-can" data-width="20"></span>
+            <div>
+              <h4 class="font-heading font-semibold text-white text-sm">Cinturon de asteroides</h4>
+              <p class="text-natura-silver text-base leading-relaxed mt-1">Ubicado entre Marte y Jupiter. Restos de la formacion del Sistema Solar que nunca llegaron a formar un planeta por la influencia gravitatoria de Jupiter.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Planetas gaseosos -->
+        <h3 class="font-heading font-semibold text-lg text-white mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-natura-energy/15 rounded flex items-center justify-center">
+            <span class="iconify text-natura-energy" data-icon="lucide:sparkles" data-width="14"></span>
+          </span>
+          Planetas exteriores (gaseosos y de hielo)
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-full" style="background: radial-gradient(circle at 30% 30%, #3B82F6, #d97706, #92400e);"></div>
+            <h4 class="font-heading font-semibold text-white mb-1">Jupiter</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">El mas grande del Sistema Solar. <strong class="text-natura-energy">Gran Mancha Roja</strong>: tormenta activa por siglos. Tiene <strong class="text-white">95 lunas</strong> conocidas.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">5,2 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">12 años</span>
+            </div>
+          </div>
+
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-16 h-16 mx-auto mb-3 flex items-center justify-center relative">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: radial-gradient(circle at 30% 30%, #fef3c7, #f59e0b);"></div>
+              <div class="absolute inset-0 border-2 border-yellow-400/50 rounded-full" style="transform: rotateX(70deg); border-top-color: transparent; border-bottom-color: transparent;"></div>
+            </div>
+            <h4 class="font-heading font-semibold text-white mb-1">Saturno</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">Anillos espectaculares de hielo y roca. Su densidad es <strong class="text-white">menor que la del agua</strong>: flotaria en una piscina gigante.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">9,5 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">Densidad &lt; agua</span>
+            </div>
+          </div>
+
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center relative">
+              <div class="w-12 h-6 bg-gradient-to-r from-teal-200 to-cyan-300 rounded-full" style="transform: rotate(90deg); opacity: 0.8;"></div>
+            </div>
+            <h4 class="font-heading font-semibold text-white mb-1">Urano</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">Gira <strong class="text-white">"acostado"</strong>: su eje esta inclinado 98°. Color azul verdoso por el metano en su atmosfera.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">19 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">Eje 98°</span>
+            </div>
+          </div>
+
+          <div class="planet-card rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="iconify text-white/60" data-icon="lucide:circle" data-width="20"></span>
+            </div>
+            <h4 class="font-heading font-semibold text-white mb-1">Neptuno</h4>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">Vientos mas rapidos del Sistema Solar: <strong class="text-natura-energy">2.000 km/h</strong>. Ultimo planeta. Color azul intenso por metano.</p>
+            <div class="flex flex-wrap gap-1 justify-center">
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">30 UA</span>
+              <span class="text-[9px] bg-natura-mid text-natura-silver px-2 py-0.5 rounded-full">Vientos 2000 km/h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box p-4 rounded-sm text-sm pull-quote">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-energy flex-shrink-0 mt-0.5" data-icon="lucide:alert-triangle" data-width="18"></span>
+            <div>
+              <p class="font-semibold text-white text-xs uppercase tracking-wider mb-1">¿Y Pluton?</p>
+              <p class="text-natura-silverLight italic">Pluton fue reclasificado como <strong class="text-natura-energy">planeta enano</strong> en 2006 por la Union Astronomica Internacional. No cumple con uno de los tres criterios para ser planeta: no ha "limpiado" su orbita de otros objetos. Ahora pertenece a la categoria de planetas enanos junto con Ceres, Eris, Makemake y Haumea.</p>
+            </div>
+          </div>
+        </div>
+
+      <!-- SIMULACIÓN INTERACTIVA DEL SISTEMA SOLAR -->
+      <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark p-6 transition-all duration-300 hover:border-natura-energy/30 relative">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <h3 class="font-heading font-bold text-white text-lg flex items-center gap-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="22"></span>
+              Simulación Interactiva del Sistema Solar
+            </h3>
+            <p class="text-xs text-natura-silverDark mt-0.5">Exploración orbital de los planetas y la Luna. Hacé clic o pasa el cursor sobre los astros.</p>
+          </div>
+          <!-- Educational note -->
+          <span class="text-[10px] bg-natura-energy/10 text-natura-energy px-2.5 py-1 rounded border border-natura-energy/20 self-start sm:self-center font-ui font-semibold">
+            Escala adaptada para fines didácticos
+          </span>
+        </div>
+
+        <div class="relative w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5">
+          <!-- Canvas -->
+          <canvas id="solarSystemCanvas" class="w-full h-[480px] block cursor-grab active:cursor-grabbing"></canvas>
+
+          <!-- Floating Info Panel -->
+          <div id="planetInfoPanel" class="absolute top-4 right-4 bg-natura-dark/95 backdrop-blur-md border border-white/10 rounded-xl p-4 w-64 text-xs font-ui transition-all duration-300 opacity-0 pointer-events-none z-10 shadow-2xl">
+            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-white/5">
+              <div id="panelPlanetIcon" class="w-3.5 h-3.5 rounded-full ring-2 ring-white/10"></div>
+              <h4 id="panelPlanetName" class="font-heading font-bold text-sm text-white">Tierra</h4>
+              <span id="panelPlanetType" class="text-[9px] px-1.5 py-0.5 rounded ml-auto text-white"></span>
+              <button id="panelCloseBtn" class="text-natura-silver hover:text-white cursor-pointer focus:outline-none flex items-center justify-center p-1 rounded hover:bg-white/10 transition-all ml-1" title="Cerrar panel">
+                <span class="iconify" data-icon="lucide:x" data-width="14"></span>
+              </button>
+            </div>
+            <div class="space-y-1.5 text-natura-silver text-[11px]">
+              <div class="flex justify-between"><span class="text-natura-silverDark">Distancia al Sol:</span> <span id="panelPlanetDist" class="font-bold text-white"></span></div>
+              <div class="flex justify-between"><span class="text-natura-silverDark">Período orbital:</span> <span id="panelPlanetPeriod" class="font-bold text-white"></span></div>
+              <div class="flex justify-between"><span class="text-natura-silverDark">Satélites conocidos:</span> <span id="panelPlanetMoons" class="font-bold text-white"></span></div>
+              <div class="flex justify-between"><span class="text-natura-silverDark">Temperatura media:</span> <span id="panelPlanetTemp" class="font-bold text-white"></span></div>
+              <p id="panelPlanetFact" class="mt-2 pt-2 border-t border-white/5 text-natura-silverLight italic leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Bottom Control Bar -->
+          <div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 bg-natura-black/85 backdrop-blur-md border border-white/5 rounded-lg px-4 py-2.5 text-xs font-ui">
+            <!-- Play/Pause & Orbits Toggle -->
+            <div class="flex items-center gap-2">
+              <button id="simPlayPauseBtn" class="flex items-center justify-center p-1.5 rounded bg-natura-energy text-natura-black hover:bg-natura-energy/80 transition-colors" title="Pausar / Reanudar">
+                <svg id="simPlayPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+              <button id="simOrbitsBtn" class="flex items-center justify-center p-1.5 rounded border border-white/10 text-natura-silver hover:text-white hover:border-white/20 transition-colors" title="Mostrar/Ocultar Órbitas">
+                <svg id="simOrbitsIcon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </button>
+              <button id="simResetBtn" class="flex items-center justify-center p-1.5 rounded border border-white/10 text-natura-silver hover:text-white hover:border-white/20 transition-colors" title="Centrar cámara/Sol">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+              </button>
+              <select id="simFocusSelect" class="bg-natura-dark/90 border border-white/15 text-natura-silver rounded px-2 py-1 text-[10px] outline-none focus:border-natura-energy/40 transition-colors cursor-pointer max-w-[110px]" title="Enfocar astro">
+                <option value="sun">Enfocar: Sol</option>
+                <option value="Mercurio">Mercurio</option>
+                <option value="Venus">Venus</option>
+                <option value="Tierra">Tierra</option>
+                <option value="Marte">Marte</option>
+                <option value="Júpiter">Júpiter</option>
+                <option value="Saturno">Saturno</option>
+                <option value="Urano">Urano</option>
+                <option value="Neptuno">Neptuno</option>
+              </select>
+            </div>
+
+            <!-- Sliders -->
+            <div class="flex items-center gap-4 flex-1 justify-end max-w-[280px] sm:max-w-md">
+              <!-- Speed -->
+              <div class="flex items-center gap-2 flex-1">
+                <span class="text-natura-silverDark text-[10px] whitespace-nowrap">Velocidad:</span>
+                <input type="range" id="simSpeedSlider" min="0.1" max="4" step="0.1" value="1" class="w-full accent-natura-energy h-1 bg-white/10 rounded-lg appearance-none cursor-pointer">
+                <span id="simSpeedVal" class="text-white text-[10px] min-w-[24px] text-right font-mono">1.0x</span>
+              </div>
+              <!-- Zoom -->
+              <div class="flex items-center gap-2 flex-1">
+                <span class="text-natura-silverDark text-[10px] whitespace-nowrap">Zoom:</span>
+                <input type="range" id="simZoomSlider" min="0.2" max="2.5" step="0.1" value="1" class="w-full accent-natura-energy h-1 bg-white/10 rounded-lg appearance-none cursor-pointer">
+                <span id="simZoomVal" class="text-white text-[10px] min-w-[24px] text-right font-mono">1.0x</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+      (function() {
+        const canvas = document.getElementById('solarSystemCanvas');
+        if (!canvas) return;
+
+        // --- HELPER DE COLOR ---
+        function hexToRgb(hex) {
+          const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+          return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+          } : { r: 128, g: 128, b: 128 };
+        }
+
+        // --- GENERACIÓN DE RUIDO BASE REUTILIZABLE ---
+        const noiseCanvas = (function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = 512;
+          canvas.height = 256;
+          const ctx = canvas.getContext('2d');
+          
+          const size = 32;
+          const grid = new Float32Array(size * size);
+          let seed = 45;
+          function random() {
+            let x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+          }
+          for (let i = 0; i < grid.length; i++) {
+            grid[i] = random();
+          }
+          
+          function noise(x, y) {
+            const X = Math.floor(x) % size;
+            const Y = Math.floor(y) % size;
+            const xNext = (X + 1) % size;
+            const yNext = (Y + 1) % size;
+            
+            const xf = x - Math.floor(x);
+            const yf = y - Math.floor(y);
+            
+            const u = xf * xf * (3 - 2 * xf);
+            const v = yf * yf * (3 - 2 * yf);
+            
+            const n00 = grid[Y * size + X];
+            const n10 = grid[Y * size + xNext];
+            const n01 = grid[yNext * size + X];
+            const n11 = grid[yNext * size + xNext];
+            
+            const x1 = n00 + u * (n10 - n00);
+            const x2 = n01 + u * (n11 - n01);
+            return x1 + v * (x2 - x1);
+          }
+          
+          const imgData = ctx.createImageData(512, 256);
+          const data = imgData.data;
+          
+          for (let y = 0; y < 256; y++) {
+            for (let x = 0; x < 512; x++) {
+              let val = 0;
+              let amp = 1;
+              let freq = 1;
+              let max = 0;
+              for (let o = 0; o < 4; o++) {
+                val += noise((x / 512) * size * freq, (y / 256) * size * freq) * amp;
+                max += amp;
+                amp *= 0.5;
+                freq *= 2;
+              }
+              const norm = val / max;
+              const idx = (y * 512 + x) * 4;
+              const c = Math.floor(norm * 255);
+              data[idx] = c;
+              data[idx+1] = c;
+              data[idx+2] = c;
+              data[idx+3] = 255;
+            }
+          }
+          ctx.putImageData(imgData, 0, 0);
+          return canvas;
+        })();
+        const noiseTexture = new THREE.CanvasTexture(noiseCanvas);
+
+        // --- BIBLIOTECA AUXILIAR PARA GENERAR TEXTURAS PROCEDIMENTALES ---
+        function createProceduralTexture(type) {
+          const texCanvas = document.createElement('canvas');
+          texCanvas.width = 512;
+          texCanvas.height = 256;
+          const ctx = texCanvas.getContext('2d');
+          
+          const nCtx = noiseCanvas.getContext('2d');
+          const nData = nCtx.getImageData(0, 0, 512, 256).data;
+          
+          if (type === 'sun') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            for (let i = 0; i < nData.length; i += 4) {
+              const nVal = nData[i] / 255;
+              let r = 255;
+              let g = Math.floor(100 + nVal * 155);
+              let b = Math.floor(nVal * 120);
+              
+              if (nVal < 0.25) {
+                const darkFactor = nVal / 0.25;
+                r = Math.floor(120 + darkFactor * 135);
+                g = Math.floor(35 + darkFactor * 65);
+                b = 0;
+              }
+              out[i] = r;
+              out[i+1] = g;
+              out[i+2] = b;
+              out[i+3] = 255;
+            }
+            ctx.putImageData(outData, 0, 0);
+            
+            ctx.fillStyle = 'rgba(255, 235, 120, 0.12)';
+            for (let i = 0; i < 20; i++) {
+              ctx.beginPath();
+              ctx.arc(Math.random()*512, Math.random()*256, 12 + Math.random()*25, 0, Math.PI*2);
+              ctx.fill();
+            }
+          } 
+          else if (type === 'mercury') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            for (let i = 0; i < nData.length; i += 4) {
+              const nVal = nData[i] / 255;
+              const c = Math.floor(95 + nVal * 55);
+              out[i] = c;
+              out[i+1] = c;
+              out[i+2] = c;
+              out[i+3] = 255;
+            }
+            ctx.putImageData(outData, 0, 0);
+            
+            for (let i = 0; i < 75; i++) {
+              const cx = Math.random() * 512;
+              const cy = Math.random() * 256;
+              const r = 2 + Math.random() * 7;
+              
+              ctx.strokeStyle = 'rgba(0, 0, 0, 0.42)';
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.arc(cx, cy + 0.5, r, 0, Math.PI);
+              ctx.stroke();
+              
+              ctx.strokeStyle = 'rgba(255, 255, 255, 0.42)';
+              ctx.beginPath();
+              ctx.arc(cx, cy - 0.5, r, Math.PI, 0);
+              ctx.stroke();
+            }
+          } 
+          else if (type === 'venus') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            const colors = ['#b85c14', '#cca025', '#e6c845', '#ca8a04', '#b85c14'];
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+                
+                const perturbedY = y + Math.sin(x / 25) * 14 + nVal * 12;
+                const colorIdx = Math.floor((perturbedY / 256) * colors.length) % colors.length;
+                const baseColor = hexToRgb(colors[colorIdx]);
+                
+                const factor = 0.88 + nVal * 0.14;
+                out[idx] = Math.min(255, Math.floor(baseColor.r * factor));
+                out[idx+1] = Math.min(255, Math.floor(baseColor.g * factor));
+                out[idx+2] = Math.min(255, Math.floor(baseColor.b * factor));
+                out[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+          } 
+          else if (type === 'earth') {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 512;
+            tempCanvas.height = 256;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            tempCtx.fillStyle = '#000000';
+            tempCtx.fillRect(0, 0, 512, 256);
+            
+            tempCtx.fillStyle = '#ffffff';
+            
+            // América del Norte y del Sur
+            tempCtx.beginPath();
+            tempCtx.moveTo(80, 45);
+            tempCtx.bezierCurveTo(100, 40, 130, 50, 140, 70);
+            tempCtx.bezierCurveTo(150, 85, 140, 105, 120, 115);
+            tempCtx.bezierCurveTo(115, 125, 120, 135, 135, 145);
+            tempCtx.bezierCurveTo(160, 160, 175, 180, 160, 205);
+            tempCtx.bezierCurveTo(150, 220, 130, 230, 120, 215);
+            tempCtx.bezierCurveTo(115, 200, 110, 170, 110, 150);
+            tempCtx.bezierCurveTo(100, 135, 80, 120, 70, 100);
+            tempCtx.bezierCurveTo(60, 80, 70, 55, 80, 45);
+            tempCtx.closePath();
+            tempCtx.fill();
+
+            // Groenlandia
+            tempCtx.beginPath();
+            tempCtx.moveTo(145, 25);
+            tempCtx.lineTo(165, 28);
+            tempCtx.lineTo(160, 45);
+            tempCtx.lineTo(138, 40);
+            tempCtx.closePath();
+            tempCtx.fill();
+
+            // Eurasia y África
+            tempCtx.beginPath();
+            tempCtx.moveTo(225, 120);
+            tempCtx.bezierCurveTo(250, 115, 275, 120, 290, 135);
+            tempCtx.bezierCurveTo(305, 150, 300, 180, 285, 198);
+            tempCtx.bezierCurveTo(275, 210, 260, 215, 255, 205);
+            tempCtx.bezierCurveTo(245, 190, 235, 165, 225, 140);
+            
+            tempCtx.bezierCurveTo(215, 110, 230, 90, 245, 80);
+            tempCtx.bezierCurveTo(260, 70, 280, 60, 310, 50);
+            tempCtx.bezierCurveTo(350, 40, 410, 45, 450, 50);
+            tempCtx.bezierCurveTo(475, 60, 485, 80, 475, 100);
+            tempCtx.bezierCurveTo(465, 115, 440, 125, 420, 120);
+            tempCtx.bezierCurveTo(400, 115, 380, 105, 360, 110);
+            tempCtx.bezierCurveTo(340, 115, 300, 105, 280, 95);
+            tempCtx.bezierCurveTo(250, 90, 230, 95, 225, 120);
+            tempCtx.closePath();
+            tempCtx.fill();
+
+            // India
+            tempCtx.beginPath();
+            tempCtx.moveTo(355, 105);
+            tempCtx.lineTo(370, 125);
+            tempCtx.lineTo(380, 108);
+            tempCtx.closePath();
+            tempCtx.fill();
+
+            // Indochina
+            tempCtx.beginPath();
+            tempCtx.moveTo(395, 105);
+            tempCtx.lineTo(410, 125);
+            tempCtx.lineTo(415, 110);
+            tempCtx.closePath();
+            tempCtx.fill();
+
+            // Australia
+            tempCtx.beginPath();
+            tempCtx.moveTo(415, 165);
+            tempCtx.bezierCurveTo(445, 160, 460, 170, 455, 185);
+            tempCtx.bezierCurveTo(445, 200, 420, 195, 412, 185);
+            tempCtx.closePath();
+            tempCtx.fill();
+
+            // Antártida
+            tempCtx.fillRect(0, 230, 512, 26);
+
+            const tData = tempCtx.getImageData(0, 0, 512, 256).data;
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+
+                const px = (x + Math.floor((nVal - 0.5) * 12) + 512) % 512;
+                const py = Math.max(0, Math.min(255, y + Math.floor((nVal - 0.5) * 8)));
+                const pIdx = (py * 512 + px) * 4;
+
+                const isLand = tData[pIdx] > 128;
+
+                let r, g, b;
+                if (isLand) {
+                  r = 34; g = 120; b = 55;
+                  
+                  if (nVal > 0.62) {
+                    r = 102; g = 80; b = 64;
+                  } else if (nVal > 0.55) {
+                    r = 139; g = 115; b = 85;
+                  }
+
+                  const latDist = Math.abs(y - 128);
+                  if (latDist > 20 && latDist < 60 && nVal < 0.46) {
+                    r = 210; g = 180; b = 120;
+                  }
+                } else {
+                  r = 12; g = 40; b = 90;
+                  
+                  if (nVal > 0.44) {
+                    r = 18; g = 80; b = 135;
+                  }
+                }
+
+                const northPolar = 22 + nVal * 8;
+                const southPolar = 228 - nVal * 8;
+                if (y < northPolar || y > southPolar) {
+                  r = 240; g = 242; b = 250;
+                }
+
+                out[idx] = r;
+                out[idx+1] = g;
+                out[idx+2] = b;
+                out[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+          } 
+          else if (type === 'earth_clouds') {
+            ctx.clearRect(0, 0, 512, 256);
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const sampleX = (x + 200) % 512;
+                const sampleY = (y + 100) % 256;
+                const sampleIdx = (sampleY * 512 + sampleX) * 4;
+                const nVal = nData[sampleIdx] / 255;
+                
+                const idx = (y * 512 + x) * 4;
+                if (nVal > 0.51) {
+                  out[idx] = 255;
+                  out[idx+1] = 255;
+                  out[idx+2] = 255;
+                  out[idx+3] = Math.floor((nVal - 0.51) * 2.05 * 220);
+                } else {
+                  out[idx+3] = 0;
+                }
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+          }
+          else if (type === 'moon') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            for (let i = 0; i < nData.length; i += 4) {
+              const nVal = nData[i] / 255;
+              let c = 128;
+              if (nVal < 0.44) {
+                c = Math.floor(75 + nVal * 55);
+              } else {
+                c = Math.floor(115 + nVal * 75);
+              }
+              out[i] = c;
+              out[i+1] = c;
+              out[i+2] = c;
+              out[i+3] = 255;
+            }
+            ctx.putImageData(outData, 0, 0);
+            
+            for (let i = 0; i < 80; i++) {
+              const cx = Math.random() * 512;
+              const cy = Math.random() * 256;
+              const r = 2 + Math.random() * 9;
+              
+              ctx.strokeStyle = 'rgba(0, 0, 0, 0.42)';
+              ctx.lineWidth = 1.2;
+              ctx.beginPath();
+              ctx.arc(cx, cy + 0.5, r, 0, Math.PI);
+              ctx.stroke();
+              
+              ctx.strokeStyle = 'rgba(255, 255, 255, 0.42)';
+              ctx.beginPath();
+              ctx.arc(cx, cy - 0.5, r, Math.PI, 0);
+              ctx.stroke();
+              
+              if (r > 6) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+                ctx.beginPath();
+                ctx.arc(cx, cy, 1, 0, Math.PI*2);
+                ctx.fill();
+                
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.lineWidth = 0.6;
+                for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+                  ctx.beginPath();
+                  ctx.moveTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+                  ctx.lineTo(cx + Math.cos(a) * (r * (1.4 + Math.random()*1.5)), cy + Math.sin(a) * (r * (1.4 + Math.random()*1.5)));
+                  ctx.stroke();
+                }
+              }
+            }
+          } 
+          else if (type === 'mars') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            for (let i = 0; i < nData.length; i += 4) {
+              const nVal = nData[i] / 255;
+              let r = 175;
+              let g = 75;
+              let b = 45;
+              
+              if (nVal < 0.40) {
+                r = Math.floor(95 + nVal * 95);
+                g = Math.floor(40 + nVal * 45);
+                b = Math.floor(25 + nVal * 25);
+              } else if (nVal > 0.60) {
+                r = Math.floor(205 + (nVal - 0.6) * 115);
+                g = Math.floor(115 + (nVal - 0.6) * 95);
+                b = Math.floor(70 + (nVal - 0.6) * 55);
+              }
+              
+              out[i] = r;
+              out[i+1] = g;
+              out[i+2] = b;
+              out[i+3] = 255;
+            }
+            ctx.putImageData(outData, 0, 0);
+            
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+                const upperCap = 13 + nVal * 5;
+                const lowerCap = 243 - nVal * 5;
+                if (y < upperCap || y > lowerCap) {
+                  out[idx] = Math.floor(out[idx] * 0.2 + 210);
+                  out[idx+1] = Math.floor(out[idx+1] * 0.2 + 218);
+                  out[idx+2] = Math.floor(out[idx+2] * 0.2 + 225);
+                }
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+          } 
+          else if (type === 'jupiter') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            const colors = [
+              '#542f13', '#8a4e1e', '#b87535', '#dfa868', '#f2d399',
+              '#dfa868', '#b87535', '#8a4e1e', '#542f13', '#c96a26'
+            ];
+            
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+                
+                const perturbedY = y + Math.sin(x / 14) * 8 + Math.cos(x / 24) * 6 + nVal * 22;
+                const colorIdx = Math.floor((perturbedY / 256) * colors.length) % colors.length;
+                const baseColor = hexToRgb(colors[colorIdx]);
+                
+                const windFactor = 0.88 + nVal * 0.22;
+                out[idx] = Math.min(255, Math.floor(baseColor.r * windFactor));
+                out[idx+1] = Math.min(255, Math.floor(baseColor.g * windFactor));
+                out[idx+2] = Math.min(255, Math.floor(baseColor.b * windFactor));
+                out[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+            
+            ctx.fillStyle = '#8f2015';
+            ctx.beginPath();
+            ctx.ellipse(325, 172, 26, 14, -0.05, 0, Math.PI*2);
+            ctx.fill();
+            ctx.strokeStyle = '#fca5a5';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            for (let i = 0; i < 4; i++) {
+              ctx.beginPath();
+              ctx.ellipse(100 + i*115, 80 + (i%2)*25, 7, 4, 0.05, 0, Math.PI*2);
+              ctx.fill();
+            }
+          } 
+          else if (type === 'saturn') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            const colors = ['#c89c44', '#dfba6b', '#f2d8a4', '#dfba6b', '#c89c44'];
+            
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+                
+                const perturbedY = y + Math.sin(x / 22) * 4 + nVal * 8;
+                const colorIdx = Math.floor((perturbedY / 256) * colors.length) % colors.length;
+                const baseColor = hexToRgb(colors[colorIdx]);
+                
+                const factor = 0.94 + nVal * 0.12;
+                out[idx] = Math.min(255, Math.floor(baseColor.r * factor));
+                out[idx+1] = Math.min(255, Math.floor(baseColor.g * factor));
+                out[idx+2] = Math.min(255, Math.floor(baseColor.b * factor));
+                out[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+          } 
+          else if (type === 'uranus') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+                out[idx] = Math.floor(98 + nVal * 22);
+                out[idx+1] = Math.floor(198 + nVal * 22);
+                out[idx+2] = Math.floor(205 + nVal * 18);
+                out[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+          } 
+          else if (type === 'neptune') {
+            const outData = ctx.createImageData(512, 256);
+            const out = outData.data;
+            const colors = ['#1d3557', '#427899', '#1d3557', '#10203d'];
+            
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                const idx = (y * 512 + x) * 4;
+                const nVal = nData[idx] / 255;
+                
+                const perturbedY = y + Math.sin(x / 18) * 5 + nVal * 10;
+                const colorIdx = Math.floor((perturbedY / 256) * colors.length) % colors.length;
+                const baseColor = hexToRgb(colors[colorIdx]);
+                
+                const factor = 0.91 + nVal * 0.17;
+                out[idx] = Math.min(255, Math.floor(baseColor.r * factor));
+                out[idx+1] = Math.min(255, Math.floor(baseColor.g * factor));
+                out[idx+2] = Math.min(255, Math.floor(baseColor.b * factor));
+                out[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(outData, 0, 0);
+            
+            ctx.fillStyle = '#0e1526';
+            ctx.beginPath();
+            ctx.ellipse(350, 150, 20, 11, 0.05, 0, Math.PI*2);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(96, 165, 250, 0.25)';
+            ctx.stroke();
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(330, 136);
+            ctx.bezierCurveTo(360, 133, 400, 139, 430, 135);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(100, 92);
+            ctx.bezierCurveTo(150, 89, 210, 95, 260, 91);
+            ctx.stroke();
+          }
+          
+          const texture = new THREE.CanvasTexture(texCanvas);
+          return texture;
+        }
+
+        function createSaturnRingsTexture() {
+          const texCanvas = document.createElement('canvas');
+          texCanvas.width = 512;
+          texCanvas.height = 8;
+          const ctx = texCanvas.getContext('2d');
+          
+          const grad = ctx.createLinearGradient(0, 0, 512, 0);
+          grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+          grad.addColorStop(0.12, 'rgba(161, 98, 7, 0.08)');
+          grad.addColorStop(0.25, 'rgba(202, 138, 4, 0.55)');
+          grad.addColorStop(0.45, 'rgba(234, 179, 8, 0.85)');
+          grad.addColorStop(0.58, 'rgba(0, 0, 0, 0)');
+          grad.addColorStop(0.68, 'rgba(202, 138, 4, 0.65)');
+          grad.addColorStop(0.85, 'rgba(161, 98, 7, 0.35)');
+          grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, 512, 8);
+          
+          return new THREE.CanvasTexture(texCanvas);
+        }
+
+        function createUranusRingsTexture() {
+          const texCanvas = document.createElement('canvas');
+          texCanvas.width = 256;
+          texCanvas.height = 8;
+          const ctx = texCanvas.getContext('2d');
+          
+          const grad = ctx.createLinearGradient(0, 0, 256, 0);
+          grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+          grad.addColorStop(0.3, 'rgba(45, 212, 191, 0.15)');
+          grad.addColorStop(0.5, 'rgba(45, 212, 191, 0.75)');
+          grad.addColorStop(0.7, 'rgba(45, 212, 191, 0.15)');
+          grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, 256, 8);
+          
+          return new THREE.CanvasTexture(texCanvas);
+        }
+
+        // --- CONFIGURACIÓN DE LA ESCENA THREE.JS ---
+        const rect = canvas.getBoundingClientRect();
+        const scene = new THREE.Scene();
+        
+        const camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 2000);
+        camera.position.set(0, 160, 320);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(rect.width, rect.height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.minDistance = 20;
+        controls.maxDistance = 550;
+        controls.maxPolarAngle = Math.PI / 2 - 0.02;
+
+        // --- SISTEMA DE ILUMINACIÓN REALISTA ---
+        const sunLight = new THREE.PointLight(0xffffff, 2.0, 800, 0.5);
+        scene.add(sunLight);
+
+        const ambientLight = new THREE.AmbientLight(0x202825, 0.35);
+        scene.add(ambientLight);
+
+        // --- FONDO DE CIELO ESTRELLADO OSCURO (PARTÍCULAS) ---
+        const starGeom = new THREE.BufferGeometry();
+        const starPositions = [];
+        for (let i = 0; i < 1500; i++) {
+          const rRadius = 450 + Math.random() * 300;
+          const theta = Math.random() * Math.PI * 2;
+          const phi = Math.acos((Math.random() * 2) - 1);
+          
+          const x = rRadius * Math.sin(phi) * Math.cos(theta);
+          const y = rRadius * Math.sin(phi) * Math.sin(theta);
+          const z = rRadius * Math.cos(phi);
+          
+          starPositions.push(x, y, z);
+        }
+        starGeom.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+        const starMat = new THREE.PointsMaterial({
+          color: 0xffffff,
+          size: 1.2,
+          transparent: true,
+          opacity: 0.85,
+          sizeAttenuation: false
+        });
+        const starField = new THREE.Points(starGeom, starMat);
+        scene.add(starField);
+
+        // --- ESTRUCTURA DE DATOS DE PLANETAS ---
+        const planetsData = [
+          {
+            name: "Mercurio",
+            color: "#9CA3AF",
+            radius: 1.8,
+            orbitRadius: 40,
+            speed: 0.038,
+            rotationSpeed: 0.003,
+            tilt: 0.03,
+            inclination: 0.12,
+            distance: "0.39 UA",
+            period: "88 días",
+            moons: "0",
+            temp: "167 °C",
+            type: "Rocoso",
+            typeColor: "bg-gray-500",
+            fact: "Es el planeta más cercano al Sol y no posee atmósfera, lo que genera oscilaciones extremas de temperatura."
+          },
+          {
+            name: "Venus",
+            color: "#C68A35",
+            radius: 2.8,
+            orbitRadius: 58,
+            speed: 0.018,
+            rotationSpeed: -0.002,
+            tilt: 3.09,
+            inclination: 0.06,
+            distance: "0.72 UA",
+            period: "225 días",
+            moons: "0",
+            temp: "462 °C",
+            type: "Rocoso",
+            typeColor: "bg-yellow-600",
+            fact: "Tiene una densa atmósfera de CO2 que genera un efecto invernadero extremo. Gira en sentido horario (retrógrado)."
+          },
+          {
+            name: "Tierra",
+            color: "#1D4ED8",
+            radius: 3.2,
+            orbitRadius: 76,
+            speed: 0.011,
+            rotationSpeed: 0.012,
+            tilt: 0.41,
+            inclination: 0.0,
+            distance: "1.00 UA",
+            period: "365 días",
+            moons: "1",
+            temp: "15 °C",
+            type: "Habitable",
+            typeColor: "bg-blue-600",
+            fact: "El único mundo conocido con agua líquida superficial y vida biológica. Posee un fuerte escudo magnético protector.",
+            hasMoon: true,
+            moonOrbitRadius: 6.5,
+            moonRadius: 0.7,
+            moonSpeed: 0.06
+          },
+          {
+            name: "Marte",
+            color: "#B91C1C",
+            radius: 2.2,
+            orbitRadius: 96,
+            speed: 0.0075,
+            rotationSpeed: 0.011,
+            tilt: 0.44,
+            inclination: 0.03,
+            distance: "1.52 UA",
+            period: "687 días",
+            moons: "2",
+            temp: "-62 °C",
+            type: "Rocoso",
+            typeColor: "bg-red-600",
+            fact: "Llamado planeta rojo por el óxido de hierro en su suelo. Posee agua helada bajo su superficie y el volcán más alto."
+          },
+          {
+            name: "Júpiter",
+            color: "#C27C38",
+            radius: 7.2,
+            orbitRadius: 138,
+            speed: 0.0022,
+            rotationSpeed: 0.024,
+            tilt: 0.05,
+            inclination: 0.02,
+            distance: "5.20 UA",
+            period: "12 años",
+            moons: "95",
+            temp: "-108 °C",
+            type: "Gigante Gaseoso",
+            typeColor: "bg-amber-700",
+            fact: "Es el planeta más grande y masivo. Su Gran Mancha Roja es una colosal tormenta anticiclónica activa por siglos."
+          },
+          {
+            name: "Saturno",
+            color: "#D1A153",
+            radius: 6.0,
+            orbitRadius: 180,
+            speed: 0.00095,
+            rotationSpeed: 0.021,
+            tilt: 0.47,
+            inclination: 0.04,
+            distance: "9.58 UA",
+            period: "29 años",
+            moons: "146",
+            temp: "-139 °C",
+            type: "Gigante Gaseoso",
+            typeColor: "bg-yellow-500",
+            fact: "Destaca por sus espectaculares anillos concéntricos compuestos de partículas de agua congelada y polvo.",
+            hasRings: true
+          },
+          {
+            name: "Urano",
+            color: "#0F766E",
+            radius: 4.4,
+            orbitRadius: 218,
+            speed: 0.00045,
+            rotationSpeed: -0.016,
+            tilt: 1.71,
+            inclination: 0.013,
+            distance: "19.22 UA",
+            period: "84 años",
+            moons: "28",
+            temp: "-197 °C",
+            type: "Gigante Helado",
+            typeColor: "bg-teal-500",
+            fact: "Gira completamente inclinado en su órbita (eje de 98°). Tiene anillos tenues casi verticales.",
+            hasVerticalRings: true
+          },
+          {
+            name: "Neptuno",
+            color: "#1E3A8A",
+            radius: 4.2,
+            orbitRadius: 254,
+            speed: 0.00025,
+            rotationSpeed: 0.018,
+            tilt: 0.49,
+            inclination: 0.03,
+            distance: "30.05 UA",
+            period: "165 años",
+            moons: "16",
+            temp: "-201 °C",
+            type: "Gigante Helado",
+            typeColor: "bg-blue-800",
+            fact: "El planeta más alejado del Sol. Alberga los vientos más intensos del sistema, llegando a los 2.000 km/h."
+          }
+        ];
+
+        const clickTargets = [];
+
+        // --- CREAR EL SOL ---
+        const sunTexture = createProceduralTexture('sun');
+        const sunGeom = new THREE.SphereGeometry(12, 32, 32);
+        const sunMat = new THREE.MeshStandardMaterial({
+          map: sunTexture,
+          emissive: 0xff7700,
+          emissiveMap: sunTexture,
+          emissiveIntensity: 1.5,
+          roughness: 0.9,
+          metalness: 0.1
+        });
+        const sunMesh = new THREE.Mesh(sunGeom, sunMat);
+        scene.add(sunMesh);
+
+        sunMesh.userData = {
+          name: "El Sol",
+          color: "#F59E0B",
+          type: "Estrella",
+          typeColor: "bg-yellow-500",
+          distance: "0 UA",
+          period: "---",
+          moons: "8 planetas",
+          temp: "5.500 °C",
+          fact: "Contiene el 99.8% de la masa del Sistema Solar. En su núcleo ocurre la fusión de hidrógeno en helio."
+        };
+        clickTargets.push(sunMesh);
+
+        const sunGlowGeom = new THREE.SphereGeometry(14.5, 16, 16);
+        const sunGlowMat = new THREE.MeshBasicMaterial({
+          color: 0xffaa00,
+          transparent: true,
+          opacity: 0.18,
+          side: THREE.BackSide
+        });
+        const sunGlow = new THREE.Mesh(sunGlowGeom, sunGlowMat);
+        scene.add(sunGlow);
+
+        // --- CREAR EL CINTURÓN DE ASTEROIDES (ENTRE MARTE Y JÚPITER) ---
+        const asteroidGeom = new THREE.BufferGeometry();
+        const asteroidPositions = [];
+        const asteroidMeta = [];
+        for (let i = 0; i < 450; i++) {
+          const aRad = 108 + Math.random() * 16;
+          const angle = Math.random() * Math.PI * 2;
+          const aSpeed = 0.001 * (0.8 + Math.random() * 0.4);
+          const height = (Math.random() - 0.5) * 3;
+          
+          const x = aRad * Math.cos(angle);
+          const y = height;
+          const z = aRad * Math.sin(angle);
+          
+          asteroidPositions.push(x, y, z);
+          asteroidMeta.push({ radius: aRad, angle: angle, speed: aSpeed, height: height });
+        }
+        asteroidGeom.setAttribute('position', new THREE.Float32BufferAttribute(asteroidPositions, 3));
+        const asteroidMat = new THREE.PointsMaterial({
+          color: 0x88918b,
+          size: 0.9,
+          transparent: true,
+          opacity: 0.45,
+          sizeAttenuation: true
+        });
+        const asteroidBelt = new THREE.Points(asteroidGeom, asteroidMat);
+        scene.add(asteroidBelt);
+
+        // --- CREAR PLANETAS Y SUS ÓRBITAS ---
+        const orbitsGroup = new THREE.Group();
+        scene.add(orbitsGroup);
+
+        planetsData.forEach(p => {
+          p.angle = Math.random() * Math.PI * 2;
+
+          const planetGroup = new THREE.Group();
+          scene.add(planetGroup);
+          p.meshGroup = planetGroup;
+
+          const orbitPoints = [];
+          const a = p.orbitRadius;
+          const ecc = 0.04;
+          const b = a * Math.sqrt(1 - ecc * ecc);
+          for (let j = 0; j <= 128; j++) {
+            const theta = (j / 128) * Math.PI * 2;
+            const pt = new THREE.Vector3(a * Math.cos(theta), 0, b * Math.sin(theta));
+            pt.applyAxisAngle(new THREE.Vector3(1, 0, 0), p.inclination);
+            orbitPoints.push(pt);
+          }
+          const orbitGeom = new THREE.BufferGeometry().setFromPoints(orbitPoints);
+          const orbitMat = new THREE.LineBasicMaterial({
+            color: 0x3b82f6,
+            transparent: true,
+            opacity: 0.12
+          });
+          const orbitLine = new THREE.LineLoop(orbitGeom, orbitMat);
+          orbitsGroup.add(orbitLine);
+          p.orbitLine = orbitLine;
+
+          let textureName = p.name.toLowerCase();
+          if (textureName === "mercurio") textureName = "mercury";
+          if (textureName === "tierra") textureName = "earth";
+          if (textureName === "marte") textureName = "mars";
+          if (textureName === "júpiter" || textureName === "jupiter") textureName = "jupiter";
+          if (textureName === "saturno") textureName = "saturn";
+          if (textureName === "urano") textureName = "uranus";
+          if (textureName === "neptuno") textureName = "neptune";
+
+          const pTexture = createProceduralTexture(textureName);
+          const sphereGeom = new THREE.SphereGeometry(p.radius, 32, 32);
+          
+          const isRocky = p.name === "Mercurio" || p.name === "Tierra" || p.name === "Marte";
+          const sphereMat = new THREE.MeshStandardMaterial({
+            map: pTexture,
+            bumpMap: isRocky ? noiseTexture : null,
+            bumpScale: p.name === "Tierra" ? 0.035 : (p.name === "Mercurio" ? 0.055 : 0.04),
+            roughness: p.name === "Tierra" ? 0.45 : (p.name === "Venus" || p.name === "Júpiter" || p.name === "Saturno" || p.name === "Urano" || p.name === "Neptuno" ? 0.95 : 0.75),
+            metalness: p.name === "Tierra" ? 0.15 : 0.05
+          });
+          
+          const sphereMesh = new THREE.Mesh(sphereGeom, sphereMat);
+          
+          const bodyGroup = new THREE.Group();
+          bodyGroup.rotation.z = p.tilt;
+          bodyGroup.add(sphereMesh);
+          planetGroup.add(bodyGroup);
+          p.mesh = sphereMesh;
+
+          if (p.name === "Tierra") {
+            const cloudGeom = new THREE.SphereGeometry(p.radius * 1.015, 32, 32);
+            const cloudTexture = createProceduralTexture('earth_clouds');
+            const cloudMat = new THREE.MeshStandardMaterial({
+              map: cloudTexture,
+              transparent: true,
+              opacity: 0.45,
+              depthWrite: false
+            });
+            const cloudMesh = new THREE.Mesh(cloudGeom, cloudMat);
+            bodyGroup.add(cloudMesh);
+            p.cloudMesh = cloudMesh;
+          }
+
+          if (p.hasRings) {
+            const rTexture = createSaturnRingsTexture();
+            const ringGeom = new THREE.RingGeometry(p.radius * 1.35, p.radius * 2.3, 64);
+            
+            const pos = ringGeom.attributes.position;
+            const uv = ringGeom.attributes.uv;
+            for (let i = 0; i < pos.count; i++) {
+              const vx = pos.getX(i);
+              const vy = pos.getY(i);
+              const dToCenter = Math.sqrt(vx * vx + vy * vy);
+              const normD = (dToCenter - p.radius * 1.35) / (p.radius * 2.3 - p.radius * 1.35);
+              uv.setXY(i, normD, 0.5);
+            }
+            
+            const ringMat = new THREE.MeshStandardMaterial({
+              map: rTexture,
+              side: THREE.DoubleSide,
+              transparent: true,
+              opacity: 0.8,
+              roughness: 0.6
+            });
+            const ringMesh = new THREE.Mesh(ringGeom, ringMat);
+            ringMesh.rotation.x = -Math.PI / 2;
+            bodyGroup.add(ringMesh);
+          }
+
+          if (p.hasVerticalRings) {
+            const rTexture = createUranusRingsTexture();
+            const ringGeom = new THREE.RingGeometry(p.radius * 1.3, p.radius * 1.75, 64);
+            
+            const pos = ringGeom.attributes.position;
+            const uv = ringGeom.attributes.uv;
+            for (let i = 0; i < pos.count; i++) {
+              const vx = pos.getX(i);
+              const vy = pos.getY(i);
+              const dToCenter = Math.sqrt(vx * vx + vy * vy);
+              const normD = (dToCenter - p.radius * 1.3) / (p.radius * 1.75 - p.radius * 1.3);
+              uv.setXY(i, normD, 0.5);
+            }
+
+            const ringMat = new THREE.MeshStandardMaterial({
+              map: rTexture,
+              side: THREE.DoubleSide,
+              transparent: true,
+              opacity: 0.45
+            });
+            const ringMesh = new THREE.Mesh(ringGeom, ringMat);
+            ringMesh.rotation.x = -Math.PI / 2;
+            bodyGroup.add(ringMesh);
+          }
+
+          if (p.hasMoon) {
+            p.moonAngle = 0;
+            const mTexture = createProceduralTexture('moon');
+            const mGeom = new THREE.SphereGeometry(p.moonRadius, 16, 16);
+            const mMat = new THREE.MeshStandardMaterial({
+              map: mTexture,
+              bumpMap: noiseTexture,
+              bumpScale: 0.05,
+              roughness: 0.85
+            });
+            const mMesh = new THREE.Mesh(mGeom, mMat);
+
+            const mGroup = new THREE.Group();
+            mGroup.add(mMesh);
+            planetGroup.add(mGroup);
+            p.moonMeshGroup = mGroup;
+            p.moonMesh = mMesh;
+          }
+
+          sphereMesh.userData = p;
+          clickTargets.push(sphereMesh);
+        });
+
+        // --- SISTEMA DE ESTADO Y CONTROLES DE LA INTERFAZ ---
+        let isPaused = false;
+        let showOrbits = true;
+        let speedMultiplier = 1.0;
+        let focusedPlanet = null;
+        let shouldMoveCameraClose = false;
+
+        const playPauseBtn = document.getElementById('simPlayPauseBtn');
+        const orbitsBtn = document.getElementById('simOrbitsBtn');
+        const resetBtn = document.getElementById('simResetBtn');
+        const speedSlider = document.getElementById('simSpeedSlider');
+        const speedVal = document.getElementById('simSpeedVal');
+        const zoomSlider = document.getElementById('simZoomSlider');
+        const zoomVal = document.getElementById('simZoomVal');
+        const focusSelect = document.getElementById('simFocusSelect');
+
+        const infoPanel = document.getElementById('planetInfoPanel');
+        const pName = document.getElementById('panelPlanetName');
+        const pType = document.getElementById('panelPlanetType');
+        const pDist = document.getElementById('panelPlanetDist');
+        const pPeriod = document.getElementById('panelPlanetPeriod');
+        const pMoons = document.getElementById('panelPlanetMoons');
+        const pTemp = document.getElementById('panelPlanetTemp');
+        const pFact = document.getElementById('panelPlanetFact');
+        const pIcon = document.getElementById('panelPlanetIcon');
+
+        function updateInfoPanel(item) {
+          if (!item) {
+            infoPanel.style.opacity = '0';
+            infoPanel.style.pointerEvents = 'none';
+            return;
+          }
+          pName.innerText = item.name;
+          pType.innerText = item.type;
+          pType.className = `text-[9px] px-1.5 py-0.5 rounded ml-auto text-white ${item.typeColor}`;
+          pDist.innerText = item.distance;
+          pPeriod.innerText = item.period;
+          pMoons.innerText = item.moons;
+          pTemp.innerText = item.temp;
+          pFact.innerText = item.fact;
+          pIcon.style.backgroundColor = item.color;
+
+          infoPanel.style.opacity = '1';
+          infoPanel.style.pointerEvents = 'auto';
+        }
+
+        function selectObject(item) {
+          focusedPlanet = item;
+          shouldMoveCameraClose = true;
+          updateInfoPanel(item === 'sun' ? sunMesh.userData : item);
+
+          if (item === 'sun') {
+            focusSelect.value = 'sun';
+          } else if (item) {
+            focusSelect.value = item.name;
+          } else {
+            focusSelect.value = 'sun';
+          }
+        }
+
+        // Controladores de eventos de la interfaz
+        playPauseBtn.addEventListener('click', () => {
+          isPaused = !isPaused;
+          playPauseBtn.innerHTML = isPaused ? 
+            `<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>` :
+            `<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+        });
+
+        orbitsBtn.addEventListener('click', () => {
+          showOrbits = !showOrbits;
+          orbitsGroup.visible = showOrbits;
+          orbitsBtn.innerHTML = showOrbits ? 
+            `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>` :
+            `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"/></svg>`;
+        });
+
+        resetBtn.addEventListener('click', () => {
+          selectObject('sun');
+          camera.position.set(0, 160, 320);
+          controls.target.set(0, 0, 0);
+          zoomSlider.value = 1.0;
+          zoomVal.innerText = "1.0x";
+          shouldMoveCameraClose = false;
+        });
+
+        speedSlider.addEventListener('input', (e) => {
+          speedMultiplier = parseFloat(e.target.value);
+          speedVal.innerText = speedMultiplier.toFixed(1) + "x";
+        });
+
+        zoomSlider.addEventListener('input', (e) => {
+          const zValue = parseFloat(e.target.value);
+          zoomVal.innerText = zValue.toFixed(1) + "x";
+          
+          const dir = camera.position.clone().sub(controls.target).normalize();
+          const distTarget = 180 / zValue;
+          camera.position.copy(controls.target.clone().add(dir.multiplyScalar(distTarget)));
+          shouldMoveCameraClose = false;
+        });
+
+        focusSelect.addEventListener('change', (e) => {
+          const val = e.target.value;
+          if (val === 'sun') {
+            selectObject('sun');
+          } else {
+            const planet = planetsData.find(p => p.name === val);
+            if (planet) selectObject(planet);
+          }
+        });
+
+        const closeBtn = document.getElementById('panelCloseBtn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            infoPanel.style.opacity = '0';
+            infoPanel.style.pointerEvents = 'none';
+            focusedPlanet = null;
+          });
+        }
+
+        // Detener cámara autoguiada si el usuario interviene manualmente
+        controls.addEventListener('start', () => {
+          shouldMoveCameraClose = false;
+        });
+
+        // --- INTERACTIVIDAD POR CLIC (RAYCASTING) ---
+        const raycaster = new THREE.Raycaster();
+        let isDragging = false;
+        let dragStart = { x: 0, y: 0 };
+
+        canvas.addEventListener('mousedown', (e) => {
+          isDragging = false;
+          dragStart.x = e.clientX;
+          dragStart.y = e.clientY;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+          // Si el mouse se desplaza significativamente, registramos arrastre en lugar de clic
+          if (Math.abs(e.clientX - dragStart.x) > 4 || Math.abs(e.clientY - dragStart.y) > 4) {
+            isDragging = true;
+          }
+
+          // Hover cursor pointer
+          const rect = canvas.getBoundingClientRect();
+          const mouse = new THREE.Vector2();
+          mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+          
+          raycaster.setFromCamera(mouse, camera);
+          const intersects = raycaster.intersectObjects(clickTargets);
+          
+          if (intersects.length > 0) {
+            canvas.style.cursor = 'pointer';
+          } else {
+            canvas.style.cursor = isDragging ? 'grabbing' : 'grab';
+          }
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+          if (!isDragging) {
+            const rect = canvas.getBoundingClientRect();
+            const mouse = new THREE.Vector2();
+            mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(clickTargets);
+
+            if (intersects.length > 0) {
+              const hitPlanet = intersects[0].object.userData;
+              selectObject(hitPlanet === sunMesh.userData ? 'sun' : hitPlanet);
+            }
+          }
+        });
+
+        // --- RESIZE ---
+        window.addEventListener('resize', () => {
+          const newRect = canvas.getBoundingClientRect();
+          camera.aspect = newRect.width / newRect.height;
+          camera.updateProjectionMatrix();
+          renderer.setSize(newRect.width, newRect.height);
+        });
+
+        // --- BUCLE DE ANIMACIÓN PRINCIPAL ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          const delta = clock.getDelta();
+          const running = !isPaused;
+
+          // 1. Animación del Sol
+          sunMesh.rotation.y += 0.002 * (running ? speedMultiplier : 0);
+          
+          // Latido de brillo solar
+          const pulse = 1.0 + Math.sin(Date.now() / 450) * 0.03;
+          sunGlow.scale.set(pulse, pulse, pulse);
+
+          // 2. Animación del cinturón de asteroides
+          if (running) {
+            const positions = asteroidBelt.geometry.attributes.position.array;
+            for (let i = 0; i < 450; i++) {
+              const meta = asteroidMeta[i];
+              meta.angle += meta.speed * speedMultiplier;
+              positions[i * 3] = meta.radius * Math.cos(meta.angle);
+              positions[i * 3 + 2] = meta.radius * Math.sin(meta.angle);
+            }
+            asteroidBelt.geometry.attributes.position.needsUpdate = true;
+          }
+
+          // 3. Animación de los Planetas
+          planetsData.forEach(p => {
+            if (running) {
+              p.angle += p.speed * speedMultiplier * 0.5; // Ajustar factor de velocidad global para que sea suave
+            }
+
+            // Kepler: calcular coordenadas X, Z teniendo en cuenta excentricidad sutil e inclinación orbital
+            const a = p.orbitRadius;
+            const ecc = 0.04;
+            const b = a * Math.sqrt(1 - ecc * ecc);
+            
+            const localPos = new THREE.Vector3(a * Math.cos(p.angle), 0, b * Math.sin(p.angle));
+            localPos.applyAxisAngle(new THREE.Vector3(1, 0, 0), p.inclination);
+            p.meshGroup.position.copy(localPos);
+
+            // Rotación sobre su propio eje
+            p.mesh.rotation.y += p.rotationSpeed * (running ? speedMultiplier : 0) * 2;
+
+            // Animación de la atmósfera / nubes de la Tierra
+            if (p.name === "Tierra" && p.cloudMesh) {
+              p.cloudMesh.rotation.y += p.rotationSpeed * 1.15 * (running ? speedMultiplier : 0) * 2;
+            }
+
+            // Animación de la Luna
+            if (p.hasMoon) {
+              if (running) {
+                p.moonAngle += p.moonSpeed * speedMultiplier;
+              }
+              p.moonMeshGroup.position.set(
+                p.moonOrbitRadius * Math.cos(p.moonAngle),
+                0,
+                p.moonOrbitRadius * Math.sin(p.moonAngle)
+              );
+              // Rotación sincrónica de la Luna (siempre mira al planeta)
+              p.moonMesh.rotation.y = -p.moonAngle + Math.PI;
+            }
+
+            // Brillo de objeto seleccionado (efecto emisivo en el planeta)
+            if (focusedPlanet === p) {
+              p.mesh.material.emissive.setHex(0x112233);
+            } else {
+              p.mesh.material.emissive.setHex(0x000000);
+            }
+          });
+
+          // 4. Cámara autoguiada (Focus)
+          if (focusedPlanet) {
+            const targetPos = new THREE.Vector3();
+            let targetDist = 65;
+
+            if (focusedPlanet === 'sun') {
+              targetPos.set(0, 0, 0);
+              targetDist = 65;
+            } else {
+              focusedPlanet.meshGroup.getWorldPosition(targetPos);
+              targetDist = focusedPlanet.radius * 4.5;
+            }
+
+            // Desplazar suavemente el objetivo de control al planeta
+            controls.target.lerp(targetPos, 0.08);
+
+            // Acercar/alejar cámara suavemente al objetivo en la selección inicial
+            if (shouldMoveCameraClose) {
+              const camDir = camera.position.clone().sub(controls.target).normalize();
+              const targetCamPos = targetPos.clone().add(camDir.multiplyScalar(targetDist));
+              camera.position.lerp(targetCamPos, 0.08);
+              if (camera.position.distanceTo(targetCamPos) < 1.0) {
+                shouldMoveCameraClose = false;
+              }
+            }
+          } else {
+            controls.target.lerp(new THREE.Vector3(0, 0, 0), 0.08);
+          }
+
+          // 5. Sincronizar slider de Zoom con la distancia actual de la cámara
+          const currentDist = camera.position.distanceTo(controls.target);
+          let zoomMult = 180 / currentDist;
+          zoomMult = Math.max(0.2, Math.min(2.5, zoomMult));
+          zoomSlider.value = zoomMult.toFixed(1);
+          zoomVal.innerText = zoomMult.toFixed(1) + "x";
+
+          controls.update();
+          renderer.render(scene, camera);
+        }
+
+        // Seleccionar Sol por defecto
+        selectObject('sun');
+
+        // Arrancar animación
+        animate();
+      })();
+      </script>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. Movimientos planetarios -->
+      <section id="movimientos" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Movimientos planetarios</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            Los planetas no se mueven en circulos perfectos. Gracias al trabajo de <strong class="text-white">Johannes Kepler</strong> (1609-1619), hoy sabemos que describen <strong class="text-natura-energy">orbitas elipticas</strong> alrededor del Sol. La elipse es una figura geometrica parecida a un circulo achatado: el Sol ocupa uno de sus focos, no el centro exacto.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy" data-icon="lucide:rotate-cw" data-width="22"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Las Leyes de Kepler</h3>
+            </div>
+            <ol class="space-y-3 text-base text-natura-silver">
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-natura-energy text-xs mt-0.5">1ª</span>
+                <span><strong class="text-white">Ley de las orbitas:</strong> Los planetas se mueven en elipses, con el Sol en uno de los focos.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-natura-energy text-xs mt-0.5">2ª</span>
+                <span><strong class="text-white">Ley de las areas:</strong> Un planeta barre areas iguales en tiempos iguales. Cuando esta mas cerca del Sol, se mueve mas rapido.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-natura-energy text-xs mt-0.5">3ª</span>
+                <span><strong class="text-white">Ley de los periodos:</strong> El cuadrado del periodo orbital es proporcional al cubo de la distancia media al Sol.</span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="22"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">El plano de la ecliptica</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">
+              Todos los planetas orbitan aproximadamente en el mismo plano: el <strong class="text-white">plano de la ecliptica</strong>. Y todos lo hacen en el <strong class="text-natura-energy">mismo sentido</strong> (antihorario visto desde el norte). Esto no es casualidad: es una herencia de la forma en que se formo el Sistema Solar a partir de un disco giratorio de gas y polvo hace 4.600 millones de anos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tabla de periodos orbitales -->
+        <div class="bg-natura-gray rounded-2xl overflow-hidden content-card mb-6">
+          <div class="p-6 border-b border-white/5">
+            <h3 class="font-heading font-semibold text-white text-lg">Periodos orbitales</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-natura-silverDark text-[11px] uppercase tracking-wider border-b border-white/5">
+                  <th class="text-left py-3 px-6 font-semibold">Planeta</th>
+                  <th class="text-left py-3 px-6 font-semibold">Periodo orbital</th>
+                  <th class="text-left py-3 px-6 font-semibold">Distancia (UA)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Mercurio</td>
+                  <td class="py-3 px-6 text-natura-silver">88 dias</td>
+                  <td class="py-3 px-6 text-natura-silver">0,39</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Venus</td>
+                  <td class="py-3 px-6 text-natura-silver">225 dias</td>
+                  <td class="py-3 px-6 text-natura-silver">0,72</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]" style="background: rgba(59,130,246,0.04);">
+                  <td class="py-3 px-6 font-medium text-natura-energy">Tierra</td>
+                  <td class="py-3 px-6 text-natura-energy font-medium">365 dias</td>
+                  <td class="py-3 px-6 text-natura-energy font-medium">1,00</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Marte</td>
+                  <td class="py-3 px-6 text-natura-silver">687 dias</td>
+                  <td class="py-3 px-6 text-natura-silver">1,52</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Jupiter</td>
+                  <td class="py-3 px-6 text-natura-silver">12 años</td>
+                  <td class="py-3 px-6 text-natura-silver">5,20</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Saturno</td>
+                  <td class="py-3 px-6 text-natura-silver">29 años</td>
+                  <td class="py-3 px-6 text-natura-silver">9,5</td>
+                </tr>
+                <tr class="border-b border-white/5 hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Urano</td>
+                  <td class="py-3 px-6 text-natura-silver">84 años</td>
+                  <td class="py-3 px-6 text-natura-silver">19</td>
+                </tr>
+                <tr class="hover:bg-white/[0.02]">
+                  <td class="py-3 px-6 font-medium text-white">Neptuno</td>
+                  <td class="py-3 px-6 text-natura-silver">165 años</td>
+                  <td class="py-3 px-6 text-natura-silver">30</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <div class="sabias-que">
+        <span class="sq-label">Sabías que...</span>
+        <p>En Júpiter cabrían más de 1300 Tierras. Su Gran Mancha Roja es una tormenta del tamaño de la Tierra que lleva activa más de 350 años.</p>
+      </div>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por que los planetas no se caen ni se escapan del Sistema Solar?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Por el equilibrio entre dos fuerzas: la <strong class="text-natura-energy">gravedad del Sol</strong>, que los atrae hacia el centro, y la <strong class="text-white">inercia</strong> del movimiento de cada planeta, que tiende a seguir en linea recta. La combinacion de ambas hace que los planetas sigan una orbita curva alrededor del Sol sin caerse ni escaparse.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por que los planetas rocosos estan cerca del Sol y los gaseosos lejos?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Durante la formacion del Sistema Solar, la radiacion solar barrio los gases livianos de las zonas cercanas al Sol. Cerca, solo quedaron los materiales rocosos y metalicos (que resisten el calor). Lejos, donde hacia mas frio, el hielo y los gases pudieron acumularse y formar los gigantes gaseosos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">Si Jupiter es el mas grande, ¿por que no es una estrella?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque no tiene suficiente masa. Para que se active la <strong class="text-natura-energy">fusion nuclear</strong> y un objeto se convierta en estrella, necesita al menos <strong class="text-white">80 veces la masa de Jupiter</strong>. A veces se dice que Jupiter es una "estrella fallida", pero en realidad le falta muchisimo para serlo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">4.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por que la Tierra es el unico planeta con vida (que conozcamos)?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Por una combinacion de factores: <strong class="text-natura-energy">distancia ideal al Sol</strong> (zona habitable, donde el agua puede ser liquida), una atmosfera que regula la temperatura, un campo magnetico que nos protege de la radiacion solar, y agua en los tres estados. Ningun otro planeta del Sistema Solar reune todas estas condiciones al mismo tiempo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="index.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Sistema Solar</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">Sol y Planetas — Pagina 1 de 4</div>
+
+        <a href="tierra-luna.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>Tierra y Luna</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:sun" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Fisica</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>

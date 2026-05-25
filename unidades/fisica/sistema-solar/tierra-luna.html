@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Tierra y la Luna — Sistema Solar | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59, 130, 246, 0.25); }
+    .highlight-box { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #3B82F6; border-left-color: #3B82F6; }
+    .toc-link:hover { color: white; }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #3B82F6;
+    }
+    .pull-quote {
+      border-left: 4px solid #3B82F6; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(59,130,246,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #3B82F6;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(59,130,246,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+    .sabias-que { clear: both; border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Fisica</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Tierra y Luna</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3 · Sem 17–18</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/earth-moon-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Eje 3 · La Tierra y la Luna</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        La Tierra y <span class="text-natura-energy">la Luna</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        La Tierra no esta quieta: gira sobre si misma y alrededor del Sol. Su compañera, la Luna, tambien se mueve y nos regala fases y eclipses. Entendamos estos movimientos que definen nuestros dias, noches y estaciones.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Rotacion</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Traslacion</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Eclipses</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Fases Lunares</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
+        <nav class="space-y-0.5">
+          <a href="#rotacion" class="toc-link active" data-toc>01. Rotacion: dia y noche</a>
+          <a href="#traslacion" class="toc-link" data-toc>02. Traslacion: el ano</a>
+          <a href="#luna" class="toc-link" data-toc>03. La Luna</a>
+          <a href="#eclipses" class="toc-link" data-toc>04. Eclipses</a>
+          <a href="#para-pensar" class="toc-link" data-toc>05. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. Rotacion -->
+      <section id="rotacion" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Rotacion: el dia y la noche</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            La Tierra gira sobre su propio eje una vez cada <strong class="text-natura-energy">24 horas</strong>. Este movimiento se llama <strong class="text-white">rotacion</strong>. Es el responsable directo de la sucesion del dia y la noche: la mitad del planeta que mira al Sol esta iluminada (de dia), mientras que la otra mitad queda en sombra (de noche).
+          </p>
+        </div>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+          La linea que separa la parte iluminada de la parte en sombra se llama <strong class="text-white">terminador</strong>. A medida que la Tierra gira, el terminador se va desplazando sobre la superficie y produce el amanecer y el atardecer en cada lugar.
+        </p>
+
+        <div class="highlight-box p-4 md:p-5 rounded-sm text-sm mb-6 pull-quote">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-energy flex-shrink-0 mt-0.5" data-icon="lucide:lightbulb" data-width="18"></span>
+            <div>
+              <p class="font-semibold text-white text-xs uppercase tracking-wider mb-1">Idea clave</p>
+              <p class="text-natura-silverLight italic">El eje de rotacion de la Tierra esta inclinado <strong class="text-natura-energy">23,5°</strong> respecto al plano de su orbita. Esta inclinacion es la causa de las estaciones del año, no la distancia al Sol.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:clock" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Duracion</h4>
+            <p class="text-natura-silver text-xs">1 rotacion completa = <strong class="text-natura-energy">24 horas</strong></p>
+          </div>
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:move-3d" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Velocidad en el ecuador</h4>
+            <p class="text-natura-silver text-xs">Aprox. <strong class="text-natura-energy">1.670 km/h</strong></p>
+          </div>
+        </div>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+          Aunque no lo sintamos, en el ecuador nos movemos a mas de 1.600 km/h solo por la rotacion terrestre. No lo percibimos porque todo a nuestro alrededor —el suelo, el aire, nosotros mismos— se mueve a la misma velocidad, como cuando viajamos en un avion en vuelo estable.
+        </p>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. Traslacion -->
+      <section id="traslacion" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Traslacion: el año y las estaciones</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            La Tierra orbita alrededor del Sol una vez cada <strong class="text-natura-energy">365 dias y 6 horas</strong>. Este movimiento se llama <strong class="text-white">traslacion</strong>. Esas 6 horas extra son la razon de que cada 4 años tengamos un año bisiesto (29 de febrero), para compensar el desfase acumulado.
+          </p>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">Dato curioso</span>
+          <p>En el hemisferio sur, la Tierra esta mas cerca del Sol (perihelio) en <strong>enero</strong>, ¡pleno verano argentino! La distancia al Sol NO causa las estaciones. Lo que las causa es la <strong>inclinacion del eje</strong>.</p>
+        </div>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+          Las estaciones <strong class="text-white">NO se producen por la distancia de la Tierra al Sol</strong>, sino por la <strong class="text-natura-energy">inclinacion del eje terrestre</strong> (23,5°). Cuando el hemisferio sur esta inclinado hacia el Sol, los rayos llegan mas directos y los dias son mas largos: es <strong class="text-white">verano en Argentina</strong>. Seis meses despues, cuando el hemisferio norte se inclina hacia el Sol, aca es invierno.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:orbit" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Duracion de la orbita</h4>
+            <p class="text-natura-silver text-xs"><strong class="text-natura-energy">365 dias y 6 horas</strong></p>
+          </div>
+          <div class="stat-box bg-natura-gray rounded-2xl p-5 text-center">
+            <span class="iconify text-natura-energy text-2xl block mb-2" data-icon="lucide:ruler" data-width="28"></span>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Distancia recorrida</h4>
+            <p class="text-natura-silver text-xs">~<strong class="text-natura-energy">940 millones de km</strong> por año</p>
+          </div>
+        </div>
+
+        <!-- Solsticios y equinoccios -->
+        <div class="bg-natura-gray rounded-2xl p-6 content-card mb-6">
+          <h3 class="font-heading font-semibold text-white text-lg mb-4 flex items-center gap-2">
+            <span class="iconify text-natura-energy" data-icon="lucide:calendar" data-width="18"></span>
+            Solsticios y equinoccios
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-3 text-base text-natura-silver">
+            <div class="bg-natura-dark rounded-xl p-4">
+              <p class="font-heading font-semibold text-natura-energy text-xs uppercase tracking-wider mb-1">Solsticio de verano (dic)</p>
+              <p>El hemisferio sur alcanza su maxima inclinacion hacia el Sol. Es el <strong class="text-white">dia mas largo</strong> del año. Los rayos solares caen directamente sobre el Tropico de Capricornio.</p>
+            </div>
+            <div class="bg-natura-dark rounded-xl p-4">
+              <p class="font-heading font-semibold text-natura-energy text-xs uppercase tracking-wider mb-1">Solsticio de invierno (jun)</p>
+              <p>El hemisferio sur esta inclinado lejos del Sol. Es el <strong class="text-white">dia mas corto</strong>. Los rayos caen sobre el Tropico de Cancer (hemisferio norte).</p>
+            </div>
+            <div class="bg-natura-dark rounded-xl p-4">
+              <p class="font-heading font-semibold text-natura-energy text-xs uppercase tracking-wider mb-1">Equinoccio de otoño (mar)</p>
+              <p>El Sol ilumina por igual ambos hemisferios. El dia y la noche duran aproximadamente <strong class="text-white">12 horas cada uno</strong> en todo el planeta.</p>
+            </div>
+            <div class="bg-natura-dark rounded-xl p-4">
+              <p class="font-heading font-semibold text-natura-energy text-xs uppercase tracking-wider mb-1">Equinoccio de primavera (sep)</p>
+              <p>Igual que el de otoño: ambos hemisferios reciben la misma cantidad de luz. Dia y noche de igual duracion.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulador 3D de Órbita y Estaciones Terrestres -->
+        <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark p-6 transition-all duration-300 hover:border-natura-energy/30 relative">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div>
+              <h3 class="font-heading font-bold text-white text-lg flex items-center gap-2">
+                <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="22"></span>
+                Simulador 3D de Órbita y Estaciones Terrestres
+              </h3>
+              <p class="text-xs text-natura-silverDark mt-0.5">Observá cómo la inclinación del eje de la Tierra (23.5°) genera las cuatro estaciones a medida que orbita al Sol.</p>
+            </div>
+            
+            <div class="flex gap-2">
+              <!-- Focus Toggle Button -->
+              <button id="btnFocusScene" class="text-xs bg-natura-energy/10 hover:bg-natura-energy/20 text-natura-energy px-3 py-1.5 rounded border border-natura-energy/20 font-ui font-semibold transition-all duration-200 flex items-center gap-1.5">
+                <span class="iconify" data-icon="lucide:zoom-in" data-width="14"></span>
+                <span id="focusSceneText">Enfocar la Tierra</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="relative w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5 flex flex-col items-stretch">
+            <!-- Three.js Canvas container -->
+            <div class="relative w-full h-[400px]">
+              <div id="seasonsLoading" class="absolute inset-0 bg-[#020403] flex items-center justify-center text-natura-silverDark text-xs z-10">
+                <div class="flex flex-col items-center gap-2">
+                  <span class="iconify animate-spin text-natura-energy" data-icon="lucide:loader" data-width="24"></span>
+                  Cargando simulador 3D...
+                </div>
+              </div>
+              <canvas id="seasons3DCanvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+              
+              <!-- Informational Overlay Card -->
+              <div class="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-natura-black/85 backdrop-blur-md border border-white/5 rounded-lg p-4 font-ui space-y-3 z-10 text-xs">
+                <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                  <span id="seasonDateText" class="font-bold text-white tracking-wide">21 de Diciembre</span>
+                  <span id="seasonTitleText" class="px-2 py-0.5 rounded text-[9px] font-bold bg-natura-energy/20 text-natura-energy uppercase">Solsticio de Verano</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="space-y-1">
+                    <span class="text-natura-silverDark text-[9px] uppercase font-bold tracking-wider block">H. Norte (Invierno)</span>
+                    <span id="hnDays" class="text-[10px] text-natura-silverDark block">Noches más largas</span>
+                    <span id="hnLight" class="text-[10px] text-blue-400 font-semibold block">Rayos Oblicuos</span>
+                  </div>
+                  <div class="space-y-1 border-l border-white/10 pl-3">
+                    <span class="text-natura-silverDark text-[9px] uppercase font-bold tracking-wider block">H. Sur (Verano)</span>
+                    <span id="hsDays" class="text-[10px] text-natura-silverDark block">Días más largos</span>
+                    <span id="hsLight" class="text-[10px] text-yellow-500 font-semibold block">Rayos Directos</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Visual Guides toggles -->
+              <div class="absolute top-4 right-4 bg-natura-black/80 backdrop-blur-md border border-white/5 rounded-lg p-2.5 font-ui space-y-2 z-10 text-[10px] w-44">
+                <span class="text-natura-silverDark font-bold uppercase tracking-wider block text-[8px]">Visualizar guías</span>
+                <label class="flex items-center gap-2 text-white cursor-pointer select-none">
+                  <input type="checkbox" id="chkShowRays" checked class="rounded border-white/10 bg-white/5 text-natura-energy focus:ring-natura-energy">
+                  <span>Rayos solares</span>
+                </label>
+                <label class="flex items-center gap-2 text-white cursor-pointer select-none">
+                  <input type="checkbox" id="chkShowOrbit" checked class="rounded border-white/10 bg-white/5 text-natura-energy focus:ring-natura-energy">
+                  <span>Línea orbital</span>
+                </label>
+                <label class="flex items-center gap-2 text-white cursor-pointer select-none">
+                  <input type="checkbox" id="chkShowAxis" checked class="rounded border-white/10 bg-white/5 text-natura-energy focus:ring-natura-energy">
+                  <span>Eje y Ecuador</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Timeline & Controls Panel -->
+            <div class="bg-natura-dark/95 border-t border-white/5 p-4 flex flex-col md:flex-row items-center gap-4 text-xs font-ui">
+              <!-- Play/Pause -->
+              <button id="btnPlayPauseSeasons" class="flex items-center justify-center p-2 rounded bg-natura-energy text-natura-black hover:bg-natura-energy/80 transition-colors font-bold shrink-0 gap-1" title="Pausar / Reanudar">
+                <span id="iconPlayPauseSeasons" class="iconify" data-icon="lucide:pause" data-width="16"></span>
+                <span id="txtPlayPauseSeasons">Pausar</span>
+              </button>
+
+              <!-- Date Slider -->
+              <div class="flex items-center gap-3 flex-grow w-full">
+                <span class="text-natura-silverDark whitespace-nowrap">Fecha:</span>
+                <input type="range" id="sliderSeasonsDate" min="0" max="364" value="354" class="w-full accent-natura-energy h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer">
+                <span id="txtSeasonsDateVal" class="text-white font-mono whitespace-nowrap min-w-[70px] text-right">Dic 21</span>
+              </div>
+
+              <!-- Quick snap buttons -->
+              <div class="flex flex-wrap gap-1.5 justify-center md:justify-end shrink-0 w-full md:w-auto">
+                <button data-day="79" class="btn-snap-season bg-white/5 hover:bg-white/10 text-white px-2 py-1 rounded transition-colors text-[10px]">Mar 20 (Equin. O)</button>
+                <button data-day="172" class="btn-snap-season bg-white/5 hover:bg-white/10 text-white px-2 py-1 rounded transition-colors text-[10px]">Jun 21 (Solst. I)</button>
+                <button data-day="264" class="btn-snap-season bg-white/5 hover:bg-white/10 text-white px-2 py-1 rounded transition-colors text-[10px]">Sep 22 (Equin. P)</button>
+                <button data-day="354" class="btn-snap-season bg-natura-energy/20 border border-natura-energy/30 text-natura-energy px-2 py-1 rounded transition-colors text-[10px]">Dic 21 (Solst. V)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+        (function() {
+          const canvas = document.getElementById('seasons3DCanvas');
+          const loading = document.getElementById('seasonsLoading');
+          if (!canvas) return;
+          const container = canvas.parentElement;
+
+          // Simulation State
+          let isPlaying = true;
+          let showRays = true;
+          let showOrbit = true;
+          let showAxis = true;
+          let focusEarth = false;
+          let day = 354; // Starts on Dec 21st (day 354)
+
+          // Three.js variables
+          let scene, camera, renderer, controls;
+          let sun, earthGroup, earthMesh, cloudsMesh, moonMesh;
+          let raysGroup = [];
+          let orbitLine, axisLine, equatorLine;
+
+          // Physics Scale Constants
+          const sunRadius = 14;
+          const earthRadius = 4.2;
+          const moonRadius = 1.1;
+          const orbitRadius = 65;
+          const moonOrbitRadius = 9.5;
+          const tiltAngle = 23.44 * Math.PI / 180; // 23.44 degrees in radians
+
+          // --- NOISE GENERATION FOR TEXTURES ---
+          const noiseCanvas = (function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            
+            const size = 32;
+            const grid = new Float32Array(size * size);
+            let seed = 92;
+            function random() {
+              let x = Math.sin(seed++) * 10000;
+              return x - Math.floor(x);
+            }
+            for (let i = 0; i < grid.length; i++) {
+              grid[i] = random();
+            }
+            
+            function noise(x, y) {
+              const X = Math.floor(x) % size;
+              const Y = Math.floor(y) % size;
+              const xNext = (X + 1) % size;
+              const yNext = (Y + 1) % size;
+              
+              const xf = x - Math.floor(x);
+              const yf = y - Math.floor(y);
+              
+              const u = xf * xf * (3 - 2 * xf);
+              const v = yf * yf * (3 - 2 * yf);
+              
+              const n00 = grid[Y * size + X];
+              const n10 = grid[Y * size + xNext];
+              const n01 = grid[yNext * size + X];
+              const n11 = grid[yNext * size + xNext];
+              
+              const x1 = n00 + u * (n10 - n00);
+              const x2 = n01 + u * (n11 - n01);
+              return x1 + v * (x2 - x1);
+            }
+            
+            const imgData = ctx.createImageData(512, 256);
+            const data = imgData.data;
+            for (let y = 0; y < 256; y++) {
+              for (let x = 0; x < 512; x++) {
+                let val = 0;
+                let amp = 1;
+                let freq = 1;
+                let max = 0;
+                for (let o = 0; o < 4; o++) {
+                  val += noise((x / 512) * size * freq, (y / 256) * size * freq) * amp;
+                  max += amp;
+                  amp *= 0.5;
+                  freq *= 2;
+                }
+                const norm = val / max;
+                const idx = (y * 512 + x) * 4;
+                const c = Math.floor(norm * 255);
+                data[idx] = c;
+                data[idx+1] = c;
+                data[idx+2] = c;
+                data[idx+3] = 255;
+              }
+            }
+            ctx.putImageData(imgData, 0, 0);
+            return canvas;
+          })();
+          const noiseTexture = new THREE.CanvasTexture(noiseCanvas);
+
+          // --- PROCEDURAL TEXTURES FOR SEASONS ---
+          function createProceduralTexture(type) {
+            const texCanvas = document.createElement('canvas');
+            texCanvas.width = 512;
+            texCanvas.height = 256;
+            const ctx = texCanvas.getContext('2d');
+            
+            const nCtx = noiseCanvas.getContext('2d');
+            const nData = nCtx.getImageData(0, 0, 512, 256).data;
+            
+            if (type === 'sun') {
+              const outData = ctx.createImageData(512, 256);
+              const out = outData.data;
+              for (let i = 0; i < nData.length; i += 4) {
+                const nVal = nData[i] / 255;
+                let r = 255;
+                let g = Math.floor(120 + nVal * 135);
+                let b = Math.floor(nVal * 80);
+                if (nVal < 0.2) {
+                  const factor = nVal / 0.2;
+                  r = Math.floor(130 + factor * 125);
+                  g = Math.floor(40 + factor * 80);
+                  b = 0;
+                }
+                out[i] = r;
+                out[i+1] = g;
+                out[i+2] = b;
+                out[i+3] = 255;
+              }
+              ctx.putImageData(outData, 0, 0);
+              ctx.fillStyle = 'rgba(255, 220, 80, 0.1)';
+              for (let i = 0; i < 15; i++) {
+                ctx.beginPath();
+                ctx.arc(Math.random()*512, Math.random()*256, 15 + Math.random()*20, 0, Math.PI*2);
+                ctx.fill();
+              }
+            } 
+            else if (type === 'earth') {
+              const tempCanvas = document.createElement('canvas');
+              tempCanvas.width = 512;
+              tempCanvas.height = 256;
+              const tempCtx = tempCanvas.getContext('2d');
+              tempCtx.fillStyle = '#000000';
+              tempCtx.fillRect(0, 0, 512, 256);
+              tempCtx.fillStyle = '#ffffff';
+              
+              // North & South America
+              tempCtx.beginPath();
+              tempCtx.moveTo(80, 45);
+              tempCtx.bezierCurveTo(100, 40, 130, 50, 140, 70);
+              tempCtx.bezierCurveTo(150, 85, 140, 105, 120, 115);
+              tempCtx.bezierCurveTo(115, 125, 120, 135, 135, 145);
+              tempCtx.bezierCurveTo(160, 160, 175, 180, 160, 205);
+              tempCtx.bezierCurveTo(150, 220, 130, 230, 120, 215);
+              tempCtx.bezierCurveTo(115, 200, 110, 170, 110, 150);
+              tempCtx.bezierCurveTo(100, 135, 80, 120, 70, 100);
+              tempCtx.bezierCurveTo(60, 80, 70, 55, 80, 45);
+              tempCtx.closePath();
+              tempCtx.fill();
+              
+              // Greenland
+              tempCtx.beginPath();
+              tempCtx.moveTo(145, 25);
+              tempCtx.lineTo(165, 28);
+              tempCtx.lineTo(160, 45);
+              tempCtx.lineTo(138, 40);
+              tempCtx.closePath();
+              tempCtx.fill();
+              
+              // Eurasia & Africa
+              tempCtx.beginPath();
+              tempCtx.moveTo(225, 120);
+              tempCtx.bezierCurveTo(250, 115, 275, 120, 290, 135);
+              tempCtx.bezierCurveTo(305, 150, 300, 180, 285, 198);
+              tempCtx.bezierCurveTo(275, 210, 260, 215, 255, 205);
+              tempCtx.bezierCurveTo(245, 190, 235, 165, 225, 140);
+              tempCtx.bezierCurveTo(215, 110, 230, 90, 245, 80);
+              tempCtx.bezierCurveTo(260, 70, 280, 60, 310, 50);
+              tempCtx.bezierCurveTo(350, 40, 410, 45, 450, 50);
+              tempCtx.bezierCurveTo(475, 60, 485, 80, 475, 100);
+              tempCtx.bezierCurveTo(465, 115, 440, 125, 420, 120);
+              tempCtx.bezierCurveTo(400, 115, 380, 105, 360, 110);
+              tempCtx.bezierCurveTo(340, 115, 300, 105, 280, 95);
+              tempCtx.bezierCurveTo(250, 90, 230, 95, 225, 120);
+              tempCtx.closePath();
+              tempCtx.fill();
+              
+              // India & Indochina
+              tempCtx.beginPath();
+              tempCtx.moveTo(355, 105);
+              tempCtx.lineTo(370, 125);
+              tempCtx.lineTo(380, 108);
+              tempCtx.closePath();
+              tempCtx.fill();
+              tempCtx.beginPath();
+              tempCtx.moveTo(395, 105);
+              tempCtx.lineTo(410, 125);
+              tempCtx.lineTo(415, 110);
+              tempCtx.closePath();
+              tempCtx.fill();
+              
+              // Australia
+              tempCtx.beginPath();
+              tempCtx.moveTo(415, 165);
+              tempCtx.bezierCurveTo(445, 160, 460, 170, 455, 185);
+              tempCtx.bezierCurveTo(445, 200, 420, 195, 412, 185);
+              tempCtx.closePath();
+              tempCtx.fill();
+              
+              // Antarctica
+              tempCtx.fillRect(0, 230, 512, 26);
+              
+              const tData = tempCtx.getImageData(0, 0, 512, 256).data;
+              const outData = ctx.createImageData(512, 256);
+              const out = outData.data;
+              
+              for (let y = 0; y < 256; y++) {
+                for (let x = 0; x < 512; x++) {
+                  const idx = (y * 512 + x) * 4;
+                  const nVal = nData[idx] / 255;
+                  const px = (x + Math.floor((nVal - 0.5) * 12) + 512) % 512;
+                  const py = Math.max(0, Math.min(255, y + Math.floor((nVal - 0.5) * 8)));
+                  const pIdx = (py * 512 + px) * 4;
+                  const isLand = tData[pIdx] > 128;
+                  
+                  let r, g, b;
+                  if (isLand) {
+                    r = 34; g = 115; b = 50;
+                    if (nVal > 0.6) {
+                      r = 100; g = 78; b = 60;
+                    } else if (nVal > 0.52) {
+                      r = 135; g = 110; b = 80;
+                    }
+                    const latDist = Math.abs(y - 128);
+                    if (latDist > 20 && latDist < 60 && nVal < 0.45) {
+                      r = 205; g = 175; b = 115; // deserts
+                    }
+                  } else {
+                    r = 10; g = 38; b = 85;
+                    if (nVal > 0.45) {
+                      r = 15; g = 75; b = 125;
+                    }
+                  }
+                  
+                  // Polar caps
+                  const northPolar = 20 + nVal * 6;
+                  const southPolar = 226 - nVal * 6;
+                  if (y < northPolar || y > southPolar) {
+                    r = 245; g = 245; b = 252;
+                  }
+                  
+                  out[idx] = r;
+                  out[idx+1] = g;
+                  out[idx+2] = b;
+                  out[idx+3] = 255;
+                }
+              }
+              ctx.putImageData(outData, 0, 0);
+            } 
+            else if (type === 'earth_clouds') {
+              ctx.clearRect(0, 0, 512, 256);
+              const outData = ctx.createImageData(512, 256);
+              const out = outData.data;
+              for (let y = 0; y < 256; y++) {
+                for (let x = 0; x < 512; x++) {
+                  const sampleX = (x + 180) % 512;
+                  const sampleY = (y + 80) % 256;
+                  const sampleIdx = (sampleY * 512 + sampleX) * 4;
+                  const nVal = nData[sampleIdx] / 255;
+                  const idx = (y * 512 + x) * 4;
+                  if (nVal > 0.52) {
+                    out[idx] = 255;
+                    out[idx+1] = 255;
+                    out[idx+2] = 255;
+                    out[idx+3] = Math.floor((nVal - 0.52) * 2.1 * 200);
+                  } else {
+                    out[idx+3] = 0;
+                  }
+                }
+              }
+              ctx.putImageData(outData, 0, 0);
+            }
+            else if (type === 'moon') {
+              const outData = ctx.createImageData(512, 256);
+              const out = outData.data;
+              for (let i = 0; i < nData.length; i += 4) {
+                const nVal = nData[i] / 255;
+                const c = Math.floor(100 + nVal * 60);
+                out[i] = c;
+                out[i+1] = c;
+                out[i+2] = c;
+                out[i+3] = 255;
+              }
+              ctx.putImageData(outData, 0, 0);
+              ctx.fillStyle = 'rgba(0,0,0,0.15)';
+              for (let i = 0; i < 15; i++) {
+                ctx.beginPath();
+                ctx.arc(Math.random()*512, Math.random()*256, 5 + Math.random()*15, 0, Math.PI*2);
+                ctx.fill();
+              }
+            }
+            
+            const tex = new THREE.CanvasTexture(texCanvas);
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.ClampToEdgeWrapping;
+            return tex;
+          }
+
+          // --- INITIALIZE THREE.JS ---
+          scene = new THREE.Scene();
+          
+          // Camera
+          camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 1000);
+          camera.position.set(0, 95, 175);
+          
+          // Renderer
+          renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+          renderer.setSize(container.clientWidth, container.clientHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          
+          // Controls
+          controls = new THREE.OrbitControls(camera, renderer.domElement);
+          controls.enableDamping = true;
+          controls.dampingFactor = 0.05;
+          controls.maxDistance = 300;
+          controls.minDistance = 15;
+          controls.target.set(0, 0, 0);
+
+          // Lights
+          const sunLight = new THREE.PointLight(0xffffff, 2.5, 400);
+          scene.add(sunLight);
+          
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.08);
+          scene.add(ambientLight);
+
+          // Starfield
+          const starsGeometry = new THREE.BufferGeometry();
+          const starsCount = 450;
+          const starPositions = new Float32Array(starsCount * 3);
+          for (let i = 0; i < starsCount * 3; i += 3) {
+            const r = 240 + Math.random() * 200;
+            const u = Math.random();
+            const v = Math.random();
+            const theta = u * 2 * Math.PI;
+            const phi = Math.acos(2 * v - 1);
+            starPositions[i] = r * Math.sin(phi) * Math.cos(theta);
+            starPositions[i+1] = r * Math.sin(phi) * Math.sin(theta);
+            starPositions[i+2] = r * Math.cos(phi);
+          }
+          starsGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+          const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.8, sizeAttenuation: true });
+          const starPoints = new THREE.Points(starsGeometry, starsMaterial);
+          scene.add(starPoints);
+
+          // Procedural Textures
+          const sunTexture = createProceduralTexture('sun');
+          const earthTexture = createProceduralTexture('earth');
+          const cloudsTexture = createProceduralTexture('earth_clouds');
+          const moonTexture = createProceduralTexture('moon');
+
+          // Sun Mesh
+          const sunGeo = new THREE.SphereGeometry(sunRadius, 32, 32);
+          const sunMat = new THREE.MeshBasicMaterial({ map: sunTexture });
+          sun = new THREE.Mesh(sunGeo, sunMat);
+          scene.add(sun);
+
+          // Sun Glow
+          const glowGeo = new THREE.SphereGeometry(sunRadius * 1.25, 32, 32);
+          const glowMat = new THREE.MeshBasicMaterial({
+            color: 0xffaa00,
+            transparent: true,
+            opacity: 0.12,
+            side: THREE.BackSide
+          });
+          const sunGlow = new THREE.Mesh(glowGeo, glowMat);
+          scene.add(sunGlow);
+
+          // Earth Parent Group (translates)
+          earthGroup = new THREE.Group();
+          scene.add(earthGroup);
+
+          // Earth Tilted Group (tilts inside parent by 23.44 deg)
+          const earthTiltGroup = new THREE.Group();
+          earthTiltGroup.rotation.z = tiltAngle; // Axial tilt
+          earthGroup.add(earthTiltGroup);
+
+          // Earth Mesh (rotates inside tilt group)
+          const earthGeo = new THREE.SphereGeometry(earthRadius, 32, 32);
+          const earthMat = new THREE.MeshStandardMaterial({
+            map: earthTexture,
+            bumpMap: noiseTexture,
+            bumpScale: 0.25,
+            roughness: 0.7,
+            metalness: 0.1
+          });
+          earthMesh = new THREE.Mesh(earthGeo, earthMat);
+          earthTiltGroup.add(earthMesh);
+
+          // Clouds Mesh (rotates slightly faster)
+          const cloudsGeo = new THREE.SphereGeometry(earthRadius * 1.018, 32, 32);
+          const cloudsMat = new THREE.MeshBasicMaterial({
+            map: cloudsTexture,
+            transparent: true,
+            opacity: 0.8
+          });
+          cloudsMesh = new THREE.Mesh(cloudsGeo, cloudsMat);
+          earthTiltGroup.add(cloudsMesh);
+
+          // Earth Rotation Axis Line
+          const axisGeo = new THREE.CylinderGeometry(0.08, 0.08, earthRadius * 2.7, 8);
+          const axisMat = new THREE.MeshBasicMaterial({ color: 0x38BDF8, transparent: true, opacity: 0.65 });
+          axisLine = new THREE.Mesh(axisGeo, axisMat);
+          earthTiltGroup.add(axisLine);
+
+          // Earth Equator Line
+          const equatorGeo = new THREE.RingGeometry(earthRadius * 1.15, earthRadius * 1.18, 32);
+          const equatorMat = new THREE.MeshBasicMaterial({ color: 0x38BDF8, side: THREE.DoubleSide, transparent: true, opacity: 0.4 });
+          equatorLine = new THREE.Mesh(equatorGeo, equatorMat);
+          equatorLine.rotation.x = Math.PI / 2;
+          earthTiltGroup.add(equatorLine);
+
+          // Moon Mesh (placed inside earthGroup directly, not tilted by earth's axial tilt)
+          const moonGeo = new THREE.SphereGeometry(moonRadius, 24, 24);
+          const moonMat = new THREE.MeshStandardMaterial({
+            map: moonTexture,
+            roughness: 0.9,
+            metalness: 0.0
+          });
+          moonMesh = new THREE.Mesh(moonGeo, moonMat);
+          earthGroup.add(moonMesh);
+
+          // Orbit Line Helper
+          const orbitCurve = new THREE.EllipseCurve(0, 0, orbitRadius, orbitRadius, 0, 2*Math.PI, false, 0);
+          const orbitPoints = orbitCurve.getPoints(120);
+          const orbitGeom = new THREE.BufferGeometry().setFromPoints(
+            orbitPoints.map(p => new THREE.Vector3(p.x, 0, p.y))
+          );
+          const orbitMat = new THREE.LineBasicMaterial({ color: 0x3B82F6, transparent: true, opacity: 0.22 });
+          orbitLine = new THREE.Line(orbitGeom, orbitMat);
+          scene.add(orbitLine);
+
+          // Hide loading spinner
+          loading.style.display = 'none';
+
+          // --- LIGHT RAYS HELPERS ---
+          function setupRays() {
+            raysGroup.forEach(r => scene.remove(r));
+            raysGroup = [];
+            
+            if (!showRays) return;
+            
+            const rayMat = new THREE.LineBasicMaterial({
+              color: 0xFACF1A,
+              transparent: true,
+              opacity: 0.35,
+              blending: THREE.AdditiveBlending
+            });
+            
+            // 7 lines: 1 central, 6 hex pattern
+            for (let i = 0; i < 7; i++) {
+              const geom = new THREE.BufferGeometry();
+              geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
+              const l = new THREE.Line(geom, rayMat);
+              scene.add(l);
+              raysGroup.push(l);
+            }
+          }
+          setupRays();
+
+          function updateRays() {
+            if (!showRays || !raysGroup.length) return;
+            
+            const ePos = earthGroup.position;
+            const dir = ePos.clone().normalize();
+            
+            // Orthogonal frame
+            const up = new THREE.Vector3(0, 1, 0);
+            const right = new THREE.Vector3().crossVectors(up, dir).normalize();
+            const realUp = new THREE.Vector3().crossVectors(dir, right).normalize();
+            
+            const offsets = [
+              { r: 0, u: 0 },
+              { r: 3.5, u: 0 },
+              { r: -3.5, u: 0 },
+              { r: 1.75, u: 3.0 },
+              { r: -1.75, u: 3.0 },
+              { r: 1.75, u: -3.0 },
+              { r: -1.75, u: -3.0 }
+            ];
+            
+            for (let i = 0; i < offsets.length; i++) {
+              if (i >= raysGroup.length) break;
+              const off = offsets[i];
+              
+              const offsetVec = new THREE.Vector3()
+                .addScaledVector(right, off.r)
+                .addScaledVector(realUp, off.u);
+                
+              const start = dir.clone().multiplyScalar(sunRadius).add(offsetVec);
+              const end = ePos.clone().add(offsetVec);
+              
+              const posAttr = raysGroup[i].geometry.attributes.position;
+              const arr = posAttr.array;
+              arr[0] = start.x; arr[1] = start.y; arr[2] = start.z;
+              arr[3] = end.x; arr[4] = end.y; arr[5] = end.z;
+              posAttr.needsUpdate = true;
+            }
+          }
+
+          // --- DATA DICTIONARY FOR SEASONS ---
+          const months = [
+            { name: 'Ene', days: 31 }, { name: 'Feb', days: 28 }, { name: 'Mar', days: 31 },
+            { name: 'Abr', days: 30 }, { name: 'May', days: 31 }, { name: 'Jun', days: 30 },
+            { name: 'Jul', days: 31 }, { name: 'Ago', days: 31 }, { name: 'Sep', days: 30 },
+            { name: 'Oct', days: 31 }, { name: 'Nov', days: 30 }, { name: 'Dic', days: 31 }
+          ];
+
+          function getFormattedDate(d) {
+            let dayCount = Math.floor(d);
+            let mIdx = 0;
+            while (dayCount >= months[mIdx].days) {
+              dayCount -= months[mIdx].days;
+              mIdx++;
+              if (mIdx >= 12) break;
+            }
+            return `${dayCount + 1} de ${months[mIdx].name}`;
+          }
+
+          function updateUI(dayVal) {
+            // Update Date text
+            const dateStr = getFormattedDate(dayVal);
+            document.getElementById('seasonDateText').innerText = dateStr;
+            document.getElementById('txtSeasonsDateVal').innerText = dateStr.slice(0, 6);
+            document.getElementById('sliderSeasonsDate').value = Math.floor(dayVal);
+
+            // Determine Season info
+            const titleEl = document.getElementById('seasonTitleText');
+            const hnDaysEl = document.getElementById('hnDays');
+            const hnLightEl = document.getElementById('hnLight');
+            const hsDaysEl = document.getElementById('hsDays');
+            const hsLightEl = document.getElementById('hsLight');
+            
+            const roundedDay = Math.floor(dayVal);
+            
+            // Snap highlights update
+            document.querySelectorAll('.btn-snap-season').forEach(btn => {
+              const snapDay = parseInt(btn.getAttribute('data-day'));
+              if (Math.abs(snapDay - roundedDay) < 3) {
+                btn.classList.add('bg-natura-energy/20', 'border', 'border-natura-energy/30', 'text-natura-energy');
+                btn.classList.remove('bg-white/5', 'text-white');
+              } else {
+                btn.classList.remove('bg-natura-energy/20', 'border', 'border-natura-energy/30', 'text-natura-energy');
+                btn.classList.add('bg-white/5', 'text-white');
+              }
+            });
+
+            // Seasons logic
+            if (roundedDay >= 351 || roundedDay <= 5) {
+              // Dec Solstice
+              titleEl.innerText = "Solsticio de Diciembre";
+              hnDaysEl.innerText = "Noche más larga (Invierno)";
+              hnLightEl.innerText = "Rayos Muy Oblicuos";
+              hnLightEl.className = "text-[10px] text-blue-400 font-semibold block";
+              hsDaysEl.innerText = "Día más largo (Verano)";
+              hsLightEl.innerText = "Rayos Directos (Calor)";
+              hsLightEl.className = "text-[10px] text-yellow-500 font-semibold block";
+            } 
+            else if (roundedDay >= 76 && roundedDay <= 82) {
+              // March Equinox
+              titleEl.innerText = "Equinoccio de Marzo";
+              hnDaysEl.innerText = "Día y Noche igual (Primavera)";
+              hnLightEl.innerText = "Rayos Centrados";
+              hnLightEl.className = "text-[10px] text-emerald-400 font-semibold block";
+              hsDaysEl.innerText = "Día y Noche igual (Otoño)";
+              hsLightEl.innerText = "Rayos Centrados";
+              hsLightEl.className = "text-[10px] text-emerald-400 font-semibold block";
+            } 
+            else if (roundedDay >= 169 && roundedDay <= 175) {
+              // June Solstice
+              titleEl.innerText = "Solsticio de Junio";
+              hnDaysEl.innerText = "Día más largo (Verano)";
+              hnLightEl.innerText = "Rayos Directos (Calor)";
+              hnLightEl.className = "text-[10px] text-yellow-500 font-semibold block";
+              hsDaysEl.innerText = "Noche más larga (Invierno)";
+              hsLightEl.innerText = "Rayos Muy Oblicuos";
+              hsLightEl.className = "text-[10px] text-blue-400 font-semibold block";
+            } 
+            else if (roundedDay >= 261 && roundedDay <= 267) {
+              // Sept Equinox
+              titleEl.innerText = "Equinoccio de Septiembre";
+              hnDaysEl.innerText = "Día y Noche igual (Otoño)";
+              hnLightEl.innerText = "Rayos Centrados";
+              hnLightEl.className = "text-[10px] text-emerald-400 font-semibold block";
+              hsDaysEl.innerText = "Día y Noche igual (Primavera)";
+              hsLightEl.innerText = "Rayos Centrados";
+              hsLightEl.className = "text-[10px] text-emerald-400 font-semibold block";
+            } 
+            else if (roundedDay > 5 && roundedDay < 76) {
+              // Summer South / Winter North
+              titleEl.innerText = "Verano (Sur) / Invierno (Norte)";
+              hnDaysEl.innerText = "Días cortos, noches largas";
+              hnLightEl.innerText = "Rayos Oblicuos";
+              hnLightEl.className = "text-[10px] text-blue-300 block";
+              hsDaysEl.innerText = "Días largos, noches cortas";
+              hsLightEl.innerText = "Rayos Directos";
+              hsLightEl.className = "text-[10px] text-amber-400 font-semibold block";
+            } 
+            else if (roundedDay > 82 && roundedDay < 169) {
+              // Autumn South / Spring North
+              titleEl.innerText = "Otoño (Sur) / Primavera (Norte)";
+              hnDaysEl.innerText = "Días alargándose progresivamente";
+              hnLightEl.innerText = "Rayos más Directos";
+              hnLightEl.className = "text-[10px] text-amber-300 block";
+              hsDaysEl.innerText = "Días acortándose progresivamente";
+              hsLightEl.innerText = "Rayos más Oblicuos";
+              hsLightEl.className = "text-[10px] text-blue-300 block";
+            } 
+            else if (roundedDay > 175 && roundedDay < 261) {
+              // Winter South / Summer North
+              titleEl.innerText = "Invierno (Sur) / Verano (Norte)";
+              hnDaysEl.innerText = "Días largos, noches cortas";
+              hnLightEl.innerText = "Rayos Directos";
+              hnLightEl.className = "text-[10px] text-amber-400 font-semibold block";
+              hsDaysEl.innerText = "Días cortos, noches largas";
+              hsLightEl.innerText = "Rayos Oblicuos";
+              hsLightEl.className = "text-[10px] text-blue-300 block";
+            } 
+            else {
+              // Spring South / Autumn North
+              titleEl.innerText = "Primavera (Sur) / Otoño (Norte)";
+              hnDaysEl.innerText = "Días acortándose progresivamente";
+              hnLightEl.innerText = "Rayos más Oblicuos";
+              hnLightEl.className = "text-[10px] text-blue-300 block";
+              hsDaysEl.innerText = "Días alargándose progresivamente";
+              hsLightEl.innerText = "Rayos más Directos";
+              hsLightEl.className = "text-[10px] text-amber-300 block";
+            }
+          }
+
+          // --- EVENT LISTENERS ---
+          const btnPlay = document.getElementById('btnPlayPauseSeasons');
+          const iconPlay = document.getElementById('iconPlayPauseSeasons');
+          const txtPlay = document.getElementById('txtPlayPauseSeasons');
+          btnPlay.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+              iconPlay.setAttribute('data-icon', 'lucide:pause');
+              txtPlay.innerText = "Pausar";
+            } else {
+              iconPlay.setAttribute('data-icon', 'lucide:play');
+              txtPlay.innerText = "Reanudar";
+            }
+          });
+
+          const sliderDate = document.getElementById('sliderSeasonsDate');
+          sliderDate.addEventListener('input', (e) => {
+            day = parseInt(e.target.value);
+            updateUI(day);
+          });
+
+          document.querySelectorAll('.btn-snap-season').forEach(btn => {
+            btn.addEventListener('click', () => {
+              day = parseInt(btn.getAttribute('data-day'));
+              updateUI(day);
+            });
+          });
+
+          // Focus toggle
+          const btnFocus = document.getElementById('btnFocusScene');
+          const txtFocus = document.getElementById('focusSceneText');
+          let isTransitioning = false;
+          
+          btnFocus.addEventListener('click', () => {
+            focusEarth = !focusEarth;
+            isTransitioning = true;
+            if (focusEarth) {
+              txtFocus.innerText = "Ver Sistema Completo";
+              btnFocus.classList.add('bg-natura-energy/20', 'border-natura-energy/40');
+            } else {
+              txtFocus.innerText = "Enfocar la Tierra";
+              btnFocus.classList.remove('bg-natura-energy/20', 'border-natura-energy/40');
+            }
+          });
+
+          // Toggle Guides
+          const chkRays = document.getElementById('chkShowRays');
+          chkRays.addEventListener('change', (e) => {
+            showRays = e.target.checked;
+            setupRays();
+          });
+          
+          const chkOrbit = document.getElementById('chkShowOrbit');
+          chkOrbit.addEventListener('change', (e) => {
+            showOrbit = e.target.checked;
+            orbitLine.visible = showOrbit;
+          });
+
+          const chkAxis = document.getElementById('chkShowAxis');
+          chkAxis.addEventListener('change', (e) => {
+            showAxis = e.target.checked;
+            axisLine.visible = showAxis;
+            equatorLine.visible = showAxis;
+          });
+
+          // Handle Resize
+          window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+          });
+
+          // --- ANIMATION LOOP ---
+          const clock = new THREE.Clock();
+          
+          function animate() {
+            requestAnimationFrame(animate);
+            
+            const delta = clock.getDelta();
+            const time = clock.getElapsedTime();
+            
+            // 1. Advance Orbit if playing
+            if (isPlaying && !isDraggingSlider()) {
+              day += delta * 15; // Speed factor: 15 days per second
+              if (day >= 365) day = 0;
+              updateUI(day);
+            }
+
+            // 2. Compute orbital angles
+            // Dec 21 is day 354, let it be orbitAngle = 0
+            const orbitAngle = ((day - 354) / 365) * 2 * Math.PI;
+            
+            const oldEarthPos = earthGroup.position.clone();
+            earthGroup.position.x = orbitRadius * Math.cos(orbitAngle);
+            earthGroup.position.z = orbitRadius * Math.sin(orbitAngle);
+            const deltaEarth = earthGroup.position.clone().sub(oldEarthPos);
+
+            // 3. Moon Orbit (tilted 5 degrees relative to ecliptic)
+            const moonAngle = (day / 27.3) * 2 * Math.PI;
+            const moonLocalX = moonOrbitRadius * Math.cos(moonAngle);
+            const moonLocalZ = moonOrbitRadius * Math.sin(moonAngle) * Math.cos(5 * Math.PI / 180);
+            const moonLocalY = moonOrbitRadius * Math.sin(moonAngle) * Math.sin(5 * Math.PI / 180);
+            
+            moonMesh.position.set(moonLocalX, moonLocalY, moonLocalZ);
+            moonMesh.rotation.y = -moonAngle; // synchronous rotation
+
+            // 4. Rotations
+            // Sun rotation
+            sun.rotation.y += 0.002;
+            
+            // Earth daily spin
+            earthMesh.rotation.y += 0.015;
+            // Atmosphere clouds drift slightly faster
+            cloudsMesh.rotation.y += 0.0175;
+
+            // Sun glow pulse
+            const glowScale = 1.0 + Math.sin(time * 2.5) * 0.03;
+            sunGlow.scale.set(glowScale, glowScale, glowScale);
+
+            // 5. Update Light Rays
+            updateRays();
+
+            // 6. Camera smooth follow & interpolation
+            if (isTransitioning) {
+              const targetTarget = focusEarth ? earthGroup.position : new THREE.Vector3(0, 0, 0);
+              const targetCam = focusEarth ? 
+                earthGroup.position.clone().add(new THREE.Vector3(20, 7, 20)) : 
+                new THREE.Vector3(0, 95, 175);
+                
+              camera.position.lerp(targetCam, 0.06);
+              controls.target.lerp(targetTarget, 0.06);
+              
+              if (camera.position.distanceTo(targetCam) < 0.25 && controls.target.distanceTo(targetTarget) < 0.25) {
+                isTransitioning = false;
+              }
+            } else {
+              if (focusEarth) {
+                // follow Earth translations smoothly
+                camera.position.add(deltaEarth);
+                controls.target.copy(earthGroup.position);
+              } else {
+                controls.target.set(0, 0, 0);
+              }
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+          }
+
+          function isDraggingSlider() {
+            return document.activeElement === sliderDate;
+          }
+
+          // Initial UI Sync
+          updateUI(day);
+          animate();
+        })();
+        </script>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. La Luna -->
+      <section id="luna" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">La Luna</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            La Luna es el <strong class="text-white">unico satelite natural</strong> de la Tierra. No tiene luz propia: la vemos brillante porque <strong class="text-natura-energy">refleja la luz del Sol</strong>. Su diametro es de aproximadamente 3.474 km, casi un cuarto del diametro terrestre. Es el quinto satelite mas grande del Sistema Solar.
+          </p>
+        </div>
+
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6">
+          Un dato fascinante: la <strong class="text-white">cara visible de la Luna es siempre la misma</strong> porque su periodo de rotacion esta sincronizado con su periodo orbital alrededor de la Tierra (ambos duran unos 27,3 dias). Este fenomeno se llama <strong class="text-natura-energy">rotacion sincronica</strong> o acoplamiento de marea. La "cara oculta" de la Luna no es oscura: recibe tanta luz solar como la visible, pero nunca la vemos desde la Tierra.
+        </p>
+
+      <!-- SIMULADOR INTERACTIVO DE FASES LUNARES -->
+      <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark p-6 transition-all duration-300 hover:border-natura-energy/30 relative">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <h3 class="font-heading font-bold text-white text-lg flex items-center gap-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:moon" data-width="22"></span>
+              Simulador Interactivo de Fases Lunares
+            </h3>
+            <p class="text-xs text-natura-silverDark mt-0.5">Arrastrá la Luna en su órbita o usá los controles para observar cómo cambia de fase desde la Tierra.</p>
+          </div>
+          <!-- Hemisphere selector -->
+          <button id="simHemisphereBtn" class="text-xs bg-natura-energy/10 hover:bg-natura-energy/20 text-natura-energy px-3 py-1.5 rounded border border-natura-energy/20 font-ui font-semibold transition-all duration-200 flex items-center gap-1.5 self-start sm:self-center">
+            <span class="iconify" data-icon="lucide:compass" data-width="14"></span>
+            <span id="simHemisphereText">Hemisferio Sur (Argentina)</span>
+          </button>
+        </div>
+
+        <div class="relative w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5 p-4 flex flex-col md:flex-row gap-6 items-center">
+          
+          <!-- Column 1: Orbital View -->
+          <div class="flex-1 w-full text-center relative">
+            <span class="absolute top-2 left-2 text-[9px] uppercase font-bold tracking-wider text-natura-silverDark bg-natura-black/60 px-2 py-0.5 rounded font-ui">Vista del Espacio (Orbital)</span>
+            <canvas id="moonOrbitCanvas" class="w-full h-[280px] bg-[#020403] rounded-lg border border-white/5 block cursor-grab active:cursor-grabbing"></canvas>
+            <div class="mt-1.5 text-[10px] text-natura-silverDark font-ui flex items-center justify-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-yellow-500/80 animate-ping"></span>
+              Luz solar proviene desde la izquierda &larr;
+            </div>
+          </div>
+
+          <!-- Column 2: Earth View (Telescope) -->
+          <div class="flex-1 w-full text-center relative flex flex-col items-center justify-center">
+            <span class="absolute top-2 left-2 text-[9px] uppercase font-bold tracking-wider text-natura-silverDark bg-natura-black/60 px-2 py-0.5 rounded font-ui font-semibold">Telescopio (Vista Terrestre)</span>
+            <div class="w-[200px] h-[200px] bg-[#020403] rounded-full border border-white/5 block mt-6 relative overflow-hidden shadow-[inset_0_0_20px_rgba(255,255,255,0.05)]">
+              <canvas id="moonPhaseCanvas" width="200" height="200" class="block"></canvas>
+            </div>
+            
+            <!-- Phase Info Panel -->
+            <div class="mt-4 w-full max-w-[240px] bg-natura-black/60 rounded-lg p-3 text-left space-y-1 font-ui border border-white/5">
+              <div class="flex justify-between text-xs"><span class="text-natura-silverDark">Fase:</span> <span id="infoPhaseName" class="font-bold text-natura-energy">Luna Nueva</span></div>
+              <div class="flex justify-between text-xs"><span class="text-natura-silverDark">Iluminación:</span> <span id="infoPhasePct" class="font-bold text-white">0%</span></div>
+              <div class="flex justify-between text-xs"><span class="text-natura-silverDark">Edad lunar:</span> <span id="infoPhaseAge" class="font-bold text-white">0.0 días</span></div>
+            </div>
+          </div>
+
+          <!-- Controls Overlay/Footer -->
+          <div class="w-full md:absolute md:bottom-4 md:left-4 md:right-4 flex flex-wrap items-center justify-between gap-3 bg-natura-black/90 backdrop-blur-md border border-white/5 rounded-lg px-4 py-2.5 text-xs font-ui mt-4 md:mt-0 md:max-w-[calc(100%-2rem)]">
+            <!-- Play/Pause -->
+            <button id="moonPlayPauseBtn" class="flex items-center justify-center p-1.5 rounded bg-natura-energy text-natura-black hover:bg-natura-energy/80 transition-colors" title="Pausar / Reanudar">
+              <svg id="moonPlayPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+
+            <!-- Angle slider -->
+            <div class="flex items-center gap-2 flex-grow min-w-[150px] max-w-xs md:max-w-md ml-auto">
+              <span class="text-natura-silverDark text-[10px] whitespace-nowrap">Ángulo:</span>
+              <input type="range" id="moonAngleSlider" min="0" max="359" step="1" value="180" class="w-full accent-natura-energy h-1 bg-white/10 rounded-lg appearance-none cursor-pointer">
+              <span id="moonAngleVal" class="text-white text-[10px] min-w-[28px] text-right font-mono">180°</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+      (function() {
+        const orbitCanvas = document.getElementById('moonOrbitCanvas');
+        const phaseCanvas = document.getElementById('moonPhaseCanvas');
+        if (!orbitCanvas || !phaseCanvas) return;
+
+        const oCtx = orbitCanvas.getContext('2d');
+        const pCtx = phaseCanvas.getContext('2d');
+
+        // Textures
+        const earthImg = new Image();
+        earthImg.src = 'tierra_realista.png';
+        const moonImg = new Image();
+        moonImg.src = 'luna_realista.png';
+
+        let earthLoaded = false;
+        let moonLoaded = false;
+        earthImg.onload = () => { earthLoaded = true; };
+        moonImg.onload = () => { moonLoaded = true; };
+
+        // State
+        let angle = Math.PI; // Starts at 180 degrees (New Moon)
+        let isPaused = false;
+        let isSouthern = true;
+        let isDragging = false;
+
+        // Elements
+        const playPauseBtn = document.getElementById('moonPlayPauseBtn');
+        const playPauseIcon = document.getElementById('moonPlayPauseIcon');
+        const angleSlider = document.getElementById('moonAngleSlider');
+        const angleVal = document.getElementById('moonAngleVal');
+        const hemisphereBtn = document.getElementById('simHemisphereBtn');
+        const hemisphereText = document.getElementById('simHemisphereText');
+
+        const infoName = document.getElementById('infoPhaseName');
+        const infoPct = document.getElementById('infoPhasePct');
+        const infoAge = document.getElementById('infoPhaseAge');
+
+        // Star systems
+        const oStars = [];
+        for (let i = 0; i < 40; i++) {
+          oStars.push({ x: Math.random(), y: Math.random(), size: Math.random() * 1.2 + 0.3, phase: Math.random() * Math.PI });
+        }
+
+        const pStars = [];
+        for (let i = 0; i < 25; i++) {
+          pStars.push({ x: Math.random() * 200, y: Math.random() * 200, size: Math.random() * 1.2 + 0.3, phase: Math.random() * Math.PI });
+        }
+
+        // Handle controls
+        playPauseBtn.addEventListener('click', () => {
+          isPaused = !isPaused;
+          playPauseBtn.innerHTML = isPaused ? 
+            `<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>` :
+            `<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+        });
+
+        hemisphereBtn.addEventListener('click', () => {
+          isSouthern = !isSouthern;
+          hemisphereText.innerText = isSouthern ? "Hemisferio Sur (Argentina)" : "Hemisferio Norte";
+        });
+
+        angleSlider.addEventListener('input', (e) => {
+          angle = (parseInt(e.target.value) * Math.PI) / 180;
+          angleVal.innerText = e.target.value + "°";
+        });
+
+        // Click and drag Moon on Orbit Canvas
+        function handleDrag(clientX, clientY) {
+          const rect = orbitCanvas.getBoundingClientRect();
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const mx = clientX - rect.left;
+          const my = clientY - rect.top;
+
+          // Compute angle relative to center of Earth
+          let newAngle = Math.atan2(my - cy, mx - cx);
+          if (newAngle < 0) newAngle += Math.PI * 2;
+          
+          angle = newAngle;
+          
+          let deg = Math.round((angle * 180) / Math.PI) % 360;
+          angleSlider.value = deg;
+          angleVal.innerText = deg + "°";
+        }
+
+        orbitCanvas.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          handleDrag(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            handleDrag(e.clientX, e.clientY);
+          }
+        });
+
+        window.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+
+        // Touch support
+        orbitCanvas.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) {
+            isDragging = true;
+            handleDrag(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }, { passive: true });
+
+        orbitCanvas.addEventListener('touchmove', (e) => {
+          if (isDragging && e.touches.length === 1) {
+            handleDrag(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }, { passive: true });
+
+        orbitCanvas.addEventListener('touchend', () => {
+          isDragging = false;
+        });
+
+        // Draw Moon Body (Telescope view)
+        function drawMoonBody(ctx, cx, cy, r) {
+          if (moonLoaded) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.clip();
+            ctx.drawImage(moonImg, cx - r, cy - r, r * 2, r * 2);
+            ctx.restore();
+            return;
+          }
+
+          // Lunar Maria (darker gray patches)
+          ctx.fillStyle = '#CBD5E1';
+          ctx.beginPath();
+          ctx.arc(cx - r * 0.32, cy - r * 0.32, r * 0.28, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(cx + r * 0.12, cy - r * 0.38, r * 0.26, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(cx - r * 0.48, cy + r * 0.08, r * 0.32, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(cx + r * 0.38, cy + r * 0.12, r * 0.2, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(cx - r * 0.08, cy + r * 0.42, r * 0.22, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Tycho Crater
+          const tx = cx + r * 0.25;
+          const ty = cy + r * 0.58;
+          ctx.fillStyle = '#F8FAFC';
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(tx, ty, r * 0.06, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          // Tycho Rays
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+          ctx.lineWidth = 0.5;
+          for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+            ctx.beginPath();
+            ctx.moveTo(tx + Math.cos(a) * r * 0.08, ty + Math.sin(a) * r * 0.08);
+            ctx.lineTo(tx + Math.cos(a) * r * 0.55, ty + Math.sin(a) * r * 0.55);
+            ctx.stroke();
+          }
+
+          // Copernicus Crater
+          ctx.fillStyle = '#F1F5F9';
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+          ctx.beginPath();
+          ctx.arc(cx - r * 0.22, cy + r * 0.02, r * 0.05, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        // Custom shadow mask for crescent and gibbous phases
+        function drawMoonShadow(ctx, cx, cy, r, pct, isLeftLit, shadowRadius) {
+          const sr = shadowRadius || r;
+          if (pct >= 0.99) return;
+          if (pct <= 0.01) {
+            ctx.fillStyle = '#020403';
+            ctx.beginPath();
+            ctx.arc(cx, cy, sr, 0, Math.PI * 2);
+            ctx.fill();
+            return;
+          }
+
+          ctx.fillStyle = '#020403';
+          ctx.beginPath();
+
+          if (isLeftLit) {
+            if (pct < 0.5) {
+              const w = sr * (1 - 2 * pct);
+              ctx.arc(cx, cy, sr, -Math.PI / 2, Math.PI / 2, false);
+              ctx.ellipse(cx, cy, Math.abs(w), sr, 0, Math.PI / 2, -Math.PI / 2, false);
+            } else {
+              const w = sr * (2 * pct - 1);
+              ctx.arc(cx, cy, sr, -Math.PI / 2, Math.PI / 2, false);
+              ctx.ellipse(cx, cy, Math.abs(w), sr, 0, Math.PI / 2, -Math.PI / 2, true);
+            }
+          } else {
+            if (pct < 0.5) {
+              const w = sr * (1 - 2 * pct);
+              ctx.arc(cx, cy, sr, Math.PI / 2, -Math.PI / 2, false);
+              ctx.ellipse(cx, cy, Math.abs(w), sr, 0, -Math.PI / 2, Math.PI / 2, false);
+            } else {
+              const w = sr * (2 * pct - 1);
+              ctx.arc(cx, cy, sr, Math.PI / 2, -Math.PI / 2, false);
+              ctx.ellipse(cx, cy, Math.abs(w), sr, 0, -Math.PI / 2, Math.PI / 2, true);
+            }
+          }
+
+          ctx.fill();
+        }
+
+        // Loop
+        function loop() {
+          // Adjust canvas size
+          const oWidth = orbitCanvas.clientWidth;
+          const oHeight = orbitCanvas.clientHeight;
+          if (orbitCanvas.width !== oWidth || orbitCanvas.height !== oHeight) {
+            orbitCanvas.width = oWidth;
+            orbitCanvas.height = oHeight;
+          }
+
+          oCtx.clearRect(0, 0, oWidth, oHeight);
+          pCtx.clearRect(0, 0, 200, 200);
+
+          // Orbit continuous rotation
+          if (!isPaused && !isDragging) {
+            angle -= 0.005; // Counter-clockwise
+            if (angle < 0) angle += Math.PI * 2;
+            
+            let deg = Math.round((angle * 180) / Math.PI) % 360;
+            angleSlider.value = deg;
+            angleVal.innerText = deg + "°";
+          }
+
+          // Normalized angle
+          const normAngle = (angle % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+          const deg = (normAngle * 180) / Math.PI;
+
+          // 1. Draw Orbit stars
+          oCtx.fillStyle = 'rgba(255,255,255,0.4)';
+          oStars.forEach(s => {
+            s.phase += 0.01;
+            const opacity = 0.2 + Math.abs(Math.sin(s.phase)) * 0.7;
+            oCtx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            oCtx.beginPath();
+            oCtx.arc(s.x * oWidth, s.y * oHeight, s.size, 0, Math.PI * 2);
+            oCtx.fill();
+          });
+
+          // 2. Draw Orbit System
+          const ocx = oWidth / 2;
+          const ocy = oHeight / 2;
+
+          // Orbit circle line
+          oCtx.strokeStyle = 'rgba(59, 130, 246, 0.08)';
+          oCtx.lineWidth = 1;
+          oCtx.beginPath();
+          oCtx.arc(ocx, ocy, 80, 0, Math.PI * 2);
+          oCtx.stroke();
+
+          // Sun light rays
+          oCtx.strokeStyle = 'rgba(253, 224, 71, 0.08)';
+          oCtx.lineWidth = 1.5;
+          for (let y = 30; y < oHeight; y += 45) {
+            oCtx.beginPath();
+            oCtx.moveTo(15, y);
+            oCtx.lineTo(65, y);
+            oCtx.lineTo(60, y - 4);
+            oCtx.moveTo(65, y);
+            oCtx.lineTo(60, y + 4);
+            oCtx.stroke();
+          }
+
+          // Dotted lines of sight and light
+          oCtx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+          oCtx.setLineDash([3, 3]);
+          
+          // Earth to Moon line
+          const omx = ocx + 80 * Math.cos(normAngle);
+          const omy = ocy + 80 * Math.sin(normAngle);
+          oCtx.beginPath();
+          oCtx.moveTo(ocx, ocy);
+          oCtx.lineTo(omx, omy);
+          oCtx.stroke();
+
+          // Earth to Sun direction
+          oCtx.beginPath();
+          oCtx.moveTo(ocx, ocy);
+          oCtx.lineTo(ocx - 100, ocy);
+          oCtx.stroke();
+          oCtx.setLineDash([]);
+
+          // Draw Earth (Space View)
+          if (earthLoaded) {
+            oCtx.save();
+            oCtx.beginPath();
+            oCtx.arc(ocx, ocy, 18, 0, Math.PI * 2);
+            oCtx.clip();
+            oCtx.drawImage(earthImg, ocx - 18, ocy - 18, 36, 36);
+            oCtx.restore();
+          } else {
+            oCtx.fillStyle = '#1D4ED8'; // Blue oceans
+            oCtx.beginPath();
+            oCtx.arc(ocx, ocy, 18, 0, Math.PI * 2);
+            oCtx.fill();
+
+            oCtx.fillStyle = '#22C55E'; // Green continent patches
+            oCtx.beginPath();
+            oCtx.arc(ocx - 4, ocy + 4, 7, 0, Math.PI * 2);
+            oCtx.arc(ocx - 5, ocy - 8, 6, 0, Math.PI * 2);
+            oCtx.arc(ocx + 8, ocy - 2, 7, 0, Math.PI * 2);
+            oCtx.fill();
+          }
+
+          // Earth shadow (right half is dark)
+          oCtx.fillStyle = 'rgba(2, 4, 3, 0.78)';
+          oCtx.beginPath();
+          oCtx.arc(ocx, ocy, 18.5, -Math.PI / 2, Math.PI / 2, false);
+          oCtx.fill();
+
+          // Draw Moon in orbit (Space View)
+          if (moonLoaded) {
+            oCtx.save();
+            oCtx.beginPath();
+            oCtx.arc(omx, omy, 7, 0, Math.PI * 2);
+            oCtx.clip();
+            oCtx.drawImage(moonImg, omx - 7, omy - 7, 14, 14);
+            oCtx.restore();
+          } else {
+            oCtx.fillStyle = '#E2E8F0';
+            oCtx.beginPath();
+            oCtx.arc(omx, omy, 7, 0, Math.PI * 2);
+            oCtx.fill();
+          }
+
+          // Moon in orbit shadow (right half is dark)
+          oCtx.fillStyle = '#020403';
+          oCtx.beginPath();
+          oCtx.arc(omx, omy, 7.5, -Math.PI / 2, Math.PI / 2, false);
+          oCtx.fill();
+
+          // Labels in Orbit view
+          oCtx.fillStyle = 'rgba(168, 181, 173, 0.5)';
+          oCtx.font = '9px Inter, sans-serif';
+          oCtx.textAlign = 'center';
+          oCtx.fillText("TIERRA", ocx, ocy - 23);
+          oCtx.fillText("LUNA", omx, omy - 11);
+
+          // 3. Draw Telescope View (Fases de la Luna)
+          pCtx.fillStyle = '#020403';
+          pCtx.fillRect(0, 0, 200, 200);
+
+          // Stars in telescope view
+          pStars.forEach(s => {
+            s.phase += 0.012;
+            const opacity = 0.15 + Math.abs(Math.sin(s.phase)) * 0.7;
+            pCtx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            pCtx.beginPath();
+            pCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+            pCtx.fill();
+          });
+
+          // Math phase calculations
+          const pct = (1 + Math.cos(normAngle)) / 2; // Illumination percent
+          const age = ((Math.PI - normAngle + Math.PI * 2) % (Math.PI * 2)) / (Math.PI * 2) * 29.53;
+
+          // Check if waxing
+          const isWaxing = (deg > 0 && deg < 180);
+
+          // Determine if left side is lit in telescope view
+          let isLeftLit;
+          if (isSouthern) {
+            isLeftLit = isWaxing;
+          } else {
+            isLeftLit = !isWaxing;
+          }
+
+          // Moon glow
+          let moonGlow = pCtx.createRadialGradient(100, 100, 70, 100, 100, 95);
+          moonGlow.addColorStop(0, 'rgba(226, 232, 240, 0.18)');
+          moonGlow.addColorStop(0.5, 'rgba(56, 189, 248, 0.05)');
+          moonGlow.addColorStop(1, 'transparent');
+          pCtx.fillStyle = moonGlow;
+          pCtx.beginPath();
+          pCtx.arc(100, 100, 95, 0, Math.PI * 2);
+          pCtx.fill();
+
+          // Base Moon body
+          pCtx.fillStyle = '#F1F5F9';
+          pCtx.beginPath();
+          pCtx.arc(100, 100, 80, 0, Math.PI * 2);
+          pCtx.fill();
+
+          // Draw craters
+          drawMoonBody(pCtx, 100, 100, 80);
+
+          // Overlay shadow to create the phase
+          drawMoonShadow(pCtx, 100, 100, 80, pct, isLeftLit, 96);
+
+          // Phase descriptions
+          let phaseName = "";
+          if (deg >= 175 && deg <= 185) {
+            phaseName = "Luna Nueva";
+          } else if (deg > 185 && deg < 265) {
+            phaseName = isSouthern ? "Creciente Cóncava (Menguante)" : "Menguante Cóncava";
+            // Wait, let's match standard Spanish school phases:
+            phaseName = "Menguante Cóncava (Crescent)";
+          } else if (deg >= 265 && deg <= 275) {
+            phaseName = "Cuarto Menguante";
+          } else if (deg > 275 && deg < 355) {
+            phaseName = "Gibosa Menguante";
+          } else if (deg >= 355 || deg <= 5) {
+            phaseName = "Luna Llena";
+          } else if (deg > 5 && deg < 85) {
+            phaseName = "Gibosa Creciente";
+          } else if (deg >= 85 && deg <= 95) {
+            phaseName = "Cuarto Creciente";
+          } else {
+            phaseName = "Creciente Cóncava";
+          }
+
+          // Let's refine school phase naming standard in Spanish:
+          if (deg >= 174 && deg <= 186) {
+            phaseName = "Luna Nueva";
+          } else if (deg > 186 && deg < 264) {
+            phaseName = "Luna Menguante (Creciente en cielo)"; // Note: Crescent
+            phaseName = "Menguante Cóncava";
+          } else if (deg >= 264 && deg <= 276) {
+            phaseName = "Cuarto Menguante";
+          } else if (deg > 276 && deg < 354) {
+            phaseName = "Gibosa Menguante";
+          } else if (deg >= 354 || deg <= 6) {
+            phaseName = "Luna Llena";
+          } else if (deg > 6 && deg < 84) {
+            phaseName = "Gibosa Creciente";
+          } else if (deg >= 84 && deg <= 96) {
+            phaseName = "Cuarto Creciente";
+          } else {
+            phaseName = "Creciente Cóncava";
+          }
+
+          infoName.innerText = phaseName;
+          infoPct.innerText = Math.round(pct * 100) + "%";
+          infoAge.innerText = age.toFixed(1) + " días";
+
+          requestAnimationFrame(loop);
+        }
+
+        loop();
+      })();
+      </script>
+
+      <!-- Fases lunares -->
+        <h3 class="font-heading font-semibold text-lg text-white mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 bg-natura-energy/15 rounded flex items-center justify-center">
+            <span class="iconify text-natura-energy" data-icon="lucide:moon" data-width="14"></span>
+          </span>
+          Fases lunares (ciclo de ~29,5 dias)
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="content-card bg-natura-gray rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 bg-natura-dark rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
+              <span class="iconify text-natura-energy/30" data-icon="lucide:circle" data-width="28"></span>
+            </div>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Luna nueva</h4>
+            <p class="text-natura-silver text-xs leading-relaxed">La Luna esta entre la Tierra y el Sol. Su cara iluminada mira hacia el Sol, no hacia nosotros. <strong class="text-natura-energy">No se ve</strong> desde la Tierra.</p>
+          </div>
+          <div class="content-card bg-natura-gray rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: linear-gradient(90deg, #080C0A 50%, #3B82F6 50%); border: 1px solid rgba(59,130,246,0.3);"></div>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Cuarto creciente</h4>
+            <p class="text-natura-silver text-xs leading-relaxed">Vemos la mitad derecha iluminada. La porcion visible <strong class="text-white">crece</strong> dia a dia. Visible en el cielo de la tarde.</p>
+          </div>
+          <div class="content-card bg-natura-gray rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 bg-natura-energy/40 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.8), rgba(59,130,246,0.3));"></div>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Luna llena</h4>
+            <p class="text-natura-silver text-xs leading-relaxed">La Tierra esta entre el Sol y la Luna. Vemos toda la cara iluminada. <strong class="text-natura-energy">Brillante y redonda</strong> toda la noche.</p>
+          </div>
+          <div class="content-card bg-natura-gray rounded-2xl p-5 text-center">
+            <div class="w-14 h-14 rounded-full mx-auto mb-3 flex items-center justify-center" style="background: linear-gradient(270deg, #080C0A 50%, #3B82F6 50%); border: 1px solid rgba(59,130,246,0.3);"></div>
+            <h4 class="font-heading font-semibold text-white text-sm mb-1">Cuarto menguante</h4>
+            <p class="text-natura-silver text-xs leading-relaxed">Vemos la mitad izquierda iluminada. La porcion visible <strong class="text-white">decrece</strong> dia a dia. Visible en la madrugada.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Eclipses -->
+      <section id="eclipses" class="animate-fadeInUp delay-100 space-y-12">
+        <div class="flex items-center gap-3 mb-5 border-b border-white/5 pb-4">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Eclipses y Sombras en el Espacio</h2>
+        </div>
+
+        <!-- Fila de Eclipse Solar -->
+        <div class="flex flex-col lg:flex-row gap-8 items-center my-8">
+          <div class="w-full lg:w-2/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:eclipse" data-width="26"></span>
+              <h3 class="font-heading font-semibold text-white text-xl">Eclipse solar</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">
+              Un eclipse solar ocurre cuando la <strong class="text-white">Luna se interpone</strong> exactamente entre el Sol y la Tierra. Al alinearse, el pequeño cuerpo lunar bloquea la inmensa luz del disco solar y proyecta su cono de sombra sobre una franja muy estrecha de la superficie terrestre.
+            </p>
+            <p class="text-natura-silver text-sm leading-relaxed">
+              En las zonas bajo la <strong class="text-white">umbra</strong> (sombra total), el día se hace de noche por unos minutos, la temperatura desciende súbitamente y la atmósfera externa del Sol (la corona) brilla de manera espectacular. Fuera de esta franja, en la <strong class="text-[#5A6B60]">penumbra</strong>, el eclipse se observa solo como parcial.
+            </p>
+            <div class="border-l-2 border-amber-500/50 pl-3 py-1.5 bg-amber-500/5 rounded-r-md text-[11px] text-amber-300/90 leading-relaxed font-sans">
+              <strong class="text-amber-400 block mb-0.5">⚠️ ¡IMPORTANTE PARA LA OBSERVACIÓN!</strong>
+              Nunca mires directamente al Sol durante un eclipse solar sin lentes con filtro especial (ISO 12312-2) o filtros de soldador número 14 o superior. Los anteojos de sol normales no protegen tus retinas.
+            </div>
+          </div>
+          <div class="w-full lg:w-3/5">
+            <!-- Simulador Eclipse Solar -->
+            <div id="solar-eclipse-simulator" class="w-full"></div>
+          </div>
+        </div>
+
+        <!-- Fila de Eclipse Lunar -->
+        <div class="flex flex-col lg:flex-row-reverse gap-8 items-center my-8">
+          <div class="w-full lg:w-2/5 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:moon" data-width="26"></span>
+              <h3 class="font-heading font-semibold text-white text-xl">Eclipse lunar</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">
+              Un eclipse lunar ocurre cuando la <strong class="text-white">Tierra se interpone</strong> entre el Sol y la Luna. Al interponerse, nuestro planeta bloquea los rayos de luz solar directa e introduce a la Luna Llena dentro de su gigantesco cono de sombra.
+            </p>
+            <p class="text-natura-silver text-sm leading-relaxed">
+              Durante la totalidad, la Luna no se vuelve completamente invisible. En su lugar, se tiñe de un color rojizo cobrizo muy particular, conocido como la <strong class="text-natura-energy">"Luna de sangre"</strong>. Esto ocurre porque la atmósfera terrestre actúa como una lente, refractando los rayos de luz solar de color rojo (los de mayor longitud de onda) hacia el interior de la sombra y proyectándolos sobre la superficie de la Luna.
+            </p>
+            <p class="text-[#5A6B60] text-xs font-sans">
+              * A diferencia del solar, el eclipse lunar es completamente seguro de observar a simple vista y se puede ver desde cualquier lugar de la Tierra donde sea de noche.
+            </p>
+          </div>
+          <div class="w-full lg:w-3/5">
+            <!-- Simulador Eclipse Lunar -->
+            <div id="lunar-eclipse-simulator" class="w-full"></div>
+          </div>
+        </div>
+
+        <!-- Highlight Box Explicativa: Por qué no hay eclipses todos los meses -->
+        <div class="highlight-box p-5 rounded-md text-sm my-8 bg-natura-mid/20 border-l-4 border-natura-energy">
+          <div class="flex items-start gap-4">
+            <div class="w-8 h-8 bg-natura-energy/10 text-natura-energy rounded flex items-center justify-center shrink-0 mt-0.5">
+              <span class="iconify" data-icon="lucide:help-circle" data-width="18"></span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white text-sm mb-1">¿Por qué no hay eclipses todos los meses si la Luna orbita la Tierra cada 29.5 días?</h4>
+              <p class="text-natura-silver leading-relaxed font-body text-base">
+                La órbita de la Luna alrededor de la Tierra no está perfectamente alineada con la órbita de la Tierra alrededor del Sol (plano de la eclíptica). Está inclinada aproximadamente <strong class="text-white">5°</strong>.
+              </p>
+              <p class="text-natura-silver leading-relaxed font-body text-base mt-2">
+                Debido a esta inclinación, la mayoría de las veces la Luna pasa "por arriba" o "por abajo" de la sombra terrestre (en Luna Llena) o de la línea visual del Sol (en Luna Nueva). Solo cuando la Luna nueva o llena coincide exactamente con los puntos de cruce entre ambos planos orbitales (llamados <strong class="text-natura-energy">nodos orbitales</strong>), se produce la alineación perfecta necesaria para un eclipse. Puedes comprobar este fenómeno variando el control de <strong class="text-white">"Inclinación de Órbita"</strong> en el simulador lunar de arriba.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-note w-full lg:w-auto my-4">
+          <span class="note-label">Dato curioso</span>
+          <p>Los eclipses solares totales son raros en un mismo lugar. El proximo visible en Argentina sera en <strong>2027</strong>. ¡Anotalo en el calendario!</p>
+        </div>
+        <div style="clear: both;"></div>
+      </section>
+
+      <div class="sabias-que">
+        <span class="sq-label">Sabías que...</span>
+        <p>La Luna se aleja de la Tierra 3.8 centímetros por año, aproximadamente lo que crecen tus uñas. Dentro de millones de años será tan pequeña en el cielo que ya no habrá eclipses totales de Sol.</p>
+      </div>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 05. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">05</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">Si la Tierra gira a 1.670 km/h, ¿por que no salimos volando?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">La <strong class="text-natura-energy">gravedad</strong> nos mantiene pegados al suelo. La fuerza centrifuga generada por la rotacion terrestre existe, pero es muy debil comparada con la atraccion gravitatoria (en el ecuador, la gravedad es solo un 0,3% menor que en los polos). Ademas, la atmosfera gira con la Tierra, asi que no sentimos un "viento" de 1.670 km/h.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por que hace mas calor en verano si la Tierra esta mas lejos del Sol?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque las estaciones dependen de la <strong class="text-white">inclinacion del eje terrestre</strong>, no de la distancia al Sol. En verano, tu hemisferio esta inclinado hacia el Sol: los rayos llegan mas <strong class="text-natura-energy">directos</strong> (menos filtrados por la atmosfera) y el dia dura <strong class="text-white">mas horas</strong>, acumulando mas calor. En invierno, los rayos llegan oblicuos y el dia es mas corto.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por que siempre vemos la misma cara de la Luna?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Por la <strong class="text-natura-energy">rotacion sincronica</strong>: la Luna tarda lo mismo en girar sobre si misma (27,3 dias) que en dar una vuelta completa a la Tierra. Es un efecto de las fuerzas de marea entre ambos cuerpos a lo largo de millones de años. No es casualidad: es un fenomeno comun en el universo (muchas lunas de Jupiter y Saturno tambien lo muestran).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">4.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿En que se diferencia un eclipse solar de uno lunar?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">
+                  Tres diferencias clave: (1) En el solar, la <strong class="text-white">Luna tapa al Sol</strong>; en el lunar, la <strong class="text-white">Tierra tapa a la Luna</strong>. (2) El solar solo se ve en una <strong class="text-natura-energy">franja estrecha</strong>; el lunar se ve desde <strong class="text-natura-energy">todo el hemisferio nocturno</strong>. (3) El solar requiere proteccion ocular para mirarlo; el lunar se puede mirar a simple vista sin peligro.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="sol-planetas.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Sol y Planetas</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">Tierra y Luna — Pagina 2 de 4</div>
+
+        <a href="exploracion.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>Exploracion</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:sun" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Fisica</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script src="solar-eclipse.js"></script>
+<script src="lunar-eclipse.js"></script>
+</body>

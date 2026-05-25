@@ -1,0 +1,469 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustancias | Química 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #22C55E; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #22C55E; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #22C55E; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #22C55E; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(34,197,94,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(34,197,94,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(34,197,94,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #22C55E;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-quimica { width: 60px; height: 2px; background: linear-gradient(90deg, #22C55E, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(34,197,94,0.25); }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 10px 14px; text-align: left; font-size: 0.85rem; }
+    th { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #22C55E; border-bottom: 1px solid rgba(34,197,94,0.2); }
+    td { border-bottom: 1px solid rgba(255,255,255,0.05); color: #C8D4CC; }
+    tr:hover td { background: rgba(34,197,94,0.03); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Materia</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Materia</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://images.unsplash.com/photo-1554475901-4538ddfbccc2?w=1200&q=60" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-quimica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-leaf" style="font-family: 'Inter', sans-serif;">Química · Materia</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Sustancias</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">Simples y compuestas. La tabla periódica, los elementos químicos y cómo se representan mediante fórmulas.</p>
+  </div>
+</section>
+
+<main class="max-w-4xl mx-auto px-4 md:px-6 py-8 space-y-10">
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:atom" data-width="22"></span>
+      Sustancias simples
+    </h2>
+    <div class="sidebar-note">
+      <span class="note-label">Dato clave</span>
+      De los 118 elementos conocidos, 92 son naturales (se encuentran en la Tierra) y el resto son sintéticos (creados en laboratorio). El oxígeno es el elemento más abundante en la corteza terrestre.
+    </div>
+    <p class="article-dropcap text-natura-silver leading-relaxed mb-4">
+      Una <strong class="text-natura-leaf">sustancia simple</strong> está formada por un solo tipo de átomo. También se llaman <strong class="text-white">elementos químicos</strong>. No se pueden descomponer en sustancias más simples por métodos químicos comunes. Cada elemento tiene un nombre y un <strong class="text-natura-leaf">símbolo químico</strong> (una o dos letras, la primera siempre mayúscula).
+    </p>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Algunos elementos se presentan como átomos individuales (ej: el helio, He) y otros forman moléculas con átomos del mismo elemento (ej: el oxígeno del aire es O2, dos átomos de oxígeno unidos).
+    </p>
+    <div class="overflow-x-auto mb-4">
+      <table class="bg-natura-dark rounded-lg overflow-hidden border border-white/5">
+        <thead>
+          <tr>
+            <th>Elemento</th>
+            <th>Símbolo</th>
+            <th>Ejemplo de uso / Dónde se encuentra</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Oxígeno</td><td>O (como O2)</td><td>Respiración, combustión. 21% del aire.</td></tr>
+          <tr><td>Hierro</td><td>Fe</td><td>Construcción, herramientas, hemoglobina en sangre.</td></tr>
+          <tr><td>Oro</td><td>Au</td><td>Joyería, electrónica. No se oxida.</td></tr>
+          <tr><td>Carbono</td><td>C</td><td>Base de la vida. Diamante, grafito, carbono orgánico.</td></tr>
+          <tr><td>Aluminio</td><td>Al</td><td>Latas, aviones, papel aluminio. Liviano y resistente.</td></tr>
+          <tr><td>Nitrógeno</td><td>N (como N2)</td><td>78% del aire. Fertilizantes.</td></tr>
+          <tr><td>Mercurio</td><td>Hg</td><td>Único metal líquido a temperatura ambiente.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="figure-placeholder">
+      <span class="iconify text-3xl mb-2" data-icon="lucide:grid-3x3" data-width="36"></span>
+      <p>Ilustración: Tabla periódica de los elementos.</p>
+      <p class="text-[11px]">Organiza los 118 elementos conocidos por número atómico creciente. Las columnas (grupos) comparten propiedades químicas.</p>
+    </div>
+    <div class="pull-quote">
+      "La tabla periódica es como el mapa de un tesoro para los químicos. Cada elemento tiene su lugar y sus propiedades están relacionadas con su posición."
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:beaker" data-width="22"></span>
+      Sustancias compuestas
+    </h2>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Una <strong class="text-natura-leaf">sustancia compuesta</strong> (o compuesto químico) está formada por <strong class="text-white">dos o más elementos diferentes</strong> unidos químicamente en proporciones fijas. Los compuestos tienen propiedades distintas a las de los elementos que los forman.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-natura-leaf mb-2">Agua (H2O)</h4>
+        <p class="text-natura-silver text-base">Dos átomos de hidrógeno + uno de oxígeno. Es líquida a temperatura ambiente, aunque el hidrógeno y el oxígeno son gases. Esencial para la vida.</p>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-natura-leaf mb-2">Dióxido de carbono (CO2)</h4>
+        <p class="text-natura-silver text-base">Un átomo de carbono + dos de oxígeno. Las plantas lo usan para la fotosíntesis. Lo exhalamos al respirar. Gas de efecto invernadero.</p>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-natura-leaf mb-2">Sal de mesa (NaCl)</h4>
+        <p class="text-natura-silver text-base">Sodio (un metal que explota en agua) + cloro (un gas tóxico). Juntos forman un compuesto inofensivo y esencial para la vida.</p>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-natura-leaf mb-2">Glucosa (C6H12O6)</h4>
+        <p class="text-natura-silver text-base">Seis carbonos + doce hidrógenos + seis oxígenos. Es el azúcar que usan las células como fuente de energía.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:git-compare" data-width="22"></span>
+      Diferencia con las mezclas
+    </h2>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Es importante no confundir <strong class="text-natura-leaf">sustancias</strong> con <strong class="text-natura-leaf">mezclas</strong>. Las diferencias principales son:
+    </p>
+    <div class="overflow-x-auto mb-4">
+      <table class="bg-natura-dark rounded-lg overflow-hidden border border-white/5">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Sustancia pura</th>
+            <th>Mezcla</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-white text-sm">Composición</td>
+            <td class="text-sm">Fija y definida</td>
+            <td class="text-sm">Variable (depende de las cantidades)</td>
+          </tr>
+          <tr>
+            <td class="text-white text-sm">Separación</td>
+            <td class="text-sm">Solo por métodos químicos (electrólisis, descomposición)</td>
+            <td class="text-sm">Por métodos físicos (filtración, decantación, evaporación)</td>
+          </tr>
+          <tr>
+            <td class="text-white text-sm">Propiedades</td>
+            <td class="text-sm">Constantes (punto de fusión y ebullición fijos)</td>
+            <td class="text-sm">Variables (dependen de la proporción)</td>
+          </tr>
+          <tr>
+            <td class="text-white text-sm">Ejemplos</td>
+            <td class="text-sm">Agua destilada, oxígeno, sal pura, azúcar</td>
+            <td class="text-sm">Agua de mar, aire, ensalada, granito</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-natura-silver leading-relaxed">
+      El aire que respiramos es una <strong class="text-white">mezcla</strong> de gases (nitrógeno, oxígeno, dióxido de carbono y otros), no una sustancia pura. El agua de mar es una mezcla de agua y sales. En cambio, el agua destilada (H2O pura) sí es una sustancia compuesta.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:superscript" data-width="22"></span>
+      Fórmulas químicas
+    </h2>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Las <strong class="text-natura-leaf">fórmulas químicas</strong> son una forma abreviada de representar las sustancias. Nos indican <strong class="text-white">qué elementos</strong> la componen y <strong class="text-white">en qué proporción</strong> se combinan sus átomos.
+    </p>
+    <div class="bg-natura-dark rounded-lg p-6 border border-white/5 text-center mb-4">
+      <p class="text-white text-lg">\[H_2O,\quad CO_2,\quad NaCl,\quad C_6H_{12}O_6\]</p>
+    </div>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      En una fórmula química, los <strong class="text-white">subíndices</strong> indican cuántos átomos de cada elemento hay. Por ejemplo:
+    </p>
+    <ul class="space-y-1.5 text-natura-silver mb-4 list-none">
+      <li class="flex items-start gap-2">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:dot" data-width="16"></span>
+        <span><strong class="text-white">H2O</strong>: 2 átomos de hidrógeno (H) y 1 átomo de oxígeno (O). Cuando no hay subíndice, se sobreentiende que es 1.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:dot" data-width="16"></span>
+        <span><strong class="text-white">CO2</strong>: 1 átomo de carbono (C) y 2 átomos de oxígeno (O).</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:dot" data-width="16"></span>
+        <span><strong class="text-white">C6H12O6</strong>: 6 átomos de carbono, 12 de hidrógeno y 6 de oxígeno. Es la fórmula de la glucosa.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:dot" data-width="16"></span>
+        <span><strong class="text-white">H2SO4</strong>: 2 hidrógenos, 1 azufre (S) y 4 oxígenos. Es el ácido sulfúrico.</span>
+      </li>
+    </ul>
+    <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+      <h4 class="font-heading text-sm font-semibold text-natura-leaf mb-2">¿Cómo se leen las fórmulas?</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+        <div>
+          <span class="text-white font-heading font-semibold">H2O</span>
+          <p class="text-natura-silver">Se lee "hache-dos-o". Dos átomos de hidrógeno y uno de oxígeno.</p>
+        </div>
+        <div>
+          <span class="text-white font-heading font-semibold">NaCl</span>
+          <p class="text-natura-silver">Cloruro de sodio. Un átomo de sodio (Na) y uno de cloro (Cl).</p>
+        </div>
+        <div>
+          <span class="text-white font-heading font-semibold">Fe2O3</span>
+          <p class="text-natura-silver">Óxido de hierro (III). Dos átomos de hierro (Fe) y tres de oxígeno.</p>
+        </div>
+        <div>
+          <span class="text-white font-heading font-semibold">CH4</span>
+          <p class="text-natura-silver">Metano. Un átomo de carbono y cuatro de hidrógeno.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:brain" data-width="22"></span>
+      Preguntas para pensar
+    </h2>
+    <div class="bg-natura-dark rounded-lg p-5 border border-white/5 space-y-3">
+      <p class="text-natura-silver text-base leading-relaxed"><span class="text-natura-leaf font-ui font-bold mr-2">1.</span>¿Cuál es la diferencia entre una sustancia simple y una compuesta? Da dos ejemplos de cada una.</p>
+      <p class="text-natura-silver text-base leading-relaxed"><span class="text-natura-leaf font-ui font-bold mr-2">2.</span>¿Por qué el agua de mar no es una sustancia pura? ¿Cómo podrías obtener agua pura a partir de ella?</p>
+      <p class="text-natura-silver text-base leading-relaxed"><span class="text-natura-leaf font-ui font-bold mr-2">3.</span>Escribí la fórmula química del dióxido de carbono y explicá qué significa cada parte.</p>
+      <p class="text-natura-silver text-base leading-relaxed"><span class="text-natura-leaf font-ui font-bold mr-2">4.</span>El sodio (Na) es un metal que reacciona violentamente con el agua y el cloro (Cl) es un gas venenoso. Sin embargo, juntos forman la sal de mesa (NaCl) que consumimos a diario. ¿Qué nos enseña esto sobre los compuestos químicos?</p>
+    </div>
+  </section>
+
+  <nav class="flex items-center justify-between pt-6 border-t border-white/5">
+    <a href="materiales.html" class="flex items-center gap-2 text-natura-silverDark hover:text-natura-leaf transition-colors font-ui text-xs font-bold uppercase tracking-wider">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+      Materiales
+    </a>
+    <a href="index.html" class="flex items-center gap-2 text-natura-leaf hover:text-white transition-colors font-ui text-xs font-bold uppercase tracking-wider">
+      <span class="iconify" data-icon="lucide:list" data-width="14"></span>
+      Índice de Materia
+    </a>
+  </nav>
+
+</main>
+
+<footer class="border-t border-white/5 py-8 mt-4">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span> Inicio
+        </a>
+        <span class="text-natura-silverDark">·</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+      </div>
+      <p class="text-natura-silverDark text-xs font-ui">Ciencias Naturales · 1° año · Biología &amp; Química</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Sustancias",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/sustancias.html",c:"#22C55E"},
+    {n:"Materiales",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/materiales.html",c:"#22C55E"},
+    {n:"Medicion",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/medicion.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/separacion.html",c:"#22C55E"},
+    {n:"Mezclas en la naturaleza",u:"Quimica",s:"Mezclas",l:"../mezclas/mezclas-naturaleza.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Usos y contaminacion del agua",u:"Quimica",s:"Agua",l:"../agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion del agua",u:"Quimica",s:"Agua",l:"../agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Comportamiento de materiales",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento rectilineo uniforme",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos del movimiento",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecificas",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion de los animales",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Alimentacion humana",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/alimentacion.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Musculos",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/musculos.html",c:"#DC2626"},
+    {n:"Pancreas",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/pancreas.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Rinones",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/rinones.html",c:"#DC2626"},
+    {n:"Sistema urinario",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/urinario.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../podcast/",c:"#E8A87C"},
+    {n:"ESI - Educacion Sexual Integral",u:"ESI",s:"ESI",l:"../../esi.html",c:"#14B8A6"},
+    {n:"EAI - Educacion Ambiental Integral",u:"EAI",s:"EAI",l:"../../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas. Proba con otra palabra.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+
+</body>
+</html>

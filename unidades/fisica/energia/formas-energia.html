@@ -1,0 +1,540 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formas de Energía | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(59,130,246,0.3);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+    .sabias-que { border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Energía</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Formas de Energía</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Energía</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/energy-forms/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · La Energía</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Formas de <span class="text-natura-energy">Energía</span></h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">La energía se presenta de muchas maneras en la naturaleza. Conocer sus formas nos ayuda a entender cómo funciona el universo, desde una pelota que cae hasta la luz de una estrella.</p>
+  </div>
+</section>
+
+<main class="max-w-3xl mx-auto px-4 md:px-6 py-10 space-y-10">
+
+  <!-- SECTION 1: Energía Cinética -->
+  <section class="animate-fadeInUp">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">1</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Cinética</h2>
+    </div>
+    <div class="article-dropcap">
+      <p class="text-base md:text-base leading-relaxed text-natura-silver">
+        Todo cuerpo que se mueve posee un tipo de energía asociada a su movimiento: la <strong class="text-white">energía cinética</strong>. Cuanto más rápido se mueve un objeto y cuanto mayor es su masa, mayor es su energía cinética. Un camión que avanza lentamente puede tener más energía cinética que una moto a toda velocidad, porque la masa del camión es mucho mayor.
+      </p>
+    </div>
+    <div class="pull-quote">
+      Todo cuerpo en movimiento posee energía cinética. Depende de su masa y de su velocidad.
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4">
+      La energía cinética se calcula con la siguiente fórmula:
+    </p>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-6 my-5">
+      \[E_c = \frac{1}{2} m v^2\]
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      Donde:
+    </p>
+    <ul class="text-lg text-natura-silverDark space-y-1 mb-5 ml-5 list-disc">
+      <li><strong class="text-natura-energy">E<sub>c</sub></strong> = energía cinética, medida en joules (J)</li>
+      <li><strong class="text-natura-energy">m</strong> = masa del cuerpo, en kilogramos (kg)</li>
+      <li><strong class="text-natura-energy">v</strong> = velocidad del cuerpo, en metros por segundo (m/s)</li>
+    </ul>
+    <div class="sidebar-note">
+      <span class="note-label">Dato curioso</span>
+      <p>Una pelota de tenis sacada a 200 km/h tiene menos energía cinética que un camión a 5 km/h, porque la masa influye mucho más. ¡La masa de un camión puede ser 35000 veces mayor!</p>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      Observá que la velocidad está elevada al cuadrado (<strong class="text-natura-energy">v²</strong>). Esto significa que si duplicás la velocidad, la energía cinética no se duplica: ¡se cuadruplica! Por eso un choque a 80 km/h es mucho más destructivo que uno a 40 km/h.
+    </p>
+    <p class="text-lg text-natura-silver leading-relaxed mb-2">
+      <strong class="text-white">Ejemplo:</strong> Un auto de 1000 kg que viaja a 20 m/s (72 km/h) tiene una energía cinética de:
+    </p>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-4 my-3">
+      \[E_c = \frac{1}{2} \times 1000\,\text{kg} \times (20\,\text{m/s})^2 = 500 \times 400 = 200\,000\,\text{J}\]
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mt-2">
+      Esos 200.000 J equivalen a la energía necesaria para levantar 100 kg a 200 metros de altura. ¡Impresionante!
+    </p>
+    <div class="figure-placeholder">
+      <span class="iconify block mx-auto mb-3" data-icon="lucide:car" data-width="36"></span>
+      FIGURA 1 · Representación de la energía cinética de un vehículo en movimiento
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
+  <!-- SECTION 2: Energía Potencial Gravitatoria -->
+  <section class="animate-fadeInUp delay-100">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Potencial Gravitatoria</h2>
+    </div>
+    <div class="article-dropcap">
+      <p class="text-base md:text-base leading-relaxed text-natura-silver">
+        Un objeto que se encuentra a cierta altura del suelo no se está moviendo, pero <strong class="text-white">tiene energía almacenada</strong>. Esa energía "en reserva" se llama <strong class="text-natura-energy">energía potencial gravitatoria</strong>. Si el objeto cae, esa energía se libera y se transforma en energía cinética.
+      </p>
+    </div>
+    <div class="pull-quote">
+      Un objeto en altura almacena energía por su posición en el campo gravitatorio.
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4">
+      La energía potencial gravitatoria se calcula así:
+    </p>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-6 my-5">
+      \[E_p = m g h\]
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      Donde:
+    </p>
+    <ul class="text-lg text-natura-silverDark space-y-1 mb-5 ml-5 list-disc">
+      <li><strong class="text-natura-energy">E<sub>p</sub></strong> = energía potencial gravitatoria, en joules (J)</li>
+      <li><strong class="text-natura-energy">m</strong> = masa del cuerpo, en kilogramos (kg)</li>
+      <li><strong class="text-natura-energy">g</strong> = aceleración de la gravedad en la Tierra ˜ 9,8 m/s²</li>
+      <li><strong class="text-natura-energy">h</strong> = altura a la que se encuentra el cuerpo, en metros (m)</li>
+    </ul>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      <strong class="text-white">Ejemplo:</strong> Una maceta de 2 kg en un balcón a 10 m de altura almacena:
+    </p>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-4 my-3">
+      \[E_p = 2\,\text{kg} \times 9,8\,\text{m/s}^2 \times 10\,\text{m} = 196\,\text{J}\]
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mt-2">
+      Esa energía se transforma en cinética si la maceta cae. Justo antes de tocar el suelo, casi toda la energía potencial se habrá convertido en cinética (descontando una pequeña parte que se pierde por el rozamiento con el aire).
+    </p>
+    <div class="figure-placeholder">
+      <span class="iconify block mx-auto mb-3" data-icon="lucide:arrow-up-from-line" data-width="36"></span>
+      FIGURA 2 · Energía potencial gravitatoria según la altura
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
+  <!-- SECTION 3: Energía Mecánica -->
+  <section class="animate-fadeInUp delay-200">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">3</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Mecánica</h2>
+    </div>
+    <div class="article-dropcap">
+      <p class="text-base md:text-base leading-relaxed text-natura-silver">
+        La <strong class="text-white">energía mecánica</strong> de un cuerpo es la suma de su energía cinética y su energía potencial. Es una de las formas más importantes para estudiar el movimiento de los objetos.
+      </p>
+    </div>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-6 my-5">
+      \[E_m = E_c + E_p\]
+    </div>
+    <div class="sidebar-note">
+      <span class="note-label">Idea clave</span>
+      <p>En un sistema ideal sin rozamiento, la energía mecánica se conserva. En la práctica, siempre hay algo de fricción que convierte parte de la energía en calor.</p>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      En un sistema ideal sin rozamiento, <strong class="text-white">la energía mecánica total se conserva</strong>. Esto significa que la energía cinética y la potencial pueden intercambiarse, pero la suma de ambas permanece constante.
+    </p>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      <strong class="text-white">Ejemplo: la montaña rusa.</strong> En la cima de la subida, el carrito tiene mucha energía potencial y poca cinética (está casi detenido). A medida que baja, la energía potencial se transforma en cinética y el carrito acelera. En el punto más bajo, la velocidad es máxima y la altura es mínima: casi toda la energía es cinética.
+    </p>
+    <p class="text-lg text-natura-silver leading-relaxed">
+      Este intercambio entre E<sub>c</sub> y E<sub>p</sub> se repite en cada subida y bajada. Si no hubiera rozamiento, el carrito subiría y bajaría eternamente. En la realidad, la fricción convierte parte de la energía mecánica en calor, por eso la montaña rusa necesita un motor que empuje el carrito al inicio.
+    </p>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
+  <!-- SECTION 4: Otras formas de energía -->
+  <section class="animate-fadeInUp delay-100">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">4</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Otras formas de energía</h2>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-6">
+      Además de la cinética, la potencial y la mecánica, la energía se manifiesta de muchas otras formas. Acá te presentamos las más importantes.
+    </p>
+
+    <div class="space-y-5">
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="iconify text-natura-energy" data-icon="lucide:thermometer" data-width="22"></span>
+          <h3 class="font-heading font-semibold text-white text-base">Energía Térmica</h3>
+        </div>
+        <p class="text-xs text-natura-silverDark leading-relaxed">
+          Es la energía asociada al <strong class="text-natura-energy">movimiento desordenado de las partículas</strong> (átomos y moléculas) que componen un cuerpo. Cuanto mayor es la temperatura de un objeto, más rápido vibran o se mueven sus partículas y mayor es su energía térmica. Cuando tocamos algo caliente, sentimos esa energía transferirse a nuestra piel.
+        </p>
+      </div>
+
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="iconify text-natura-energy" data-icon="lucide:flask-conical" data-width="22"></span>
+          <h3 class="font-heading font-semibold text-white text-base">Energía Química</h3>
+        </div>
+        <p class="text-xs text-natura-silverDark leading-relaxed">
+          Es la energía <strong class="text-natura-energy">almacenada en los enlaces químicos</strong> que unen a los átomos dentro de las moléculas. Está presente en los alimentos que comemos, en las pilas y baterías, en los combustibles como la nafta y el gas, y en la leña que se quema. Cuando ocurre una reacción química, parte de esa energía se libera.
+        </p>
+      </div>
+
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="iconify text-natura-energy" data-icon="lucide:zap" data-width="22"></span>
+          <h3 class="font-heading font-semibold text-white text-base">Energía Eléctrica</h3>
+        </div>
+        <p class="text-xs text-natura-silverDark leading-relaxed">
+          Es la energía asociada al <strong class="text-natura-energy">movimiento de cargas eléctricas</strong> (electrones) a través de un conductor, como un cable de cobre. Es la forma de energía que más usamos en la vida cotidiana: alimenta las luces, los electrodomésticos, las computadoras y los celulares.
+        </p>
+      </div>
+
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="iconify text-natura-energy" data-icon="lucide:atom" data-width="22"></span>
+          <h3 class="font-heading font-semibold text-white text-base">Energía Nuclear</h3>
+        </div>
+        <p class="text-xs text-natura-silverDark leading-relaxed">
+          Es la energía <strong class="text-natura-energy">almacenada en el núcleo de los átomos</strong>. Se libera cuando los núcleos atómicos se dividen (fisión) o se unen (fusión). Es la energía que alimenta al Sol y a las estrellas, y la que se aprovecha en las centrales nucleares para generar electricidad.
+        </p>
+      </div>
+
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="iconify text-natura-energy" data-icon="lucide:sun" data-width="22"></span>
+          <h3 class="font-heading font-semibold text-white text-base">Energía Radiante</h3>
+        </div>
+        <p class="text-xs text-natura-silverDark leading-relaxed">
+          Es la energía transportada por las <strong class="text-natura-energy">ondas electromagnéticas</strong>, como la luz visible, los rayos X, las microondas y las ondas de radio. La luz solar es la principal fuente de energía radiante que recibe la Tierra y es la base de casi toda la vida en el planeta.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sabias-que">
+    <span class="sq-label">Sabías que...</span>
+    <p>Un rayo puede liberar hasta 5 gigajoules de energía: suficiente para abastecer el consumo eléctrico de una casa promedio durante un mes entero.</p>
+  </div>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
+  <!-- SECTION 5: Preguntas para pensar -->
+  <section class="animate-fadeInUp delay-200">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-6">
+      Reflexioná sobre lo aprendido y respondé en tu carpeta.
+    </p>
+    <div class="space-y-3">
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <div class="flex items-start gap-3">
+          <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">1.</span>
+          <div>
+            <p class="font-heading font-semibold text-white text-sm mb-1">¿Qué tipo de energía tiene un arquero justo antes de soltar la flecha? ¿Y la flecha en pleno vuelo?</p>
+            <p class="text-xs text-natura-silverDark leading-relaxed">Antes de soltar, el arco tensado almacena energía potencial elástica. Al soltar, esa energía se transforma en cinética de la flecha. Durante el vuelo, la flecha posee energía cinética y también una pequeña cantidad de potencial gravitatoria porque está a cierta altura del suelo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <div class="flex items-start gap-3">
+          <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">2.</span>
+          <div>
+            <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué un martillo puede clavar un clavo pero tu mano no, aunque apliques la misma fuerza?</p>
+            <p class="text-xs text-natura-silverDark leading-relaxed">El martillo tiene masa y se mueve a cierta velocidad, por lo tanto posee energía cinética. Cuando golpea el clavo, esa energía se concentra en un área muy pequeña (la cabeza del clavo) y se transfiere al clavo, que penetra la madera. La mano no acumula la misma energía cinética porque se mueve más lento y tiene menos masa concentrada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <div class="flex items-start gap-3">
+          <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">3.</span>
+          <div>
+            <p class="font-heading font-semibold text-white text-sm mb-1">Si la Luna tiene menos gravedad que la Tierra, ¿un objeto a 10 m de altura en la Luna tiene más o menos energía potencial que en la Tierra?</p>
+            <p class="text-xs text-natura-silverDark leading-relaxed">Tiene <strong class="text-natura-energy">menos</strong> energía potencial, porque la aceleración de la gravedad en la Luna es aproximadamente 1,6 m/s² (seis veces menor que en la Tierra). Con la misma masa y altura, la energía potencial es proporcional a g: E<sub>p</sub> = m × g × h. Si g es menor, E<sub>p</sub> también lo es.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <div class="flex items-start gap-3">
+          <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">4.</span>
+          <div>
+            <p class="font-heading font-semibold text-white text-sm mb-1">Nombra dos objetos de tu vida cotidiana que posean energía química y dos que posean energía eléctrica.</p>
+            <p class="text-xs text-natura-silverDark leading-relaxed">Energía química: una pila, una barra de cereal. Energía eléctrica: un cargador enchufado, el cable de una lamparita conectada a la corriente. ¡Buscá tus propios ejemplos!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAVIGATION -->
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="index.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Energía</span>
+    </a>
+    <a href="transformaciones.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Transformaciones</span>
+      <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+    </a>
+  </div>
+
+</main>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>

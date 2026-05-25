@@ -1,0 +1,449 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Alimentación — Herbívoros, Carnívoros y Omnívoros | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .accent-line-bio { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+    .sidebar-note { border: 1px solid rgba(255,255,255,0.08); background: rgba(22,28,24,0.7); }
+    .pull-quote {
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; font-style: italic;
+      color: #DC2626; border-left: 3px solid #DC2626; padding-left: 1.5rem;
+    }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.85; color: #DC2626;
+      padding-right: 0.5rem; padding-top: 0.1rem;
+    }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); background: rgba(22,28,24,0.5);
+    }
+    .grain-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 2; opacity: 0.32; mix-blend-mode: overlay;
+    }
+    .grain-overlay::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.45'/%3E%3C/svg%3E");
+      background-size: 96px 96px;
+      animation: grainShift 0.4s steps(4) infinite;
+    }
+    @keyframes grainShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-3px, 2px); }
+      50% { transform: translate(2px, -3px); }
+      75% { transform: translate(-1px, -1px); }
+    }
+    .sabias-que { border-left:3px solid #DC2626; background:rgba(220,38,38,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#DC2626; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body class="bg-natura-black text-natura-silver font-body">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Animales</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">Alimentación</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · Heterótrofos</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/animal-feeding-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line-bio"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · Animales</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Tipos de Alimentación — <span class="text-natura-bio">Herbívoros, Carnívoros y Omnívoros</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Los animales son heterótrofos: necesitan consumir otros seres vivos. Su dieta determina sus adaptaciones, su lugar en la cadena alimenticia y su anatomía.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Herbívoros</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Carnívoros</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Omnívoros</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Adaptaciones</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-7xl mx-auto px-4 md:px-6">
+  <hr class="border-white/5">
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-3xl mx-auto space-y-14">
+
+    <!-- SECTION 1: ¿Cómo se alimentan los animales? -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">¿Cómo se alimentan los animales?</h2>
+      </div>
+      <div class="highlight-box p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify mt-0.5 shrink-0 text-natura-bio" data-icon="lucide:utensils-crossed" data-width="22"></span>
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+            Todos los animales son heterótrofos: necesitan consumir otros seres vivos para obtener energía y nutrientes. A diferencia de las plantas, no pueden fabricar su propio alimento.
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-lg text-natura-silverDark leading-relaxed">
+        La palabra <strong class="text-natura-silverLight">heterótrofo</strong> viene del griego <em>héteros</em> (otro) y <em>trophos</em> (alimentación): «que se alimenta de otros». Todos los animales, sin excepción, son heterótrofos. Según lo que comen, se clasifican en tres grandes grupos: herbívoros, carnívoros y omnívoros. Esta clasificación no solo describe su dieta sino también las adaptaciones de su cuerpo: desde la forma de los dientes hasta la longitud del intestino.
+      </p>
+      <div class="mt-5 pull-quote text-base md:text-xl leading-relaxed max-w-2xl">
+        «Decime lo que comés y te diré cómo sos.»<br>
+        <span class="text-natura-silverDark text-base not-italic">— La dieta modela la anatomía de cada animal.</span>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Herbívoros -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Herbívoros</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Se alimentan exclusivamente de plantas: hojas, tallos, frutos, semillas, raíces. Comer vegetales presenta un desafío: la celulosa de las paredes celulares es difícil de digerir. Por eso los herbívoros tienen adaptaciones especiales.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:leaf" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Adaptaciones</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Dientes planos (molares anchos) para triturar fibras vegetales</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Intestino muy largo (hasta 20 veces el cuerpo) para una digestión lenta</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Fermentación bacteriana en el estómago o intestino para romper la celulosa</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Algunos rumian (vaca, oveja): tragan, regurgitan y vuelven a masticar</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:cow" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Ejemplos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> <strong class="text-natura-silverLight">Vaca</strong> — rumiante, cuatro estómagos, fermentación microbiana</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> <strong class="text-natura-silverLight">Caballo</strong> — no rumia, fermenta en el intestino grueso</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> <strong class="text-natura-silverLight">Conejo</strong> — cecotrofia: come sus propias heces blandas para absorber más nutrientes</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> <strong class="text-natura-silverLight">Oruga</strong> — herbívoro invertebrado, mandíbulas masticadoras</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Carnívoros -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Carnívoros</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Se alimentan de otros animales. Comer carne es energéticamente más eficiente que comer plantas porque la carne se digiere más rápido: no tiene celulosa. Los carnívoros necesitan cazar o capturar a sus presas.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-5">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:sword" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Adaptaciones</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Colmillos (caninos) largos y filosos para desgarrar carne</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Garras, picos ganchudos o mandíbulas potentes para atrapar presas</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Intestino corto (3 a 6 veces el cuerpo): la carne se digiere rápido</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Visión binocular (ojos al frente) para calcular distancias al cazar</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-water" data-icon="lucide:fish" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Ejemplos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">León</strong> — carnívoro terrestre, caza en grupo, caninos prominentes</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Águila</strong> — carnívora aérea, pico curvo y garras afiladas (rapaz)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Tiburón</strong> — carnívoro acuático, dientes en varias hileras</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Araña</strong> — carnívora invertebrada, inyecta enzimas digestivas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Omnívoros -->
+    <section class="animate-fadeInUp delay-300">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Omnívoros</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Se alimentan tanto de plantas como de animales. Son los más flexibles: pueden adaptar su dieta según lo que haya disponible en el ambiente. Sus adaptaciones son una combinación de las de herbívoros y carnívoros.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:blend" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Adaptaciones mixtas</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Dentadura mixta: incisivos, caninos y molares desarrollados</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Intestino de longitud intermedia (ni tan largo como herbívoro, ni tan corto como carnívoro)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Sistema digestivo versátil que procesa distintos tipos de alimentos</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Conducta flexible: pueden buscar distintas fuentes de alimento</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-greenLight" data-icon="lucide:users" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Ejemplos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Ser humano</strong> — omnívoro por excelencia, dieta culturalmente variada</li>
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Oso</strong> — come frutos, miel, peces y pequeños mamíferos</li>
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Chancho</strong> — hocico adaptado para hozar y encontrar raíces y pequeños animales</li>
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Rata</strong> — come granos, frutas, insectos y desperdicios</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Tabla comparativa (sidebar note) -->
+    <section class="animate-fadeInUp delay-400">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Tabla Comparativa</h2>
+      </div>
+      <div class="sidebar-note p-5 md:p-6 overflow-x-auto">
+        <table class="w-full text-sm text-natura-silver">
+          <thead>
+            <tr class="border-b border-white/10 text-natura-bio uppercase tracking-wider text-[11px]">
+              <th class="text-left py-2 pr-4">Tipo</th>
+              <th class="text-left py-2 pr-4">Alimento</th>
+              <th class="text-left py-2 pr-4">Ejemplo</th>
+              <th class="text-left py-2">Adaptación clave</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm">
+            <tr class="border-b border-white/5">
+              <td class="py-2.5 pr-4 font-semibold text-natura-leaf">Herbívoro</td>
+              <td class="py-2.5 pr-4">Plantas</td>
+              <td class="py-2.5 pr-4">Vaca</td>
+              <td class="py-2.5">Molares planos, intestino largo</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2.5 pr-4 font-semibold text-natura-water">Carnívoro</td>
+              <td class="py-2.5 pr-4">Carne</td>
+              <td class="py-2.5 pr-4">León</td>
+              <td class="py-2.5">Colmillos, garras, intestino corto</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2.5 pr-4 font-semibold text-natura-energy">Omnívoro</td>
+              <td class="py-2.5 pr-4">Plantas y carne</td>
+              <td class="py-2.5 pr-4">Ser humano</td>
+              <td class="py-2.5">Dentadura mixta, intestino intermedio</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="sabias-que" style="max-width:640px;margin-left:auto;margin-right:auto;">
+      <span class="sq-label">Sabías que...</span>
+      <p>Las vacas son rumiantes: regurgitan el alimento y lo vuelven a masticar. Pasan hasta 8 horas al día rumiando y producen entre 100 y 200 litros de saliva diarios para ayudar a la digestión.</p>
+    </div>
+
+    <!-- SECTION 6: Preguntas para pensar -->
+    <section class="animate-fadeInUp delay-500">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Preguntas para Pensar</h2>
+      </div>
+      <div class="space-y-3">
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Por qué los herbívoros tienen el intestino más largo que los carnívoros?</span> — La celulosa de las plantas es difícil de digerir y necesita más tiempo y superficie para descomponerse. La carne, en cambio, se digiere rápido y no requiere un intestino tan largo.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Qué ventaja tiene ser omnívoro?</span> — Los omnívoros pueden sobrevivir en más ambientes porque tienen más opciones de alimento. Si escasean las plantas, pueden comer carne, y viceversa. Esta flexibilidad fue clave para la expansión del ser humano por todo el planeta.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Todos los animales son heterótrofos? ¿Podría existir un animal autótrofo?</span> — Sí, todos los animales son heterótrofos. No existe ningún animal autótrofo conocido. Ser autótrofo requiere cloroplastos u otras estructuras fotosintéticas, propias de plantas, algas y algunas bacterias, pero no del reino animal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <div></div>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span class="ml-1">Todos los temas</span>
+      </a>
+      <a href="vertebrados.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Vertebrados</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+</body>
+</html>

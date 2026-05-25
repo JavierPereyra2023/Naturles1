@@ -1,0 +1,1174 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast · Ciencias Naturales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+              podcast: '#E8A87C', podcastDark: '#C47E3B', podcastGlow: '#F4C7A2',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #E8A87C; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #E8A87C; border-radius: 3px; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; } .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; } .delay-500 { animation-delay: 500ms; }
+
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #E8A87C, #C47E3B); }
+
+    /* ─── CINEMATIC GRAIN ─── */
+    .grain-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 4; opacity: 0.55; mix-blend-mode: overlay;
+    }
+    .grain-overlay::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.55'/%3E%3C/svg%3E");
+      background-size: 96px 96px;
+      animation: grainShift 0.4s steps(4) infinite;
+    }
+    @keyframes grainShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-3px, 2px); }
+      50% { transform: translate(2px, -3px); }
+      75% { transform: translate(-1px, -1px); }
+    }
+
+    /* ─── PODCAST CARD ─── */
+    .podcast-card {
+      position: relative; background: #161C18; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .podcast-card:hover {
+      transform: scale(1.02);
+      border-color: #E8A87C;
+      box-shadow: 0 0 40px rgba(232,168,124,0.12), inset 0 0 40px rgba(232,168,124,0.03);
+    }
+    .podcast-card .card-img-wrap {
+      position: relative; height: 200px; overflow: hidden;
+    }
+    .podcast-card .card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: contrast(1.2) brightness(0.75) saturate(0.85);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .podcast-card:hover .card-img-wrap img {
+      transform: scale(1.06);
+      filter: contrast(1.15) brightness(0.8) saturate(0.9);
+    }
+
+    /* ─── PLAY BUTTON ─── */
+    .play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(232,168,124,0.9);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5; transition: background 0.3s ease, box-shadow 0.3s ease, width 0.3s ease, height 0.3s ease;
+      box-shadow: 0 0 30px rgba(232,168,124,0.4);
+    }
+    .podcast-card:hover .play-btn {
+      width: 64px; height: 64px;
+      background: #E8A87C;
+      box-shadow: 0 0 50px rgba(232,168,124,0.6);
+    }
+    .playing .play-btn {
+      background: #161C18;
+      border: 2px solid #E8A87C;
+      box-shadow: 0 0 40px rgba(232,168,124,0.5);
+    }
+    .play-btn .iconify { color: #080C0A; transition: all 0.2s; }
+    .playing .play-btn .iconify { color: #E8A87C; }
+
+    /* ─── SOUND WAVE RINGS (hover) ─── */
+    .play-btn::before,
+    .play-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(232, 168, 124, 0);
+      pointer-events: none;
+    }
+    .podcast-card:hover .play-btn::before {
+      animation: soundWave 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+    }
+    .podcast-card:hover .play-btn::after {
+      animation: soundWave 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.72s infinite;
+    }
+    .podcast-card:hover .pulse-ring {
+      animation: soundWavePulse 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.44s infinite;
+    }
+    @keyframes soundWave {
+      0%   { transform: scale(1);   opacity: 0.75; border-color: rgba(232,168,124,0.75); }
+      100% { transform: scale(3.6); opacity: 0;    border-color: rgba(232,168,124,0); }
+    }
+    /* pulse-ring usa translate(-50%,-50%) en su base, hay que mantenerlo */
+    @keyframes soundWavePulse {
+      0%   { width: 56px; height: 56px; opacity: 0.75; border-color: rgba(232,168,124,0.75); }
+      100% { width: 200px; height: 200px; opacity: 0;  border-color: rgba(232,168,124,0); }
+    }
+    /* cuando está playing, los rings van más rápido */
+    .playing .pulse-ring {
+      animation: soundWavePulse 1.4s ease-out infinite !important;
+    }
+
+    /* ─── EQUALIZER ─── */
+    .eq-bars {
+      position: absolute; bottom: 12px; right: 12px;
+      display: flex; align-items: flex-end; gap: 2px;
+      z-index: 5; height: 24px;
+    }
+    .eq-bars .bar {
+      width: 3px; background: #E8A87C;
+      border-radius: 1px; opacity: 0.8;
+      animation: eqPulse 1.2s ease-in-out infinite;
+    }
+    .eq-bars .bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+    .eq-bars .bar:nth-child(2) { height: 14px; animation-delay: 0.1s; }
+    .eq-bars .bar:nth-child(3) { height: 20px; animation-delay: 0.2s; }
+    .eq-bars .bar:nth-child(4) { height: 10px; animation-delay: 0.3s; }
+    .eq-bars .bar:nth-child(5) { height: 16px; animation-delay: 0.4s; }
+    .eq-bars .bar:nth-child(6) { height: 6px; animation-delay: 0.5s; }
+
+    @keyframes eqPulse {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
+
+    /* Active state for bars */
+    .playing .eq-bars .bar {
+      animation-duration: 0.6s;
+      opacity: 1;
+    }
+
+    /* ─── AUDIO PLAYER BAR ─── */
+    .player-bar {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .player-bar.active {
+      max-height: 60px; padding: 8px 16px; opacity: 1;
+    }
+    .player-bar input[type="range"] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 4px; background: #242C28;
+      border-radius: 2px; outline: none; cursor: pointer;
+    }
+    .player-bar input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #E8A87C; cursor: pointer;
+      box-shadow: 0 0 10px rgba(232,168,124,0.4);
+    }
+
+    /* ─── PULSE RING ─── */
+    .pulse-ring {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1px solid rgba(232,168,124,0.5);
+      z-index: 3; pointer-events: none;
+    }
+    .playing .pulse-ring {
+      animation: pulseRing 2s ease-out infinite;
+    }
+    @keyframes pulseRing {
+      0% { width: 56px; height: 56px; opacity: 0.8; border-width: 2px; }
+      100% { width: 120px; height: 120px; opacity: 0; border-width: 0.5px; }
+    }
+
+    /* ─── BADGE ─── */
+    .podcast-badge {
+      background: rgba(232,168,124,0.15); color: #E8A87C;
+      font-size: 8px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 3px 8px;
+      position: absolute; top: 12px; left: 12px; z-index: 5;
+    }
+
+    /* ─── SECTION DIVIDER ─── */
+    .section-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, #E8A87C, transparent);
+      opacity: 0.2; margin: 2rem 0;
+    }
+
+    /* ─── FILM GRAIN FUERTE ─── */
+    .film-grain-heavy {
+      position: absolute; inset: 0; z-index: 4;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.52;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 175px 175px;
+      animation: filmGrainMove 0.1s steps(2) infinite;
+    }
+    @keyframes filmGrainMove {
+      0%   { background-position: 0 0; }
+      33%  { background-position: -60px 28px; }
+      66%  { background-position: 38px -50px; }
+      100% { background-position: -22px 58px; }
+    }
+    /* imagen más oscura y contrastada para que el grain resalte */
+    .podcast-card .card-img-wrap img {
+      filter: contrast(1.35) brightness(0.55) saturate(0.65) !important;
+    }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#E8A87C;width:0%;transition:width 0.15s ease-out;"></div>
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-podcast transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-podcast font-semibold">Podcast</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-podcast/15 text-natura-podcast px-2.5 py-1 hidden sm:inline">
+          <span class="iconify inline mr-1" data-icon="lucide:podcast" data-width="12"></span>
+          Audio · MP3
+        </span>
+        <a href="../index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0">
+    <img
+      src="../assets/microfono.png"
+      alt="Micrófono Podcast"
+      class="w-full h-full object-cover object-center"
+      style="filter: grayscale(30%) contrast(1.15) brightness(0.55);"
+    >
+    <!-- Gradiente: oscuro a la izquierda, se abre a la derecha -->
+    <div class="absolute inset-0 bg-gradient-to-r from-natura-black via-natura-black/85 to-natura-black/30"></div>
+    <!-- Gradiente vertical: cierra arriba y abajo -->
+    <div class="absolute inset-0 bg-gradient-to-b from-natura-black/60 via-transparent to-natura-black"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-36 pb-24 md:pt-44 md:pb-32 w-full">
+    <div class="max-w-2xl">
+
+      <div class="animate-fadeInUp opacity-0 flex items-center gap-3 mb-6">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-podcast">Podcast · 1° Año</span>
+      </div>
+
+      <h1 class="animate-fadeInUp opacity-0 delay-100 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.88] tracking-tight text-white mb-6">
+        Ciencias<br>Naturales<br><span class="text-natura-podcast">en Audio</span>
+      </h1>
+
+      <p class="animate-fadeInUp opacity-0 delay-200 text-sm md:text-lg text-natura-silver max-w-lg leading-relaxed mb-8">
+        Escuchá los temas de Química, Física y Biología donde quieras. Cada episodio explica un tema de la materia en formato podcast, ideal para repasar antes del examen o escuchar camino al cole.
+      </p>
+
+      <!-- Stats -->
+      <div class="animate-fadeInUp opacity-0 delay-300 flex flex-wrap gap-8 mb-8">
+        <div>
+          <div class="font-heading text-3xl md:text-4xl font-bold text-natura-podcast">14</div>
+          <div class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark mt-1">Episodios</div>
+        </div>
+        <div class="w-px bg-white/10 self-stretch"></div>
+        <div>
+          <div class="font-heading text-3xl md:text-4xl font-bold text-natura-podcast">3</div>
+          <div class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark mt-1">Materias</div>
+        </div>
+        <div class="w-px bg-white/10 self-stretch"></div>
+        <div>
+          <div class="font-heading text-3xl md:text-4xl font-bold text-natura-podcast">1°</div>
+          <div class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark mt-1">Año</div>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="animate-fadeInUp opacity-0 delay-400 flex flex-wrap gap-2">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-podcast/15 text-natura-podcast px-3 py-1.5">Química</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-podcast/15 text-natura-podcast px-3 py-1.5">Física</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-podcast/15 text-natura-podcast px-3 py-1.5">Biología</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-podcast/15 text-natura-podcast px-3 py-1.5">1° Año</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-podcast/15 text-natura-podcast px-3 py-1.5">Prof. Pereyra</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 animate-bounce">
+    <span class="text-[9px] uppercase tracking-[0.3em] text-natura-silverDark">Episodios</span>
+    <span class="iconify text-natura-podcast" data-icon="lucide:chevron-down" data-width="16"></span>
+  </div>
+</section>
+
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-podcast/30 to-transparent"></div>
+
+<!-- ═══════════════ PODCAST GRID ═══════════════ -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+
+  <!-- QUÍMICA -->
+  <div class="mb-12">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="iconify text-natura-podcast text-2xl" data-icon="lucide:flask-conical" data-width="24"></span>
+      <h2 class="font-heading text-lg md:text-xl font-bold uppercase tracking-wider text-white">Química</h2>
+      <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark bg-natura-gray px-2 py-0.5">3 episodios</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card: Materia y Propiedades -->
+      <div class="podcast-card group" data-audio="materia-propiedades">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-matter/600/400.jpg" alt="Materia y propiedades" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 1</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Materia y sus Propiedades
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            ¿De qué está hecho todo? Masa, volumen, estados de agregación y propiedades intensivas y extensivas.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 1–8 · Química</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/materia-propiedades.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Mezclas -->
+      <div class="podcast-card group" data-audio="mezclas">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-mixtures/600/400.jpg" alt="Mezclas" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 2</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Mezclas y Métodos de Separación
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Homogéneas y heterogéneas. Filtración, decantación, tamizado, imantación y destilación.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 9–12 · Química</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/mezclas.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Agua -->
+      <div class="podcast-card group" data-audio="agua">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-water/600/400.jpg" alt="El agua" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 3</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            El Agua como Recurso
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Propiedades del agua, ciclo hidrológico, potabilización y contaminación del agua.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 13–17 · Química</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/agua.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- FÍSICA -->
+  <div class="mb-12">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="iconify text-natura-podcast text-2xl" data-icon="lucide:zap" data-width="24"></span>
+      <h2 class="font-heading text-lg md:text-xl font-bold uppercase tracking-wider text-white">Física</h2>
+      <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark bg-natura-gray px-2 py-0.5">4 episodios</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card: Energía -->
+      <div class="podcast-card group" data-audio="energia">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-energy/600/400.jpg" alt="Energía" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 4</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            La Energía y sus Formas
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Tipos de energía, transformaciones y la ley de conservación. Energías renovables y no renovables.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 9–14 · Física</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/energia.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Calor y Sonido -->
+      <div class="podcast-card group" data-audio="calor-sonido">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-heat/600/400.jpg" alt="Calor y sonido" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 5</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Calor y Sonido
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Diferencia entre calor y temperatura. Propagación del calor y ondas sonoras. Luz y materiales.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 15–17 · Física</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/calor-sonido.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Movimientos -->
+      <div class="podcast-card group" data-audio="movimientos">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-motion/600/400.jpg" alt="Movimientos" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 6</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Movimientos y Trayectorias
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Posición, tiempo, velocidad y aceleración. Gráficos de movimiento MRU. Trayectoria y desplazamiento.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 18–20 · Física</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/movimientos.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Sistema Solar -->
+      <div class="podcast-card group" data-audio="sistema-solar">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-space/600/400.jpg" alt="Sistema Solar" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 7</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            El Sistema Solar
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Sol, planetas, movimientos de rotación y traslación. El sistema Tierra-Luna y el proyecto MAPI.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Proyecto MAPI · Física</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/sistema-solar.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- BIOLOGÍA -->
+  <div>
+    <div class="flex items-center gap-3 mb-6">
+      <span class="iconify text-natura-podcast text-2xl" data-icon="lucide:heart-pulse" data-width="24"></span>
+      <h2 class="font-heading text-lg md:text-xl font-bold uppercase tracking-wider text-white">Biología</h2>
+      <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark bg-natura-gray px-2 py-0.5">7 episodios</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card: Seres Vivos -->
+      <div class="podcast-card group" data-audio="seres-vivos">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-living/600/400.jpg" alt="Seres vivos" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 8</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Seres Vivos: Unidad y Diversidad
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Características de la vida. Funciones vitales: nutrición, relación y reproducción. Clasificación.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 21–23 · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/seres-vivos.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Plantas -->
+      <div class="podcast-card group" data-audio="plantas">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-plants/600/400.jpg" alt="Plantas" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 9</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Las Plantas como Sistemas Autótrofos
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Fotosíntesis, germinación y estructuras vegetales. Raíz, tallo, hojas, flores y frutos.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 24–26 · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/plantas.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Animales -->
+      <div class="podcast-card group" data-audio="animales">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-animals/600/400.jpg" alt="Animales" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 10</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Los Animales como Sistemas Heterótrofos
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Tipos de alimentación y adaptaciones. Animales del conurbano bonaerense. Vertebrados e invertebrados.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 27–28 · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/animales.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Digestión -->
+      <div class="podcast-card group" data-audio="digestion">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-digestion/600/400.jpg" alt="Digestión" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 11</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            La Digestión
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            El recorrido del alimento. Boca, estómago, intestinos, hígado y páncreas. Enzimas digestivas.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 29–34 · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/digestion.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Circulación -->
+      <div class="podcast-card group" data-audio="circulacion">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-heart/600/400.jpg" alt="Circulación" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 12</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            La Circulación
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Corazón, arterias, venas y sangre. Circulación pulmonar y sistémica. Cómo viajan O₂ y nutrientes.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 29–34 · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/circulacion.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Respiración -->
+      <div class="podcast-card group" data-audio="respiracion">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-lungs/600/400.jpg" alt="Respiración" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 13</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            La Respiración
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Desde las fosas nasales hasta los alvéolos. Intercambio gaseoso y mecánica respiratoria.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 29–34 · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/respiracion.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Alimentación -->
+      <div class="podcast-card group" data-audio="alimentacion">
+        <div class="card-img-wrap">
+          <img src="https://picsum.photos/seed/pod-food/600/400.jpg" alt="Alimentación saludable" loading="lazy">
+          <div class="grain-overlay"></div>
+          <div class="film-grain-heavy"></div>
+          <div class="pulse-ring"></div>
+          <div class="play-btn">
+            <span class="iconify" data-icon="lucide:play" data-width="24"></span>
+          </div>
+          <div class="eq-bars">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <span class="podcast-badge">Episodio 14</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading font-bold text-sm text-white group-hover:text-natura-podcast transition-colors mb-1">
+            Alimentación Saludable
+          </h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-1">
+            Nutrientes, vitaminas y minerales. El plato ideal. Alimentos ultraprocesados y ESI.
+          </p>
+          <span class="text-[9px] font-semibold tracking-wider text-natura-silverDark">Semanas 29–34 · ESI · Biología</span>
+        </div>
+        <div class="player-bar">
+          <audio preload="none">
+            <source src="audio/alimentacion.mp3" type="audio/mpeg">
+          </audio>
+          <div class="flex items-center gap-3">
+            <button class="play-toggle flex-shrink-0 w-8 h-8 rounded-full bg-natura-podcast/20 flex items-center justify-center hover:bg-natura-podcast/30 transition-colors">
+              <span class="iconify text-natura-podcast" data-icon="lucide:play" data-width="16"></span>
+            </button>
+            <input type="range" class="flex-1 seek-bar" value="0" min="0" max="100">
+            <span class="text-[11px] text-natura-silverDark time-display w-10 text-right">0:00</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="mt-14 p-6 bg-natura-gray/50 border border-natura-podcast/20 max-w-3xl">
+    <div class="flex items-start gap-3">
+      <span class="iconify text-natura-podcast mt-0.5 flex-shrink-0" data-icon="lucide:info" data-width="18"></span>
+      <div>
+        <span class="text-[11px] font-bold uppercase tracking-wider text-natura-podcast">Para cargar tus audios</span>
+        <p class="text-xs text-natura-silver leading-relaxed mt-1">
+          Colocá los archivos <strong class="text-white">.mp3</strong> en la carpeta <code class="text-natura-podcast bg-natura-mid px-1 py-0.5">podcast/audio/</code> con los nombres indicados en cada tarjeta (ej: <code class="text-natura-podcast bg-natura-mid px-1 py-0.5">materia-propiedades.mp3</code>). Los controles de reproducción se activan automáticamente cuando el archivo está presente.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-podcast flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:podcast" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-podcast transition-colors">Inicio</a>
+        <a href="../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-podcast transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ AUDIO PLAYER SCRIPT ═══════════════ -->
+<script>
+  (function() {
+    const cards = document.querySelectorAll('.podcast-card');
+    let currentlyPlaying = null;
+
+    cards.forEach(function(card) {
+      const audio = card.querySelector('audio');
+      const playBtn = card.querySelector('.play-btn');
+      const playIcon = playBtn.querySelector('.iconify');
+      const playToggle = card.querySelector('.play-toggle');
+      const toggleIcon = playToggle.querySelector('.iconify');
+      const seekBar = card.querySelector('.seek-bar');
+      const timeDisplay = card.querySelector('.time-display');
+      const playerBar = card.querySelector('.player-bar');
+
+      function formatTime(seconds) {
+        var m = Math.floor(seconds / 60);
+        var s = Math.floor(seconds % 60);
+        return m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      function togglePlay(e) {
+        e.stopPropagation();
+        if (!audio.src || audio.src === window.location.href) return;
+
+        if (card.classList.contains('playing')) {
+          audio.pause();
+          card.classList.remove('playing');
+          playIcon.setAttribute('data-icon', 'lucide:play');
+          toggleIcon.setAttribute('data-icon', 'lucide:play');
+          currentlyPlaying = null;
+        } else {
+          if (currentlyPlaying && currentlyPlaying !== card) {
+            var prevAudio = currentlyPlaying.querySelector('audio');
+            prevAudio.pause();
+            currentlyPlaying.classList.remove('playing');
+            var prevIcon = currentlyPlaying.querySelector('.play-btn .iconify');
+            prevIcon.setAttribute('data-icon', 'lucide:play');
+            var prevToggle = currentlyPlaying.querySelector('.play-toggle .iconify');
+            prevToggle.setAttribute('data-icon', 'lucide:play');
+          }
+          audio.play().catch(function() {});
+          card.classList.add('playing');
+          playIcon.setAttribute('data-icon', 'lucide:pause');
+          toggleIcon.setAttribute('data-icon', 'lucide:pause');
+          currentlyPlaying = card;
+          if (!playerBar.classList.contains('active')) {
+            playerBar.classList.add('active');
+          }
+        }
+      }
+
+      function updateSeek() {
+        if (!audio.duration) return;
+        var pct = (audio.currentTime / audio.duration) * 100;
+        seekBar.value = pct;
+        timeDisplay.textContent = formatTime(audio.currentTime);
+      }
+
+      function seekAudio(e) {
+        if (!audio.duration) return;
+        audio.currentTime = (seekBar.value / 100) * audio.duration;
+      }
+
+      function onEnded() {
+        card.classList.remove('playing');
+        playIcon.setAttribute('data-icon', 'lucide:play');
+        toggleIcon.setAttribute('data-icon', 'lucide:play');
+        seekBar.value = 0;
+        timeDisplay.textContent = '0:00';
+        currentlyPlaying = null;
+      }
+
+      playBtn.addEventListener('click', togglePlay);
+      playToggle.addEventListener('click', togglePlay);
+      seekBar.addEventListener('input', seekAudio);
+      audio.addEventListener('timeupdate', updateSeek);
+      audio.addEventListener('ended', onEnded);
+      audio.addEventListener('loadedmetadata', function() {
+        timeDisplay.textContent = formatTime(audio.duration || 0);
+      });
+      audio.addEventListener('error', function() {
+        playerBar.style.opacity = '1';
+        playerBar.style.maxHeight = '40px';
+        playerBar.style.padding = '8px 16px';
+        playerBar.innerHTML = '<span class="text-[11px] text-natura-silverDark">Archivo de audio no encontrado. Colocá el MP3 en podcast/audio/</span>';
+      });
+      audio.load();
+    });
+  })();
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../unidades/quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../unidades/quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../unidades/quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../unidades/quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../unidades/quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../unidades/quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../unidades/fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../unidades/fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../unidades/fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../unidades/fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../unidades/fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../unidades/fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Seres vivos",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../unidades/biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../unidades/biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../unidades/biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../unidades/biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#F97316"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

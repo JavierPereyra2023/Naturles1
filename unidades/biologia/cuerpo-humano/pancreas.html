@@ -1,0 +1,506 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Páncreas — Un Órgano con Doble Función | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+    /* ─── REVISTA: DROP CAP ─── */
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #DC2626;
+    }
+    /* ─── REVISTA: PULL QUOTE ─── */
+    .pull-quote {
+      border-left: 4px solid #DC2626; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(220,38,38,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #DC2626;
+    }
+    /* ─── REVISTA: SIDEBAR NOTE ─── */
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    /* ─── REVISTA: ORNAMENTAL DIVIDER ─── */
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(220,38,38,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Cuerpo Humano</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">El Páncreas</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · ESI</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/pancreas-bio/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · El Cuerpo Humano</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        El <span class="text-natura-bio">Páncreas</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">Un órgano único que cumple dos funciones muy diferentes: ayuda a digerir los alimentos y produce las hormonas que regulan el azúcar en sangre.</p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Insulina</span>
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Glucagón</span>
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Jugo Pancreático</span>
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Enzimas</span>
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Diabetes</span>
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Glucosa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-4xl mx-auto space-y-14">
+
+    <!-- Section 01 -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">¿Qué es el páncreas?</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="sidebar-note">
+        <span class="note-label">Dato único</span>
+        <p>El páncreas es el <strong class="text-white">único órgano</strong> con doble función: digestiva (exocrina) y hormonal (endocrina). Mide ~15 cm y está detrás del estómago.</p>
+      </div>
+      <div class="highlight-box p-4 md:p-5 flex items-start gap-4 drop-cap pull-quote">
+        <span class="iconify text-natura-bio mt-0.5 flex-shrink-0" data-icon="lucide:pill" data-width="22"></span>
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed italic">El páncreas es una glándula alargada de ~15 cm ubicada detrás del estómago. Es el único órgano del cuerpo que tiene una doble función: <span class="text-natura-bio font-semibold">digestiva (exocrina)</span> y <span class="text-natura-bio font-semibold">hormonal (endocrina)</span>.</p>
+      </div>
+    </section>
+
+    <div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+    <!-- Section 02 -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Las dos funciones del páncreas</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card bg-natura-dark/30 p-4 rounded-lg drop-cap mb-5">
+        <p class="text-lg text-natura-silver leading-relaxed">El páncreas combina dos funciones en un solo órgano: produce enzimas digestivas que van al intestino y hormonas que regulan el azúcar en sangre.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="content-card bg-natura-dark/30 p-5 rounded-lg pull-quote">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 bg-natura-bio/15 flex items-center justify-center rounded-lg flex-shrink-0">
+              <span class="iconify text-natura-bio" data-icon="lucide:beaker" data-width="20"></span>
+            </div>
+            <p class="font-heading text-base font-bold text-white">Función Exocrina <span class="text-natura-silverDark font-normal text-xs">(digestiva)</span></p>
+          </div>
+          <p class="text-lg text-natura-silver leading-relaxed mb-3 italic">Produce el jugo pancreático, rico en enzimas digestivas que se vuelcan al intestino delgado. Estas enzimas digieren proteínas, grasas y carbohidratos.</p>
+          <div class="space-y-2 mt-3 pt-3 border-t border-white/5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-natura-bio rounded-full flex-shrink-0"></span>
+              <span class="text-xs text-natura-silver"><span class="text-natura-silverLight font-semibold">Amilasa</span> — digiere carbohidratos</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-natura-bio rounded-full flex-shrink-0"></span>
+              <span class="text-xs text-natura-silver"><span class="text-natura-silverLight font-semibold">Lipasa</span> — digiere grasas</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-natura-bio rounded-full flex-shrink-0"></span>
+              <span class="text-xs text-natura-silver"><span class="text-natura-silverLight font-semibold">Proteasas</span> — digieren proteínas</span>
+            </div>
+          </div>
+        </div>
+        <div class="content-card bg-natura-dark/30 p-5 rounded-lg">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 bg-natura-energy/15 flex items-center justify-center rounded-lg flex-shrink-0">
+              <span class="iconify text-natura-energy" data-icon="lucide:zap" data-width="20"></span>
+            </div>
+            <p class="font-heading text-base font-bold text-white">Función Endocrina <span class="text-natura-silverDark font-normal text-xs">(hormonal)</span></p>
+          </div>
+          <p class="text-lg text-natura-silver leading-relaxed mb-3">Los <span class="text-natura-energy font-semibold">islotes de Langerhans</span> (grupos de células especiales) producen hormonas que van directo a la sangre.</p>
+          <div class="space-y-2 mt-3 pt-3 border-t border-white/5">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-natura-energy rounded-full flex-shrink-0"></span>
+              <span class="text-xs text-natura-silver"><span class="text-natura-silverLight font-semibold">Insulina</span> — baja el nivel de glucosa en sangre (permite que la glucosa entre a las células)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-natura-energy rounded-full flex-shrink-0"></span>
+              <span class="text-xs text-natura-silver"><span class="text-natura-silverLight font-semibold">Glucagón</span> — sube el nivel de glucosa en sangre (libera glucosa almacenada en el hígado)</span>
+            </div>
+          </div>
+          <p class="text-lg text-natura-silverDark mt-3">Juntas mantienen la glucosa en niveles normales (~70-110 mg/dL en ayunas)</p>
+        </div>
+      </div>
+      <div class="sidebar-note">
+        <span class="note-label">Dato hormonal</span>
+        <p>La <strong class="text-white">insulina</strong> y el <strong class="text-white">glucagón</strong> trabajan como un termostato: una baja y la otra sube la glucosa para mantenerla entre 70-110 mg/dL.</p>
+      </div>
+    </section>
+
+    <div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+    <!-- Section 03 -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Insulina y glucagón: el equilibrio</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card bg-natura-dark/30 p-5 rounded-lg mb-5 drop-cap pull-quote">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="iconify text-natura-bio" data-icon="lucide:scale" data-width="24"></span>
+          <p class="text-lg text-natura-silver leading-relaxed italic">Imaginá una balanza: la <span class="text-natura-energy font-semibold">insulina baja</span> la glucosa, el <span class="text-natura-energy font-semibold">glucagón la sube</span>. Entre las dos mantienen el equilibrio.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-3 rounded-lg bg-natura-bio/5 border border-natura-bio/10">
+            <p class="text-xs uppercase tracking-wider text-natura-silverDark font-semibold mb-2">Después de comer (glucosa alta)</p>
+            <div class="flex items-center gap-2 text-base text-natura-silver">
+              <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+              <span>Páncreas libera <span class="text-natura-bio font-semibold">insulina</span></span>
+            </div>
+            <div class="flex items-center gap-2 text-base text-natura-silver mt-1">
+              <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+              <span>Glucosa entra a las células</span>
+            </div>
+            <div class="flex items-center gap-2 text-base text-natura-silver mt-1">
+              <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+              <span>Glucosa en sangre <span class="text-natura-leaf font-semibold">baja</span></span>
+            </div>
+          </div>
+          <div class="p-3 rounded-lg bg-natura-energy/5 border border-natura-energy/10">
+            <p class="text-xs uppercase tracking-wider text-natura-silverDark font-semibold mb-2">En ayunas (glucosa baja)</p>
+            <div class="flex items-center gap-2 text-base text-natura-silver">
+              <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+              <span>Páncreas libera <span class="text-natura-energy font-semibold">glucagón</span></span>
+            </div>
+            <div class="flex items-center gap-2 text-base text-natura-silver mt-1">
+              <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+              <span>Hígado libera glucosa almacenada</span>
+            </div>
+            <div class="flex items-center gap-2 text-base text-natura-silver mt-1">
+              <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+              <span>Glucosa en sangre <span class="text-natura-energy font-semibold">sube</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+    <!-- Section 04 -->
+    <section class="animate-fadeInUp delay-300">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">¿Qué es la diabetes?</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="highlight-box-warn p-4 md:p-5 mb-5 drop-cap pull-quote">
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed italic">La diabetes es una enfermedad donde el cuerpo no produce suficiente insulina (<span class="text-natura-energy font-semibold">Tipo 1</span>) o no la usa correctamente (<span class="text-natura-energy font-semibold">Tipo 2</span>).</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        <div class="content-card bg-natura-dark/30 p-4 rounded-lg">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-water" data-icon="lucide:shield-off" data-width="20"></span>
+            <p class="text-sm font-semibold text-white">Diabetes Tipo 1</p>
+          </div>
+          <p class="text-lg text-natura-silver leading-relaxed">El sistema inmune ataca las células que producen insulina. Generalmente aparece en niños y jóvenes. Requiere inyecciones de insulina.</p>
+        </div>
+        <div class="content-card bg-natura-dark/30 p-4 rounded-lg">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-energy" data-icon="lucide:shield-alert" data-width="20"></span>
+            <p class="text-sm font-semibold text-white">Diabetes Tipo 2</p>
+          </div>
+          <p class="text-lg text-natura-silver leading-relaxed">Las células no responden bien a la insulina. Está relacionada con la alimentación y el sedentarismo. Es la más común (90% de los casos).</p>
+        </div>
+      </div>
+      <div class="content-card bg-natura-dark/30 p-4 rounded-lg">
+          <p class="text-xs uppercase tracking-wider text-natura-energy font-semibold mb-2 flex items-center gap-2">
+          <span class="iconify" data-icon="lucide:alert-triangle" data-width="14"></span>
+          Señales de advertencia
+        </p>
+        <div class="flex flex-wrap gap-3 text-xs text-natura-silver">
+          <span class="bg-natura-energy/10 text-natura-energy px-2.5 py-1 border border-natura-energy/20">Mucha sed</span>
+          <span class="bg-natura-energy/10 text-natura-energy px-2.5 py-1 border border-natura-energy/20">Mucha orina</span>
+          <span class="bg-natura-energy/10 text-natura-energy px-2.5 py-1 border border-natura-energy/20">Cansancio</span>
+          <span class="bg-natura-energy/10 text-natura-energy px-2.5 py-1 border border-natura-energy/20">Pérdida de peso sin causa aparente</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+    <!-- Section 05 -->
+    <section class="animate-fadeInUp delay-400">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Cuidados para un páncreas sano</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card bg-natura-dark/30 p-5 rounded-lg drop-cap">
+        <div class="sidebar-note">
+          <span class="note-label">Prevención</span>
+          <p>Mantener una <strong class="text-white">alimentación equilibrada</strong> y hacer <strong class="text-white">actividad física regular</strong> son las claves para prevenir la diabetes tipo 2.</p>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="iconify text-natura-leaf flex-shrink-0" data-icon="lucide:apple" data-width="20"></span>
+            <span class="text-base text-natura-silver">Mantener una alimentación equilibrada (no abusar de azúcares)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:bike" data-width="20"></span>
+            <span class="text-base text-natura-silver">Hacer actividad física regular</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="iconify text-natura-green flex-shrink-0" data-icon="lucide:user-check" data-width="20"></span>
+            <span class="text-base text-natura-silver">Mantener un peso saludable</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:ban" data-width="20"></span>
+            <span class="text-base text-natura-silver">Evitar el alcohol y el tabaco</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="iconify text-natura-water flex-shrink-0" data-icon="lucide:stethoscope" data-width="20"></span>
+            <span class="text-base text-natura-silver">Controlar la glucemia si hay antecedentes familiares de diabetes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+    <!-- Section 06 -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Dato curioso</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="stat-box bg-natura-dark/40 p-5 rounded-lg drop-cap">
+        <div class="sidebar-note">
+          <span class="note-label">Dato impactante</span>
+          <p>Si se obstruye el conducto pancreático, las enzimas pueden digerir el propio páncreas causando <strong class="text-natura-energy">pancreatitis</strong>.</p>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="iconify text-natura-bio flex-shrink-0 mt-1" data-icon="lucide:lightbulb" data-width="24"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">El páncreas produce <span class="text-natura-bio font-semibold">~1.5 litros de jugo pancreático por día</span>. Si se obstruye el conducto que lo lleva al intestino, las enzimas pueden empezar a digerir el propio páncreas (<span class="text-natura-energy font-semibold">pancreatitis</span>).</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="magazine-divider">
+  <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+</div>
+
+    <!-- Section 07 -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Preguntas para pensar</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="space-y-3 drop-cap">
+        <div class="content-card bg-natura-dark/30 p-4 rounded-lg flex items-start gap-3 pull-quote">
+          <span class="iconify text-natura-bio mt-0.5 flex-shrink-0" data-icon="lucide:brain" data-width="18"></span>
+          <p class="text-lg text-natura-silver leading-relaxed italic">¿Por qué una persona con diabetes no puede comer grandes cantidades de azúcar?</p>
+        </div>
+        <div class="content-card bg-natura-dark/30 p-4 rounded-lg flex items-start gap-3">
+          <span class="iconify text-natura-bio mt-0.5 flex-shrink-0" data-icon="lucide:brain" data-width="18"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">¿Qué pasaría si el páncreas produjera demasiada insulina?</p>
+        </div>
+        <div class="content-card bg-natura-dark/30 p-4 rounded-lg flex items-start gap-3">
+          <span class="iconify text-natura-bio mt-0.5 flex-shrink-0" data-icon="lucide:brain" data-width="18"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">¿Por qué el páncreas necesita cumplir dos funciones tan diferentes?</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <a href="rinones.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Los Riñones</span>
+      </a>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span>Todos</span>
+      </a>
+      <a href="urinario.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Aparato Urinario</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+</body></html>

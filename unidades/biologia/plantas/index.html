@@ -1,0 +1,209 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantas | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); }
+  </style>
+</head>
+<body>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Plantas</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Semanas 24–26</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Plantas</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-16 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 30%, rgba(220,38,38,0.06) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-natura-bio">Biología · Unidad 4</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold text-white leading-tight mb-6">Las Plantas como<br>Sistemas Autótrofos</h1>
+      <p class="font-body text-lg md:text-xl text-natura-silver leading-relaxed max-w-2xl">
+        Cómo las plantas transforman la energía del sol en alimento. Fotosíntesis, estructuras vegetales y el milagro de la germinación.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="pb-16">
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/20 to-transparent"></div>
+  <div class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1: Fotosíntesis -->
+      <a href="fotosintesis.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline animate-fadeInUp delay-100">
+        <div class="relative h-44 overflow-hidden">
+          <img src="https://picsum.photos/seed/photosynthesis-card/600/400.jpg" alt="Fotosíntesis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Tema 1</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Fotosíntesis</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">La ecuación de la fotosíntesis. Autótrofos vs heterótrofos. Clorofila y respiración celular.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Fotosíntesis</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Autótrofos</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Clorofila</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[10px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Estructuras Vegetales -->
+      <a href="estructuras.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline animate-fadeInUp delay-200">
+        <div class="relative h-44 overflow-hidden">
+          <img src="https://picsum.photos/seed/plant-structures-card/600/400.jpg" alt="Estructuras Vegetales" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Tema 2</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Estructuras Vegetales</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Raíz, tallo, hojas y flores. Cómo está construida una planta y la función de cada una de sus partes.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Raíz</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Tallo</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Hojas</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Flores</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[10px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Germinación -->
+      <a href="germinacion.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline animate-fadeInUp" style="animation-delay: 300ms;">
+        <div class="relative h-44 overflow-hidden">
+          <img src="https://picsum.photos/seed/germination-card/600/400.jpg" alt="Germinación" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Tema 3</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Germinación</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Del embrión a la planta. Condiciones para germinar, el experimento del poroto y el ciclo de vida.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Semilla</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Germinación</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Ciclo de Vida</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[10px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body></html>

@@ -1,0 +1,365 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educación Ambiental Integral | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A',
+              dark: '#0E1410',
+              gray: '#161C18',
+              mid: '#242C28',
+              silver: '#A8B5AD',
+              silverLight: '#C8D4CC',
+              silverDark: '#5A6B60',
+              green: '#0D9488',
+              greenLight: '#14B8A6',
+              greenDark: '#0F766E',
+              leaf: '#22C55E',
+              water: '#38BDF8',
+              energy: '#3B82F6',
+              bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #0D9488; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .accent-line {
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, #22C55E, #0D9488);
+    }
+    .content-card {
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+    }
+    .content-card:hover {
+      border-color: rgba(13, 148, 136, 0.25);
+    }
+    .highlight-box {
+      border-left: 3px solid #0D9488;
+      background: rgba(13, 148, 136, 0.05);
+    }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-greenLight transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-leaf font-semibold">EAI</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-2.5 py-1 hidden sm:inline">Ley N° 27.621</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="pt-24 pb-12">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
+    <div class="mb-2">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-widest text-natura-leaf bg-natura-leaf/10 px-3 py-1">Ley N° 27.621</span>
+    </div>
+    <h1 class="font-heading text-3xl md:text-5xl font-extrabold text-white mb-4">Educación Ambiental Integral</h1>
+    <p class="text-natura-silver text-base md:text-base max-w-2xl mb-5 leading-relaxed">
+      Comprendemos las problemáticas ambientales de nuestro entorno local —la cuenca del Reconquista— y desarrollamos actitudes de responsabilidad ambiental y ciudadanía activa.
+    </p>
+    <div class="flex flex-wrap gap-2">
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-leaf bg-natura-leaf/10 px-3 py-1.5">Reconquista</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-leaf bg-natura-leaf/10 px-3 py-1.5">Contaminación</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-leaf bg-natura-leaf/10 px-3 py-1.5">Biodiversidad</span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-leaf bg-natura-leaf/10 px-3 py-1.5">Cambio Climático</span>
+    </div>
+  </div>
+</section>
+
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-leaf/20 to-transparent"></div>
+
+<main class="max-w-5xl mx-auto px-4 md:px-6 space-y-12 pb-16">
+
+  <!-- Problemáticas -->
+  <section class="animate-fadeInUp">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-8 h-8 bg-natura-leaf/15 flex items-center justify-center rounded-lg">
+        <span class="iconify text-natura-leaf" data-icon="lucide:alert-triangle" data-width="18"></span>
+      </div>
+      <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Problemáticas</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="relative overflow-hidden rounded-lg">
+        <img src="https://picsum.photos/seed/environment-river/600/400.jpg" alt="Ambiente y río" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-natura-black via-natura-black/40 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-4">
+          <p class="text-natura-leaf font-heading text-xs font-semibold uppercase tracking-wider">Cuenca del Reconquista</p>
+          <p class="text-natura-silverLight text-xs">Caso de estudio local</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="highlight-box p-4">
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Contaminación del agua y el suelo</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Vertidos industriales, residuos domiciliarios y su impacto en los ecosistemas acuáticos y terrestres.</p>
+        </div>
+        <div class="highlight-box p-4">
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Pérdida de biodiversidad</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Degradación de hábitats naturales, especies amenazadas y desequilibrio ecológico en la región.</p>
+        </div>
+        <div class="highlight-box p-4">
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Cambio climático</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Eventos extremos, aumento de temperatura e inundaciones en la provincia de Buenos Aires.</p>
+        </div>
+        <div class="highlight-box p-4">
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">El ambiente del conurbano</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Malvinas Argentinas y la cuenca del río Reconquista como caso de estudio local para comprender las problemáticas de nuestro entorno.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objetivos -->
+  <section class="animate-fadeInUp delay-100">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-8 h-8 bg-natura-leaf/15 flex items-center justify-center rounded-lg">
+        <span class="iconify text-natura-leaf" data-icon="lucide:target" data-width="18"></span>
+      </div>
+      <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Objetivos</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="content-card bg-natura-dark p-5 flex items-start gap-3">
+        <span class="iconify text-natura-leaf mt-0.5 shrink-0" data-icon="lucide:check-circle-2" data-width="20"></span>
+        <p class="text-natura-silver text-lg leading-relaxed">Reconocer problemáticas ambientales del entorno local</p>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-start gap-3">
+        <span class="iconify text-natura-leaf mt-0.5 shrink-0" data-icon="lucide:check-circle-2" data-width="20"></span>
+        <p class="text-natura-silver text-lg leading-relaxed">Comprender la relación entre actividades humanas, ciencia, tecnología y el ambiente</p>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-start gap-3">
+        <span class="iconify text-natura-leaf mt-0.5 shrink-0" data-icon="lucide:check-circle-2" data-width="20"></span>
+        <p class="text-natura-silver text-lg leading-relaxed">Desarrollar actitudes de responsabilidad ambiental y ciudadanía activa</p>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-start gap-3">
+        <span class="iconify text-natura-leaf mt-0.5 shrink-0" data-icon="lucide:check-circle-2" data-width="20"></span>
+        <p class="text-natura-silver text-lg leading-relaxed">Proponer acciones individuales y colectivas para la mejora del ambiente</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Actividades y Proyectos -->
+  <section class="animate-fadeInUp delay-200">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-8 h-8 bg-natura-leaf/15 flex items-center justify-center rounded-lg">
+        <span class="iconify text-natura-leaf" data-icon="lucide:flask-conical" data-width="18"></span>
+      </div>
+      <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Actividades y Proyectos</h2>
+    </div>
+    <div class="space-y-4">
+      <div class="content-card bg-natura-dark p-5 flex items-center gap-4">
+        <span class="text-natura-leaf font-heading font-bold text-lg shrink-0">01</span>
+        <div>
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Registro de problemáticas ambientales</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Identificación y relevamiento de problemáticas cercanas al entorno escolar.</p>
+        </div>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-center gap-4">
+        <span class="text-natura-leaf font-heading font-bold text-lg shrink-0">02</span>
+        <div>
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Análisis de caso: Río Reconquista</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Lectura de artículos periodísticos sobre la contaminación del río Reconquista y debate grupal.</p>
+        </div>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-center gap-4">
+        <span class="text-natura-leaf font-heading font-bold text-lg shrink-0">03</span>
+        <div>
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Trabajo experimental: Potabilización del agua</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Diseño y construcción de un filtro casero para comprender los procesos de purificación del agua.</p>
+        </div>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-center gap-4">
+        <span class="text-natura-leaf font-heading font-bold text-lg shrink-0">04</span>
+        <div>
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Campaña ambiental para la escuela</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">Proyecto grupal: afiche informativo o video corto de concientización ambiental.</p>
+        </div>
+      </div>
+      <div class="content-card bg-natura-dark p-5 flex items-center gap-4">
+        <span class="text-natura-leaf font-heading font-bold text-lg shrink-0">05</span>
+        <div>
+          <h3 class="font-heading text-sm font-semibold text-white mb-1">Investigación: Cambio climático y sistemas biológicos</h3>
+          <p class="text-natura-silverDark text-base leading-relaxed">¿Cómo afecta el cambio climático a los sistemas biológicos de nuestra región?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recursos -->
+  <section class="animate-fadeInUp">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-8 h-8 bg-natura-leaf/15 flex items-center justify-center rounded-lg">
+        <span class="iconify text-natura-leaf" data-icon="lucide:folder-open" data-width="18"></span>
+      </div>
+      <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Recursos</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="content-card bg-natura-dark p-4 flex items-center gap-3">
+        <span class="iconify text-natura-leaf/60 shrink-0" data-icon="lucide:globe" data-width="20"></span>
+        <span class="text-natura-silver text-xs">Artículos web, videos documentales (Greenpeace Argentina, Ministerio de Ambiente)</span>
+      </div>
+      <div class="content-card bg-natura-dark p-4 flex items-center gap-3">
+        <span class="iconify text-natura-leaf/60 shrink-0" data-icon="lucide:sprout" data-width="20"></span>
+        <span class="text-natura-silver text-xs">Materiales de Ecoescuelas</span>
+      </div>
+      <div class="content-card bg-natura-dark p-4 flex items-center gap-3">
+        <span class="iconify text-natura-leaf/60 shrink-0" data-icon="lucide:monitor" data-width="20"></span>
+        <span class="text-natura-silver text-xs">Google Classroom</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-green flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:leaf" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-green transition-colors">Inicio</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"./unidades/quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"./unidades/quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"./unidades/quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"./unidades/quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"./unidades/quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"./unidades/quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"./unidades/fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"./unidades/fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"./unidades/fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"./unidades/fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"./unidades/fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"./unidades/fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"./unidades/fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"./unidades/fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"./unidades/fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Seres vivos",u:"Biología",s:"Seres Vivos",l:"./unidades/biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"./unidades/biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"./unidades/biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"./unidades/biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"./unidades/biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"./unidades/biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"./unidades/biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"./unidades/biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"./unidades/biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"./unidades/biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"./revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"./podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"./esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"./eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Mezclas | Química 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #22C55E; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #22C55E; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #22C55E; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #22C55E; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(34,197,94,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(34,197,94,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(34,197,94,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #22C55E;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-quimica { width: 60px; height: 2px; background: linear-gradient(90deg, #22C55E, transparent); }
+    .sabias-que { border-left:3px solid #22C55E; background:rgba(34,197,94,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#22C55E; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Mezclas</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-leaf font-semibold">Tipos de Mezclas</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Mezclas</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/mixture-types-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-quimica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-leaf" style="font-family: 'Inter', sans-serif;">Química · Mezclas</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Tipos de <span class="text-natura-leaf">Mezclas</span></h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">Homogéneas y heterogéneas: dos formas en que la materia se combina sin reaccionar químicamente.</p>
+    <div class="flex flex-wrap gap-3 mt-5">
+      <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-3 py-1">Homogéneas</span>
+      <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-3 py-1">Heterogéneas</span>
+      <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-3 py-1">Soluciones</span>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-3xl mx-auto px-4 md:px-6 py-8 space-y-10">
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:flask-conical" data-width="22"></span>
+      ¿Qué son las mezclas?
+    </h2>
+    <p class="article-dropcap text-natura-silver leading-relaxed mb-4">
+      En la naturaleza, casi nada es una sustancia pura. La mayoría de lo que nos rodea son <strong class="text-white">mezclas</strong>. Cada componente conserva sus propiedades. A diferencia de las sustancias compuestas, las mezclas se pueden separar por métodos físicos.
+    </p>
+    <div class="pull-quote">
+      &laquo;Una mezcla es la combinación física de dos o más sustancias. Cada componente conserva sus propiedades y puede separarse por métodos físicos.&raquo;
+    </div>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Cuando mezclamos azúcar con agua, el azúcar sigue siendo azúcar (sigue teniendo sabor dulce) y el agua sigue siendo agua. No se ha formado ninguna sustancia nueva. Si evaporamos el agua, recuperamos el azúcar. Esto es lo que diferencia una <strong class="text-natura-leaf">mezcla</strong> de una <strong class="text-natura-leaf">combinación química</strong>: en esta última sí se producen nuevas sustancias con propiedades diferentes.
+    </p>
+    <div class="figure-placeholder">
+      <span class="iconify text-3xl mb-2" data-icon="lucide:flask-conical" data-width="36"></span>
+      <p>Ilustración: Mezcla de dos sustancias — cada una conserva sus propiedades.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:droplets" data-width="22"></span>
+      Mezclas homogéneas
+    </h2>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      También llamadas <strong class="text-white">soluciones</strong>. No se distinguen sus componentes a simple vista. Tienen una apariencia uniforme en toda su extensión: cualquier porción que tomemos tendrá la misma composición.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-white mb-2">Soluto y solvente</h4>
+        <p class="text-natura-silver text-base leading-relaxed mb-2">En una solución distinguimos dos componentes:</p>
+        <ul class="space-y-1.5 text-natura-silver text-base list-none">
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:check-circle" data-width="14"></span>
+            <span><strong class="text-white">Solvente</strong> (o disolvente): el componente que está en mayor proporción. Ej: el agua.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:check-circle" data-width="14"></span>
+            <span><strong class="text-white">Soluto</strong>: el componente que está en menor proporción y se disuelve. Ej: la sal.</span>
+          </li>
+        </ul>
+        <div class="mt-3 text-xs text-natura-silverDark font-ui">
+          $$\text{Soluto} + \text{Solvente} \rightarrow \text{Solución}$$
+        </div>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-white mb-2">Ejemplos cotidianos</h4>
+        <ul class="space-y-2 text-natura-silver text-base list-none">
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:wine" data-width="14"></span>
+            <span><strong class="text-white">Agua con sal</strong>: el agua (solvente) disuelve la sal (soluto).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:wind" data-width="14"></span>
+            <span><strong class="text-white">Aire</strong>: mezcla homogénea de N2, O2, CO2 y otros gases.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:hard-hat" data-width="14"></span>
+            <span><strong class="text-white">Acero</strong>: solución sólida de carbono en hierro.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:medal" data-width="14"></span>
+            <span><strong class="text-white">Bronce</strong>: solución sólida de estaño en cobre.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:layout-dashboard" data-width="22"></span>
+      Mezclas heterogéneas
+    </h2>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Se distinguen sus componentes a simple vista o con lupa. La composición no es uniforme: si tomamos muestras de distintas partes de la mezcla, su composición puede variar.
+    </p>
+    <div class="sidebar-note">
+      <span class="note-label">Dato curioso</span>
+      La leche es un coloide. Las partículas de grasa están dispersas en agua. Si la dejás reposar, la crema sube. Es una mezcla heterogénea aunque a simple vista parezca uniforme.
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-white mb-2">Ejemplos</h4>
+        <ul class="space-y-2 text-natura-silver text-base list-none">
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:circle-dot" data-width="14"></span>
+            <span><strong class="text-white">Arena y agua</strong>: la arena se deposita en el fondo.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:circle-dot" data-width="14"></span>
+            <span><strong class="text-white">Ensalada</strong>: podemos distinguir cada ingrediente.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:circle-dot" data-width="14"></span>
+            <span><strong class="text-white">Granito</strong>: mezcla sólida de cuarzo, feldespato y mica.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:circle-dot" data-width="14"></span>
+            <span><strong class="text-white">Agua y aceite</strong>: dos líquidos que no se mezclan.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-4 border border-white/5">
+        <h4 class="font-heading font-semibold text-white mb-2">Suspensiones y coloides</h4>
+        <p class="text-natura-silver text-base leading-relaxed mb-2">Dentro de las mezclas heterogéneas encontramos dos tipos importantes:</p>
+        <ul class="space-y-2 text-natura-silver text-base list-none">
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:minus-circle" data-width="14"></span>
+            <span><strong class="text-white">Suspensiones</strong>: partículas sólidas visibles dispersas en un líquido que sedimentan con el tiempo. Ej: agua barrosa.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:minus-circle" data-width="14"></span>
+            <span><strong class="text-white">Coloides</strong>: partículas muy pequeñas dispersas que no sedimentan. Ej: leche, gelatina, humo.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:flashlight" data-width="22"></span>
+      Efecto Tyndall
+    </h2>
+    <p class="text-natura-silver leading-relaxed mb-4">
+      Un haz de luz que atraviesa un <strong class="text-natura-leaf">coloide</strong> o una <strong class="text-natura-leaf">suspensión</strong> se hace visible porque las partículas dispersan la luz. En una <strong class="text-white">solución verdadera</strong>, el haz de luz no se ve porque las partículas de soluto son demasiado pequeñas para dispersar la luz. Este fenómeno permite distinguir soluciones de coloides.
+    </p>
+    <div class="figure-placeholder">
+      <span class="iconify text-3xl mb-2" data-icon="lucide:flashlight" data-width="36"></span>
+      <p>Ilustración: Efecto Tyndall — Dispersión de luz en coloides</p>
+      <p class="text-[11px]">El humo es un coloide: partículas sólidas dispersas en un gas.</p>
+    </div>
+  </section>
+
+  <div class="sabias-que">
+    <span class="sq-label">Sabías que...</span>
+    <p>El aire que respiramos es una mezcla homogénea de gases: aproximadamente 78% nitrógeno, 21% oxígeno y 1% de otros gases como argón y dióxido de carbono.</p>
+  </div>
+
+  <section>
+    <h2 class="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+      <span class="iconify text-natura-leaf" data-icon="lucide:brain" data-width="22"></span>
+      Preguntas para pensar
+    </h2>
+    <div class="space-y-4">
+      <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+        <p class="text-natura-silver text-base leading-relaxed mb-2"><span class="text-natura-leaf font-ui font-bold mr-2">1.</span>¿El aire que respiramos es una mezcla homogénea o heterogénea? ¿Por qué?</p>
+        <details class="mt-2">
+          <summary class="text-natura-leaf text-xs font-ui cursor-pointer hover:text-white transition-colors">Ver respuesta</summary>
+          <p class="text-natura-silverDark text-base mt-2 leading-relaxed">Es una mezcla <strong class="text-natura-silverLight">homogénea</strong>. Sus componentes (N2, O2, CO2, argón) no se distinguen a simple vista y la composición es uniforme en cualquier punto. Es una solución gaseosa.</p>
+        </details>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+        <p class="text-natura-silver text-base leading-relaxed mb-2"><span class="text-natura-leaf font-ui font-bold mr-2">2.</span>¿Qué diferencia hay entre una solución y una suspensión? Da un ejemplo de cada una.</p>
+        <details class="mt-2">
+          <summary class="text-natura-leaf text-xs font-ui cursor-pointer hover:text-white transition-colors">Ver respuesta</summary>
+          <p class="text-natura-silverDark text-base mt-2 leading-relaxed">En una <strong class="text-natura-silverLight">solución</strong> las partículas de soluto no se ven ni sedimentan (ej: agua con sal). En una <strong class="text-natura-silverLight">suspensión</strong> las partículas sí son visibles y sedimentan con el tiempo (ej: agua con arena). La solución es homogénea y la suspensión es heterogénea.</p>
+        </details>
+      </div>
+      <div class="bg-natura-dark rounded-lg p-5 border border-white/5">
+        <p class="text-natura-silver text-base leading-relaxed mb-2"><span class="text-natura-leaf font-ui font-bold mr-2">3.</span>Si preparás un vaso de leche chocolatada, ¿es una mezcla homogénea o heterogénea? Fundamentá.</p>
+        <details class="mt-2">
+          <summary class="text-natura-leaf text-xs font-ui cursor-pointer hover:text-white transition-colors">Ver respuesta</summary>
+          <p class="text-natura-silverDark text-base mt-2 leading-relaxed">Depende de cómo esté preparada. Si el chocolate en polvo se disolvió completamente, es una <strong class="text-natura-silverLight">solución (homogénea)</strong>. Pero la leche en sí misma es un <strong class="text-natura-silverLight">coloide</strong> (heterogéneo) porque contiene gotitas de grasa y proteínas dispersas que dispersan la luz (Efecto Tyndall).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <div></div>
+    <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+      <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+      <span>Mezclas</span>
+    </a>
+    <a href="separacion.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-leaf transition-colors group">
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Separación</span>
+      <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+    </a>
+  </div>
+
+</main>
+
+<footer class="border-t border-white/5 py-8 mt-4">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span> Inicio
+        </a>
+        <span class="text-natura-silverDark">·</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+        <span class="text-natura-silverDark">·</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-leaf transition-colors">Mezclas</a>
+      </div>
+      <p class="text-natura-silverDark text-xs font-ui">Ciencias Naturales · 1° año · Biología &amp; Química</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Sustancias",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/sustancias.html",c:"#22C55E"},
+    {n:"Materiales",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/materiales.html",c:"#22C55E"},
+    {n:"Medicion",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/medicion.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/separacion.html",c:"#22C55E"},
+    {n:"Mezclas en la naturaleza",u:"Quimica",s:"Mezclas",l:"../mezclas/mezclas-naturaleza.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Usos y contaminacion del agua",u:"Quimica",s:"Agua",l:"../agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion del agua",u:"Quimica",s:"Agua",l:"../agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Comportamiento de materiales",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento rectilineo uniforme",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos del movimiento",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecificas",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion de los animales",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Alimentacion humana",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/alimentacion.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Musculos",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/musculos.html",c:"#DC2626"},
+    {n:"Pancreas",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/pancreas.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Rinones",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/rinones.html",c:"#DC2626"},
+    {n:"Sistema urinario",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/urinario.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../podcast/",c:"#E8A87C"},
+    {n:"ESI - Educacion Sexual Integral",u:"ESI",s:"ESI",l:"../../esi.html",c:"#14B8A6"},
+    {n:"EAI - Educacion Ambiental Integral",u:"EAI",s:"EAI",l:"../../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas. Proba con otra palabra.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,382 @@
+?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biología — Sistemas Biológicos | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; } .delay-300 { animation-delay: 300ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.3); transform: translateY(-4px); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .grain-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 2;   opacity: 0.32; mix-blend-mode: overlay;
+    }
+    .grain-overlay::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.45'/%3E%3C/svg%3E");
+      background-size: 96px 96px;
+      animation: grainShift 0.4s steps(4) infinite;
+    }
+    @keyframes grainShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-3px, 2px); }
+      50% { transform: translate(2px, -3px); }
+      75% { transform: translate(-1px, -1px); }
+    }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">Biología</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · Semanas 21–34</span>
+        <a href="../../index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/biology-cells/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · Semanas 21–34</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Biología — <span class="text-natura-bio">Sistemas Biológicos</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        El eje más extenso del año. Desde las características que definen la vida hasta el cuerpo humano como sistema integrado. Plantas, animales, ecosistemas y el cuidado de nuestro cuerpo.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Seres Vivos</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Plantas</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Animales</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Cuerpo Humano</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">ESI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="relative py-12 md:py-16 bg-natura-dark">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-8">
+      <div class="accent-line"></div>
+      <h2 class="font-heading text-lg md:text-xl font-bold uppercase tracking-wider text-white">Temas de la Unidad</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Card 1: Seres Vivos -->
+      <a href="seres-vivos/" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://picsum.photos/seed/living-beings-bio/600/400.jpg" alt="Seres vivos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <div class="grain-overlay"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 21–23</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Seres Vivos — Unidad y Diversidad</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Características que definen la vida, clasificación de los seres vivos. Funciones vitales: nutrición, relación y reproducción.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Células</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Clasificación</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Funciones Vitales</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Plantas -->
+      <a href="plantas/" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://picsum.photos/seed/plants-bio/600/400.jpg" alt="Plantas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <div class="grain-overlay"></div>
+          <div class="absolute top-3 right-3 flex items-center gap-2">
+            <span class="text-[8px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2 py-1">Experimento</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 24–26</span>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Las Plantas como Sistemas Autótrofos</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Fotosíntesis, germinación, estructuras vegetales. Experimentos con semillas y observación del crecimiento.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Fotosíntesis</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Germinación</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Autótrofos</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Animales -->
+      <a href="animales/" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://picsum.photos/seed/animals-bio/600/400.jpg" alt="Animales" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <div class="grain-overlay"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 27–28</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Los Animales como Sistemas Heterótrofos</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Tipos de alimentación, adaptaciones según el ambiente. Animales del conurbano bonaerense y su clasificación.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Heterótrofos</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Adaptaciones</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Fauna Local</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 4: Cuerpo Humano -->
+      <a href="cuerpo-humano/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://picsum.photos/seed/human-body-bio/600/400.jpg" alt="Cuerpo humano" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <div class="grain-overlay"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 29–34</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">El Cuerpo Humano — 10 sistemas</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Digestión, circulación, respiración, músculos, esqueleto, sistema endocrino, riñones, páncreas, aparato urinario y alimentación saludable.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">10 Temas</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Nutrición</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">ESI</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ESI Highlight Box -->
+    <div class="mt-10 highlight-box p-5 max-w-3xl">
+      <div class="flex items-start gap-3">
+        <span class="iconify text-natura-bio mt-0.5 flex-shrink-0" data-icon="lucide:heart" data-width="18"></span>
+        <div>
+          <h3 class="font-heading font-semibold text-sm text-white mb-1">Integración con Educación Sexual Integral (ESI)</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">
+            La unidad de Biología incorpora contenidos de ESI al abordar el cuerpo humano como sistema integrado, los cambios en la pubertad, la salud reproductiva y el respeto por la diversidad corporal. Los sistemas reproductores se trabajan desde una perspectiva científica y de cuidado.
+          </p>
+          <a href="../../esi.html" class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-natura-bio hover:text-natura-greenLight transition-colors">
+            <span class="iconify" data-icon="lucide:external-link" data-width="12"></span>
+            <span>Ver contenidos de ESI</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- EAI Highlight Box -->
+    <div class="mt-5 highlight-box p-5 max-w-3xl" style="border-left-color: #22C55E; background: rgba(34, 197, 94, 0.05);">
+      <div class="flex items-start gap-3">
+        <span class="iconify text-natura-leaf mt-0.5 flex-shrink-0" data-icon="lucide:leaf" data-width="18"></span>
+        <div>
+          <h3 class="font-heading font-semibold text-sm text-white mb-1">Educación Ambiental Integral (EAI)</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">
+            El estudio de los seres vivos, los ecosistemas y las relaciones entre organismos y ambiente se vincula directamente con la Educación Ambiental Integral. Comprender cómo funcionan los sistemas biológicos nos ayuda a valorar y proteger la biodiversidad.
+          </p>
+          <a href="../../eai.html" class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-natura-leaf hover:text-natura-greenLight transition-colors">
+            <span class="iconify" data-icon="lucide:external-link" data-width="12"></span>
+            <span>Ver contenidos de EAI</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Pro<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{
+      m.slice(0,12).forEach(function(t){
+        var a=document.createElement('a');
+        a.href=t.l;
+        a.className='search-result-item';
+        a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+        results.appendChild(a);
+      });
+    }
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

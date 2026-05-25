@@ -1,0 +1,436 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Características de la Vida | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Seres Vivos</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[11px] text-natura-silverDark">1/3</span>
+        <a href="clasificacion.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span>Siguiente</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-28 pb-16 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 20%, rgba(220,38,38,0.08) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-natura-bio">Artículo</span>
+        <span class="text-[9px] text-natura-silverDark uppercase tracking-wider">Seres Vivos</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold text-white leading-tight mb-4">Características<br>de la Vida</h1>
+      <p class="font-body text-lg text-natura-silver italic max-w-xl">¿Qué comparten una bacteria, un árbol y un ser humano?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 pb-20">
+
+  <!-- Section 1 -->
+  <section class="animate-fadeInUp delay-100 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Qué tienen en común todos los seres vivos?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        A simple vista, una bacteria, un hongo, una planta y un animal parecen no tener nada en común. Sin embargo, la Biología ha identificado un conjunto de características que todo ser vivo comparte, sin importar su tamaño, forma o complejidad. Estas características nos permiten distinguir lo vivo de lo no vivo, y constituyen la base de lo que llamamos <strong class="text-white">vida</strong>.
+      </p>
+      <div class="pull-quote">
+        "La vida es un fenómeno que se reconoce por lo que hace, no solo por lo que es. Se define por sus funciones, no por su estructura."
+      </div>
+      <p class="text-base leading-relaxed text-natura-silverLight">
+        Durante siglos, filósofos y científicos debatieron qué era la vida. Hoy, gracias a la Biología moderna, sabemos que no hay una única definición, sino un conjunto de propiedades emergentes que, al estar todas presentes, indican que estamos frente a un organismo vivo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Las 7 características -->
+  <section class="animate-fadeInUp delay-200 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Las 7 características de los seres vivos</h2>
+      <div class="accent-line-bio mb-6"></div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">1.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Organización celular</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Todo ser vivo está formado por una o más células. La célula es la unidad estructural y funcional básica de la vida. Los organismos unicelulares (bacterias, protozoos) realizan todas sus funciones vitales dentro de una sola célula. Los pluricelulares (plantas, animales) tienen células especializadas que trabajan en conjunto.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">2.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Metabolismo</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Conjunto de reacciones químicas que ocurren dentro del organismo para obtener y utilizar energía. Incluye el anabolismo (construcción de moléculas) y el catabolismo (degradación de moléculas). Sin metabolismo no hay vida: es lo que mantiene al organismo funcionando.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">3.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Homeostasis</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Capacidad de mantener un ambiente interno estable a pesar de los cambios externos. Ejemplos: regular la temperatura corporal (en humanos, ~36.5 °C), mantener el pH de la sangre, controlar los niveles de azúcar. Es un equilibrio dinámico constante.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">4.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Crecimiento</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Aumento de tamaño o número de células. Los organismos crecen mediante la división celular y la incorporación de materia del ambiente. Una semilla se convierte en árbol; un bebé, en adulto.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">5.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Reproducción</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Capacidad de generar nuevos individuos. Puede ser asexual (un solo progenitor, descendientes idénticos) o sexual (dos progenitores, descendientes con variabilidad genética). La reproducción asegura la continuidad de la especie.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">6.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Respuesta a estímulos</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Capacidad de detectar cambios en el ambiente y reaccionar ante ellos. Una planta gira hacia el sol (fototropismo), un animal huye de un depredador, las bacterias nadan hacia nutrientes (quimiotaxis).</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 bg-natura-dark border border-white/5">
+        <span class="text-2xl text-natura-bio font-heading font-bold shrink-0">7.</span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Evolución</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Las poblaciones de seres vivos cambian a lo largo de las generaciones mediante la selección natural. La evolución explica la enorme diversidad de formas de vida y cómo se adaptan a sus ambientes. Es la característica que opera a nivel de población, no de individuo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Las 3 funciones vitales -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 300ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Las 3 funciones vitales</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-6">
+        De las siete características, tres se consideran las <strong class="text-white">funciones vitales</strong> fundamentales que todo ser vivo realiza para mantenerse con vida y perpetuar su especie.
+      </p>
+
+      <div class="flex items-start gap-4 mb-6 p-4 border-l-2 border-natura-bio" style="background: rgba(220,38,38,0.03);">
+        <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:utensils" data-width="22"></span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Nutrición</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Obtención de materia y energía del ambiente. Los <strong class="text-white">autótrofos</strong> (plantas, algas) producen su propio alimento mediante fotosíntesis. Los <strong class="text-white">heterótrofos</strong> (animales, hongos) consumen otros organismos. La nutrición incluye la ingestión, digestión, absorción y eliminación de desechos.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 border-l-2 border-natura-bio" style="background: rgba(220,38,38,0.03);">
+        <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:radio" data-width="22"></span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Relación</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Capacidad de percibir estímulos del ambiente (interno y externo) y elaborar respuestas. En animales involucra los órganos de los sentidos y el sistema nervioso. En plantas, las hormonas vegetales regulan respuestas como el crecimiento hacia la luz o el cierre de estomas.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 mb-6 p-4 border-l-2 border-natura-bio" style="background: rgba(220,38,38,0.03);">
+        <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:egg" data-width="22"></span>
+        <div>
+          <h3 class="font-heading text-lg font-bold text-white mb-1">Reproducción</h3>
+          <p class="text-lg text-natura-silverDark leading-relaxed">Producción de nuevos individuos para perpetuar la especie. La reproducción <strong class="text-white">asexual</strong> genera clones (bipartición en bacterias, gemación en levaduras). La reproducción <strong class="text-white">sexual</strong> combina material genético de dos progenitores, generando variabilidad, clave para la evolución.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: ¿Un virus está vivo? -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 400ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Un virus está vivo?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="sidebar-note">
+        <span class="note-label">Dato curioso</span>
+        Los virus son entre 10 y 100 veces más pequeños que una bacteria. Para observarlos se necesita un microscopio electrónico, no uno óptico común.
+      </div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        Esta es una de las preguntas más fascinantes y debatidas de la Biología. Los virus ocupan una zona gris entre lo vivo y lo no vivo. Tienen material genético (ADN o ARN) y pueden evolucionar, pero no cumplen con varias de las características que definen a un ser vivo.
+      </p>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        Los virus <strong class="text-white">no tienen organización celular</strong>: no son células, son partículas formadas por material genético envuelto en una cápsula proteica. No tienen metabolismo propio: no respiran, no se alimentan, no producen energía por sí mismos. No crecen ni se desarrollan.
+      </p>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        Para reproducirse, un virus necesita <strong class="text-white">invadir una célula huésped</strong> y usar su maquinaria celular. Fuera de una célula, un virus es completamente inerte, como un cristal. Solo "cobra vida" cuando infecta a un organismo. Por eso muchos científicos los consideran "partículas biológicas" más que seres vivos.
+      </p>
+      <div class="pull-quote">
+        "Un virus es como una carta sin cartero: tiene la información, pero no puede entregarla por sí mismo. Necesita a la célula para multiplicarse."
+      </div>
+      <p class="text-base leading-relaxed text-natura-silverLight">
+        El debate sigue abierto. Algunos biólogos proponen una definición más amplia de vida que incluya a los virus; otros sostienen que son un ejemplo de que la naturaleza no siempre encaja en nuestras categorías. Lo cierto es que estudiar los virus nos ayuda a entender mejor qué significa estar vivo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Preguntas para pensar -->
+  <section class="animate-fadeInUp" style="animation-delay: 500ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Preguntas para pensar</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="space-y-4">
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed">
+            <span class="text-natura-bio font-bold mr-2">1.</span>
+            ¿Un robot que se mueve, responde a estímulos y se "alimenta" de electricidad podría considerarse un ser vivo? ¿Qué características le faltarían?
+          </p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed">
+            <span class="text-natura-bio font-bold mr-2">2.</span>
+            Pensá en una semilla. ¿Está viva? ¿Cumple con todas las características de un ser vivo mientras está en estado de latencia?
+          </p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed">
+            <span class="text-natura-bio font-bold mr-2">3.</span>
+            ¿Por qué la evolución es una característica que se observa en las poblaciones y no en los individuos? ¿Podría un solo organismo evolucionar durante su vida?
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Navigation -->
+  <div class="flex justify-end mt-16 pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="clasificacion.html" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-natura-bio transition-colors">
+      <span>Siguiente: Clasificación</span>
+      <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+    </a>
+  </div>
+
+</article>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body></html>

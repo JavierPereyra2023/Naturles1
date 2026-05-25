@@ -1,0 +1,490 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertebrados — Peces, Anfibios, Reptiles, Aves y Mamíferos | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; } .delay-600 { animation-delay: 600ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .accent-line-bio { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+    .sidebar-note { border: 1px solid rgba(255,255,255,0.08); background: rgba(22,28,24,0.7); }
+    .pull-quote {
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; font-style: italic;
+      color: #DC2626; border-left: 3px solid #DC2626; padding-left: 1.5rem;
+    }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.85; color: #DC2626;
+      padding-right: 0.5rem; padding-top: 0.1rem;
+    }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); background: rgba(22,28,24,0.5);
+    }
+    .grain-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 2; opacity: 0.32; mix-blend-mode: overlay;
+    }
+    .grain-overlay::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.45'/%3E%3C/svg%3E");
+      background-size: 96px 96px;
+      animation: grainShift 0.4s steps(4) infinite;
+    }
+    @keyframes grainShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-3px, 2px); }
+      50% { transform: translate(2px, -3px); }
+      75% { transform: translate(-1px, -1px); }
+    }
+    .sabias-que { border-left:3px solid #DC2626; background:rgba(220,38,38,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#DC2626; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body class="bg-natura-black text-natura-silver font-body">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Animales</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">Vertebrados</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · Vertebrados</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/vertebrates-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line-bio"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · Animales</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Vertebrados — <span class="text-natura-bio">Columna y Esqueleto Interno</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Animales con columna vertebral. Cinco grandes grupos con adaptaciones sorprendentes para vivir en el agua, la tierra y el aire.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Peces</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Anfibios</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Reptiles</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Aves</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Mamíferos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-7xl mx-auto px-4 md:px-6">
+  <hr class="border-white/5">
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-3xl mx-auto space-y-14">
+
+    <!-- SECTION 1: Animales con columna -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Animales con Columna Vertebral</h2>
+      </div>
+      <div class="highlight-box p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify mt-0.5 shrink-0 text-natura-bio" data-icon="lucide:bone" data-width="22"></span>
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+            Los vertebrados son animales que tienen un esqueleto interno con columna vertebral, que protege la médula espinal y da soporte al cuerpo. Pertenecen al filo de los cordados.
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-lg text-natura-silverDark leading-relaxed">
+        Solo el <strong class="text-natura-silverLight">3% de los animales</strong> del planeta son vertebrados, pero son los que mejor conocemos. Se dividen en cinco grandes clases: peces, anfibios, reptiles, aves y mamíferos. Cada grupo desarrolló adaptaciones únicas para sobrevivir en su ambiente.
+      </p>
+      <div class="mt-5 pull-quote text-base md:text-xl leading-relaxed max-w-2xl">
+        «La columna vertebral es una obra maestra de la evolución: flexible, fuerte y protectora.»<br>
+        <span class="text-natura-silverDark text-base not-italic">— Sostiene el cuerpo y protege el sistema nervioso central.</span>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Peces -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Peces</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Son vertebrados acuáticos. Respiran por branquias, tienen el cuerpo cubierto de escamas y son de sangre fría (poiquilotermos). Se dividen en dos grandes grupos: óseos y cartilaginosos.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-water" data-icon="lucide:fish" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Peces Óseos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Esqueleto de hueso</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Vejiga natatoria para flotar</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> La mayoría de los peces: trucha, salmón, pejerrey</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-silverLight" data-icon="lucide:fish-symbol" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Peces Cartilaginosos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-silverLight mt-0.5">•</span> Esqueleto de cartílago</li>
+            <li class="flex items-start gap-2"><span class="text-natura-silverLight mt-0.5">•</span> Sin vejiga natatoria: deben nadar constantemente</li>
+            <li class="flex items-start gap-2"><span class="text-natura-silverLight mt-0.5">•</span> Tiburones, rayas, quimeras</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Anfibios -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Anfibios</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Su nombre significa «doble vida» (del griego <em>amphi</em>: ambos, y <em>bios</em>: vida): pasan parte de su vida en el agua y parte en la tierra. Tienen la piel húmeda y desnuda, sin escamas ni pelos. Son de sangre fría.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:waves" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Características</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> Piel húmeda, fina y permeable: respiran por la piel</li>
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> Metamorfosis: de larva acuática (renacuajo) a adulto terrestre</li>
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> Huevos sin cáscara, depositados en agua</li>
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> Dependen del agua para reproducirse</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-greenLight" data-icon="lucide:bug" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Ejemplos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Ranas</strong> — piel lisa, patas traseras largas para saltar</li>
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Sapos</strong> — piel más rugosa, cuerpo robusto</li>
+            <li class="flex items-start gap-2"><span class="text-natura-greenLight mt-0.5">•</span> <strong class="text-natura-silverLight">Salamandras</strong> — cuerpo alargado con cola, algunas acuáticas</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Reptiles -->
+    <section class="animate-fadeInUp delay-300">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Reptiles</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Animales terrestres con piel cubierta de escamas secas e impermeables. Fueron los primeros vertebrados en independizarse completamente del agua para reproducirse, gracias al huevo con cáscara (huevo amniota).
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:shield" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Características</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> Piel con escamas secas: evitan la pérdida de agua</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> Respiración pulmonar durante toda la vida</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> Huevos con cáscara: no necesitan agua para ponerlos</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> Sangre fría: regulan su temperatura con el ambiente</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:turtle" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Grupos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> <strong class="text-natura-silverLight">Lagartijas y serpientes</strong> — escamosos, algunos sin patas</li>
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> <strong class="text-natura-silverLight">Tortugas</strong> — cuerpo protegido por un caparazón óseo</li>
+            <li class="flex items-start gap-2"><span class="text-natura-leaf mt-0.5">•</span> <strong class="text-natura-silverLight">Cocodrilos y yacarés</strong> — grandes reptiles acuáticos, los más emparentados con las aves</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Aves -->
+    <section class="animate-fadeInUp delay-400">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Aves</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Son los únicos animales con plumas. Tienen el cuerpo adaptado al vuelo, aunque algunas especies no vuelan. Son de sangre caliente (homeotermos) y sus antepasados fueron los dinosaurios.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-water" data-icon="lucide:feather" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Adaptaciones al vuelo</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Cuerpo cubierto de plumas (aislantes y aerodinámicas)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Huesos huecos y livianos con refuerzos internos</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Pico sin dientes (más liviano que una mandíbula dentada)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Alas (extremidades anteriores transformadas)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> Quilla en el esternón para anclar músculos de vuelo</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:egg" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Otras características</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Sangre caliente: mantienen temperatura corporal constante</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Huevos con cáscara dura de carbonato de calcio</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Sacos aéreos conectados a los pulmones (respiración muy eficiente)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Pico adaptado a su tipo de alimentación (semillas, carne, néctar)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Mamíferos -->
+    <section class="animate-fadeInUp delay-500">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Mamíferos</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Se caracterizan por tener pelo o pelaje y glándulas mamarias que producen leche para alimentar a las crías. Son de sangre caliente y la mayoría tiene a sus crías vivas (son vivíparos), aunque hay excepciones.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:egg" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Monotremas</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">
+            Mamíferos que ponen huevos. Solo existen dos: el <strong class="text-natura-silverLight">ornitorrinco</strong> y el <strong class="text-natura-silverLight">equidna</strong>. Viven en Australia y Nueva Guinea.
+          </p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:package" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Marsupiales</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">
+            Las crías nacen muy prematuras y completan su desarrollo en una bolsa externa llamada <strong class="text-natura-silverLight">marsupio</strong>. Ejemplos: canguro, koala, comadreja overa.
+          </p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:heart" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Placentarios</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">
+            Las crías se desarrollan dentro del útero materno conectadas por una <strong class="text-natura-silverLight">placenta</strong>. Es el grupo más numeroso: ser humano, perro, ballena, murciélago.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sabias-que" style="max-width:640px;margin-left:auto;margin-right:auto;">
+      <span class="sq-label">Sabías que...</span>
+      <p>El corazón de un colibrí late hasta 1200 veces por minuto y sus alas baten 80 veces por segundo. En comparación, el corazón de una ballena azul late solo 8 veces por minuto.</p>
+    </div>
+
+    <!-- SECTION 7: Preguntas para pensar -->
+    <section class="animate-fadeInUp delay-600">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Preguntas para Pensar</h2>
+      </div>
+      <div class="space-y-3">
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Por qué los anfibios no pueden vivir lejos del agua?</span> — Su piel es fina y pierde agua con facilidad; necesitan humedad constante. Además, se reproducen en el agua porque sus huevos no tienen cáscara y se deshidratarían en tierra firme.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Qué ventaja evolutiva trajo el huevo con cáscara de los reptiles?</span> — Les permitió independizarse del agua para reproducirse y conquistar ambientes terrestres secos. El huevo amniota tiene sus propias reservas de agua y alimento para el embrión.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Qué tienen en común todos los vertebrados?</span> — Todos poseen columna vertebral y esqueleto interno, un sistema nervioso con cerebro y médula espinal protegidos, y un plan corporal con simetría bilateral. A pesar de sus diferencias externas, comparten este diseño básico.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <a href="alimentacion.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Alimentación</span>
+      </a>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span class="ml-1">Todos los temas</span>
+      </a>
+      <a href="invertebrados.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Invertebrados</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+</body>
+</html>

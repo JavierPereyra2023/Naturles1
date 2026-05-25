@@ -1,0 +1,414 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Digestión — Sistema Digestivo | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body class="bg-natura-black text-natura-silver font-body">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Cuerpo Humano</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">Digestión</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · ESI</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/digestion-bio/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · El Cuerpo Humano</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        La Digestión — <span class="text-natura-bio">Sistema Digestivo</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        El recorrido del alimento desde que entra por la boca hasta que los nutrientes llegan a las células. Un viaje de 7 metros a través del cuerpo.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Boca</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Estómago</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Intestinos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Enzimas</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Hígado</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Páncreas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-7xl mx-auto px-4 md:px-6">
+  <hr class="border-white/5">
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-4xl mx-auto space-y-14">
+
+    <!-- SECTION 1: Función principal -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Función Principal</h2>
+      </div>
+      <div class="highlight-box p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify mt-0.5 shrink-0 text-natura-bio" data-icon="lucide:target" data-width="22"></span>
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+            Transformar los alimentos en nutrientes que las células puedan usar. Sin digestión, no podríamos aprovechar lo que comemos.
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-lg text-natura-silverDark leading-relaxed">
+        El sistema digestivo es un tubo de aproximadamente 7 metros de largo que atraviesa el cuerpo desde la boca hasta el ano. En su recorrido, los alimentos son triturados, mezclados con enzimas y ácidos, y descompuestos hasta obtener moléculas pequeñas —como aminoácidos, glucosa y ácidos grasos— que pueden atravesar las paredes del intestino y entrar al torrente sanguíneo. Todo lo que no se digiere ni se absorbe se elimina como materia fecal.
+      </p>
+    </section>
+
+    <!-- SECTION 2: Recorrido del alimento -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Recorrido del Alimento</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-6">El alimento viaja a través de varios órganos, transformándose en cada etapa. Estos son los pasos del proceso digestivo:</p>
+
+      <!-- Step 1: Boca -->
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-4">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center shrink-0">
+            <span class="font-heading text-sm font-bold text-natura-bio">1</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-2">Boca</h3>
+            <p class="text-lg text-natura-silver leading-relaxed">
+              Masticación mecánica. Los dientes trituran el alimento mientras la lengua lo mezcla con saliva. La saliva contiene <strong class="text-natura-silverLight">amilasa</strong>, una enzima que empieza a digerir los carbohidratos. Aquí se forma el <strong class="text-natura-silverLight">bolo alimenticio</strong>, una masa blanda lista para ser tragada.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Faringe y Esófago -->
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-4">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center shrink-0">
+            <span class="font-heading text-sm font-bold text-natura-bio">2</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-2">Faringe y Esófago</h3>
+            <p class="text-lg text-natura-silver leading-relaxed">
+              La faringe es un conducto compartido con el sistema respiratorio; la epiglotis se cierra al tragar para evitar que el alimento pase a la tráquea. El esófago es un tubo muscular que transporta el bolo alimenticio desde la faringe hasta el estómago mediante <strong class="text-natura-silverLight">movimientos peristálticos</strong>: ondas de contracción que empujan el alimento hacia abajo, incluso si estuviéramos cabeza abajo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Estómago -->
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-4">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center shrink-0">
+            <span class="font-heading text-sm font-bold text-natura-bio">3</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-2">Estómago</h3>
+            <p class="text-lg text-natura-silver leading-relaxed">
+              Es una bolsa muscular con forma de «J» que produce <strong class="text-natura-silverLight">jugos gástricos</strong> (ácido clorhídrico y enzimas como la pepsina). Su pH es muy ácido (~2), lo que mata bacterias y ayuda a descomponer las proteínas. El alimento se mezcla durante 2 a 4 horas y se transforma en una pasta semilíquida llamada <strong class="text-natura-silverLight">quimo</strong>. La mucosa del estómago secreta moco para protegerse de su propio ácido.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Intestino Delgado -->
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-4">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center shrink-0">
+            <span class="font-heading text-sm font-bold text-natura-bio">4</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-2">Intestino Delgado (~6 metros)</h3>
+            <p class="text-lg text-natura-silver leading-relaxed">
+              Es la parte más larga del tubo digestivo. Se divide en tres partes: duodeno, yeyuno e íleon. Aquí ocurre la mayor parte de la digestión química y la <strong class="text-natura-silverLight">absorción de nutrientes</strong>. Su interior está cubierto de millones de vellosidades intestinales que, como diminutos dedos, aumentan enormemente la superficie de absorción. Los nutrientes pasan desde el intestino hacia la sangre y la linfa. Aquí también actúan los jugos del páncreas y la bilis del hígado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Intestino Grueso -->
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-4">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center shrink-0">
+            <span class="font-heading text-sm font-bold text-natura-bio">5</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-2">Intestino Grueso (~1.5 metros)</h3>
+            <p class="text-lg text-natura-silver leading-relaxed">
+              Más ancho que el delgado pero más corto. Su función principal es absorber agua y sales minerales de los restos no digeridos, compactándolos para formar las <strong class="text-natura-silverLight">heces</strong>. También alberga la flora intestinal, billones de bacterias beneficiosas que ayudan a sintetizar vitaminas (como la vitamina K) y protegen contra microorganismos dañinos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6: Recto y Ano -->
+      <div class="content-card bg-natura-dark p-5 md:p-6">
+        <div class="flex gap-4">
+          <div class="w-8 h-8 bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center shrink-0">
+            <span class="font-heading text-sm font-bold text-natura-bio">6</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-2">Recto y Ano</h3>
+            <p class="text-lg text-natura-silver leading-relaxed">
+              Etapa final del recorrido. El recto almacena las heces hasta que son eliminadas al exterior a través del ano mediante un proceso llamado <strong class="text-natura-silverLight">egestión</strong> o defecación. Este paso es controlado por esfínteres voluntarios e involuntarios.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Órganos anexos -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Órganos Anexos</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-6">No forman parte del tubo digestivo, pero producen sustancias esenciales para la digestión que vuelcan en el intestino delgado.</p>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <!-- Hígado -->
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:flask-conical" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Hígado</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">
+            Produce la <strong class="text-natura-silverLight">bilis</strong>, un líquido amarillo-verdoso que ayuda a emulsionar y digerir las grasas. Es el órgano interno más grande del cuerpo y cumple más de 500 funciones, incluyendo almacenar vitaminas y eliminar toxinas de la sangre.
+          </p>
+        </div>
+
+        <!-- Vesícula Biliar -->
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:package" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Vesícula Biliar</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">
+            Pequeña bolsa en forma de pera ubicada debajo del hígado. Almacena y concentra la bilis producida por el hígado y la libera en el duodeno cuando comemos alimentos grasos para facilitar su digestión.
+          </p>
+        </div>
+
+        <!-- Páncreas -->
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:test-tubes" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Páncreas</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">
+            Glándula alargada que cumple dos funciones. Por un lado produce el <strong class="text-natura-silverLight">jugo pancreático</strong> con enzimas que digieren proteínas, grasas y carbohidratos. Por el otro produce hormonas como la <strong class="text-natura-silverLight">insulina</strong>, que regula el nivel de glucosa en sangre.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Dato curioso -->
+    <section class="animate-fadeInUp delay-300">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Dato Curioso</h2>
+      </div>
+      <div class="stat-box bg-natura-dark p-6 md:p-8 text-center">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <span class="iconify text-natura-bio" data-icon="lucide:maximize" data-width="24"></span>
+          <span class="font-heading text-4xl md:text-5xl font-bold text-natura-bio">200 m²</span>
+        </div>
+        <p class="text-sm text-natura-silver max-w-lg mx-auto leading-relaxed">
+          Las vellosidades intestinales del intestino delgado aumentan la superficie de absorción. Si las estiráramos todas, cubrirían una <strong class="text-natura-silverLight">cancha de tenis completa</strong> (aproximadamente 200 metros cuadrados). Sin ellas, el intestino tendría una superficie 600 veces menor y la absorción de nutrientes sería ineficiente.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Preguntas para pensar -->
+    <section class="animate-fadeInUp delay-400">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Preguntas para Pensar</h2>
+      </div>
+      <div class="space-y-3">
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Por qué es importante masticar bien los alimentos?</span> — La digestión comienza en la boca. Una buena masticación tritura los alimentos en partículas pequeñas, facilita la acción de las enzimas y evita sobrecargar el estómago. Además, al comer despacio, el cerebro tiene tiempo de registrar la sensación de saciedad.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Qué pasaría si no tuviéramos ácido en el estómago?</span> — Sin el ácido clorhídrico, muchas bacterias sobrevivirían y causarían infecciones. Las proteínas no se descompondrían correctamente y la pepsina (la enzima que las digiere) no se activaría, ya que necesita un ambiente ácido para funcionar.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Qué relación hay entre el intestino delgado y el sistema circulatorio?</span> — Los nutrientes absorbidos en el intestino delgado pasan a los capilares sanguíneos que lo rodean. Desde allí, la sangre los transporta a todas las células del cuerpo. Sin el sistema circulatorio, los nutrientes jamás llegarían a su destino.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <div></div>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span class="ml-1">Todos los sistemas</span>
+      </a>
+      <a href="circulacion.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Circulación</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luz y Materiales | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59,130,246,0.25); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Calor y Sonido</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Calor y Sonido</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/optics/1200/400" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Calor y Sonido</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Luz y Materiales</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">¿Por qué vemos a través del vidrio pero no de la madera? Cómo la luz interactúa con distintos materiales y por qué vemos colores.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/20 to-transparent"></div>
+<div class="max-w-3xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="space-y-12">
+
+    <!-- SECTION 1 -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">01</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">La luz y los materiales</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Cuando la luz incide sobre un objeto, pueden ocurrir varias cosas: puede atravesarlo, puede ser reflejada, puede ser absorbida o una combinación de estas. Según cómo se comporte la luz al interactuar con ellos, los materiales se clasifican en tres grandes categorías. Esta clasificación nos ayuda a entender desde por qué podemos ver a través de una ventana hasta por qué nos vestimos de colores claros en verano.</p>
+      </div>
+
+      <div class="pull-quote">
+        "Según cómo interactúan con la luz, los materiales se clasifican en opacos, translúcidos y transparentes."
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed">No todos los materiales se comportan igual frente a la luz. Algunos la bloquean completamente, otros la dejan pasar parcialmente y otros son prácticamente invisibles a ella. Esta propiedad depende de la estructura interna del material y de cómo sus átomos y moléculas interactúan con las ondas electromagnéticas.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">02</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Clasificación de materiales</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Cada tipo de material interactúa con la luz de manera particular. La clasificación se basa en qué tanta luz pueden transmitir y con qué nitidez se ven los objetos a través de ellos. Esta propiedad tiene aplicaciones prácticas en nuestra vida diaria, desde la construcción hasta la tecnología.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm mb-4">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+          <span class="iconify" data-icon="lucide:square" data-width="18"></span> Materiales opacos
+        </h3>
+        <p class="text-lg text-natura-silver leading-relaxed mb-2">No dejan pasar la luz. Cuando la luz incide sobre ellos, es absorbida o reflejada, pero no los atraviesa. No se puede ver a través de ellos.</p>
+        <p class="text-lg text-natura-silverDark" style="font-family: 'Inter', sans-serif;">Ejemplos: madera, metal, cartón, piedra, pared, libro.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm mb-4">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+          <span class="iconify" data-icon="lucide:square-dashed" data-width="18"></span> Materiales translúcidos
+        </h3>
+        <p class="text-lg text-natura-silver leading-relaxed mb-2">Dejan pasar algo de luz, pero la dispersan en múltiples direcciones. Los objetos no se ven nítidos a través de ellos; se ven borrosos o solo como siluetas. La luz los atraviesa pero de manera desordenada.</p>
+        <p class="text-lg text-natura-silverDark" style="font-family: 'Inter', sans-serif;">Ejemplos: vidrio esmerilado, papel manteca, algunos plásticos, tela fina, nubes.</p>
+      </div>
+
+      <div class="content-card p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+          <span class="iconify" data-icon="lucide:square-check" data-width="18"></span> Materiales transparentes
+        </h3>
+        <p class="text-lg text-natura-silver leading-relaxed mb-2">Dejan pasar la luz prácticamente sin alterarla. Se puede ver a través de ellos con nitidez, distinguiendo formas y colores. La luz los atraviesa de manera ordenada.</p>
+        <p class="text-lg text-natura-silverDark" style="font-family: 'Inter', sans-serif;">Ejemplos: vidrio común, agua limpia, aire, algunos plásticos como el acrílico.</p>
+      </div>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">03</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Fenómenos luminosos</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Cuando la luz interactúa con la materia se producen tres fenómenos principales: reflexión, refracción y absorción. Estos fenómenos explican desde por qué vemos nuestra imagen en un espejo hasta por qué un lápiz parece quebrado dentro de un vaso de agua.</p>
+      </div>
+
+      <h3 class="font-heading text-lg font-bold text-natura-energy mt-6 mb-2">Reflexión</h3>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">La luz rebota en una superficie y cambia de dirección. La reflexión puede ser especular (como en un espejo, donde los rayos rebotan ordenadamente y se forma una imagen nítida) o difusa (como en una pared blanca, donde los rayos rebotan en muchas direcciones y no se forma imagen).</p>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">La ley de la reflexión establece que el ángulo de incidencia es igual al ángulo de reflexión. Ambos ángulos se miden respecto a la normal, una línea imaginaria perpendicular a la superficie en el punto donde incide la luz.</p>
+
+      <div class="text-center py-3 mb-4 border border-natura-energy/10 rounded-sm bg-natura-dark/30">
+        <p class="text-natura-silverLight font-heading">Ángulo de incidencia = Ángulo de reflexión &emsp; (?<sub>i</sub> = ?<sub>r</sub>)</p>
+      </div>
+
+      <h3 class="font-heading text-lg font-bold text-natura-energy mt-6 mb-2">Refracción</h3>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">La luz cambia de dirección (y de velocidad) al pasar de un medio transparente a otro con distinta densidad. Un lápiz en un vaso de agua parece quebrado en la superficie; esto es refracción. La luz viaja más lento en el agua que en el aire, y al cambiar de velocidad cambia de dirección.</p>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">Este fenómeno es el que permite que las lentes (anteojos, lupas, microscopios) funcionen: curvan la luz para enfocar imágenes. También explica la formación del arcoíris: las gotas de agua refractan y reflejan la luz del sol, separándola en colores.</p>
+
+      <div class="sidebar-note">
+        <span class="note-label">Espejismos</span>
+        Los espejismos en la ruta en días calurosos se producen por refracción. El aire cerca del asfalto está mucho más caliente (y es menos denso) que el aire más arriba. La luz se curva al atravesar capas de aire de distinta densidad, creando la ilusión de agua sobre el pavimento.
+      </div>
+
+      <h3 class="font-heading text-lg font-bold text-natura-energy mt-6 mb-2">Absorción</h3>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">La luz es absorbida por el material y su energía se transforma en calor. Una remera negra al sol se calienta más que una blanca precisamente porque el color negro absorbe más luz (todos los colores) mientras que el blanco refleja la mayoría.</p>
+
+      <div class="figure-placeholder">
+        <span class="iconify block mx-auto mb-2" data-icon="lucide:eye" data-width="32"></span>
+        FIGURA 1: Esquema comparativo de reflexión, refracción y absorción de la luz al incidir sobre distintos materiales
+      </div>
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="animate-fadeInUp" style="animation-delay: 300ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">04</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">¿Por qué vemos colores?</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">La luz blanca del Sol está compuesta por todos los colores del arcoíris (rojo, naranja, amarillo, verde, azul, añil y violeta). Cuando esta luz blanca incide sobre un objeto, el objeto absorbe algunos colores y refleja otros. El color que vemos es precisamente el color (o los colores) que el objeto refleja.</p>
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">Una manzana se ve roja porque su piel absorbe todos los colores de la luz blanca <strong class="text-natura-energy">excepto el rojo</strong>, que es reflejado hacia nuestros ojos. Una hoja se ve verde porque refleja el verde y absorbe el resto. Si ilumináramos una manzana roja con luz azul pura, la veríamos negra, porque no habría luz roja para reflejar.</p>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">El negro absorbe todos los colores y no refleja ninguno. El blanco refleja todos los colores y no absorbe ninguno. Por eso en verano conviene usar ropa clara: refleja más luz solar (y por lo tanto más energía) y nos mantenemos más frescos. Una remera negra absorbe toda la luz y la convierte en calor.</p>
+
+      <div class="content-card p-5 rounded-sm mb-4">
+        <p class="text-lg text-natura-silverLight leading-relaxed text-center font-heading italic">&laquo;Un objeto se ve de un color porque refleja ese color y absorbe los demás. El negro absorbe todos los colores. El blanco los refleja todos.&raquo;</p>
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed">Este principio tiene aplicaciones muy prácticas. Los paneles solares térmicos son de color negro para absorber la máxima cantidad de energía del sol. Los techos de las casas en zonas cálidas se pintan de blanco para reflejar la luz y mantener el interior fresco. La naturaleza también lo aprovecha: muchos animales del desierto tienen pelaje claro para reflejar el sol, mientras que los animales polares tienen pelaje oscuro bajo el pelaje blanco para absorber y retener el calor.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="animate-fadeInUp" style="animation-delay: 400ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">05</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Preguntas para pensar</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">1.</span> ¿Por qué en una habitación a oscuras no podemos ver los colores de los objetos? ¿Qué le falta a la escena para que exista color?</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">2.</span> ¿Qué tipo de material es una cortina de baño semitransparente? ¿Y el agua con barro? Justificá tu respuesta usando los tres tipos.</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">3.</span> Imaginá que estás en una pileta y ves una moneda en el fondo. ¿Está realmente donde la ves? Explicá qué fenómeno luminoso está actuando.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- NAVIGATION -->
+<div class="max-w-3xl mx-auto px-4 md:px-6 pb-10">
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="ondas.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Ondas: Luz y Sonido</span>
+    </a>
+    <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+      <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+      <span>Calor y Sonido</span>
+    </a>
+    <span></span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>

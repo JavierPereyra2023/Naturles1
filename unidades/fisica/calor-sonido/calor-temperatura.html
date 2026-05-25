@@ -1,0 +1,392 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calor y Temperatura | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59,130,246,0.25); }
+    .sabias-que { border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Calor y Sonido</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Calor y Sonido</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/heat-transfer/1200/400" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Calor y Sonido</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Calor y Temperatura</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">Entendé la diferencia entre calor y temperatura, cómo se transfiere la energía térmica y cómo calcularla.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/20 to-transparent"></div>
+<div class="max-w-3xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="space-y-12">
+
+    <!-- SECTION 1 -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">01</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">&iquest;Calor o temperatura?</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Es muy común usar las palabras "calor" y "temperatura" como si fueran lo mismo, pero en física son conceptos muy distintos. La temperatura es una medida de la energía cinética promedio de las partículas de un cuerpo: nos dice qué tan rápido se mueven sus moléculas. El calor, en cambio, es la energía que se transfiere de un cuerpo a otro debido a una diferencia de temperatura.</p>
+      </div>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">Cuando tocás un vaso de vidrio y uno de metal que están a la misma temperatura, el metal se siente más frío. ¿Por qué? Porque el metal conduce el calor de tu mano más rápido. Tu mano no mide temperatura, mide la velocidad a la que pierde calor. Este simple experimento muestra que temperatura y calor no son lo mismo.</p>
+
+      <div class="pull-quote">
+        "La temperatura mide la agitación de las partículas. El calor es la energía que se transfiere entre cuerpos a diferente temperatura."
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed">La temperatura se mide con un termómetro y sus unidades más comunes son los grados Celsius (°C), Fahrenheit (°F) y Kelvin (K). El calor se mide en joules (J) o en calorías (cal). Una caloría es la cantidad de calor necesaria para elevar 1°C la temperatura de 1 gramo de agua.</p>
+
+      <div class="figure-placeholder">
+        <span class="iconify block mx-auto mb-2" data-icon="lucide:thermometer" data-width="32"></span>
+        FIGURA 1: Comparación visual entre calor (transferencia de energía) y temperatura (medición con termómetro)
+      </div>
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">02</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Mecanismos de transferencia</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">El calor siempre se transfiere del cuerpo de mayor temperatura al de menor temperatura. Existen tres mecanismos fundamentales mediante los cuales esto ocurre: conducción, convección y radiación. Cada uno funciona de manera diferente y está presente en situaciones cotidianas.</p>
+      </div>
+
+      <h3 class="font-heading text-lg font-bold text-natura-energy mt-6 mb-2">Conducción</h3>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">El calor se transmite por contacto directo entre partículas, sin que haya desplazamiento de materia. Las partículas más energéticas chocan con las menos energéticas, transfiriéndoles energía. Los metales son buenos conductores térmicos; la madera y el plástico son aislantes. Por eso las ollas son de metal pero sus mangos suelen ser de plástico o madera.</p>
+
+      <h3 class="font-heading text-lg font-bold text-natura-energy mt-6 mb-2">Convección</h3>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">El calor se transmite por el movimiento de fluidos (líquidos y gases). Cuando un fluido se calienta, se expande, se vuelve menos denso y asciende. El fluido más frío y denso desciende para ocupar su lugar. Este ciclo crea corrientes de convección. Así funcionan la calefacción en una habitación, el agua hirviendo en una olla y las brisas marinas.</p>
+
+      <div class="sidebar-note">
+        <span class="note-label">Dato curioso</span>
+        El Sol está a 150 millones de km de la Tierra y en el espacio no hay materia. Su calor nos llega exclusivamente por radiación, atravesando el vacío en forma de ondas electromagnéticas.
+      </div>
+
+      <h3 class="font-heading text-lg font-bold text-natura-energy mt-6 mb-2">Radiación</h3>
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">El calor se transmite por ondas electromagnéticas, sin necesidad de un medio material. Todos los cuerpos emiten radiación térmica. Cuanto mayor es la temperatura del cuerpo, mayor es la energía radiante que emite. Así nos llega el calor del Sol a través del espacio vacío, y así funciona un horno de microondas o una estufa eléctrica.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">03</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">La ecuación del calor</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Para calcular la cantidad de calor que gana o pierde un cuerpo cuando cambia su temperatura, usamos una ecuación que relaciona la masa, el tipo de material y la variación de temperatura. Esta ecuación es fundamental en calorimetría y nos permite hacer predicciones cuantitativas.</p>
+      </div>
+
+      <div class="text-center my-8 py-6 border border-natura-energy/15 rounded-sm bg-natura-dark/50">
+        <p class="text-natura-silverLight text-lg font-heading mb-2">Ecuación fundamental del calor:</p>
+        \[Q = m \cdot c \cdot \Delta T\]
+        <p class="text-[11px] text-natura-silverDark mt-3" style="font-family: 'Inter', sans-serif;">
+          Q = calor (Joules o calorías) &nbsp;|&nbsp;
+          m = masa (kg o g) &nbsp;|&nbsp;
+          c = calor específico (J/kg·°C) &nbsp;|&nbsp;
+          ?T = cambio de temperatura
+        </p>
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">El <strong class="text-natura-energy">calor específico</strong> es una propiedad de cada material que indica cuánta energía se necesita para elevar 1°C la temperatura de 1 kg de esa sustancia. Cuanto mayor es el calor específico, más energía se necesita para calentarlo.</p>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">Veamos un ejemplo concreto: para calentar 1 kg de agua de 20°C a 100°C necesitamos:</p>
+      <div class="text-center py-3 mb-4 border border-natura-energy/10 rounded-sm bg-natura-dark/30">
+        <p class="text-natura-silverLight font-heading">Q = 1 × 4180 × 80 = 334.400 J</p>
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed mb-4">El agua tiene un calor específico muy alto (4180 J/kg·°C). Por eso se usa para enfriar motores, tarda mucho en hervir y se enfría lentamente. Las zonas costeras tienen climas más estables que las zonas continentales precisamente porque el agua del mar absorbe y libera calor lentamente, regulando la temperatura.</p>
+
+      <p class="text-lg text-natura-silver leading-relaxed">En comparación, el hierro tiene un calor específico de solo 450 J/kg·°C. Esto significa que se calienta y se enfría casi diez veces más rápido que el agua. Por eso una cuchara de metal en una sopa caliente se vuelve intocable en segundos.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <div class="sabias-que">
+      <span class="sq-label">Sabías que...</span>
+      <p>El lugar más frío del universo conocido está en la Nebulosa Boomerang: -272°C, apenas un grado por encima del cero absoluto (-273.15°C). ¡Más frío que el congelador de tu casa, que está a solo -18°C!</p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <section class="animate-fadeInUp" style="animation-delay: 300ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">04</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Preguntas para pensar</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">1.</span> ¿Por qué la arena de la playa quema los pies al mediodía pero el agua del mar está fresca, si ambos reciben la misma radiación solar?</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">2.</span> Si en el espacio no hay aire, ¿cómo llega el calor del Sol a la Tierra? ¿Qué mecanismo de transferencia está actuando?</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">3.</span> Explicá con tus palabras por qué un termo mantiene el café caliente durante horas. ¿Qué mecanismos de transferencia está evitando?</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- NAVIGATION -->
+<div class="max-w-3xl mx-auto px-4 md:px-6 pb-10">
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <span></span>
+    <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+      <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+      <span>Calor y Sonido</span>
+    </a>
+    <a href="ondas.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Ondas: Luz y Sonido</span>
+      <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>

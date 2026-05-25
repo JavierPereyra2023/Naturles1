@@ -1,0 +1,462 @@
+?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Niveles de Organización | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Células</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[11px] text-natura-silverDark">3/3</span>
+        <a href="organelas.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span class="hidden sm:inline">Anterior</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-28 pb-16 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 20%, rgba(220,38,38,0.08) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-natura-bio">Artículo</span>
+        <span class="text-[9px] text-natura-silverDark uppercase tracking-wider">Células</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold text-white leading-tight mb-4">Niveles de<br>Organización</h1>
+      <p class="font-body text-lg text-natura-silver italic max-w-xl">Del átomo al organismo. Cómo la materia se organiza en niveles de complejidad creciente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 pb-20">
+
+  <!-- Section 1 -->
+  <section class="animate-fadeInUp delay-100 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">De lo simple a lo complejo</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        La materia viva no es un conjunto caótico de átomos y moléculas. Está organizada en <strong class="text-white">niveles jerárquicos</strong>, cada uno con propiedades nuevas que no existían en el nivel anterior. A esto se lo llama <strong class="text-white">propiedades emergentes</strong>: el todo es más que la suma de sus partes.
+      </p>
+      <div class="pull-quote">
+        "La vida no está en los átomos ni en las moléculas por separado. La vida emerge de la organización. Un átomo de carbono no está vivo, pero organizado de cierta manera, forma parte de un ser vivo."
+      </div>
+      <p class="text-base leading-relaxed text-natura-silverLight">
+        Entender los niveles de organización es fundamental en Biología porque permite estudiar la vida desde distintas perspectivas: desde lo más pequeño (átomos y moléculas) hasta lo más grande (ecosistemas y biosfera). Cada nivel tiene sus propias reglas y requiere herramientas distintas para ser estudiado.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 2: Los niveles -->
+  <section class="animate-fadeInUp delay-200 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Los niveles de organización biológica</h2>
+      <div class="accent-line-bio mb-6"></div>
+
+      <div class="space-y-4">
+        <!-- Nivel 1: Átomo -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-natura-silverDark">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-natura-mid flex items-center justify-center">
+            <span class="text-[11px] font-bold text-natura-silverDark" style="font-family: 'Inter', sans-serif;">1</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Átomo</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">La unidad más pequeña de un elemento químico. Los principales átomos en los seres vivos son: carbono (C), hidrógeno (H), oxígeno (O), nitrógeno (N), fósforo (P) y azufre (S). Forman el 99% de la materia viva.</p>
+          </div>
+        </div>
+
+        <!-- Nivel 2: Molécula -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-natura-water">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-natura-mid flex items-center justify-center">
+            <span class="text-[11px] font-bold text-natura-water" style="font-family: 'Inter', sans-serif;">2</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Molécula</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">Unión de dos o más átomos. Ejemplos en los seres vivos: agua (H₂O), glucosa (C₆H₁₂O₆), proteínas, lípidos, ácidos nucleicos (ADN, ARN). Las macromoléculas como el ADN contienen la información genética.</p>
+          </div>
+        </div>
+
+        <!-- Nivel 3: Célula -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-natura-bio">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-natura-bio/20 flex items-center justify-center">
+            <span class="text-[11px] font-bold text-natura-bio" style="font-family: 'Inter', sans-serif;">3</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Célula</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">La <strong class="text-white">unidad básica de la vida</strong>. Primer nivel con vida propia. Puede ser procariota (bacteria) o eucariota (neurona, célula muscular, célula epidérmica). Todas las funciones vitales ocurren dentro de ella.</p>
+          </div>
+        </div>
+
+        <!-- Nivel 4: Tejido -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-natura-green">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-natura-green/20 flex items-center justify-center">
+            <span class="text-[11px] font-bold text-natura-green" style="font-family: 'Inter', sans-serif;">4</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Tejido</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">Conjunto de <strong class="text-white">células similares</strong> que realizan una función común. Ejemplos: tejido muscular (contracción), tejido nervioso (transmisión de impulsos), tejido epitelial (revestimiento), tejido conectivo (sostén).</p>
+          </div>
+        </div>
+
+        <!-- Nivel 5: Órgano -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-natura-energy">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-natura-energy/20 flex items-center justify-center">
+            <span class="text-[11px] font-bold text-natura-energy" style="font-family: 'Inter', sans-serif;">5</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Órgano</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">Estructura formada por <strong class="text-white">varios tejidos</strong> que trabajan juntos para cumplir una función específica. Ejemplos: corazón (tejido muscular + conectivo + nervioso), estómago, pulmón, hoja (en plantas), raíz.</p>
+          </div>
+        </div>
+
+        <!-- Nivel 6: Sistema -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-natura-leaf">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-natura-leaf/20 flex items-center justify-center">
+            <span class="text-[11px] font-bold text-natura-leaf" style="font-family: 'Inter', sans-serif;">6</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Sistema de órganos</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">Conjunto de <strong class="text-white">órganos que cooperan</strong> para realizar una función compleja. Ejemplos: sistema digestivo (boca, esófago, estómago, intestinos), sistema circulatorio (corazón, arterias, venas), sistema nervioso.</p>
+          </div>
+        </div>
+
+        <!-- Nivel 7: Organismo -->
+        <div class="flex items-start gap-4 p-4 bg-natura-dark border-l-2 border-white/30">
+          <div class="shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+            <span class="text-[11px] font-bold text-white" style="font-family: 'Inter', sans-serif;">7</span>
+          </div>
+          <div>
+            <h3 class="font-heading text-base font-bold text-white mb-1">Organismo</h3>
+            <p class="text-lg text-natura-silverDark leading-relaxed">Un <strong class="text-white">individuo completo</strong> formado por todos los sistemas funcionando de manera integrada. Puede ser unicelular (una bacteria) o pluricelular (un ser humano, un árbol). Es el nivel donde el ser vivo interactúa con su ambiente como una unidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-lg text-natura-silverDark mt-6 italic">Nota: más allá del organismo, existen niveles superiores: población, comunidad, ecosistema, bioma y biosfera. Esos los exploramos en la unidad de Seres Vivos y Ecosistemas.</p>
+    </div>
+  </section>
+
+  <!-- Section 3: Ejemplo con el cuerpo humano -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 300ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Un recorrido por el cuerpo humano</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        Veamos cómo se aplican los niveles de organización usando un ejemplo concreto: el sistema que late en tu pecho en este mismo momento. El sistema circulatorio ilustra perfectamente cómo la materia se va organizando desde lo microscópico hasta el organismo completo.
+      </p>
+
+      <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark p-6 transition-all duration-300 hover:border-natura-bio/30">
+        <div class="relative overflow-hidden rounded-lg mb-4 bg-natura-black/40 flex items-center justify-center p-4">
+          <img src="../../../assets/niveles_organizacion.png" alt="Niveles de Organización Biológica" class="max-h-[380px] w-auto object-contain rounded-md transform hover:scale-[1.04] transition-all duration-500 ease-out cursor-pointer">
+        </div>
+        <p class="font-ui text-[11px] font-bold uppercase tracking-wider text-natura-bio mb-4 text-center">Del Átomo al Organismo: Ejemplo del Sistema Circulatorio</p>
+        <div class="space-y-2 text-xs font-ui">
+          <div class="grid grid-cols-1 sm:grid-cols-7 gap-2">
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-natura-bio block mb-1">1. Átomo</span>
+              <span class="text-natura-silverDark block text-[10px]">Bioelementos (C, H, O, N)</span>
+            </div>
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-natura-water block mb-1">2. Molécula</span>
+              <span class="text-natura-silverDark block text-[10px]">Proteínas, ATP, Agua</span>
+            </div>
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-natura-bio block mb-1">3. Célula</span>
+              <span class="text-natura-silverDark block text-[10px]">Cardiomiocito</span>
+            </div>
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-natura-green block mb-1">4. Tejido</span>
+              <span class="text-natura-silverDark block text-[10px]">Miocardio</span>
+            </div>
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-natura-energy block mb-1">5. Órgano</span>
+              <span class="text-natura-silverDark block text-[10px]">Corazón (Bomba)</span>
+            </div>
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-natura-leaf block mb-1">6. Sistema</span>
+              <span class="text-natura-silverDark block text-[10px]">Circulatorio</span>
+            </div>
+            <div class="p-2 bg-natura-black/20 border border-white/5 rounded text-center">
+              <span class="text-[9px] font-bold uppercase tracking-wider text-white block mb-1">7. Organismo</span>
+              <span class="text-natura-silverDark block text-[10px]">Ser Humano</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        Este mismo recorrido puede hacerse con cualquier sistema del cuerpo o con una planta. Por ejemplo, en una planta: célula vegetal con cloroplastos → tejido de parénquima → hoja (órgano) → sistema de hojas o sistema radicular → planta completa (organismo).
+      </p>
+
+      <div class="sidebar-note">
+        <span class="note-label">Propiedades emergentes</span>
+        En cada nivel aparecen propiedades que no existían en el nivel inferior. Las células cardíacas individuales laten, pero solo cuando se organizan en tejido y forman el corazón pueden bombear sangre. El latido coordinado es una propiedad emergente del tejido.
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight">
+        La clave está en entender que <strong class="text-white">cada nivel se construye sobre el anterior</strong>. Sin átomos no hay moléculas; sin moléculas no hay células; sin células no hay tejidos. Pero también es cierto que cada nivel tiene propiedades que no pueden explicarse solo mirando el nivel inferior. Esta es la magia de la organización biológica.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Preguntas para pensar -->
+  <section class="animate-fadeInUp" style="animation-delay: 400ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Preguntas para pensar</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="space-y-4">
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed">
+            <span class="text-natura-bio font-bold mr-2">1.</span>
+            ¿Por qué decimos que la célula es el primer nivel con vida? ¿Está vivo un átomo de carbono? ¿Y una molécula de ADN por sí sola? Justificá tu respuesta usando los 7 criterios de la vida.
+          </p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed">
+            <span class="text-natura-bio font-bold mr-2">2.</span>
+            Elegí otro sistema del cuerpo humano (digestivo, respiratorio, nervioso) y trazá su recorrido completo por los niveles de organización, desde el átomo hasta el organismo.
+          </p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed">
+            <span class="text-natura-bio font-bold mr-2">3.</span>
+            ¿Qué nivel de organización falta en un organismo unicelular como una bacteria? ¿Significa eso que es menos complejo o simplemente está organizado de otra manera?
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Navigation -->
+  <div class="flex justify-start mt-16 pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="organelas.html" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-natura-bio transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+      <span>Anterior: Organelas Celulares</span>
+    </a>
+  </div>
+
+</article>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body></html>

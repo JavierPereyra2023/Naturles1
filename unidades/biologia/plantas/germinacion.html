@@ -1,0 +1,527 @@
+?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Germinación | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); }
+    .sabias-que { border-left:3px solid #DC2626; background:rgba(220,38,38,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#DC2626; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Plantas</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="estructuras.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Anterior</span>
+        </a>
+        <span class="text-[11px] text-natura-silverDark">3/3</span>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-28 pb-16 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 20%, rgba(220,38,38,0.08) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-natura-bio">Artículo</span>
+        <span class="text-[9px] text-natura-silverDark uppercase tracking-wider">Plantas</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold text-white leading-tight mb-4">Germinación</h1>
+      <p class="font-body text-lg text-natura-silver italic max-w-xl">El momento en que una semilla despierta y comienza una nueva vida.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 pb-20">
+
+  <!-- Section 1: Del embrión a la planta -->
+  <section class="animate-fadeInUp delay-100 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Del embrión a la planta</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        La germinación es el proceso por el cual una <strong class="text-white">semilla</strong> pasa de un estado de latencia (vida suspendida) a un estado de crecimiento activo. Es el <strong class="text-white">nacimiento de una nueva planta</strong>. Dentro de cada semilla hay un <strong class="text-white">embrión</strong> —una planta en miniatura— que espera las condiciones adecuadas para comenzar a desarrollarse.
+      </p>
+
+      <div class="pull-quote">
+        "Una semilla es una planta en pausa. Contiene todo lo necesario para empezar una nueva vida, pero espera el momento justo."
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        El embrión dentro de la semilla ya tiene las estructuras básicas: una <strong class="text-white">radícula</strong> (futura raíz), un <strong class="text-white">tallito embrionario</strong> (plúmula) y uno o dos <strong class="text-white">cotiledones</strong> (hojas embrionarias llenas de nutrientes). Todo esto está protegido por una cubierta llamada <strong class="text-white">tegumento</strong> o cubierta seminal.
+      </p>
+
+      <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark p-6 transition-all duration-300 hover:border-natura-bio/30">
+        <div class="relative overflow-hidden rounded-lg mb-4 bg-natura-black/40 flex items-center justify-center p-4">
+          <img src="../../../assets/semilla_interior.png" alt="Estructura interna de la semilla" class="max-h-[350px] w-auto object-contain rounded-md transform hover:scale-[1.04] transition-all duration-500 ease-out cursor-pointer">
+        </div>
+        <p class="font-ui text-[11px] font-bold uppercase tracking-wider text-natura-bio mb-4 text-center">Anatomía de una Semilla: El Embrión y sus Partes</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-ui">
+          <div class="p-3 bg-natura-black/20 border border-white/5 rounded-lg">
+            <span class="font-bold text-white block mb-1 text-[11px]">Tegumento</span>
+            <span class="text-natura-silverDark leading-relaxed text-[11px]">Cáscara protectora exterior que resguarda al embrión del ambiente exterior y la desecación.</span>
+          </div>
+          <div class="p-3 bg-natura-black/20 border border-white/5 rounded-lg">
+            <span class="font-bold text-white block mb-1 text-[11px]">Cotiledón</span>
+            <span class="text-natura-silverDark leading-relaxed text-[11px]">Reserva de nutrientes que alimentan a la plántula antes de que pueda hacer fotosíntesis.</span>
+          </div>
+          <div class="p-3 bg-natura-black/20 border border-white/5 rounded-lg">
+            <span class="font-bold text-white block mb-1 text-[11px]">Radícula</span>
+            <span class="text-natura-silverDark leading-relaxed text-[11px]">La raíz embrionaria. Es la primera estructura que emerge para absorber agua y anclar la semilla.</span>
+          </div>
+          <div class="p-3 bg-natura-black/20 border border-white/5 rounded-lg">
+            <span class="font-bold text-white block mb-1 text-[11px]">Plúmula</span>
+            <span class="text-natura-silverDark leading-relaxed text-[11px]">El brote o tallito de donde crecerán las primeras hojas verdaderas de la planta adulta.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: ¿Qué necesita una semilla? -->
+  <section class="animate-fadeInUp delay-200 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Qué necesita una semilla?</h2>
+      <div class="accent-line-bio mb-6"></div>
+
+      <div class="sidebar-note">
+        <span class="note-label">¿Luz sí o luz no?</span>
+        Algunas semillas <strong class="text-white">necesitan luz</strong> para germinar (lechuga, petunia). Otras <strong class="text-white">germinan mejor en oscuridad</strong> (cebolla, muchas legumbres). La mayoría de las semillas grandes que sembramos en el aula no necesitan luz para germinar.
+      </div>
+
+      <div class="sabias-que">
+        <span class="sq-label">Sabías que...</span>
+        <p>En 2005, científicos lograron germinar una semilla de palmera datilera de 2000 años de antigüedad encontrada en la fortaleza de Masada, Israel. Las semillas pueden permanecer dormidas por milenios esperando las condiciones ideales.</p>
+      </div>
+
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        Para que una semilla germine se necesitan <strong class="text-white">tres condiciones básicas</strong>: agua, oxígeno y una temperatura adecuada. La luz no siempre es necesaria; de hecho, la mayoría de las semillas germinan bajo tierra, en la oscuridad.
+      </p>
+
+      <div class="space-y-4 mt-6">
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-xl mt-1">
+            <span class="iconify" data-icon="lucide:droplets" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Agua</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">El agua <strong class="text-white">hidrata la semilla</strong>, la hincha y rompe el tegumento. Activa las enzimas que transforman los nutrientes de reserva en alimento utilizable por el embrión. Sin agua, la semilla permanece latente indefinidamente.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-xl mt-1">
+            <span class="iconify" data-icon="lucide:wind" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Oxígeno</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">El embrión necesita <strong class="text-white">respirar</strong>. La germinación es un proceso que consume mucha energía, y esa energía se obtiene mediante la respiración celular, que requiere O₂. Si la semilla está en un suelo encharcado y sin aire, se pudre.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-xl mt-1">
+            <span class="iconify" data-icon="lucide:thermometer" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Temperatura</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">Cada especie tiene un <strong class="text-white">rango óptimo de temperatura</strong> para germinar. La mayoría de las plantas de clima templado germinan entre 15 °C y 25 °C. El frío extremo detiene el proceso; el calor excesivo puede dañar el embrión.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Experimento en el aula -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 300ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Experimento en el aula</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        Una de las experiencias más lindas en Biología de primer año es <strong class="text-white">ver germinar una semilla</strong>. Vamos a hacer un experimento sencillo y fascinante: sembrar porotos (o lentejas) en algodón húmedo y observar día a día cómo la semilla se transforma en una pequeña planta.
+      </p>
+
+      <div class="p-5 bg-natura-dark border border-natura-bio/20 mb-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-3">Materiales</h3>
+        <ul class="space-y-2 text-sm text-natura-silverDark leading-relaxed">
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> 3 o 4 porotos secos (o lentejas, o garbanzos).</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Un frasco de vidrio transparente.</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Algodón.</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Agua (sin excederse: húmedo, no encharcado).</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Un cuaderno para registrar las observaciones.</li>
+        </ul>
+      </div>
+
+      <div class="p-5 bg-natura-dark border border-natura-bio/20 mb-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-3">Procedimiento</h3>
+        <ol class="space-y-3 text-sm text-natura-silverDark leading-relaxed">
+          <li class="flex items-start gap-3"><span class="text-natura-bio font-heading font-bold">1.</span> Colocá algodón en el fondo del frasco, sin compactarlo demasiado.</li>
+          <li class="flex items-start gap-3"><span class="text-natura-bio font-heading font-bold">2.</span> Humedecé el algodón con agua. No debe quedar encharcado, solo húmedo.</li>
+          <li class="flex items-start gap-3"><span class="text-natura-bio font-heading font-bold">3.</span> Colocá los porotos entre el algodón y la pared del frasco, para poder verlos.</li>
+          <li class="flex items-start gap-3"><span class="text-natura-bio font-heading font-bold">4.</span> Dejá el frasco en un lugar con luz indirecta y temperatura templada.</li>
+          <li class="flex items-start gap-3"><span class="text-natura-bio font-heading font-bold">5.</span> Mantené el algodón húmedo agregando unas gotas de agua cada día.</li>
+          <li class="flex items-start gap-3"><span class="text-natura-bio font-heading font-bold">6.</span> Registrá tus observaciones cada día: dibujá lo que ves, medí con una regla, anotá cambios.</li>
+        </ol>
+      </div>
+
+      <div class="sidebar-note">
+        <span class="note-label">¿Qué vas a observar?</span>
+        <strong class="text-white">Día 1–2:</strong> la semilla se hincha y el tegumento se rompe.<br><br>
+        <strong class="text-white">Día 3–4:</strong> aparece la radícula (raíz) blanca que crece hacia abajo.<br><br>
+        <strong class="text-white">Día 5–7:</strong> emerge el tallito con los cotiledones, que se abren como dos hojitas.<br><br>
+        <strong class="text-white">Día 8+:</strong> aparecen las primeras hojas verdaderas, distintas de los cotiledones.
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight">
+        Este experimento te permite ver en tiempo real todo lo que aprendiste sobre las estructuras vegetales. Vas a poder identificar <strong class="text-white">la radícula</strong> (futura raíz), <strong class="text-white">el tallito</strong>, <strong class="text-white">los cotiledones</strong> (las dos "hojitas" iniciales que alimentan a la planta en sus primeros días) y, después de una o dos semanas, <strong class="text-white">las primeras hojas verdaderas</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4: Ciclo de vida -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 400ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Ciclo de vida</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        La vida de una planta con flor sigue un <strong class="text-white">ciclo cerrado</strong> que empieza y termina con una semilla. Entender este ciclo nos ayuda a ver la planta no como algo estático, sino como un organismo en transformación permanente.
+      </p>
+
+      <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark p-6 transition-all duration-300 hover:border-natura-bio/30">
+        <div class="relative overflow-hidden rounded-lg mb-4 bg-natura-black/40 flex items-center justify-center p-4">
+          <img src="../../../assets/ciclo_vida_planta.png" alt="Ciclo de vida de una planta con flor" class="max-h-[350px] w-auto object-contain rounded-md transform hover:scale-[1.04] transition-all duration-500 ease-out cursor-pointer">
+        </div>
+        <p class="font-ui text-[11px] font-bold uppercase tracking-wider text-natura-bio mb-2 text-center">Diagrama: Ciclo de Vida Completo de las Angiospermas</p>
+        <p class="text-[10px] font-ui text-natura-silverDark text-center leading-relaxed max-w-md mx-auto">Desde la semilla latente, pasando por la germinación, el desarrollo de la plántula, la adultez con la flor (órgano reproductor), la formación del fruto por fecundación, y finalmente la liberación de nuevas semillas.</p>
+      </div>
+
+      <div class="space-y-3 mt-6">
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-lg mt-0.5">
+            <span class="iconify" data-icon="lucide:circle-dot" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Semilla</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">Estado de latencia. Contiene el embrión y las reservas de nutrientes. Puede permanecer así mucho tiempo hasta que las condiciones sean favorables.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-lg mt-0.5">
+            <span class="iconify" data-icon="lucide:sprout" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Germinación</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">La semilla absorbe agua, el embrión se activa y la radícula rompe el tegumento. La planta emerge del suelo usando la energía de los cotiledones.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-lg mt-0.5">
+            <span class="iconify" data-icon="lucide:leafy-green" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Plántula</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">Aparecen las primeras hojas verdaderas y comienza la fotosíntesis. La planta ya no depende de los cotiledones (que se secan y caen).</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-lg mt-0.5">
+            <span class="iconify" data-icon="lucide:tree-pine" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Planta adulta</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">Sistema radicular y aéreo completamente desarrollados. La planta crece, produce más hojas y ramas, acumula reservas y se prepara para la reproducción.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3 p-4 bg-natura-dark border border-natura-bio/20">
+          <span class="text-natura-bio text-lg mt-0.5">
+            <span class="iconify" data-icon="lucide:flower-2" data-width="20"></span>
+          </span>
+          <div>
+            <h3 class="font-heading font-bold text-white mb-1">Flor → Fruto → Semilla</h3>
+            <p class="text-sm text-natura-silverDark leading-relaxed">La planta florece. Tras la polinización y fecundación, el ovario se transforma en fruto y los óvulos en semillas. El ciclo se cierra y vuelve a comenzar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Observación con lupa -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 500ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Observación con lupa</h2>
+      <div class="accent-line-bio mb-6"></div>
+
+      <div class="sidebar-note">
+        <span class="note-label">Consejo</span>
+        Si no tenés lupa, podés usar la cámara del celular con zoom. Acercate bien y sacá una foto con buena luz. Después podés hacer zoom en la pantalla y ver detalles que a simple vista se escapan.
+      </div>
+
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        A medida que el poroto germina, vamos a usar una <strong class="text-white">lupa de mano</strong> para observar más de cerca las estructuras que van apareciendo. La lupa nos permite ver detalles que a simple vista no notaríamos y nos acerca al trabajo de un verdadero científico.
+      </p>
+
+      <div class="p-5 bg-natura-dark border border-natura-bio/20 mb-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-3">¿Qué buscar con la lupa?</h3>
+        <ul class="space-y-2 text-sm text-natura-silverDark leading-relaxed">
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-white">Raíz primaria (radícula):</strong> es lo primero que sale de la semilla. Buscá los pelitos absorbentes en la zona cercana a la punta.</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-white">Tallito (hipocótilo):</strong> la parte que conecta la raíz con los cotiledones. Al principio es blanco, después se pone verde.</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-white">Cotiledones:</strong> las dos "hojitas" gruesas que salen primero. Con lupa se puede ver la textura y las venas. Contienen las reservas de alimento del embrión.</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-white">Primeras hojas verdaderas:</strong> cuando aparecen, son distintas a los cotiledones: más finitas y con la forma característica de la especie.</li>
+          <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-white">Tegumento:</strong> la cáscara de la semilla que queda adherida a los cotiledones o cae al suelo. Observá su textura y grosor.</li>
+        </ul>
+      </div>
+
+      <div class="pull-quote">
+        "Observar con atención es la primera herramienta de la ciencia. La lupa no solo agranda lo que vemos: agranda nuestra capacidad de hacer preguntas."
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Preguntas para pensar -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 600ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Preguntas para pensar</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="space-y-5">
+        <div class="p-5 bg-natura-dark border border-natura-bio/10">
+          <p class="text-base text-natura-silverLight leading-relaxed mb-2"><span class="text-natura-bio font-heading font-bold text-xl">1.</span> Si ponemos una semilla en un frasco con agua pero sin oxígeno (por ejemplo, sumergida completamente), ¿germinará? ¿Por qué?</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-natura-bio/10">
+          <p class="text-base text-natura-silverLight leading-relaxed mb-2"><span class="text-natura-bio font-heading font-bold text-xl">2.</span> Durante los primeros días de germinación, la planta no tiene hojas verdes. ¿De dónde saca la energía para crecer? ¿Está haciendo fotosíntesis?</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-natura-bio/10">
+          <p class="text-base text-natura-silverLight leading-relaxed mb-2"><span class="text-natura-bio font-heading font-bold text-xl">3.</span> Diseñá un experimento para probar si las semillas de poroto necesitan luz para germinar. ¿Cómo harías para que unas tengan luz y otras no, manteniendo iguales todas las demás condiciones?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="flex items-center justify-between mt-20 pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="estructuras.html" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+      <span>Estructuras</span>
+    </a>
+    <div></div>
+  </div>
+</article>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body></html>

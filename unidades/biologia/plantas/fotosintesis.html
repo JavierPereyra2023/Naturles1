@@ -1,0 +1,441 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotosíntesis | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); }
+    .img-hover { transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: zoom-in; }
+    .img-hover:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+    .sabias-que { border-left:3px solid #DC2626; background:rgba(220,38,38,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#DC2626; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Plantas</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[11px] text-natura-silverDark">1/3</span>
+        <a href="estructuras.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span>Siguiente</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-28 pb-16 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 20%, rgba(220,38,38,0.08) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-natura-bio">Artículo</span>
+        <span class="text-[9px] text-natura-silverDark uppercase tracking-wider">Plantas</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold text-white leading-tight mb-4">Fotosíntesis</h1>
+      <p class="font-body text-lg text-natura-silver italic max-w-xl">La ecuación química más importante del planeta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 pb-20">
+
+  <!-- Section 1: ¿Por qué las plantas son verdes? -->
+  <section class="animate-fadeInUp delay-100 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Por qué las plantas son verdes?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        El color verde de las hojas no es casualidad. Se debe a un pigmento llamado <strong class="text-white">clorofila</strong>, una molécula que se encuentra dentro de los <strong class="text-white">cloroplastos</strong>, pequeñas organelas presentes en las células vegetales. La clorofila absorbe luz roja y azul del espectro, pero refleja la luz verde. Por eso vemos las hojas de ese color.
+      </p>
+
+      <div class="sidebar-note">
+        <span class="note-label">Dato curioso</span>
+        En otoño, la clorofila se degrada y deja ver otros pigmentos que estaban enmascarados: carotenoides (naranjas) y antocianinas (rojos y púrpuras).
+      </div>
+
+      <div class="sabias-que">
+        <span class="sq-label">Sabías que...</span>
+        <p>La mitad del oxígeno que respiramos no viene de los bosques terrestres sino del fitoplancton marino. Estas algas microscópicas que flotan en los océanos producen entre el 50% y el 80% del oxígeno del planeta.</p>
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        La clorofila no solo da color: es la molécula que <strong class="text-white">captura la energía de la luz solar</strong> y la convierte en energía química. Sin clorofila, la fotosíntesis no sería posible. Existen varios tipos (clorofila <em>a</em>, <em>b</em>, <em>c</em> y <em>d</em>), pero la más abundante en las plantas es la clorofila <em>a</em>.
+      </p>
+
+      <div class="pull-quote">
+        "Las plantas no son verdes porque sí. Son verdes porque la evolución encontró en la clorofila la molécula perfecta para capturar la energía del sol."
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: La ecuación -->
+  <section class="animate-fadeInUp delay-200 mb-14">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">La ecuación</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        La fotosíntesis se puede resumir en una ecuación química que muestra qué entra y qué sale del proceso. Es una de las ecuaciones más importantes de la Biología porque explica cómo la energía solar se transforma en alimento para casi toda la vida en la Tierra.
+      </p>
+
+      <div class="p-6 bg-natura-dark border border-natura-bio/20 my-6 text-center">
+        \[6CO_2 + 6H_2O + \text{luz} \xrightarrow{\text{clorofila}} C_6H_{12}O_6 + 6O_2\]
+      </div>
+
+      <div class="space-y-3 mt-6">
+        <div class="flex items-start gap-3 p-3 bg-natura-dark border border-white/5">
+          <span class="text-natura-bio font-heading font-bold shrink-0">CO₂</span>
+          <p class="text-sm text-natura-silverDark leading-relaxed"><strong class="text-white">Dióxido de carbono:</strong> las plantas lo absorben del aire a través de los estomas, unos poros microscópicos en las hojas.</p>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-natura-dark border border-white/5">
+          <span class="text-natura-bio font-heading font-bold shrink-0">H₂O</span>
+          <p class="text-sm text-natura-silverDark leading-relaxed"><strong class="text-white">Agua:</strong> la absorben del suelo por las raíces y viaja por el tallo hasta las hojas a través del xilema.</p>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-natura-dark border border-white/5">
+          <span class="text-natura-bio font-heading font-bold shrink-0">Luz</span>
+          <p class="text-sm text-natura-silverDark leading-relaxed"><strong class="text-white">Energía lumínica:</strong> proviene del sol. Es capturada por la clorofila y transformada en energía química.</p>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-natura-dark border border-white/5">
+          <span class="text-natura-bio font-heading font-bold shrink-0">C₆H₁₂O₆</span>
+          <p class="text-sm text-natura-silverDark leading-relaxed"><strong class="text-white">Glucosa:</strong> el producto principal. Es un azúcar que la planta usa como fuente de energía y como ladrillo para construir otras moléculas.</p>
+        </div>
+        <div class="flex items-start gap-3 p-3 bg-natura-dark border border-white/5">
+          <span class="text-natura-bio font-heading font-bold shrink-0">O₂</span>
+          <p class="text-sm text-natura-silverDark leading-relaxed"><strong class="text-white">Oxígeno:</strong> se libera como "desecho". Es el oxígeno que respiramos todos los seres vivos aeróbicos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: ¿Cómo funciona? -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 300ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Cómo funciona?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        La fotosíntesis ocurre en los <strong class="text-white">cloroplastos</strong>, unas organelas que contienen clorofila y que están presentes en las células de las hojas y los tallos verdes. Dentro del cloroplasto hay unas estructuras llamadas <strong class="text-white">tilacoides</strong>, apiladas como monedas formando los <strong class="text-white">grana</strong>. Es en la membrana de los tilacoides donde la luz es capturada.
+      </p>
+
+      <div class="bg-natura-dark border border-white/5 p-2 mt-6 mb-5">
+        <img src="../../../../assets/tilacoides.png" alt="Estructura de los tilacoides dentro del cloroplasto" class="w-full h-auto img-hover" loading="lazy">
+        <p class="text-center text-xs text-natura-silverDark mt-2" style="font-family: 'Inter', sans-serif;">Estructura del cloroplasto: tilacoides apilados en grana (donde ocurre la fase luminosa) y estroma (donde ocurre el ciclo de Calvin).</p>
+      </div>
+
+      <div class="bg-natura-dark border border-white/5 p-2 mt-6 mb-5">
+        <img src="../../../../assets/fotosintesis.png" alt="Esquema de la fotosíntesis" class="w-full h-auto img-hover" loading="lazy">
+        <p class="text-center text-xs text-natura-silverDark mt-2" style="font-family: 'Inter', sans-serif;">Esquema completo de la fotosíntesis: fase luminosa en los tilacoides (captura de luz, producción de ATP y NADPH, liberación de O₂) y ciclo de Calvin en el estroma (fijación de CO₂, producción de glucosa).</p>
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        El proceso tiene dos fases principales:
+      </p>
+      <div class="p-5 bg-natura-dark border border-natura-bio/20 mb-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-3">Fase luminosa</h3>
+        <p class="text-sm text-natura-silverDark leading-relaxed mb-3">Ocurre en los tilacoides y <strong class="text-white">necesita luz</strong>. La clorofila captura la energía lumínica y la usa para romper moléculas de agua (fotólisis), liberando O₂. Se produce ATP y NADPH, moléculas cargadas de energía.</p>
+      </div>
+      <div class="p-5 bg-natura-dark border border-natura-bio/20">
+        <h3 class="font-heading text-lg font-bold text-white mb-3">Fase oscura (Ciclo de Calvin)</h3>
+        <p class="text-sm text-natura-silverDark leading-relaxed">Ocurre en el estroma del cloroplasto y <strong class="text-white">no necesita luz directamente</strong> (aunque sí los productos de la fase luminosa). Usa el CO₂, el ATP y el NADPH para fabricar glucosa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Autótrofos vs Heterótrofos -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 400ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Autótrofos vs Heterótrofos</h2>
+      <div class="accent-line-bio mb-6"></div>
+
+      <div class="sidebar-note">
+        <span class="note-label">Definición</span>
+        <strong class="text-white">Autótrofo</strong> (del griego <em>auto</em> = propio, <em>trophos</em> = alimento): organismo que fabrica su propio alimento. <strong class="text-white">Heterótrofo</strong> (<em>hetero</em> = otro): organismo que necesita consumir a otros para alimentarse.
+      </div>
+
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        La vida en la Tierra se organiza alrededor de una distinción fundamental: cómo obtienen los organismos su alimento. Las <strong class="text-white">plantas son autótrofas</strong>: fabrican su propio alimento a partir de sustancias inorgánicas (CO₂, H₂O) y luz solar. Los <strong class="text-white">animales somos heterótrofos</strong>: no podemos fabricar nuestro alimento y debemos consumir a otros seres vivos.
+      </p>
+
+      <div class="pull-quote">
+        "Las plantas fabrican su alimento. Nosotros debemos consumirlo. En esa diferencia reside el equilibrio de todos los ecosistemas del planeta."
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight">
+        Las plantas ocupan el primer eslabón de la cadena alimentaria: son <strong class="text-white">productores</strong>. Todo el resto de los seres vivos depende, directa o indirectamente, de la materia orgánica que ellas fabrican. Sin fotosíntesis no habría oxígeno en la atmósfera ni alimento para los animales. Las plantas literalmente <strong class="text-white">sostienen la vida en la Tierra</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Respiración celular -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 500ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Respiración celular</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        Un error común es pensar que las plantas solo hacen fotosíntesis. La verdad es que <strong class="text-white">las plantas también respiran</strong>. La respiración celular es el proceso por el cual las mitocondrias (presentes tanto en células animales como vegetales) usan oxígeno para "quemar" glucosa y obtener energía (ATP).
+      </p>
+
+      <div class="p-6 bg-natura-dark border border-natura-bio/20 my-6 text-center">
+        \[C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{energía (ATP)}\]
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        Notá que la ecuación de la respiración es <strong class="text-white">exactamente la inversa</strong> de la fotosíntesis. La fotosíntesis consume CO₂ y produce O₂ y glucosa. La respiración consume O₂ y glucosa y produce CO₂.
+      </p>
+
+      <div class="sidebar-note">
+        <span class="note-label">De día y de noche</span>
+        De día, las plantas hacen <strong class="text-white">ambas cosas</strong>: fotosíntesis y respiración. Pero como la fotosíntesis es más intensa, el balance neto es producción de O₂. De noche, solo respiran (consumen O₂ y liberan CO₂), como nosotros.
+      </div>
+
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        Durante el día, la fotosíntesis produce mucho más oxígeno del que la planta consume en su respiración. Por eso decimos que las plantas "purifican el aire". De noche, al no haber luz, la fotosíntesis se detiene y la planta solo respira, consumiendo O₂ y liberando CO₂. Por esta razón <strong class="text-white">no es recomendable dormir con muchas plantas en una habitación cerrada</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: Preguntas para pensar -->
+  <section class="animate-fadeInUp mb-14" style="animation-delay: 600ms;">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Preguntas para pensar</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="space-y-5">
+        <div class="p-5 bg-natura-dark border border-natura-bio/10">
+          <p class="text-base text-natura-silverLight leading-relaxed mb-2"><span class="text-natura-bio font-heading font-bold text-xl">1.</span> Si las plantas fabrican su propio alimento, ¿por qué necesitamos ponerles fertilizante? ¿Qué obtienen del suelo que no obtienen del aire?</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-natura-bio/10">
+          <p class="text-base text-natura-silverLight leading-relaxed mb-2"><span class="text-natura-bio font-heading font-bold text-xl">2.</span> La ecuación de la fotosíntesis muestra que se necesitan 6 moléculas de CO₂ y 6 de H₂O. ¿De dónde sale el oxígeno que se libera: del CO₂ o del H₂O? Investigá el concepto de <strong class="text-white">fotólisis del agua</strong>.</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-natura-bio/10">
+          <p class="text-base text-natura-silverLight leading-relaxed mb-2"><span class="text-natura-bio font-heading font-bold text-xl">3.</span> ¿Qué pasaría con la atmósfera terrestre si todas las plantas del planeta dejaran de hacer fotosíntesis? ¿Cuánto tiempo podrían sobrevivir los animales?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="flex items-center justify-between mt-20 pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <div></div>
+    <a href="estructuras.html" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors">
+      <span>Estructuras</span>
+      <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+    </a>
+  </div>
+</article>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body></html>

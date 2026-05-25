@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unidades de Aprendizaje — Ciencias Naturales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A',
+              dark: '#0E1410',
+              gray: '#161C18',
+              mid: '#242C28',
+              silver: '#A8B5AD',
+              silverLight: '#C8D4CC',
+              silverDark: '#5A6B60',
+              green: '#0D9488',
+              greenLight: '#14B8A6',
+              greenDark: '#0F766E',
+              leaf: '#22C55E',
+              water: '#38BDF8',
+              energy: '#3B82F6',
+              bio: '#DC2626',
+              podcast: '#E8A87C'
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #0D9488; color: #080C0A; }
+    body { font-family: 'Inter', sans-serif; background: #080C0A; color: #D0D8D2; }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+
+    .glow-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .glow-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+    
+    .glow-quimica:hover { border-color: rgba(34, 197, 94, 0.3); box-shadow: 0 20px 40px rgba(34, 197, 94, 0.05); }
+    .glow-fisica:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.05); }
+    .glow-biologia:hover { border-color: rgba(220, 38, 38, 0.3); box-shadow: 0 20px 40px rgba(220, 38, 38, 0.05); }
+
+    .search-overlay-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 48px;
+      color: #C8D4CC;
+      font-size: 15px;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .search-overlay-input:focus { border-color: rgba(13, 148, 136, 0.4); background: rgba(255, 255, 255, 0.06); }
+    .search-overlay-results {
+      margin-top: 8px;
+      background: #0E1410;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      max-height: 380px;
+      overflow-y: auto;
+      display: none;
+    }
+    .search-overlay-results.active { display: block; }
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      transition: background 0.15s;
+      text-decoration: none;
+      color: #C8D4CC;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: rgba(255, 255, 255, 0.04); }
+    .sr-unit-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+    .sr-name { flex: 1; }
+    .sr-subhub { font-size: 11px; color: #5A6B60; margin-left: auto; }
+    .search-no-results { padding: 16px; text-align: center; color: #5A6B60; font-size: 13px; }
+  </style>
+</head>
+<body class="bg-natura-black text-natura-silverLight min-h-screen flex flex-col">
+
+  <!-- Search Overlay -->
+  <div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background: rgba(8,12,10,0.94); backdrop-filter: blur(16px); display: none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+    <div class="flex items-start justify-center pt-24 px-4">
+      <div class="w-full max-w-lg">
+        <div class="relative">
+          <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+          <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, materia, fuerza)" autocomplete="off">
+          <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+            <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+          </button>
+        </div>
+        <div class="search-overlay-results" id="searchOverlayResults"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#080C0A]/90 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="flex items-center justify-between h-14 md:h-16">
+        <div class="flex items-center gap-2 text-xs">
+          <a href="../index.html" class="text-natura-silverDark hover:text-natura-green transition-colors flex items-center gap-1">
+            <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+            <span>Inicio</span>
+          </a>
+          <span class="text-natura-silverDark">/</span>
+          <span class="text-white font-semibold">Unidades</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors flex items-center gap-1.5 text-xs py-1.5 px-3 rounded bg-white/5 border border-white/5" aria-label="Buscar tema">
+            <span class="iconify" data-icon="lucide:search" data-width="14"></span>
+            <span class="hidden sm:inline">Buscar Tema...</span>
+          </button>
+          <a href="../index.html" class="text-xs font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+            <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+            <span>Volver</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow pt-24 pb-16 px-4 md:px-6">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mb-12 animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-0.5 bg-natura-green"></div>
+          <span class="text-xs font-bold uppercase tracking-widest text-natura-green">Programa de Estudios</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white tracking-tight mb-4">
+          Unidades de <span class="text-natura-green">Ciencias Naturales</span>
+        </h1>
+        <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+          Explora los contenidos interactivos, experimentos de laboratorio y recursos didácticos de las tres ramas principales para 1° Año de Secundaria.
+        </p>
+      </div>
+
+      <!-- Units Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Química Card -->
+        <div class="glow-card glow-quimica bg-[#0E1410] flex flex-col justify-between h-full">
+          <div>
+            <div class="relative h-44 overflow-hidden">
+              <img src="https://picsum.photos/seed/chemistry-dashboard/600/400.jpg" alt="Química" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0E1410] via-transparent to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-leaf/20 text-natura-leaf px-2.5 py-1">Eje 1</span>
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-black/60 text-white px-2.5 py-1">Sem 3–9</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2.5 mb-3 text-natura-leaf">
+                <span class="iconify" data-icon="lucide:flask-conical" data-width="22"></span>
+                <h2 class="font-heading text-xl font-bold uppercase tracking-wide text-white">Química</h2>
+              </div>
+              <p class="text-sm text-natura-silver leading-relaxed mb-6">
+                Los materiales y sus transformaciones. Estudio de las propiedades de la materia, la clasificación de mezclas y los métodos físicos de separación. Análisis del agua como sustancia y recurso social.
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-leaf mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Propiedades intensivas y extensivas</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-leaf mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Mezclas homogéneas y heterogéneas</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-leaf mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">El agua como recurso y derecho humano</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 mt-6">
+            <a href="quimica/" class="flex items-center justify-between w-full py-3 px-4 border border-natura-leaf/30 hover:border-natura-leaf text-natura-leaf hover:bg-natura-leaf/5 text-xs font-bold uppercase tracking-wider transition-all">
+              <span>Explorar Química</span>
+              <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Física Card -->
+        <div class="glow-card glow-fisica bg-[#0E1410] flex flex-col justify-between h-full">
+          <div>
+            <div class="relative h-44 overflow-hidden">
+              <img src="https://picsum.photos/seed/physics-dashboard/600/400.jpg" alt="Física" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0E1410] via-transparent to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Ejes 2-3</span>
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-black/60 text-white px-2.5 py-1">Sem 10–20</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2.5 mb-3 text-natura-energy">
+                <span class="iconify" data-icon="lucide:zap" data-width="22"></span>
+                <h2 class="font-heading text-xl font-bold uppercase tracking-wide text-white">Física</h2>
+              </div>
+              <p class="text-sm text-natura-silver leading-relaxed mb-6">
+                Estudio del cambio, la energía y el movimiento. Análisis de las fuerzas y transformaciones energéticas, calor y ondas, y el fascinante modelo del Sistema Solar con su dinámica orbital.
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-energy mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Tipos y fuentes de energía</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-energy mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Calor, temperatura y sonido</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-energy mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Simulador 3D del Sistema Solar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 mt-6">
+            <a href="fisica/" class="flex items-center justify-between w-full py-3 px-4 border border-natura-energy/30 hover:border-natura-energy text-natura-energy hover:bg-natura-energy/5 text-xs font-bold uppercase tracking-wider transition-all">
+              <span>Explorar Física</span>
+              <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Biología Card -->
+        <div class="glow-card glow-biologia bg-[#0E1410] flex flex-col justify-between h-full">
+          <div>
+            <div class="relative h-44 overflow-hidden">
+              <img src="https://picsum.photos/seed/biology-dashboard/600/400.jpg" alt="Biología" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0E1410] via-transparent to-transparent"></div>
+              <div class="absolute top-4 left-4 flex items-center gap-2">
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Eje 4</span>
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-black/60 text-white px-2.5 py-1">Sem 21–34</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2.5 mb-3 text-natura-bio">
+                <span class="iconify" data-icon="lucide:heart-pulse" data-width="22"></span>
+                <h2 class="font-heading text-xl font-bold uppercase tracking-wide text-white">Biología</h2>
+              </div>
+              <p class="text-sm text-natura-silver leading-relaxed mb-6">
+                Interacción y diversidad de los seres vivos. Comprende el estudio celular, las plantas como productores autótrofos, la ecología de poblaciones y el cuerpo humano integrado con ESI y EAI.
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-bio mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Tipos celulares y organelas</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-bio mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Fotosíntesis y fisiología vegetal</span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <span class="iconify text-natura-bio mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span>
+                  <span class="text-xs text-natura-silverLight">Los 10 sistemas del Cuerpo Humano</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 mt-6">
+            <a href="biologia/" class="flex items-center justify-between w-full py-3 px-4 border border-natura-bio/30 hover:border-natura-bio text-natura-bio hover:bg-natura-bio/5 text-xs font-bold uppercase tracking-wider transition-all">
+              <span>Explorar Biología</span>
+              <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative py-8 bg-[#080C0A] border-t border-white/5 mt-12">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 bg-natura-green flex items-center justify-center rounded-sm">
+            <span class="iconify text-[#080C0A]" data-icon="lucide:leaf" data-width="14"></span>
+          </div>
+          <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+          <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors">Inicio</a>
+          <a href="quimica/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+          <a href="fisica/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+          <a href="biologia/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+          <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var topics = [
+      {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+      {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+      {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+      {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"quimica/mezclas/separacion.html",c:"#22C55E"},
+      {n:"Propiedades del agua",u:"Química",s:"Agua",l:"quimica/agua/propiedades-agua.html",c:"#22C55E"},
+      {n:"Ciclo del agua",u:"Química",s:"Agua",l:"quimica/agua/ciclo-agua.html",c:"#22C55E"},
+      {n:"Potabilización",u:"Química",s:"Agua",l:"quimica/agua/potabilizacion.html",c:"#22C55E"},
+      {n:"Formas de energía",u:"Física",s:"Energía",l:"fisica/energia/formas-energia.html",c:"#3B82F6"},
+      {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"fisica/energia/transformaciones.html",c:"#3B82F6"},
+      {n:"Fuentes de energía",u:"Física",s:"Energía",l:"fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+      {n:"Calor y temperatura",u:"Física",s:"Calor",l:"fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+      {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+      {n:"MRU",u:"Física",s:"Movimientos",l:"fisica/movimientos/mru.html",c:"#3B82F6"},
+      {n:"MRUV",u:"Física",s:"Movimientos",l:"fisica/movimientos/mruv.html",c:"#3B82F6"},
+      {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+      {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+      {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+      {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+      {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+      {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+      {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+      {n:"Tipos de células",u:"Biología",s:"Células",l:"biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+      {n:"Organelas",u:"Biología",s:"Células",l:"biologia/celulas/organelas.html",c:"#DC2626"},
+      {n:"Niveles organización",u:"Biología",s:"Células",l:"biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+      {n:"Poblaciones",u:"Biología",s:"Ecología",l:"biologia/ecologia/poblaciones.html",c:"#DC2626"},
+      {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+      {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+      {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"biologia/plantas/fotosintesis.html",c:"#DC2626"},
+      {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"biologia/plantas/estructuras.html",c:"#DC2626"},
+      {n:"Germinación",u:"Biología",s:"Plantas",l:"biologia/plantas/germinacion.html",c:"#DC2626"},
+      {n:"Alimentación animal",u:"Biología",s:"Animales",l:"biologia/animales/alimentacion.html",c:"#DC2626"},
+      {n:"Vertebrados",u:"Biología",s:"Animales",l:"biologia/animales/vertebrados.html",c:"#DC2626"},
+      {n:"Invertebrados",u:"Biología",s:"Animales",l:"biologia/animales/invertebrados.html",c:"#DC2626"},
+      {n:"Fauna local",u:"Biología",s:"Animales",l:"biologia/animales/fauna-local.html",c:"#DC2626"},
+      {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+      {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+      {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+      {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+      {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+      {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
+      {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+      {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+      {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+    ];
+
+    var overlay = document.getElementById('searchOverlay');
+    var input = document.getElementById('globalSearch');
+    var results = document.getElementById('searchOverlayResults');
+    if(!overlay||!input||!results)return;
+
+    function filter(val){
+      results.innerHTML='';
+      if(!val.trim()){results.classList.remove('active');return;}
+      var q=val.toLowerCase().trim();
+      var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+      if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+      else{
+        m.slice(0,12).forEach(function(t){
+          var a=document.createElement('a');
+          a.href=t.l;
+          a.className='search-result-item';
+          a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+          results.appendChild(a);
+        });
+      }
+      results.classList.add('active');
+    }
+
+    input.addEventListener('input',function(){filter(this.value);});
+    input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+    document.addEventListener('keydown',function(e){
+      if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+      if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+    });
+  })();
+  </script>
+</body>
+</html>

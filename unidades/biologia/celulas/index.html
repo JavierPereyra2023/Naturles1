@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Células | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); }
+  </style>
+</head>
+<body>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Células</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Células</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-16 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 30%, rgba(220,38,38,0.06) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-natura-bio">Biología · Unidad 3</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold text-white leading-tight mb-6">Células</h1>
+      <p class="font-body text-lg md:text-xl text-natura-silver leading-relaxed max-w-2xl">
+        La unidad básica de la vida. Tipos de células, sus organelas y cómo se organizan para formar organismos complejos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="pb-16">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Card 1 -->
+      <a href="tipos-celulas.html" class="content-card bg-natura-dark p-6 group block animate-fadeInUp delay-100">
+        <div class="w-10 h-10 rounded-full bg-natura-bio/10 flex items-center justify-center mb-4 group-hover:bg-natura-bio/20 transition-colors">
+          <span class="iconify text-natura-bio" data-icon="lucide:shapes" data-width="20"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold text-white mb-3 group-hover:text-natura-bio transition-colors">Tipos de Células</h3>
+        <p class="text-lg text-natura-silverDark leading-relaxed mb-4">Eucariota y procariota. Célula animal y vegetal. Diferencias y similitudes.</p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Eucariota</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Procariota</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Animal</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Vegetal</span>
+        </div>
+        <span class="text-[11px] font-bold uppercase tracking-wider text-natura-bio flex items-center gap-1" style="font-family: 'Inter', sans-serif;">
+          Leer artículo <span class="iconify" data-icon="lucide:arrow-right" data-width="12"></span>
+        </span>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="organelas.html" class="content-card bg-natura-dark p-6 group block animate-fadeInUp delay-200">
+        <div class="w-10 h-10 rounded-full bg-natura-bio/10 flex items-center justify-center mb-4 group-hover:bg-natura-bio/20 transition-colors">
+          <span class="iconify text-natura-bio" data-icon="lucide:box" data-width="20"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold text-white mb-3 group-hover:text-natura-bio transition-colors">Organelas Celulares</h3>
+        <p class="text-lg text-natura-silverDark leading-relaxed mb-4">Núcleo, mitocondria, ribosomas, retículo endoplasmático, Golgi, cloroplastos, membrana. Funciones de cada una.</p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Núcleo</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Mitocondria</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Cloroplasto</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Membrana</span>
+        </div>
+        <span class="text-[11px] font-bold uppercase tracking-wider text-natura-bio flex items-center gap-1" style="font-family: 'Inter', sans-serif;">
+          Leer artículo <span class="iconify" data-icon="lucide:arrow-right" data-width="12"></span>
+        </span>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="niveles-organizacion.html" class="content-card bg-natura-dark p-6 group block animate-fadeInUp" style="animation-delay: 300ms;">
+        <div class="w-10 h-10 rounded-full bg-natura-bio/10 flex items-center justify-center mb-4 group-hover:bg-natura-bio/20 transition-colors">
+          <span class="iconify text-natura-bio" data-icon="lucide:layers" data-width="20"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold text-white mb-3 group-hover:text-natura-bio transition-colors">Niveles de Organización</h3>
+        <p class="text-lg text-natura-silverDark leading-relaxed mb-4">Átomo → Molécula → Célula → Tejido → Órgano → Sistema → Organismo. De lo simple a lo complejo.</p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Tejido</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Órgano</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Sistema</span>
+          <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-natura-bio/20 text-natura-bio" style="font-family: 'Inter', sans-serif;">Organismo</span>
+        </div>
+        <span class="text-[11px] font-bold uppercase tracking-wider text-natura-bio flex items-center gap-1" style="font-family: 'Inter', sans-serif;">
+          Leer artículo <span class="iconify" data-icon="lucide:arrow-right" data-width="12"></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body></html>

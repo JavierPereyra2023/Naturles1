@@ -1,0 +1,458 @@
+﻿?<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Endocrino — Las Hormonas | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Cuerpo Humano</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">Sistema Endocrino</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · ESI</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/endocrine-bio/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · El Cuerpo Humano</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Sistema <span class="text-natura-bio">Endocrino</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">Las hormonas son los mensajeros químicos del cuerpo. Viajan por la sangre y regulan el crecimiento, el metabolismo, las emociones y los cambios de la pubertad.</p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark bg-natura-mid/50 px-3 py-1.5">Hormonas</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark bg-natura-mid/50 px-3 py-1.5">Insulina</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark bg-natura-mid/50 px-3 py-1.5">Adrenalina</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark bg-natura-mid/50 px-3 py-1.5">Pubertad</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark bg-natura-mid/50 px-3 py-1.5">Glándulas</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark bg-natura-mid/50 px-3 py-1.5">Crecimiento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/20 to-transparent"></div>
+
+<!-- MAIN -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-4xl mx-auto space-y-14">
+
+    <!-- 01 · ¿Qué es el sistema endocrino? -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">¿Qué es el sistema endocrino?</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card bg-natura-dark p-5 md:p-6 rounded-lg">
+        <div class="highlight-box p-4 md:p-5">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed">Regular procesos lentos y duraderos mediante hormonas. A diferencia del sistema nervioso (respuestas rápidas), el endocrino actúa de forma sostenida.</p>
+        </div>
+        <div class="flex items-start gap-3 mt-5">
+          <span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:target" data-width="20"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">El sistema endocrino está formado por <strong class="text-white font-semibold">glándulas</strong> que liberan hormonas directamente al torrente sanguíneo. A diferencia de otros sistemas del cuerpo, no tiene conductos: las hormonas viajan libres por la sangre hasta encontrar sus células "blanco" u órganos diana.</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 02 · ¿Qué son las hormonas? -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">¿Qué son las hormonas?</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-5">Las hormonas son mensajeros químicos que viajan por la sangre. Se producen en glándulas y actúan sobre órganos o tejidos específicos, a distancia.</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="space-y-3">
+          <div class="flex items-start gap-3 bg-natura-mid/30 p-3 rounded-lg">
+            <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:droplets" data-width="18"></span>
+            <div>
+              <p class="text-sm font-semibold text-white">Insulina</p>
+              <p class="text-lg text-natura-silver leading-relaxed">Regula el nivel de glucosa en sangre. Producida por el páncreas.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 bg-natura-mid/30 p-3 rounded-lg">
+            <span class="iconify text-natura-energy mt-0.5 shrink-0" data-icon="lucide:droplets" data-width="18"></span>
+            <div>
+              <p class="text-sm font-semibold text-white">Adrenalina</p>
+              <p class="text-lg text-natura-silver leading-relaxed">Hormona del estrés. Prepara al cuerpo para reaccionar rápido.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 bg-natura-mid/30 p-3 rounded-lg">
+            <span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:droplets" data-width="18"></span>
+            <div>
+              <p class="text-sm font-semibold text-white">Hormona del crecimiento</p>
+              <p class="text-lg text-natura-silver leading-relaxed">Producida por la hipófisis. Regula el crecimiento de huesos y músculos.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 bg-natura-mid/30 p-3 rounded-lg">
+            <span class="iconify text-natura-water mt-0.5 shrink-0" data-icon="lucide:droplets" data-width="18"></span>
+            <div>
+              <p class="text-sm font-semibold text-white">Tiroxina</p>
+              <p class="text-lg text-natura-silver leading-relaxed">Producida por la tiroides. Regula el metabolismo (cómo usamos la energía).</p>
+            </div>
+          </div>
+        </div>
+        <div class="content-card bg-natura-dark p-5 rounded-lg">
+          <p class="text-sm font-semibold text-white mb-3">Glándulas principales</p>
+          <ul class="space-y-2 text-xs text-natura-silver">
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-natura-bio rounded-full shrink-0"></span> <strong class="text-natura-silverLight font-medium">Hipófisis</strong> (cerebro) — "la glándula maestra"</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-natura-bio rounded-full shrink-0"></span> <strong class="text-natura-silverLight font-medium">Tiroides</strong> (cuello)</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-natura-bio rounded-full shrink-0"></span> <strong class="text-natura-silverLight font-medium">Páncreas</strong> (abdomen)</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-natura-bio rounded-full shrink-0"></span> <strong class="text-natura-silverLight font-medium">Glándulas suprarrenales</strong> (sobre los riñones)</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-natura-bio rounded-full shrink-0"></span> <strong class="text-natura-silverLight font-medium">Ovarios</strong> / <strong class="text-natura-silverLight font-medium">Testículos</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 03 · Las glándulas principales -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Las glándulas principales</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card bg-natura-dark rounded-lg overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs md:text-sm">
+            <thead>
+              <tr class="border-b border-white/05">
+                <th class="text-left py-3 px-4 font-semibold text-natura-bio uppercase tracking-wider text-[11px]">Glándula</th>
+                <th class="text-left py-3 px-4 font-semibold text-natura-bio uppercase tracking-wider text-[11px]">Ubicación</th>
+                <th class="text-left py-3 px-4 font-semibold text-natura-bio uppercase tracking-wider text-[11px]">Hormona(s)</th>
+                <th class="text-left py-3 px-4 font-semibold text-natura-bio uppercase tracking-wider text-[11px]">Función</th>
+              </tr>
+            </thead>
+            <tbody class="text-natura-silver">
+              <tr class="border-b border-white/05 hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-4 font-medium text-white">Hipófisis</td>
+                <td class="py-3 px-4">Base del cerebro</td>
+                <td class="py-3 px-4">Hormona del crecimiento</td>
+                <td class="py-3 px-4">Crecimiento general</td>
+              </tr>
+              <tr class="border-b border-white/05 hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-4 font-medium text-white">Tiroides</td>
+                <td class="py-3 px-4">Cuello</td>
+                <td class="py-3 px-4">Tiroxina</td>
+                <td class="py-3 px-4">Metabolismo</td>
+              </tr>
+              <tr class="border-b border-white/05 hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-4 font-medium text-white">Páncreas</td>
+                <td class="py-3 px-4">Abdomen</td>
+                <td class="py-3 px-4">Insulina, glucagón</td>
+                <td class="py-3 px-4">Regula glucosa en sangre</td>
+              </tr>
+              <tr class="border-b border-white/05 hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-4 font-medium text-white">Suprarrenales</td>
+                <td class="py-3 px-4">Sobre los riñones</td>
+                <td class="py-3 px-4">Adrenalina, cortisol</td>
+                <td class="py-3 px-4">Respuesta al estrés</td>
+              </tr>
+              <tr class="border-b border-white/05 hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-4 font-medium text-white">Ovarios</td>
+                <td class="py-3 px-4">Pelvis femenina</td>
+                <td class="py-3 px-4">Estrógenos, progesterona</td>
+                <td class="py-3 px-4">Caracteres sexuales femeninos</td>
+              </tr>
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="py-3 px-4 font-medium text-white">Testículos</td>
+                <td class="py-3 px-4">Escroto masculino</td>
+                <td class="py-3 px-4">Testosterona</td>
+                <td class="py-3 px-4">Caracteres sexuales masculinos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 04 · Hormonas sexuales y pubertad -->
+    <section class="animate-fadeInUp delay-300">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Hormonas sexuales y pubertad</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card bg-natura-dark p-5 md:p-6 rounded-lg">
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-5">Durante la pubertad, el sistema endocrino activa la producción de hormonas sexuales que provocan los cambios físicos y el desarrollo de los caracteres sexuales secundarios.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="stat-box bg-natura-mid/20 p-4 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:flask-conical" data-width="18"></span>
+              <p class="font-semibold text-white text-sm">Testosterona</p>
+            </div>
+            <p class="text-lg text-natura-silver leading-relaxed">Producida en los testículos. Provoca cambio de voz, crecimiento de vello facial y corporal, desarrollo muscular.</p>
+          </div>
+          <div class="stat-box bg-natura-mid/20 p-4 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-greenLight" data-icon="lucide:flask-conical" data-width="18"></span>
+              <p class="font-semibold text-white text-sm">Estrógenos</p>
+            </div>
+            <p class="text-lg text-natura-silver leading-relaxed">Producidos en los ovarios. Provocan desarrollo de mamas, ensanchamiento de caderas, inicio del ciclo menstrual.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 05 · Sistema endocrino vs. Sistema nervioso -->
+    <section class="animate-fadeInUp delay-400">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Sistema endocrino vs. Sistema nervioso</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="content-card bg-natura-dark p-5 rounded-lg">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:droplets" data-width="20"></span>
+            <p class="font-heading font-semibold text-white text-sm">Sistema Endocrino</p>
+          </div>
+          <ul class="space-y-3 text-xs text-natura-silver">
+            <li class="flex items-start gap-2">
+              <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="14"></span>
+              <span>Mensajes por <strong class="text-natura-silverLight font-medium">hormonas</strong> en la sangre</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="14"></span>
+              <span>Respuesta <strong class="text-natura-energy font-medium">LENTA</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="iconify text-natura-bio mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="14"></span>
+              <span>Efecto <strong class="text-natura-greenLight font-medium">DURADERO</strong></span>
+            </li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5 rounded-lg">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-water" data-icon="lucide:zap" data-width="20"></span>
+            <p class="font-heading font-semibold text-white text-sm">Sistema Nervioso</p>
+          </div>
+          <ul class="space-y-3 text-xs text-natura-silver">
+            <li class="flex items-start gap-2">
+              <span class="iconify text-natura-water mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="14"></span>
+              <span>Mensajes por <strong class="text-natura-silverLight font-medium">impulsos eléctricos</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="iconify text-natura-water mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="14"></span>
+              <span>Respuesta <strong class="text-natura-energy font-medium">RÁPIDA</strong></span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="iconify text-natura-water mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="14"></span>
+              <span>Efecto <strong class="text-natura-greenLight font-medium">BREVE</strong></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 06 · Dato curioso -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Dato curioso</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="stat-box bg-natura-dark p-5 rounded-lg flex items-center gap-4">
+        <div class="w-12 h-12 bg-natura-bio/15 rounded-lg flex items-center justify-center shrink-0">
+          <span class="iconify text-natura-bio" data-icon="lucide:brain" data-width="24"></span>
+        </div>
+        <div>
+          <p class="text-2xl md:text-3xl font-heading font-bold text-natura-bio">100.000 millones</p>
+          <p class="text-xs md:text-base text-natura-silver mt-1">de neuronas tiene el cerebro, pero también es un órgano endocrino: produce hormonas que regulan el sueño, el apetito y las emociones.</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 07 · Preguntas para pensar -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Preguntas para pensar</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="space-y-3">
+        <div class="flex items-start gap-3 bg-natura-mid/20 p-4 rounded-lg">
+          <span class="iconify text-natura-energy shrink-0 mt-0.5" data-icon="lucide:help-circle" data-width="18"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">¿Por qué la diabetes es una enfermedad del sistema endocrino?</p>
+        </div>
+        <div class="flex items-start gap-3 bg-natura-mid/20 p-4 rounded-lg">
+          <span class="iconify text-natura-energy shrink-0 mt-0.5" data-icon="lucide:help-circle" data-width="18"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">¿Qué hormonas se activan cuando tenés miedo o estrés?</p>
+        </div>
+        <div class="flex items-start gap-3 bg-natura-mid/20 p-4 rounded-lg">
+          <span class="iconify text-natura-energy shrink-0 mt-0.5" data-icon="lucide:help-circle" data-width="18"></span>
+          <p class="text-lg text-natura-silver leading-relaxed">¿Por qué los cambios de la pubertad no ocurren todos al mismo tiempo?</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- NAVIGATION -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <a href="alimentacion.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Alimentación</span>
+      </a>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span>Todos</span>
+      </a>
+      <a href="musculos.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Músculos</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+</body></html>
