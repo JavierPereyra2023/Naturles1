@@ -1,4 +1,4 @@
-?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -108,7 +108,7 @@
   <div class="max-w-4xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14">
       <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
-        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -191,6 +191,116 @@
           </div>
         </div>
       </div>
+
+      <!-- ANIMACIÓN: time-lapse de la germinación -->
+      <div class="my-8 overflow-hidden rounded-xl border border-white/5 bg-natura-dark transition-all duration-300 hover:border-natura-bio/30">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify" data-icon="lucide:sprout" data-width="16" style="color:#22C55E;"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#22C55E;">Time-lapse · Dos semanas de germinación en 14 segundos</span>
+        </div>
+        <div class="px-3">
+          <svg id="germSvg" viewBox="0 0 640 380" class="w-full max-w-lg mx-auto" role="img" aria-label="Animación de la germinación: la radícula baja, el tallo sube y aparecen las hojas">
+            <!-- cielo y suelo -->
+            <line x1="0" y1="210" x2="640" y2="210" stroke="rgba(120,72,40,0.7)" stroke-width="2"/>
+            <rect x="0" y="210" width="640" height="170" fill="rgba(120,72,40,0.18)"/>
+            <text x="14" y="200" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif">aire y luz</text>
+            <text x="14" y="228" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif">suelo húmedo</text>
+            <!-- gotas de agua (fase 1) -->
+            <g id="germAgua" fill="#38BDF8">
+              <circle cx="290" cy="252" r="4"/><circle cx="352" cy="246" r="4"/><circle cx="312" cy="270" r="3.5"/><circle cx="338" cy="268" r="3.5"/>
+            </g>
+            <!-- raíces -->
+            <path id="germRaiz" d="M320 248 C318 278 326 300 318 332" fill="none" stroke="#D8C8A8" stroke-width="5" stroke-linecap="round"/>
+            <path id="germRaizB1" d="M319 280 C306 290 298 300 290 312" fill="none" stroke="#D8C8A8" stroke-width="3" stroke-linecap="round"/>
+            <path id="germRaizB2" d="M322 296 C334 306 342 314 350 324" fill="none" stroke="#D8C8A8" stroke-width="3" stroke-linecap="round"/>
+            <!-- tallo -->
+            <path id="germTallo" d="M320 238 C322 212 317 185 320 152 C321 140 320 130 320 120" fill="none" stroke="#16A34A" stroke-width="6" stroke-linecap="round"/>
+            <!-- semilla -->
+            <g id="germSemilla" transform="translate(320 238)">
+              <ellipse rx="16" ry="11" fill="#C8A86B" stroke="#8A6A3B" stroke-width="2"/>
+              <path d="M-14 -3 C-4 -8 6 -8 14 -2" stroke="#8A6A3B" stroke-width="1.5" fill="none"/>
+            </g>
+            <!-- cotiledones -->
+            <g id="germCoti" transform="translate(320 152)">
+              <path d="M0 0 C-14 -4 -30 4 -34 14 C-22 20 -6 14 0 0 Z" fill="#A3C76D" stroke="#7BA84A" stroke-width="1.5"/>
+              <path d="M0 0 C14 -4 30 4 34 14 C22 20 6 14 0 0 Z" fill="#A3C76D" stroke="#7BA84A" stroke-width="1.5"/>
+            </g>
+            <!-- hojas verdaderas -->
+            <g id="germHojas" transform="translate(320 120)">
+              <path d="M0 0 C-18 -10 -42 -6 -52 8 C-38 22 -12 16 0 0 Z" fill="rgba(34,197,94,0.45)" stroke="#22C55E" stroke-width="1.8"/>
+              <path d="M0 0 C18 -10 42 -6 52 8 C38 22 12 16 0 0 Z" fill="rgba(34,197,94,0.45)" stroke="#22C55E" stroke-width="1.8"/>
+              <path d="M0 0 C-2 -14 2 -24 0 -34" stroke="#22C55E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M0 -34 C-10 -42 -22 -40 -28 -32 C-20 -24 -6 -26 0 -34 Z" fill="rgba(34,197,94,0.45)" stroke="#22C55E" stroke-width="1.5"/>
+            </g>
+            <!-- etiqueta de fase -->
+            <text id="germFase" x="320" y="30" fill="#22C55E" font-size="13" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">1 · La semilla absorbe agua</text>
+            <!-- barra de progreso -->
+            <rect x="120" y="362" width="400" height="4" rx="2" fill="rgba(255,255,255,0.08)"/>
+            <rect id="germBarra" x="120" y="362" width="0" height="4" rx="2" fill="#22C55E"/>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 pt-2 text-sm text-natura-silverDark leading-relaxed">
+          Lo que en el aula tarda una o dos semanas, acá pasa en segundos. Fijate en el orden: <strong class="text-white">primero baja la raíz</strong> (para conseguir agua y anclarse), <strong class="text-white">después sube el tallo</strong>. Los cotiledones alimentan a la plántula hasta que las hojas verdaderas empiezan a hacer fotosíntesis — entonces se secan y caen: ya cumplieron su misión.
+        </p>
+      </div>
+      <script>
+      (function(){
+        var svg = document.getElementById('germSvg');
+        if (!svg) return;
+        function prep(id) {
+          var el = document.getElementById(id);
+          var L = el.getTotalLength();
+          el.style.strokeDasharray = L;
+          el.style.strokeDashoffset = L;
+          return { el: el, L: L };
+        }
+        var raiz = prep('germRaiz'), rb1 = prep('germRaizB1'), rb2 = prep('germRaizB2'), tallo = prep('germTallo');
+        var agua = document.getElementById('germAgua');
+        var semilla = document.getElementById('germSemilla');
+        var coti = document.getElementById('germCoti');
+        var hojas = document.getElementById('germHojas');
+        var fase = document.getElementById('germFase');
+        var barra = document.getElementById('germBarra');
+        var fases = [
+          [0.00, '1 · La semilla absorbe agua (imbibición)'],
+          [0.14, '2 · La radícula rompe el tegumento y baja'],
+          [0.38, '3 · El tallito sube buscando la luz'],
+          [0.60, '4 · Los cotiledones se despliegan'],
+          [0.78, '5 · Hojas verdaderas: ¡empieza la fotosíntesis!']
+        ];
+        var DUR = 14;
+        function k(p, a, b) { return Math.max(0, Math.min(1, (p - a) / (b - a))); }
+        function frame(ms) {
+          var p = (ms / 1000 % DUR) / DUR;
+          // 1: gotas de agua y semilla que se hincha
+          agua.setAttribute('opacity', p < 0.2 ? (0.5 + 0.5 * Math.sin(ms / 180)) : Math.max(0, 1 - k(p, 0.2, 0.3)));
+          var sw = 1 + 0.15 * k(p, 0, 0.14) - 0.3 * k(p, 0.75, 0.95); // se hincha y al final se consume
+          semilla.setAttribute('transform', 'translate(320 238) scale(' + sw + ')');
+          semilla.setAttribute('opacity', 1 - 0.6 * k(p, 0.75, 0.95));
+          // 2: raíz principal y secundarias
+          raiz.el.style.strokeDashoffset = raiz.L * (1 - k(p, 0.14, 0.40));
+          rb1.el.style.strokeDashoffset = rb1.L * (1 - k(p, 0.30, 0.50));
+          rb2.el.style.strokeDashoffset = rb2.L * (1 - k(p, 0.34, 0.54));
+          // 3: tallo
+          tallo.el.style.strokeDashoffset = tallo.L * (1 - k(p, 0.38, 0.66));
+          // 4: cotiledones
+          var kc = k(p, 0.60, 0.74), marchito = k(p, 0.88, 1);
+          coti.setAttribute('transform', 'translate(320 152) scale(' + kc * (1 - 0.35 * marchito) + ')');
+          coti.setAttribute('opacity', kc * (1 - 0.7 * marchito));
+          // 5: hojas verdaderas
+          var kh = k(p, 0.78, 0.96);
+          hojas.setAttribute('transform', 'translate(320 120) scale(' + kh + ')');
+          hojas.setAttribute('opacity', kh);
+          // etiqueta y barra
+          var f = fases[0];
+          for (var i = 0; i < fases.length; i++) { if (p >= fases[i][0]) f = fases[i]; }
+          fase.textContent = f[1];
+          barra.setAttribute('width', (400 * p).toFixed(1));
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+      </script>
     </div>
   </section>
 
@@ -431,7 +541,7 @@
         <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
         <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
         <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
       </div>
@@ -456,49 +566,49 @@
 <script>
 (function(){
   var topics = [
-    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
-    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
-    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
-    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
-    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
-    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
-    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
-    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
-    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
-    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
-    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
-    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
-    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
-    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
-    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
-    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
-    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
-    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
-    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
-    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
-    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
-    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
-    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
-    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
-    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
-    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
-    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
-    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
-    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
-    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
-    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
-    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
-    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
-    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
-    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
-    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
-    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
-    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
-    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
-    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
-    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
-    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
-    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
   ];
 
   var overlay = document.getElementById('searchOverlay');

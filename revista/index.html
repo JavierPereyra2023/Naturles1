@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -17,9 +17,9 @@
               bg: '#0C100E',
               paper: '#141A16',
               paperLight: '#1A221E',
-              gold: '#F97316',
-              goldLight: '#FB923C',
-              goldDark: '#EA580C',
+              gold: '#8B5CF6',
+              goldLight: '#A78BFA',
+              goldDark: '#7C3AED',
               text: '#D4D0C8',
               textMuted: '#9A958A',
               textDim: '#6B665E',
@@ -39,12 +39,12 @@
   </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    ::selection { background: #F97316; color: #0C100E; }
+    ::selection { background: #8B5CF6; color: #0C100E; }
     body { font-family: '"Cormorant Garamond"', Georgia, serif; background: #0C100E; color: #D4D0C8; }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0C100E; }
-    ::-webkit-scrollbar-thumb { background: #F97316; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 3px; }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -68,16 +68,16 @@
       line-height: 0.75;
       padding-right: 12px;
       padding-top: 4px;
-      color: #F97316;
+      color: #8B5CF6;
       font-weight: 700;
     }
 
     .article-card {
-      border: 1px solid rgba(201, 169, 110, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.1);
       transition: all 0.4s ease;
     }
     .article-card:hover {
-      border-color: rgba(201, 169, 110, 0.35);
+      border-color: rgba(139, 92, 246, 0.35);
       transform: translateY(-4px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
@@ -85,7 +85,7 @@
     .accent-line-revista {
       width: 80px;
       height: 2px;
-      background: linear-gradient(90deg, #F97316, transparent);
+      background: linear-gradient(90deg, #8B5CF6, transparent);
     }
 
     .figure-caption {
@@ -97,13 +97,13 @@
 
     .pullquote {
       font-family: 'Playfair Display', Georgia, serif;
-      border-left: 3px solid #F97316;
+      border-left: 3px solid #8B5CF6;
       padding-left: 20px;
     }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#D4D0C8; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
-.search-overlay-input:focus { border-color:rgba(249,115,22,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input:focus { border-color:rgba(139,92,246,0.4); background:rgba(255,255,255,0.06); }
 .search-overlay-input::placeholder { color:#9A958A; }
 .search-overlay-results { margin-top:8px; background:#141A16; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
 .search-overlay-results.active { display:block; }
@@ -133,11 +133,11 @@
 </div>
 
 <!-- Navigation Bar -->
-<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(12,16,14,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(249,115,22,0.1);">
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(12,16,14,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(139,92,246,0.1);">
   <div class="max-w-6xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14 md:h-16">
       <div class="flex items-center gap-3">
-        <a href="../index.html" class="text-revista-textDim hover:text-revista-gold transition-colors flex items-center gap-1" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../inicio.html" class="text-revista-textDim hover:text-revista-gold transition-colors flex items-center gap-1" style="font-family: 'Inter', sans-serif; font-size: 12px;">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -298,7 +298,7 @@
       </div>
 
       <!-- ¿Qué son los IG Nobel? -->
-      <div class="bg-revista-paper border border-revista-line p-5" style="border-left: 3px solid #F97316;">
+      <div class="bg-revista-paper border border-revista-line p-5" style="border-left: 3px solid #8B5CF6;">
         <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-revista-gold mb-3" style="font-family: 'Inter', sans-serif;">¿Qué son los IG Nobel?</h4>
         <p class="text-base text-revista-textMuted leading-relaxed mb-3">Los Premios IG Nobel son una parodia de los Premios Nobel que se otorgan cada año a investigaciones científicas que <span class="text-revista-gold">"primero hacen reír, y luego hacen pensar"</span>.</p>
         <p class="text-base text-revista-textMuted leading-relaxed">Organizados por la revista <em>Annals of Improbable Research</em>, se entregan en una ceremonia en Harvard desde 1991. Muchos ganadores del IG Nobel luego han hecho contribuciones científicas serias.</p>
@@ -323,7 +323,7 @@
         <span class="text-[11px] text-revista-textDim ml-2">Cs. Naturales · 1° Año</span>
       </div>
       <div class="flex items-center gap-6" style="font-family: 'Inter', sans-serif;">
-        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-revista-textDim hover:text-revista-gold transition-colors">Inicio</a>
+        <a href="../inicio.html" class="text-[11px] uppercase tracking-wider text-revista-textDim hover:text-revista-gold transition-colors">Inicio</a>
         <span class="text-[11px] uppercase tracking-wider text-revista-textDim">Artículos de divulgación científica</span>
       </div>
     </div>
@@ -345,39 +345,39 @@
 <script>
 (function(){
   var topics = [
-    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"./unidades/quimica/materia-propiedades/que-es-la-materia.html",c:"#4ADE80"},
-    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"./unidades/quimica/mezclas/tipos-mezclas.html",c:"#4ADE80"},
-    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"./unidades/quimica/mezclas/separacion.html",c:"#4ADE80"},
-    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"./unidades/quimica/agua/propiedades-agua.html",c:"#4ADE80"},
-    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"./unidades/quimica/agua/ciclo-agua.html",c:"#4ADE80"},
-    {n:"Potabilización",u:"Química",s:"Agua",l:"./unidades/quimica/agua/potabilizacion.html",c:"#4ADE80"},
-    {n:"Formas de energía",u:"Física",s:"Energía",l:"./unidades/fisica/energia/formas-energia.html",c:"#FBBF24"},
-    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"./unidades/fisica/energia/transformaciones.html",c:"#FBBF24"},
-    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"./unidades/fisica/calor-sonido/calor-temperatura.html",c:"#FBBF24"},
-    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"./unidades/fisica/calor-sonido/ondas.html",c:"#FBBF24"},
-    {n:"MRU",u:"Física",s:"Movimientos",l:"./unidades/fisica/movimientos/mru.html",c:"#FBBF24"},
-    {n:"MRUV",u:"Física",s:"Movimientos",l:"./unidades/fisica/movimientos/mruv.html",c:"#FBBF24"},
-    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"./unidades/fisica/sistema-solar/sol-planetas.html",c:"#FBBF24"},
-    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"./unidades/fisica/sistema-solar/tierra-luna.html",c:"#FBBF24"},
-    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"./unidades/fisica/sistema-solar/exploracion.html",c:"#FBBF24"},
-    {n:"Seres vivos",u:"Biología",s:"Seres Vivos",l:"./unidades/biologia/seres-vivos/caracteristicas.html",c:"#34D399"},
-    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"./unidades/biologia/seres-vivos/clasificacion.html",c:"#34D399"},
-    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"./unidades/biologia/seres-vivos/ecosistemas.html",c:"#34D399"},
-    {n:"Tipos de células",u:"Biología",s:"Células",l:"./unidades/biologia/celulas/tipos-celulas.html",c:"#34D399"},
-    {n:"Organelas",u:"Biología",s:"Células",l:"./unidades/biologia/celulas/organelas.html",c:"#34D399"},
-    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"./unidades/biologia/plantas/fotosintesis.html",c:"#34D399"},
-    {n:"Germinación",u:"Biología",s:"Plantas",l:"./unidades/biologia/plantas/germinacion.html",c:"#34D399"},
-    {n:"Vertebrados",u:"Biología",s:"Animales",l:"./unidades/biologia/animales/vertebrados.html",c:"#34D399"},
-    {n:"Invertebrados",u:"Biología",s:"Animales",l:"./unidades/biologia/animales/invertebrados.html",c:"#34D399"},
-    {n:"Fauna local",u:"Biología",s:"Animales",l:"./unidades/biologia/animales/fauna-local.html",c:"#34D399"},
-    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/circulacion.html",c:"#34D399"},
-    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/digestion.html",c:"#34D399"},
-    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/respiracion.html",c:"#34D399"},
-    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"./unidades/biologia/cuerpo-humano/endocrino.html",c:"#34D399"},
-    {n:"La rana que voló",u:"Revista",s:"Revista",l:"./revista/rana-levitacion.html",c:"#F97316"},
-    {n:"Podcast",u:"Podcast",s:"Podcast",l:"./podcast/",c:"#E8A87C"},
-    {n:"ESI",u:"ESI",s:"ESI",l:"./esi.html",c:"#14B8A6"},
-    {n:"EAI",u:"EAI",s:"EAI",l:"./eai.html",c:"#4ADE80"}
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../unidades/quimica/materia-propiedades/que-es-la-materia.html",c:"#4ADE80"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../unidades/quimica/mezclas/tipos-mezclas.html",c:"#4ADE80"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../unidades/quimica/mezclas/separacion.html",c:"#4ADE80"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../unidades/quimica/agua/propiedades-agua.html",c:"#4ADE80"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../unidades/quimica/agua/ciclo-agua.html",c:"#4ADE80"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../unidades/quimica/agua/potabilizacion.html",c:"#4ADE80"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../unidades/fisica/energia/formas-energia.html",c:"#FBBF24"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../unidades/fisica/energia/transformaciones.html",c:"#FBBF24"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../unidades/fisica/calor-sonido/calor-temperatura.html",c:"#FBBF24"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../unidades/fisica/calor-sonido/ondas.html",c:"#FBBF24"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../unidades/fisica/movimientos/mru.html",c:"#FBBF24"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../unidades/fisica/movimientos/mruv.html",c:"#FBBF24"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/sol-planetas.html",c:"#FBBF24"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/tierra-luna.html",c:"#FBBF24"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../unidades/fisica/sistema-solar/exploracion.html",c:"#FBBF24"},
+    {n:"Seres vivos",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/caracteristicas.html",c:"#34D399"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/clasificacion.html",c:"#34D399"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../unidades/biologia/seres-vivos/ecosistemas.html",c:"#34D399"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../unidades/biologia/celulas/tipos-celulas.html",c:"#34D399"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../unidades/biologia/celulas/organelas.html",c:"#34D399"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../unidades/biologia/plantas/fotosintesis.html",c:"#34D399"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../unidades/biologia/plantas/germinacion.html",c:"#34D399"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/vertebrados.html",c:"#34D399"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/invertebrados.html",c:"#34D399"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../unidades/biologia/animales/fauna-local.html",c:"#34D399"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/circulacion.html",c:"#34D399"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/digestion.html",c:"#34D399"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/respiracion.html",c:"#34D399"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/endocrino.html",c:"#34D399"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"rana-levitacion.html",c:"#8B5CF6"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#4ADE80"}
   ];
 
   var overlay = document.getElementById('searchOverlay');

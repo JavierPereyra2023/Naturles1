@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -87,7 +87,7 @@
   <div class="max-w-7xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14 md:h-16">
       <div class="flex items-center gap-2 text-xs">
-        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -246,6 +246,86 @@
           <p class="text-base text-natura-silverLight leading-relaxed">El <span class="iconify text-natura-energy inline" data-icon="lucide:move-up" data-width="14"></span> diafragma <strong class="text-white">sube</strong>, los pulmones se contraen y se expulsa el aire cargado con <span class="text-natura-energy font-semibold">\(CO_2\)</span>. En reposo es un proceso pasivo.</p>
         </div>
       </div>
+
+      <!-- ANIMACIÓN: mecánica respiratoria -->
+      <div class="content-card bg-natura-dark rounded-lg mt-6 overflow-hidden" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:wind" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Animación · Un ciclo respiratorio completo</span>
+        </div>
+        <div class="px-5">
+          <svg id="respSvg" viewBox="0 0 640 360" class="w-full max-w-lg mx-auto" role="img" aria-label="Animación de la mecánica respiratoria: los pulmones se expanden cuando el diafragma baja">
+            <!-- caja torácica (costillas sugeridas) -->
+            <g stroke="rgba(200,212,204,0.12)" stroke-width="5" fill="none" stroke-linecap="round">
+              <path d="M185 130 Q320 160 455 130"/>
+              <path d="M180 170 Q320 202 460 170"/>
+              <path d="M178 210 Q320 244 462 210"/>
+              <path d="M180 250 Q320 284 460 250"/>
+            </g>
+            <!-- tráquea y bronquios -->
+            <rect x="313" y="22" width="14" height="62" rx="6" fill="rgba(200,212,204,0.25)"/>
+            <path d="M320 84 L268 112 M320 84 L372 112" stroke="rgba(200,212,204,0.25)" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <!-- pulmones (se escalan desde su vértice superior) -->
+            <g transform="translate(262 108)">
+              <g id="lungL">
+                <path d="M0 0 C-46 8 -66 70 -62 120 C-59 158 -28 172 -2 162 C18 154 22 120 18 70 C16 35 14 -3 0 0 Z" fill="rgba(220,38,38,0.16)" stroke="#DC2626" stroke-width="1.8"/>
+              </g>
+            </g>
+            <g transform="translate(378 108)">
+              <g id="lungR">
+                <path d="M0 0 C46 8 66 70 62 120 C59 158 28 172 2 162 C-18 154 -22 120 -18 70 C-16 35 -14 -3 0 0 Z" fill="rgba(220,38,38,0.16)" stroke="#DC2626" stroke-width="1.8"/>
+              </g>
+            </g>
+            <!-- diafragma -->
+            <path id="diafragma" d="M178 295 Q320 255 462 295" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+            <text x="320" y="330" fill="#F59E0B" font-size="11" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">DIAFRAGMA</text>
+            <!-- flechas de aire -->
+            <g id="airIn">
+              <line x1="320" y1="0" x2="320" y2="14" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+              <polygon points="320,20 313,8 327,8" fill="#38BDF8"/>
+              <text x="338" y="16" fill="#38BDF8" font-size="11" font-family="Inter,sans-serif" font-weight="600">entra aire (O₂)</text>
+            </g>
+            <g id="airOut">
+              <line x1="320" y1="20" x2="320" y2="6" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+              <polygon points="320,0 313,12 327,12" fill="#F59E0B"/>
+              <text x="338" y="16" fill="#F59E0B" font-size="11" font-family="Inter,sans-serif" font-weight="600">sale aire (CO₂)</text>
+            </g>
+            <text id="respFase" x="120" y="40" fill="#A8B5AD" font-size="12" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">INSPIRACIÓN</text>
+            <text id="respDesc" x="120" y="56" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">el diafragma baja</text>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 pt-2 text-base text-natura-silver leading-relaxed">
+          Cuando el diafragma <strong class="text-natura-silverLight">se contrae y baja</strong>, el tórax se agranda y la presión interna disminuye: el aire entra solo, empujado por la presión atmosférica. Cuando el diafragma <strong class="text-natura-silverLight">se relaja y sube</strong>, los pulmones se achican como un globo que se desinfla y el aire con CO₂ sale. No es el aire el que mueve a los pulmones: es el diafragma el que hace todo el trabajo.
+        </p>
+      </div>
+      <script>
+      (function(){
+        var lungL = document.getElementById('lungL');
+        if (!lungL) return;
+        var lungR = document.getElementById('lungR');
+        var dia = document.getElementById('diafragma');
+        var airIn = document.getElementById('airIn'), airOut = document.getElementById('airOut');
+        var fase = document.getElementById('respFase'), desc = document.getElementById('respDesc');
+        var CYCLE = 5; // segundos por respiración
+        function frame(ms) {
+          var t = (ms / 1000) % CYCLE;
+          var ph = (1 - Math.cos(2 * Math.PI * t / CYCLE)) / 2; // 0 = vacío, 1 = lleno
+          var inhaling = t < CYCLE / 2;
+          var s = 'scale(' + (1 + 0.10 * ph) + ',' + (1 + 0.16 * ph) + ')';
+          lungL.setAttribute('transform', s);
+          lungR.setAttribute('transform', s);
+          // el diafragma baja al inspirar (control de la curva: arriba relajado, abajo contraído)
+          var cy = 255 + 60 * ph;
+          dia.setAttribute('d', 'M178 295 Q320 ' + cy.toFixed(1) + ' 462 295');
+          airIn.setAttribute('opacity', inhaling ? '1' : '0');
+          airOut.setAttribute('opacity', inhaling ? '0' : '1');
+          fase.textContent = inhaling ? 'INSPIRACIÓN' : 'ESPIRACIÓN';
+          desc.textContent = inhaling ? 'el diafragma baja' : 'el diafragma sube';
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+      </script>
     </section>
     <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
 
@@ -355,9 +435,9 @@
         <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
         <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
-        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <a href="../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
         <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
       </div>
     </div>

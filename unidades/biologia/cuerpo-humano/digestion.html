@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -85,7 +85,7 @@
   <div class="max-w-7xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14 md:h-16">
       <div class="flex items-center gap-2 text-xs">
-        <a href="../../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -267,6 +267,76 @@
           </div>
         </div>
       </div>
+
+      <!-- ANIMACIÓN: el viaje del alimento -->
+      <div class="content-card bg-natura-dark rounded-sm mt-6 overflow-hidden" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:route" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Animación · El viaje completo del alimento (~30 horas en la vida real)</span>
+        </div>
+        <div class="px-5">
+          <svg id="digSvg" viewBox="0 0 640 430" class="w-full max-w-lg mx-auto" role="img" aria-label="Animación del recorrido del alimento por el tubo digestivo">
+            <!-- órganos de fondo -->
+            <circle cx="140" cy="40" r="14" fill="none" stroke="rgba(200,212,204,0.35)" stroke-width="2"/>
+            <line x1="150" y1="52" x2="150" y2="140" stroke="rgba(220,38,38,0.25)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M150 138 C143 196 188 224 240 212 C284 201 284 158 256 148 C233 140 165 134 150 138 Z" fill="rgba(220,38,38,0.13)" stroke="rgba(220,38,38,0.55)" stroke-width="1.5"/>
+            <path d="M250 218 C290 235 220 250 230 270 C240 292 320 270 330 290 C340 312 230 305 240 325 C250 345 350 330 360 310" fill="none" stroke="rgba(244,114,182,0.35)" stroke-width="14" stroke-linecap="round"/>
+            <path d="M428 338 L428 252 Q428 240 416 240 L184 240 Q172 240 172 252 L172 340 C172 364 206 372 232 378 L246 390" fill="none" stroke="rgba(220,38,38,0.3)" stroke-width="18" stroke-linecap="round"/>
+            <!-- etiquetas de etapas -->
+            <text id="digL0" x="108" y="30" fill="#5A6B60" font-size="11" font-family="Inter,sans-serif" text-anchor="end" font-weight="700">1 · BOCA</text>
+            <text id="digL1" x="130" y="105" fill="#5A6B60" font-size="11" font-family="Inter,sans-serif" text-anchor="end" font-weight="700">2 · ESÓFAGO</text>
+            <text id="digL2" x="305" y="185" fill="#5A6B60" font-size="11" font-family="Inter,sans-serif" font-weight="700">3 · ESTÓMAGO</text>
+            <text id="digL3" x="385" y="290" fill="#5A6B60" font-size="11" font-family="Inter,sans-serif" font-weight="700">4 · I. DELGADO</text>
+            <text id="digL4" x="450" y="260" fill="#5A6B60" font-size="11" font-family="Inter,sans-serif" font-weight="700">5 · I. GRUESO</text>
+            <text id="digL5" x="262" y="400" fill="#5A6B60" font-size="11" font-family="Inter,sans-serif" font-weight="700">6 · RECTO Y ANO</text>
+            <!-- camino del bolo (invisible) -->
+            <path id="digPath" d="M140 40 L150 140 C148 195 190 220 240 210 C290 235 220 250 230 270 C240 292 320 270 330 290 C340 312 230 305 240 325 C250 345 350 330 360 310 C390 300 425 315 428 335 L428 252 Q428 240 416 240 L184 240 Q172 240 172 252 L172 340 C172 364 206 372 232 378 L246 390" fill="none" stroke="none"/>
+            <!-- el alimento -->
+            <circle id="digBolo" r="9" fill="#F59E0B"/>
+            <text id="digBoloLabel" x="0" y="0" fill="#F59E0B" font-size="10" font-family="Inter,sans-serif" font-weight="700">bolo</text>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 pt-2 text-base text-natura-silver leading-relaxed">
+          Seguí la pelotita: entra como <strong class="text-natura-silverLight">bolo alimenticio</strong>, en el estómago se convierte en <strong class="text-natura-silverLight">quimo</strong>, en el intestino delgado entrega sus <strong class="text-natura-silverLight">nutrientes</strong> a la sangre (por eso se achica) y lo que queda pierde agua en el intestino grueso hasta ser eliminado como <strong class="text-natura-silverLight">desechos</strong>.
+        </p>
+      </div>
+      <script>
+      (function(){
+        var path = document.getElementById('digPath');
+        if (!path || !path.getTotalLength) return;
+        var bolo = document.getElementById('digBolo');
+        var boloLabel = document.getElementById('digBoloLabel');
+        var L = path.getTotalLength();
+        var labels = ['digL0','digL1','digL2','digL3','digL4','digL5'].map(function(id){ return document.getElementById(id); });
+        // [fin de etapa, índice de etiqueta, nombre del alimento, radio, color]
+        var stages = [
+          [0.04, 0, 'bolo',      9, '#F59E0B'],
+          [0.16, 1, 'bolo',      9, '#F59E0B'],
+          [0.30, 2, 'quimo',     8, '#D97706'],
+          [0.62, 3, 'nutrientes',6, '#EAB308'],
+          [0.90, 4, 'desechos',  7, '#92664A'],
+          [1.01, 5, 'desechos',  7, '#7C5A42']
+        ];
+        var DUR = 16; // segundos por vuelta
+        function frame(ms) {
+          var f = (ms / 1000 % DUR) / DUR;
+          var p = path.getPointAtLength(f * L);
+          bolo.setAttribute('cx', p.x.toFixed(1));
+          bolo.setAttribute('cy', p.y.toFixed(1));
+          boloLabel.setAttribute('x', (p.x + 14).toFixed(1));
+          boloLabel.setAttribute('y', (p.y - 10).toFixed(1));
+          var st = stages[0];
+          for (var i = 0; i < stages.length; i++) { if (f < stages[i][0]) { st = stages[i]; break; } }
+          bolo.setAttribute('r', st[3]);
+          bolo.setAttribute('fill', st[4]);
+          boloLabel.textContent = st[2];
+          boloLabel.setAttribute('fill', st[4]);
+          labels.forEach(function(el, idx){ el.setAttribute('fill', idx === st[1] ? '#DC2626' : '#5A6B60'); });
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+      </script>
     </section>
 
     <!-- SECTION 3: Órganos anexos -->
@@ -386,9 +456,9 @@
         <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="../../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
         <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
-        <a href="../../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <a href="../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
         <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
       </div>
     </div>

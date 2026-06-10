@@ -1,12 +1,12 @@
-﻿?<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ciencias Naturales — 1° Año</title>
+  <title>Bienvenidos — Ciencias Naturales · 1° Año</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -15,19 +15,14 @@
             natura: {
               black: '#080C0A',
               dark: '#0E1410',
-              gray: '#161C18',
-              mid: '#242C28',
               silver: '#A8B5AD',
               silverLight: '#C8D4CC',
               silverDark: '#5A6B60',
               green: '#0D9488',
               greenLight: '#14B8A6',
-              greenDark: '#0F766E',
               leaf: '#22C55E',
-              water: '#38BDF8',
               energy: '#3B82F6',
               bio: '#DC2626',
-              podcast: '#E8A87C', podcastDark: '#C47E3B',
             }
           },
           fontFamily: {
@@ -41,736 +36,377 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     ::selection { background: #0D9488; color: #080C0A; }
-    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: #04060E;
+      color: #D0D8D2;
+      overflow: hidden;
+    }
 
-
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #080C0A; }
-    ::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+    #escena {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    .animate-fadeInUp { animation: fadeInUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 200ms; }
+    .delay-200 { animation-delay: 450ms; }
+    .delay-300 { animation-delay: 700ms; }
+    .delay-400 { animation-delay: 950ms; }
+
     @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(13, 148, 136, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(13, 148, 136, 0.6); }
+      0%, 100% { box-shadow: 0 0 20px rgba(13, 148, 136, 0.35); }
+      50% { box-shadow: 0 0 42px rgba(13, 148, 136, 0.65); }
     }
+    .glow-btn { animation: pulse-glow 2.2s ease-in-out infinite; }
 
-    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    .animate-fadeIn { animation: fadeIn 0.6s ease forwards; }
-    .delay-100 { animation-delay: 100ms; }
-    .delay-200 { animation-delay: 200ms; }
-    .delay-300 { animation-delay: 300ms; }
-    .delay-400 { animation-delay: 400ms; }
-
-    .marquee-track { animation: marquee 30s linear infinite; }
-    .marquee-track:hover { animation-play-state: paused; }
-
-    .glow-btn { animation: pulse-glow 2s ease-in-out infinite; }
-
-    .hero-img {
-      filter: grayscale(60%) contrast(1.2) brightness(0.6);
-      transition: filter 0.7s ease;
+    .chip {
+      backdrop-filter: blur(6px);
+      background: rgba(8, 12, 10, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #0D9488, #14B8A6); }
-    .stat-number {
-      background: linear-gradient(135deg, #0D9488, #14B8A6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
 
-    .unit-card {
-      transition: all 0.35s ease;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .unit-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
-    }
-
-    .nav-link { position: relative; }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 2px; background: #0D9488;
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after { width: 100%; }
-
-    .mobile-menu {
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .mobile-menu.open { transform: translateX(0); }
-
-    .revista-card {
-      border: 1px solid rgba(201,169,110,0.15);
-      transition: all 0.35s ease;
-    }
-    .revista-card:hover {
-      border-color: rgba(201,169,110,0.4);
-      transform: translateY(-4px);
-    }
-
-    .search-wrap { position: relative; z-index: 200; }
-    .search-input {
-      width: 100%; max-width: 480px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 14px 16px 14px 44px;
-      color: #C8D4CC; font-family: 'Inter', sans-serif; font-size: 14px;
-      border-radius: 6px; outline: none;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .search-input:focus { border-color: rgba(13,148,136,0.4); background: rgba(255,255,255,0.06); }
-    .search-input::placeholder { color: #5A6B60; font-size: 13px; }
-    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #5A6B60; pointer-events: none; z-index: 101; }
-    .search-results {
-      position: absolute; top: calc(100% + 6px); left: 0; right: 0; max-width: 480px;
-      background: #0E1410; border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 8px; max-height: 320px; overflow-y: auto;
-      display: none; z-index: 9999; box-shadow: 0 16px 48px rgba(0,0,0,0.6);
-    }
-    .search-results.active { display: block; }
-    .search-result-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 16px; cursor: pointer;
-      font-family: 'Inter', sans-serif; font-size: 13px;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: background 0.15s;
-      text-decoration: none; color: #C8D4CC;
-    }
-    .search-result-item:last-child { border-bottom: none; }
-    .search-result-item:hover { background: rgba(255,255,255,0.04); }
-    .search-result-item .sr-unit-badge {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .search-result-item .sr-name { flex: 1; }
-    .search-result-item .sr-subhub { font-size: 11px; color: #5A6B60; margin-left: auto; }
-    .search-no-results { padding: 16px; text-align: center; color: #5A6B60; font-family: 'Inter', sans-serif; font-size: 13px; }
-    .search-shortcut { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-family: 'Inter', sans-serif; font-size: 10px; color: #5A6B60; pointer-events: none; border: 1px solid #242C28; border-radius: 4px; padding: 2px 6px; }
-
-    @media print {
-      body { background: white; color: black; }
-    }
+    .text-shadow-soft { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.85); }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: rgba(8,12,10,0.9); backdrop-filter: blur(12px);">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="flex items-center justify-between h-16 md:h-20">
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-2 group">
-          <div class="w-8 h-8 bg-natura-green flex items-center justify-center rounded-sm">
-            <span class="iconify text-natura-black" data-icon="lucide:leaf" data-width="18"></span>
-          </div>
-          <span class="font-heading font-bold text-lg tracking-wider text-white uppercase">Cs. Naturales</span>
-        </a>
+  <!-- Escena nocturna animada: cielo, luna, mar y playa -->
+  <canvas id="escena" aria-hidden="true"></canvas>
 
-        <!-- Desktop Nav -->
-        <div class="hidden lg:flex items-center gap-5">
-          <a href="#quimica" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-leaf transition-colors">Química</a>
-          <a href="#fisica" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-energy transition-colors">Física</a>
-          <a href="#biologia" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-bio transition-colors">Biología</a>
-          <a href="#revista" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-white transition-colors">Revista</a>
-          <a href="podcast/" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-podcast transition-colors">Podcast</a>
-          <a href="esi.html" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-greenLight transition-colors">ESI</a>
-          <a href="eai.html" class="nav-link text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-leaf transition-colors">EAI</a>
-        </div>
+  <!-- Contenido -->
+  <main class="relative z-10 min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 w-full">
+      <div class="max-w-2xl">
 
-        <!-- Mobile Toggle -->
-        <div class="flex items-center gap-4">
-          <span class="hidden md:inline text-[11px] font-semibold uppercase tracking-wider text-natura-silverDark">1° Año</span>
-          <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white hover:text-natura-green transition-colors">
-            <span class="iconify" data-icon="lucide:menu" data-width="24" id="menuIcon"></span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-natura-black border-l border-white/5 z-50">
-      <div class="p-6">
-        <div class="flex justify-end mb-10">
-          <button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white hover:text-natura-green transition-colors">
-            <span class="iconify" data-icon="lucide:x" data-width="24"></span>
-          </button>
-        </div>
-        <div class="flex flex-col gap-5">
-          <a href="#quimica" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-natura-leaf transition-colors">Química</a>
-          <a href="#fisica" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-natura-energy transition-colors">Física</a>
-          <a href="#biologia" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-natura-bio transition-colors">Biología</a>
-          <a href="#revista" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-white transition-colors">Revista</a>
-          <a href="podcast/" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-natura-podcast transition-colors">Podcast</a>
-          <div class="mt-2 pt-4 border-t border-white/10 flex flex-col gap-3">
-            <a href="esi.html" class="mobile-link text-sm font-bold uppercase tracking-wider text-natura-silver hover:text-natura-greenLight transition-colors">ESI</a>
-            <a href="eai.html" class="mobile-link text-sm font-bold uppercase tracking-wider text-natura-silver hover:text-natura-leaf transition-colors">EAI</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Mobile menu overlay -->
-  <div id="menuOverlay" class="fixed inset-0 bg-black/60 z-40 hidden" style="backdrop-filter:blur(4px);"></div>
-
-  <!-- ============================================ -->
-  <!-- HERO -->
-  <!-- ============================================ -->
-  <section class="relative min-h-screen flex items-center overflow-hidden">
-    <div class="absolute inset-0">
-      <img src="https://picsum.photos/seed/nature-cells/1920/1080.jpg" alt="Ciencias Naturales" class="hero-img w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-r from-natura-black via-natura-black/90 to-natura-black/40"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-natura-black via-transparent to-natura-black/40"></div>
-    </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-32 pb-20 md:pt-40 md:pb-28 w-full">
-      <div class="max-w-3xl">
         <div class="animate-fadeInUp opacity-0 flex items-center gap-3 mb-6">
           <div class="accent-line"></div>
-          <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-green">Ciencias Naturales · 1° Año</span>
+          <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-greenLight" style="font-family:'Inter',sans-serif;">Bienvenidos · 1° Año</span>
         </div>
 
-        <h1 class="animate-fadeInUp opacity-0 delay-100 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.9] tracking-tight text-white mb-6">
-          Explorá<br>
+        <h1 class="animate-fadeInUp opacity-0 delay-100 font-heading text-5xl sm:text-6xl md:text-7xl font-bold uppercase leading-[0.95] tracking-tight text-white mb-6 text-shadow-soft">
+          Ciencias<br>
           <span class="relative inline-block">
-            El Mundo
+            Naturales
             <span class="absolute -bottom-1 left-0 w-full h-1 bg-natura-green"></span>
-          </span><br>
-          Natural
+          </span>
         </h1>
 
-        <p class="animate-fadeInUp opacity-0 delay-200 text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed mb-8">
-          Tres grandes unidades para entender cómo funciona el universo: desde las partículas que forman la materia hasta la inmensidad del cosmos, pasando por la asombrosa diversidad de los seres vivos.
+        <p class="animate-fadeInUp opacity-0 delay-200 text-lg md:text-2xl text-natura-silverLight max-w-xl leading-relaxed mb-4 text-shadow-soft">
+          Mirá el cielo: cada estrella es una pregunta. Escuchá el mar: cada ola es energía en movimiento.
+          Las Ciencias Naturales son eso — el arte de hacerle preguntas a la naturaleza y aprender a leer sus respuestas.
+        </p>
+        <p class="animate-fadeInUp opacity-0 delay-200 text-base md:text-lg text-natura-silver max-w-xl leading-relaxed mb-8 text-shadow-soft">
+          Este año vamos a explorar la materia y sus transformaciones, la energía y el universo,
+          y la asombrosa diversidad de los seres vivos.
         </p>
 
-        <div class="animate-fadeInUp opacity-0 delay-300 flex flex-wrap gap-8 mb-10">
-          <div>
-            <div class="stat-number font-heading text-3xl md:text-4xl font-bold">3</div>
-            <div class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark mt-1">Grandes Unidades</div>
-          </div>
-          <div class="w-px bg-white/10"></div>
-          <div>
-            <div class="stat-number font-heading text-3xl md:text-4xl font-bold">36</div>
-            <div class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark mt-1">Semanas de Clase</div>
-          </div>
-          <div class="w-px bg-white/10"></div>
-          <div>
-            <div class="stat-number font-heading text-3xl md:text-4xl font-bold">4</div>
-            <div class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark mt-1">Ejes Temáticos</div>
-          </div>
+        <div class="animate-fadeInUp opacity-0 delay-300 flex flex-wrap gap-3 mb-10" style="font-family:'Inter',sans-serif;">
+          <span class="chip inline-flex items-center gap-2 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-natura-leaf">
+            <span class="iconify" data-icon="lucide:flask-conical" data-width="15"></span> Química
+          </span>
+          <span class="chip inline-flex items-center gap-2 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-natura-energy">
+            <span class="iconify" data-icon="lucide:zap" data-width="15"></span> Física
+          </span>
+          <span class="chip inline-flex items-center gap-2 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-natura-bio">
+            <span class="iconify" data-icon="lucide:heart-pulse" data-width="15"></span> Biología
+          </span>
         </div>
 
-        <div class="animate-fadeInUp opacity-0 delay-400 mb-8" style="position:relative;z-index:200;">
-          <div class="search-wrap">
-            <span class="search-icon iconify" data-icon="lucide:search" data-width="18"></span>
-            <input type="text" id="topicSearch" class="search-input" placeholder="Buscar tema... (ej: célula, fotosíntesis, MRU)" autocomplete="off">
-            <span class="search-shortcut">Ctrl+K</span>
-            <div class="search-results" id="searchResults"></div>
-          </div>
+        <div class="animate-fadeInUp opacity-0 delay-400 flex flex-wrap items-center gap-5" style="font-family:'Inter',sans-serif;">
+          <a href="inicio.html" class="glow-btn inline-flex items-center gap-2 bg-natura-green hover:bg-natura-greenLight text-natura-black text-xs font-bold uppercase tracking-wider px-8 py-4 transition-all duration-200">
+            <span>Comenzar a explorar</span>
+            <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+          </a>
+          <span class="text-[11px] uppercase tracking-[0.2em] text-natura-silverDark">Prof. Pereyra, Javier</span>
         </div>
 
-        <div class="animate-fadeInUp opacity-0 delay-400 flex flex-wrap gap-4">
-          <a href="#quimica" class="glow-btn inline-flex items-center gap-2 bg-natura-green hover:bg-natura-greenLight text-natura-black text-xs font-bold uppercase tracking-wider px-8 py-4 transition-all duration-200">
-            <span>Explorar Unidades</span>
-            <span class="iconify" data-icon="lucide:arrow-down" data-width="16"></span>
-          </a>
-          <a href="revista/" class="inline-flex items-center gap-2 border border-white/20 hover:border-amber-400/50 text-white text-xs font-bold uppercase tracking-wider px-8 py-4 transition-all duration-200 hover:bg-white/5">
-            <span class="iconify" data-icon="lucide:book-open" data-width="16"></span>
-            <span>Revista</span>
-          </a>
-        </div>
       </div>
     </div>
+  </main>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
-      <span class="text-[9px] uppercase tracking-[0.3em] text-natura-silverDark">Explorar</span>
-      <span class="iconify text-natura-green" data-icon="lucide:chevron-down" data-width="16"></span>
-    </div>
-  </section>
-
-  <!-- Marquee Banner -->
-  <div class="relative bg-natura-green py-3 overflow-hidden z-10">
-    <div class="flex whitespace-nowrap">
-      <div class="marquee-track flex items-center gap-8">
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Células y Organismos</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Propiedades de Materiales</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Fotosíntesis</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Energía y Movimiento</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Sistema Solar</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Cuerpo Humano</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Mezclas</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Células y Organismos</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Propiedades de Materiales</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Fotosíntesis</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Energía y Movimiento</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Sistema Solar</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Cuerpo Humano</span>
-        <span class="text-natura-greenDark">?</span>
-        <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Mezclas</span>
-        <span class="text-natura-greenDark">?</span>
-      </div>
-    </div>
+  <!-- Pista sutil -->
+  <div class="fixed bottom-5 right-6 z-10 hidden md:flex items-center gap-2 text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+    <span class="iconify" data-icon="lucide:sparkles" data-width="13"></span>
+    <span class="text-[10px] uppercase tracking-[0.25em]">Atención: a veces pasa una estrella fugaz</span>
   </div>
 
-  <!-- ============================================ -->
-  <!-- UNIDADES — 3 CARDS PRINCIPALES -->
-  <!-- ============================================ -->
-  <section id="unidades" class="relative py-20 md:py-28 bg-natura-black">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-16">
-        <div class="flex items-center justify-center gap-3 mb-4">
-          <div class="accent-line"></div>
-          <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-green">Plan de Estudios</span>
-          <div class="accent-line"></div>
-        </div>
-        <h2 class="font-heading text-4xl md:text-5xl font-bold uppercase tracking-tight text-white mb-4">
-          Tres Grandes <span class="text-natura-green">Unidades</span>
-        </h2>
-        <p class="text-lg text-natura-silver max-w-xl mx-auto leading-relaxed">
-          Cada unidad explora una rama de las Ciencias Naturales con contenidos teóricos, actividades de laboratorio y conexiones con la vida cotidiana.
-        </p>
-      </div>
-
-      <!-- ===== QUÍMICA ===== -->
-      <div id="quimica" class="mb-8">
-        <a href="unidades/quimica/" class="unit-card block relative overflow-hidden bg-natura-dark no-underline">
-          <div class="absolute top-0 left-0 w-1.5 h-full bg-natura-leaf"></div>
-          <div class="grid md:grid-cols-12">
-            <!-- Left content -->
-            <div class="md:col-span-8 p-6 md:p-8">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="iconify text-natura-leaf" data-icon="lucide:flask-conical" data-width="22"></span>
-                <span class="font-heading text-xl md:text-2xl font-bold uppercase tracking-wide text-white">Química</span>
-                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-leaf/15 text-natura-leaf px-2.5 py-1 ml-2">Eje 1 · Sem 3–9</span>
-              </div>
-              <p class="text-lg text-natura-silver leading-relaxed mb-5 max-w-lg">
-                Los materiales y sus transformaciones. Propiedades de la materia, mezclas y métodos de separación. El agua como sustancia, recurso y derecho humano.
-              </p>
-              <div class="grid sm:grid-cols-3 gap-3">
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-leaf flex-shrink-0" data-icon="lucide:cube" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Propiedades de los Materiales</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-leaf flex-shrink-0" data-icon="lucide:blend" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Las Mezclas</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-leaf flex-shrink-0" data-icon="lucide:droplets" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">El Agua</span>
-                </div>
-              </div>
-            </div>
-            <!-- Right visual -->
-            <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden">
-              <img src="assets/unidad-quimica-card.png" alt="Química" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
-              <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/60 to-transparent"></div>
-              
-              <div class="absolute bottom-0 left-0 right-0 p-4 md:hidden">
-                <span class="text-[9px] font-bold uppercase tracking-wider text-natura-leaf">3 temas · Laboratorio incluido</span>
-              </div>
-              <div class="absolute right-4 bottom-4 hidden md:flex items-center gap-2 text-natura-leaf group-hover:gap-3 transition-all">
-                <span class="text-xs font-bold uppercase tracking-wider">Explorar Química</span>
-                <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- ===== FÍSICA ===== -->
-      <div id="fisica" class="mb-8">
-        <a href="unidades/fisica/" class="unit-card block relative overflow-hidden bg-natura-dark no-underline">
-          <div class="absolute top-0 left-0 w-1.5 h-full bg-natura-energy"></div>
-          <div class="grid md:grid-cols-12">
-            <div class="md:col-span-8 p-6 md:p-8 md:order-1 order-1">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="iconify text-natura-energy" data-icon="lucide:zap" data-width="22"></span>
-                <span class="font-heading text-xl md:text-2xl font-bold uppercase tracking-wide text-white">Física</span>
-                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 ml-2">Ejes 2–3 · Sem 10–20</span>
-              </div>
-              <p class="text-lg text-natura-silver leading-relaxed mb-5 max-w-lg">
-                Energía, cambio y movimientos. Formas de energía y sus transformaciones. Fenómenos ondulatorios y térmicos. El Sistema Solar y la exploración espacial.
-              </p>
-              <div class="grid sm:grid-cols-4 gap-3">
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:bolt" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Energías</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:flame" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Calor y Sonido</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-energy flex-shrink-0" data-icon="lucide:trending-up" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Movimientos</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-water flex-shrink-0" data-icon="lucide:orbit" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Sistema Solar</span>
-                </div>
-              </div>
-            </div>
-            <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden md:order-2 order-2">
-              <img src="assets/unidad-fisica-card.png" alt="Física" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
-              <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/60 to-transparent"></div>
-              
-              <div class="absolute right-4 bottom-4 hidden md:flex items-center gap-2 text-natura-energy group-hover:gap-3 transition-all">
-                <span class="text-xs font-bold uppercase tracking-wider">Explorar Física</span>
-                <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <!-- ===== BIOLOGÍA ===== -->
-      <div id="biologia" class="mb-8">
-        <a href="unidades/biologia/" class="unit-card block relative overflow-hidden bg-natura-dark no-underline">
-          <div class="absolute top-0 left-0 w-1.5 h-full bg-natura-bio"></div>
-          <div class="grid md:grid-cols-12">
-            <div class="md:col-span-8 p-6 md:p-8">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="iconify text-natura-bio" data-icon="lucide:heart-pulse" data-width="22"></span>
-                <span class="font-heading text-xl md:text-2xl font-bold uppercase tracking-wide text-white">Biología</span>
-                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 ml-2">Eje 4 · Sem 21–34</span>
-              </div>
-              <p class="text-lg text-natura-silver leading-relaxed mb-5 max-w-lg">
-                Interacción y diversidad en los sistemas biológicos. Características de los seres vivos, plantas, animales y el cuerpo humano como sistema integrado. Nutrición, relación y reproducción.
-              </p>
-              <div class="grid sm:grid-cols-4 gap-3">
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:microscope" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Seres Vivos</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:sprout" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Las Plantas</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:paw-print" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Los Animales</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="iconify text-natura-bio flex-shrink-0" data-icon="lucide:person-standing" data-width="16"></span>
-                  <span class="text-xs text-natura-silver">Cuerpo Humano</span>
-                </div>
-              </div>
-            </div>
-            <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden">
-              <img src="assets/unidad-biologia-card.png" alt="Biología" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
-              <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/60 to-transparent"></div>
-              
-              <div class="absolute right-4 bottom-4 hidden md:flex items-center gap-2 text-natura-bio group-hover:gap-3 transition-all">
-                <span class="text-xs font-bold uppercase tracking-wider">Explorar Biología</span>
-                <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- REVISTA HIGHLIGHT -->
-  <!-- ============================================ -->
-  <section id="revista" class="relative py-20 md:py-28 bg-natura-dark">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <!-- Left: Revista info -->
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-px bg-amber-400/60"></div>
-            <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-amber-400/80">Divulgación Científica</span>
-          </div>
-          <h2 class="font-heading text-3xl md:text-4xl font-bold uppercase tracking-tight text-white mb-4">
-            <span class="text-amber-400">Revista</span> de Ciencias
-          </h2>
-          <p class="text-lg text-natura-silver leading-relaxed mb-4 max-w-lg">
-            Historias de ciencia que no están en los libros. Artículos, curiosidades y descubrimientos que conectan con lo que aprendemos en clase. Premios IG Nobel, materiales del futuro y científicas que cambiaron el mundo.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-6">
-            <span class="text-[9px] font-semibold uppercase tracking-wider bg-amber-400/10 text-amber-400 px-2.5 py-1">IG Nobel</span>
-            <span class="text-[9px] font-semibold uppercase tracking-wider bg-amber-400/10 text-amber-400 px-2.5 py-1">Física</span>
-            <span class="text-[9px] font-semibold uppercase tracking-wider bg-amber-400/10 text-amber-400 px-2.5 py-1">Química</span>
-            <span class="text-[9px] font-semibold uppercase tracking-wider bg-amber-400/10 text-amber-400 px-2.5 py-1">Biología</span>
-          </div>
-          <a href="revista/" class="inline-flex items-center gap-2 border border-amber-400/30 hover:border-amber-400/60 text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all duration-200 hover:bg-amber-400/5">
-            <span>Explorar Revista</span>
-            <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
-          </a>
-        </div>
-
-        <!-- Right: Article preview card -->
-        <a href="revista/rana-levitacion.html" class="revista-card block bg-[#141A16] overflow-hidden group no-underline">
-          <div class="relative h-48 overflow-hidden">
-            <img src="assets/card-revista-index.png" alt="Revista - La rana que voló" class="w-full h-full object-cover object-right-top group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#141A16] via-[#141A16]/40 to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="text-[9px] font-bold uppercase tracking-wider bg-amber-400/20 text-amber-400 px-2.5 py-1">Artículo Destacado</span>
-            </div>
-            <div class="absolute bottom-0 left-0 right-0 p-5">
-              <div class="text-amber-400/70 text-[11px] font-bold uppercase tracking-wider mb-1">IG Nobel 2000 · Física</div>
-              <div class="font-heading text-lg font-bold text-white">La rana que voló</div>
-              <div class="text-xs text-[#9A958A] mt-1">Cuando el magnetismo desafía la gravedad</div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- ESI + EAI QUICK ACCESS -->
-  <!-- ============================================ -->
-  <section class="relative py-16 md:py-20 bg-natura-black border-y border-white/5">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- ESI -->
-        <a href="esi.html" class="unit-card block bg-natura-gray p-6 no-underline hover:border-natura-greenLight/30">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-greenLight" data-icon="lucide:heart" data-width="22"></span>
-            <h3 class="font-heading text-lg font-bold uppercase text-white">
-              ESI — Educación Sexual Integral
-            </h3>
-          </div>
-          <p class="text-lg text-natura-silver leading-relaxed mb-3">
-            Ley N° 26.150. Cambios corporales en la adolescencia, salud sexual y reproductiva, identidad de género y diversidad. Científicas en la historia.
-          </p>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-natura-greenLight">Explorar ESI ?</span>
-        </a>
-
-        <!-- EAI -->
-        <a href="eai.html" class="unit-card block bg-natura-gray p-6 no-underline hover:border-natura-leaf/30">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-leaf" data-icon="lucide:tree-pine" data-width="22"></span>
-            <h3 class="font-heading text-lg font-bold uppercase text-white">
-              EAI — Educación Ambiental Integral
-            </h3>
-          </div>
-          <p class="text-lg text-natura-silver leading-relaxed mb-3">
-            Ley N° 27.621. Contaminación del agua y el suelo, pérdida de biodiversidad. La cuenca del Reconquista como caso de estudio local.
-          </p>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-natura-leaf">Explorar EAI ?</span>
-        </a>
-
-        <!-- Podcast -->
-        <a href="podcast/" class="unit-card block bg-natura-gray p-6 no-underline hover:border-natura-podcast/50">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-podcast" data-icon="lucide:podcast" data-width="22"></span>
-            <h3 class="font-heading text-lg font-bold uppercase text-white">
-              Podcast — Ciencias en Audio
-            </h3>
-          </div>
-          <p class="text-lg text-natura-silver leading-relaxed mb-3">
-            Escuchá los temas de Química, Física y Biología. Episodios para repasar antes del examen o estudiar camino al cole.
-          </p>
-          <span class="text-[11px] font-bold uppercase tracking-wider text-natura-podcast">Escuchar Podcast ?</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- FOOTER -->
-  <!-- ============================================ -->
-  <footer class="relative py-8 bg-natura-black border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-2">
-          <div class="w-6 h-6 bg-natura-green flex items-center justify-center rounded-sm">
-            <span class="iconify text-natura-black" data-icon="lucide:leaf" data-width="14"></span>
-          </div>
-          <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
-          <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
-        </div>
-        <div class="flex items-center gap-6">
-          <a href="unidades/quimica/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
-          <a href="unidades/fisica/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
-          <a href="unidades/biologia/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
-          <a href="revista/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-amber-400 transition-colors">Revista</a>
-          <a href="podcast/" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-podcast transition-colors">Podcast</a>
-          <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const menuClose = document.getElementById('menuClose');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
+  (function () {
+    var canvas = document.getElementById('escena');
+    var ctx = canvas.getContext('2d');
+    var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-    function openMenu() {
-      mobileMenu.classList.add('open');
-      menuOverlay.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+    // Geometría de la escena (se recalcula al redimensionar)
+    var horizonY, shoreY, moonX, moonY, moonR;
+    var stars = [];
+    var meteors = [];
+    var nextMeteorAt = 0;
+
+    function resize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+      horizonY = H * 0.55;
+      shoreY = H * 0.82;
+      moonR = Math.max(28, Math.min(W, H) * 0.055);
+      moonX = W * 0.76;
+      moonY = H * 0.18;
+
+      buildStars();
     }
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      menuOverlay.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
 
-    menuToggle.addEventListener('click', openMenu);
-    menuClose.addEventListener('click', closeMenu);
-    menuOverlay.addEventListener('click', closeMenu);
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 100) {
-        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
-      } else {
-        navbar.style.borderBottom = 'none';
+    function buildStars() {
+      stars = [];
+      var count = Math.floor((W * horizonY) / 3800);
+      for (var i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * horizonY * 0.96,
+          r: Math.random() * 1.3 + 0.3,
+          base: Math.random() * 0.5 + 0.35,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 1.5 + 0.4
+        });
       }
-    });
-
-    // Scroll-triggered animation for unit cards
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
-    document.querySelectorAll('.unit-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-  </script>
-
-  <script>
-(function(){
-  var topics = [
-    {n:"¿Qué es la materia?",u:"Química",s:"Materia y Propiedades",l:"unidades/quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
-    {n:"Propiedades de la materia",u:"Química",s:"Materia y Propiedades",l:"unidades/quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
-    {n:"Sustancias",u:"Química",s:"Materia y Propiedades",l:"unidades/quimica/materia-propiedades/sustancias.html",c:"#22C55E"},
-    {n:"Materiales",u:"Química",s:"Materia y Propiedades",l:"unidades/quimica/materia-propiedades/materiales.html",c:"#22C55E"},
-    {n:"Medición",u:"Química",s:"Materia y Propiedades",l:"unidades/quimica/materia-propiedades/medicion.html",c:"#22C55E"},
-    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"unidades/quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
-    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"unidades/quimica/mezclas/separacion.html",c:"#22C55E"},
-    {n:"Mezclas en la naturaleza",u:"Química",s:"Mezclas",l:"unidades/quimica/mezclas/mezclas-naturaleza.html",c:"#22C55E"},
-    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"unidades/quimica/agua/propiedades-agua.html",c:"#22C55E"},
-    {n:"Usos y contaminación del agua",u:"Química",s:"Agua",l:"unidades/quimica/agua/usos-contaminacion.html",c:"#22C55E"},
-    {n:"Potabilización del agua",u:"Química",s:"Agua",l:"unidades/quimica/agua/potabilizacion.html",c:"#22C55E"},
-    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"unidades/quimica/agua/ciclo-agua.html",c:"#22C55E"},
-    {n:"Formas de energía",u:"Física",s:"Energía",l:"unidades/fisica/energia/formas-energia.html",c:"#3B82F6"},
-    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"unidades/fisica/energia/transformaciones.html",c:"#3B82F6"},
-    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"unidades/fisica/energia/fuentes-energia.html",c:"#3B82F6"},
-    {n:"Calor y temperatura",u:"Física",s:"Calor y Sonido",l:"unidades/fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
-    {n:"Ondas y sonido",u:"Física",s:"Calor y Sonido",l:"unidades/fisica/calor-sonido/ondas.html",c:"#3B82F6"},
-    {n:"Comportamiento de materiales",u:"Física",s:"Calor y Sonido",l:"unidades/fisica/calor-sonido/materiales.html",c:"#3B82F6"},
-    {n:"MRU - Movimiento rectilíneo uniforme",u:"Física",s:"Movimientos",l:"unidades/fisica/movimientos/mru.html",c:"#3B82F6"},
-    {n:"MRUV - Movimiento acelerado",u:"Física",s:"Movimientos",l:"unidades/fisica/movimientos/mruv.html",c:"#3B82F6"},
-    {n:"Gráficos de movimiento",u:"Física",s:"Movimientos",l:"unidades/fisica/movimientos/graficos.html",c:"#3B82F6"},
-    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"unidades/fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
-    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"unidades/fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
-    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"unidades/fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
-    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"unidades/fisica/sistema-solar/mapi.html",c:"#3B82F6"},
-    {n:"Características de los seres vivos",u:"Biología",s:"Seres Vivos",l:"unidades/biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
-    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"unidades/biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
-    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"unidades/biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
-    {n:"Tipos de células",u:"Biología",s:"Células",l:"unidades/biologia/celulas/tipos-celulas.html",c:"#DC2626"},
-    {n:"Organelas celulares",u:"Biología",s:"Células",l:"unidades/biologia/celulas/organelas.html",c:"#DC2626"},
-    {n:"Niveles de organización",u:"Biología",s:"Células",l:"unidades/biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
-    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"unidades/biologia/ecologia/poblaciones.html",c:"#DC2626"},
-    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"unidades/biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
-    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"unidades/biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
-    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"unidades/biologia/plantas/fotosintesis.html",c:"#DC2626"},
-    {n:"Estructuras de las plantas",u:"Biología",s:"Plantas",l:"unidades/biologia/plantas/estructuras.html",c:"#DC2626"},
-    {n:"Germinación",u:"Biología",s:"Plantas",l:"unidades/biologia/plantas/germinacion.html",c:"#DC2626"},
-    {n:"Alimentación de los animales",u:"Biología",s:"Animales",l:"unidades/biologia/animales/alimentacion.html",c:"#DC2626"},
-    {n:"Vertebrados",u:"Biología",s:"Animales",l:"unidades/biologia/animales/vertebrados.html",c:"#DC2626"},
-    {n:"Invertebrados",u:"Biología",s:"Animales",l:"unidades/biologia/animales/invertebrados.html",c:"#DC2626"},
-    {n:"Fauna local",u:"Biología",s:"Animales",l:"unidades/biologia/animales/fauna-local.html",c:"#DC2626"},
-    {n:"Alimentación humana",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/alimentacion.html",c:"#DC2626"},
-    {n:"Circulación sanguínea",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
-    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
-    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
-    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
-    {n:"Músculos",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/musculos.html",c:"#DC2626"},
-    {n:"Páncreas",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/pancreas.html",c:"#DC2626"},
-    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
-    {n:"Riñones",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/rinones.html",c:"#DC2626"},
-    {n:"Sistema urinario",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/urinario.html",c:"#DC2626"},
-    {n:"La rana que voló (Revista)",u:"Revista",s:"Revista",l:"revista/rana-levitacion.html",c:"#C9A96E"},
-    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"podcast/",c:"#E8A87C"},
-    {n:"ESI - Educación Sexual Integral",u:"ESI",s:"ESI",l:"esi.html",c:"#14B8A6"},
-    {n:"EAI - Educación Ambiental Integral",u:"EAI",s:"EAI",l:"eai.html",c:"#22C55E"}
-  ];
-
-  var input = document.getElementById('topicSearch');
-  var results = document.getElementById('searchResults');
-  if(!input||!results)return;
-
-  function filter(val){
-    results.innerHTML='';
-    if(!val.trim()){results.classList.remove('active');return;}
-    var q=val.toLowerCase().trim();
-    var m=topics.filter(function(t){
-      return t.n.toLowerCase().indexOf(q)!==-1 || t.u.toLowerCase().indexOf(q)!==-1 || t.s.toLowerCase().indexOf(q)!==-1;
-    });
-    if(!m.length){
-      results.innerHTML='<div class="search-no-results">No se encontraron temas. Probá con otra palabra.</div>';
-    }else{
-      m.slice(0,12).forEach(function(t){
-        var a=document.createElement('a');
-        a.href=t.l; a.className='search-result-item';
-        a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
-        results.appendChild(a);
-      });
     }
-    results.classList.add('active');
-  }
 
-  input.addEventListener('input',function(){filter(this.value);});
-  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
-  document.addEventListener('click',function(e){if(!input.contains(e.target)&&!results.contains(e.target)){results.classList.remove('active');}});
-  document.addEventListener('keydown',function(e){
-    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();input.focus();input.select();}
-    if(e.key==='Escape'){input.blur();results.classList.remove('active');}
-  });
-})();
+    // ----- Cielo y estrellas -----
+    function drawSky(t) {
+      var g = ctx.createLinearGradient(0, 0, 0, horizonY);
+      g.addColorStop(0, '#03040c');
+      g.addColorStop(0.55, '#071226');
+      g.addColorStop(1, '#0d2038');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, horizonY + 1);
+
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var tw = s.base + Math.sin(t * s.speed + s.phase) * 0.35;
+        if (tw <= 0.02) continue;
+        ctx.globalAlpha = Math.max(0, Math.min(1, tw));
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // ----- Luna -----
+    function drawMoon() {
+      // Halo
+      var halo = ctx.createRadialGradient(moonX, moonY, moonR * 0.6, moonX, moonY, moonR * 4.2);
+      halo.addColorStop(0, 'rgba(230, 238, 248, 0.35)');
+      halo.addColorStop(0.4, 'rgba(190, 210, 235, 0.10)');
+      halo.addColorStop(1, 'rgba(190, 210, 235, 0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(moonX, moonY, moonR * 4.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Disco
+      var disc = ctx.createRadialGradient(moonX - moonR * 0.35, moonY - moonR * 0.35, moonR * 0.2, moonX, moonY, moonR);
+      disc.addColorStop(0, '#fdfdf6');
+      disc.addColorStop(0.75, '#e8ecdf');
+      disc.addColorStop(1, '#c9d2c8');
+      ctx.fillStyle = disc;
+      ctx.beginPath();
+      ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cráteres sutiles
+      ctx.fillStyle = 'rgba(150, 160, 155, 0.28)';
+      var craters = [
+        [-0.30, -0.15, 0.16], [0.22, 0.10, 0.22], [0.05, -0.40, 0.11],
+        [-0.15, 0.42, 0.13], [0.45, -0.28, 0.09]
+      ];
+      for (var i = 0; i < craters.length; i++) {
+        ctx.beginPath();
+        ctx.arc(moonX + craters[i][0] * moonR, moonY + craters[i][1] * moonR, craters[i][2] * moonR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // ----- Estrellas fugaces -----
+    function spawnMeteor(t) {
+      var speed = (Math.random() * 0.35 + 0.45) * W;
+      var dir = Math.random() < 0.5 ? -1 : 1; // a veces cruza hacia la izquierda, a veces hacia la derecha
+      var vx = dir * speed;
+      meteors.push({
+        x: dir === -1 ? W * (0.35 + Math.random() * 0.6) : W * (0.05 + Math.random() * 0.6),
+        y: horizonY * (0.05 + Math.random() * 0.35),
+        vx: vx,
+        vy: Math.abs(vx) * (0.3 + Math.random() * 0.25), // caída diagonal suave
+        life: 0,
+        maxLife: Math.random() * 0.5 + 0.7
+      });
+      nextMeteorAt = t + 4 + Math.random() * 7;
+    }
+
+    function drawMeteors(t, dt) {
+      if (t > nextMeteorAt) spawnMeteor(t);
+      for (var i = meteors.length - 1; i >= 0; i--) {
+        var m = meteors[i];
+        m.life += dt;
+        m.x += m.vx * dt;
+        m.y += m.vy * dt;
+        if (m.life > m.maxLife || m.y > horizonY || m.x < -100 || m.x > W + 100) {
+          meteors.splice(i, 1);
+          continue;
+        }
+        var fade = Math.sin((m.life / m.maxLife) * Math.PI); // entra y sale suave
+        var tailX = m.x - m.vx * 0.18;
+        var tailY = m.y - m.vy * 0.18;
+        var grad = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
+        grad.addColorStop(0, 'rgba(255, 255, 255, ' + (0.95 * fade) + ')');
+        grad.addColorStop(0.3, 'rgba(190, 215, 255, ' + (0.5 * fade) + ')');
+        grad.addColorStop(1, 'rgba(190, 215, 255, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+
+        // Cabeza brillante
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + fade + ')';
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // ----- Playa -----
+    function drawBeach() {
+      var g = ctx.createLinearGradient(0, shoreY - 40, 0, H);
+      g.addColorStop(0, '#2a2620');
+      g.addColorStop(0.5, '#3a332a');
+      g.addColorStop(1, '#221e18');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, shoreY - 40, W, H - shoreY + 40);
+    }
+
+    // Borde del agua sobre la arena (avanza y retrocede)
+    function waterEdge(x, t) {
+      var tide = Math.sin(t * 0.45) * (H * 0.022);            // la ola sube y baja
+      var ripple = Math.sin(x * 0.012 + t * 1.3) * 5
+                 + Math.sin(x * 0.004 - t * 0.7) * 8;          // borde irregular
+      return shoreY + tide + ripple;
+    }
+
+    // ----- Mar -----
+    function drawSea(t) {
+      // Cuerpo de agua: del horizonte al borde sobre la arena
+      ctx.beginPath();
+      ctx.moveTo(0, horizonY);
+      ctx.lineTo(W, horizonY);
+      var step = 14;
+      for (var x = W; x >= 0; x -= step) {
+        ctx.lineTo(x, waterEdge(x, t));
+      }
+      ctx.closePath();
+
+      var g = ctx.createLinearGradient(0, horizonY, 0, shoreY + 30);
+      g.addColorStop(0, '#0e2a44');
+      g.addColorStop(0.55, '#0a1e33');
+      g.addColorStop(1, '#0a1a28');
+      ctx.fillStyle = g;
+      ctx.fill();
+
+      // Reflejo de la luna sobre el agua (camino de luz que tiembla)
+      ctx.save();
+      ctx.clip();
+      for (var y = horizonY + 4; y < shoreY + 14; y += 7) {
+        var prog = (y - horizonY) / (shoreY - horizonY);
+        var wob = Math.sin(y * 0.18 + t * 2.1) * (6 + prog * 26);
+        var len = moonR * (0.9 + prog * 2.6) * (0.7 + 0.3 * Math.sin(y * 0.5 + t * 3));
+        var alpha = 0.20 * (1 - prog * 0.55) * (0.6 + 0.4 * Math.sin(y * 0.7 - t * 2.4));
+        if (alpha <= 0.01) continue;
+        ctx.fillStyle = 'rgba(235, 240, 230, ' + alpha.toFixed(3) + ')';
+        ctx.fillRect(moonX + wob - len / 2, y, len, 2.2);
+      }
+
+      // Crestas de olas que avanzan hacia la costa
+      for (var k = 0; k < 5; k++) {
+        var cycle = 9; // segundos que tarda una ola del horizonte a la costa
+        var p = ((t / cycle) + k / 5) % 1;            // 0 = horizonte, 1 = costa
+        var yWave = horizonY + (shoreY - horizonY) * (p * p * 0.96 + 0.04);
+        var amp = 2 + p * 7;
+        var alphaW = 0.05 + p * 0.22;
+        ctx.strokeStyle = 'rgba(180, 215, 235, ' + alphaW.toFixed(3) + ')';
+        ctx.lineWidth = 1 + p * 1.6;
+        ctx.beginPath();
+        for (var wx = 0; wx <= W; wx += 12) {
+          var wy = yWave + Math.sin(wx * 0.014 + t * 1.1 + k * 2.3) * amp;
+          if (wx === 0) ctx.moveTo(wx, wy); else ctx.lineTo(wx, wy);
+        }
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Espuma en el borde del agua
+      ctx.beginPath();
+      for (var fx = 0; fx <= W; fx += step) {
+        var fy = waterEdge(fx, t);
+        if (fx === 0) ctx.moveTo(fx, fy); else ctx.lineTo(fx, fy);
+      }
+      var foamPulse = 0.55 + 0.35 * Math.max(0, Math.cos(t * 0.45)); // más espuma cuando la ola rompe
+      ctx.strokeStyle = 'rgba(240, 248, 250, ' + foamPulse.toFixed(3) + ')';
+      ctx.lineWidth = 2.4;
+      ctx.shadowColor = 'rgba(240, 248, 250, 0.6)';
+      ctx.shadowBlur = 6;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Espuma residual: la marca que deja la ola anterior sobre la arena
+      ctx.beginPath();
+      var tPrev = t - 1.6;
+      for (var px = 0; px <= W; px += step) {
+        var py = waterEdge(px, tPrev) + 6;
+        if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = 'rgba(220, 230, 232, ' + (0.18 * (1 - foamPulse)).toFixed(3) + ')';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+
+    // ----- Bucle principal -----
+    var last = 0;
+    function frame(ms) {
+      var t = ms / 1000;
+      var dt = Math.min(0.05, t - last);
+      last = t;
+
+      ctx.clearRect(0, 0, W, H);
+      drawSky(t);
+      drawMeteors(t, dt);
+      drawMoon();
+      drawBeach();
+      drawSea(t);
+
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    nextMeteorAt = 2.5; // primera estrella fugaz a los pocos segundos
+    requestAnimationFrame(frame);
+  })();
   </script>
 
 </body>

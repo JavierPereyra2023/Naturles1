@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -109,7 +109,7 @@
   <div class="max-w-4xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14">
       <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
-        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -274,11 +274,108 @@
             La pendiente de la recta en un grafico x vs t es la velocidad. Cuanto mas inclinada la recta, mayor la velocidad.
           </div>
         </div>
-        <div class="figure-placeholder">
-          <span class="iconify block mx-auto mb-3" data-icon="lucide:chart-line" data-width="32" style="color: rgba(59,130,246,0.3);"></span>
-          <p class="uppercase tracking-wider font-bold">Figura 1 — Grafico posicion-tiempo en MRU</p>
-          <p class="mt-1">En el eje horizontal (x) se representa el tiempo en segundos. En el eje vertical (y), la posicion en metros. La pendiente de la recta es ?x/?t = velocidad.</p>
+        <!-- SIMULACIÓN: MRU con gráfico x-t en vivo -->
+        <div class="rounded-sm mt-6 overflow-hidden" style="background:#0a1322; border:1px solid rgba(59,130,246,0.25);">
+          <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+            <span class="iconify text-natura-energy" data-icon="lucide:chart-line" data-width="16"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-energy">Simulación · El auto y su gráfico, al mismo tiempo</span>
+          </div>
+          <div class="px-5">
+            <svg id="mruSvg" viewBox="0 0 640 340" class="w-full" role="img" aria-label="Simulación de movimiento rectilíneo uniforme con su gráfico posición-tiempo">
+              <!-- ruta -->
+              <line x1="40" y1="78" x2="620" y2="78" stroke="rgba(255,255,255,0.25)" stroke-width="3"/>
+              <g id="mruTicks" stroke="rgba(255,255,255,0.2)"></g>
+              <g id="mruTickLabels" fill="#5A6B60" font-size="9" font-family="Inter,sans-serif" text-anchor="middle"></g>
+              <!-- auto -->
+              <g id="mruAuto">
+                <rect x="-22" y="-22" width="44" height="14" rx="4" fill="#3B82F6"/>
+                <rect x="-12" y="-32" width="24" height="12" rx="4" fill="#60A5FA"/>
+                <circle cx="-12" cy="-6" r="6" fill="#0F172A" stroke="#94A3B8" stroke-width="2"/>
+                <circle cx="12" cy="-6" r="6" fill="#0F172A" stroke="#94A3B8" stroke-width="2"/>
+              </g>
+              <text id="mruPosLabel" x="0" y="36" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">x = 0 m</text>
+              <!-- gráfico -->
+              <line x1="70" y1="310" x2="610" y2="310" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="70" y1="310" x2="70" y2="140" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <text x="612" y="324" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="end">t (s)</text>
+              <text x="56" y="138" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="end">x (m)</text>
+              <g id="mruGridLabels" fill="#5A6B60" font-size="9" font-family="Inter,sans-serif"></g>
+              <line id="mruLinea" x1="70" y1="310" x2="70" y2="310" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+              <circle id="mruPunto" cx="70" cy="310" r="5" fill="#F8FAFC"/>
+              <text id="mruEq" x="600" y="160" fill="#3B82F6" font-size="12" font-family="Inter,sans-serif" text-anchor="end" font-weight="700">pendiente = v = 12 m/s</text>
+            </svg>
+          </div>
+          <div class="px-5 pb-2" style="font-family:'Inter',sans-serif;">
+            <label class="block max-w-xs">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silver">Velocidad · <span id="mruVel" class="text-natura-energy">12</span> m/s</span>
+              <input id="mruCtrl" type="range" min="4" max="30" step="1" value="12" class="w-full accent-blue-500">
+            </label>
+          </div>
+          <p class="px-5 pb-5 text-base text-natura-silver leading-relaxed">
+            El auto recorre <strong class="text-natura-silverLight">la misma distancia en cada segundo</strong>: por eso su gráfico x-t es una línea recta. Cambiá la velocidad y mirá la pendiente: a mayor velocidad, la recta se hace más empinada. La pendiente <em>es</em> la velocidad: Δx/Δt.
+          </p>
         </div>
+        <script>
+        (function(){
+          var svg = document.getElementById('mruSvg');
+          if (!svg) return;
+          var NS = 'http://www.w3.org/2000/svg';
+          var auto = document.getElementById('mruAuto');
+          var posLabel = document.getElementById('mruPosLabel');
+          var linea = document.getElementById('mruLinea');
+          var punto = document.getElementById('mruPunto');
+          var eq = document.getElementById('mruEq');
+          var ctrl = document.getElementById('mruCtrl'), velTxt = document.getElementById('mruVel');
+          // escalas: ruta 40..620 px = 0..120 m ; gráfico t 0..10 s -> 70..610 px ; x 0..120 m -> 310..140 px
+          var XMAX = 120, TMAX = 10;
+          function roadX(m){ return 40 + m / XMAX * 580; }
+          function gX(t){ return 70 + t / TMAX * 540; }
+          function gY(m){ return 310 - m / XMAX * 170; }
+          // marcas de la ruta y del gráfico
+          var ticks = document.getElementById('mruTicks'), tlabels = document.getElementById('mruTickLabels');
+          for (var m = 0; m <= 120; m += 20) {
+            var l = document.createElementNS(NS, 'line');
+            l.setAttribute('x1', roadX(m)); l.setAttribute('x2', roadX(m));
+            l.setAttribute('y1', 74); l.setAttribute('y2', 86);
+            ticks.appendChild(l);
+            var tx = document.createElementNS(NS, 'text');
+            tx.setAttribute('x', roadX(m)); tx.setAttribute('y', 100);
+            tx.textContent = m + ' m';
+            tlabels.appendChild(tx);
+          }
+          var grid = document.getElementById('mruGridLabels');
+          for (var s = 0; s <= 10; s += 2) {
+            var g1 = document.createElementNS(NS, 'text');
+            g1.setAttribute('x', gX(s) - 4); g1.setAttribute('y', 322);
+            g1.textContent = s;
+            grid.appendChild(g1);
+          }
+          [40, 80, 120].forEach(function (m) {
+            var g2 = document.createElementNS(NS, 'text');
+            g2.setAttribute('x', 44); g2.setAttribute('y', gY(m) + 3);
+            g2.textContent = m;
+            grid.appendChild(g2);
+          });
+          var v = 12, t0 = null;
+          ctrl.addEventListener('input', function(){ v = parseFloat(this.value); velTxt.textContent = v; t0 = null; });
+          function frame(ms) {
+            if (t0 === null) t0 = ms;
+            var t = (ms - t0) / 1000;
+            var x = v * t;
+            if (x > XMAX || t > TMAX) { t0 = ms; t = 0; x = 0; }
+            auto.setAttribute('transform', 'translate(' + roadX(x).toFixed(1) + ' 74)');
+            posLabel.setAttribute('x', roadX(x).toFixed(1));
+            posLabel.textContent = 'x = ' + Math.round(x) + ' m';
+            linea.setAttribute('x2', gX(t).toFixed(1));
+            linea.setAttribute('y2', gY(x).toFixed(1));
+            punto.setAttribute('cx', gX(t).toFixed(1));
+            punto.setAttribute('cy', gY(x).toFixed(1));
+            eq.textContent = 'pendiente = v = ' + v + ' m/s';
+            requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        })();
+        </script>
       </section>
 
       <!-- Magazine Divider -->
@@ -399,7 +496,7 @@
         <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
         <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
       </div>
     </div>
@@ -449,51 +546,51 @@
 <script>
 (function(){
   var topics = [
-    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
-    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
-    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
-    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
-    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
-    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
-    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
-    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
-    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
-    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
-    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
-    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
-    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
-    {n:"Materiales",u:"Fisica",s:"Calor",l:"../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
-    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
-    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
-    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../fisica/movimientos/graficos.html",c:"#3B82F6"},
-    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
-    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
-    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
-    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
-    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
-    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
-    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
-    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
-    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
-    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
-    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
-    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
-    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
-    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
-    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
-    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
-    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
-    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
-    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
-    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
-    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
-    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
-    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
-    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
-    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
-    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
-    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
-    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Fisica",s:"Sonido",l:"../calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
   ];
 
   var overlay = document.getElementById('searchOverlay');

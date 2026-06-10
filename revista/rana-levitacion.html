@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -17,9 +17,9 @@
               bg: '#0C100E',
               paper: '#141A16',
               paperLight: '#1A221E',
-              gold: '#F97316',
-              goldLight: '#FB923C',
-              goldDark: '#EA580C',
+              gold: '#8B5CF6',
+              goldLight: '#A78BFA',
+              goldDark: '#7C3AED',
               text: '#D4D0C8',
               textMuted: '#9A958A',
               textDim: '#6B665E',
@@ -39,12 +39,12 @@
   </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    ::selection { background: #F97316; color: #0C100E; }
+    ::selection { background: #8B5CF6; color: #0C100E; }
     body { font-family: '"Cormorant Garamond"', Georgia, serif; background: #0C100E; color: #D4D0C8; }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0C100E; }
-    ::-webkit-scrollbar-thumb { background: #F97316; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 3px; }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -68,16 +68,16 @@
       line-height: 0.75;
       padding-right: 12px;
       padding-top: 4px;
-      color: #F97316;
+      color: #8B5CF6;
       font-weight: 700;
     }
 
     .article-card {
-      border: 1px solid rgba(201, 169, 110, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.1);
       transition: all 0.4s ease;
     }
     .article-card:hover {
-      border-color: rgba(201, 169, 110, 0.35);
+      border-color: rgba(139, 92, 246, 0.35);
       transform: translateY(-4px);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
@@ -85,7 +85,7 @@
     .accent-line-revista {
       width: 80px;
       height: 2px;
-      background: linear-gradient(90deg, #F97316, transparent);
+      background: linear-gradient(90deg, #8B5CF6, transparent);
     }
 
     .figure-caption {
@@ -97,17 +97,17 @@
 
     .pullquote {
       font-family: 'Playfair Display', Georgia, serif;
-      border-left: 3px solid #F97316;
+      border-left: 3px solid #8B5CF6;
       padding-left: 20px;
     }
     .img-hover { transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: zoom-in; }
     .img-hover:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
-  .sabias-que { border-left:3px solid #F97316; background:rgba(249,115,22,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
-  .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#F97316; }
+  .sabias-que { border-left:3px solid #8B5CF6; background:rgba(139,92,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+  .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#8B5CF6; }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#D4D0C8; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
-.search-overlay-input:focus { border-color:rgba(249,115,22,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input:focus { border-color:rgba(139,92,246,0.4); background:rgba(255,255,255,0.06); }
 .search-overlay-input::placeholder { color:#9A958A; }
 .search-overlay-results { margin-top:8px; background:#141A16; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
 .search-overlay-results.active { display:block; }
@@ -122,7 +122,7 @@
 </head>
 <body class="min-h-screen" style="font-family: 'Cormorant Garamond', Georgia, serif; background: #0C100E; color: #D4D0C8;">
 
-<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#F97316;width:0%;transition:width 0.15s ease-out;"></div>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#8B5CF6;width:0%;transition:width 0.15s ease-out;"></div>
 <div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
   <div class="flex items-start justify-center pt-24 px-4">
     <div class="w-full max-w-lg">
@@ -139,11 +139,11 @@
 </div>
 
 <!-- Navigation Bar -->
-<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(12,16,14,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(249,115,22,0.1);">
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(12,16,14,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(139,92,246,0.1);">
   <div class="max-w-6xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14 md:h-16">
       <div class="flex items-center gap-3">
-        <a href="../index.html" class="text-revista-textDim hover:text-revista-gold transition-colors flex items-center gap-1" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../inicio.html" class="text-revista-textDim hover:text-revista-gold transition-colors flex items-center gap-1" style="font-family: 'Inter', sans-serif; font-size: 12px;">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -291,7 +291,7 @@
   <!-- Sidebar boxes in a grid -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 animate-fadeInUp delay-300">
     <!-- Conexión con el currículum -->
-    <div class="bg-revista-paper p-5" style="border-left: 3px solid #F97316;">
+    <div class="bg-revista-paper p-5" style="border-left: 3px solid #8B5CF6;">
       <div class="flex items-center gap-2 mb-3">
         <span class="iconify text-revista-gold" data-icon="lucide:book-open" data-width="16"></span>
         <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-revista-gold" style="font-family: 'Inter', sans-serif;">Conexión con el currículum</h4>
@@ -302,7 +302,7 @@
     </div>
 
     <!-- Dato curioso -->
-    <div class="bg-revista-paper p-5" style="border-left: 3px solid #F97316;">
+    <div class="bg-revista-paper p-5" style="border-left: 3px solid #8B5CF6;">
       <div class="flex items-center gap-2 mb-3">
         <span class="iconify text-revista-gold" data-icon="lucide:zap" data-width="16"></span>
         <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-revista-gold" style="font-family: 'Inter', sans-serif;">Dato curioso</h4>
@@ -313,7 +313,7 @@
     </div>
 
     <!-- ¿Sabías que...? -->
-    <div class="bg-revista-paper p-5" style="border-left: 3px solid #F97316;">
+    <div class="bg-revista-paper p-5" style="border-left: 3px solid #8B5CF6;">
       <div class="flex items-center gap-2 mb-3">
         <span class="iconify text-revista-gold" data-icon="lucide:lightbulb" data-width="16"></span>
         <h4 class="text-[11px] font-bold uppercase tracking-[0.15em] text-revista-gold" style="font-family: 'Inter', sans-serif;">¿Sabías que...?</h4>
@@ -351,7 +351,7 @@
 
     <!-- Second image -->
     <div class="mt-8">
-      <img src="../assets/rana2.png" alt="Ilustración de campo magnético y levitación" class="w-full block img-hover" style="border: 1px solid rgba(249,115,22,0.1);">
+      <img src="../assets/rana2.png" alt="Ilustración de campo magnético y levitación" class="w-full block img-hover" style="border: 1px solid rgba(139,92,246,0.1);">
       <p class="figure-caption mt-2">Representación artística: líneas de campo magnético alrededor de un objeto en levitación diamagnética.</p>
     </div>
   </section>
@@ -391,7 +391,7 @@
         <span class="text-[11px] text-revista-textDim ml-2">Cs. Naturales · 1° Año</span>
       </div>
       <div class="flex items-center gap-6" style="font-family: 'Inter', sans-serif;">
-        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-revista-textDim hover:text-revista-gold transition-colors">Inicio</a>
+        <a href="../inicio.html" class="text-[11px] uppercase tracking-wider text-revista-textDim hover:text-revista-gold transition-colors">Inicio</a>
         <span class="text-[11px] uppercase tracking-wider text-revista-textDim">Artículos de divulgación científica</span>
       </div>
     </div>
@@ -449,8 +449,8 @@
     {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/digestion.html",c:"#34D399"},
     {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/respiracion.html",c:"#34D399"},
     {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../unidades/biologia/cuerpo-humano/endocrino.html",c:"#34D399"},
-    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#F97316"},
-    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#8B5CF6"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/index.html",c:"#E8A87C"},
     {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
     {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#4ADE80"}
   ];

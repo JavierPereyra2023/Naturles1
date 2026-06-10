@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -110,7 +110,7 @@
   <div class="max-w-4xl mx-auto px-4 md:px-6">
     <div class="flex items-center justify-between h-14">
       <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
-        <a href="../../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:home" data-width="14"></span>
           <span class="hidden sm:inline">Inicio</span>
         </a>
@@ -229,12 +229,12 @@
       </p>
 
       <div class="bg-natura-dark border border-white/5 p-2 mt-6 mb-5">
-        <img src="../../../../assets/tilacoides.png" alt="Estructura de los tilacoides dentro del cloroplasto" class="w-full h-auto img-hover" loading="lazy">
+        <img src="../../../assets/tilacoides.png" alt="Estructura de los tilacoides dentro del cloroplasto" class="w-full h-auto img-hover" loading="lazy">
         <p class="text-center text-xs text-natura-silverDark mt-2" style="font-family: 'Inter', sans-serif;">Estructura del cloroplasto: tilacoides apilados en grana (donde ocurre la fase luminosa) y estroma (donde ocurre el ciclo de Calvin).</p>
       </div>
 
       <div class="bg-natura-dark border border-white/5 p-2 mt-6 mb-5">
-        <img src="../../../../assets/fotosintesis.png" alt="Esquema de la fotosíntesis" class="w-full h-auto img-hover" loading="lazy">
+        <img src="../../../assets/fotosintesis.png" alt="Esquema de la fotosíntesis" class="w-full h-auto img-hover" loading="lazy">
         <p class="text-center text-xs text-natura-silverDark mt-2" style="font-family: 'Inter', sans-serif;">Esquema completo de la fotosíntesis: fase luminosa en los tilacoides (captura de luz, producción de ATP y NADPH, liberación de O₂) y ciclo de Calvin en el estroma (fijación de CO₂, producción de glucosa).</p>
       </div>
 
@@ -248,6 +248,84 @@
       <div class="p-5 bg-natura-dark border border-natura-bio/20">
         <h3 class="font-heading text-lg font-bold text-white mb-3">Fase oscura (Ciclo de Calvin)</h3>
         <p class="text-sm text-natura-silverDark leading-relaxed">Ocurre en el estroma del cloroplasto y <strong class="text-white">no necesita luz directamente</strong> (aunque sí los productos de la fase luminosa). Usa el CO₂, el ATP y el NADPH para fabricar glucosa.</p>
+      </div>
+
+      <!-- ANIMACIÓN: la fotosíntesis en acción -->
+      <div class="bg-natura-dark border border-natura-bio/20 mt-6 overflow-hidden">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify" data-icon="lucide:sprout" data-width="16" style="color:#22C55E;"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em]" style="color:#22C55E;">Animación · Entradas y salidas de la fotosíntesis</span>
+        </div>
+        <div class="px-3">
+          <svg viewBox="0 0 640 420" class="w-full" role="img" aria-label="Animación de la fotosíntesis: luz, agua y dióxido de carbono entran; oxígeno y glucosa salen">
+            <!-- sol con rayos giratorios -->
+            <g transform="translate(90 70)">
+              <g stroke="#FACC15" stroke-width="3" stroke-linecap="round" opacity="0.8">
+                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="24s" repeatCount="indefinite"/>
+                <line x1="0" y1="-42" x2="0" y2="-54"/><line x1="0" y1="42" x2="0" y2="54"/>
+                <line x1="-42" y1="0" x2="-54" y2="0"/><line x1="42" y1="0" x2="54" y2="0"/>
+                <line x1="-30" y1="-30" x2="-38" y2="-38"/><line x1="30" y1="30" x2="38" y2="38"/>
+                <line x1="-30" y1="30" x2="-38" y2="38"/><line x1="30" y1="-30" x2="38" y2="-38"/>
+              </g>
+              <circle r="32" fill="#FACC15"/>
+              <circle r="32" fill="#FDE68A" opacity="0.5"><animate attributeName="r" values="32;36;32" dur="3s" repeatCount="indefinite"/></circle>
+            </g>
+            <!-- suelo y raíces -->
+            <rect x="0" y="345" width="640" height="75" fill="rgba(120,72,40,0.25)"/>
+            <line x1="0" y1="345" x2="640" y2="345" stroke="rgba(120,72,40,0.6)" stroke-width="2"/>
+            <g stroke="rgba(200,170,130,0.5)" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M320 345 C300 365 280 370 260 385"/>
+              <path d="M320 345 C330 370 355 375 370 392"/>
+              <path d="M320 345 L320 400"/>
+            </g>
+            <!-- tallo y hoja -->
+            <path d="M320 345 C320 300 320 250 330 205" stroke="#16A34A" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <g transform="translate(345 175) rotate(-18)">
+              <path d="M0 0 C45 -38 105 -30 125 0 C105 30 45 38 0 0 Z" fill="rgba(34,197,94,0.25)" stroke="#22C55E" stroke-width="2"/>
+              <path d="M0 0 L118 0 M30 0 C45 -12 60 -16 78 -18 M30 0 C45 12 60 16 78 18" stroke="#22C55E" stroke-width="1.2" fill="none" opacity="0.7"/>
+            </g>
+            <!-- segunda hoja chica -->
+            <path d="M322 280 C295 260 270 262 255 278 C268 295 300 297 322 280 Z" fill="rgba(34,197,94,0.18)" stroke="#22C55E" stroke-width="1.5"/>
+
+            <!-- caminos (invisibles) -->
+            <path id="fsLuz" d="M118 95 C190 115 265 135 330 158" fill="none" stroke="none"/>
+            <path id="fsCO2" d="M580 120 C500 135 430 150 392 165" fill="none" stroke="none"/>
+            <path id="fsH2O" d="M280 392 C295 370 318 360 320 335 C321 300 322 240 335 195" fill="none" stroke="none"/>
+            <path id="fsO2" d="M390 145 C400 105 390 65 408 22" fill="none" stroke="none"/>
+            <path id="fsGlu" d="M348 192 C335 245 322 285 320 330" fill="none" stroke="none"/>
+
+            <!-- fotones de luz -->
+            <circle r="4" fill="#FACC15"><animateMotion dur="2.6s" begin="0s" repeatCount="indefinite"><mpath href="#fsLuz"/></animateMotion></circle>
+            <circle r="4" fill="#FACC15"><animateMotion dur="2.6s" begin="-0.9s" repeatCount="indefinite"><mpath href="#fsLuz"/></animateMotion></circle>
+            <circle r="4" fill="#FACC15"><animateMotion dur="2.6s" begin="-1.8s" repeatCount="indefinite"><mpath href="#fsLuz"/></animateMotion></circle>
+            <!-- CO2 entrando -->
+            <g><animateMotion dur="3.2s" begin="0s" repeatCount="indefinite"><mpath href="#fsCO2"/></animateMotion><circle r="5" fill="#94A3B8"/><circle cx="-7" cy="3" r="3.2" fill="#CBD5E1"/><circle cx="7" cy="3" r="3.2" fill="#CBD5E1"/></g>
+            <g><animateMotion dur="3.2s" begin="-1.6s" repeatCount="indefinite"><mpath href="#fsCO2"/></animateMotion><circle r="5" fill="#94A3B8"/><circle cx="-7" cy="3" r="3.2" fill="#CBD5E1"/><circle cx="7" cy="3" r="3.2" fill="#CBD5E1"/></g>
+            <!-- agua subiendo -->
+            <circle r="4" fill="#38BDF8"><animateMotion dur="3.8s" begin="0s" repeatCount="indefinite"><mpath href="#fsH2O"/></animateMotion></circle>
+            <circle r="4" fill="#38BDF8"><animateMotion dur="3.8s" begin="-1.3s" repeatCount="indefinite"><mpath href="#fsH2O"/></animateMotion></circle>
+            <circle r="4" fill="#38BDF8"><animateMotion dur="3.8s" begin="-2.6s" repeatCount="indefinite"><mpath href="#fsH2O"/></animateMotion></circle>
+            <!-- oxígeno saliendo (burbujas) -->
+            <circle r="5" fill="none" stroke="#7DD3FC" stroke-width="2"><animateMotion dur="3s" begin="0s" repeatCount="indefinite"><mpath href="#fsO2"/></animateMotion><animate attributeName="opacity" values="1;1;0" keyTimes="0;0.8;1" dur="3s" begin="0s" repeatCount="indefinite"/></circle>
+            <circle r="4" fill="none" stroke="#7DD3FC" stroke-width="2"><animateMotion dur="3s" begin="-1.5s" repeatCount="indefinite"><mpath href="#fsO2"/></animateMotion><animate attributeName="opacity" values="1;1;0" keyTimes="0;0.8;1" dur="3s" begin="-1.5s" repeatCount="indefinite"/></circle>
+            <!-- glucosa bajando -->
+            <polygon points="0,-6 5,-3 5,3 0,6 -5,3 -5,-3" fill="#22C55E"><animateMotion dur="4s" begin="0s" repeatCount="indefinite"><mpath href="#fsGlu"/></animateMotion></polygon>
+            <polygon points="0,-6 5,-3 5,3 0,6 -5,3 -5,-3" fill="#22C55E"><animateMotion dur="4s" begin="-2s" repeatCount="indefinite"><mpath href="#fsGlu"/></animateMotion></polygon>
+
+            <!-- etiquetas -->
+            <text x="150" y="90" fill="#FACC15" font-size="12" font-family="Inter,sans-serif" font-weight="700">luz solar</text>
+            <text x="540" y="105" fill="#94A3B8" font-size="12" font-family="Inter,sans-serif" font-weight="700">CO₂ del aire</text>
+            <text x="240" y="410" fill="#38BDF8" font-size="12" font-family="Inter,sans-serif" font-weight="700">H₂O del suelo</text>
+            <text x="420" y="30" fill="#7DD3FC" font-size="12" font-family="Inter,sans-serif" font-weight="700">O₂ liberado</text>
+            <text x="360" y="260" fill="#22C55E" font-size="12" font-family="Inter,sans-serif" font-weight="700">glucosa</text>
+            <text x="455" y="190" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif">en el cloroplasto:</text>
+            <text x="455" y="204" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif">6CO₂ + 6H₂O + luz</text>
+            <text x="455" y="218" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif">→ C₆H₁₂O₆ + 6O₂</text>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 pt-2 text-sm text-natura-silverDark leading-relaxed">
+          Mirá las cuatro corrientes a la vez: la <strong class="text-white">luz</strong> y el <strong class="text-white">CO₂</strong> llegan a la hoja, el <strong class="text-white">agua</strong> sube desde las raíces por el xilema, y la hoja devuelve <strong class="text-white">O₂</strong> al aire mientras envía la <strong class="text-white">glucosa</strong> al resto de la planta para crecer. Todo esto pasa en cada hoja verde, todos los días, sin hacer ruido.
+        </p>
       </div>
     </div>
   </section>
@@ -345,7 +423,7 @@
         <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
       </div>
       <div class="flex items-center gap-6">
-        <a href="../../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
         <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
         <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
       </div>
@@ -370,49 +448,49 @@
 <script>
 (function(){
   var topics = [
-    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
-    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
-    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
-    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../quimica/mezclas/separacion.html",c:"#22C55E"},
-    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../quimica/agua/propiedades-agua.html",c:"#22C55E"},
-    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../quimica/agua/ciclo-agua.html",c:"#22C55E"},
-    {n:"Potabilización",u:"Química",s:"Agua",l:"../quimica/agua/potabilizacion.html",c:"#22C55E"},
-    {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
-    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
-    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
-    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
-    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
-    {n:"MRU",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mru.html",c:"#3B82F6"},
-    {n:"MRUV",u:"Física",s:"Movimientos",l:"../fisica/movimientos/mruv.html",c:"#3B82F6"},
-    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
-    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
-    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
-    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
-    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
-    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
-    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
-    {n:"Tipos de células",u:"Biología",s:"Células",l:"../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
-    {n:"Organelas",u:"Biología",s:"Células",l:"../biologia/celulas/organelas.html",c:"#DC2626"},
-    {n:"Niveles organización",u:"Biología",s:"Células",l:"../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
-    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../biologia/ecologia/poblaciones.html",c:"#DC2626"},
-    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
-    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
-    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../biologia/plantas/fotosintesis.html",c:"#DC2626"},
-    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"../biologia/plantas/estructuras.html",c:"#DC2626"},
-    {n:"Germinación",u:"Biología",s:"Plantas",l:"../biologia/plantas/germinacion.html",c:"#DC2626"},
-    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../biologia/animales/alimentacion.html",c:"#DC2626"},
-    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/vertebrados.html",c:"#DC2626"},
-    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../biologia/animales/invertebrados.html",c:"#DC2626"},
-    {n:"Fauna local",u:"Biología",s:"Animales",l:"../biologia/animales/fauna-local.html",c:"#DC2626"},
-    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
-    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
-    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
-    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
-    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
-    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../revista/rana-levitacion.html",c:"#C9A96E"},
-    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../podcast/",c:"#E8A87C"},
-    {n:"ESI",u:"ESI",s:"ESI",l:"../esi.html",c:"#14B8A6"},
-    {n:"EAI",u:"EAI",s:"EAI",l:"../eai.html",c:"#22C55E"}
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Química",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Química",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separación de mezclas",u:"Química",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Química",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Química",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Potabilización",u:"Química",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas y sonido",u:"Física",s:"Sonido",l:"../../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploración espacial",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biología",s:"Ecología",l:"../ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de plantas",u:"Biología",s:"Plantas",l:"estructuras.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"germinacion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"../animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"../animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"../animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que voló",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
   ];
 
   var overlay = document.getElementById('searchOverlay');
