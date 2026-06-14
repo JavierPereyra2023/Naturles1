@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué es la Ciencia? — Método Científico | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #0D9488; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #0D9488; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #0D9488, #14B8A6); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(13, 148, 136, 0.3); }
+    .highlight-box { border-left: 3px solid #0D9488; background: rgba(13, 148, 136, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(13, 148, 136, 0.35); transform: translateY(-2px); }
+    .sabias-que { border-left:3px solid #0D9488; background:rgba(13,148,136,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#0D9488; }
+    .step-connector { width: 2px; height: 32px; background: linear-gradient(to bottom, #0D9488, rgba(13,148,136,0.2)); margin: 0 auto; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Quiz */
+    .quiz-opt { border-radius:6px; border:1px solid transparent; transition:all 0.2s; }
+    .quiz-opt:hover { background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); }
+    /* Scientist card */
+    .scientist-card { border:1px solid rgba(255,255,255,0.06); transition:all 0.3s; }
+    .scientist-card:hover { border-color:rgba(13,148,136,0.35); transform:translateY(-3px); }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#0D9488;width:0%;transition:width 0.15s ease-out;"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs" style="font-family:'Inter',sans-serif;">
+        <a href="../../inicio.html" class="text-natura-silverDark hover:text-natura-green transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-green font-semibold">La Ciencia</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family:'Inter',sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-green/15 text-natura-greenLight px-2.5 py-1 hidden sm:inline">Tramo de Inicio · Sem 1–2</span>
+        <a href="../../inicio.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Inicio</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 60% 40%, rgba(13,148,136,0.13) 0%, transparent 60%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4 animate-fadeInUp opacity-0">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-greenLight" style="font-family:'Inter',sans-serif;">Tramo de Inicio · Semanas 1–2</span>
+      </div>
+      <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold uppercase leading-[0.95] tracking-tight text-white mb-5 animate-fadeInUp opacity-0 delay-100">
+        ¿Qué es<br>la <span class="text-natura-green">Ciencia</span>?
+      </h1>
+      <p class="text-base md:text-xl text-natura-silver max-w-xl leading-relaxed animate-fadeInUp opacity-0 delay-200">La ciencia no es solo un conjunto de datos que memorizar. Es una forma de hacer preguntas, buscar evidencias y construir conocimiento que cambia y mejora con el tiempo.</p>
+      <div class="flex flex-wrap gap-3 mt-6 animate-fadeInUp opacity-0 delay-300" style="font-family:'Inter',sans-serif;">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-green/10 text-natura-greenLight px-3 py-1.5">Método Científico</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-3 py-1.5">Hipótesis</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-leaf/10 text-natura-leaf px-3 py-1.5">Experimento</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5">Ciencia Social</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-green/20 to-transparent"></div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-4xl mx-auto space-y-14">
+
+    <!-- 01 · ¿Qué es la ciencia? -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-green/40">01</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">¿Qué es la ciencia?</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card highlight-box rounded-lg p-5 md:p-6 mb-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-xl mt-0.5 shrink-0" data-icon="lucide:sparkles"></span>
+          <p class="text-sm md:text-lg text-natura-silverLight leading-relaxed">La ciencia es un <span class="text-natura-greenLight font-semibold">proceso sistemático</span> para comprender el mundo natural. No es un conjunto fijo de verdades, sino una actividad humana que construye conocimiento a través de la observación, la experimentación y el debate.</p>
+        </div>
+      </div>
+      <p class="text-lg text-natura-silver leading-relaxed mb-5">Existen distintos tipos de ciencia según su objeto de estudio:</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="content-card rounded-lg p-5 text-center bg-natura-dark/40 hover:border-natura-leaf/30">
+          <span class="iconify text-natura-leaf text-3xl mb-3" data-icon="lucide:flask-conical"></span>
+          <h3 class="font-heading text-base font-semibold text-white mb-2">Ciencias Naturales</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">Estudian la naturaleza: Física, Química, Biología, Astronomía, Geología.</p>
+        </div>
+        <div class="content-card rounded-lg p-5 text-center bg-natura-dark/40 hover:border-natura-energy/30">
+          <span class="iconify text-natura-energy text-3xl mb-3" data-icon="lucide:users"></span>
+          <h3 class="font-heading text-base font-semibold text-white mb-2">Ciencias Sociales</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">Estudian las sociedades humanas: Historia, Sociología, Economía, Geografía.</p>
+        </div>
+        <div class="content-card rounded-lg p-5 text-center bg-natura-dark/40 hover:border-natura-bio/30">
+          <span class="iconify text-natura-bio text-3xl mb-3" data-icon="lucide:calculator"></span>
+          <h3 class="font-heading text-base font-semibold text-white mb-2">Ciencias Formales</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">Trabajan con sistemas abstractos: Matemática, Lógica, Informática.</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-green/10 to-transparent"></div>
+
+    <!-- 02 · El Método Científico -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-green/40">02</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">El método científico</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-8 leading-relaxed">El método científico es el conjunto de pasos que los científicos usan para investigar. No es una receta rígida: en la práctica puede modificarse, repetirse o saltear etapas. Pero en general, sigue esta secuencia:</p>
+
+      <div class="max-w-xl mx-auto">
+        <!-- Paso 1 -->
+        <div class="flex items-start gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold" style="background:rgba(13,148,136,0.2);border:2px solid #0D9488;color:#14B8A6;font-family:'Inter',sans-serif;">1</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="content-card rounded-lg p-4 mb-0 flex-1 hover:border-natura-green/30 bg-natura-dark/30">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-natura-greenLight" data-icon="lucide:eye" data-width="16"></span>
+              <h3 class="font-heading text-base font-semibold text-white">Observación</h3>
+            </div>
+            <p class="text-sm text-natura-silver leading-relaxed">El proceso comienza con la observación cuidadosa de un fenómeno natural. Ejemplo: <em>"las plantas crecen más rápido cerca de la ventana"</em>.</p>
+          </div>
+        </div>
+        <!-- Paso 2 -->
+        <div class="flex items-start gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold" style="background:rgba(13,148,136,0.2);border:2px solid #0D9488;color:#14B8A6;font-family:'Inter',sans-serif;">2</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="content-card rounded-lg p-4 mb-0 flex-1 hover:border-natura-green/30 bg-natura-dark/30">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-natura-greenLight" data-icon="lucide:help-circle" data-width="16"></span>
+              <h3 class="font-heading text-base font-semibold text-white">Pregunta / Problema</h3>
+            </div>
+            <p class="text-sm text-natura-silver leading-relaxed">Se formula una pregunta específica a investigar. Ejemplo: <em>"¿La cantidad de luz solar afecta el crecimiento de las plantas?"</em></p>
+          </div>
+        </div>
+        <!-- Paso 3 -->
+        <div class="flex items-start gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold" style="background:rgba(13,148,136,0.2);border:2px solid #0D9488;color:#14B8A6;font-family:'Inter',sans-serif;">3</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="content-card rounded-lg p-4 mb-0 flex-1 hover:border-natura-energy/30 bg-natura-dark/30">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-natura-energy" data-icon="lucide:lightbulb" data-width="16"></span>
+              <h3 class="font-heading text-base font-semibold text-white">Hipótesis</h3>
+            </div>
+            <p class="text-sm text-natura-silver leading-relaxed">Una respuesta provisional, basada en los conocimientos previos, que puede ponerse a prueba. Ejemplo: <em>"Si una planta recibe más luz, entonces crecerá más rápido"</em>.</p>
+          </div>
+        </div>
+        <!-- Paso 4 -->
+        <div class="flex items-start gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold" style="background:rgba(13,148,136,0.2);border:2px solid #0D9488;color:#14B8A6;font-family:'Inter',sans-serif;">4</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="content-card rounded-lg p-4 mb-0 flex-1 hover:border-natura-leaf/30 bg-natura-dark/30">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-natura-leaf" data-icon="lucide:flask-conical" data-width="16"></span>
+              <h3 class="font-heading text-base font-semibold text-white">Experimentación</h3>
+            </div>
+            <p class="text-sm text-natura-silver leading-relaxed">Se diseña y realiza un experimento controlado para poner a prueba la hipótesis. Se registran datos de forma sistemática. <strong class="text-natura-silverLight">Variable independiente</strong> (la que cambiamos) y <strong class="text-natura-silverLight">variable dependiente</strong> (la que medimos).</p>
+          </div>
+        </div>
+        <!-- Paso 5 -->
+        <div class="flex items-start gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold" style="background:rgba(13,148,136,0.2);border:2px solid #0D9488;color:#14B8A6;font-family:'Inter',sans-serif;">5</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="content-card rounded-lg p-4 mb-0 flex-1 hover:border-natura-water/30 bg-natura-dark/30">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-natura-water" data-icon="lucide:bar-chart-2" data-width="16"></span>
+              <h3 class="font-heading text-base font-semibold text-white">Análisis de datos</h3>
+            </div>
+            <p class="text-sm text-natura-silver leading-relaxed">Se organizan y analizan los resultados obtenidos. Se usan tablas, gráficos y estadísticas para encontrar patrones.</p>
+          </div>
+        </div>
+        <!-- Paso 6 -->
+        <div class="flex items-start gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold" style="background:rgba(13,148,136,0.2);border:2px solid #0D9488;color:#14B8A6;font-family:'Inter',sans-serif;">6</div>
+            <div class="step-connector opacity-0"></div>
+          </div>
+          <div class="content-card rounded-lg p-4 mb-0 flex-1 hover:border-natura-green/30 bg-natura-dark/30">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="iconify text-natura-greenLight" data-icon="lucide:check-circle-2" data-width="16"></span>
+              <h3 class="font-heading text-base font-semibold text-white">Conclusión y comunicación</h3>
+            </div>
+            <p class="text-sm text-natura-silver leading-relaxed">Se decide si la hipótesis fue confirmada o refutada, y se comunican los resultados para que otros científicos puedan repetir el experimento y verificar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sabias-que mt-6" style="max-width:640px;margin-left:auto;margin-right:auto;">
+        <span class="sq-label">Para tener en cuenta</span>
+        <p>Una hipótesis refutada no es un fracaso: es un resultado científico valioso. Saber <em>qué no funciona</em> es parte del proceso. Muchos descubrimientos históricos comenzaron con hipótesis erróneas que llevaron a preguntas más interesantes.</p>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-green/10 to-transparent"></div>
+
+    <!-- 03 · La ciencia no es objetiva pura -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-green/40">03</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">La ciencia como construcción social</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Durante mucho tiempo se pensó que la ciencia era completamente objetiva y neutral. Hoy sabemos que esto no es tan simple:</p>
+      <div class="space-y-4">
+        <div class="content-card rounded-lg p-5 flex items-start gap-3 bg-natura-dark/30">
+          <span class="iconify text-natura-greenLight text-xl mt-0.5 shrink-0" data-icon="lucide:users"></span>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-1">La hacen personas</h3>
+            <p class="text-base text-natura-silverLight leading-relaxed">Los científicos tienen valores, culturas, épocas históricas e intereses que influyen en qué preguntas hacen y cómo las interpretan. Por ejemplo, históricamente las mujeres fueron excluidas de la ciencia académica, lo que generó sesgos en las investigaciones.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-5 flex items-start gap-3 bg-natura-dark/30">
+          <span class="iconify text-natura-greenLight text-xl mt-0.5 shrink-0" data-icon="lucide:refresh-cw"></span>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-1">Cambia con el tiempo</h3>
+            <p class="text-base text-natura-silverLight leading-relaxed">El conocimiento científico no es definitivo. Lo que hoy es verdad científica puede ser revisado mañana con nuevas evidencias. El heliocentrismo reemplazó al geocentrismo. La teoría de la evolución completó y complejizó la visión de los seres vivos.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-5 flex items-start gap-3 bg-natura-dark/30">
+          <span class="iconify text-natura-greenLight text-xl mt-0.5 shrink-0" data-icon="lucide:check-check"></span>
+          <div>
+            <h3 class="font-heading text-base font-semibold text-white mb-1">Tiene criterios de validez</h3>
+            <p class="text-base text-natura-silverLight leading-relaxed">Aunque la ciencia es imperfecta, usa mecanismos como la revisión por pares, la replicación de experimentos y el debate público para corregirse. Esto la diferencia de opiniones, mitos o pseudociencias.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-green/10 to-transparent"></div>
+
+    <!-- 04 · Científicos históricos -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-green/40">04</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Figuras que cambiaron la ciencia</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="scientist-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-natura-energy/20 flex items-center justify-center shrink-0">
+              <span class="iconify text-natura-energy" data-icon="lucide:apple" data-width="20"></span>
+            </div>
+            <div>
+              <h3 class="font-heading text-base font-semibold text-white">Isaac Newton</h3>
+              <p class="text-[11px] text-natura-silverDark uppercase tracking-wider" style="font-family:'Inter',sans-serif;">1643–1727 · Física</p>
+            </div>
+          </div>
+          <p class="text-sm text-natura-silverLight leading-relaxed">Formuló las leyes del movimiento y la ley de la gravitación universal. Inventó el cálculo diferencial. Su obra demostró que el mismo conjunto de leyes gobernaba tanto la caída de una manzana como el movimiento de los planetas.</p>
+        </div>
+        <div class="scientist-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-natura-bio/20 flex items-center justify-center shrink-0">
+              <span class="iconify text-natura-bio" data-icon="lucide:atom" data-width="20"></span>
+            </div>
+            <div>
+              <h3 class="font-heading text-base font-semibold text-white">Marie Curie</h3>
+              <p class="text-[11px] text-natura-silverDark uppercase tracking-wider" style="font-family:'Inter',sans-serif;">1867–1934 · Química y Física</p>
+            </div>
+          </div>
+          <p class="text-sm text-natura-silverLight leading-relaxed">Primera mujer en ganar un Premio Nobel y única persona en ganarlo en dos ciencias distintas (Física y Química). Descubrió los elementos polonio y radio, y desarrolló la teoría de la radiactividad.</p>
+        </div>
+        <div class="scientist-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-natura-leaf/20 flex items-center justify-center shrink-0">
+              <span class="iconify text-natura-leaf" data-icon="lucide:bird" data-width="20"></span>
+            </div>
+            <div>
+              <h3 class="font-heading text-base font-semibold text-white">Charles Darwin</h3>
+              <p class="text-[11px] text-natura-silverDark uppercase tracking-wider" style="font-family:'Inter',sans-serif;">1809–1882 · Biología</p>
+            </div>
+          </div>
+          <p class="text-sm text-natura-silverLight leading-relaxed">Propuso la teoría de la evolución por selección natural. Observó durante años la variación de especies en las Islas Galápagos. Su obra <em>"El origen de las especies"</em> (1859) transformó para siempre la biología.</p>
+        </div>
+        <div class="scientist-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-natura-greenLight/20 flex items-center justify-center shrink-0">
+              <span class="iconify text-natura-greenLight" data-icon="lucide:microscope" data-width="20"></span>
+            </div>
+            <div>
+              <h3 class="font-heading text-base font-semibold text-white">Alexander Fleming</h3>
+              <p class="text-[11px] text-natura-silverDark uppercase tracking-wider" style="font-family:'Inter',sans-serif;">1881–1955 · Microbiología</p>
+            </div>
+          </div>
+          <p class="text-sm text-natura-silverLight leading-relaxed">Descubrió la penicilina en 1928 <em>por accidente</em>: observó que un hongo había contaminado su cultivo bacteriano y matado las bacterias. Sabía reconocer lo inesperado: eso es ciencia en estado puro.</p>
+        </div>
+      </div>
+      <div class="sabias-que mt-6" style="max-width:640px;margin-left:auto;margin-right:auto;">
+        <span class="sq-label">Para reflexionar</span>
+        <p>De los cuatro científicos listados, solo Marie Curie es mujer. Sin embargo, la historia de la ciencia está llena de mujeres que contribuyeron decisivamente y fueron borradas, ignoradas o despojadas del crédito por sus colegas hombres. Rosalind Franklin (ADN), Lise Meitner (fisión nuclear) y Cecilia Payne (composición del sol) son solo algunos ejemplos. ¿Cómo habría sido la ciencia si hubieran tenido iguales condiciones?</p>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-green/10 to-transparent"></div>
+
+    <!-- 05 · Ciencia en la vida cotidiana -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-green/40">05</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">La ciencia en nuestra vida cotidiana</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Cada vez que tomás decisiones basadas en evidencias, estás haciendo ciencia. La ciencia no está solo en los laboratorios:</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="content-card rounded-lg p-4 text-center bg-natura-dark/40 hover:border-natura-green/30">
+          <span class="iconify text-natura-greenLight text-2xl mb-2" data-icon="lucide:smartphone"></span>
+          <p class="text-sm text-natura-silverLight">Tu celular funciona gracias a la física cuántica, la química de las baterías y la biología de los algoritmos de salud.</p>
+        </div>
+        <div class="content-card rounded-lg p-4 text-center bg-natura-dark/40 hover:border-natura-green/30">
+          <span class="iconify text-natura-greenLight text-2xl mb-2" data-icon="lucide:pill"></span>
+          <p class="text-sm text-natura-silverLight">Las vacunas y los antibióticos existen gracias a décadas de investigación científica en microbiología e inmunología.</p>
+        </div>
+        <div class="content-card rounded-lg p-4 text-center bg-natura-dark/40 hover:border-natura-green/30">
+          <span class="iconify text-natura-greenLight text-2xl mb-2" data-icon="lucide:cloud-rain"></span>
+          <p class="text-sm text-natura-silverLight">El pronóstico del tiempo usa modelos matemáticos y datos de satélites para predecir fenómenos meteorológicos.</p>
+        </div>
+        <div class="content-card rounded-lg p-4 text-center bg-natura-dark/40 hover:border-natura-green/30">
+          <span class="iconify text-natura-greenLight text-2xl mb-2" data-icon="lucide:wheat"></span>
+          <p class="text-sm text-natura-silverLight">Los alimentos que comés pasaron por estudios de nutrición, química alimentaria y genética vegetal.</p>
+        </div>
+        <div class="content-card rounded-lg p-4 text-center bg-natura-dark/40 hover:border-natura-green/30">
+          <span class="iconify text-natura-greenLight text-2xl mb-2" data-icon="lucide:tree-pine"></span>
+          <p class="text-sm text-natura-silverLight">La ecología y la biología de la conservación permiten entender y frenar la pérdida de biodiversidad.</p>
+        </div>
+        <div class="content-card rounded-lg p-4 text-center bg-natura-dark/40 hover:border-natura-green/30">
+          <span class="iconify text-natura-greenLight text-2xl mb-2" data-icon="lucide:satellite"></span>
+          <p class="text-sm text-natura-silverLight">Los satélites que dan señal de GPS siguen las ecuaciones de la relatividad de Einstein para calcular las posiciones.</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-green/10 to-transparent"></div>
+
+    <!-- 06 · AUTOEVALUACIÓN -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-green/40">06</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Autoevaluación</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Respondé todas las preguntas y presioná <em>Ver resultado</em> para comprobar cuánto aprendiste.</p>
+      <div id="quiz" class="space-y-5"></div>
+      <div id="quiz-result" class="hidden mt-6 p-6 rounded-lg text-center" style="border:1px solid rgba(13,148,136,0.3);background:rgba(13,148,136,0.05);"></div>
+      <div class="mt-5">
+        <button id="quiz-btn" type="button" class="inline-flex items-center gap-2 text-natura-black text-xs font-bold uppercase tracking-wider px-7 py-3.5 transition-all duration-200" style="background:#0D9488;font-family:'Inter',sans-serif;">
+          <span class="iconify" data-icon="lucide:check-circle-2" data-width="16"></span>
+          <span>Ver resultado</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LINKS A LAS UNIDADES -->
+    <section class="reveal">
+      <div class="accent-line mb-5"></div>
+      <h3 class="font-heading text-base font-semibold text-white mb-4">Ahora que conocés el método, explorá las unidades:</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" style="font-family:'Inter',sans-serif;">
+        <a href="../quimica/index.html" class="content-card block rounded-lg p-4 bg-natura-dark/40 hover:border-natura-leaf/40 no-underline">
+          <span class="iconify text-natura-leaf text-2xl mb-2" data-icon="lucide:flask-conical"></span>
+          <h4 class="font-heading text-sm font-semibold text-white mb-1">Química</h4>
+          <p class="text-xs text-natura-silver">Los materiales y sus transformaciones.</p>
+        </a>
+        <a href="../fisica/index.html" class="content-card block rounded-lg p-4 bg-natura-dark/40 hover:border-natura-energy/40 no-underline">
+          <span class="iconify text-natura-energy text-2xl mb-2" data-icon="lucide:zap"></span>
+          <h4 class="font-heading text-sm font-semibold text-white mb-1">Física</h4>
+          <p class="text-xs text-natura-silver">Energía, movimiento y el universo.</p>
+        </a>
+        <a href="../biologia/index.html" class="content-card block rounded-lg p-4 bg-natura-dark/40 hover:border-natura-bio/40 no-underline">
+          <span class="iconify text-natura-bio text-2xl mb-2" data-icon="lucide:heart-pulse"></span>
+          <h4 class="font-heading text-sm font-semibold text-white mb-1">Biología</h4>
+          <p class="text-xs text-natura-silver">Los seres vivos y sus sistemas.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family:'Inter',sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-green flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:microscope" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-green transition-colors">Inicio</a>
+        <a href="../quimica/index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-leaf transition-colors">Química</a>
+        <a href="../fisica/index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <a href="../biologia/index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+<script>
+(function(){
+  var quizData=[
+    {q:"¿Qué es una hipótesis científica?",opts:["Una verdad demostrada definitivamente","Una respuesta provisional que puede ponerse a prueba","Una ley de la naturaleza","Un hecho observado sin explicación"],correct:1},
+    {q:"¿Cuál es la diferencia entre variable independiente y dependiente?",opts:["No hay diferencia, son lo mismo","La independiente es la que medimos, la dependiente la que cambiamos","La independiente es la que el investigador cambia; la dependiente, la que se mide como resultado","La dependiente siempre va en el eje X del gráfico"],correct:2},
+    {q:"¿Por qué decimos que la ciencia es una construcción social?",opts:["Porque solo científicos sociales pueden practicarla","Porque es objetiva y neutral al 100%","Porque la hacen personas con valores y contextos históricos que influyen en el proceso","Porque se realiza siempre en sociedad y nunca individualmente"],correct:2},
+    {q:"¿Qué ocurre cuando una hipótesis es refutada por el experimento?",opts:["El experimento falló y hay que repetirlo","Es un resultado inútil que debe descartarse","Es un resultado válido que nos dice qué no funciona y puede generar nuevas preguntas","El científico cometió un error"],correct:2},
+    {q:"¿Qué descubrió Marie Curie que le valió el Premio Nobel de Química?",opts:["La penicilina","Los elementos polonio y radio, y la teoría de la radiactividad","La ley de la gravedad","La teoría de la evolución"],correct:1}
+  ];
+  var container=document.getElementById('quiz');
+  if(!container)return;
+  quizData.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='content-card rounded-lg p-4 md:p-5';
+    div.id='q-block-'+i;
+    var html='<p class="text-base text-natura-silverLight mb-3"><span class="font-heading font-bold text-natura-greenLight mr-2">'+(i+1)+'.</span>'+item.q+'</p><div class="space-y-2">';
+    item.opts.forEach(function(opt,j){
+      html+='<label class="quiz-opt flex items-start gap-2.5 cursor-pointer p-2.5" style="font-family:\'Inter\',sans-serif;">';
+      html+='<input type="radio" name="q'+i+'" value="'+j+'" class="mt-0.5" style="accent-color:#0D9488;">';
+      html+='<span class="text-sm text-natura-silver">'+opt+'</span>';
+      html+='</label>';
+    });
+    html+='</div>';
+    div.innerHTML=html;
+    container.appendChild(div);
+  });
+  var btn=document.getElementById('quiz-btn');
+  var resultBox=document.getElementById('quiz-result');
+  var checked=false;
+  btn.addEventListener('click',function(){
+    if(checked){location.reload();return;}
+    var score=0;
+    quizData.forEach(function(item,i){
+      var sel=document.querySelector('input[name="q'+i+'"]:checked');
+      var block=document.getElementById('q-block-'+i);
+      if(sel){
+        if(parseInt(sel.value)===item.correct){score++;block.style.borderColor='rgba(34,197,94,0.4)';block.style.background='rgba(34,197,94,0.04)';}
+        else{block.style.borderColor='rgba(220,38,38,0.4)';block.style.background='rgba(220,38,38,0.04)';}
+      }
+    });
+    var pct=Math.round(score/quizData.length*100);
+    var msg=pct===100?'¡Perfecto! Entendés muy bien cómo funciona la ciencia.':pct>=80?'Muy bien. Revisá las que no salieron.':pct>=60?'Vas por buen camino. Repasá algunas secciones.':'Leé el tema de nuevo, hay conceptos clave para recordar.';
+    resultBox.classList.remove('hidden');
+    resultBox.innerHTML='<div class="font-heading text-4xl font-bold text-white mb-1">'+score+'/'+quizData.length+'</div><div class="text-base text-natura-silverLight mt-1">'+msg+'</div>';
+    btn.innerHTML='<span class="iconify" data-icon="lucide:rotate-ccw" data-width="16"></span><span>Intentar de nuevo</span>';
+    checked=true;
+  });
+})();
+</script>
+</body>
+</html>

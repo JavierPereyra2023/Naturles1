@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Reproductor · ESI | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #14B8A6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #14B8A6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #14B8A6, #DC2626); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(20, 184, 166, 0.25); }
+    .highlight-box { border-left: 3px solid #14B8A6; background: rgba(20, 184, 166, 0.05); }
+    .highlight-esi { border-left: 3px solid #14B8A6; background: rgba(20, 184, 166, 0.07); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(20, 184, 166, 0.35); transform: translateY(-2px); }
+    .sabias-que { border-left:3px solid #14B8A6; background:rgba(20,184,166,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#14B8A6; }
+    .esi-badge { display:inline-flex; align-items:center; gap:6px; font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; background:rgba(20,184,166,0.12); color:#14B8A6; border:1px solid rgba(20,184,166,0.25); padding:4px 10px; border-radius:4px; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Quiz */
+    .quiz-opt { border-radius:6px; border:1px solid transparent; transition:all 0.2s; }
+    .quiz-opt:hover { background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); }
+    .quiz-correct { border-color:rgba(34,197,94,0.4)!important; background:rgba(34,197,94,0.06)!important; }
+    .quiz-wrong { border-color:rgba(220,38,38,0.4)!important; background:rgba(220,38,38,0.06)!important; }
+  </style>
+</head>
+<body>
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#14B8A6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs" style="font-family:'Inter',sans-serif;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-greenLight transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-greenLight transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-greenLight transition-colors">Cuerpo Humano</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-greenLight font-semibold">Reproductor</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family:'Inter',sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-greenLight/15 text-natura-greenLight px-2.5 py-1 hidden sm:inline">Eje 4 · ESI · Sem 32–34</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-8" style="background: radial-gradient(ellipse at 70% 50%, rgba(20,184,166,0.12) 0%, transparent 70%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-greenLight" style="font-family:'Inter',sans-serif;">Eje 4 · El Cuerpo Humano · ESI</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4 animate-fadeInUp opacity-0">
+        Sistema <span class="text-natura-greenLight">Reproductor</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed animate-fadeInUp opacity-0 delay-100">La reproducción garantiza la continuidad de la especie. Conocer nuestro cuerpo es el primer paso para cuidarlo y respetarlo.</p>
+      <div class="flex flex-wrap gap-3 mt-6 animate-fadeInUp opacity-0 delay-200" style="font-family:'Inter',sans-serif;">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-greenLight/10 text-natura-greenLight px-3 py-1.5">Gónadas</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5">Gametos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-3 py-1.5">Hormonas</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-water/10 text-natura-water px-3 py-1.5">Ciclo Menstrual</span>
+        <span class="esi-badge"><span class="iconify" data-icon="lucide:heart" data-width="11"></span> ESI · Ley 26.150</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/20 to-transparent"></div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="max-w-4xl mx-auto space-y-14">
+
+    <!-- 01 · Función -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">01</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Función del sistema reproductor</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card highlight-box rounded-lg p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-xl mt-0.5 shrink-0" data-icon="lucide:dna"></span>
+          <p class="text-sm md:text-lg text-natura-silverLight leading-relaxed">
+            La <span class="text-natura-greenLight font-semibold">reproducción</span> es la función vital que permite a los seres vivos generar descendencia y asegurar la continuidad de la especie. En los humanos es de tipo <strong class="text-white">sexual</strong>: requiere la participación de dos gametos —uno masculino y uno femenino— que se fusionan en la fecundación.
+          </p>
+        </div>
+      </div>
+      <p class="mt-5 text-lg text-natura-silver leading-relaxed">A diferencia de otros sistemas que funcionan desde el nacimiento, el sistema reproductor completa su maduración durante la <strong class="text-natura-silverLight">pubertad</strong>, etapa que trae cambios físicos, hormonales y emocionales que vamos a explorar en la sección ESI más adelante.</p>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/10 to-transparent"></div>
+
+    <!-- 02 · Sistema Reproductor Femenino -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">02</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Sistema reproductor femenino</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Está formado por órganos internos y externos que producen gametos femeninos (óvulos), permiten la fecundación y alojan el desarrollo embrionario.</p>
+      <div class="space-y-3">
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Ovarios</strong> — son las gónadas femeninas. Producen los <em>óvulos</em> (gametos femeninos) y secretan las hormonas <strong class="text-natura-greenLight">estrógenos</strong> y <strong class="text-natura-greenLight">progesterona</strong>, que regulan el ciclo menstrual y los cambios de la pubertad.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Trompas de Falopio</strong> — dos conductos que conectan los ovarios con el útero. Por aquí viaja el óvulo después de ser liberado. Si hay espermatozoides presentes, la fecundación ocurre generalmente en la trompa.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Útero</strong> — órgano muscular con forma de pera invertida donde se implanta y desarrolla el embrión si hay fecundación. Su pared interna, el <em>endometrio</em>, se renueva cada mes durante el ciclo menstrual.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Cuello del útero (cérvix)</strong> — zona que conecta el útero con la vagina. Produce mucosidad que varía según el momento del ciclo.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-greenLight text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Vagina</strong> — conducto muscular que conecta el útero con el exterior. Cumple funciones en la menstruación y en el parto.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagrama SVG esquemático -->
+      <div class="content-card rounded-lg mt-6 overflow-hidden bg-natura-dark/40" style="border-color:rgba(20,184,166,0.2);">
+        <div class="p-4 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-greenLight" data-icon="lucide:scan" data-width="14"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-greenLight">Esquema · Vista frontal (simplificada)</span>
+        </div>
+        <svg viewBox="0 0 480 320" class="w-full max-w-md mx-auto px-4 pb-4" role="img" aria-label="Esquema simplificado del sistema reproductor femenino">
+          <!-- Ovarios -->
+          <ellipse cx="155" cy="130" rx="28" ry="20" fill="rgba(20,184,166,0.18)" stroke="#14B8A6" stroke-width="2"/>
+          <ellipse cx="325" cy="130" rx="28" ry="20" fill="rgba(20,184,166,0.18)" stroke="#14B8A6" stroke-width="2"/>
+          <text x="155" y="134" text-anchor="middle" fill="#14B8A6" font-size="10" font-family="Inter,sans-serif" font-weight="700">ovario</text>
+          <text x="325" y="134" text-anchor="middle" fill="#14B8A6" font-size="10" font-family="Inter,sans-serif" font-weight="700">ovario</text>
+          <!-- Trompas -->
+          <path d="M183 126 Q200 108 220 120 Q230 125 240 135" fill="none" stroke="#A8B5AD" stroke-width="3" stroke-linecap="round"/>
+          <path d="M297 126 Q280 108 260 120 Q250 125 240 135" fill="none" stroke="#A8B5AD" stroke-width="3" stroke-linecap="round"/>
+          <text x="190" y="104" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif" text-anchor="middle">trompa</text>
+          <text x="290" y="104" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif" text-anchor="middle">trompa</text>
+          <!-- Útero -->
+          <path d="M215 135 Q195 170 200 210 Q215 245 240 248 Q265 245 280 210 Q285 170 265 135 Z" fill="rgba(220,38,38,0.15)" stroke="#DC2626" stroke-width="2"/>
+          <text x="240" y="200" text-anchor="middle" fill="#DC2626" font-size="11" font-family="Inter,sans-serif" font-weight="700">útero</text>
+          <!-- Cuello -->
+          <rect x="227" y="248" width="26" height="22" rx="4" fill="rgba(220,38,38,0.1)" stroke="#DC2626" stroke-width="1.5"/>
+          <text x="240" y="263" text-anchor="middle" fill="#DC2626" font-size="8" font-family="Inter,sans-serif">cérvix</text>
+          <!-- Vagina -->
+          <rect x="222" y="270" width="36" height="30" rx="5" fill="rgba(168,181,173,0.08)" stroke="#5A6B60" stroke-width="1.5"/>
+          <text x="240" y="289" text-anchor="middle" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif">vagina</text>
+          <!-- Leyenda ESI -->
+          <text x="240" y="315" text-anchor="middle" fill="#5A6B60" font-size="8" font-family="Inter,sans-serif">Esquema anatómico didáctico · No escala</text>
+        </svg>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/10 to-transparent"></div>
+
+    <!-- 03 · Sistema Reproductor Masculino -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">03</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Sistema reproductor masculino</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Produce, transporta y deposita los gametos masculinos llamados <strong class="text-natura-silverLight">espermatozoides</strong>. También secreta la hormona <strong class="text-natura-silverLight">testosterona</strong>, responsable de muchos cambios de la pubertad.</p>
+      <div class="space-y-3">
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-energy text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Testículos</strong> — gónadas masculinas ubicadas en el escroto, fuera del cuerpo, lo que mantiene una temperatura algo menor que la corporal (necesaria para la producción de espermatozoides). Producen espermatozoides y testosterona.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-energy text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Epidídimo</strong> — estructura enrollada sobre cada testículo donde los espermatozoides maduran y se almacenan temporalmente. Aquí adquieren la capacidad de moverse.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-energy text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Conductos deferentes</strong> — tubos que transportan los espermatozoides desde el epidídimo hasta la uretra.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-energy text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Glándulas accesorias</strong> — vesículas seminales, próstata y glándulas de Cowper producen el líquido seminal, que nutre y protege a los espermatozoides formando el <em>semen</em>.</p>
+          </div>
+        </div>
+        <div class="content-card rounded-lg p-4 md:p-5 flex items-start gap-3">
+          <span class="iconify text-natura-energy text-lg mt-0.5 shrink-0" data-icon="lucide:circle-dot"></span>
+          <div>
+            <p class="text-base text-natura-silverLight"><strong class="text-white">Pene y uretra</strong> — la uretra es el conducto de salida del semen (y de la orina, en momentos distintos). El pene es el órgano por donde sale el semen durante la eyaculación.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sabias-que mt-6" style="max-width:640px;">
+        <span class="sq-label">Dato científico</span>
+        <p>Cada eyaculación contiene entre 40 y 600 millones de espermatozoides, pero solo uno puede fecundar al óvulo. Los espermatozoides sobreviven entre 3 y 5 días dentro del cuerpo femenino. El óvulo, en cambio, solo es fértil durante 12 a 24 horas después de la ovulación.</p>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/10 to-transparent"></div>
+
+    <!-- 04 · Ciclo Menstrual -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">04</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">El ciclo menstrual</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">El ciclo menstrual es el proceso por el cual el cuerpo femenino se prepara periódicamente para un posible embarazo. Su duración varía de persona a persona, generalmente entre <strong class="text-natura-silverLight">21 y 35 días</strong>.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="content-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-natura-greenLight/15 flex items-center justify-center text-xs font-bold text-natura-greenLight" style="font-family:'Inter',sans-serif;">01</div>
+            <h3 class="font-heading text-base font-semibold text-white">Fase folicular</h3>
+          </div>
+          <p class="text-base text-natura-silverLight leading-relaxed">El folículo ovárico madura bajo la acción de hormonas hipofisarias (FSH). El endometrio se engrosa para prepararse.</p>
+        </div>
+        <div class="content-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-natura-bio/15 flex items-center justify-center text-xs font-bold text-natura-bio" style="font-family:'Inter',sans-serif;">02</div>
+            <h3 class="font-heading text-base font-semibold text-white">Ovulación</h3>
+          </div>
+          <p class="text-base text-natura-silverLight leading-relaxed">Un óvulo maduro es liberado desde el ovario hacia la trompa de Falopio. Ocurre aproximadamente a la mitad del ciclo.</p>
+        </div>
+        <div class="content-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-natura-energy/15 flex items-center justify-center text-xs font-bold text-natura-energy" style="font-family:'Inter',sans-serif;">03</div>
+            <h3 class="font-heading text-base font-semibold text-white">Fase lútea</h3>
+          </div>
+          <p class="text-base text-natura-silverLight leading-relaxed">El folículo vacío se transforma en cuerpo lúteo y secreta progesterona, que mantiene el endometrio preparado.</p>
+        </div>
+        <div class="content-card rounded-lg p-5 bg-natura-dark/40">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-natura-silverDark/30 flex items-center justify-center text-xs font-bold text-natura-silverLight" style="font-family:'Inter',sans-serif;">04</div>
+            <h3 class="font-heading text-base font-semibold text-white">Menstruación</h3>
+          </div>
+          <p class="text-base text-natura-silverLight leading-relaxed">Si no hubo fecundación, el endometrio se desprende y sale por la vagina. Este proceso dura entre 3 y 7 días y da inicio al nuevo ciclo.</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/10 to-transparent"></div>
+
+    <!-- 05 · Fecundación y desarrollo -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">05</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Fecundación y desarrollo embrionario</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-5 leading-relaxed">La fecundación ocurre cuando un espermatozoide penetra al óvulo, generalmente en la trompa de Falopio. Se forma el <strong class="text-natura-silverLight">cigoto</strong>, que contiene la información genética de ambos progenitores.</p>
+      <div class="content-card rounded-lg p-5 md:p-6 space-y-4 bg-natura-dark/30">
+        <div class="flex items-start gap-3">
+          <span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+          <p class="text-base text-natura-silverLight"><strong class="text-white">Cigoto</strong> → primera célula del nuevo ser. Se divide rápidamente mientras viaja hacia el útero.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+          <p class="text-base text-natura-silverLight"><strong class="text-white">Mórula y blástula</strong> → el cigoto sigue dividiéndose formando una esfera de células.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+          <p class="text-base text-natura-silverLight"><strong class="text-white">Implantación</strong> → el embrión se adhiere al endometrio (alrededor del día 7). Desde aquí se desarrolla la placenta, órgano que lo nutre.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:arrow-right" data-width="16"></span>
+          <p class="text-base text-natura-silverLight"><strong class="text-white">Gestación</strong> → el embarazo dura aproximadamente 40 semanas (9 meses). Al final del proceso, el bebé nace por el canal del parto o por cesárea.</p>
+        </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/10 to-transparent"></div>
+
+    <!-- 06 · ESI -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">06</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Integración ESI — Mi cuerpo, mis derechos</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <div class="content-card highlight-esi rounded-lg p-5 md:p-6 mb-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="esi-badge"><span class="iconify" data-icon="lucide:shield-check" data-width="11"></span> Educación Sexual Integral · Ley N° 26.150</span>
+        </div>
+        <p class="text-base text-natura-silverLight leading-relaxed">La ESI reconoce el derecho de niñas, niños y adolescentes a recibir información científica, actualizada y respetuosa sobre su cuerpo y su salud sexual y reproductiva.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="content-card rounded-lg p-5 md:p-6 bg-natura-dark/30">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-greenLight" data-icon="lucide:user-round" data-width="20"></span>
+            <h3 class="font-heading text-base font-semibold text-white">Cambios en la pubertad</h3>
+          </div>
+          <p class="text-base text-natura-silverLight leading-relaxed mb-3">La pubertad es la etapa de maduración sexual que comienza entre los 8 y 13 años en personas con ovarios, y entre los 9 y 14 años en personas con testículos. Las hormonas sexuales activan una serie de cambios físicos y emocionales:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+            <div class="p-3 rounded" style="background:rgba(20,184,166,0.06);border:1px solid rgba(20,184,166,0.15);">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-natura-greenLight mb-2" style="font-family:'Inter',sans-serif;">Cambios físicos comunes</p>
+              <ul class="space-y-1 text-sm text-natura-silver">
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Crecimiento en estatura</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Aparición de vello corporal</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Cambios en la piel (acné)</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Desarrollo de órganos genitales</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-greenLight mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Cambios en la voz</li>
+              </ul>
+            </div>
+            <div class="p-3 rounded" style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-natura-energy mb-2" style="font-family:'Inter',sans-serif;">Cambios emocionales</p>
+              <ul class="space-y-1 text-sm text-natura-silver">
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-energy mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Mayor búsqueda de autonomía</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-energy mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Cambios de humor frecuentes</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-energy mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Mayor importancia de los vínculos con pares</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-energy mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Desarrollo de la identidad personal</li>
+                <li class="flex items-start gap-1.5"><span class="iconify text-natura-energy mt-0.5 shrink-0" data-icon="lucide:check" data-width="12"></span>Inicio del desarrollo de la sexualidad</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card rounded-lg p-5 bg-natura-dark/30">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-greenLight" data-icon="lucide:users" data-width="20"></span>
+            <h3 class="font-heading text-base font-semibold text-white">Diversidad de cuerpos e identidades</h3>
+          </div>
+          <p class="text-base text-natura-silverLight leading-relaxed">Todos los cuerpos son distintos y todos los procesos de desarrollo son válidos. La pubertad no ocurre igual en todas las personas ni al mismo tiempo. La identidad de género —cómo nos sentimos y cómo nos identificamos— puede coincidir o no con el sexo biológico asignado al nacer, y eso es parte de la diversidad humana.</p>
+        </div>
+
+        <div class="content-card rounded-lg p-5 bg-natura-dark/30">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-greenLight" data-icon="lucide:shield" data-width="20"></span>
+            <h3 class="font-heading text-base font-semibold text-white">Derechos y cuidado del cuerpo</h3>
+          </div>
+          <ul class="space-y-2 text-base text-natura-silverLight">
+            <li class="flex items-start gap-2"><span class="iconify text-natura-greenLight mt-1 shrink-0" data-icon="lucide:check-circle-2" data-width="15"></span>Tenemos derecho a recibir información veraz sobre nuestro cuerpo y nuestra salud.</li>
+            <li class="flex items-start gap-2"><span class="iconify text-natura-greenLight mt-1 shrink-0" data-icon="lucide:check-circle-2" data-width="15"></span>Nadie puede tocar nuestro cuerpo sin nuestro consentimiento.</li>
+            <li class="flex items-start gap-2"><span class="iconify text-natura-greenLight mt-1 shrink-0" data-icon="lucide:check-circle-2" data-width="15"></span>Podemos consultar ante cualquier duda a profesionales de salud o docentes de confianza.</li>
+            <li class="flex items-start gap-2"><span class="iconify text-natura-greenLight mt-1 shrink-0" data-icon="lucide:check-circle-2" data-width="15"></span>El acceso a la salud sexual y reproductiva es un derecho garantizado por ley en Argentina.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center gap-3">
+        <a href="../../../esi.html" class="inline-flex items-center gap-2 border border-natura-greenLight/30 hover:border-natura-greenLight text-natura-greenLight text-[11px] font-bold uppercase tracking-wider px-5 py-2.5 transition-all duration-200 hover:bg-natura-greenLight/5" style="font-family:'Inter',sans-serif;">
+          <span class="iconify" data-icon="lucide:external-link" data-width="13"></span>
+          <span>Ver sección ESI completa</span>
+        </a>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-greenLight/10 to-transparent"></div>
+
+    <!-- 07 · AUTOEVALUACIÓN -->
+    <section class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-greenLight/40">07</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Autoevaluación</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Respondé todas las preguntas y luego presioná <em>Ver resultado</em> para saber cómo te fue.</p>
+      <div id="quiz" class="space-y-5"></div>
+      <div id="quiz-result" class="hidden mt-6 p-6 rounded-lg text-center" style="border:1px solid rgba(20,184,166,0.3);background:rgba(20,184,166,0.05);"></div>
+      <div class="mt-5">
+        <button id="quiz-btn" type="button" class="inline-flex items-center gap-2 text-natura-black text-xs font-bold uppercase tracking-wider px-7 py-3.5 transition-all duration-200" style="background:#14B8A6;font-family:'Inter',sans-serif;">
+          <span class="iconify" data-icon="lucide:check-circle-2" data-width="16"></span>
+          <span>Ver resultado</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- NAVEGACIÓN ENTRE PÁGINAS -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family:'Inter',sans-serif;">
+      <a href="endocrino.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-greenLight transition-colors group">
+        <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Sist. Endocrino</span>
+      </a>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-greenLight transition-colors flex items-center gap-1">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span>Todos los sistemas</span>
+      </a>
+      <a href="nervioso.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-greenLight transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Sist. Nervioso</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family:'Inter',sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-greenLight flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-greenLight transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-greenLight transition-colors">Biología</a>
+        <a href="../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-greenLight transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+<script>
+(function(){
+  var quizData=[
+    {q:"¿Cuáles son las gónadas femeninas?",opts:["Trompas de Falopio","Ovarios","Útero y vagina","Placenta"],correct:1},
+    {q:"¿Dónde ocurre generalmente la fecundación?",opts:["En el útero","En el ovario","En la trompa de Falopio","En la vagina"],correct:2},
+    {q:"¿Qué hormona producen los testículos además de espermatozoides?",opts:["Estrógeno","Progesterona","Testosterona","Insulina"],correct:2},
+    {q:"¿Qué ocurre durante la menstruación?",opts:["Se libera un óvulo maduro","El embrión se implanta en el útero","El endometrio se desprende porque no hubo fecundación","El cuerpo lúteo produce progesterona"],correct:2},
+    {q:"Según la ESI, el derecho a recibir información sobre salud sexual y reproductiva:",opts:["Solo aplica a personas adultas","Está garantizado por ley para todas las personas","Depende de la decisión de cada familia","No existe en la legislación argentina"],correct:1}
+  ];
+  var container=document.getElementById('quiz');
+  if(!container)return;
+  quizData.forEach(function(item,i){
+    var div=document.createElement('div');
+    div.className='content-card rounded-lg p-4 md:p-5';
+    div.id='q-block-'+i;
+    var html='<p class="text-base text-natura-silverLight mb-3"><span class="font-heading font-bold text-natura-greenLight mr-2">'+(i+1)+'.</span>'+item.q+'</p><div class="space-y-2">';
+    item.opts.forEach(function(opt,j){
+      html+='<label class="quiz-opt flex items-start gap-2.5 cursor-pointer p-2.5" style="font-family:\'Inter\',sans-serif;">';
+      html+='<input type="radio" name="q'+i+'" value="'+j+'" class="mt-0.5" style="accent-color:#14B8A6;">';
+      html+='<span class="text-sm text-natura-silver">'+opt+'</span>';
+      html+='</label>';
+    });
+    html+='</div>';
+    div.innerHTML=html;
+    container.appendChild(div);
+  });
+  var btn=document.getElementById('quiz-btn');
+  var resultBox=document.getElementById('quiz-result');
+  var checked=false;
+  btn.addEventListener('click',function(){
+    if(checked){location.reload();return;}
+    var score=0;
+    quizData.forEach(function(item,i){
+      var sel=document.querySelector('input[name="q'+i+'"]:checked');
+      var block=document.getElementById('q-block-'+i);
+      if(sel){
+        if(parseInt(sel.value)===item.correct){score++;block.style.borderColor='rgba(34,197,94,0.4)';block.style.background='rgba(34,197,94,0.04)';}
+        else{block.style.borderColor='rgba(220,38,38,0.4)';block.style.background='rgba(220,38,38,0.04)';}
+      }
+    });
+    var pct=Math.round(score/quizData.length*100);
+    var msg=pct===100?'¡Perfecto! Dominás el tema completamente.':pct>=80?'Muy bien. Revisá las que no salieron.':pct>=60?'Bien, pero conviene repasar algunas secciones.':'Repasá el tema e intentá de nuevo.';
+    resultBox.classList.remove('hidden');
+    resultBox.innerHTML='<div class="font-heading text-4xl font-bold text-white mb-1">'+score+'/'+quizData.length+'</div><div class="text-base text-natura-silverLight mt-1">'+msg+'</div>';
+    btn.innerHTML='<span class="iconify" data-icon="lucide:rotate-ccw" data-width="16"></span><span>Intentar de nuevo</span>';
+    checked=true;
+  });
+})();
+</script>
+</body>
+</html>

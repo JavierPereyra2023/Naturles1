@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Luz y los colores | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59,130,246,0.25); }
+    .sabias-que { border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+</head>
+<body>
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Calor y Sonido</a>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Calor y Sonido</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="https://picsum.photos/seed/light-spectrum/1200/400" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Calor y Sonido</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">La Luz y los colores</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">La luz es una onda electromagnética que viaja a 300.000 km/s. Descubrí el espectro completo, por qué la luz blanca esconde todos los colores y cómo un prisma los separa.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/20 to-transparent"></div>
+<div class="max-w-3xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <main class="space-y-12">
+
+    <!-- SECTION 1 -->
+    <section class="animate-fadeInUp">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">01</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">&iquest;Qué es la luz?</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">La luz es una <strong class="text-natura-silverLight">onda electromagnética</strong>: una perturbación que transporta energía y que, a diferencia del sonido, no necesita ningún medio material para viajar. Por eso la luz del Sol puede atravesar el vacío del espacio y llegar hasta nosotros. Todas las ondas electromagnéticas viajan en el vacío a la misma velocidad altísima: 300.000 kilómetros por segundo.</p>
+      </div>
+
+      <div class="pull-quote">
+        "La luz no necesita aire ni agua para viajar: puede cruzar el vacío del espacio."
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+            <span class="iconify" data-icon="lucide:sun" data-width="18"></span> Onda electromagnética
+          </h3>
+          <p class="text-lg text-natura-silver leading-relaxed">No necesita medio material y puede viajar en el vacío. La luz visible, los rayos X, las ondas de radio y los ultravioleta son todas ondas electromagnéticas.</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold text-natura-energy mb-2 flex items-center gap-2">
+            <span class="iconify" data-icon="lucide:gauge" data-width="18"></span> Velocidad de la luz
+          </h3>
+          <p class="text-lg text-natura-silver leading-relaxed">En el vacío viaja a ˜ <strong class="text-natura-silverLight">300.000 km/s</strong>, casi un millón de veces más rápido que el sonido. Es la mayor velocidad posible en el universo.</p>
+        </div>
+      </div>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 2: ESPECTRO ELECTROMAGNÉTICO -->
+    <section class="animate-fadeInUp delay-100">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">02</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">El espectro electromagnético</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">La luz que vemos es apenas una <strong class="text-natura-silverLight">delgadísima franja</strong> de un enorme conjunto de ondas electromagnéticas. Todas viajan a la misma velocidad, pero se diferencian en su frecuencia y longitud de onda: desde las ondas de radio (kilómetros de largo) hasta los rayos gamma (más chicos que un átomo).</p>
+      </div>
+
+      <!-- LABORATORIO VISUAL: ESPECTRO ELECTROMAGNÉTICO -->
+      <div class="content-card rounded-sm mt-6 overflow-hidden" style="background:#0a1322; border-color:rgba(59,130,246,0.25);">
+        <div class="p-5 pb-3 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:radio" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-energy">El espectro electromagnético completo</span>
+        </div>
+        <div class="px-5 pb-3">
+          <svg viewBox="0 0 640 300" class="w-full" role="img" aria-label="Espectro electromagnético desde ondas de radio hasta rayos gamma, con la luz visible ampliada">
+            <defs>
+              <linearGradient id="rainbowGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#EF4444"/><stop offset="16%" stop-color="#FB923C"/>
+                <stop offset="33%" stop-color="#FDE047"/><stop offset="50%" stop-color="#22C55E"/>
+                <stop offset="66%" stop-color="#38BDF8"/><stop offset="83%" stop-color="#6366F1"/>
+                <stop offset="100%" stop-color="#A855F7"/>
+              </linearGradient>
+              <linearGradient id="waveGrad" gradientUnits="userSpaceOnUse" x1="44" y1="0" x2="596" y2="0">
+                <stop offset="0%" stop-color="#60A5FA"/><stop offset="55%" stop-color="#38BDF8"/>
+                <stop offset="100%" stop-color="#A855F7"/>
+              </linearGradient>
+            </defs>
+            <!-- onda que se comprime: mayor λ (izq) → menor λ (der) -->
+            <path id="spectrumWave" fill="none" stroke="url(#waveGrad)" stroke-width="2.5" stroke-linecap="round"/>
+            <text x="44" y="92" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif">← Mayor longitud de onda · menor frecuencia</text>
+            <text x="596" y="92" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="end">Menor λ · mayor frecuencia →</text>
+            <!-- etiquetas de regiones -->
+            <text x="80"  y="106" fill="#C8D4CC" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle">Radio</text>
+            <text x="160" y="106" fill="#C8D4CC" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle">Microondas</text>
+            <text x="240" y="106" fill="#C8D4CC" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle">Infrarrojo</text>
+            <text x="320" y="106" fill="#FFFFFF" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">Visible</text>
+            <text x="400" y="106" fill="#C8D4CC" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle">Ultravioleta</text>
+            <text x="480" y="106" fill="#C8D4CC" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle">Rayos X</text>
+            <text x="560" y="106" fill="#C8D4CC" font-size="9.5" font-family="Inter,sans-serif" text-anchor="middle">Gamma</text>
+            <!-- barra del espectro -->
+            <rect x="40"  y="112" width="80" height="40" fill="#243B4A"/>
+            <rect x="120" y="112" width="80" height="40" fill="#2D6E7E"/>
+            <rect x="200" y="112" width="80" height="40" fill="#8B1E1E"/>
+            <rect x="280" y="112" width="80" height="40" fill="url(#rainbowGrad)"/>
+            <rect x="360" y="112" width="80" height="40" fill="#4C1D95"/>
+            <rect x="440" y="112" width="80" height="40" fill="#2563EB"/>
+            <rect x="520" y="112" width="80" height="40" fill="#7E22CE"/>
+            <rect x="40" y="112" width="560" height="40" fill="none" stroke="rgba(255,255,255,0.15)"/>
+            <line x1="280" y1="112" x2="280" y2="152" stroke="#fff" stroke-width="1.5"/>
+            <line x1="360" y1="112" x2="360" y2="152" stroke="#fff" stroke-width="1.5"/>
+            <!-- ampliación de la luz visible -->
+            <path d="M280 152 L175 205 M360 152 L465 205" stroke="rgba(255,255,255,0.25)" stroke-dasharray="3 4"/>
+            <rect x="175" y="205" width="290" height="34" rx="3" fill="url(#rainbowGrad)"/>
+            <rect x="175" y="205" width="290" height="34" rx="3" fill="none" stroke="rgba(255,255,255,0.2)"/>
+            <text x="178" y="262" fill="#EF4444" font-size="11" font-family="Inter,sans-serif" font-weight="700">Rojo · ~700 nm</text>
+            <text x="462" y="262" fill="#A855F7" font-size="11" font-family="Inter,sans-serif" font-weight="700" text-anchor="end">Violeta · ~400 nm</text>
+            <text x="320" y="200" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">lo único que ven nuestros ojos</text>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 text-base text-natura-silver leading-relaxed">
+          De izquierda a derecha la <strong class="text-natura-silverLight">longitud de onda se achica</strong> y la <strong class="text-natura-silverLight">frecuencia aumenta</strong> (mirá cómo la onda de arriba se comprime). El infrarrojo es el "calor" que sentimos; el ultravioleta nos quema la piel; los rayos X atraviesan el cuerpo; los gamma son los más energéticos. En el medio, una franja minúscula entre los <strong class="text-natura-silverLight">400 y 700 nanómetros</strong> es todo lo que nuestros ojos pueden ver: la luz visible.
+        </p>
+      </div>
+
+      <div class="sidebar-note">
+        <span class="note-label">¿Un nanómetro?</span>
+        Un nanómetro (nm) es la millonésima parte de un milímetro. La luz visible mide entre 400 nm (violeta) y 700 nm (rojo): ¡miles de veces más fina que un cabello!
+      </div>
+
+      <p class="text-lg text-natura-silver leading-relaxed">Muchos aparatos que usás todos los días funcionan con ondas de este espectro que <em>no</em> vemos: el control remoto usa infrarrojo, el wifi y el microondas usan microondas, la radio usa ondas de radio y las radiografías usan rayos X. Son todas "luz", solo que invisible para nuestros ojos.</p>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 3: PRISMA -->
+    <section class="animate-fadeInUp delay-200">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">03</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">La luz blanca y el prisma</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">¿Por qué la luz del Sol es blanca si está hecha de colores? Porque cuando todos los colores se mezclan en partes iguales, los percibimos como blanco. Para "desarmar" esa mezcla usamos un <strong class="text-natura-silverLight">prisma</strong>: como cada color tiene distinta longitud de onda, cada uno se desvía un ángulo diferente al atravesar el vidrio. Esto se llama <strong class="text-natura-silverLight">dispersión</strong>.</p>
+      </div>
+
+      <!-- LABORATORIO VISUAL: PRISMA -->
+      <div class="content-card rounded-sm mt-6 overflow-hidden" style="background:#0a1322; border-color:rgba(59,130,246,0.25);">
+        <div class="p-5 pb-3 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:triangle" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-energy">La luz blanca atraviesa un prisma</span>
+        </div>
+        <div class="px-5 pb-4">
+          <svg viewBox="0 0 700 300" class="w-full" role="img" aria-label="Luz blanca que entra a un prisma y se descompone en los colores del arcoíris">
+            <defs>
+              <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+                <stop offset="100%" stop-color="rgba(56,189,248,0.06)"/>
+              </linearGradient>
+            </defs>
+            <!-- haz de luz blanca entrante -->
+            <line x1="20" y1="150" x2="283" y2="150" stroke="#F8FAFC" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 8">
+              <animate attributeName="stroke-dashoffset" from="0" to="-44" dur="0.9s" repeatCount="indefinite"/>
+            </line>
+            <text x="22" y="140" fill="#C8D4CC" font-size="11" font-family="Inter,sans-serif" font-weight="700">Luz blanca</text>
+            <!-- prisma -->
+            <path d="M320 60 L250 230 L390 230 Z" fill="url(#glass)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+            <text x="320" y="200" fill="rgba(255,255,255,0.7)" font-size="11" font-family="Inter,sans-serif" text-anchor="middle">prisma</text>
+            <!-- rayo blanco interno -->
+            <line x1="283" y1="150" x2="357" y2="170" stroke="#F8FAFC" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 7">
+              <animate attributeName="stroke-dashoffset" from="0" to="-34" dur="0.9s" repeatCount="indefinite"/>
+            </line>
+            <!-- abanico de colores dispersados -->
+            <g stroke-width="3" stroke-linecap="round">
+              <line x1="357" y1="170" x2="600" y2="130" stroke="#EF4444" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="0.9s" repeatCount="indefinite"/></line>
+              <line x1="357" y1="170" x2="600" y2="148" stroke="#FB923C" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="0.95s" repeatCount="indefinite"/></line>
+              <line x1="357" y1="170" x2="600" y2="166" stroke="#FDE047" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1s" repeatCount="indefinite"/></line>
+              <line x1="357" y1="170" x2="600" y2="184" stroke="#22C55E" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1.05s" repeatCount="indefinite"/></line>
+              <line x1="357" y1="170" x2="600" y2="202" stroke="#38BDF8" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1.1s" repeatCount="indefinite"/></line>
+              <line x1="357" y1="170" x2="600" y2="220" stroke="#6366F1" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1.15s" repeatCount="indefinite"/></line>
+              <line x1="357" y1="170" x2="600" y2="238" stroke="#A855F7" stroke-dasharray="14 8"><animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1.2s" repeatCount="indefinite"/></line>
+            </g>
+            <!-- etiquetas de los colores -->
+            <text x="606" y="133" fill="#EF4444" font-size="10" font-family="Inter,sans-serif">Rojo</text>
+            <text x="606" y="151" fill="#FB923C" font-size="10" font-family="Inter,sans-serif">Naranja</text>
+            <text x="606" y="169" fill="#FDE047" font-size="10" font-family="Inter,sans-serif">Amarillo</text>
+            <text x="606" y="187" fill="#22C55E" font-size="10" font-family="Inter,sans-serif">Verde</text>
+            <text x="606" y="205" fill="#38BDF8" font-size="10" font-family="Inter,sans-serif">Azul</text>
+            <text x="606" y="223" fill="#6366F1" font-size="10" font-family="Inter,sans-serif">Índigo</text>
+            <text x="606" y="241" fill="#A855F7" font-size="10" font-family="Inter,sans-serif">Violeta</text>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 text-base text-natura-silver leading-relaxed">
+          El <strong class="text-natura-silverLight">violeta</strong> (menor longitud de onda) se desvía <strong class="text-natura-silverLight">más</strong> que el <strong class="text-natura-silverLight">rojo</strong> (mayor longitud de onda). Por eso salen separados formando el orden del arcoíris. De hecho, ¡un arcoíris es exactamente esto: el Sol descomponiéndose en millones de gotitas de lluvia que funcionan como prismas diminutos!
+        </p>
+      </div>
+
+      <div class="sabias-que">
+        <span class="sq-label">Sabías que...</span>
+        <p>En 1666, Isaac Newton demostró con un prisma que la luz blanca contenía todos los colores. Después usó un <em>segundo</em> prisma invertido para volver a unirlos en luz blanca, probando que el color venía de la luz y no del vidrio.</p>
+      </div>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 4: POR QUÉ VEMOS COLORES -->
+    <section class="animate-fadeInUp" style="animation-delay: 300ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">04</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">&iquest;Por qué vemos los colores?</h2>
+      </div>
+      <div class="article-dropcap mb-4">
+        <p class="text-lg text-natura-silver leading-relaxed">Los objetos no "tienen" color por sí mismos: el color que vemos depende de qué partes de la luz <strong class="text-natura-silverLight">reflejan</strong> y cuáles <strong class="text-natura-silverLight">absorben</strong>. Cuando la luz blanca ilumina un objeto, este absorbe algunos colores y rebota otros. Los colores que rebotan son los que llegan a nuestros ojos.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold mb-2" style="color:#EF4444;">Una manzana roja</h3>
+          <p class="text-base text-natura-silver leading-relaxed">Refleja la luz <strong class="text-natura-silverLight">roja</strong> y absorbe el resto. Por eso la vemos roja: es el único color que rebota hacia nuestros ojos.</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold text-white mb-2">Un objeto blanco</h3>
+          <p class="text-base text-natura-silver leading-relaxed">Refleja <strong class="text-natura-silverLight">todos</strong> los colores por igual. Por eso lo vemos blanco: nos devuelve la luz completa.</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <h3 class="font-heading text-lg font-bold text-natura-silverDark mb-2">Un objeto negro</h3>
+          <p class="text-base text-natura-silver leading-relaxed">Absorbe <strong class="text-natura-silverLight">casi toda</strong> la luz y refleja muy poca. Por eso lo vemos negro y se calienta más al sol.</p>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        "El color no está en los objetos: está en la luz que reflejan y en nuestros ojos que la interpretan."
+      </div>
+
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/10 to-transparent mt-8"></div>
+    </section>
+
+    <!-- SECTION 5: PREGUNTAS -->
+    <section class="animate-fadeInUp" style="animation-delay: 400ms;">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-3xl font-bold text-natura-energy/30">05</span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Preguntas para pensar</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">1.</span> El control remoto del televisor usa luz infrarroja. ¿Por qué no la podemos ver, si también es una onda electromagnética como la luz visible?</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">2.</span> Si un prisma separa la luz blanca en colores, ¿qué pasaría si pusieras un segundo prisma invertido después del primero?</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">3.</span> ¿Por qué una remera negra te da más calor al sol que una blanca? Relacionalo con la luz que absorbe y refleja.</p>
+        </div>
+        <div class="content-card p-5 rounded-sm">
+          <p class="text-lg text-natura-silverLight leading-relaxed mb-1"><span class="text-natura-energy font-bold font-heading text-xl mr-2">4.</span> El violeta se desvía más que el rojo al pasar por el prisma. ¿Qué tiene que ver eso con su longitud de onda?</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- NAVIGATION -->
+<div class="max-w-3xl mx-auto px-4 md:px-6 pb-10">
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="sonido.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+      <span class="text-[11px] font-semibold uppercase tracking-wider">El Sonido</span>
+    </a>
+    <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+      <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+      <span>Calor y Sonido</span>
+    </a>
+    <a href="materiales.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-energy transition-colors group">
+      <span class="text-[11px] font-semibold uppercase tracking-wider">Luz y Materiales</span>
+      <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var p = document.getElementById('spectrumWave'); if(!p) return;
+  var X0=44, X1=596, base=58, amp=15;
+  function frame(ms){
+    var t = ms/1000, d='';
+    for (var x=X0; x<=X1; x+=3){
+      var u = (x-X0)/(X1-X0);
+      var cyc = 0.6*u + 7*u*u;            // ciclos acumulados: la onda se comprime hacia la derecha
+      var phase = 2*Math.PI*cyc - 3.2*t;  // se desplaza con el tiempo
+      d += (x===X0?'M':'L') + x + ' ' + (base - amp*Math.sin(phase)).toFixed(1);
+    }
+    p.setAttribute('d', d);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas",u:"Fisica",s:"Ondas",l:"ondas.html",c:"#3B82F6"},
+    {n:"El Sonido",u:"Fisica",s:"Sonido",l:"sonido.html",c:"#3B82F6"},
+    {n:"La Luz y los colores",u:"Fisica",s:"Luz",l:"luz.html",c:"#3B82F6"},
+    {n:"Luz y Materiales",u:"Fisica",s:"Luz",l:"materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>
