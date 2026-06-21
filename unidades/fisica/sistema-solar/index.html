@@ -84,8 +84,9 @@
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
   </style>
+  <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
 </head>
-<body>
+<body class="bg-sistema-solar">
 
 <div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
   <div class="flex items-start justify-center pt-24 px-4">
@@ -132,7 +133,7 @@
         <span class="text-natura-energy font-semibold">Sistema Solar</span>
       </div>
       <div class="flex items-center gap-3">
-        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3 · Sem 16–20 · MAPI</span>
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3 · MAPI</span>
         <a href="../index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
           <span>Volver</span>
@@ -148,14 +149,14 @@
 <!-- HERO -->
 <section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 opacity-10">
-    <img src="https://picsum.photos/seed/solar-system-hub/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+    <img src="../../../assets/fisica/sistema-solar/solar-system-hub.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
   <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
     <div class="max-w-3xl">
       <div class="flex items-center gap-3 mb-4">
         <div class="accent-line"></div>
-        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Eje 3 · Semanas 16–20 · MAPI</span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Eje 3 </span>
       </div>
       <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
         El <span class="text-natura-energy">Sistema Solar</span>
@@ -187,7 +188,7 @@
       <!-- Card 1: El Sol y los Planetas -->
       <a href="sol-planetas.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-44 overflow-hidden">
-          <img src="https://picsum.photos/seed/solar-planets/600/400.jpg" alt="El Sol y los Planetas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../../assets/fisica/sistema-solar/sapiens-planets.jpg" alt="El Sol y los Planetas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
           <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Sol y Planetas</span>
@@ -212,7 +213,7 @@
       <!-- Card 2: La Tierra y la Luna -->
       <a href="tierra-luna.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-44 overflow-hidden">
-          <img src="https://picsum.photos/seed/earth-moon/600/400.jpg" alt="La Tierra y la Luna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../../assets/fisica/sistema-solar/earth-moon-phase.jpg" alt="La Tierra y la Luna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
           <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Tierra y Luna</span>
@@ -236,7 +237,7 @@
       <!-- Card 3: Exploración Espacial -->
       <a href="exploracion.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-44 overflow-hidden">
-          <img src="https://picsum.photos/seed/space-exploration/600/400.jpg" alt="Exploración Espacial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../../assets/fisica/sistema-solar/astronaut-moon.jpg" alt="Exploración Espacial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
           <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Exploración</span>
@@ -260,7 +261,7 @@
       <!-- Card 4: Proyecto MAPI -->
       <a href="mapi.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-44 overflow-hidden">
-          <img src="https://picsum.photos/seed/mapi-project/600/400.jpg" alt="Proyecto MAPI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../../assets/fisica/sistema-solar/mapi-table.jpg" alt="Proyecto MAPI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
           <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-water/20 text-natura-water px-2.5 py-1">MAPI</span>

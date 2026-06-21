@@ -1,0 +1,157 @@
+/* =============================================================
+   backgrounds.css — Fondos tematicos por pagina
+   Aplicado via <body class="bg-XXX">
+   El overlay ::before mantiene el texto legible
+   ============================================================= */
+
+body {
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8,12,10,0.65) 0%, rgba(8,12,10,0.55) 50%, rgba(8,12,10,0.75) 100%);
+  z-index: -1;
+  pointer-events: none;
+  /* Overlay 55-75% segun zona, mas claro al medio */
+}
+
+/* === PORTADA / HERO estilizado ===
+   El primer <section class="relative ..."> de cada pagina recibe:
+   - Fondo transparente (deja ver el body)
+   - Gradiente radial del color del tema (alpha 0.25-0.40)
+   - Linea de acento en la parte inferior
+   ============================================================= */
+body[class*="bg-"] > section.relative.overflow-hidden:first-of-type,
+body[class*="bg-"] > section.relative.overflow-hidden:nth-of-type(2) {
+  background: transparent !important;
+}
+
+body[class*="bg-"] > section.relative.overflow-hidden:first-of-type::before,
+body[class*="bg-"] > section.relative.overflow-hidden:nth-of-type(2)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Cada tema con su color de acento (radial-gradient con alpha fuerte) */
+body.bg-ecosistemas > section.relative.overflow-hidden::before,
+body.bg-fotosintesis > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 197, 94, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(13, 148, 136, 0.18) 0%, transparent 60%);
+}
+body.bg-celulas > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(34, 211, 238, 0.18) 0%, transparent 60%);
+}
+body.bg-cuerpo-humano > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(220, 38, 38, 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(168, 85, 247, 0.16) 0%, transparent 60%);
+}
+body.bg-sistema-solar > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59, 130, 246, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 70% 90%, rgba(139, 92, 246, 0.18) 0%, transparent 60%);
+}
+body.bg-calor > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(239, 68, 68, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(245, 158, 11, 0.18) 0%, transparent 60%);
+}
+body.bg-sonido > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(20, 184, 166, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(34, 211, 238, 0.18) 0%, transparent 60%);
+}
+body.bg-movimiento > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(168, 85, 247, 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
+}
+body.bg-luz > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(250, 204, 21, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(244, 114, 182, 0.14) 0%, transparent 60%);
+}
+body.bg-agua > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(20, 184, 166, 0.18) 0%, transparent 60%);
+}
+body.bg-quimica > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 197, 94, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 100%, rgba(132, 204, 22, 0.18) 0%, transparent 60%);
+}
+body.bg-moleculas > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
+}
+
+/* Asegurar que el contenido del hero este sobre el gradiente */
+body[class*="bg-"] > section.relative.overflow-hidden > .max-w-4xl,
+body[class*="bg-"] > section.relative.overflow-hidden > .max-w-5xl,
+body[class*="bg-"] > section.relative.overflow-hidden > .max-w-7xl,
+body[class*="bg-"] > section.relative.overflow-hidden > .max-w-6xl {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hacer transparente el fondo de los hero sections (que tienen bg-natura-black inline) */
+body[class*="bg-"] section.relative[class*="bg-natura-black"],
+body[class*="bg-"] section.relative[class*="bg-natura-dark"]:first-of-type {
+  background: transparent !important;
+}
+
+/* === Temas Biologia === */
+body.bg-ecosistemas {
+  background-image: url('../backgrounds/bg-ecosistemas-bosque.png');
+}
+body.bg-celulas {
+  background-image: url('../backgrounds/bg-celulas-microscopio.png');
+}
+body.bg-fotosintesis {
+  background-image: url('../backgrounds/bg-fotosintesis-planta.png');
+}
+body.bg-cuerpo-humano {
+  background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.png');
+}
+
+/* === Temas Fisica === */
+body.bg-sistema-solar {
+  background-image: url('../backgrounds/bg-sistema-solar-espacio.png');
+}
+body.bg-calor {
+  background-image: url('../backgrounds/bg-calor-llamas.png');
+}
+body.bg-sonido {
+  background-image: url('../backgrounds/bg-sonido-ondas.png');
+}
+body.bg-movimiento {
+  background-image: url('../backgrounds/bg-movimiento-velocidad.png');
+}
+body.bg-luz {
+  background-image: url('../backgrounds/bg-luz-espectro.png');
+}
+
+/* === Temas Quimica === */
+body.bg-agua {
+  background-image: url('../backgrounds/bg-agua-gotas.png');
+}
+body.bg-quimica {
+  background-image: url('../backgrounds/bg-quimica-matraz.png');
+}
+body.bg-moleculas {
+  background-image: url('../backgrounds/bg-moleculas-atomos.png');
+}

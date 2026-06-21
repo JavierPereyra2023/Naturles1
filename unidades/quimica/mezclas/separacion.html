@@ -89,8 +89,9 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
-</head>
-<body>
+  <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
+  </head>
+<body class="bg-quimica">
 <div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
 
 <div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
@@ -139,7 +140,7 @@
 
 <section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 opacity-10">
-    <img src="https://picsum.photos/seed/separation-methods-hero/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+    <img src="https://loremflickr.com/600/400/science,nature,lab?lock=379" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
@@ -173,10 +174,10 @@
     <p class="text-natura-silver leading-relaxed">
       Cada método de separación aprovecha una <strong class="text-white">propiedad física</strong> diferente: el tamaño de partícula, la densidad, el punto de ebullición, la solubilidad o las propiedades magnéticas. Elegir el método correcto depende de qué tipo de mezcla tenemos y qué componentes queremos separar.
     </p>
-    <div class="figure-placeholder">
-      <span class="iconify text-3xl mb-2" data-icon="lucide:flask-round" data-width="36"></span>
-      <p>Ilustración: Técnicas de separación en el laboratorio.</p>
-    </div>
+    <figure class="my-8">
+  <img src="https://loremflickr.com/800/450/chemistry,lab,flask?lock=2534" alt="Ilustración: Técnicas de separación en el laboratorio." class="w-full rounded-lg" loading="lazy" onerror="this.onerror=null;this.src='https://loremflickr.com/800/450/chemistry,lab,flask?lock=2535'">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">Ilustración: Técnicas de separación en el laboratorio.</figcaption>
+</figure>
   </section>
 
   <section>

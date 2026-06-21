@@ -73,8 +73,9 @@
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
   </style>
+  <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
 </head>
-<body>
+<body class="bg-ecosistemas">
 
 <div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
   <div class="flex items-start justify-center pt-24 px-4">
@@ -103,7 +104,7 @@
         <span class="text-natura-bio font-semibold">Biología</span>
       </div>
       <div class="flex items-center gap-3">
-        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · Semanas 21–34</span>
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4</span>
         <a href="../../inicio.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
           <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
           <span>Volver</span>
@@ -118,14 +119,14 @@
 
 <section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 opacity-10">
-    <img src="https://picsum.photos/seed/biology-cells/1920/600.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+    <img src="../../assets/biologia/biodiversity-hero.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
   <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
     <div class="max-w-3xl">
       <div class="flex items-center gap-3 mb-4">
         <div class="accent-line"></div>
-        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · Semanas 21–34</span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4</span>
       </div>
       <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
         Biología — <span class="text-natura-bio">Sistemas Biológicos</span>
@@ -135,8 +136,10 @@
       </p>
       <div class="flex flex-wrap gap-3 mt-6">
         <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Seres Vivos</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Células</span>
         <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Plantas</span>
         <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Animales</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Ecología</span>
         <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">Cuerpo Humano</span>
         <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-3 py-1">ESI</span>
       </div>
@@ -156,10 +159,10 @@
       <!-- Card 1: Seres Vivos -->
       <a href="seres-vivos/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-48 overflow-hidden">
-          <img src="https://picsum.photos/seed/living-beings-bio/600/400.jpg" alt="Seres vivos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../assets/biologia/seres-vivos/forest-ecosystem.jpg" alt="Ecosistema forestal con diversidad de seres vivos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
-          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 21–23</span>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1"></span>
         </div>
         <div class="p-5">
           <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Seres Vivos — Unidad y Diversidad</h3>
@@ -176,15 +179,38 @@
         </div>
       </a>
 
-      <!-- Card 2: Plantas -->
+      <!-- Card 2: Células (NUEVO) -->
+      <a href="celulas/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+        <div class="relative h-48 overflow-hidden">
+          <img src="../../assets/biologia/celulas/dna-helix.jpg" alt="Doble hélice de ADN: la unidad básica de la vida" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <div class="grain-overlay"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Transversal</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Células — Unidad de la Vida</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Célula eucariota y procariota, organelas y niveles de organización. La base de todos los seres vivos.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Eucariota</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Organelas</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">ADN</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Plantas -->
       <a href="plantas/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-48 overflow-hidden">
-          <img src="https://picsum.photos/seed/plants-bio/600/400.jpg" alt="Plantas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../assets/biologia/plantas/rainforest.jpg" alt="Plantas de la selva tropical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
           <div class="absolute top-3 right-3 flex items-center gap-2">
             <span class="text-[8px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2 py-1">Experimento</span>
-            <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 24–26</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1"></span>
           </div>
         </div>
         <div class="p-5">
@@ -205,10 +231,10 @@
       <!-- Card 3: Animales -->
       <a href="animales/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-48 overflow-hidden">
-          <img src="https://picsum.photos/seed/animals-bio/600/400.jpg" alt="Animales" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../assets/biologia/animales/lion.jpg" alt="León en su hábitat natural" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
-          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 27–28</span>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1"></span>
         </div>
         <div class="p-5">
           <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Los Animales como Sistemas Heterótrofos</h3>
@@ -225,13 +251,36 @@
         </div>
       </a>
 
-      <!-- Card 4: Cuerpo Humano -->
-      <a href="cuerpo-humano/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+      <!-- Card 5: Ecología (NUEVO) -->
+      <a href="ecologia/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
         <div class="relative h-48 overflow-hidden">
-          <img src="https://picsum.photos/seed/human-body-bio/600/400.jpg" alt="Cuerpo humano" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <img src="../../assets/biologia/ecologia/food-chain.jpg" alt="Cadena trófica: relaciones entre los seres vivos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
           <div class="grain-overlay"></div>
-          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Semanas 29–34</span>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1">Complementario</span>
+        </div>
+        <div class="p-5">
+          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">Ecología — Interacciones y Poblaciones</h3>
+          <p class="text-xs text-natura-silver leading-relaxed mb-3">Poblaciones, factores bióticos y abióticos, relaciones interespecíficas. Biodiversidad del conurbano.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Poblaciones</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Mutualismo</span>
+            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-0.5">Biodiversidad</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-4 text-natura-bio">
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
+            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 6: Cuerpo Humano -->
+      <a href="cuerpo-humano/index.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
+        <div class="relative h-48 overflow-hidden">
+          <img src="../../assets/biologia/cuerpo-humano/skeleton-anatomy.jpg" alt="Esqueleto humano, sistema óseo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+          <div class="grain-overlay"></div>
+          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-bio/20 text-natura-bio px-2.5 py-1"></span>
         </div>
         <div class="p-5">
           <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-bio transition-colors mb-2">El Cuerpo Humano — 10 sistemas</h3>
@@ -299,7 +348,13 @@
       </div>
       <div class="flex items-center gap-6">
         <a href="../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
-        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Pro<script>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
 (function(){
   var topics = [
     {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},

@@ -87,8 +87,9 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
-</head>
-<body>
+  <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
+  </head>
+<body class="bg-moleculas">
 <div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
 
 <div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
@@ -185,11 +186,10 @@
         </tbody>
       </table>
     </div>
-    <div class="figure-placeholder">
-      <span class="iconify text-3xl mb-2" data-icon="lucide:grid-3x3" data-width="36"></span>
-      <p>Ilustración: Tabla periódica de los elementos.</p>
-      <p class="text-[11px]">Organiza los 118 elementos conocidos por número atómico creciente. Las columnas (grupos) comparten propiedades químicas.</p>
-    </div>
+    <figure class="my-8">
+  <img src="https://loremflickr.com/800/450/chemistry,lab,flask?lock=2714" alt="Ilustración: Tabla periódica de los elementos. Organiza los 118 elementos conocidos por número atómico creciente. Las co" class="w-full rounded-lg" loading="lazy" onerror="this.onerror=null;this.src='https://loremflickr.com/800/450/chemistry,lab,flask?lock=2715'">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">Ilustración: Tabla periódica de los elementos. Organiza los 118 elementos conocidos por número atómico creciente. Las columnas (grupos) comparten propiedades químicas.</figcaption>
+</figure>
     <div class="pull-quote">
       "La tabla periódica es como el mapa de un tesoro para los químicos. Cada elemento tiene su lugar y sus propiedades están relacionadas con su posición."
     </div>
