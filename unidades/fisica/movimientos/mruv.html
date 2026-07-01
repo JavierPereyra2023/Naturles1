@@ -171,8 +171,9 @@
         <nav class="space-y-0.5">
           <a href="#velocidad-cambia" class="toc-link active" data-toc>01. Cuando la velocidad cambia</a>
           <a href="#aceleracion" class="toc-link" data-toc>02. La aceleracion</a>
-          <a href="#caida-libre" class="toc-link" data-toc>03. Caida libre</a>
-          <a href="#para-pensar" class="toc-link" data-toc>04. Para pensar</a>
+          <a href="#graficos-mruv" class="toc-link" data-toc>03. Graficos en MRUV</a>
+          <a href="#caida-libre" class="toc-link" data-toc>04. Caida libre</a>
+          <a href="#para-pensar" class="toc-link" data-toc>05. Para pensar</a>
         </nav>
       </div>
     </aside>
@@ -247,6 +248,176 @@
             La aceleracion puede ser <strong class="text-white">positiva</strong> (el objeto aumenta su velocidad) o <strong class="text-white">negativa</strong> (el objeto disminuye su velocidad, es decir, frena). En la vida cotidiana, cuando decimos "acelerar" normalmente nos referimos a aumentar la velocidad, pero en fisica el termino abarca cualquier cambio de velocidad, incluida la desaceleracion.
           </p>
         </div>
+      </section>
+
+      <!-- 02b. Graficos en MRUV -->
+      <section id="graficos-mruv" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02b</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Graficos en MRUV</h2>
+        </div>
+        <div class="space-y-4 text-base md:text-base leading-relaxed text-natura-silver">
+          <p>
+            En el MRUV tenemos <strong class="text-white">dos graficos fundamentales</strong>: el de <span class="text-natura-energy">velocidad vs tiempo</span> (una recta inclinada cuya pendiente es la aceleracion) y el de <span class="text-natura-energy">posicion vs tiempo</span> (una parabola, porque la posicion crece de forma cuadratica).
+          </p>
+          <div class="pull-quote">
+            En MRUV, la velocidad cambia linealmente con el tiempo (recta) y la posicion cambia de forma parabolica.
+          </div>
+        </div>
+        <!-- SIMULACION: MRUV con graficos x-t y v-t en vivo -->
+        <div class="rounded-sm mt-6 overflow-hidden" style="background:#0a1322; border:1px solid rgba(59,130,246,0.25);">
+          <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+            <span class="iconify text-natura-energy" data-icon="lucide:chart-line" data-width="16"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-energy">Simulacion · Aceleracion y sus graficos</span>
+          </div>
+          <div class="px-5">
+            <svg id="mruvSvg" viewBox="0 0 640 400" class="w-full" role="img" aria-label="Simulacion de movimiento uniformemente variado con graficos posicion-tiempo y velocidad-tiempo">
+              <!-- ruta -->
+              <line x1="40" y1="60" x2="620" y2="60" stroke="rgba(255,255,255,0.25)" stroke-width="3"/>
+              <g id="mruvTicks" stroke="rgba(255,255,255,0.2)"></g>
+              <g id="mruvTickLabels" fill="#5A6B60" font-size="9" font-family="Inter,sans-serif" text-anchor="middle"></g>
+              <!-- auto -->
+              <g id="mruvAuto">
+                <rect x="-22" y="-22" width="44" height="14" rx="4" fill="#3B82F6"/>
+                <rect x="-12" y="-32" width="24" height="12" rx="4" fill="#60A5FA"/>
+                <circle cx="-12" cy="-6" r="6" fill="#0F172A" stroke="#94A3B8" stroke-width="2"/>
+                <circle cx="12" cy="-6" r="6" fill="#0F172A" stroke="#94A3B8" stroke-width="2"/>
+              </g>
+              <text id="mruvPosLabel" x="0" y="36" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">x = 0 m</text>
+              <text id="mruvVelLabel" x="0" y="48" fill="#38BDF8" font-size="9" font-family="Inter,sans-serif" text-anchor="middle">v = 0 m/s</text>
+              <!-- GRAFICO x vs t (arriba) -->
+              <line x1="70" y1="180" x2="610" y2="180" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="70" y1="180" x2="70" y2="70" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <text x="612" y="192" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif" text-anchor="end">t (s)</text>
+              <text x="58" y="68" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif" text-anchor="end">x (m)</text>
+              <g id="mruvGridXT" fill="#5A6B60" font-size="9" font-family="Inter,sans-serif"></g>
+              <path id="mruvCurvaXT" d="" stroke="#3B82F6" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <circle id="mruvPuntoXT" cx="70" cy="180" r="5" fill="#F8FAFC"/>
+              <text id="mruvEqXT" x="600" y="82" fill="#3B82F6" font-size="11" font-family="Inter,sans-serif" text-anchor="end" font-weight="700"></text>
+              <!-- GRAFICO v vs t (abajo) -->
+              <line x1="70" y1="370" x2="610" y2="370" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <line x1="70" y1="370" x2="70" y2="260" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <text x="612" y="382" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif" text-anchor="end">t (s)</text>
+              <text x="58" y="258" fill="#A8B5AD" font-size="9" font-family="Inter,sans-serif" text-anchor="end">v (m/s)</text>
+              <g id="mruvGridVT" fill="#5A6B60" font-size="9" font-family="Inter,sans-serif"></g>
+              <line id="mruvRectaVT" x1="70" y1="370" x2="70" y2="370" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+              <circle id="mruvPuntoVT" cx="70" cy="370" r="5" fill="#F8FAFC"/>
+              <text id="mruvEqVT" x="600" y="272" fill="#38BDF8" font-size="11" font-family="Inter,sans-serif" text-anchor="end" font-weight="700"></text>
+            </svg>
+          </div>
+          <div class="px-5 pb-2 grid grid-cols-2 gap-4" style="font-family:'Inter',sans-serif;">
+            <label>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silver">Velocidad inicial · <span id="mruvVo" class="text-natura-energy">0</span> m/s</span>
+              <input id="mruvVoCtrl" type="range" min="0" max="20" step="1" value="0" class="w-full accent-blue-500">
+            </label>
+            <label>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silver">Aceleracion · <span id="mruvAcc" class="text-natura-energy">4</span> m/s2</span>
+              <input id="mruvAccCtrl" type="range" min="1" max="10" step="0.5" value="4" class="w-full accent-blue-500">
+            </label>
+          </div>
+          <p class="px-5 pb-5 text-base text-natura-silver leading-relaxed">
+            El auto acelera constantemente: su <strong class="text-natura-silverLight">velocidad crece en linea recta</strong> y su <strong class="text-natura-silverLight">posicion describe una parabola</strong>. Cambia la velocidad inicial y la aceleracion para ver como cambian los graficos.
+          </p>
+        </div>
+        <script>
+        (function(){
+          var svg = document.getElementById('mruvSvg');
+          if (!svg) return;
+          var NS = 'http://www.w3.org/2000/svg';
+          var auto = document.getElementById('mruvAuto');
+          var posLabel = document.getElementById('mruvPosLabel');
+          var velLabel = document.getElementById('mruvVelLabel');
+          var puntoXT = document.getElementById('mruvPuntoXT');
+          var puntoVT = document.getElementById('mruvPuntoVT');
+          var curvaXT = document.getElementById('mruvCurvaXT');
+          var rectaVT = document.getElementById('mruvRectaVT');
+          var eqXT = document.getElementById('mruvEqXT');
+          var eqVT = document.getElementById('mruvEqVT');
+          var voCtrl = document.getElementById('mruvVoCtrl');
+          var accCtrl = document.getElementById('mruvAccCtrl');
+          var voTxt = document.getElementById('mruvVo');
+          var accTxt = document.getElementById('mruvAcc');
+
+          var XMAX = 200, TMAX = 10, VMAX = 100;
+          function roadX(m){ return 40 + m / XMAX * 580; }
+          function gXt(t){ return 70 + t / TMAX * 540; }
+          function gYt(m){ return 180 - m / XMAX * 110; }
+          function gVt(t){ return 370 - t / TMAX * 110; }
+
+          var ticks = document.getElementById('mruvTicks'), tlabels = document.getElementById('mruvTickLabels');
+          for (var m = 0; m <= 200; m += 40) {
+            var l = document.createElementNS(NS, 'line');
+            l.setAttribute('x1', roadX(m)); l.setAttribute('x2', roadX(m));
+            l.setAttribute('y1', 56); l.setAttribute('y2', 68);
+            ticks.appendChild(l);
+            var tx = document.createElementNS(NS, 'text');
+            tx.setAttribute('x', roadX(m)); tx.setAttribute('y', 80);
+            tx.textContent = m + ' m';
+            tlabels.appendChild(tx);
+          }
+
+          var gridXT = document.getElementById('mruvGridXT');
+          for (var s = 0; s <= 10; s += 2) {
+            var g1 = document.createElementNS(NS, 'text');
+            g1.setAttribute('x', gXt(s) - 4); g1.setAttribute('y', 192);
+            g1.textContent = s;
+            gridXT.appendChild(g1);
+          }
+          [0, 100, 200].forEach(function(m){
+            var g2 = document.createElementNS(NS, 'text');
+            g2.setAttribute('x', 44); g2.setAttribute('y', gYt(m) + 3);
+            g2.textContent = m;
+            gridXT.appendChild(g2);
+          });
+
+          var gridVT = document.getElementById('mruvGridVT');
+          for (var s = 0; s <= 10; s += 2) {
+            var v1 = document.createElementNS(NS, 'text');
+            v1.setAttribute('x', gVt(s) - 4); v1.setAttribute('y', 382);
+            v1.textContent = s;
+            gridVT.appendChild(v1);
+          }
+          [0, 50, 100].forEach(function(v){
+            var v2 = document.createElementNS(NS, 'text');
+            v2.setAttribute('x', 44); v2.setAttribute('y', gVt(v) + 3);
+            v2.textContent = v;
+            gridVT.appendChild(v2);
+          });
+
+          var v0 = 0, a = 4, t0 = null;
+          var pathPoints = [];
+
+          voCtrl.addEventListener('input', function(){ v0 = parseFloat(this.value); voTxt.textContent = v0; resetSim(); });
+          accCtrl.addEventListener('input', function(){ a = parseFloat(this.value); accTxt.textContent = a; resetSim(); });
+
+          function resetSim() { t0 = null; pathPoints = []; curvaXT.setAttribute('d', ''); }
+
+          function frame(ms) {
+            if (t0 === null) { t0 = ms; pathPoints = []; }
+            var t = (ms - t0) / 1000;
+            var x = v0 * t + 0.5 * a * t * t;
+            var v = v0 + a * t;
+            if (x > XMAX || t > TMAX) { t0 = ms; pathPoints = []; x = 0; v = v0; }
+            auto.setAttribute('transform', 'translate(' + roadX(x).toFixed(1) + ' 56)');
+            posLabel.setAttribute('x', roadX(x).toFixed(1));
+            posLabel.textContent = 'x = ' + Math.round(x) + ' m';
+            velLabel.setAttribute('x', roadX(x).toFixed(1));
+            velLabel.textContent = 'v = ' + v.toFixed(1) + ' m/s';
+            puntoXT.setAttribute('cx', gXt(t).toFixed(1));
+            puntoXT.setAttribute('cy', gYt(x).toFixed(1));
+            puntoVT.setAttribute('cx', gXt(t).toFixed(1));
+            puntoVT.setAttribute('cy', gVt(v).toFixed(1));
+            pathPoints.push(gXt(t).toFixed(1) + ',' + gYt(x).toFixed(1));
+            if (pathPoints.length > 2) curvaXT.setAttribute('d', 'M' + pathPoints.join('L'));
+            rectaVT.setAttribute('x2', gXt(t).toFixed(1));
+            rectaVT.setAttribute('y2', gVt(v).toFixed(1));
+            eqXT.textContent = 'x = ' + v0 + 't + ' + (a/2).toFixed(1) + 't²';
+            eqVT.textContent = 'v = ' + v0 + ' + ' + a.toFixed(1) + 't  |  a = ' + a + ' m/s²';
+            requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        })();
+        </script>
       </section>
 
       <!-- Magazine Divider -->

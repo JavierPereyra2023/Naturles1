@@ -1,7 +1,8 @@
 /* =============================================================
    backgrounds.css — Fondos tematicos por pagina
    Aplicado via <body class="bg-XXX">
-   El overlay ::before mantiene el texto legible
+   - ::before: dark overlay para legibilidad
+   - ::after:  fugado de color (radial bleed) de contraste
    ============================================================= */
 
 body {
@@ -15,10 +16,55 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8,12,10,0.65) 0%, rgba(8,12,10,0.55) 50%, rgba(8,12,10,0.75) 100%);
+  background: linear-gradient(180deg, rgba(8,12,10,0.58) 0%, rgba(8,12,10,0.48) 50%, rgba(8,12,10,0.70) 100%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Fugado de color de contraste en el area del titulo */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* Overlay 55-75% segun zona, mas claro al medio */
+}
+
+body.bg-ecosistemas::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(220,38,38,0.28) 0%, transparent 58%);
+}
+body.bg-celulas::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(245,158,11,0.26) 0%, transparent 58%);
+}
+body.bg-fotosintesis::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(220,38,38,0.26) 0%, transparent 58%);
+}
+body.bg-cuerpo-humano::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(34,197,94,0.24) 0%, transparent 58%);
+}
+body.bg-sistema-solar::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(245,158,11,0.28) 0%, transparent 58%);
+}
+body.bg-calor::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(56,189,248,0.24) 0%, transparent 58%);
+}
+body.bg-sonido::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(220,38,38,0.22) 0%, transparent 58%);
+}
+body.bg-movimiento::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(234,179,8,0.24) 0%, transparent 58%);
+}
+body.bg-luz::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(139,92,246,0.24) 0%, transparent 58%);
+}
+body.bg-agua::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(245,158,11,0.24) 0%, transparent 58%);
+}
+body.bg-quimica::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(245,158,11,0.24) 0%, transparent 58%);
+}
+body.bg-moleculas::after {
+  background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(234,179,8,0.24) 0%, transparent 58%);
 }
 
 /* === PORTADA / HERO estilizado ===
@@ -45,58 +91,58 @@ body[class*="bg-"] > section.relative.overflow-hidden:nth-of-type(2)::before {
 body.bg-ecosistemas > section.relative.overflow-hidden::before,
 body.bg-fotosintesis > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 197, 94, 0.32) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(13, 148, 136, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 197, 94, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(13, 148, 136, 0.28) 0%, transparent 55%);
 }
 body.bg-celulas > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, 0.32) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(34, 211, 238, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(34, 211, 238, 0.28) 0%, transparent 55%);
 }
 body.bg-cuerpo-humano > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(220, 38, 38, 0.28) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(168, 85, 247, 0.16) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(220, 38, 38, 0.42) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(168, 85, 247, 0.26) 0%, transparent 55%);
 }
 body.bg-sistema-solar > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59, 130, 246, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 70% 90%, rgba(139, 92, 246, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59, 130, 246, 0.48) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 70% 90%, rgba(139, 92, 246, 0.28) 0%, transparent 55%);
 }
 body.bg-calor > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(239, 68, 68, 0.30) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(245, 158, 11, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(239, 68, 68, 0.42) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(245, 158, 11, 0.28) 0%, transparent 55%);
 }
 body.bg-sonido > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(20, 184, 166, 0.30) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(34, 211, 238, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(20, 184, 166, 0.42) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(34, 211, 238, 0.28) 0%, transparent 55%);
 }
 body.bg-movimiento > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(168, 85, 247, 0.28) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(168, 85, 247, 0.40) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(99, 102, 241, 0.28) 0%, transparent 55%);
 }
 body.bg-luz > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(250, 204, 21, 0.25) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(244, 114, 182, 0.14) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(250, 204, 21, 0.38) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(244, 114, 182, 0.24) 0%, transparent 55%);
 }
 body.bg-agua > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, 0.30) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(20, 184, 166, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, 0.42) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(20, 184, 166, 0.28) 0%, transparent 55%);
 }
 body.bg-quimica > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 197, 94, 0.32) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 20% 100%, rgba(132, 204, 22, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34, 197, 94, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 100%, rgba(132, 204, 22, 0.28) 0%, transparent 55%);
 }
 body.bg-moleculas > section.relative.overflow-hidden::before {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.30) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.42) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(99, 102, 241, 0.28) 0%, transparent 55%);
 }
 
 /* Asegurar que el contenido del hero este sobre el gradiente */
