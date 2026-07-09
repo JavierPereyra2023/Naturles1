@@ -40,7 +40,7 @@
       <!-- El marco del simulador 3D -->
       <div class="relative w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5 flex flex-col items-stretch">
         <!-- Contenedor del Canvas de Three.js -->
-        <div class="relative w-full h-[400px] sm:h-[480px]">
+        <div class="relative w-full h-[440px] sm:h-[500px]">
           <!-- Pantalla de carga -->
           <div id="solarEclipseLoading" class="absolute inset-0 bg-[#020403] flex items-center justify-center text-[#5A6B60] text-xs z-10">
             <div class="flex flex-col items-center gap-2">
@@ -50,10 +50,13 @@
           </div>
           
           <!-- Canvas 3D -->
-          <canvas id="solarEclipseCanvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+          <canvas id="solarEclipseCanvas" class="w-full h-full block cursor-grab active:cursor-grabbing" aria-label="Modelo 3D interactivo del eclipse solar"></canvas>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3 bg-[#0E1410]/90 p-3 md:grid-cols-[1.2fr_.8fr]">
 
           <!-- Tarjeta informativa flotante (Abajo a la izquierda) -->
-          <div id="solarEclipseInfoCard" class="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-[#080C0A]/85 backdrop-blur-md border border-white/5 rounded-lg p-4 space-y-3 z-10 text-xs transition-opacity duration-300">
+          <div id="solarEclipseInfoCard" class="bg-[#080C0A]/85 border border-white/5 rounded-lg p-4 space-y-3 text-xs transition-opacity duration-300">
             <div class="flex justify-between items-center border-b border-white/10 pb-2">
               <span class="font-bold text-white tracking-wide">Estado del Sistema</span>
               <span id="lblSolarEclipseState" class="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-500/20 text-blue-400 uppercase">Fuera de Alineación</span>
@@ -80,7 +83,7 @@
           </div>
 
           <!-- Selector de Guías Visuales (Arriba a la derecha) -->
-          <div class="absolute top-4 right-4 bg-[#080C0A]/80 backdrop-blur-md border border-white/5 rounded-lg p-2.5 space-y-2 z-10 text-[10px] w-48 shadow-lg">
+          <div class="bg-[#080C0A]/80 border border-white/5 rounded-lg p-3 space-y-2 text-[10px] shadow-lg">
             <span class="text-[#5A6B60] font-bold uppercase tracking-wider block text-[8px]">Visualizar guías</span>
             <label class="flex items-center gap-2 text-white cursor-pointer select-none">
               <input type="checkbox" id="chkSolarShowRays" checked class="rounded border-white/10 bg-white/5 text-blue-500 focus:ring-blue-500">
@@ -178,7 +181,7 @@
   let moonOrbitLine;
   let raysLines = [];
   let starsPoints;
-  const camTarget = new THREE.Vector3(30, 0, 0); // Objetivo de cámara por defecto (centrado en la órbita)
+  const camTarget = new THREE.Vector3(-4, 0, 0); // Encuadra Sol, Luna y Tierra en la vista espacial.
 
   // 4. Generación de textura procedimental CORS-safe de ruido base
   const noiseCanvas = (function () {
@@ -522,12 +525,15 @@
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 1, 1000);
-    camera.position.set(30, 45, 115);
+    camera.position.set(12, 34, 150);
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     
     controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -598,7 +604,7 @@
 
     // --- EL SOL ---
     const sunGeo = new THREE.SphereGeometry(sunRadius, 32, 32);
-    const sunMat = new THREE.MeshBasicMaterial({ map: sunTexture });
+    const sunMat = new THREE.MeshStandardMaterial({ map: sunTexture, emissive: 0xff8a00, emissiveMap: sunTexture, emissiveIntensity: 1.4, roughness: 0.9 });
     sunMesh = new THREE.Mesh(sunGeo, sunMat);
     sunMesh.position.copy(sunPosition);
     scene.add(sunMesh);
@@ -661,6 +667,12 @@
     cloudsMesh.receiveShadow = true;
     earthTiltGroup.add(cloudsMesh);
 
+    const atmosphereMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(earthRadius * 1.055, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0x5bbcff, transparent: true, opacity: 0.18, side: THREE.BackSide, depthWrite: false })
+    );
+    earthTiltGroup.add(atmosphereMesh);
+
     // --- LA LUNA ---
     const moonGeo = new THREE.SphereGeometry(moonRadius, 24, 24);
     const moonMat = new THREE.MeshStandardMaterial({
@@ -671,6 +683,18 @@
     moonMesh = new THREE.Mesh(moonGeo, moonMat);
     moonMesh.castShadow = true;
     earthGroup.add(moonMesh);
+
+    // Texturas astronómicas reales con respaldo procedural para uso sin conexión.
+    const hdTexture = new THREE.TextureLoader();
+    const loadHDTexture = (url, apply) => hdTexture.load(url, tex => {
+      tex.encoding = THREE.sRGBEncoding;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      apply(tex);
+    }, undefined, () => {});
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_sun.jpg', tex => { sunMat.map = tex; sunMat.emissiveMap = tex; sunMat.needsUpdate = true; });
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_earth.jpg', tex => { earthMat.map = tex; earthMat.needsUpdate = true; });
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_earth_clouds.jpg', tex => { cloudsMat.map = tex; cloudsMat.needsUpdate = true; });
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_moon.jpg', tex => { moonMat.map = tex; moonMat.needsUpdate = true; });
 
     // --- CONOS DE SOMBRA 3D (UMBRA Y PENUMBRA) ---
     const coneHeight = 16.0;
@@ -742,19 +766,12 @@
 
     if (!showRays) return;
 
-    const rayMat = new THREE.LineBasicMaterial({
-      color: 0xffe680,
-      transparent: true,
-      opacity: 0.22,
-      blending: THREE.AdditiveBlending
-    });
-
-    for (let i = 0; i < 7; i++) {
-      const geom = new THREE.BufferGeometry();
-      geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
-      const line = new THREE.Line(geom, rayMat);
-      scene.add(line);
-      raysLines.push(line);
+    const rayGeom = new THREE.CylinderGeometry(0.07, 0.07, 1, 8, 1, true);
+    for (let i = 0; i < 3; i++) {
+      const rayMat = new THREE.MeshBasicMaterial({ color: 0xffd36a, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false });
+      const ray = new THREE.Mesh(rayGeom, rayMat);
+      scene.add(ray);
+      raysLines.push(ray);
     }
   }
 
@@ -766,15 +783,7 @@
     const right = new THREE.Vector3().crossVectors(up, dir).normalize();
     const realUp = new THREE.Vector3().crossVectors(dir, right).normalize();
 
-    const offsets = [
-      { r: 0, u: 0 },
-      { r: 3.2, u: 0 },
-      { r: -3.2, u: 0 },
-      { r: 1.6, u: 2.7 },
-      { r: -1.6, u: 2.7 },
-      { r: 1.6, u: -2.7 },
-      { r: -1.6, u: -2.7 }
-    ];
+    const offsets = [{ r: 0, u: 0 }, { r: 2.6, u: 0 }, { r: -2.6, u: 0 }];
 
     for (let i = 0; i < offsets.length; i++) {
       if (i >= raysLines.length) break;
@@ -786,16 +795,17 @@
       const start = sunPosition.clone().addScaledVector(dir, sunRadius).add(offsetVec);
       
       let end = earthPosition.clone().add(offsetVec);
-      if (Math.style = Math.abs(moonAngle) < 0.25) {
+      if (Math.abs(moonAngle) < 0.25) {
         if (i === 0) {
           end = moonMesh.position.clone().add(earthPosition);
         }
       }
 
-      const arr = raysLines[i].geometry.attributes.position.array;
-      arr[0] = start.x; arr[1] = start.y; arr[2] = start.z;
-      arr[3] = end.x; arr[4] = end.y; arr[5] = end.z;
-      raysLines[i].geometry.attributes.position.needsUpdate = true;
+      const segment = end.clone().sub(start);
+      const ray = raysLines[i];
+      ray.position.copy(start).addScaledVector(segment, 0.5);
+      ray.scale.set(1, segment.length(), 1);
+      ray.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), segment.normalize());
     }
   }
 
@@ -958,11 +968,11 @@
     if (isTransitioning) {
       const targetCamPos = isEarthView ? 
         new THREE.Vector3(45 - earthRadius + 0.05, 0, 0) :
-        new THREE.Vector3(30, 45, 115);
+        new THREE.Vector3(12, 34, 150);
 
       const targetCamLook = isEarthView ? 
         sunPosition.clone() :
-        new THREE.Vector3(30, 0, 0);
+        new THREE.Vector3(-4, 0, 0);
 
       camera.position.lerp(targetCamPos, 0.06);
       camTarget.lerp(targetCamLook, 0.06);

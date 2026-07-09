@@ -102,6 +102,8 @@
     }
     .sabias-que { border-left:3px solid #3B82F6; background:rgba(59,130,246,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
     .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#3B82F6; }
+    #solarSystemCanvas { background: radial-gradient(circle at 50% 45%, #101b29 0%, #05080d 48%, #020304 100%); }
+    @media (max-width: 640px) { #solarSystemCanvas { height: 440px !important; } }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
@@ -293,8 +295,8 @@
           El Sistema Solar tiene <strong class="text-white">8 planetas</strong> (Pluton fue reclasificado como planeta enano en 2006 por la Union Astronomica Internacional). Se dividen en dos grupos bien diferenciados.
         </p>
 
-        <!-- Diagrama orbital 2D del sistema solar -->
-        <div class="my-6 p-5 bg-natura-dark border border-natura-energy/20 rounded-2xl">
+        <!-- Diagrama orbital 2D retirado: el modelo 3D interactivo ofrece una lectura más clara. -->
+        <div class="hidden my-6 p-5 bg-natura-dark border border-natura-energy/20 rounded-2xl" aria-hidden="true">
           <div class="flex items-center gap-2 mb-2" style="font-family:'Inter',sans-serif;">
             <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="16"></span>
             <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-energy">Diagrama orbital · Vista esquemática</span>
@@ -542,7 +544,7 @@
               <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="22"></span>
               Simulación Interactiva del Sistema Solar
             </h3>
-            <p class="text-xs text-natura-silverDark mt-0.5">Exploración orbital de los planetas y la Luna. Hacé clic o pasa el cursor sobre los astros.</p>
+            <p class="text-xs text-natura-silverDark mt-0.5">Arrastrá para recorrer el modelo y seleccioná un astro para conocerlo. Tamaños y distancias: escala didáctica.</p>
           </div>
           <!-- Educational note -->
           <span class="text-[10px] bg-natura-energy/10 text-natura-energy px-2.5 py-1 rounded border border-natura-energy/20 self-start sm:self-center font-ui font-semibold">
@@ -550,19 +552,17 @@
           </span>
         </div>
 
-        <div class="relative w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5">
+        <div class="w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5">
           <!-- Canvas -->
-          <canvas id="solarSystemCanvas" class="w-full h-[480px] block cursor-grab active:cursor-grabbing"></canvas>
+          <canvas id="solarSystemCanvas" class="w-full h-[540px] block cursor-grab active:cursor-grabbing" aria-label="Modelo tridimensional interactivo del Sistema Solar"></canvas>
 
-          <!-- Floating Info Panel -->
-          <div id="planetInfoPanel" class="absolute top-4 right-4 bg-natura-dark/95 backdrop-blur-md border border-white/10 rounded-xl p-4 w-64 text-xs font-ui transition-all duration-300 opacity-0 pointer-events-none z-10 shadow-2xl">
+          <!-- Ficha integrada: acompaña al modelo sin taparlo -->
+          <div id="planetInfoPanel" class="mx-3 mt-3 rounded-lg border border-white/10 bg-natura-dark/95 p-4 text-xs font-ui shadow-xl">
             <div class="flex items-center gap-2 mb-2 pb-2 border-b border-white/5">
               <div id="panelPlanetIcon" class="w-3.5 h-3.5 rounded-full ring-2 ring-white/10"></div>
               <h4 id="panelPlanetName" class="font-heading font-bold text-sm text-white">Tierra</h4>
               <span id="panelPlanetType" class="text-[9px] px-1.5 py-0.5 rounded ml-auto text-white"></span>
-              <button id="panelCloseBtn" class="text-natura-silver hover:text-white cursor-pointer focus:outline-none flex items-center justify-center p-1 rounded hover:bg-white/10 transition-all ml-1" title="Cerrar panel">
-                <span class="iconify" data-icon="lucide:x" data-width="14"></span>
-              </button>
+              <span class="ml-auto text-[10px] text-natura-silverDark">Astro seleccionado</span>
             </div>
             <div class="space-y-1.5 text-natura-silver text-[11px]">
               <div class="flex justify-between"><span class="text-natura-silverDark">Distancia al Sol:</span> <span id="panelPlanetDist" class="font-bold text-white"></span></div>
@@ -573,8 +573,8 @@
             </div>
           </div>
 
-          <!-- Bottom Control Bar -->
-          <div class="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 bg-natura-black/85 backdrop-blur-md border border-white/5 rounded-lg px-4 py-2.5 text-xs font-ui">
+          <!-- Controles fuera del lienzo: el modelo queda completamente visible -->
+          <div class="m-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-white/5 bg-natura-black/85 px-4 py-2.5 text-xs font-ui">
             <!-- Play/Pause & Orbits Toggle -->
             <div class="flex items-center gap-2">
               <button id="simPlayPauseBtn" class="flex items-center justify-center p-1.5 rounded bg-natura-energy text-natura-black hover:bg-natura-energy/80 transition-colors" title="Pausar / Reanudar">
@@ -1296,7 +1296,10 @@
               REAL_TEXTURE_URLS[key],
               function(tex) {
                 tex.anisotropy = renderer.capabilities.getMaxAnisotropy ? renderer.capabilities.getMaxAnisotropy() : 4;
-                tex.colorSpace = THREE.SRGBColorSpace;
+                // Three.js r128 utiliza `encoding`; conserva la compatibilidad
+                // con versiones posteriores que exponen `colorSpace`.
+                tex.encoding = THREE.sRGBEncoding;
+                if (THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace;
                 realTextureCache[key] = tex;
                 applyRealTexture(key);
               },
@@ -1316,6 +1319,7 @@
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setSize(rect.width, rect.height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.outputEncoding = THREE.sRGBEncoding;
 
         // Dispara la carga de texturas reales (no bloquea el primer frame;
         // cuando llegan hacen swap del .map sobre la malla correspondiente)

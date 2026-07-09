@@ -109,7 +109,7 @@
 
         <!-- Contenedor Principal del Canvas -->
         <div class="relative w-full overflow-hidden rounded-lg bg-[#030605] border border-white/5 flex flex-col items-stretch">
-          <div class="relative w-full h-[460px]">
+          <div class="relative w-full h-[500px]">
             <!-- Spinner de carga -->
             <div id="lunarEclipseLoading" class="absolute inset-0 bg-[#020403] flex items-center justify-center text-[#5A6B60] text-xs z-10 font-sans">
               <div class="flex flex-col items-center gap-2">
@@ -119,10 +119,13 @@
             </div>
             
             <!-- Canvas de Three.js -->
-            <canvas id="eclipse3DCanvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+            <canvas id="eclipse3DCanvas" class="w-full h-full block cursor-grab active:cursor-grabbing" aria-label="Modelo 3D interactivo del eclipse lunar"></canvas>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3 bg-[#0E1410]/90 p-3 md:grid-cols-[1.2fr_.8fr]">
             
             <!-- Panel Informativo Lateral Izquierdo (Dinámico) -->
-            <div class="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-sm bg-[#080C0A]/85 backdrop-blur-md border border-white/5 rounded-lg p-4 font-sans space-y-3 z-10 text-xs shadow-lg">
+            <div class="bg-[#080C0A]/85 border border-white/5 rounded-lg p-4 font-sans space-y-3 text-xs shadow-lg">
               <div class="flex justify-between items-center border-b border-white/10 pb-2">
                 <span id="eclipseStateTitle" class="font-bold text-white tracking-wide text-sm">Alineación Orbital</span>
                 <span id="eclipseStateBadge" class="px-2.5 py-0.5 rounded text-[9px] font-bold bg-[#5A6B60]/20 text-[#A8B5AD] uppercase">Luna Llena</span>
@@ -145,7 +148,7 @@
             </div>
 
             <!-- Panel de Guías Visuales Superior Derecho -->
-            <div class="absolute top-4 right-4 bg-[#080C0A]/80 backdrop-blur-md border border-white/5 rounded-lg p-3 font-sans space-y-2 z-10 text-[10px] w-48 shadow-lg">
+            <div class="bg-[#080C0A]/80 border border-white/5 rounded-lg p-3 font-sans space-y-2 text-[10px] shadow-lg">
               <span class="text-[#5A6B60] font-bold uppercase tracking-wider block text-[8px]">Visualizar guías</span>
               <label class="flex items-center gap-2 text-white cursor-pointer select-none">
                 <input type="checkbox" id="chkEclipseShowShadows" checked class="rounded border-white/10 bg-white/5 text-blue-500 focus:ring-blue-500">
@@ -569,12 +572,15 @@
 
     // Cámara
     camera = new THREE.PerspectiveCamera(45, containerCanvas.clientWidth / containerCanvas.clientHeight, 1, 1000);
-    camera.position.set(0, 50, 100);
+    camera.position.set(4, 34, 118);
 
     // Renderizador
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setSize(containerCanvas.clientWidth, containerCanvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.08;
 
     // Controles orbitales
     controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -582,7 +588,7 @@
     controls.dampingFactor = 0.05;
     controls.maxDistance = 250;
     controls.minDistance = 10;
-    controls.target.set(10, 0, 0); // Ligeramente a la derecha para centrar Earth + Sombra
+    controls.target.set(2, 0, 0);
 
     // Ocultar spinner
     loadingEl.style.display = 'none';
@@ -624,7 +630,7 @@
 
     // --- MALLA SOL ---
     const sunGeo = new THREE.SphereGeometry(sunRadius, 32, 32);
-    const sunMat = new THREE.MeshBasicMaterial({ map: sunTexture });
+    const sunMat = new THREE.MeshStandardMaterial({ map: sunTexture, emissive: 0xff8a00, emissiveMap: sunTexture, emissiveIntensity: 1.4, roughness: 0.9 });
     sunMesh = new THREE.Mesh(sunGeo, sunMat);
     sunMesh.position.set(-sunDistance, 0, 0);
     scene.add(sunMesh);
@@ -672,6 +678,12 @@
     cloudsMesh = new THREE.Mesh(cloudsGeo, cloudsMat);
     earthTiltGroup.add(cloudsMesh);
 
+    const atmosphereMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(earthRadius * 1.055, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0x5bbcff, transparent: true, opacity: 0.18, side: THREE.BackSide, depthWrite: false })
+    );
+    earthTiltGroup.add(atmosphereMesh);
+
     // Eje de Rotación Visual de la Tierra
     const axisGeo = new THREE.CylinderGeometry(0.08, 0.08, earthRadius * 2.8, 8);
     const axisMat = new THREE.MeshBasicMaterial({ color: 0x38BDF8, transparent: true, opacity: 0.6 });
@@ -716,6 +728,18 @@
     });
     moonMesh = new THREE.Mesh(moonGeo, moonMat);
     orbitGroup.add(moonMesh);
+
+    // Mapas astronómicos reales con respaldo procedimental si no hay conexión.
+    const hdTexture = new THREE.TextureLoader();
+    const loadHDTexture = (url, apply) => hdTexture.load(url, tex => {
+      tex.encoding = THREE.sRGBEncoding;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      apply(tex);
+    }, undefined, () => {});
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_sun.jpg', tex => { sunMat.map = tex; sunMat.emissiveMap = tex; sunMat.needsUpdate = true; });
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_earth.jpg', tex => { earthMat.map = tex; earthMat.needsUpdate = true; });
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_earth_clouds.jpg', tex => { cloudsMat.map = tex; cloudsMat.needsUpdate = true; });
+    loadHDTexture('https://www.solarsystemscope.com/textures/download/2k_moon.jpg', tex => { moonMat.map = tex; moonMat.needsUpdate = true; });
 
     // --- CONOS DE SOMBRA 3D SEMITRANSPARENTES ---
     shadowConesGroup = new THREE.Group();
@@ -763,14 +787,14 @@
 
     // --- RAYOS DE LUZ SOLAR (GUÍAS GEOMÉTRICAS) ---
     const raysMat = new THREE.LineBasicMaterial({
-      color: 0xFACF1A,
+      color: 0xffd36a,
       transparent: true,
-      opacity: 0.28,
+      opacity: 0.14,
       blending: THREE.AdditiveBlending
     });
 
     const raysGeo = new THREE.BufferGeometry();
-    const raysPositions = new Float32Array(8 * 3 * 2); // 8 rayos, cada uno 2 puntos (x,y,z)
+    const raysPositions = new Float32Array(4 * 3 * 2); // Sólo los límites del cono de sombra.
     raysGeo.setAttribute('position', new THREE.BufferAttribute(raysPositions, 3));
     const raysLines = new THREE.LineSegments(raysGeo, raysMat);
     scene.add(raysLines);
@@ -798,6 +822,10 @@
       // 4. Rayo trasero
       posArr[ptr++] = -sunDistance; posArr[ptr++] = 0; posArr[ptr++] = -Rs;
       posArr[ptr++] = Xu; posArr[ptr++] = 0; posArr[ptr++] = 0;
+
+      // Los cuatro bordes bastan para explicar el cono: evitamos la reja de líneas cruzadas.
+      raysLines.geometry.attributes.position.needsUpdate = true;
+      return;
 
       // Rayos de Penumbra cruzados (Plano XY)
       // 5. Cruzado de Arriba-Sol a Abajo-Tierra
