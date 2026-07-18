@@ -269,8 +269,8 @@
           </p>
         </div>
         <figure class="my-8">
-  <img src="https://loremflickr.com/800/450/motion,blur,speed?lock=5239" alt="Grafico posicion-tiempo Comparacion de tres casos: recta horizontal (reposo), recta inclinada (MRU), y parabola (MRUV). " class="w-full rounded-lg" loading="lazy" onerror="this.onerror=null;this.src='https://loremflickr.com/800/450/motion,blur,speed?lock=5240'">
-  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">Figura 1 — Grafico posicion-tiempo Comparacion de tres casos: recta horizontal (reposo), recta inclinada (MRU), y parabola (MRUV). La pendiente en cada punto es la velocidad.</figcaption>
+  <img src="../../../assets/fisica/movimientos/grafico-posicion-tres-casos.svg" alt="Comparación de tres casos: reposo, MRU y MRUV" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Gráfico posición-tiempo: tres casos (reposo, MRU, MRUV). La pendiente en cada punto es la velocidad.</figcaption>
 </figure>
       </section>
 
@@ -321,6 +321,10 @@
           <p class="text-xs text-natura-silverDark leading-relaxed mb-2">Un auto viaja a 20 m/s durante 5 segundos (MRU). En el grafico v vs t aparece una recta horizontal a la altura 20 m/s entre t = 0 y t = 5. El area bajo esa recta es un rectangulo de base 5 s y altura 20 m/s:</p>
           <p class="text-xs text-natura-silverDark">Distancia = Area = base × altura = 5 s × 20 m/s = <strong class="text-natura-energy">100 metros</strong></p>
         </div>
+        <figure class="my-8">
+  <img src="../../../assets/fisica/movimientos/grafico-velocidad-dos-casos.svg" alt="Comparación de dos casos en gráfico velocidad-tiempo" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Gráfico velocidad-tiempo: dos casos (MRU y MRUV). El área bajo la curva representa la distancia recorrida.</figcaption>
+</figure>
       </section>
 
       <!-- Magazine Divider -->
@@ -434,6 +438,26 @@
               <div>
                 <p class="font-heading font-semibold text-white text-sm mb-1">Si te dan una tabla con valores de tiempo y posicion, ¿como sabes si el movimiento es MRU?</p>
                 <p class="text-xs text-natura-silverDark leading-relaxed">Calcula la velocidad entre cada par de puntos consecutivos: v = ?x / ?t. Si la velocidad es <strong class="text-natura-energy">siempre la misma</strong> (o muy parecida, si hay pequenos errores de medicion), el movimiento es MRU. Al graficar, los puntos deberian alinearse sobre una recta. Si la velocidad calculada va cambiando, podria tratarse de un MRUV u otro tipo de movimiento mas complejo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-natura-gray border border-natura-energy/15">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">4.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">Comparando los dos graficos estaticos: ¿por que el de posicion-tiempo muestra una parabola y el de velocidad-tiempo una recta inclinada?</p>
+                <p class="text-xs text-natura-silverDark leading-relaxed">Porque en el MRUV la posicion depende del <strong class="text-natura-energy">cuadrado del tiempo</strong> (x = v₀·t + ½·a·t²), y una funcion cuadratica se ve como una parabola. En cambio, la velocidad depende de forma <strong class="text-natura-energy">lineal</strong> del tiempo (v = v₀ + a·t), y una funcion lineal se ve como una recta inclinada. La pendiente de esa recta es la aceleracion constante.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-natura-gray border border-natura-energy/15">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">5.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">Si en un grafico v vs t el area bajo la curva es un trapecio, ¿como calcularias la distancia recorrida?</p>
+                <p class="text-xs text-natura-silverDark leading-relaxed">El area del trapecio se calcula como <strong class="text-natura-energy">(base mayor + base menor) × altura / 2</strong>. En un MRUV con velocidad inicial v₀ y velocidad final v_f durante un tiempo t, la distancia recorrida es <strong class="text-natura-energy">?x = (v₀ + v_f) · t / 2</strong>, que es justo el area del trapecio. Geometria y fisica, todo junto.</p>
               </div>
             </div>
           </div>
@@ -597,3 +621,4 @@
 })();
 </script>
 </body>
+</html>

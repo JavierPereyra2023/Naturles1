@@ -149,10 +149,25 @@
 
 <!-- MAIN CONTENT -->
 <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
-  <main class="max-w-4xl mx-auto space-y-14">
+  <div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <!-- SIDEBAR TOC -->
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#funcin-principal" class="toc-link active" data-toc>01. Función Principal</a>
+          <a href="#los-3-componentes" class="toc-link" data-toc>02. Los 3 Componentes</a>
+          <a href="#doble-circuito" class="toc-link" data-toc>03. Doble Circuito</a>
+          <a href="#el-recorrido-de-la-sangre" class="toc-link" data-toc>04. El Recorrido de la Sangre</a>
+          <a href="#dato-curioso" class="toc-link" data-toc>05. Dato Curioso</a>
+          <a href="#preguntas-para-pensar" class="toc-link" data-toc>06. Preguntas para Pensar</a>
+      </nav>
+    </div>
+  </aside>
+<main class="flex-1 min-w-0 space-y-12">
 
     <!-- SECTION 1: Función principal -->
-    <section class="animate-fadeInUp">
+    <section class="animate-fadeInUp" id="funcin-principal">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
         <div class="accent-line"></div>
@@ -172,7 +187,7 @@
     </section>
 
     <!-- SECTION 2: Los 3 componentes -->
-    <section class="animate-fadeInUp delay-100">
+    <section class="animate-fadeInUp delay-100" id="los-3-componentes">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
         <div class="accent-line"></div>
@@ -225,7 +240,7 @@
     </section>
 
     <!-- SECTION 3: Doble circuito -->
-    <section class="animate-fadeInUp delay-200">
+    <section class="animate-fadeInUp delay-200" id="doble-circuito">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
         <div class="accent-line"></div>
@@ -338,7 +353,7 @@
     </section>
 
     <!-- SECTION 4: El recorrido de la sangre -->
-    <section class="animate-fadeInUp delay-300">
+    <section class="animate-fadeInUp delay-300" id="el-recorrido-de-la-sangre">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
         <div class="accent-line"></div>
@@ -406,7 +421,7 @@
     </section>
 
     <!-- SECTION 5: Dato curioso -->
-    <section class="animate-fadeInUp delay-300">
+    <section class="animate-fadeInUp delay-300" id="dato-curioso">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
         <div class="accent-line"></div>
@@ -429,7 +444,7 @@
     </div>
 
     <!-- SECTION 6: Preguntas para pensar -->
-    <section class="animate-fadeInUp delay-400">
+    <section class="animate-fadeInUp delay-400" id="preguntas-para-pensar">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
         <div class="accent-line"></div>
@@ -470,7 +485,7 @@
       </a>
     </div>
 
-  </main>
+  </main></div></div>
 </div>
 
 <!-- FOOTER -->

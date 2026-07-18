@@ -172,8 +172,9 @@
           <a href="#velocidad-cambia" class="toc-link active" data-toc>01. Cuando la velocidad cambia</a>
           <a href="#aceleracion" class="toc-link" data-toc>02. La aceleracion</a>
           <a href="#graficos-mruv" class="toc-link" data-toc>03. Graficos en MRUV</a>
-          <a href="#caida-libre" class="toc-link" data-toc>04. Caida libre</a>
-          <a href="#para-pensar" class="toc-link" data-toc>05. Para pensar</a>
+          <a href="#graficos-estaticos" class="toc-link" data-toc>04. Graficos estaticos del MRUV</a>
+          <a href="#caida-libre" class="toc-link" data-toc>05. Caida libre</a>
+          <a href="#para-pensar" class="toc-link" data-toc>06. Para pensar</a>
         </nav>
       </div>
     </aside>
@@ -308,11 +309,11 @@
           <div class="px-5 pb-2 grid grid-cols-2 gap-4" style="font-family:'Inter',sans-serif;">
             <label>
               <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silver">Velocidad inicial · <span id="mruvVo" class="text-natura-energy">0</span> m/s</span>
-              <input id="mruvVoCtrl" type="range" min="0" max="20" step="1" value="0" class="w-full accent-blue-500">
+              <input id="mruvVoCtrl" type="range" min="0" max="10" step="1" value="0" class="w-full accent-blue-500">
             </label>
             <label>
-              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silver">Aceleracion · <span id="mruvAcc" class="text-natura-energy">4</span> m/s2</span>
-              <input id="mruvAccCtrl" type="range" min="1" max="10" step="0.5" value="4" class="w-full accent-blue-500">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silver">Aceleracion · <span id="mruvAcc" class="text-natura-energy">3</span> m/s2</span>
+              <input id="mruvAccCtrl" type="range" min="1" max="5" step="0.5" value="3" class="w-full accent-blue-500">
             </label>
           </div>
           <p class="px-5 pb-5 text-base text-natura-silver leading-relaxed">
@@ -338,11 +339,11 @@
           var voTxt = document.getElementById('mruvVo');
           var accTxt = document.getElementById('mruvAcc');
 
-          var XMAX = 200, TMAX = 10, VMAX = 100;
+          var XMAX = 200, TMAX = 8, VMAX = 50;
           function roadX(m){ return 40 + m / XMAX * 580; }
           function gXt(t){ return 70 + t / TMAX * 540; }
           function gYt(m){ return 180 - m / XMAX * 110; }
-          function gVt(t){ return 370 - t / TMAX * 110; }
+          function gYv(v){ return 370 - v / VMAX * 110; }
 
           var ticks = document.getElementById('mruvTicks'), tlabels = document.getElementById('mruvTickLabels');
           for (var m = 0; m <= 200; m += 40) {
@@ -357,7 +358,7 @@
           }
 
           var gridXT = document.getElementById('mruvGridXT');
-          for (var s = 0; s <= 10; s += 2) {
+          for (var s = 0; s <= TMAX; s += 2) {
             var g1 = document.createElementNS(NS, 'text');
             g1.setAttribute('x', gXt(s) - 4); g1.setAttribute('y', 192);
             g1.textContent = s;
@@ -371,20 +372,20 @@
           });
 
           var gridVT = document.getElementById('mruvGridVT');
-          for (var s = 0; s <= 10; s += 2) {
+          for (var s = 0; s <= TMAX; s += 2) {
             var v1 = document.createElementNS(NS, 'text');
-            v1.setAttribute('x', gVt(s) - 4); v1.setAttribute('y', 382);
+            v1.setAttribute('x', gXt(s) - 4); v1.setAttribute('y', 382);
             v1.textContent = s;
             gridVT.appendChild(v1);
           }
-          [0, 50, 100].forEach(function(v){
+          [0, 25, 50].forEach(function(v){
             var v2 = document.createElementNS(NS, 'text');
-            v2.setAttribute('x', 44); v2.setAttribute('y', gVt(v) + 3);
+            v2.setAttribute('x', 44); v2.setAttribute('y', gYv(v) + 3);
             v2.textContent = v;
             gridVT.appendChild(v2);
           });
 
-          var v0 = 0, a = 4, t0 = null;
+          var v0 = 0, a = 3, t0 = null;
           var pathPoints = [];
 
           voCtrl.addEventListener('input', function(){ v0 = parseFloat(this.value); voTxt.textContent = v0; resetSim(); });
@@ -406,11 +407,11 @@
             puntoXT.setAttribute('cx', gXt(t).toFixed(1));
             puntoXT.setAttribute('cy', gYt(x).toFixed(1));
             puntoVT.setAttribute('cx', gXt(t).toFixed(1));
-            puntoVT.setAttribute('cy', gVt(v).toFixed(1));
+            puntoVT.setAttribute('cy', gYv(v).toFixed(1));
             pathPoints.push(gXt(t).toFixed(1) + ',' + gYt(x).toFixed(1));
             if (pathPoints.length > 2) curvaXT.setAttribute('d', 'M' + pathPoints.join('L'));
             rectaVT.setAttribute('x2', gXt(t).toFixed(1));
-            rectaVT.setAttribute('y2', gVt(v).toFixed(1));
+            rectaVT.setAttribute('y2', gYv(v).toFixed(1));
             eqXT.textContent = 'x = ' + v0 + 't + ' + (a/2).toFixed(1) + 't²';
             eqVT.textContent = 'v = ' + v0 + ' + ' + a.toFixed(1) + 't  |  a = ' + a + ' m/s²';
             requestAnimationFrame(frame);
@@ -418,6 +419,39 @@
           requestAnimationFrame(frame);
         })();
         </script>
+      </section>
+
+      <!-- Magazine Divider -->
+      <div class="flex items-center gap-3" style="color: rgba(59,130,246,0.4);">
+        <span class="flex-1 h-px" style="background: linear-gradient(90deg, transparent, currentColor, transparent);"></span>
+        <span class="iconify flex-shrink-0 opacity-50" data-icon="lucide:move-right" data-width="14"></span>
+        <span class="flex-1 h-px" style="background: linear-gradient(90deg, transparent, currentColor, transparent);"></span>
+      </div>
+
+      <!-- 02c. Gráficos estáticos del MRUV (didácticos) -->
+      <section id="graficos-estaticos" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02c</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Gráficos estáticos del MRUV</h2>
+        </div>
+        <div class="space-y-4 text-base md:text-base leading-relaxed text-natura-silver">
+          <p>
+            Además de la simulación interactiva de arriba, te dejamos dos <strong class="text-natura-energy">gráficos de referencia</strong> del MRUV para que compares las dos curvas características: cómo crece la posición (parábola) y cómo crece la velocidad (recta inclinada) con aceleración constante.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 my-6">
+          <figure>
+            <img src="../../../assets/fisica/movimientos/grafico-mruv-xt.svg" alt="Gráfico posición vs tiempo en MRUV" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+            <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · x vs t: parábola (MRUV)</figcaption>
+          </figure>
+          <figure>
+            <img src="../../../assets/fisica/movimientos/grafico-mruv-vt.svg" alt="Gráfico velocidad vs tiempo en MRUV" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+            <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · v vs t: recta inclinada (aceleración constante)</figcaption>
+          </figure>
+        </div>
+        <p class="text-base text-natura-silver leading-relaxed">
+          Mirá la diferencia: la <strong class="text-natura-energy">posición</strong> dibuja una parábola (porque depende de t²) y la <strong class="text-natura-energy">velocidad</strong> una recta inclinada (porque depende linealmente de t). La pendiente de la recta en el gráfico v vs t es justamente la aceleración.
+        </p>
       </section>
 
       <!-- Magazine Divider -->
@@ -473,8 +507,8 @@
           </p>
         </div>
         <figure class="my-8">
-  <img src="https://loremflickr.com/800/450/motion,blur,speed?lock=3335" alt="Caida libre Un objeto en caida libre parte del reposo y su velocidad aumenta linealmente con el tiempo: v = g·t. La dist" class="w-full rounded-lg" loading="lazy" onerror="this.onerror=null;this.src='https://loremflickr.com/800/450/motion,blur,speed?lock=3336'">
-  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">Figura 1 — Caida libre Un objeto en caida libre parte del reposo y su velocidad aumenta linealmente con el tiempo: v = g·t. La distancia recorrida crece con el cuadrado del tiempo: h = ½·g·t².</figcaption>
+  <img src="../../../assets/fisica/movimientos/caida-libre-real.jpg" alt="Saltador de bungee en plena caída: ejemplo de movimiento acelerado por la gravedad" class="w-full rounded-lg" loading="lazy">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Caída libre: la velocidad aumenta linealmente con el tiempo (v = g·t) y la distancia recorrida crece con el cuadrado del tiempo (h = ½·g·t²).</figcaption>
 </figure>
       </section>
 
@@ -522,6 +556,16 @@
               <div>
                 <p class="font-heading font-semibold text-white text-sm mb-1">Si un auto frena, ¿su aceleracion es positiva o negativa?</p>
                 <p class="text-xs text-natura-silverDark leading-relaxed">Es <strong class="text-natura-energy">negativa</strong> (tambien llamada desaceleracion). Si el auto va hacia adelante (velocidad positiva) y frena, la aceleracion es negativa porque la velocidad final es menor que la inicial. Matematicamente: a = (vf - vi) / ?t. Si vf < vi, el resultado es negativo. Sin embargo, el auto sigue estando en MRUV: su velocidad cambia de manera uniforme, solo que hacia valores menores.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-natura-gray border border-natura-energy/15">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">4.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Qué representa el área bajo la curva en el gráfico v vs t? ¿Y la pendiente de la recta?</p>
+                <p class="text-xs text-natura-silverDark leading-relaxed">El <strong class="text-natura-energy">área bajo la curva</strong> en un gráfico v vs t representa la <strong class="text-natura-energy">distancia recorrida</strong> por el móvil (es geometría: base × altura da metros). Y la <strong class="text-natura-energy">pendiente de la recta</strong> (cuánto sube v por cada segundo que pasa) es justamente la <strong class="text-natura-energy">aceleración</strong>. Por eso el gráfico v vs t es tan útil: con una sola imagen podés leer a la vez la velocidad, la aceleración y la distancia recorrida.</p>
               </div>
             </div>
           </div>
@@ -685,3 +729,4 @@
 })();
 </script>
 </body>
+</html>

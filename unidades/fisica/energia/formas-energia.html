@@ -155,10 +155,28 @@
   </div>
 </section>
 
-<main class="max-w-3xl mx-auto px-4 md:px-6 py-10 space-y-10">
+<div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <!-- SIDEBAR TOC -->
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#energa-cintica" class="toc-link active" data-toc>01. Energía Cinética</a>
+          <a href="#aplicaciones-de-la-energa-cintica" class="toc-link" data-toc>02. Aplicaciones de la energía cinética</a>
+          <a href="#energa-potencial-gravitatoria" class="toc-link" data-toc>03. Energía Potencial Gravitatoria</a>
+          <a href="#aplicaciones-de-la-energa-potencial-gravitatoria" class="toc-link" data-toc>04. Aplicaciones de la energía potencial gravitatoria</a>
+          <a href="#energa-mecnica" class="toc-link" data-toc>05. Energía Mecánica</a>
+          <a href="#energa-elstica" class="toc-link" data-toc>06. Energía Elástica</a>
+          <a href="#otras-formas-de-energa" class="toc-link" data-toc>07. Otras formas de energía</a>
+          <a href="#grficos-de-energa-mecnica" class="toc-link" data-toc>08. Gráficos de energía mecánica</a>
+          <a href="#preguntas-para-pensar" class="toc-link" data-toc>09. Preguntas para pensar</a>
+      </nav>
+    </div>
+  </aside>
+<main class="flex-1 min-w-0 space-y-12">
 
   <!-- SECTION 1: Energía Cinética -->
-  <section class="animate-fadeInUp">
+  <section class="animate-fadeInUp" id="energa-cintica">
     <div class="flex items-center gap-3 mb-4">
       <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">1</span>
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Cinética</h2>
@@ -202,8 +220,8 @@
       Esos 200.000 J equivalen a la energía necesaria para levantar 100 kg a 200 metros de altura. ¡Impresionante!
     </p>
     <figure class="my-8">
-  <img src="../../../assets/backgrounds/bg-movimiento-velocidad.png" alt="Estelas de vehículos que representan movimiento y energía cinética" class="w-full rounded-lg" loading="lazy">
-  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA 1 · Representación de la energía cinética de un vehículo en movimiento</figcaption>
+  <img src="../../../assets/fisica/energia/energia-cinetica-real.jpg" alt="Auto de carrera en pleno movimiento: ejemplo de energía cinética" class="w-full rounded-lg" loading="lazy">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA 1 · La energía cinética de un auto de carrera: cuanto mayor la masa y la velocidad, mayor la energía asociada al movimiento</figcaption>
 </figure>
   </section>
 
@@ -211,8 +229,48 @@
     <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
   </div>
 
+  <!-- APLICACIONES DE LA ENERGÍA CINÉTICA -->
+  <section class="animate-fadeInUp delay-100" id="aplicaciones-de-la-energa-cintica">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy/70 text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">★</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Aplicaciones de la energía cinética</h2>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4">
+      La energía cinética aparece por todos lados en la vida cotidiana. Estos son algunos ejemplos donde entenderla salva vidas o genera electricidad limpia.
+    </p>
+    <div class="space-y-3">
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Seguridad vial</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">Un choque a 80 km/h libera <strong class="text-natura-energy">cuatro veces más</strong> energía cinética que el mismo choque a 40 km/h (porque la velocidad va al cuadrado). Por eso los límites de velocidad existen y por qué un pequeño exceso de velocidad multiplica el riesgo de lesiones graves.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Energía eólica</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">Las aspas de un aerogenerador capturan la energía cinética del viento y la transforman en electricidad. Cuanto más rápido sopla el viento, más energía se puede extraer. Por eso los parques eólicos se instalan en zonas ventosas como la Patagonia.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Energía hidroeléctrica</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">El agua que cae desde una represa tiene muchísima energía cinética, que hace girar las turbinas y genera electricidad limpia. Una represa como Yacyretá puede abastecer de energía a millones de hogares.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Frenado regenerativo</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">Los autos híbridos y eléctricos recuperan parte de la energía cinética al frenar: en lugar de perderla como calor, la convierten en energía eléctrica que recarga la batería. Es como "devolver" la velocidad a la batería en vez de tirarla a la calle.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Deportes</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">Una pelota de fútbol, un esquiador bajando una pendiente o una bola de bowling concentran energía cinética para golpear, deslizarse o tirar pinos. Los atletas trabajan para que esa energía se transmita de la mejor manera posible al objetivo.</p>
+      </div>
+    </div>
+    <div class="pull-quote">
+      La energía cinética está en todo lo que se mueve: lo importante es saber usarla y protegerse de ella.
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
   <!-- SECTION 2: Energía Potencial Gravitatoria -->
-  <section class="animate-fadeInUp delay-100">
+  <section class="animate-fadeInUp delay-100" id="energa-potencial-gravitatoria">
     <div class="flex items-center gap-3 mb-4">
       <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Potencial Gravitatoria</h2>
@@ -250,8 +308,8 @@
       Esa energía se transforma en cinética si la maceta cae. Justo antes de tocar el suelo, casi toda la energía potencial se habrá convertido en cinética (descontando una pequeña parte que se pierde por el rozamiento con el aire).
     </p>
     <figure class="my-8">
-  <img src="../../../assets/fisica/energia/potencial-gravitatoria.svg" alt="Diagrama de energía potencial gravitatoria según la altura" class="w-full rounded-lg" loading="lazy">
-  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA 2 · Energía potencial gravitatoria según la altura</figcaption>
+  <img src="../../../assets/fisica/energia/energia-potencial-real.jpg" alt="Lago glaciar en altura almacenando energía potencial gravitatoria" class="w-full rounded-lg" loading="lazy">
+  <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA 2 · El agua acumulada en un lago de montaña almacena una enorme cantidad de energía potencial gravitatoria, lista para transformarse en cinética al caer</figcaption>
 </figure>
   </section>
 
@@ -259,8 +317,48 @@
     <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
   </div>
 
+  <!-- APLICACIONES DE LA ENERGÍA POTENCIAL GRAVITATORIA -->
+  <section class="animate-fadeInUp delay-100" id="aplicaciones-de-la-energa-potencial-gravitatoria">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy/70 text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">★</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Aplicaciones de la energía potencial gravitatoria</h2>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4">
+      Tener un objeto en altura es como tener una "pila cargada": la energía está ahí, lista para liberarse. Veamos algunos ejemplos donde la aprovechamos (o donde hay que tener cuidado).
+    </p>
+    <div class="space-y-3">
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Represas hidroeléctricas</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">Las represas argentinas como <strong class="text-natura-energy">Yacyretá, El Chocón o Piedra del Águila</strong> almacenan millones de metros cúbicos de agua a gran altura. Toda esa agua tiene una energía potencial enorme que, al caer, mueve turbinas y genera electricidad limpia para millones de personas.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Montaña rusa</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">El primer ascenso (con la cadena que tira el carrito) carga al carrito de energía potencial. En cada bajada esa energía se convierte en cinética y el carrito se acelera; en cada subida vuelve a almacenarse como potencial. Sin rozamiento, el ciclo se repetiría eternamente.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Relojes de pesas antiguos</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">En los relojes de pared de antes, unas pesas colgadas a cierta altura almacenaban energía potencial gravitatoria. A medida que la pesa bajaba (lentamente, gracias a un mecanismo), la energía se liberaba y mantenía funcionando el reloj durante días.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Salto de bungee</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">El saltador parado en el puente está a unos 50-100 metros de altura y tiene muchísima energía potencial. Al saltar, esa energía se transforma en cinética a velocidad terminal y, al final de la cuerda, vuelve a almacenarse como energía elástica (en la goma).</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-5">
+        <h3 class="font-heading font-semibold text-white text-base mb-1">Tanques de agua en edificios</h3>
+        <p class="text-xs text-natura-silverDark leading-relaxed">En las azoteas de los edificios suelen colocarse tanques elevados. El agua a esa altura tiene presión natural (por la energía potencial) y baja por las cañerías a las cocinas y baños sin necesidad de bombas eléctricas en cada piso.</p>
+      </div>
+    </div>
+    <div class="pull-quote">
+      La energía potencial gravitatoria es como una pila cargada por la altura: mientras más alto, más energía almacenada.
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
   <!-- SECTION 3: Energía Mecánica -->
-  <section class="animate-fadeInUp delay-200">
+  <section class="animate-fadeInUp delay-200" id="energa-mecnica">
     <div class="flex items-center gap-3 mb-4">
       <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">3</span>
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Mecánica</h2>
@@ -292,10 +390,84 @@
     <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
   </div>
 
-  <!-- SECTION 4: Otras formas de energía -->
-  <section class="animate-fadeInUp delay-100">
+  <!-- SECTION 5: Energía Elástica -->
+  <section class="animate-fadeInUp delay-100" id="energa-elstica">
     <div class="flex items-center gap-3 mb-4">
-      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">4</span>
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Energía Elástica</h2>
+    </div>
+    <div class="article-dropcap">
+      <p class="text-base md:text-base leading-relaxed text-natura-silver">
+        Hay otra forma de energía mecánica que también se "almacena": la <strong class="text-white">energía potencial elástica</strong>. Aparece cuando deformamos un objeto elástico (un resorte, un arco, una banda de goma) y lo "cargamos" de energía que se libera cuando lo soltamos.
+      </p>
+    </div>
+    <div class="pull-quote">
+      Un objeto elástico deformado almacena energía que se libera cuando vuelve a su forma original.
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4">
+      La ley que describe cuánto se deforma un resorte cuando le aplicamos una fuerza se llama <strong class="text-natura-energy">Ley de Hooke</strong>:
+    </p>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-6 my-5">
+      \[F = k \cdot x\]
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      Donde <strong class="text-natura-energy">F</strong> es la fuerza aplicada, <strong class="text-natura-energy">x</strong> es la deformación (cuánto se estira o comprime el resorte) y <strong class="text-natura-energy">k</strong> es la constante elástica del resorte (un valor fijo que indica su "dureza": cuanto más grande k, más rígido es).
+    </p>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4 mt-4">
+      La <strong class="text-white">energía elástica</strong> almacenada en un resorte comprimido o estirado se calcula así:
+    </p>
+    <div class="bg-natura-gray border border-white/5 rounded-sm p-6 my-5">
+      \[E_e = \frac{1}{2} k x^2\]
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      Donde:
+    </p>
+    <ul class="text-lg text-natura-silverDark space-y-1 mb-5 ml-5 list-disc">
+      <li><strong class="text-natura-energy">E<sub>e</sub></strong> = energía potencial elástica, en joules (J)</li>
+      <li><strong class="text-natura-energy">k</strong> = constante elástica del resorte (N/m)</li>
+      <li><strong class="text-natura-energy">x</strong> = deformación del resorte respecto a su longitud natural (m)</li>
+    </ul>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      Fijate que la deformación está al cuadrado (<strong class="text-natura-energy">x²</strong>). Esto significa que si comprimís un resorte el doble, almacenás <strong class="text-natura-energy">cuatro veces más</strong> energía. Es la misma idea que con la energía cinética y la velocidad.
+    </p>
+    <p class="text-lg text-natura-silver leading-relaxed mb-3">
+      <strong class="text-white">Aplicaciones:</strong> la energía elástica está en muchísimos objetos de uso diario.
+    </p>
+    <div class="space-y-3 mb-4">
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <p class="text-xs text-natura-silverDark leading-relaxed"><strong class="text-natura-energy">Trampolín de pileta:</strong> cuando saltás, el trampolín se flexiona y guarda energía elástica. Al soltarte, te impulsa hacia arriba con esa misma energía.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <p class="text-xs text-natura-silverDark leading-relaxed"><strong class="text-natura-energy">Arco y flecha:</strong> al tensar la cuerda del arco, almacenás energía elástica. Al soltar, esa energía se transfiere a la flecha como energía cinética. Un arco de competición puede almacenar más de 70 J de energía elástica.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <p class="text-xs text-natura-silverDark leading-relaxed"><strong class="text-natura-energy">Resortes de colchón y resortes de suspensión del auto:</strong> absorben los golpes comprimiéndose y estirándose, almacenando energía que después devuelven lentamente. Eso hace que el viaje sea más cómodo.</p>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <p class="text-xs text-natura-silverDark leading-relaxed"><strong class="text-natura-energy">Resortes de lapicera, ganchos de ropa, bandas de goma, poleas con resorte, juguetes con resorte:</strong> todos almacenan y liberan energía elástica al deformarse y volver a su forma original.</p>
+      </div>
+    </div>
+    <div class="pull-quote">
+      La energía elástica es energía mecánica "guardada" en la deformación de un objeto.
+    </div>
+    <figure class="my-8">
+      <img src="../../../assets/fisica/energia/energia-elastica-real.jpg" alt="Resorte tensado: ejemplo de energía potencial elástica" class="w-full rounded-lg" loading="lazy">
+      <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Resorte tensado: la energía se almacena como energía potencial elástica</figcaption>
+    </figure>
+    <div class="sabias-que">
+      <span class="sq-label">Sabías que...</span>
+      <p>Un arco de competición puede almacenar más de 70 J de energía elástica: ¡lo suficiente como para lanzar una flecha a más de 250 km/h!</p>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
+  <!-- SECTION 6: Otras formas de energía -->
+  <section class="animate-fadeInUp delay-100" id="otras-formas-de-energa">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">6</span>
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Otras formas de energía</h2>
     </div>
     <p class="text-lg text-natura-silver leading-relaxed mb-6">
@@ -364,10 +536,40 @@
     <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
   </div>
 
-  <!-- SECTION 5: Preguntas para pensar -->
-  <section class="animate-fadeInUp delay-200">
+  <!-- GRÁFICOS DE ENERGÍA MECÁNICA -->
+  <section class="animate-fadeInUp delay-100" id="grficos-de-energa-mecnica">
     <div class="flex items-center gap-3 mb-4">
-      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <span class="w-8 h-8 bg-natura-energy/70 text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">★</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Gráficos de energía mecánica</h2>
+    </div>
+    <p class="text-lg text-natura-silver leading-relaxed mb-4">
+      Así como graficamos el movimiento, podemos graficar las energías. Cada forma de energía tiene una dependencia característica con su variable principal. Estos tres gráficos de referencia te van a servir para entender cómo crece (o decrece) cada tipo de energía.
+    </p>
+    <figure class="my-6">
+      <img src="../../../assets/fisica/energia/grafico-ec-v.svg" alt="Gráfico de energía cinética en función de la velocidad" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+      <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Ec crece con el cuadrado de la velocidad: al duplicar v, Ec se cuadruplica</figcaption>
+    </figure>
+    <figure class="my-6">
+      <img src="../../../assets/fisica/energia/grafico-ep-h.svg" alt="Gráfico de energía potencial gravitatoria en función de la altura" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+      <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Ep crece linealmente con la altura</figcaption>
+    </figure>
+    <figure class="my-6">
+      <img src="../../../assets/fisica/energia/grafico-ee-x.svg" alt="Gráfico de energía elástica en función de la deformación" class="w-full rounded-lg bg-natura-gray p-3" loading="lazy">
+      <figcaption class="text-center text-xs text-natura-silverDark mt-2 italic">FIGURA · Ee crece con el cuadrado de la deformación: al duplicar x, Ee se cuadruplica</figcaption>
+    </figure>
+    <p class="text-lg text-natura-silver leading-relaxed">
+      Notá la diferencia de forma: la energía potencial gravitatoria es <strong class="text-natura-energy">lineal</strong> (una recta que sube proporcional a la altura), mientras que la cinética y la elástica son <strong class="text-natura-energy">parábolas</strong> (porque dependen del cuadrado de su variable). Esto explica por qué la velocidad y la deformación son más "delicadas" que la altura: un pequeño cambio en v o x produce un cambio grande en la energía.
+    </p>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="iconify divider-icon" data-icon="lucide:zap" data-width="14"></span>
+  </div>
+
+  <!-- SECTION 7: Preguntas para pensar -->
+  <section class="animate-fadeInUp delay-200" id="preguntas-para-pensar">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">7</span>
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
     </div>
     <p class="text-lg text-natura-silver leading-relaxed mb-6">
@@ -410,6 +612,24 @@
           </div>
         </div>
       </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <div class="flex items-start gap-3">
+          <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">5.</span>
+          <div>
+            <p class="font-heading font-semibold text-white text-sm mb-1">Un arquero tensa su arco estirando la cuerda 50 cm. Si la estira el doble (1 metro), ¿cuánta más energía elástica se almacena en el arco?</p>
+            <p class="text-xs text-natura-silverDark leading-relaxed">Se almacena <strong class="text-natura-energy">cuatro veces más</strong> energía, porque E<sub>e</sub> depende del cuadrado de la deformación (x²). Si x se duplica, x² se cuadruplica. Por eso los arcos de competición tienen mecanismos para que la cuerda se estire grandes distancias: cada centímetro extra de estiramiento agrega una cantidad creciente de energía.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-natura-gray border border-white/5 rounded-sm p-4">
+        <div class="flex items-start gap-3">
+          <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">6.</span>
+          <div>
+            <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué un auto híbrido recupera energía al frenar, pero un auto convencional no?</p>
+            <p class="text-xs text-natura-silverDark leading-relaxed">Porque el auto híbrido usa el motor eléctrico como generador: en lugar de quemar el combustible para mantener la velocidad, aprovecha la <strong class="text-natura-energy">energía cinética</strong> del vehículo en movimiento para generar electricidad. Esa energía se guarda en la batería y se reutiliza después para acelerar. Un auto convencional convierte esa misma energía cinética en calor (por la fricción de los frenos) y la pierde.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -425,7 +645,7 @@
     </a>
   </div>
 
-</main>
+</main></div></div>
 
 <footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
   <div class="max-w-4xl mx-auto px-4 md:px-6">
@@ -536,3 +756,5 @@
 })();
 </script>
 </body>
+
+</html>

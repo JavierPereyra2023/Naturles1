@@ -1,1 +1,264 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quiz · Ciencias Naturales</title><script src="https://cdn.tailwindcss.com"></script><script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"><style>body{background:#080c0a;color:#c8d4cc;font-family:Inter,sans-serif}.answer{border:1px solid #27302b;transition:.2s}.answer:hover,.answer:focus{border-color:#2dd4bf;background:#0e1915}.answer.selected{border-color:#2dd4bf;background:#0d948822}.correct{border-color:#22c55e!important;background:#22c55e22}.wrong{border-color:#ef4444!important;background:#ef444422}</style></head><body><main class="max-w-3xl mx-auto px-5 py-10"><a href="index.html" class="text-xs uppercase font-bold text-teal-400">← Volver a los quizzes</a><div id="app" class="mt-8"></div></main><script src="js/quiz-data.js"></script><script src="js/quiz-app.js"></script><script>const id=new URLSearchParams(location.search).get('unidad'),u=QUIZ_UNITS.find(x=>x.id===id),app=document.getElementById('app');let n=0,answers=[];if(!u){app.innerHTML='<h1>Quiz no encontrado</h1>';throw 0}function draw(){let q=u.questions[n];app.innerHTML=`<p class="text-xs font-bold uppercase tracking-widest text-teal-400">${u.title} · ${n+1}/${u.questions.length}</p><h1 class="font-[Playfair_Display] text-4xl font-bold text-white mt-3">${q.text}</h1><div class="mt-7 grid gap-3">${q.options.map((o,i)=>`<button class="answer text-left p-4 rounded" data-i="${i}"><b class="mr-3 text-teal-300">${'ABCD'[i]}</b>${o}</button>`).join('')}</div><button id="next" disabled class="mt-7 bg-teal-500 disabled:opacity-30 text-black font-extrabold uppercase text-xs px-6 py-4 rounded">${n===u.questions.length-1?'Ver resultado':'Siguiente'}</button>`;document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>{document.querySelectorAll('.answer').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');answers[n]=+b.dataset.i;document.getElementById('next').disabled=false});document.getElementById('next').onclick=()=>{n++;n<u.questions.length?draw():finish()}}function finish(){let correct=answers.reduce((s,a,i)=>s+(a===u.questions[i].correct),0),score=correct/u.questions.length*100,d=QuizProgress.read(),old=d.units[u.id]?.best||0;d.units[u.id]={best:Math.max(old,score),attempts:(d.units[u.id]?.attempts||0)+1};QuizProgress.save(d);app.innerHTML=`<p class="text-xs font-bold uppercase tracking-widest text-teal-400">Resultado guardado</p><h1 class="font-[Playfair_Display] text-5xl font-bold text-white mt-3">${Math.round(score)} puntos</h1><p class="mt-4">Respondiste ${correct} de ${u.questions.length} correctamente. ${score>=QuizProgress.pass?'¡Unidad aprobada!':'Necesitás 60 puntos para aprobar; podés reintentar.'}</p><div class="mt-8 flex gap-3"><a class="bg-teal-500 text-black font-bold text-xs uppercase px-5 py-3 rounded" href="index.html">Ver mi progreso</a><button class="border border-white/20 px-5 py-3 rounded text-xs font-bold uppercase" onclick="location.reload()">Reintentar</button></div>`}draw()</script></body></html>
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quiz interactivo de Ciencias Naturales para 1° año de secundaria.">
+  <title>Quiz — Ciencias Naturales 1° Año</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', leaf: '#22C55E', energy: '#3B82F6', bio: '#DC2626'
+            }
+          },
+          fontFamily: { heading: ['Playfair Display', 'Georgia', 'serif'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Inter, sans-serif; background: #080C0A; color: #C8D4CC; }
+    ::selection { background: #14B8A6; color: #080C0A; }
+    .grid-lines { background-image: linear-gradient(rgba(20,184,166,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(20,184,166,.07) 1px, transparent 1px); background-size: 42px 42px; mask-image: radial-gradient(ellipse 76% 70% at 50% 42%, black 0%, transparent 74%); }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.06); } 100% { transform: scale(1); opacity: 1; } }
+    .rise { animation: rise .6s cubic-bezier(.16,1,.3,1) both; }
+    .pop { animation: pop .45s cubic-bezier(.16,1,.3,1) both; }
+
+    .answer { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 15px 16px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); border-radius: 2px; color: #C8D4CC; font-size: 14px; line-height: 1.45; transition: border-color .2s, background .2s, transform .2s; cursor: pointer; }
+    .answer:not(:disabled):hover, .answer:not(:disabled):focus-visible { border-color: rgba(45,212,191,.6); background: rgba(13,148,136,.09); transform: translateX(4px); outline: none; }
+    .answer:disabled { cursor: default; }
+    .answer .letter { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(45,212,191,.35); background: rgba(20,184,166,.08); color: #5EEAD4; font-size: 12px; font-weight: 800; border-radius: 2px; transition: inherit; }
+    .answer .marks { flex: 0 0 auto; position: relative; width: 18px; height: 18px; margin-left: auto; }
+    .answer .mark { position: absolute; inset: 0; font-size: 18px; opacity: 0; transition: opacity .2s; }
+    .answer.correct { border-color: rgba(34,197,94,.7); background: rgba(34,197,94,.1); }
+    .answer.correct .letter { border-color: rgba(34,197,94,.7); background: rgba(34,197,94,.15); color: #4ADE80; }
+    .answer.correct .mark-check { opacity: 1; color: #4ADE80; }
+    .answer.wrong { border-color: rgba(239,68,68,.7); background: rgba(239,68,68,.09); }
+    .answer.wrong .letter { border-color: rgba(239,68,68,.7); background: rgba(239,68,68,.14); color: #F87171; }
+    .answer.wrong .mark-x { opacity: 1; color: #F87171; }
+    .answer.dimmed { opacity: .38; }
+
+    .feedback { border-left: 2px solid; padding: 14px 16px; border-radius: 2px; }
+    .feedback.ok { border-color: #22C55E; background: rgba(34,197,94,.07); }
+    .feedback.bad { border-color: #EF4444; background: rgba(239,68,68,.07); }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; border-radius: 2px; background: #0D9488; padding: 15px 26px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: #080C0A; transition: all .2s; box-shadow: 0 0 0 1px rgba(20,184,166,.25), 0 10px 30px rgba(13,148,136,.22); }
+    .btn-primary:not(:disabled):hover { background: #14B8A6; transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(45,212,191,.6), 0 14px 38px rgba(13,148,136,.32); }
+    .btn-primary:disabled { opacity: .3; cursor: not-allowed; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; border-radius: 2px; border: 1px solid rgba(255,255,255,.18); padding: 15px 26px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: #C8D4CC; transition: all .2s; }
+    .btn-ghost:hover { border-color: rgba(45,212,191,.5); color: #fff; background: rgba(20,184,166,.07); }
+
+    .progress-track { height: 5px; background: rgba(255,255,255,.07); border-radius: 99px; overflow: hidden; }
+    .progress-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #0D9488, #2DD4BF); transition: width .5s cubic-bezier(.16,1,.3,1); }
+
+    .review-item { display: flex; gap: 14px; padding: 16px; border: 1px solid rgba(255,255,255,.08); border-radius: 2px; background: rgba(255,255,255,.02); }
+    .review-item .state { flex: 0 0 auto; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 99px; font-size: 14px; }
+    .review-item.ok .state { background: rgba(34,197,94,.13); color: #4ADE80; }
+    .review-item.bad .state { background: rgba(239,68,68,.13); color: #F87171; }
+
+    .ring-num { position: absolute; inset: 0; display: grid; place-items: center; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+  <div class="fixed inset-0 grid-lines pointer-events-none"></div>
+
+  <nav class="relative z-10 border-b border-white/5 bg-natura-black/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="../inicio.html" class="flex items-center gap-2 group" aria-label="Volver al inicio de Ciencias Naturales">
+        <span class="w-8 h-8 bg-natura-green rounded-sm grid place-items-center text-natura-black group-hover:bg-natura-greenLight transition-colors"><span class="iconify" data-icon="lucide:flask-conical" data-width="17"></span></span>
+        <span class="font-heading text-base font-bold tracking-wide text-white uppercase">Cs. Naturales</span>
+      </a>
+      <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors">
+        <span class="iconify" data-icon="lucide:arrow-left" data-width="15"></span> Volver a los quizzes
+      </a>
+    </div>
+  </nav>
+
+  <main class="relative z-10 max-w-3xl mx-auto px-5 py-10 sm:py-14">
+    <div id="app"></div>
+  </main>
+
+  <footer class="relative z-10 border-t border-white/5 px-5 py-7 text-center text-[11px] uppercase tracking-wider text-natura-silverDark">Ciencias Naturales · 1° Año · Prof. Javier Pereyra</footer>
+
+  <script src="js/quiz-data.js"></script>
+  <script src="js/quiz-app.js"></script>
+  <script>
+    const id = new URLSearchParams(location.search).get('unidad');
+    const u = QUIZ_UNITS.find(x => x.id === id);
+    const app = document.getElementById('app');
+    let n = 0, answers = [];
+
+    if (!u) {
+      app.innerHTML = `<div class="rise rounded-sm border border-white/10 bg-white/[.03] p-10 text-center">
+        <span class="iconify text-4xl text-red-400" data-icon="lucide:circle-alert"></span>
+        <h1 class="mt-4 font-heading text-3xl font-bold text-white">Quiz no encontrado</h1>
+        <p class="mt-2 text-sm text-natura-silver">El enlace no corresponde a ninguna unidad.</p>
+        <a href="index.html" class="btn-primary mt-7">Volver a los quizzes</a>
+      </div>`;
+      throw 0;
+    }
+
+    const area = QuizProgress.area[u.area];
+    document.title = `${u.title} · Quiz · Ciencias Naturales`;
+
+    const head = () => `
+      <header class="rise">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <span class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.18em]" style="border-color:${area.color}44;color:${area.color};background:${area.color}11">
+            <span class="iconify" data-icon="${u.icon}" data-width="14"></span> ${area.name}
+          </span>
+          <span class="text-[11px] font-bold uppercase tracking-[.18em] text-natura-silverDark">Pregunta <span class="text-white">${n + 1}</span> / ${u.questions.length}</span>
+        </div>
+        <div class="progress-track mt-4"><div class="progress-bar" id="bar" style="width:${n / u.questions.length * 100}%"></div></div>
+        <h1 class="mt-6 font-heading text-3xl sm:text-4xl font-bold text-white">${u.title}</h1>
+      </header>`;
+
+    function draw() {
+      const q = u.questions[n];
+      const last = n === u.questions.length - 1;
+      app.innerHTML = head() + `
+        <section class="rise mt-8">
+          <h2 class="font-heading text-2xl sm:text-[28px] font-bold leading-snug text-white">${q.text}</h2>
+          <div class="mt-7 grid gap-3" role="group" aria-label="Opciones de respuesta">
+            ${q.options.map((o, i) => `
+              <button class="answer" data-i="${i}">
+                <span class="letter">${'ABCD'[i]}</span>
+                <span>${o}</span>
+                <span class="marks"><span class="mark mark-check iconify" data-icon="lucide:circle-check"></span><span class="mark mark-x iconify" data-icon="lucide:circle-x"></span></span>
+              </button>`).join('')}
+          </div>
+          <div id="feedback" class="mt-5" aria-live="polite"></div>
+          <div class="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-6">
+            <p class="text-[11px] text-natura-silverDark">Elegí una opción · teclas <b class="text-natura-silver">1-4</b> o <b class="text-natura-silver">A-D</b></p>
+            <button id="next" disabled class="btn-primary">
+              ${last ? 'Ver resultado' : 'Siguiente'} <span class="iconify" data-icon="lucide:arrow-right" data-width="15"></span>
+            </button>
+          </div>
+        </section>`;
+      document.querySelectorAll('.answer').forEach(b => b.onclick = () => select(+b.dataset.i));
+      document.getElementById('next').onclick = () => { n++; n < u.questions.length ? draw() : finish(); };
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function select(i) {
+      if (answers[n] !== undefined) return;
+      answers[n] = i;
+      const q = u.questions[n];
+      const ok = i === q.correct;
+      document.querySelectorAll('.answer').forEach(b => {
+        const bi = +b.dataset.i;
+        b.disabled = true;
+        if (bi === q.correct) b.classList.add('correct');
+        else if (bi === i) b.classList.add('wrong');
+        else b.classList.add('dimmed');
+      });
+      document.getElementById('feedback').innerHTML = `
+        <div class="feedback pop ${ok ? 'ok' : 'bad'}">
+          <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.14em] ${ok ? 'text-green-400' : 'text-red-400'}">
+            <span class="iconify" data-icon="${ok ? 'lucide:party-popper' : 'lucide:lightbulb'}" data-width="16"></span>
+            ${ok ? '¡Correcto!' : 'No era esa…'}
+          </p>
+          <p class="mt-1.5 text-sm leading-relaxed text-natura-silverLight">${q.feedback}</p>
+        </div>`;
+      document.getElementById('bar').style.width = ((n + 1) / u.questions.length * 100) + '%';
+      const next = document.getElementById('next');
+      next.disabled = false;
+      next.focus();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && answers[n] !== undefined && !document.getElementById('next')?.disabled) { document.getElementById('next').click(); return; }
+      const map = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 };
+      const i = map[e.key.toLowerCase()];
+      if (i !== undefined && answers[n] === undefined) document.querySelector(`.answer[data-i="${i}"]`)?.click();
+    });
+
+    function finish() {
+      const correct = answers.reduce((s, a, i) => s + (a === u.questions[i].correct ? 1 : 0), 0);
+      const score = Math.round(correct / u.questions.length * 100);
+      const d = QuizProgress.read();
+      const old = d.units[u.id]?.best || 0;
+      const attempts = (d.units[u.id]?.attempts || 0) + 1;
+      d.units[u.id] = { best: Math.max(old, score), attempts };
+      QuizProgress.save(d);
+
+      const passed = score >= QuizProgress.pass;
+      const newBest = score > old;
+      const C = 439.8, col = passed ? '#2DD4BF' : '#F87171';
+
+      app.innerHTML = `
+        <section class="rise rounded-sm border border-white/10 bg-white/[.03] p-7 sm:p-10 text-center">
+          <p class="text-[11px] font-bold uppercase tracking-[.2em]" style="color:${area.color}">${area.name} · ${u.title}</p>
+          <div class="relative mx-auto mt-8 h-44 w-44">
+            <svg viewBox="0 0 160 160" class="h-full w-full -rotate-0">
+              <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/>
+              <circle id="ring" cx="80" cy="80" r="70" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" transform="rotate(-90 80 80)" style="transition:stroke-dashoffset 1.3s cubic-bezier(.16,1,.3,1)"/>
+            </svg>
+            <div class="ring-num"><div><p class="font-heading text-5xl font-bold text-white" id="num">0</p><p class="text-[10px] font-bold uppercase tracking-[.18em] text-natura-silverDark">puntos</p></div></div>
+          </div>
+          <h1 class="mt-7 font-heading text-3xl sm:text-4xl font-bold ${passed ? 'text-teal-300' : 'text-white'}">${passed ? '¡Unidad aprobada!' : 'Todavía no…'}</h1>
+          <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-natura-silver">
+            Respondiste bien <b class="text-white">${correct} de ${u.questions.length}</b> preguntas.
+            ${passed ? (newBest ? 'Nuevo mejor puntaje. ¡Gran trabajo!' : 'Aprobaste de nuevo, ¡muy bien!') : `Necesitás ${QuizProgress.pass} puntos para aprobar. Revisá la devolución y reintentá.`}
+          </p>
+          <div class="mx-auto mt-7 grid max-w-md grid-cols-3 gap-3 text-center">
+            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-2xl font-bold text-white">${Math.round(Math.max(old, score))}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">Mejor puntaje</p></div>
+            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-2xl font-bold text-white">${attempts}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">${attempts === 1 ? 'Intento' : 'Intentos'}</p></div>
+            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-2xl font-bold" style="color:${col}">${passed ? 'Sí' : 'No'}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">Aprobada</p></div>
+          </div>
+          <div class="mt-9 flex flex-wrap justify-center gap-3">
+            <a href="index.html" class="btn-primary"><span class="iconify" data-icon="lucide:chart-line" data-width="15"></span> Ver mi progreso</a>
+            <button onclick="location.reload()" class="btn-ghost"><span class="iconify" data-icon="lucide:rotate-ccw" data-width="15"></span> Reintentar</button>
+          </div>
+        </section>
+
+        <section class="rise mt-10">
+          <p class="text-[11px] font-bold uppercase tracking-[.2em] text-natura-green">Devolución</p>
+          <h2 class="mt-2 font-heading text-2xl font-bold text-white">Revisá tus respuestas</h2>
+          <div class="mt-5 grid gap-3">
+            ${u.questions.map((q, i) => {
+              const ok = answers[i] === q.correct;
+              return `<div class="review-item ${ok ? 'ok' : 'bad'}">
+                <span class="state"><span class="iconify" data-icon="${ok ? 'lucide:check' : 'lucide:x'}" data-width="14"></span></span>
+                <div class="min-w-0">
+                  <p class="text-sm font-bold text-white">${q.text}</p>
+                  ${ok
+                    ? `<p class="mt-1.5 text-xs text-green-400">Tu respuesta: ${q.options[answers[i]]}</p>`
+                    : `<p class="mt-1.5 text-xs text-red-400">Tu respuesta: ${answers[i] !== undefined ? q.options[answers[i]] : 'Sin responder'}</p>
+                       <p class="mt-1 text-xs text-green-400">Correcta: ${q.options[q.correct]}</p>`}
+                  <p class="mt-1.5 text-xs leading-relaxed text-natura-silverDark">${q.feedback}</p>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </section>`;
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.getElementById('ring').style.strokeDashoffset = C * (1 - score / 100);
+        const num = document.getElementById('num'), t0 = performance.now();
+        (function tick(t) {
+          const p = Math.min((t - t0) / 1200, 1);
+          num.textContent = Math.round(score * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      }));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    draw();
+  </script>
+</body>
+</html>

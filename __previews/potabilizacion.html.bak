@@ -1,0 +1,545 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Potabilización — Química · Ciencias Naturales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/iconify@1.0.0/dist/iconify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A',
+              dark: '#0E1410',
+              gray: '#161C18',
+              mid: '#242C28',
+              silver: '#A8B5AD',
+              silverLight: '#C8D4CC',
+              silverDark: '#5A6B60',
+              leaf: '#22C55E',
+            }
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body: ['"Cormorant Garamond"', 'serif'],
+            ui: ['"Inter"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Cormorant Garamond', serif; background: #080C0A; color: #D0D8D2; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #242C28; border-radius: 3px; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; opacity: 0; }
+    .delay-200 { animation-delay: 200ms; opacity: 0; }
+
+    .accent-line-quimica {
+      background: linear-gradient(90deg, #22C55E 0%, #86EFAC 50%, transparent 100%);
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    .breadcrumb { font-family: 'Inter', sans-serif; font-size: 0.875rem; }
+    .breadcrumb a { color: #22C55E; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #5A6B60; }
+
+    .article-dropcap::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      padding-top: 0.15rem;
+      color: #22C55E;
+      font-weight: 900;
+    }
+
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #22C55E;
+      border-left: 4px solid #22C55E;
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      max-width: 90%;
+    }
+
+    .sidebar-note {
+      background: #0E1410;
+      border-left: 4px solid #22C55E;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 12px 12px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #C8D4CC;
+      margin: 1.5rem 0;
+    }
+    .sidebar-note strong { color: #22C55E; }
+
+    .figure-placeholder {
+      background: linear-gradient(135deg, #0E1410 0%, #161C18 100%);
+      border: 2px dashed #22C55E;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #22C55E;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      margin: 2rem 0;
+    }
+
+    .nav-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      transition: all 0.2s;
+    }
+    .nav-link.prev { background: #0E1410; color: #22C55E; border: 1px solid rgba(255,255,255,0.06); }
+    .nav-link.prev:hover { background: #161C18; }
+    .nav-link.next { background: #0E1410; color: #22C55E; border: 1px solid rgba(255,255,255,0.06); }
+    .nav-link.next:hover { background: #161C18; }
+
+    .pregunta-card {
+      background: #0E1410;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #C8D4CC;
+      transition: all 0.2s;
+    }
+    .pregunta-card:hover { border-color: #22C55E; background: #161C18; }
+    .pregunta-card::before { content: '?? '; }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .process-step:last-child { border-bottom: none; }
+    .step-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+    .step-icon.captacion { background: #3B82F6; }
+    .step-icon.coagulacion { background: #6366F1; }
+    .step-icon.decantacion { background: #8B5CF6; }
+    .step-icon.filtracion { background: #A855F7; }
+    .step-icon.desinfeccion { background: #EC4899; }
+    .step-icon.distribucion { background: #22C55E; }
+    .step-content h4 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.2rem; color: #C8D4CC; margin-bottom: 0.35rem; }
+    .step-content p { font-size: 1.05rem; color: #A8B5AD; line-height: 1.6; }
+
+    .content-card {
+      background: #0E1410;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    @media print {
+      body { background: white; color: black; }
+    }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  </head>
+<body class="bg-natura-black text-natura-silverLight min-h-screen bg-agua">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Fixed Glass Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div class="max-w-4xl mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <div class="breadcrumb flex items-center gap-2 flex-wrap">
+        <a href="../../../inicio.html">Inicio</a>
+        <span>›</span>
+        <a href="../../index.html">Química</a>
+        <span>›</span>
+        <a href="index.html">Agua</a>
+        <span>›</span>
+        <span>Potabilización</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="relative overflow-hidden" style="background: #080C0A;">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=1200&q=80"
+        alt="Planta potabilizadora"
+        class="w-full h-full object-cover"
+        style="filter: grayscale(40%) contrast(1.15) brightness(0.35);"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/50 to-natura-black"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-natura-black/60 via-transparent to-natura-black/40"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-6 pt-32 pb-16">
+      <div class="accent-line-quimica w-32 mb-6 animate-fadeInUp"></div>
+      <p class="text-natura-leaf uppercase tracking-[0.25em] text-sm font-ui font-medium mb-3 animate-fadeInUp delay-100" style="font-family: 'Inter', sans-serif;">Química · Agua</p>
+      <h1 class="font-display text-5xl md:text-6xl font-black text-white leading-tight animate-fadeInUp delay-200">
+        Potabilización
+      </h1>
+      <p class="text-xl text-natura-silver mt-4 max-w-2xl font-body italic leading-relaxed animate-fadeInUp delay-200">
+        El camino que recorre el agua desde el río hasta tu canilla. Un proceso que salva millones de vidas cada día.
+      </p>
+    </div>
+  </header>
+
+  <!-- Article Content -->
+  <main class="max-w-4xl mx-auto px-6 pt-12 pb-16">
+
+    <!-- Section 1: ¿Por qué potabilizar? -->
+    <section class="mb-14">
+      <h2 class="section-heading text-3xl text-natura-silverLight mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-natura-leaf flex items-center justify-center text-natura-black font-ui text-sm font-bold">1</span>
+        ¿Por qué potabilizar?
+      </h2>
+      <p class="article-dropcap text-lg leading-relaxed text-natura-silver font-body">
+        El agua de ríos, lagos y napas debe analizarse y, en general, tratarse antes de beberla. Según la fuente puede contener <strong class="text-natura-silverLight">microorganismos</strong> (bacterias, virus, parásitos), <strong class="text-natura-silverLight">partículas en suspensión</strong> (barro, arena, arcilla) y <strong class="text-natura-silverLight">sustancias químicas</strong> que pueden afectar la salud.
+      </p>
+      <aside class="sidebar-note">
+        <strong>Según la OMS:</strong> Cada año mueren aproximadamente 500.000 personas por enfermedades diarreicas vinculadas al consumo de agua no potable. La mayoría son niños menores de 5 años.
+      </aside>
+      <p class="text-lg leading-relaxed text-natura-silver font-body">
+        La <strong class="text-natura-silverLight">potabilización</strong> es el conjunto de tratamientos físicos, químicos y biológicos que transforman el agua cruda en agua segura para beber. El objetivo es eliminar o reducir hasta niveles inocuos los contaminantes que pueden dañar nuestra salud.
+      </p>
+    </section>
+
+    <!-- Section 2: Proceso paso a paso -->
+    <section class="mb-14">
+      <h2 class="section-heading text-3xl text-natura-silverLight mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-natura-leaf flex items-center justify-center text-natura-black font-ui text-sm font-bold">2</span>
+        Proceso paso a paso
+      </h2>
+      <p class="text-lg leading-relaxed text-natura-silver font-body mb-4">
+        El proceso de potabilización en una planta típica combina varias etapas; pueden variar según la fuente de agua y los contaminantes presentes.
+      </p>
+
+      <figure class="content-card rounded-2xl p-4 mb-6 overflow-x-auto">
+        <svg viewBox="0 0 780 150" class="min-w-[680px] w-full" role="img" aria-label="Diagrama animado del proceso de potabilización: captación, floculación, decantación, filtración, desinfección y distribución">
+          <defs><linearGradient id="flow" x1="0" x2="1"><stop stop-color="#38BDF8"/><stop offset="1" stop-color="#22C55E"/></linearGradient></defs>
+          <path d="M55 75H725" stroke="url(#flow)" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+          <circle r="6" fill="#E0F2FE"><animateMotion dur="4s" repeatCount="indefinite" path="M55 75H725"/></circle>
+          <g fill="#0E1410" stroke="#22C55E" stroke-width="2"><circle cx="70" cy="75" r="26"/><circle cx="195" cy="75" r="26"/><circle cx="320" cy="75" r="26"/><circle cx="445" cy="75" r="26"/><circle cx="570" cy="75" r="26"/><circle cx="695" cy="75" r="26"/></g>
+          <g fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12" text-anchor="middle"><text x="70" y="80">1</text><text x="195" y="80">2</text><text x="320" y="80">3</text><text x="445" y="80">4</text><text x="570" y="80">5</text><text x="695" y="80">6</text><text x="70" y="125">Captación</text><text x="195" y="125">Floculación</text><text x="320" y="125">Decantación</text><text x="445" y="125">Filtración</text><text x="570" y="125">Desinfección</text><text x="695" y="125">Distribución</text></g>
+        </svg>
+        <figcaption class="text-center text-xs text-natura-silverDark mt-2">Seguí la gota: cada etapa reduce riesgos diferentes antes de la distribución.</figcaption>
+      </figure>
+
+      <div class="content-card rounded-2xl p-6">
+        <div class="process-step">
+          <div class="step-icon captacion">1</div>
+          <div class="step-content">
+            <h4>Captación</h4>
+            <p>Se toma el agua directamente del río, lago o embalse mediante bombas o tomas sumergidas. Unas rejillas (<em class="text-natura-silverLight">cribas</em>) retienen los objetos más grandes: ramas, botellas, bolsas.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon coagulacion">2</div>
+          <div class="step-content">
+            <h4>Coagulación y Floculación</h4>
+            <p>Se agregan al agua <strong class="text-natura-silverLight">sales coagulantes</strong> (como sulfato de aluminio o cloruro férrico). Estas sales desestabilizan las partículas suspendidas y hacen que se agrupen formando <strong class="text-natura-silverLight">flóculos</strong> —grumos más grandes y pesados— que luego podrán sedimentar.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon decantacion">3</div>
+          <div class="step-content">
+            <h4>Decantación</h4>
+            <p>El agua pasa lentamente por grandes piletas llamadas <strong class="text-natura-silverLight">decantadores</strong>. Allí los flóculos, más pesados, se depositan en el fondo por acción de la gravedad. El agua más limpia queda en la parte superior.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon filtracion">4</div>
+          <div class="step-content">
+            <h4>Filtración</h4>
+            <p>El agua decantada atraviesa filtros compuestos por <strong class="text-natura-silverLight">capas de arena de distinto grosor y carbón activado</strong>. Estos filtros retienen las partículas más finas que no sedimentaron, además de mejorar el sabor y el olor del agua al eliminar compuestos orgánicos.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon desinfeccion">5</div>
+          <div class="step-content">
+            <h4>Desinfección</h4>
+            <p>Es la etapa más crítica. Se agrega <strong class="text-natura-silverLight">cloro</strong> (hipoclorito de sodio) que elimina bacterias, virus y otros microorganismos patógenos. La dosis se controla cuidadosamente: suficiente para desinfectar pero segura para la salud. En algunas plantas también se usa <strong class="text-natura-silverLight">luz ultravioleta</strong> u <strong class="text-natura-silverLight">ozono</strong>.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-icon distribucion">6</div>
+          <div class="step-content">
+            <h4>Distribución</h4>
+            <p>El agua potabilizada se almacena en grandes tanques elevados y luego se <strong class="text-natura-silverLight">bombea</strong> a través de una red de cañerías subterráneas hasta cada hogar, escuela, hospital y fábrica. Se agrega una pequeña cantidad de cloro residual para mantener el agua libre de gérmenes durante todo el recorrido.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="figure-placeholder mt-8">
+        <span style="font-size: 3rem;">??</span>
+        <p class="mt-2"><strong>Figura:</strong> Diagrama de una planta potabilizadora típica. El agua entra cruda (izquierda) y sale potable (derecha) lista para distribuir.</p>
+      </div>
+    </section>
+
+    <!-- Section 3: El agua como derecho -->
+    <section class="mb-14">
+      <h2 class="section-heading text-3xl text-natura-silverLight mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-natura-leaf flex items-center justify-center text-natura-black font-ui text-sm font-bold">3</span>
+        El agua como derecho
+      </h2>
+      <p class="text-lg leading-relaxed text-natura-silver font-body mb-4">
+        En 2010, la <strong class="text-natura-silverLight">Asamblea General de las Naciones Unidas</strong> reconoció el acceso al agua potable y al saneamiento como un <strong class="text-natura-silverLight">derecho humano fundamental</strong>. Esto significa que todos los Estados tienen la obligación de garantizar a su población agua suficiente, segura, aceptable, accesible y asequible.
+      </p>
+      <blockquote class="pull-quote">
+        "El derecho al agua potable y el saneamiento es un derecho humano esencial para el pleno disfrute de la vida y de todos los derechos humanos."
+      </blockquote>
+      <p class="text-lg leading-relaxed text-natura-silver font-body">
+        Sin embargo, la realidad está lejos de este ideal. Según la ONU, más de <strong class="text-natura-silverLight">2.000 millones de personas</strong> en el mundo carecen de acceso a agua potable gestionada de forma segura. En la Argentina, si bien la cobertura de agua de red es alta en zonas urbanas, muchas comunidades rurales y barrios periféricos aún dependen de fuentes precarias o no seguras.
+      </p>
+    </section>
+
+    <!-- Section 4: ¿Qué podemos hacer? -->
+    <section class="mb-14">
+      <h2 class="section-heading text-3xl text-natura-silverLight mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-natura-leaf flex items-center justify-center text-natura-black font-ui text-sm font-bold">4</span>
+        ¿Qué podemos hacer?
+      </h2>
+      <p class="text-lg leading-relaxed text-natura-silver font-body mb-4">
+        Si bien la potabilización a gran escala es tarea de los Estados y las empresas de agua, cada persona puede contribuir a cuidar este recurso. Acciones cotidianas que marcan la diferencia:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-3 content-card rounded-xl p-4">
+          <span class="text-natura-leaf text-xl mt-0.5">??</span>
+          <p class="text-natura-silver font-body leading-relaxed"><strong class="text-natura-silverLight">Cerrar la canilla</strong> al cepillarse los dientes o enjabonarse. Una canilla abierta desperdicia hasta 12 litros por minuto.</p>
+        </div>
+        <div class="flex items-start gap-3 content-card rounded-xl p-4">
+          <span class="text-natura-leaf text-xl mt-0.5">???</span>
+          <p class="text-natura-silver font-body leading-relaxed"><strong class="text-natura-silverLight">No arrojar basura</strong> a ríos, arroyos o al inodoro. Aceites, pinturas y medicamentos contaminan fuertemente.</p>
+        </div>
+        <div class="flex items-start gap-3 content-card rounded-xl p-4">
+          <span class="text-natura-leaf text-xl mt-0.5">??</span>
+          <p class="text-natura-silver font-body leading-relaxed"><strong class="text-natura-silverLight">Reducir el uso de plásticos</strong> descartables. Los plásticos terminan en los cursos de agua y se degradan en microplásticos.</p>
+        </div>
+        <div class="flex items-start gap-3 content-card rounded-xl p-4">
+          <span class="text-natura-leaf text-xl mt-0.5">??</span>
+          <p class="text-natura-silver font-body leading-relaxed"><strong class="text-natura-silverLight">Informarse y difundir</strong>. Conocer la situación del agua en nuestra comunidad es el primer paso para defender este derecho.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Preguntas para pensar -->
+    <section class="mb-10">
+      <h2 class="section-heading text-3xl text-natura-silverLight mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-natura-leaf flex items-center justify-center text-natura-black font-ui text-sm font-bold">?</span>
+        Preguntas para pensar
+      </h2>
+      <div class="space-y-4">
+        <div class="pregunta-card">¿Por qué la etapa de desinfección es la más importante del proceso de potabilización? ¿Qué pasaría si se eliminara?</div>
+        <div class="pregunta-card">¿Qué diferencias hay entre potabilizar agua y purificarla? ¿Son lo mismo?</div>
+        <div class="pregunta-card">Si el acceso al agua es un derecho humano, ¿quién debería pagar el costo de potabilizarla y distribuirla? Fundamentá tu respuesta.</div>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="flex items-center justify-between pt-8 border-t border-white/5 mt-10">
+      <a href="usos-contaminacion.html" class="nav-link prev">
+        ? Usos y Contaminación
+      </a>
+      <a href="ciclo-agua.html" class="nav-link next">
+        Siguiente ?
+      </a>
+    </nav>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 py-8">
+    <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 font-ui text-sm text-natura-silverDark">
+      <p>Ciencias Naturales · 1° Año · Biología</p>
+      <div class="flex gap-6">
+        <a href="../../../inicio.html" class="hover:text-natura-leaf transition-colors">Inicio</a>
+        <a href="../../index.html" class="hover:text-natura-leaf transition-colors">Química</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Sustancias",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/sustancias.html",c:"#22C55E"},
+    {n:"Materiales",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/materiales.html",c:"#22C55E"},
+    {n:"Medicion",u:"Quimica",s:"Materia y Propiedades",l:"../materia-propiedades/medicion.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../mezclas/separacion.html",c:"#22C55E"},
+    {n:"Mezclas en la naturaleza",u:"Quimica",s:"Mezclas",l:"../mezclas/mezclas-naturaleza.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Usos y contaminacion del agua",u:"Quimica",s:"Agua",l:"../agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion del agua",u:"Quimica",s:"Agua",l:"../agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"../../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas",u:"Fisica",s:"Ondas",l:"../../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"El Sonido",u:"Fisica",s:"Sonido",l:"../../fisica/calor-sonido/sonido.html",c:"#3B82F6"},
+    {n:"Comportamiento de materiales",u:"Fisica",s:"Calor y Sonido",l:"../../fisica/calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento rectilineo uniforme",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos del movimiento",u:"Fisica",s:"Movimientos",l:"../../fisica/movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Relaciones interespecificas",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion de los animales",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Alimentacion humana",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/alimentacion.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Musculos",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/musculos.html",c:"#DC2626"},
+    {n:"Pancreas",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/pancreas.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Rinones",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/rinones.html",c:"#DC2626"},
+    {n:"Sistema urinario",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/urinario.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI - Educacion Sexual Integral",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"EAI - Educacion Ambiental Integral",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas. Proba con otra palabra.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+
+</body>
+</html>

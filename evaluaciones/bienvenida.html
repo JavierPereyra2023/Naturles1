@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Presentación de los desafíos de Ciencias Naturales: un paisaje que florece del invierno a la primavera.">
+  <title>Evaluaciones — Del invierno florece lo que sabés</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', leaf: '#22C55E', energy: '#3B82F6', bio: '#DC2626'
+            }
+          },
+          fontFamily: { heading: ['Playfair Display', 'Georgia', 'serif'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: Inter, sans-serif; background: #070D16; color: #C8D4CC; overflow-x: hidden; }
+    ::selection { background: #14B8A6; color: #080C0A; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 1s cubic-bezier(.16,1,.3,1) both; }
+    .delay-100 { animation-delay: .25s; } .delay-200 { animation-delay: .5s; }
+    .delay-300 { animation-delay: .8s; } .delay-400 { animation-delay: 1.05s; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 18px rgba(20,184,166,.35), 0 0 0 1px rgba(45,212,191,.35); }
+      50% { box-shadow: 0 0 40px rgba(20,184,166,.6), 0 0 0 1px rgba(45,212,191,.6); }
+    }
+    .glow-btn { animation: pulse-glow 2.4s ease-in-out infinite; }
+
+    @keyframes sound-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(20,184,166,.5); }
+      70% { box-shadow: 0 0 0 11px rgba(20,184,166,0); }
+      100% { box-shadow: 0 0 0 0 rgba(20,184,166,0); }
+    }
+    .sound-pulse { animation: sound-pulse 2.4s ease-out infinite; }
+
+    .chip { backdrop-filter: blur(6px); background: rgba(8,12,10,.38); border: 1px solid rgba(255,255,255,.14); }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #0D9488, #14B8A6); }
+    .text-shadow-soft { text-shadow: 0 2px 26px rgba(0,0,0,.9), 0 1px 6px rgba(0,0,0,.75); }
+
+    #stage { perspective: 1400px; }
+    #tilt { transform-style: preserve-3d; will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Escena SVG animada: del solsticio de invierno a la primavera -->
+  <div id="stage" class="fixed inset-0 overflow-hidden">
+    <div id="tilt" class="absolute" style="inset:-3.5%;">
+      <svg id="scene" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice" class="block w-full h-full" aria-hidden="true">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop id="sky0" offset="0" stop-color="#070D16"/>
+            <stop id="sky1" offset="0.55" stop-color="#0F1B29"/>
+            <stop id="sky2" offset="1" stop-color="#1E2F40"/>
+          </linearGradient>
+          <linearGradient id="meadowGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop id="mead0" offset="0" stop-color="#DCE7EE"/>
+            <stop id="mead1" offset="1" stop-color="#AEBFCC"/>
+          </linearGradient>
+          <radialGradient id="haloGrad">
+            <stop offset="0" stop-color="#FFF3C4" stop-opacity=".55"/>
+            <stop offset=".45" stop-color="#FFE3A0" stop-opacity=".18"/>
+            <stop offset="1" stop-color="#FFE3A0" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="warmGrad" cx=".5" cy=".42" r=".85">
+            <stop offset="0" stop-color="#FFDFA0" stop-opacity=".5"/>
+            <stop offset="1" stop-color="#FFDFA0" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="lampGrad">
+            <stop offset="0" stop-color="#FFD98A" stop-opacity=".85"/>
+            <stop offset="1" stop-color="#FFD98A" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="vignette" cx=".5" cy=".46" r=".78">
+            <stop offset=".55" stop-color="#040806" stop-opacity="0"/>
+            <stop offset="1" stop-color="#040806" stop-opacity=".5"/>
+          </radialGradient>
+          <filter id="blur6" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="7"/></filter>
+          <filter id="blur3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+
+        <g id="L-sky" data-depth="0.02"><rect x="-60" y="-60" width="1560" height="930" fill="url(#skyGrad)"/></g>
+        <g id="L-stars" data-depth="0.035"></g>
+        <g id="L-meteors" data-depth="0.04"></g>
+        <g id="L-sun" data-depth="0.05">
+          <circle id="sunHalo" cx="1330" cy="600" r="120" fill="url(#haloGrad)" opacity="0.12"/>
+          <circle id="sunDisc" cx="1330" cy="600" r="34" fill="#AABACB" opacity="0.85"/>
+        </g>
+        <g id="L-clouds" data-depth="0.07"></g>
+        <g id="L-mountains" data-depth="0.09"></g>
+        <g id="L-hills" data-depth="0.14"></g>
+        <g id="L-meadow" data-depth="0.2">
+          <path id="meadowPath" d="M-60,628 Q280,596 720,620 Q1160,644 1500,612 L1500,870 L-60,870 Z" fill="url(#meadowGrad)"/>
+          <g id="snowPatches"></g>
+          <g id="grassTufts"></g>
+        </g>
+        <g id="L-mist" data-depth="0.23"></g>
+        <g id="L-fox" data-depth="0.3"></g>
+        <g id="L-tree" data-depth="0.32">
+          <ellipse id="treeShadow" cx="1030" cy="712" rx="270" ry="24" fill="#15201C" opacity="0.28" filter="url(#blur6)"/>
+          <g id="lantern">
+            <ellipse id="lampGround" cx="862" cy="710" rx="58" ry="9" fill="#FFD98A" opacity="0"/>
+            <circle id="lampGlow" cx="860" cy="660" r="34" fill="url(#lampGrad)" opacity="0"/>
+            <rect x="848" y="692" width="24" height="12" rx="2" fill="#3A3430"/>
+            <rect x="856" y="670" width="8" height="24" fill="#3A3430"/>
+            <rect x="846" y="650" width="28" height="20" rx="2" fill="#3A3430"/>
+            <rect id="lampWindow" x="852" y="655" width="16" height="10" fill="#FFD98A" opacity="0"/>
+            <path d="M842,650 L860,634 L878,650 Z" fill="#3A3430"/>
+            <circle cx="860" cy="631" r="3.5" fill="#3A3430"/>
+          </g>
+          <path id="trunk" fill="#241B18" d="M1016,712 C1010,648 990,604 1000,544 C1008,494 1032,472 1044,436 L1068,436 C1056,474 1042,494 1036,546 C1029,608 1054,650 1064,712 Z"/>
+          <g id="branches" stroke="#241B18" stroke-linecap="round" fill="none">
+            <path d="M1040,486 C1000,444 954,414 908,326" stroke-width="10"/>
+            <path d="M1052,462 C1084,414 1124,392 1184,332" stroke-width="9"/>
+            <path d="M1028,540 C992,518 944,500 894,448" stroke-width="8"/>
+            <path d="M1058,500 C1104,478 1164,468 1234,446" stroke-width="8"/>
+            <path d="M1048,452 C1054,392 1060,336 1054,252" stroke-width="9"/>
+          </g>
+          <g id="blossomBase"></g>
+          <g id="blossoms"></g>
+          <g id="critters"></g>
+        </g>
+        <g id="L-birds" data-depth="0.06"></g>
+        <g id="L-snow" data-depth="0.3"></g>
+        <g id="L-petals" data-depth="0.34"></g>
+        <g id="L-hero" data-depth="0.55" filter="url(#blur3)"></g>
+        <g id="L-heroSnow" data-depth="0.5" filter="url(#blur3)"></g>
+        <g id="L-vignette" data-depth="0"><rect x="-60" y="-60" width="1560" height="930" fill="url(#vignette)" pointer-events="none"/></g>
+        <rect id="warmLight" x="-60" y="-60" width="1560" height="930" fill="url(#warmGrad)" opacity="0" pointer-events="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Veladura para legibilidad del texto -->
+  <div class="fixed inset-0 z-[5] pointer-events-none bg-gradient-to-r from-black/60 via-black/25 to-transparent"></div>
+
+  <!-- Navegación mínima -->
+  <nav class="fixed top-0 left-0 right-0 z-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="../inicio.html" class="flex items-center gap-2 group" aria-label="Volver al inicio de Ciencias Naturales">
+        <span class="w-8 h-8 bg-natura-green rounded-sm grid place-items-center text-natura-black group-hover:bg-natura-greenLight transition-colors"><span class="iconify" data-icon="lucide:flask-conical" data-width="17"></span></span>
+        <span class="font-heading text-base font-bold tracking-wide text-white uppercase text-shadow-soft">Cs. Naturales</span>
+      </a>
+      <a href="../inicio.html" class="hidden sm:inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.18em] text-white/60 hover:text-white transition-colors text-shadow-soft">
+        <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> Volver al inicio
+      </a>
+    </div>
+  </nav>
+
+  <!-- Sonido ambiente: viento que se transforma en pájaros -->
+  <button id="audio-toggle" type="button" aria-label="Activar sonido ambiente"
+    class="sound-pulse fixed top-[max(1.1rem,env(safe-area-inset-top))] right-[max(1.1rem,env(safe-area-inset-right))] z-30 inline-flex items-center gap-2 px-3.5 py-2.5 bg-black/45 backdrop-blur-md border border-white/15 hover:border-natura-greenLight/60 text-white/75 hover:text-natura-greenLight text-[10px] font-semibold uppercase tracking-[.22em] transition-all duration-300">
+    <span id="audio-icon-off"><span class="iconify" data-icon="lucide:volume-x" data-width="14"></span></span>
+    <span id="audio-icon-on" class="hidden"><span class="iconify" data-icon="lucide:bird" data-width="14"></span></span>
+    <span id="audio-label">Activar sonido</span>
+  </button>
+
+  <!-- Contenido -->
+  <main class="relative z-10 min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 w-full">
+      <div class="max-w-2xl pt-16">
+
+        <div class="animate-fadeInUp opacity-0 flex items-center gap-3 mb-5">
+          <div class="accent-line"></div>
+          <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-[.28em] text-natura-greenLight text-shadow-soft">Evaluaciones · 1° Año</span>
+        </div>
+
+        <h1 class="animate-fadeInUp opacity-0 delay-100 font-heading text-4xl sm:text-6xl md:text-7xl font-bold leading-[.98] tracking-tight text-white mb-5 text-shadow-soft">
+          Del invierno<br>
+          <span class="bg-gradient-to-r from-teal-300 via-emerald-300 to-rose-200 bg-clip-text text-transparent">florece lo que sabés.</span>
+        </h1>
+
+        <p class="animate-fadeInUp opacity-0 delay-200 text-sm sm:text-base md:text-lg text-white/80 max-w-xl leading-relaxed mb-7 text-shadow-soft">
+          En el día más oscuro del año el paisaje parece quieto, pero bajo la nieve algo se prepara.
+          Lo mismo pasa con lo que aprendiste: <span class="text-teal-200 font-semibold">cada repaso es un sol que vuelve</span>.
+          Quedate a ver cómo el paisaje despierta… y después ponete a prueba.
+        </p>
+
+        <div class="animate-fadeInUp opacity-0 delay-300 flex flex-wrap gap-2.5 mb-9">
+          <span class="chip inline-flex items-center gap-2 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.15em] text-teal-200"><span class="iconify" data-icon="lucide:layers" data-width="13"></span> 13 unidades</span>
+          <span class="chip inline-flex items-center gap-2 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.15em] text-emerald-200"><span class="iconify" data-icon="lucide:flask-conical" data-width="13"></span> Química · Física · Biología</span>
+          <span class="chip inline-flex items-center gap-2 px-4 py-2 text-[10px] font-semibold uppercase tracking-[.15em] text-amber-200"><span class="iconify" data-icon="lucide:award" data-width="13"></span> Diploma al completar</span>
+        </div>
+
+        <div class="animate-fadeInUp opacity-0 delay-400 flex flex-wrap items-center gap-5">
+          <a href="index.html" class="glow-btn inline-flex items-center gap-3 bg-natura-green hover:bg-natura-greenLight text-natura-black text-xs font-extrabold uppercase tracking-[.16em] px-8 py-4 transition-all duration-200 hover:-translate-y-0.5">
+            <span class="iconify" data-icon="lucide:flower-2" data-width="16"></span>
+            <span>Ponete a prueba</span>
+            <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+          </a>
+          <span class="text-[11px] text-white/55 uppercase tracking-[.18em] text-shadow-soft">Sin nota · solo para aprender</span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Estación actual + progreso del amanecer -->
+  <div class="fixed bottom-[max(1.4rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none">
+    <p id="season-label" class="text-[10px] font-bold uppercase tracking-[.3em] text-white/75 text-shadow-soft">Solsticio de invierno · el día más oscuro</p>
+    <div class="mt-2 h-[3px] w-48 sm:w-64 mx-auto bg-white/15 rounded-full overflow-hidden">
+      <div id="season-bar" class="h-full rounded-full bg-gradient-to-r from-sky-300 via-amber-200 to-emerald-300 transition-[width] duration-500" style="width:0%"></div>
+    </div>
+  </div>
+
+  <script>
+  // ============================================================
+  // Escena viva: del solsticio de invierno a la primavera
+  // Una variable maestra p (0 = noche invernal, 1 = primavera)
+  // interpola cielo, sol, pradera, nieve, flores y fauna.
+  // ============================================================
+  (function () {
+    const SVG = 'http://www.w3.org/2000/svg';
+    const VB = { w: 1440, h: 810 };
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const FINE_POINTER = window.matchMedia('(pointer: fine)').matches;
+    const DURATION = 28; // segundos del viaje invierno → primavera
+    const FORCE_P = parseFloat(((location.search + location.hash).match(/p=([\d.]+)/) || [])[1]); // ?p= o #p= para depurar
+
+    const $ = id => document.getElementById(id);
+    function el(name, attrs, parent) {
+      const e = document.createElementNS(SVG, name);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const smooth = t => { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
+    const backOut = t => { t = clamp(t, 0, 1); const c = 1.70158; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+    function hexLerp(a, b, t) {
+      const pa = [1, 3, 5].map(i => parseInt(a.substr(i, 2), 16));
+      const pb = [1, 3, 5].map(i => parseInt(b.substr(i, 2), 16));
+      return 'rgb(' + pa.map((v, i) => Math.round(lerp(v, pb[i], t))).join(',') + ')';
+    }
+
+    // ----- Paleta con paradas en el tiempo -----
+    const STOPS = [0, .35, .7, 1];
+    const PAL = {
+      skyTop:  ['#070D16', '#22345A', '#5E93BE', '#7FB8E0'],
+      skyMid:  ['#0F1B29', '#3E5478', '#9CC4DD', '#B9DDF0'],
+      skyBot:  ['#1E2F40', '#C0808A', '#F2D9BE', '#EAF6EF'],
+      sun:     ['#AABACB', '#F0A988', '#FFD98A', '#FFF3C4'],
+      meadTop: ['#DCE7EE', '#CFC9B8', '#A5C787', '#93C273'],
+      meadBot: ['#AEBFCC', '#8A937E', '#6B9E54', '#5F9A4C'],
+      mtn:     ['#33445A', '#4E6378', '#5F7A6E', '#557A5E'],
+      mtnBack: ['#2A3C50', '#46586E', '#74907E', '#6B8F72'],
+      hill:    ['#B9C9D4', '#9A9A8C', '#7BA562', '#6DA457'],
+      cloud:   ['#54687F', '#93A2B4', '#F4F8FA', '#FFFFFF']
+    };
+    function sample(key, p) {
+      let i = 0;
+      while (i < STOPS.length - 2 && p > STOPS[i + 1]) i++;
+      return hexLerp(PAL[key][i], PAL[key][i + 1], (p - STOPS[i]) / (STOPS[i + 1] - STOPS[i]));
+    }
+    const sunPos = p => ({ x: lerp(1330, 640, p), y: 600 - 430 * Math.sin(p * Math.PI * 0.58) });
+
+    // ----- Construcción de elementos -----
+    const starG = $('L-stars'), meteorG = $('L-meteors'), cloudG = $('L-clouds'), mtnG = $('L-mountains'), hillG = $('L-hills');
+    const mistG = $('L-mist'), foxG = $('L-fox'), snowG = $('L-snow'), petalG = $('L-petals'), heroG = $('L-hero'), heroSnowG = $('L-heroSnow');
+    const birdG = $('L-birds'), blossomG = $('blossoms'), baseG = $('blossomBase'), critterG = $('critters');
+    const patchG = $('snowPatches'), tuftG = $('grassTufts'), branchesG = $('branches');
+
+    // Estrellas
+    const stars = [];
+    for (let i = 0; i < 90; i++) {
+      const c = el('circle', { cx: Math.random() * VB.w, cy: Math.random() * 520, r: (0.7 + Math.random() * 1.1).toFixed(2), fill: '#FFFFFF' }, starG);
+      stars.push({ c, base: 0.35 + Math.random() * 0.55, ph: Math.random() * 6.28, sp: 0.5 + Math.random() * 1.6 });
+    }
+
+    // Nubes (3 grupos de elipses)
+    const clouds = [];
+    for (let i = 0; i < 3; i++) {
+      const g = el('g', { opacity: 0.16 }, cloudG);
+      el('ellipse', { cx: 0, cy: 0, rx: 90, ry: 22 }, g);
+      el('ellipse', { cx: 60, cy: -14, rx: 70, ry: 18 }, g);
+      el('ellipse', { cx: -65, cy: -8, rx: 60, ry: 15 }, g);
+      clouds.push({ g, x: Math.random() * VB.w, y: 90 + i * 70 + Math.random() * 40, v: 8 + Math.random() * 8 });
+    }
+
+    // Cordillera lejana: dos crestas suaves y redondeadas
+    const mtnBack = el('path', { d: 'M-60,645 L-60,520 Q60,478 180,505 Q300,532 420,480 Q540,428 680,472 Q800,510 940,470 Q1080,430 1210,478 Q1340,522 1500,488 L1500,645 Z', fill: '#2A3C50' }, mtnG);
+    // Nieve suave en las cumbres (parches redondeados)
+    const mtnSnow = [
+      [430, 472, 60, 13], [680, 464, 66, 14], [950, 462, 58, 12], [185, 498, 48, 11]
+    ].map(([x, y, rx, ry]) => el('ellipse', { cx: x, cy: y, rx, ry, fill: '#C7D3DC', opacity: 0.75, filter: 'url(#blur3)' }, mtnG));
+    // Cresta delantera, más baja y oscura
+    const mtnPath = el('path', { d: 'M-60,645 L-60,575 Q100,545 240,562 Q380,580 540,548 Q700,515 880,558 Q1060,598 1230,556 Q1370,528 1500,562 L1500,645 Z', fill: '#33445A' }, mtnG);
+    // Colinas medias
+    const hillPath = el('path', { d: 'M-60,660 Q180,560 480,620 Q760,672 1040,606 Q1280,562 1500,630 L1500,700 L-60,700 Z', fill: '#B9C9D4' }, hillG);
+
+    // Manchones de nieve que se retiran
+    const patches = [];
+    [[400, 692, 120, 16], [1150, 734, 150, 18], [680, 762, 170, 20], [120, 740, 100, 13]].forEach(([x, y, rx, ry]) => {
+      patches.push({ e: el('ellipse', { cx: x, cy: y, rx, ry, fill: '#E8F0F4' }, patchG), x, y });
+    });
+
+    // Pasto nuevo (primavera)
+    const tufts = [];
+    for (let i = 0; i < 14; i++) {
+      const x = 60 + Math.random() * 1320, y = 700 + Math.random() * 95;
+      tufts.push(el('path', { d: 'M0,0 Q2,-10 6,-14 M0,0 Q-2,-9 -7,-12 M0,0 Q0,-12 1,-16', stroke: '#4E7A3A', 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round', transform: `translate(${x} ${y})` }, tuftG));
+    }
+    tuftG.setAttribute('opacity', 0);
+
+    // Niebla baja
+    const mists = [];
+    for (let i = 0; i < 4; i++) {
+      const e = el('ellipse', { cx: Math.random() * VB.w, cy: 645 + Math.random() * 85, rx: 180 + Math.random() * 150, ry: 13 + Math.random() * 10, fill: '#DCE8EE' }, mistG);
+      mists.push({ e, v: (3 + i * 1.5) * (i % 2 ? 1 : -1) });
+    }
+    mistG.setAttribute('opacity', 0.45);
+
+    // Base de la copa: masas rosas suaves detrás de los racimos
+    const crown = { cx: 1055, cy: 380, rx: 200, ry: 150 };
+    const baseBlobs = [];
+    [[-60, -30, 130, 95], [70, -50, 120, 88], [10, 55, 140, 92], [-130, 30, 90, 70], [140, 40, 88, 68]].forEach(([dx, dy, rx, ry], i) => {
+      const e = el('ellipse', { cx: crown.cx + dx, cy: crown.cy + dy, rx, ry, fill: ['#E89AAF', '#F2B8C6', '#EFA9BC'][i % 3], opacity: 0.32, filter: 'url(#blur6)' }, baseG);
+      baseBlobs.push({ e, delay: 0.42 + i * 0.035, cx: crown.cx + dx, cy: crown.cy + dy });
+    });
+
+    // Racimos de flor (cerezo)
+    const pinks = ['#F2B8C6', '#E89AAF', '#F7D3DC', '#E79BB4', '#F4C8D2', '#EFA9BC'];
+    const blossoms = [];
+    for (let i = 0; i < 64; i++) {
+      const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
+      const x = crown.cx + Math.cos(a) * crown.rx * r;
+      const y = crown.cy + Math.sin(a) * crown.ry * r * 0.92;
+      const g = el('g', {}, blossomG);
+      const n = 4 + Math.floor(Math.random() * 3);
+      for (let j = 0; j < n; j++) {
+        el('circle', {
+          cx: (Math.random() * 44 - 22).toFixed(1), cy: (Math.random() * 36 - 18).toFixed(1),
+          r: (6 + Math.random() * 9).toFixed(1), fill: pinks[(Math.random() * pinks.length) | 0],
+          opacity: (0.78 + Math.random() * 0.22).toFixed(2)
+        }, g);
+      }
+      blossoms.push({ g, x, y, delay: 0.45 + Math.random() * 0.32, ph: Math.random() * 6.28 });
+    }
+
+    // Mariposas (aparecen con las flores)
+    const butterflies = [];
+    ['#E8A87C', '#B58CC6'].forEach((col, i) => {
+      const g = el('g', { opacity: 0 }, critterG);
+      const wl = el('ellipse', { cx: -6, cy: 0, rx: 6.5, ry: 9.5, fill: col }, g);
+      const wr = el('ellipse', { cx: 6, cy: 0, rx: 6.5, ry: 9.5, fill: col }, g);
+      el('line', { x1: 0, y1: -9, x2: 0, y2: 9, stroke: '#2A211D', 'stroke-width': 2, 'stroke-linecap': 'round' }, g);
+      butterflies.push({ g, wl, wr, ax: 950 + i * 210, ay: 400 + Math.random() * 90, ph: Math.random() * 6, sp: 0.45 + Math.random() * 0.35 });
+    });
+
+    // Copos de nieve
+    const snows = [];
+    for (let i = 0; i < 60; i++) {
+      const c = el('circle', { r: (1.3 + Math.random() * 2.2).toFixed(2), fill: '#F4F8FA' }, snowG);
+      snows.push({ c, x: Math.random() * VB.w, y: Math.random() * VB.h, vy: 24 + Math.random() * 28, ph: Math.random() * 6.28 });
+    }
+
+    // Copos grandes en primer plano (desenfocados)
+    const heroSnows = [];
+    for (let i = 0; i < 6; i++) {
+      const c = el('circle', { r: (3 + Math.random() * 3).toFixed(1), fill: '#F4F8FA', opacity: 0.5 }, heroSnowG);
+      heroSnows.push({ c, x: Math.random() * VB.w, y: Math.random() * VB.h, vy: 18 + Math.random() * 14, vx: 8 + Math.random() * 10, ph: Math.random() * 6 });
+    }
+    heroSnowG.setAttribute('opacity', 0.55);
+
+    // Estrellas fugaces (solo de noche)
+    const meteors = [];
+    let nextMeteor = 2.4;
+
+    // Zorro que cruza la nieve (aparece temprano, como el cangrejo de la playa)
+    let fox = null, nextFox = 3.2;
+    function spawnFox() {
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      const g = el('g', {}, foxG);
+      const col = '#B85C33', dark = '#7A3A20';
+      el('ellipse', { cx: -26, cy: -7, rx: 17, ry: 7.5, fill: col, transform: 'rotate(-30 -26 -7)' }, g); // cola
+      el('ellipse', { cx: -40, cy: -14, rx: 6.5, ry: 4, fill: '#F2E8DC', transform: 'rotate(-30 -40 -14)' }, g); // punta blanca
+      const legs = [];
+      for (let i = 0; i < 4; i++) legs.push(el('line', { 'stroke-width': 3.4, stroke: dark, 'stroke-linecap': 'round' }, g));
+      el('ellipse', { cx: 0, cy: 0, rx: 24, ry: 10, fill: col }, g);   // cuerpo
+      el('ellipse', { cx: 15, cy: 2, rx: 12, ry: 9, fill: col }, g);   // pecho
+      el('circle', { cx: 27, cy: -6, r: 8, fill: col }, g);            // cabeza
+      el('path', { d: 'M32,-6 L44,-3 L32,0 Z', fill: dark }, g);       // hocico
+      el('path', { d: 'M23,-12 L26,-21 L29,-12 Z', fill: dark }, g);   // oreja
+      el('path', { d: 'M29,-12 L33,-19 L34,-11 Z', fill: col }, g);    // oreja
+      fox = { g, legs, dir, x: dir === 1 ? -80 : VB.w + 80, y: 708, v: 52 + Math.random() * 18 };
+    }
+
+    // Conejo que cruza saltando (con pausas para mirar alrededor)
+    let rabbit = null, nextRabbit = 9;
+    function spawnRabbit() {
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      const g = el('g', {}, foxG);
+      const fur = '#EDE9E0', furD = '#CFC8BA';
+      el('circle', { cx: -13, cy: -4, r: 4, fill: '#F7F4EC' }, g);                       // cola pompon
+      el('ellipse', { cx: -6, cy: 2, rx: 9, ry: 5, fill: furD }, g);                    // pata trasera
+      el('ellipse', { cx: 0, cy: -2, rx: 13, ry: 8.5, fill: fur }, g);                  // cuerpo
+      el('circle', { cx: 11, cy: -9, r: 6.5, fill: fur }, g);                           // cabeza
+      const ear1 = el('ellipse', { cx: 8, cy: -20, rx: 2.8, ry: 8, fill: fur, transform: 'rotate(-14 8 -14)' }, g);
+      el('ellipse', { cx: 13, cy: -20, rx: 2.6, ry: 7.5, fill: furD, transform: 'rotate(6 13 -14)' }, g);
+      el('circle', { cx: 13.5, cy: -10, r: 1.3, fill: '#2A211D' }, g);                  // ojo
+      el('circle', { cx: 17, cy: -7, r: 1, fill: '#E8B4B8' }, g);                       // nariz
+      el('ellipse', { cx: 7, cy: 4, rx: 5.5, ry: 2.6, fill: furD }, g);                 // pata delantera
+      rabbit = { g, ear1, dir, x: dir === 1 ? -50 : VB.w + 50, y: 700, v: 85 + Math.random() * 30, ph: Math.random() * 6 };
+    }
+
+    // Abejas (primavera plena)
+    const bees = [];
+    for (let i = 0; i < 2; i++) {
+      const g = el('g', { opacity: 0 }, critterG);
+      el('ellipse', { cx: 0, cy: 0, rx: 5, ry: 3.4, fill: '#E8B93B' }, g);
+      el('line', { x1: -1.6, y1: -3, x2: -1.6, y2: 3, stroke: '#2A211D', 'stroke-width': 1.6 }, g);
+      el('line', { x1: 1.6, y1: -3, x2: 1.6, y2: 3, stroke: '#2A211D', 'stroke-width': 1.6 }, g);
+      const wing = el('ellipse', { cx: -1, cy: -3.6, rx: 3.2, ry: 1.8, fill: '#FFFFFF', opacity: 0.85 }, g);
+      bees.push({ g, wing, ax: 980 + i * 170, ay: 330 + i * 70, ph: Math.random() * 6, sp: 0.9 + Math.random() * 0.5 });
+    }
+
+    // Pétalos que caen de la copa
+    const petalShape = 'M0,-5 C5,-4 7,1 3,6 C0,8 -4,6 -5,1 C-6,-3 -3,-5 0,-5 Z';
+    const petals = [];
+    let nextPetal = 0;
+    function spawnPetal() {
+      const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random());
+      const e = el('path', { d: petalShape, fill: pinks[(Math.random() * pinks.length) | 0] }, petalG);
+      petals.push({
+        e, x: crown.cx + Math.cos(a) * crown.rx * r, y: crown.cy + Math.sin(a) * crown.ry * r * 0.9,
+        vy: 26 + Math.random() * 30, ph: Math.random() * 6.28, rot: Math.random() * 360, vr: (Math.random() - 0.5) * 120,
+        gy: 690 + Math.random() * 80, life: 0, settled: false
+      });
+    }
+
+    // Pétalos héroe en primer plano (desenfocados)
+    const heroes = [];
+    for (let i = 0; i < 4; i++) {
+      const e = el('path', { d: petalShape, fill: pinks[(Math.random() * pinks.length) | 0], opacity: 0.55 }, heroG);
+      heroes.push({ e, x: Math.random() * VB.w, y: Math.random() * VB.h, vy: 12 + Math.random() * 10, vx: 10 + Math.random() * 12, rot: Math.random() * 360, vr: (Math.random() - 0.5) * 40, s: 3 + Math.random() * 1.6, ph: Math.random() * 6 });
+    }
+    heroG.setAttribute('opacity', 0);
+
+    // Bandada ocasional de pájaros
+    let flock = null, nextFlock = 9;
+
+    // ----- Referencias fijas -----
+    const sky0 = $('sky0'), sky1 = $('sky1'), sky2 = $('sky2'), mead0 = $('mead0'), mead1 = $('mead1');
+    const sunDisc = $('sunDisc'), sunHalo = $('sunHalo'), warm = $('warmLight');
+    const shadow = $('treeShadow'), lampGlow = $('lampGlow'), lampWin = $('lampWindow'), lampGround = $('lampGround');
+    const seasonLabel = $('season-label'), seasonBar = $('season-bar');
+
+    const PHASES = [
+      [0.18, 'Solsticio de invierno · el día más oscuro'],
+      [0.42, 'El sol empieza su regreso'],
+      [0.62, 'La nieve se retira'],
+      [0.82, 'El árbol despierta'],
+      [0.985, 'Florece la primavera'],
+      [2, 'Primavera plena · es tu momento de brillar']
+    ];
+    let phaseIdx = -1, starsHidden = false;
+
+    // ----- Aplica la estación p a la escena -----
+    function applyScene(p, t) {
+      sky0.setAttribute('stop-color', sample('skyTop', p));
+      sky1.setAttribute('stop-color', sample('skyMid', p));
+      sky2.setAttribute('stop-color', sample('skyBot', p));
+      mead0.setAttribute('stop-color', sample('meadTop', p));
+      mead1.setAttribute('stop-color', sample('meadBot', p));
+      mtnPath.setAttribute('fill', sample('mtn', p));
+      mtnBack.setAttribute('fill', sample('mtnBack', p));
+      mtnSnow.forEach(s => s.setAttribute('opacity', lerp(0.75, 0.4, p).toFixed(3)));
+      hillPath.setAttribute('fill', sample('hill', p));
+      const cloudCol = sample('cloud', p);
+      clouds.forEach(cl => cl.g.childNodes.forEach(e => e.setAttribute('fill', cloudCol)));
+
+      // Sol: arco del amanecer
+      const s = sunPos(p);
+      sunDisc.setAttribute('cx', s.x); sunDisc.setAttribute('cy', s.y);
+      sunDisc.setAttribute('r', 34 + p * 10);
+      sunDisc.setAttribute('fill', sample('sun', p));
+      sunDisc.setAttribute('opacity', 0.8 + p * 0.2);
+      sunHalo.setAttribute('cx', s.x); sunHalo.setAttribute('cy', s.y);
+      sunHalo.setAttribute('r', 110 + p * 110);
+      sunHalo.setAttribute('opacity', 0.1 + p * 0.5);
+      warm.setAttribute('opacity', (p * 0.22).toFixed(3));
+
+      // Estrellas se apagan
+      const starFade = clamp(1 - p * 1.7, 0, 1);
+      if (starFade > 0) {
+        for (const st of stars) st.c.setAttribute('opacity', (st.base * (0.55 + 0.45 * Math.sin(t * st.sp + st.ph)) * starFade).toFixed(3));
+      } else if (!starsHidden) {
+        starG.setAttribute('display', 'none');
+        starsHidden = true;
+      }
+
+      // Sombra del árbol: larga al amanecer, corta al mediodía
+      shadow.setAttribute('cx', 1040 + (1040 - s.x) * 0.1);
+      shadow.setAttribute('rx', lerp(280, 130, p));
+      shadow.setAttribute('ry', lerp(26, 15, p));
+      shadow.setAttribute('opacity', lerp(0.3, 0.16, p));
+
+      // Linterna: se apaga cuando llega la luz
+      const lamp = clamp(1 - p * 1.9, 0, 1) * (0.85 + 0.15 * Math.sin(t * 7));
+      lampGlow.setAttribute('opacity', (lamp * 0.8).toFixed(3));
+      lampWin.setAttribute('opacity', lamp.toFixed(3));
+      lampGround.setAttribute('opacity', (lamp * 0.35).toFixed(3));
+
+      // Nieve cae y se detiene; manchones se retiran; pasto brota
+      snowG.setAttribute('opacity', clamp(1 - p * 2.1, 0, 1).toFixed(3));
+      heroSnowG.setAttribute('opacity', (clamp(1 - p * 1.9, 0, 1) * 0.55).toFixed(3));
+      const patchS = 1 - clamp((p - 0.5) / 0.35, 0, 1);
+      for (const pa of patches) {
+        pa.e.setAttribute('opacity', (0.9 * patchS).toFixed(3));
+        pa.e.setAttribute('transform', `translate(${pa.x} ${pa.y}) scale(${patchS.toFixed(3)} ${(patchS * 0.7 + 0.3).toFixed(3)}) translate(${-pa.x} ${-pa.y})`);
+      }
+      tuftG.setAttribute('opacity', smooth((p - 0.72) / 0.25).toFixed(3));
+      mistG.setAttribute('opacity', ((1 - p) * 0.45).toFixed(3));
+
+      // Floración: masas base + racimos con rebote
+      for (const b of baseBlobs) {
+        const sc = backOut((p - b.delay) / 0.25);
+        b.e.setAttribute('transform', `translate(${b.cx} ${b.cy}) scale(${Math.max(0.001, sc).toFixed(3)}) translate(${-b.cx} ${-b.cy})`);
+      }
+      for (const b of blossoms) {
+        const sc = backOut((p - b.delay) / 0.22);
+        const sway = Math.sin(t * 0.9 + b.ph) * 3 * p;
+        b.g.setAttribute('transform', `translate(${(b.x + sway).toFixed(1)} ${b.y.toFixed(1)}) rotate(${(Math.sin(t * 0.8 + b.ph) * 2.4 * p).toFixed(2)}) scale(${Math.max(0.001, sc).toFixed(3)})`);
+      }
+
+      // Mariposas
+      const bOp = clamp((p - 0.75) / 0.15, 0, 1);
+      for (const bf of butterflies) {
+        bf.g.setAttribute('opacity', bOp.toFixed(2));
+        if (bOp > 0) {
+          const x = bf.ax + Math.sin(t * bf.sp + bf.ph) * 75;
+          const y = bf.ay + Math.sin(t * bf.sp * 1.7 + bf.ph) * 48;
+          const flap = Math.sin(t * 12 + bf.ph) * 42;
+          bf.g.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(Math.sin(t * bf.sp + bf.ph + 0.4) * 24).toFixed(1)})`);
+          bf.wl.setAttribute('transform', `rotate(${(-18 - flap).toFixed(1)} 0 0)`);
+          bf.wr.setAttribute('transform', `rotate(${(18 + flap).toFixed(1)} 0 0)`);
+        }
+      }
+
+      // Pétalos héroe
+      heroG.setAttribute('opacity', clamp((p - 0.5) * 2, 0, 1).toFixed(3));
+
+      // Cartel de estación
+      const idx = PHASES.findIndex(([lim]) => p < lim);
+      if (idx !== phaseIdx) {
+        phaseIdx = idx;
+        seasonLabel.textContent = PHASES[idx][1];
+      }
+      seasonBar.style.width = (p * 100).toFixed(1) + '%';
+    }
+
+    // ----- Fauna y partículas (dependen de dt) -----
+    function updateLife(t, dt, p) {
+      // Nubes
+      for (const cl of clouds) {
+        cl.x += cl.v * dt;
+        if (cl.x > VB.w + 240) cl.x = -240;
+        cl.g.setAttribute('transform', `translate(${cl.x.toFixed(1)} ${cl.y})`);
+        cl.g.setAttribute('opacity', (0.14 + p * 0.24).toFixed(3));
+      }
+      // Niebla a la deriva
+      for (const m of mists) {
+        let x = parseFloat(m.e.getAttribute('cx')) + m.v * dt;
+        if (x > VB.w + 380) x = -380; if (x < -380) x = VB.w + 380;
+        m.e.setAttribute('cx', x.toFixed(1));
+      }
+      // Nieve con ráfagas de viento
+      if (p < 0.55) {
+        const gust = (Math.sin(t * 0.23) + Math.sin(t * 0.11 + 2)) * 24;
+        for (const sn of snows) {
+          sn.y += sn.vy * dt;
+          sn.x += (Math.sin(t * 1.2 + sn.ph) * 12 + gust) * dt;
+          if (sn.y > VB.h + 8) { sn.y = -8; sn.x = Math.random() * VB.w; }
+          if (sn.x > VB.w + 8) sn.x = -8; else if (sn.x < -8) sn.x = VB.w + 8;
+          sn.c.setAttribute('cx', sn.x.toFixed(1));
+          sn.c.setAttribute('cy', sn.y.toFixed(1));
+        }
+        for (const hs of heroSnows) {
+          hs.y += hs.vy * dt; hs.x += hs.vx * dt + Math.sin(t + hs.ph) * 0.4;
+          if (hs.y > VB.h + 12) { hs.y = -12; hs.x = Math.random() * VB.w; }
+          if (hs.x > VB.w + 12) hs.x = -12;
+          hs.c.setAttribute('cx', hs.x.toFixed(1));
+          hs.c.setAttribute('cy', hs.y.toFixed(1));
+        }
+      }
+
+      // Estrellas fugaces de invierno
+      if (p < 0.4 && t > nextMeteor) {
+        const dir = Math.random() < 0.5 ? 1 : -1;
+        const g = el('g', {}, meteorG);
+        meteors.push({
+          g,
+          tail: el('line', { 'stroke-width': 4, 'stroke-linecap': 'round', stroke: '#BDD7FF' }, g),
+          core: el('line', { 'stroke-width': 1.8, 'stroke-linecap': 'round', stroke: '#FFFFFF' }, g),
+          head: el('circle', { r: 1.9, fill: '#FFFFFF' }, g),
+          x: dir === 1 ? 100 + Math.random() * 500 : 900 + Math.random() * 500,
+          y: 60 + Math.random() * 180,
+          vx: dir * (330 + Math.random() * 160), vy: 130 + Math.random() * 90,
+          life: 0, max: 0.7 + Math.random() * 0.4
+        });
+        nextMeteor = t + 4 + Math.random() * 6;
+      }
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        m.life += dt; m.x += m.vx * dt; m.y += m.vy * dt;
+        const f = Math.sin(Math.min(m.life / m.max, 1) * Math.PI);
+        const tx = m.x - m.vx * 0.16, ty = m.y - m.vy * 0.16;
+        for (const [ln, op] of [[m.tail, 0.3], [m.core, 0.95]]) {
+          ln.setAttribute('x1', m.x.toFixed(1)); ln.setAttribute('y1', m.y.toFixed(1));
+          ln.setAttribute('x2', tx.toFixed(1)); ln.setAttribute('y2', ty.toFixed(1));
+          ln.setAttribute('opacity', (op * f).toFixed(3));
+        }
+        m.head.setAttribute('cx', m.x.toFixed(1)); m.head.setAttribute('cy', m.y.toFixed(1));
+        m.head.setAttribute('opacity', f.toFixed(3));
+        if (m.life > m.max) { m.g.remove(); meteors.splice(i, 1); }
+      }
+
+      // Zorro al trote (mientras hace frío)
+      if (!fox && p < 0.6 && t > nextFox) spawnFox();
+      if (fox) {
+        fox.x += fox.dir * fox.v * dt;
+        const bob = Math.abs(Math.sin(t * 7)) * 2.2;
+        fox.g.setAttribute('transform', `translate(${fox.x.toFixed(1)} ${(fox.y - bob).toFixed(1)}) scale(${fox.dir} 1)`);
+        const legX = [-14, -8, 10, 16];
+        fox.legs.forEach((l, i) => {
+          const ph = Math.sin(t * 9 + (i % 2) * Math.PI + (i > 1 ? 0.7 : 0)) * 5;
+          l.setAttribute('x1', legX[i]); l.setAttribute('y1', 6);
+          l.setAttribute('x2', (legX[i] + ph).toFixed(1)); l.setAttribute('y2', 16);
+        });
+        if (fox.x < -100 || fox.x > VB.w + 100) { fox.g.remove(); fox = null; nextFox = t + 24 + Math.random() * 18; }
+      }
+
+      // Conejo: salta en ráfagas y hace pausas (twitch de oreja al mirar)
+      if (!rabbit && t > nextRabbit) spawnRabbit();
+      if (rabbit) {
+        const cyc = (t * 0.9 + rabbit.ph) % 2.2;
+        if (cyc < 1.3) {
+          rabbit.x += rabbit.dir * rabbit.v * dt;
+          const hop = Math.abs(Math.sin(t * 8 + rabbit.ph)) * 13;
+          const tilt = Math.sin(t * 8 + rabbit.ph) * -6 * rabbit.dir;
+          rabbit.g.setAttribute('transform', `translate(${rabbit.x.toFixed(1)} ${(rabbit.y - hop).toFixed(1)}) scale(${rabbit.dir} 1) rotate(${tilt.toFixed(1)})`);
+        } else {
+          rabbit.g.setAttribute('transform', `translate(${rabbit.x.toFixed(1)} ${rabbit.y}) scale(${rabbit.dir} 1)`);
+          rabbit.ear1.setAttribute('transform', `rotate(${(-14 + Math.sin(t * 3) * 6).toFixed(1)} 8 -14)`);
+        }
+        if (rabbit.x < -70 || rabbit.x > VB.w + 70) { rabbit.g.remove(); rabbit = null; nextRabbit = t + 18 + Math.random() * 16; }
+      }
+
+      // Viento mece las ramas desnudas
+      branchesG.setAttribute('transform', `rotate(${(Math.sin(t * 0.6) * 0.7 + Math.sin(t * 1.7) * 0.25).toFixed(2)} 1048 460)`);
+
+      // Abejas entre las flores
+      const beeOp = clamp((p - 0.85) / 0.12, 0, 1);
+      for (const b of bees) {
+        b.g.setAttribute('opacity', beeOp.toFixed(2));
+        if (beeOp > 0) {
+          const x = b.ax + Math.sin(t * b.sp + b.ph) * 90 + Math.sin(t * 2.3 + b.ph) * 12;
+          const y = b.ay + Math.cos(t * b.sp * 1.3 + b.ph) * 55;
+          b.g.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+          b.wing.setAttribute('transform', `scale(1 ${(0.4 + 0.6 * Math.abs(Math.sin(t * 30 + b.ph))).toFixed(2)})`);
+        }
+      }
+      // Pétalos: nacen de la copa cuando florece
+      if (p > 0.5 && t > nextPetal && petals.length < 60) {
+        spawnPetal();
+        nextPetal = t + 0.1;
+      }
+      for (let i = petals.length - 1; i >= 0; i--) {
+        const pt = petals[i];
+        pt.life += dt;
+        if (!pt.settled) {
+          pt.y += pt.vy * dt;
+          pt.x += Math.sin(t * 1.9 + pt.ph) * 0.85;
+          pt.rot += pt.vr * dt;
+          if (pt.y >= pt.gy) { pt.settled = true; pt.settleAt = pt.life; }
+        }
+        const fadeIn = clamp(pt.life / 0.35, 0, 1);
+        const fadeOut = pt.settled ? clamp(1 - (pt.life - pt.settleAt - 2.5) / 1.8, 0, 1) : 1;
+        pt.e.setAttribute('opacity', (fadeIn * fadeOut * 0.95).toFixed(3));
+        pt.e.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${pt.rot.toFixed(1)})`);
+        if (pt.settled && fadeOut <= 0) { pt.e.remove(); petals.splice(i, 1); }
+      }
+      // Héroes
+      for (const h of heroes) {
+        h.y += h.vy * dt; h.x += h.vx * dt + Math.sin(t + h.ph) * 0.4;
+        h.rot += h.vr * dt;
+        if (h.y > VB.h + 30) { h.y = -30; h.x = Math.random() * VB.w; }
+        if (h.x > VB.w + 30) h.x = -30;
+        h.e.setAttribute('transform', `translate(${h.x.toFixed(1)} ${h.y.toFixed(1)}) rotate(${h.rot.toFixed(1)}) scale(${h.s})`);
+      }
+      // Bandada
+      if (!flock && p > 0.2 && t > nextFlock) {
+        const dir = Math.random() < 0.5 ? 1 : -1;
+        flock = { dir, x: dir > 0 ? -90 : VB.w + 90, y: 140 + Math.random() * 180, v: 70 + Math.random() * 40, g: el('g', { opacity: 0.85 }, birdG), birds: [] };
+        for (let i = 0; i < 4; i++) {
+          const b = el('path', { d: 'M-9,0 Q-4.5,-6 0,0 Q4.5,-6 9,0', stroke: '#1E2A33', 'stroke-width': 2.2, fill: 'none', 'stroke-linecap': 'round' }, flock.g);
+          flock.birds.push({ b, ox: -dir * i * 26, oy: (i % 2) * 15 + Math.random() * 8, ph: Math.random() * 6 });
+        }
+      }
+      if (flock) {
+        flock.x += flock.dir * flock.v * dt;
+        for (const fb of flock.birds) {
+          const flap = 0.35 + 0.65 * Math.abs(Math.sin(t * 9 + fb.ph));
+          fb.b.setAttribute('transform', `translate(${(flock.x + fb.ox).toFixed(1)} ${(flock.y + fb.oy + Math.sin(t * 3 + fb.ph) * 4).toFixed(1)}) scale(1 ${flap.toFixed(2)})`);
+        }
+        if (flock.x < -140 || flock.x > VB.w + 140) { flock.g.remove(); flock = null; nextFlock = t + (10 + Math.random() * 10) * (1.5 - p); }
+      }
+    }
+
+    // ----- Paralaje 3D -----
+    const tilt = $('tilt');
+    const layers = REDUCED ? [] : [...document.querySelectorAll('#scene > g[data-depth]')];
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    if (FINE_POINTER && !REDUCED) {
+      window.addEventListener('pointermove', e => {
+        mx = (e.clientX / window.innerWidth - 0.5) * 2;
+        my = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+    }
+    function applyParallax() {
+      cx = lerp(cx, mx, 0.045); cy = lerp(cy, my, 0.045);
+      tilt.style.transform = `rotateY(${(cx * 1.7).toFixed(3)}deg) rotateX(${(-cy * 1.2).toFixed(3)}deg)`;
+      for (const g of layers) {
+        const d = parseFloat(g.dataset.depth);
+        g.setAttribute('transform', `translate(${(-cx * d * 60).toFixed(2)} ${(-cy * d * 34).toFixed(2)})`);
+      }
+    }
+
+    // ----- Bucle principal -----
+    const start = performance.now();
+    let last = start;
+    window.__seasonP = 0;
+    function frame(ms) {
+      const t = (ms - start) / 1000;
+      const dt = Math.min(0.05, (ms - last) / 1000);
+      last = ms;
+      const raw = Math.min(t / DURATION, 1);
+      const p = isNaN(FORCE_P) ? smooth(raw) : clamp(FORCE_P, 0, 1);
+      window.__seasonP = p;
+      applyScene(p, t);
+      updateLife(t, dt, p);
+      applyParallax();
+      updateAudio(p, t);
+      requestAnimationFrame(frame);
+    }
+
+    // La escena siempre se anima (como la playa); con reduced-motion
+    // solo se desactiva el paralaje/tilt, que es lo que puede marear.
+    requestAnimationFrame(frame);
+
+    // ============================================================
+    // Sonido ambiente: viento invernal → gorjeos de primavera
+    // (sintetizado con Web Audio API, apagado por defecto)
+    // ============================================================
+    const btn = $('audio-toggle'), icOn = $('audio-icon-on'), icOff = $('audio-icon-off'), lbl = $('audio-label');
+    let actx = null, master = null, windBus = null, birdBus = null, on = false, started = false, nextChirp = 0;
+    // Por defecto CON sonido: queda "armado" y arranca con el primer gesto
+    // del usuario (los navegadores no permiten audio sin interacción previa).
+    let savedPref = null;
+    try { savedPref = localStorage.getItem('quiz-ambiente-v2'); } catch (e) {}
+    let wantSound = savedPref !== 'off';
+
+    function pinkNoise() {
+      const len = actx.sampleRate * 4, buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < len; i++) {
+        const w = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + w * 0.0555179; b1 = 0.99332 * b1 + w * 0.0750759;
+        b2 = 0.96900 * b2 + w * 0.1538520; b3 = 0.86650 * b3 + w * 0.3104856;
+        b4 = 0.55000 * b4 + w * 0.5329522; b5 = -0.7616 * b5 - w * 0.0168980;
+        d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362) * 0.11;
+        b6 = w * 0.115926;
+      }
+      return buf;
+    }
+
+    function buildAudio() {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+      master = actx.createGain(); master.gain.value = 0; master.connect(actx.destination);
+      // Viento: ruido rosa filtrado con ráfagas (2 LFOs)
+      const src = actx.createBufferSource(); src.buffer = pinkNoise(); src.loop = true;
+      const bp = actx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 420; bp.Q.value = 0.45;
+      const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 950;
+      windBus = actx.createGain(); windBus.gain.value = 0.3;
+      src.connect(bp); bp.connect(lp); lp.connect(windBus); windBus.connect(master);
+      src.start();
+      const lfo1 = actx.createOscillator(); lfo1.frequency.value = 0.07;
+      const lg1 = actx.createGain(); lg1.gain.value = 0.11; lfo1.connect(lg1); lg1.connect(windBus.gain); lfo1.start();
+      const lfo2 = actx.createOscillator(); lfo2.frequency.value = 0.017;
+      const lg2 = actx.createGain(); lg2.gain.value = 0.07; lfo2.connect(lg2); lg2.connect(windBus.gain); lfo2.start();
+      // Bus de pájaros (los gorjeos se generan en updateAudio)
+      birdBus = actx.createGain(); birdBus.gain.value = 0; birdBus.connect(master);
+    }
+
+    function chirpSeq() {
+      const n = 2 + Math.floor(Math.random() * 3);
+      let t0 = actx.currentTime + 0.02;
+      for (let i = 0; i < n; i++) {
+        const o = actx.createOscillator(), g = actx.createGain();
+        const f = 2000 + Math.random() * 1600;
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f, t0);
+        o.frequency.exponentialRampToValueAtTime(f * (1.15 + Math.random() * 0.45), t0 + 0.07);
+        o.frequency.exponentialRampToValueAtTime(f * (0.9 + Math.random() * 0.2), t0 + 0.13);
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime(0.05 + Math.random() * 0.05, t0 + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.16);
+        o.connect(g); g.connect(birdBus);
+        o.start(t0); o.stop(t0 + 0.2);
+        t0 += 0.09 + Math.random() * 0.09;
+      }
+    }
+
+    function updateAudio(p, t) {
+      if (!started || !on) return;
+      windBus.gain.value = 0.26 * (1 - smooth(Math.min(p * 1.25, 1))) + 0.03;
+      birdBus.gain.value = 0.55 * smooth(clamp((p - 0.55) / 0.35, 0, 1));
+      if (p > 0.55 && t > nextChirp) {
+        chirpSeq();
+        nextChirp = t + 0.5 + Math.random() * 2.8 * (1.7 - p);
+      }
+    }
+
+    function setOn(state) {
+      on = state;
+      wantSound = state;
+      if (actx && master) {
+        const now = actx.currentTime;
+        master.gain.cancelScheduledValues(now);
+        master.gain.setValueAtTime(master.gain.value, now);
+        master.gain.linearRampToValueAtTime(on ? 0.55 : 0, now + (on ? 2.2 : 0.6));
+      }
+      icOn.classList.toggle('hidden', !on);
+      icOff.classList.toggle('hidden', on);
+      lbl.textContent = on ? 'Sonido activo' : 'Activar sonido';
+      btn.classList.toggle('sound-pulse', !on);
+      try { localStorage.setItem('quiz-ambiente-v2', on ? 'on' : 'off'); } catch (e) {}
+    }
+
+    // Arranque automático con el primer gesto del usuario en la página
+    function tryStart() {
+      if (!wantSound || on) return;
+      if (!started) {
+        try { buildAudio(); started = true; } catch (e) { return; }
+      }
+      if (actx.state === 'suspended') actx.resume();
+      setOn(true);
+    }
+    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, tryStart, { passive: true }));
+
+    btn.addEventListener('click', () => {
+      if (!started && !on && wantSound) {
+        // Estaba armado por defecto y el usuario lo apaga antes de que suene
+        setOn(false);
+        return;
+      }
+      if (!started) {
+        try { buildAudio(); started = true; } catch (e) { return; }
+      }
+      if (actx.state === 'suspended') actx.resume();
+      setOn(!on);
+    });
+
+    // Estado inicial visual: armado (se activará solo con el primer gesto)
+    icOn.classList.toggle('hidden', !wantSound);
+    icOff.classList.toggle('hidden', wantSound);
+    lbl.textContent = wantSound ? 'Sonido activo' : 'Activar sonido';
+    btn.classList.toggle('sound-pulse', !wantSound);
+  })();
+  </script>
+</body>
+</html>

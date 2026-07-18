@@ -62,6 +62,43 @@ Se reforzó la identidad visual por unidad:
   - `revista/index.html`
   - sección Revista dentro de `inicio.html`
 
+## Plan de mejoras Física (2026-07-17)
+
+Auditoría visual detectó: imágenes genéricas (SVG vectorial / loremflickr.com), secciones de energía incompletas (faltaba Energía Elástica y aplicaciones de Ec/Ep), gráficos MRUV sin figuras estáticas.
+
+**Imágenes JPG fotorrealistas nuevas** (16:9, 2K, generadas con image_synthesize):
+- `assets/fisica/energia/energia-cinetica-real.jpg` (auto de carrera)
+- `assets/fisica/energia/energia-potencial-real.jpg` (lago glaciar / represa en altura)
+- `assets/fisica/energia/energia-elastica-real.jpg` (resorte tensado)
+- `assets/fisica/energia/energia-mecanica-real.jpg` (montaña rusa)
+- `assets/fisica/movimientos/caida-libre-real.jpg` (saltador de bungee)
+- `assets/fisica/index/physics-hero.jpg` (bobina de Tesla)
+- `assets/fisica/index/energia-card.jpg` (paneles solares al atardecer)
+- `assets/fisica/index/calor-card.jpg` (lava volcánica)
+
+**SVGs didácticos nuevos** (curvas con ejes, números y fórmulas, estilo libro de texto):
+- `assets/fisica/movimientos/grafico-mruv-xt.svg` (parábola posición-tiempo)
+- `assets/fisica/movimientos/grafico-mruv-vt.svg` (recta velocidad-tiempo)
+- `assets/fisica/movimientos/grafico-posicion-tres-casos.svg` (reposo, MRU, MRUV)
+- `assets/fisica/movimientos/grafico-velocidad-dos-casos.svg` (MRU y MRUV)
+- `assets/fisica/energia/grafico-ec-v.svg` (Ec vs v: parábola)
+- `assets/fisica/energia/grafico-ep-h.svg` (Ep vs h: recta)
+- `assets/fisica/energia/grafico-ee-x.svg` (Ee vs x: parábola)
+
+**HTML modificados**:
+- `formas-energia.html` (2 figuras reemplazadas por fotos + 2 secciones "Aplicaciones de Ec/Ep" + sección 5 "Energía Elástica" + sección "Gráficos de energía mecánica" + 2 preguntas nuevas)
+- `mruv.html` (figura de caída libre reemplazada por foto de bungee + nueva sección 02c "Gráficos estáticos del MRUV" con 2 SVGs didácticos + pregunta nueva sobre pendiente y área)
+- `graficos.html` (figura de posición-tiempo reemplazada por SVG + nueva figura de velocidad-tiempo + 2 preguntas nuevas sobre gráficos combinados)
+- `unidades/fisica/index.html` (3 loremflickr reemplazados por fotos locales + filtro del hero ajustado a `grayscale(70%) brightness(0.6) contrast(1.1)` para que la imagen sea visible)
+
+**Regla visual confirmada por el usuario**: las imágenes conceptuales deben ser fotorrealistas, los SVGs solo para gráficos didácticos (curvas, ejes, fórmulas, números).
+
+**Anti-patrón detectado**: el index de calor-sonido usaba loremflickr.com con el MISMO query y solo cambiaba el lock. loremflickr devolvía imágenes random sin relación con el tema. **Nunca usar loremflickr con el mismo query** — regenerar con prompts distintos por tarjeta.
+
+### Bug en la simulación SVG de MRUV (mruv.html)
+
+La función `gVt(t)` estaba mal nombrada: calculaba la coordenada Y del gráfico v-t, pero se usaba también en el loop de ticks del eje X → ticks invertidos "8 6 4 2 0". **Fix**: renombrar a `gYv(v)` y usar `gXt(s)` para el eje X. También achicar rangos (VMAX 100→50, TMAX 10→8, slider a max 5 m/s²).
+
 ## Pendientes importantes
 
 ### Podcast
