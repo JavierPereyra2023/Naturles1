@@ -1,0 +1,83 @@
+- generic [active] [ref=f6e1]:
+  - navigation [ref=f6e2]:
+    - generic [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - link "Inicio" [ref=f6e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f6e12]: /
+        - link "Física" [ref=f6e13] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f6e14]: /
+        - generic [ref=f6e15]: Calor y Sonido
+      - generic [ref=f6e16]:
+        - link "Volver a Física" [ref=f6e17] [cursor=pointer]:
+          - /url: ../index.html
+        - button "Buscar tema" [ref=f6e21] [cursor=pointer]
+  - generic [ref=f6e29]:
+    - generic [ref=f6e30]: Física · Segundo Trimestre
+    - heading "Calor y Sonido" [level=1] [ref=f6e33]
+    - paragraph [ref=f6e34]: Explorá cómo se transmite la energía térmica, qué son las ondas y cómo el sonido y la luz son dos casos especiales que interactúan con los materiales que nos rodean. Cinco artículos para entender fenómenos que vivís todos los días.
+  - generic [ref=f6e37]:
+    - 'link "Calor y Temperatura Calor y Temperatura Diferencia entre calor y temperatura. Mecanismos de transferencia: conducción, convección y radiación. La ecuación del calor. Conducción Convección Radiación" [ref=f6e38] [cursor=pointer]':
+      - /url: calor-temperatura.html
+      - img "Calor y Temperatura" [ref=f6e40]
+      - generic [ref=f6e42]:
+        - heading "Calor y Temperatura" [level=3] [ref=f6e43]
+        - paragraph [ref=f6e44]: "Diferencia entre calor y temperatura. Mecanismos de transferencia: conducción, convección y radiación. La ecuación del calor."
+        - generic [ref=f6e45]:
+          - generic [ref=f6e46]: Conducción
+          - generic [ref=f6e47]: Convección
+          - generic [ref=f6e48]: Radiación
+    - link "Ondas Ondas Qué es una onda y cómo se mide. Frecuencia, amplitud y longitud de onda. La ecuación fundamental, la interferencia y la difracción. Frecuencia Amplitud Interferencia Difracción" [ref=f6e49] [cursor=pointer]:
+      - /url: ondas.html
+      - img "Ondas" [ref=f6e51]
+      - generic [ref=f6e53]:
+        - heading "Ondas" [level=3] [ref=f6e54]
+        - paragraph [ref=f6e55]: Qué es una onda y cómo se mide. Frecuencia, amplitud y longitud de onda. La ecuación fundamental, la interferencia y la difracción.
+        - generic [ref=f6e56]:
+          - generic [ref=f6e57]: Frecuencia
+          - generic [ref=f6e58]: Amplitud
+          - generic [ref=f6e59]: Interferencia
+          - generic [ref=f6e60]: Difracción
+    - link "El Sonido El Sonido El sonido como onda mecánica. Cómo se produce y se propaga, su velocidad en cada medio, las cualidades (altura, intensidad, timbre) y el rango audible. Longitudinal Velocidad Timbre Ultrasonido" [ref=f6e61] [cursor=pointer]:
+      - /url: sonido.html
+      - img "El Sonido" [ref=f6e63]
+      - generic [ref=f6e65]:
+        - heading "El Sonido" [level=3] [ref=f6e66]
+        - paragraph [ref=f6e67]: El sonido como onda mecánica. Cómo se produce y se propaga, su velocidad en cada medio, las cualidades (altura, intensidad, timbre) y el rango audible.
+        - generic [ref=f6e68]:
+          - generic [ref=f6e69]: Longitudinal
+          - generic [ref=f6e70]: Velocidad
+          - generic [ref=f6e71]: Timbre
+          - generic [ref=f6e72]: Ultrasonido
+    - link "La Luz y los colores La Luz y los colores La luz como onda electromagnética. El espectro completo, la luz blanca atravesando un prisma y por qué vemos los colores. Espectro Prisma Colores" [ref=f6e73] [cursor=pointer]:
+      - /url: luz.html
+      - img "La Luz y los colores" [ref=f6e75]
+      - generic [ref=f6e77]:
+        - heading "La Luz y los colores" [level=3] [ref=f6e78]
+        - paragraph [ref=f6e79]: La luz como onda electromagnética. El espectro completo, la luz blanca atravesando un prisma y por qué vemos los colores.
+        - generic [ref=f6e80]:
+          - generic [ref=f6e81]: Espectro
+          - generic [ref=f6e82]: Prisma
+          - generic [ref=f6e83]: Colores
+    - link "Luz y Materiales Luz y Materiales Interacción de la luz con la materia. Opacos, translúcidos y transparentes. Reflexión y refracción. Reflexión Refracción Opacos" [ref=f6e84] [cursor=pointer]:
+      - /url: materiales.html
+      - img "Luz y Materiales" [ref=f6e86]
+      - generic [ref=f6e88]:
+        - heading "Luz y Materiales" [level=3] [ref=f6e89]
+        - paragraph [ref=f6e90]: Interacción de la luz con la materia. Opacos, translúcidos y transparentes. Reflexión y refracción.
+        - generic [ref=f6e91]:
+          - generic [ref=f6e92]: Reflexión
+          - generic [ref=f6e93]: Refracción
+          - generic [ref=f6e94]: Opacos
+  - contentinfo [ref=f6e95]:
+    - generic [ref=f6e97]:
+      - generic [ref=f6e98]:
+        - generic [ref=f6e102]: Cs. Naturales
+        - generic [ref=f6e103]: 1° Año
+      - generic [ref=f6e104]:
+        - link "Inicio" [ref=f6e105] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Física" [ref=f6e106] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f6e107]: Prof. Pereyra, Javier

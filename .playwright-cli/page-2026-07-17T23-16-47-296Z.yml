@@ -1,0 +1,200 @@
+- generic [active] [ref=f10e1]:
+  - navigation [ref=f10e2]:
+    - generic [ref=f10e4]:
+      - generic [ref=f10e5]:
+        - link "Inicio" [ref=f10e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f10e12]: /
+        - link "Química" [ref=f10e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f10e14]: /
+        - link "Mezclas" [ref=f10e15] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=f10e16]: /
+        - generic [ref=f10e17]: Naturaleza
+      - generic [ref=f10e18]:
+        - link "Mezclas" [ref=f10e19] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f10e23] [cursor=pointer]
+  - generic [ref=f10e31]:
+    - generic [ref=f10e32]: Química · Mezclas
+    - heading "Mezclas en la Naturaleza" [level=1] [ref=f10e35]
+    - paragraph [ref=f10e36]: El planeta está hecho de mezclas. Desde el aire que respiramos hasta el suelo que pisamos.
+    - generic [ref=f10e37]:
+      - generic [ref=f10e38]: Aire
+      - generic [ref=f10e39]: Agua de mar
+      - generic [ref=f10e40]: Suelo
+  - main [ref=f10e41]:
+    - generic [ref=f10e42]:
+      - heading "Mezclas que nos rodean" [level=2] [ref=f10e43]
+      - paragraph [ref=f10e48]: "No necesitamos un laboratorio para encontrar mezclas: vivimos rodeados de ellas. Respirás una mezcla, bebés una mezcla, pisás una mezcla. El aire, el agua de los océanos, el suelo del jardín y hasta los alimentos que comemos son mezclas de distintas sustancias combinadas físicamente."
+    - generic [ref=f10e49]:
+      - heading "El aire" [level=2] [ref=f10e50]
+      - paragraph [ref=f10e53]:
+        - text: El aire es una
+        - strong [ref=f10e54]: mezcla homogénea de gases
+        - text: ". Sin el aire no habría vida. Sus componentes principales:"
+      - generic [ref=f10e55]:
+        - generic [ref=f10e56]:
+          - generic [ref=f10e57]: 78%
+          - text: Nitrógeno (N2)
+        - generic [ref=f10e58]:
+          - generic [ref=f10e59]: 21%
+          - text: Oxígeno (O2)
+        - generic [ref=f10e60]:
+          - generic [ref=f10e61]: 0.93%
+          - text: Argón (Ar)
+        - generic [ref=f10e62]:
+          - generic [ref=f10e63]: 0.04%
+          - text: CO2 y otros
+      - paragraph [ref=f10e64]: También contiene vapor de agua en proporción variable (humedad) y otros gases en cantidades muy pequeñas. Es una solución gaseosa que hace posible la vida.
+    - generic [ref=f10e65]:
+      - heading "El agua de mar" [level=2] [ref=f10e66]
+      - generic [ref=f10e69]:
+        - generic [ref=f10e70]: Dato clave
+        - text: Si evaporamos 1 litro de agua de mar, quedan aproximadamente
+        - strong [ref=f10e71]: 35 g de sal
+        - text: ". Es una de las mezclas más abundantes del planeta: cubre el 71% de la superficie terrestre."
+      - paragraph [ref=f10e72]:
+        - text: El agua de mar es una
+        - strong [ref=f10e73]: solución acuosa
+        - text: . Contiene aproximadamente
+        - strong [ref=f10e74]: 3.5% de sales disueltas
+        - text: ". Su principal soluto es el cloruro de sodio (NaCl, sal común), pero contiene muchos otros iones disueltos:"
+      - list [ref=f10e75]:
+        - listitem [ref=f10e76]:
+          - generic [ref=f10e81]: Cloruro (Cl?) — 55% de las sales
+        - listitem [ref=f10e82]:
+          - generic [ref=f10e87]: Sodio (Na?) — 30% de las sales
+        - listitem [ref=f10e88]:
+          - generic [ref=f10e93]: Sulfato (SO4²?), Magnesio (Mg²?), Calcio (Ca²?), Potasio (K?)
+    - generic [ref=f10e94]:
+      - heading "El suelo" [level=2] [ref=f10e95]
+      - paragraph [ref=f10e98]:
+        - text: El suelo es una de las mezclas más complejas de la naturaleza. Es una
+        - strong [ref=f10e99]: mezcla heterogénea
+        - text: donde conviven componentes sólidos, líquidos y gaseosos. Cada suelo es único.
+      - generic [ref=f10e100]:
+        - generic [ref=f10e101]:
+          - heading "Componentes del suelo" [level=4] [ref=f10e102]
+          - list [ref=f10e103]:
+            - listitem [ref=f10e104]:
+              - generic [ref=f10e107]:
+                - strong [ref=f10e108]: Minerales
+                - text: "(arena, limo, arcilla): fragmentos de rocas."
+            - listitem [ref=f10e109]:
+              - generic [ref=f10e114]:
+                - strong [ref=f10e115]: Materia orgánica
+                - text: "(humus): restos de seres vivos."
+            - listitem [ref=f10e116]:
+              - generic [ref=f10e121]:
+                - strong [ref=f10e122]: Agua
+                - text: ": con sales minerales disueltas."
+            - listitem [ref=f10e123]:
+              - generic [ref=f10e126]:
+                - strong [ref=f10e127]: Aire
+                - text: ": en los poros del suelo."
+            - listitem [ref=f10e128]:
+              - generic [ref=f10e131]:
+                - strong [ref=f10e132]: Microorganismos
+                - text: ": bacterias, hongos."
+        - generic [ref=f10e133]:
+          - 'figure "Perfil del suelo — Horizontes. Capas: O (orgánica), A (superficial), B (subsuelo), C (roca madre)." [ref=f10e134]':
+            - img "Perfil del suelo - Horizontes" [ref=f10e135]
+          - paragraph [ref=f10e137]: Una cucharadita de suelo fértil contiene más microorganismos que personas hay en todo el planeta.
+    - generic [ref=f10e138]:
+      - heading "El petróleo" [level=2] [ref=f10e139]
+      - paragraph [ref=f10e142]:
+        - text: El petróleo es una
+        - strong [ref=f10e143]: mezcla líquida compleja
+        - text: formada por cientos de hidrocarburos diferentes (compuestos de carbono e hidrógeno). Se formó hace millones de años a partir de restos de organismos marinos sepultados bajo capas de roca, sometidos a alta presión y temperatura.
+      - generic [ref=f10e144]:
+        - heading "Destilación fraccionada del petróleo" [level=4] [ref=f10e145]
+        - paragraph [ref=f10e146]:
+          - text: Como el petróleo es una mezcla de hidrocarburos con distintos puntos de ebullición, se lo separa por
+          - strong [ref=f10e147]: destilación fraccionada
+          - text: en una torre. Cada fracción se recoge a distinta altura.
+        - table [ref=f10e149]:
+          - rowgroup [ref=f10e150]:
+            - row [ref=f10e151]:
+              - columnheader "Fracción" [ref=f10e152]
+              - columnheader "N° de carbonos" [ref=f10e153]
+              - columnheader "Punto de ebullición" [ref=f10e154]
+              - columnheader "Uso" [ref=f10e155]
+          - rowgroup [ref=f10e156]:
+            - row [ref=f10e157]:
+              - cell "Gas" [ref=f10e158]
+              - cell "C1–C4" [ref=f10e159]
+              - cell "< 20 °C" [ref=f10e160]
+              - cell "Combustible de cocina" [ref=f10e161]
+            - row [ref=f10e162]:
+              - cell "Nafta" [ref=f10e163]
+              - cell "C5–C10" [ref=f10e164]
+              - cell "20–200 °C" [ref=f10e165]
+              - cell "Combustible de autos" [ref=f10e166]
+            - row [ref=f10e167]:
+              - cell "Querosén" [ref=f10e168]
+              - cell "C10–C16" [ref=f10e169]
+              - cell "175–275 °C" [ref=f10e170]
+              - cell "Combustible de aviones" [ref=f10e171]
+            - row [ref=f10e172]:
+              - cell "Gasoil" [ref=f10e173]
+              - cell "C15–C20" [ref=f10e174]
+              - cell "250–350 °C" [ref=f10e175]
+              - cell "Combustible de camiones" [ref=f10e176]
+            - row [ref=f10e177]:
+              - cell "Asfalto" [ref=f10e178]
+              - cell "> C20" [ref=f10e179]
+              - cell "> 350 °C" [ref=f10e180]
+              - cell "Pavimentación" [ref=f10e181]
+      - 'figure "Ilustración: Torre de destilación fraccionada — Refinería de petróleo" [ref=f10e182]':
+        - 'img "Ilustración: Torre de destilación fraccionada — Refinería de petróleo" [ref=f10e183]'
+    - generic [ref=f10e185]:
+      - 'heading "Contaminación: mezclas no deseadas" [level=2] [ref=f10e186]'
+      - paragraph [ref=f10e189]: La contaminación es una mezcla de sustancias dañinas en el ambiente. Cuando introducimos materiales extraños en el aire, el agua o el suelo, creamos mezclas que alteran el equilibrio natural y pueden ser perjudiciales para los seres vivos.
+      - generic [ref=f10e190]:
+        - generic [ref=f10e191]:
+          - heading "Smog (contaminación del aire)" [level=3] [ref=f10e192]
+          - paragraph [ref=f10e193]: Mezcla de humo (smoke) y niebla (fog) que contiene óxidos de nitrógeno, dióxido de azufre, monóxido de carbono y partículas en suspensión. Se forma principalmente por la quema de combustibles fósiles en vehículos e industrias. Es una mezcla heterogénea de gases y partículas sólidas.
+        - generic [ref=f10e194]:
+          - heading "Aguas residuales" [level=3] [ref=f10e195]
+          - paragraph [ref=f10e196]: "Mezcla de agua con desechos domésticos e industriales: detergentes, aceites, materia orgánica, metales pesados y microorganismos. Cuando llegan a ríos y lagos sin tratar, alteran la composición natural del agua y afectan la vida acuática."
+        - generic [ref=f10e197]:
+          - heading "Plásticos en el océano" [level=3] [ref=f10e198]
+          - paragraph [ref=f10e199]:
+            - text: Millones de toneladas de plásticos forman una mezcla heterogénea con el agua de mar. Se degradan en
+            - strong [ref=f10e200]: microplásticos
+            - text: (partículas menores a 5 mm) que los animales marinos ingieren y entran en la cadena alimentaria.
+      - generic [ref=f10e201]: «La contaminación es lo que pasa cuando ponemos sustancias en el lugar equivocado.»
+    - generic [ref=f10e202]:
+      - heading "Preguntas para pensar" [level=2] [ref=f10e203]
+      - generic [ref=f10e212]:
+        - generic [ref=f10e213]:
+          - paragraph [ref=f10e214]: 1.¿Por qué el aire se considera una mezcla y no un compuesto?
+          - group [ref=f10e215]:
+            - generic "Ver respuesta" [ref=f10e216] [cursor=pointer]
+        - generic [ref=f10e217]:
+          - paragraph [ref=f10e218]: 2.Si el agua de mar es una solución, ¿por qué a veces se ve turbia?
+          - group [ref=f10e219]:
+            - generic "Ver respuesta" [ref=f10e220] [cursor=pointer]
+        - generic [ref=f10e221]:
+          - paragraph [ref=f10e222]: 3.¿Qué método de separación se usa en la refinación del petróleo y en qué propiedad se basa?
+          - group [ref=f10e223]:
+            - generic "Ver respuesta" [ref=f10e224] [cursor=pointer]
+    - generic [ref=f10e225]:
+      - link "Separación" [ref=f10e226] [cursor=pointer]:
+        - /url: separacion.html
+      - link "Mezclas" [ref=f10e230] [cursor=pointer]:
+        - /url: index.html
+  - contentinfo [ref=f10e238]:
+    - generic [ref=f10e240]:
+      - generic [ref=f10e241]:
+        - link "Inicio" [ref=f10e242] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f10e247]: ·
+        - link "Química" [ref=f10e248] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f10e249]: ·
+        - link "Mezclas" [ref=f10e250] [cursor=pointer]:
+          - /url: index.html
+      - paragraph [ref=f10e251]: Ciencias Naturales · 1° año · Biología & Química

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="t d">
+  <title id="t">Paisaje de fuentes de energía</title>
+  <desc id="d">Un paisaje muestra paneles solares, aerogeneradores y agua frente a una central de combustibles fósiles.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#13506e"/><stop offset=".55" stop-color="#7fb2b0"/><stop offset="1" stop-color="#dfb56b"/></linearGradient>
+    <linearGradient id="ground"><stop stop-color="#35654b"/><stop offset="1" stop-color="#19372d"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#58c8de"/><stop offset="1" stop-color="#176888"/></linearGradient>
+    <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#2778d7"/><stop offset="1" stop-color="#0b2f68"/></linearGradient>
+    <linearGradient id="smoke" x2="0" y2="1"><stop stop-color="#4b5563" stop-opacity=".75"/><stop offset="1" stop-color="#94a3b8" stop-opacity="0"/></linearGradient>
+    <radialGradient id="sun"><stop stop-color="#fff7b0"/><stop offset=".55" stop-color="#facc15"/><stop offset="1" stop-color="#f59e0b"/></radialGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity=".45"/></filter>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <circle cx="112" cy="116" r="43" fill="url(#sun)" filter="url(#glow)">
+    <animate attributeName="r" values="41;45;41" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <g transform="translate(112 116)" stroke="#fff3a3" stroke-width="4" stroke-linecap="round">
+    <path d="M0-59v-18M0 59v18M-59 0h-18M59 0h18M-42-42l-13-13M42-42l13-13M-42 42l-13 13M42 42l13 13"/>
+    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" dur="24s" repeatCount="indefinite" additive="sum"/>
+  </g>
+
+  <path d="M0 260C125 209 247 256 360 222C491 183 599 220 800 180V450H0Z" fill="url(#ground)"/>
+  <path d="M0 353C127 315 208 340 315 303C409 271 510 314 800 276V450H0Z" fill="#244e3b"/>
+  <path d="M0 375C148 340 259 371 378 331C494 292 608 343 800 305V450H0Z" fill="url(#water)"/>
+  <g fill="none" stroke="#b8f1ff" stroke-width="3" opacity=".6">
+    <path d="M0 392q32-12 64 0t64 0t64 0t64 0"><animate attributeName="transform" values="translate(-40 0);translate(40 0)" dur="3s" repeatCount="indefinite"/></path>
+    <path d="M310 357q32-12 64 0t64 0t64 0t64 0"><animate attributeName="transform" values="translate(35 0);translate(-35 0)" dur="3.5s" repeatCount="indefinite"/></path>
+  </g>
+
+  <!-- panel solar -->
+  <g transform="translate(68 242)" filter="url(#shadow)">
+    <path d="M19 113h151l-18-82H39z" fill="url(#panel)" stroke="#93c5fd" stroke-width="3"/>
+    <g stroke="#bfdbfe" stroke-width="1.4"><path d="M34 54h123M28 80h135M68 34l-12 79M112 34l10 79"/></g>
+    <path d="M75 113l-9 29M130 113l10 29M48 142h115" stroke="#64748b" stroke-width="6"/>
+    <path d="M28 48l116 54" stroke="#fff" stroke-width="5" opacity=".18">
+      <animate attributeName="transform" values="translate(-70 0);translate(80 0)" dur="2.8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- turbinas -->
+  <g fill="none" stroke="#e5eef5" stroke-linecap="round" filter="url(#shadow)">
+    <g transform="translate(300 181)">
+      <path d="M0 0v176" stroke-width="9"/>
+      <g stroke-width="9"><circle r="9" fill="#f8fafc" stroke="none"/><path d="M0 0L-53 42M0 0l56 37M0 0l-2-70"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="5.5s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(390 213) scale(.72)">
+      <path d="M0 0v176" stroke-width="9"/>
+      <g stroke-width="9"><circle r="9" fill="#f8fafc" stroke="none"/><path d="M0 0L-53 42M0 0l56 37M0 0l-2-70"/>
+        <animateTransform attributeName="transform" type="rotate" from="360 0 0" to="0 0 0" dur="6.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- central térmica -->
+  <g filter="url(#shadow)">
+    <path d="M565 322h203v70H565z" fill="#313941" stroke="#65717d" stroke-width="2"/>
+    <path d="M585 322v-92h47v92M693 322v-132h42v132" fill="#414b55" stroke="#8b98a5" stroke-width="3"/>
+    <path d="M575 392h208M551 321h232" stroke="#151a1f" stroke-width="8"/>
+    <rect x="648" y="275" width="40" height="47" fill="#283039"/>
+    <g fill="#f59e0b"><circle cx="667" cy="296" r="5"><animate attributeName="opacity" values=".25;1;.25" dur="1.2s" repeatCount="indefinite"/></circle></g>
+  </g>
+  <g fill="url(#smoke)">
+    <path d="M600 232c-22-35 26-51 3-87-17-28 23-42 7-73 50 29 47 63 20 88 38 24 21 57-30 72z">
+      <animate attributeName="d" values="M600 232c-22-35 26-51 3-87-17-28 23-42 7-73 50 29 47 63 20 88 38 24 21 57-30 72z;M600 232c22-35-26-51-3-87 17-28-23-42-7-73 50 29 47 63 20 88 38 24 21 57 10 72z;M600 232c-22-35 26-51 3-87-17-28 23-42 7-73 50 29 47 63 20 88 38 24 21 57-30 72z" dur="6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M710 192c-22-32 21-48 0-80-14-22 15-38 4-66 43 27 42 57 17 79 32 23 18 51-21 67z">
+      <animate attributeName="opacity" values=".42;.78;.42" dur="4.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <g font-family="Arial,sans-serif" text-anchor="middle" font-weight="700">
+    <rect x="26" y="43" width="255" height="38" rx="19" fill="#0e3d32" opacity=".94" stroke="#4ade80"/>
+    <text x="153" y="68" fill="#bbf7d0" font-size="17">RENOVABLES</text>
+    <rect x="522" y="43" width="252" height="38" rx="19" fill="#442727" opacity=".95" stroke="#fb7185"/>
+    <text x="648" y="68" fill="#fecdd3" font-size="17">NO RENOVABLES</text>
+  </g>
+</svg>

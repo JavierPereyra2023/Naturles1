@@ -1,0 +1,272 @@
+- generic [active] [ref=f9e1]:
+  - navigation [ref=f9e2]:
+    - generic [ref=f9e4]:
+      - generic [ref=f9e5]:
+        - link "Inicio" [ref=f9e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f9e12]: /
+        - link "Física" [ref=f9e13] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f9e14]: /
+        - link "Calor y Sonido" [ref=f9e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f9e16]:
+        - link "Calor y Sonido" [ref=f9e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f9e21] [cursor=pointer]
+  - generic [ref=f9e29]:
+    - generic [ref=f9e30]: Física · Calor y Sonido
+    - heading "Ondas" [level=1] [ref=f9e33]
+    - paragraph [ref=f9e34]: Una onda transporta energía sin transportar materia. Acá vas a ver qué es una onda, cómo se mide y cómo se comporta. Después, el sonido y la luz son dos casos especiales que estudiamos por separado.
+  - main [ref=f9e37]:
+    - generic [ref=f9e38]:
+      - generic [ref=f9e39]:
+        - generic [ref=f9e40]: "01"
+        - heading "¿Qué es una onda?" [level=2] [ref=f9e41]
+      - paragraph [ref=f9e43]: "Una onda es una perturbación que se propaga a través del espacio, transmitiendo energía sin transportar materia. Tirá una piedra a un estanque: las ondas viajan hacia afuera, pero el agua no se desplaza con ellas, solo sube y baja. Así funcionan todas las ondas: transportan energía, no materia."
+      - generic [ref=f9e44]: "\"Una onda es una perturbación que transmite energía sin transportar materia.\""
+      - paragraph [ref=f9e45]: "Las ondas se clasifican en dos grandes grupos según si necesitan o no un medio material para propagarse:"
+      - generic [ref=f9e46]:
+        - heading "Ondas mecánicas" [level=3] [ref=f9e47]
+        - paragraph [ref=f9e48]: Necesitan un medio material para propagarse. El sonido, las olas del mar y las ondas sísmicas son ejemplos. No pueden viajar en el vacío. Si estuvieras en el espacio, no podrías escuchar nada.
+      - generic [ref=f9e49]:
+        - heading "Ondas electromagnéticas" [level=3] [ref=f9e50]
+        - paragraph [ref=f9e51]: NO necesitan un medio material. Pueden viajar en el vacío. La luz visible, los rayos X, las ondas de radio y los rayos ultravioleta son ondas electromagnéticas. Todas viajan a 300.000 km/s en el vacío.
+    - generic [ref=f9e53]:
+      - generic [ref=f9e54]:
+        - generic [ref=f9e55]: "02"
+        - heading "Propiedades de las ondas" [level=2] [ref=f9e56]
+      - paragraph [ref=f9e58]: Para describir una onda usamos cinco magnitudes fundamentales. Conocerlas nos permite comparar ondas diferentes y entender fenómenos como la música, los colores o las comunicaciones. Cada propiedad mide un aspecto distinto de la onda.
+      - generic [ref=f9e59]:
+        - heading "Frecuencia (f)" [level=3] [ref=f9e60]
+        - paragraph [ref=f9e61]: Es el número de ciclos (oscilaciones completas) que ocurren en un segundo. Se mide en Hertz (Hz). 1 Hz = 1 ciclo por segundo. El oído humano puede escuchar sonidos entre 20 Hz y 20.000 Hz. La nota La estándar tiene una frecuencia de 440 Hz.
+      - generic [ref=f9e62]:
+        - heading "Período (T)" [level=3] [ref=f9e63]
+        - paragraph [ref=f9e64]: "Es el tiempo que tarda en completarse un ciclo completo. Se mide en segundos. El período y la frecuencia son inversos: T = 1/f. Si una onda tiene frecuencia de 440 Hz, su período es T = 1/440 ˜ 0,0023 segundos."
+      - generic [ref=f9e65]:
+        - heading "Amplitud (A)" [level=3] [ref=f9e66]
+        - paragraph [ref=f9e67]: Es la máxima distancia que alcanza una partícula del medio respecto de su posición de equilibrio. En el sonido, la amplitud determina el volumen (sonidos fuertes o suaves). En la luz, la amplitud determina la intensidad o brillo.
+      - generic [ref=f9e68]:
+        - heading "Longitud de onda (?)" [level=3] [ref=f9e69]
+        - paragraph [ref=f9e70]: Es la distancia entre dos puntos consecutivos que están en la misma fase de la onda, por ejemplo, entre dos crestas consecutivas. Se mide en metros. Las ondas de radio pueden tener longitudes de onda de kilómetros; los rayos gamma, del tamaño del núcleo atómico.
+      - generic [ref=f9e71]:
+        - heading "Velocidad de propagación (v)" [level=3] [ref=f9e72]
+        - paragraph [ref=f9e73]: Es la rapidez con que la onda viaja a través del medio. Depende exclusivamente de las propiedades del medio, no de la frecuencia ni de la amplitud. En el aire a 20°C, el sonido viaja a 340 m/s; en el agua, a 1.500 m/s; y en el acero, a más de 5.000 m/s.
+      - generic [ref=f9e74]:
+        - generic [ref=f9e75]: Laboratorio visual · Mové los controles
+        - img "Onda transversal animada con amplitud y longitud de onda" [ref=f9e80]:
+          - generic [ref=f9e81]: posición de equilibrio
+          - generic [ref=f9e82]: λ longitud de onda
+          - generic [ref=f9e84]: A
+          - generic [ref=f9e88]: "la partícula del medio solo sube y baja: la que viaja es la energía"
+        - generic [ref=f9e89]:
+          - generic [ref=f9e90]:
+            - generic [ref=f9e91]: Frecuencia · 2.0 ciclos visibles
+            - slider "Frecuencia · 2.0 ciclos visibles" [ref=f9e92]: "2"
+          - generic [ref=f9e93]:
+            - generic [ref=f9e94]: Amplitud · 50 px
+            - slider "Amplitud · 50 px" [ref=f9e95]: "50"
+        - generic [ref=f9e96]: "Así viaja el sonido: onda longitudinal"
+        - 'img "Onda longitudinal animada: compresiones y rarefacciones del aire" [ref=f9e101]':
+          - generic [ref=f9e103]: compresión (aire apretado)
+          - generic [ref=f9e104]: rarefacción (aire estirado)
+        - paragraph [ref=f9e105]:
+          - text: "Arriba: una"
+          - strong [ref=f9e106]: onda transversal
+          - text: "(como la luz o las olas), donde el medio vibra perpendicular a la dirección en que viaja la onda. Subí la frecuencia y mirá cómo la longitud de onda se achica: ¡es la ecuación v = λ · f en acción! Abajo: una"
+          - strong [ref=f9e107]: onda longitudinal
+          - text: (como el sonido), donde las partículas del aire se aprietan y se separan en la misma dirección en que viaja la onda.
+    - generic [ref=f9e109]:
+      - generic [ref=f9e110]:
+        - generic [ref=f9e111]: "03"
+        - heading "La ecuación fundamental" [level=2] [ref=f9e112]
+      - paragraph [ref=f9e114]: La relación entre velocidad, longitud de onda y frecuencia es una de las ecuaciones más importantes en el estudio de las ondas. Esta ecuación se aplica tanto a ondas mecánicas como electromagnéticas y es la base para entender desde la música hasta las telecomunicaciones.
+      - generic [ref=f9e115]:
+        - paragraph [ref=f9e116]: "Ecuación fundamental de las ondas:"
+        - generic [ref=f9e117]:
+          - generic [ref=f9e118]:
+            - generic [ref=f9e119]: v
+            - generic [ref=f9e121]: =
+            - generic [ref=f9e123]: λ
+            - generic [ref=f9e125]: ⋅
+            - generic [ref=f9e127]: f
+          - math [ref=f9e130]:
+            - generic [ref=f9e131]: v
+            - generic [ref=f9e132]: =
+            - generic [ref=f9e133]: λ
+            - generic [ref=f9e134]: ⋅
+            - generic [ref=f9e135]: f
+        - paragraph [ref=f9e136]: v = velocidad de propagación | ? = longitud de onda | f = frecuencia
+      - paragraph [ref=f9e137]: La velocidad de una onda es igual al producto de su longitud de onda por su frecuencia. Esto significa que, para una velocidad fija, si la frecuencia aumenta, la longitud de onda disminuye, y viceversa.
+      - paragraph [ref=f9e138]: "Veamos un ejemplo concreto con el sonido. Una onda sonora correspondiente a la nota La (440 Hz) viaja a 340 m/s en el aire. Su longitud de onda será:"
+      - paragraph [ref=f9e140]: "? = v / f = 340 / 440 ˜ 0,77 m"
+      - generic [ref=f9e141]:
+        - generic [ref=f9e142]: Velocidad del sonido
+        - text: El sonido viaja más rápido en sólidos que en líquidos, y más rápido en líquidos que en gases. En el aire viaja a 340 m/s, pero en el acero supera los 5.000 m/s. ¡Por eso en las películas del oeste apoyaban la oreja en las vías para saber si venía el tren!
+      - paragraph [ref=f9e143]: Si la misma nota (440 Hz) se tocara dentro del agua, donde el sonido viaja a 1.500 m/s, su longitud de onda sería ? = 1500/440 ˜ 3,41 m. La frecuencia es la misma —seguimos escuchando un La— pero la longitud de onda cambió porque la velocidad del medio es diferente.
+    - generic [ref=f9e145]:
+      - generic [ref=f9e146]:
+        - generic [ref=f9e147]: "04"
+        - 'heading "Dos casos: el sonido y la luz" [level=2] [ref=f9e148]'
+      - paragraph [ref=f9e150]: El sonido y la luz son las dos ondas con las que más interactuamos a diario, pero son fundamentalmente diferentes. Las dos comparten las propiedades que ya vimos (frecuencia, amplitud, longitud de onda), pero cada una tiene su propio análisis. Acá las comparamos; en sus páginas las estudiamos a fondo.
+      - generic [ref=f9e151]:
+        - generic [ref=f9e152]:
+          - heading "Sonido" [level=3] [ref=f9e153]
+          - list [ref=f9e156]:
+            - listitem [ref=f9e157]:
+              - generic [ref=f9e158]: "?"
+              - generic [ref=f9e159]:
+                - text: Onda
+                - strong [ref=f9e160]: mecánica
+            - listitem [ref=f9e161]:
+              - generic [ref=f9e162]: "?"
+              - generic [ref=f9e163]: Necesita un medio material
+            - listitem [ref=f9e164]:
+              - generic [ref=f9e165]: "?"
+              - strong [ref=f9e167]: No viaja en el vacío
+            - listitem [ref=f9e168]:
+              - generic [ref=f9e169]: "?"
+              - generic [ref=f9e170]:
+                - text: "Velocidad en el aire: ˜"
+                - strong [ref=f9e171]: 340 m/s
+            - listitem [ref=f9e172]:
+              - generic [ref=f9e173]: "?"
+              - generic [ref=f9e174]: Onda longitudinal
+        - generic [ref=f9e175]:
+          - heading "Luz" [level=3] [ref=f9e176]
+          - list [ref=f9e181]:
+            - listitem [ref=f9e182]:
+              - generic [ref=f9e183]: "?"
+              - generic [ref=f9e184]:
+                - text: Onda
+                - strong [ref=f9e185]: electromagnética
+            - listitem [ref=f9e186]:
+              - generic [ref=f9e187]: "?"
+              - generic [ref=f9e188]: No necesita medio material
+            - listitem [ref=f9e189]:
+              - generic [ref=f9e190]: "?"
+              - strong [ref=f9e192]: Sí viaja en el vacío
+            - listitem [ref=f9e193]:
+              - generic [ref=f9e194]: "?"
+              - generic [ref=f9e195]:
+                - text: "Velocidad en el vacío: ˜"
+                - strong [ref=f9e196]: 300.000 km/s
+            - listitem [ref=f9e197]:
+              - generic [ref=f9e198]: "?"
+              - generic [ref=f9e199]: Onda transversal
+      - generic [ref=f9e200]: "\"Por eso vemos el relámpago antes de escuchar el trueno: la luz viaja casi un millón de veces más rápido que el sonido.\""
+      - paragraph [ref=f9e201]: Durante una tormenta, la luz del relámpago viaja a 300.000 km/s y llega a nuestros ojos casi instantáneamente. El sonido del trueno, en cambio, viaja a solo 340 m/s. Si la tormenta está a 3,4 km de distancia, el trueno tarda 10 segundos en llegar. Contar los segundos entre el relámpago y el trueno y dividir por 3 da aproximadamente la distancia en kilómetros.
+      - generic [ref=f9e202]:
+        - link [ref=f9e203] [cursor=pointer]:
+          - /url: sonido.html
+          - heading "El Sonido" [level=3] [ref=f9e207]
+          - paragraph [ref=f9e208]: "El caso de las ondas mecánicas: cómo se produce, viaja y se escucha."
+          - generic [ref=f9e209]: Estudiar el sonido
+        - link [ref=f9e212] [cursor=pointer]:
+          - /url: luz.html
+          - heading "La Luz y los colores" [level=3] [ref=f9e218]
+          - paragraph [ref=f9e219]: "El caso de las ondas electromagnéticas: el espectro, el prisma y los colores."
+          - generic [ref=f9e220]: Estudiar la luz
+    - generic [ref=f9e224]:
+      - generic [ref=f9e225]: Sabías que...
+      - paragraph [ref=f9e226]: "El sonido no puede viajar por el espacio porque no hay aire ni medio material que lo transmita. Por eso las explosiones en Star Wars no deberían escucharse: en el vacío nadie puede oírte gritar."
+    - generic [ref=f9e227]:
+      - generic [ref=f9e228]:
+        - generic [ref=f9e229]: "05"
+        - heading "Cuando las ondas se encuentran" [level=2] [ref=f9e230]
+      - paragraph [ref=f9e232]:
+        - text: "Las ondas no chocan como las pelotas: se atraviesan y se"
+        - strong [ref=f9e233]: superponen
+        - text: . Cuando dos ondas coinciden en el mismo lugar, sus efectos se suman punto por punto. Según cómo lleguen, pueden reforzarse o cancelarse. Y cuando una onda encuentra un obstáculo o una abertura, es capaz de
+        - strong [ref=f9e234]: rodearlo
+        - text: . Estos dos fenómenos —interferencia y difracción— son la firma inconfundible de todo lo que es onda.
+      - generic [ref=f9e235]:
+        - generic [ref=f9e236]: Laboratorio visual · Interferencia constructiva
+        - img "Dos pulsos hacia arriba viajan en sentidos opuestos, se encuentran y se suman al doble de altura" [ref=f9e243]:
+          - generic [ref=f9e244]: Pulso A · viaja →
+          - generic [ref=f9e245]: ← viaja · Pulso B
+          - generic [ref=f9e249]: ¡el doble de amplitud!
+        - paragraph [ref=f9e250]:
+          - text: Dos pulsos llegan por lados opuestos,
+          - strong [ref=f9e251]: los dos hacia arriba
+          - text: ". Al cruzarse en el centro se suman: por un instante forman un pulso del"
+          - strong [ref=f9e252]: doble de altura
+          - text: . Después siguen su camino intactos. En sonido se escucharía
+          - strong [ref=f9e253]: más fuerte
+          - text: ; en luz,
+          - strong [ref=f9e254]: más brillante
+          - text: .
+      - generic [ref=f9e255]:
+        - generic [ref=f9e256]: Laboratorio visual · Interferencia destructiva
+        - img "Un pulso hacia arriba y otro hacia abajo viajan en sentidos opuestos, se encuentran y se cancelan" [ref=f9e262]:
+          - generic [ref=f9e263]: Pulso A (arriba) · viaja →
+          - generic [ref=f9e264]: ← viaja · Pulso B (abajo)
+          - generic [ref=f9e268]: "¡se cancelan: cuerda plana!"
+        - paragraph [ref=f9e269]:
+          - text: Ahora un pulso va
+          - strong [ref=f9e270]: hacia arriba
+          - text: y el otro
+          - strong [ref=f9e271]: hacia abajo
+          - text: . Cuando se encuentran en el centro, la cresta de uno tapa el valle del otro y
+          - strong [ref=f9e272]: se cancelan
+          - text: ": la cuerda queda plana por un instante. Luego reaparecen y continúan. Así funcionan los"
+          - strong [ref=f9e273]: auriculares con cancelación de ruido
+          - text: ": generan un \"anti-sonido\" que anula al ruido."
+      - paragraph [ref=f9e274]:
+        - text: La
+        - strong [ref=f9e275]: interferencia
+        - text: ocurre cuando dos ondas se superponen. Si llegan
+        - emphasis [ref=f9e276]: en fase
+        - text: "(cresta con cresta) se refuerzan: interferencia"
+        - strong [ref=f9e277]: constructiva
+        - text: . Si llegan
+        - emphasis [ref=f9e278]: en oposición
+        - text: "(cresta con valle) se anulan: interferencia"
+        - strong [ref=f9e279]: destructiva
+        - text: . Este principio explica los auriculares con cancelación de ruido, los colores de las burbujas de jabón y los patrones de luz en los experimentos de física.
+      - generic [ref=f9e280]:
+        - generic [ref=f9e281]: Laboratorio visual · Difracción · Cambiá el ancho de la rendija
+        - img "Difracción de ondas planas al atravesar una rendija" [ref=f9e286]:
+          - generic [ref=f9e301]: ondas planas →
+          - generic [ref=f9e302]: ondas que rodean el obstáculo
+        - generic [ref=f9e305]:
+          - generic [ref=f9e306]: Ancho de la rendija · 60 px
+          - slider "Ancho de la rendija · 60 px" [ref=f9e307]: "60"
+        - paragraph [ref=f9e308]:
+          - text: A la izquierda viajan
+          - strong [ref=f9e309]: ondas planas
+          - text: (como olas rectas que se acercan a la costa). Al pasar por la rendija, la onda se
+          - strong [ref=f9e310]: curva
+          - text: "y se abre en frentes circulares: eso es la"
+          - strong [ref=f9e311]: difracción
+          - text: . Achicá la rendija y mirá cómo la onda se abre
+          - emphasis [ref=f9e312]: más
+          - text: ": cuanto más estrecha es la abertura comparada con la longitud de onda, más se difracta. Por eso escuchás a alguien que habla a la vuelta de una pared, aunque no lo veas: el sonido difracta y rodea la esquina."
+    - generic [ref=f9e314]:
+      - generic [ref=f9e315]:
+        - generic [ref=f9e316]: "06"
+        - heading "Preguntas para pensar" [level=2] [ref=f9e317]
+      - generic [ref=f9e318]:
+        - paragraph [ref=f9e320]: 1. Si el sonido no viaja en el vacío, ¿por qué en las películas de ciencia ficción se escuchan explosiones en el espacio?
+        - paragraph [ref=f9e322]: 2. Un músico toca una nota de 880 Hz. ¿Cuál es su longitud de onda en el aire? (v = 340 m/s). Usá la ecuación v = ? · f.
+        - paragraph [ref=f9e324]: 3. ¿Por qué una radio FM y un control remoto de TV no interfieren entre sí si ambos usan ondas electromagnéticas?
+        - paragraph [ref=f9e326]: 4. Los auriculares con cancelación de ruido generan una onda "anti-sonido" para silenciar el ruido externo. ¿Qué tipo de interferencia usan y por qué funciona?
+        - paragraph [ref=f9e328]: 5. Podés escuchar a alguien hablar desde la otra habitación aunque no lo veas, pero no podés verlo. ¿Qué fenómeno de las ondas explica esta diferencia entre el sonido y la luz?
+  - generic [ref=f9e330]:
+    - link "Calor y Temperatura" [ref=f9e331] [cursor=pointer]:
+      - /url: calor-temperatura.html
+    - link "Calor y Sonido" [ref=f9e335] [cursor=pointer]:
+      - /url: index.html
+    - link "El Sonido" [ref=f9e343] [cursor=pointer]:
+      - /url: sonido.html
+  - contentinfo [ref=f9e347]:
+    - generic [ref=f9e349]:
+      - generic [ref=f9e350]:
+        - generic [ref=f9e354]: Cs. Naturales
+        - generic [ref=f9e355]: 1° Año
+      - generic [ref=f9e356]:
+        - link "Inicio" [ref=f9e357] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Física" [ref=f9e358] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f9e359]: Prof. Pereyra, Javier

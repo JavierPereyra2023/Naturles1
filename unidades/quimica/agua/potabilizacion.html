@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -199,7 +199,7 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
-  <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   </head>
 <body class="bg-natura-black text-natura-silverLight min-h-screen bg-agua">
 <div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
@@ -276,7 +276,7 @@
         ¿Por qué potabilizar?
       </h2>
       <p class="article-dropcap text-lg leading-relaxed text-natura-silver font-body">
-        El agua que encontramos en ríos, lagos y napas subterráneas no es apta para el consumo humano directo. Contiene <strong class="text-natura-silverLight">microorganismos</strong> (bacterias, virus, parásitos), <strong class="text-natura-silverLight">partículas en suspensión</strong> (barro, arena, arcilla) y <strong class="text-natura-silverLight">sustancias químicas</strong> que pueden causar enfermedades como el cólera, la hepatitis A, la disentería y otras infecciones gastrointestinales.
+        El agua de ríos, lagos y napas debe analizarse y, en general, tratarse antes de beberla. Según la fuente puede contener <strong class="text-natura-silverLight">microorganismos</strong> (bacterias, virus, parásitos), <strong class="text-natura-silverLight">partículas en suspensión</strong> (barro, arena, arcilla) y <strong class="text-natura-silverLight">sustancias químicas</strong> que pueden afectar la salud.
       </p>
       <aside class="sidebar-note">
         <strong>Según la OMS:</strong> Cada año mueren aproximadamente 500.000 personas por enfermedades diarreicas vinculadas al consumo de agua no potable. La mayoría son niños menores de 5 años.
@@ -293,8 +293,19 @@
         Proceso paso a paso
       </h2>
       <p class="text-lg leading-relaxed text-natura-silver font-body mb-4">
-        El proceso de potabilización en una planta típica sigue estas etapas:
+        El proceso de potabilización en una planta típica combina varias etapas; pueden variar según la fuente de agua y los contaminantes presentes.
       </p>
+
+      <figure class="content-card rounded-2xl p-4 mb-6 overflow-x-auto">
+        <svg viewBox="0 0 780 150" class="min-w-[680px] w-full" role="img" aria-label="Diagrama animado del proceso de potabilización: captación, floculación, decantación, filtración, desinfección y distribución">
+          <defs><linearGradient id="flow" x1="0" x2="1"><stop stop-color="#38BDF8"/><stop offset="1" stop-color="#22C55E"/></linearGradient></defs>
+          <path d="M55 75H725" stroke="url(#flow)" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+          <circle r="6" fill="#E0F2FE"><animateMotion dur="4s" repeatCount="indefinite" path="M55 75H725"/></circle>
+          <g fill="#0E1410" stroke="#22C55E" stroke-width="2"><circle cx="70" cy="75" r="26"/><circle cx="195" cy="75" r="26"/><circle cx="320" cy="75" r="26"/><circle cx="445" cy="75" r="26"/><circle cx="570" cy="75" r="26"/><circle cx="695" cy="75" r="26"/></g>
+          <g fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12" text-anchor="middle"><text x="70" y="80">1</text><text x="195" y="80">2</text><text x="320" y="80">3</text><text x="445" y="80">4</text><text x="570" y="80">5</text><text x="695" y="80">6</text><text x="70" y="125">Captación</text><text x="195" y="125">Floculación</text><text x="320" y="125">Decantación</text><text x="445" y="125">Filtración</text><text x="570" y="125">Desinfección</text><text x="695" y="125">Distribución</text></g>
+        </svg>
+        <figcaption class="text-center text-xs text-natura-silverDark mt-2">Seguí la gota: cada etapa reduce riesgos diferentes antes de la distribución.</figcaption>
+      </figure>
 
       <div class="content-card rounded-2xl p-6">
         <div class="process-step">

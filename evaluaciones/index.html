@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quizzes de Ciencias Naturales para 1° año de secundaria.">
+  <title>Quizzes — Ciencias Naturales 1° Año</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', leaf: '#22C55E', energy: '#3B82F6', bio: '#DC2626'
+            }
+          },
+          fontFamily: { heading: ['Playfair Display', 'Georgia', 'serif'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Inter, sans-serif; background: #080C0A; color: #C8D4CC; }
+    ::selection { background: #14B8A6; color: #080C0A; }
+    .grid-lines { background-image: linear-gradient(rgba(20,184,166,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(20,184,166,.07) 1px, transparent 1px); background-size: 42px 42px; mask-image: radial-gradient(ellipse 76% 70% at 50% 42%, black 0%, transparent 74%); }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    @keyframes orbit-reverse { to { transform: rotate(-360deg); } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes pulse-dot { 0%,100% { opacity: .32; transform: scale(.82); } 50% { opacity: 1; transform: scale(1.12); } }
+    .rise { animation: rise .7s cubic-bezier(.16,1,.3,1) both; }
+    .delay-1 { animation-delay: .1s; } .delay-2 { animation-delay: .2s; } .delay-3 { animation-delay: .3s; }
+    .orbit { transform-origin: 180px 180px; animation: orbit 20s linear infinite; }
+    .orbit-reverse { transform-origin: 180px 180px; animation: orbit-reverse 15s linear infinite; }
+    .float { animation: float 4s ease-in-out infinite; }
+    .pulse-dot { animation: pulse-dot 2.2s ease-in-out infinite; }
+    .quiz-button { box-shadow: 0 0 0 1px rgba(20,184,166,.25), 0 12px 38px rgba(13,148,136,.24); }
+    .quiz-button:hover { box-shadow: 0 0 0 1px rgba(45,212,191,.6), 0 16px 48px rgba(13,148,136,.35); transform: translateY(-2px); }
+    .topic-card { border: 1px solid rgba(255,255,255,.08); transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+    .topic-card:hover { transform: translateY(-4px); border-color: rgba(20,184,166,.35); background: rgba(255,255,255,.055); }
+    .quiz-area { grid-column: 1 / -1; margin-top: 18px; color: #c8d4cc; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; scroll-margin-top: 24px; }
+    .quiz-card { display:flex; align-items:center; gap:14px; min-height:112px; border:1px solid rgba(255,255,255,.08); border-left:3px solid var(--area); background:rgba(255,255,255,.025); padding:18px; color:#c8d4cc; text-decoration:none; transition:.25s; }
+    .quiz-card:hover { transform:translateY(-3px); background:rgba(255,255,255,.06); border-color:var(--area); }
+    .quiz-card > .iconify { color:var(--area); font-size:25px; flex:0 0 auto; }.quiz-card small{color:var(--area);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}.quiz-card h3{font-family:'Playfair Display',Georgia,serif;color:#fff;font-size:20px;font-weight:700;margin:3px 0}.quiz-card p{font-size:11px;color:#a8b5ad}.quiz-card b{margin-left:auto;color:var(--area);font-size:20px}
+    .quiz-hero { isolation:isolate; }.quiz-hero-bg { background:linear-gradient(90deg,rgba(8,12,10,.98) 0%,rgba(8,12,10,.89) 38%,rgba(8,12,10,.32) 100%),linear-gradient(0deg,rgba(8,12,10,.7),transparent 48%),url('../assets/backgrounds/bg-ecosistemas-bosque.png') center/cover; filter:saturate(.82) contrast(1.05); }.area-hotspot { display:flex; align-items:center; gap:9px; border:1px solid rgba(255,255,255,.22); background:rgba(8,12,10,.52); backdrop-filter:blur(7px); border-radius:999px; padding:10px 13px; color:#fff; font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; transition:.25s; }.area-hotspot:hover,.area-hotspot:focus-visible { transform:translateY(-3px); border-color:var(--spot); color:var(--spot); background:rgba(8,12,10,.8); outline:none; }.area-hotspot .iconify { color:var(--spot); }
+    .subject-visual { position:relative; min-height:250px; overflow:hidden; border:1px solid rgba(255,255,255,.1); background-position:center; background-size:cover; transition:transform .35s ease,border-color .35s ease; }.subject-visual:hover { transform:translateY(-5px); border-color:var(--subject); }.subject-visual::before { content:''; position:absolute; inset:0; background:linear-gradient(0deg,rgba(8,12,10,.98) 0%,rgba(8,12,10,.35) 80%); }.subject-visual > * { position:relative; z-index:1; }.step { border-left:2px solid #14b8a6; padding-left:16px; }.rule-icon { width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(45,212,191,.28);background:rgba(20,184,166,.08);color:#5eead4; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+  <div class="fixed inset-0 grid-lines pointer-events-none"></div>
+  <nav class="relative z-10 border-b border-white/5 bg-natura-black/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="../inicio.html" class="flex items-center gap-2 group" aria-label="Volver al inicio de Ciencias Naturales">
+        <span class="w-8 h-8 bg-natura-green rounded-sm grid place-items-center text-natura-black group-hover:bg-natura-greenLight transition-colors"><span class="iconify" data-icon="lucide:flask-conical" data-width="17"></span></span>
+        <span class="font-heading text-base font-bold tracking-wide text-white uppercase">Cs. Naturales</span>
+      </a>
+      <a href="../inicio.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors">
+        <span class="iconify" data-icon="lucide:arrow-left" data-width="15"></span> Volver al inicio
+      </a>
+    </div>
+  </nav>
+
+  <main class="relative z-10">
+    <section class="quiz-hero relative min-h-[calc(100vh-64px)] flex items-center overflow-hidden px-5 py-16">
+      <div class="quiz-hero-bg absolute inset-0 -z-10"></div>
+      <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-[1.05fr_.95fr] gap-10 lg:gap-16 items-center">
+        <div class="max-w-xl text-center lg:text-left order-2 lg:order-1">
+          <div class="rise inline-flex items-center gap-2 rounded-full border border-natura-green/25 bg-natura-green/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.19em] text-natura-greenLight">
+            <span class="w-1.5 h-1.5 rounded-full bg-natura-greenLight pulse-dot"></span> Evaluaciones interactivas
+          </div>
+          <h1 class="rise delay-1 mt-6 font-heading text-5xl sm:text-6xl lg:text-7xl font-bold uppercase leading-[.92] tracking-tight text-white">Probá lo que<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-natura-greenLight to-natura-leaf">sabés.</span></h1>
+          <p class="rise delay-2 mt-6 max-w-lg mx-auto lg:mx-0 text-sm sm:text-base leading-relaxed text-natura-silver">Cada quiz te ayuda a recuperar ideas importantes, detectar qué necesitás repasar y aprender de los errores con una devolución clara.</p>
+          <a href="#temas" class="rise delay-3 quiz-button mt-8 inline-flex items-center gap-3 rounded-sm bg-natura-green px-6 py-4 text-xs font-extrabold uppercase tracking-[.16em] text-natura-black transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-natura-greenLight focus:ring-offset-2 focus:ring-offset-natura-black">
+            <span class="iconify" data-icon="lucide:circle-play" data-width="18"></span> Elegir un quiz <span class="iconify" data-icon="lucide:arrow-down" data-width="16"></span>
+          </a>
+          <p class="rise delay-3 mt-4 text-[11px] text-natura-silverDark">Sin nota · podés intentar todas las veces que quieras</p>
+        </div>
+
+        <div class="order-1 lg:order-2 min-h-[320px] lg:min-h-[430px] relative" aria-label="Elegí el área de quizzes">
+          <a href="#biologia" class="area-hotspot absolute left-[7%] top-[28%]" style="--spot:#f87171"><span class="iconify" data-icon="lucide:leaf" data-width="18"></span> Biología</a>
+          <a href="#quimica" class="area-hotspot absolute left-[36%] bottom-[16%]" style="--spot:#4ade80"><span class="iconify" data-icon="lucide:flask-conical" data-width="18"></span> Química</a>
+          <a href="#fisica" class="area-hotspot absolute right-[5%] top-[12%]" style="--spot:#60a5fa"><span class="iconify" data-icon="lucide:atom" data-width="18"></span> Física</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="temas" class="border-t border-white/5 bg-natura-dark/70 px-5 py-16 scroll-mt-5">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-2xl">
+          <p class="text-[11px] font-bold uppercase tracking-[.2em] text-natura-green">Próximo paso</p>
+          <h2 class="mt-3 font-heading text-3xl sm:text-4xl font-bold text-white">Elegí el tema que querés desafiar.</h2>
+          <p class="mt-3 text-sm leading-relaxed text-natura-silver">Los quizzes se irán habilitando por tema. Empezaremos con los tres grandes ejes de la materia.</p>
+        </div>
+        <div class="mt-8 grid md:grid-cols-3 gap-5">
+          <a href="#quimica" class="subject-visual p-6 flex flex-col justify-end" style="--subject:#4ade80;background-image:url('../assets/backgrounds/bg-quimica-matraz.png')"><span class="text-[10px] font-bold uppercase tracking-[.2em] text-green-300">3 unidades</span><h3 class="mt-2 font-heading text-3xl font-bold text-white">Química</h3><p class="mt-2 text-sm text-natura-silverLight">Materia, mezclas y agua: observá, compará y explicá.</p></a>
+          <a href="#fisica" class="subject-visual p-6 flex flex-col justify-end" style="--subject:#60a5fa;background-image:url('../assets/backgrounds/bg-sistema-solar-espacio.png')"><span class="text-[10px] font-bold uppercase tracking-[.2em] text-blue-300">4 unidades</span><h3 class="mt-2 font-heading text-3xl font-bold text-white">Física</h3><p class="mt-2 text-sm text-natura-silverLight">Energía, ondas, movimientos y Sistema Solar.</p></a>
+          <a href="#biologia" class="subject-visual p-6 flex flex-col justify-end" style="--subject:#f87171;background-image:url('../assets/backgrounds/bg-celulas-microscopio.png')"><span class="text-[10px] font-bold uppercase tracking-[.2em] text-red-300">6 unidades</span><h3 class="mt-2 font-heading text-3xl font-bold text-white">Biología</h3><p class="mt-2 text-sm text-natura-silverLight">Vida, células, ecosistemas, plantas, animales y cuerpo humano.</p></a>
+        </div>
+        <div class="mt-12 grid lg:grid-cols-2 gap-8 border-y border-white/5 py-10">
+          <div><p class="text-[11px] font-bold uppercase tracking-[.2em] text-natura-green">¿Cómo se juega?</p><h3 class="mt-3 font-heading text-3xl font-bold text-white">Aprender, responder, mejorar.</h3><div class="mt-7 grid gap-6"><div class="step"><b class="text-white">1. Elegí una unidad</b><p class="mt-1 text-sm leading-relaxed text-natura-silver">Cada desafío presenta tres preguntas breves sobre los contenidos que ya estudiaste.</p></div><div class="step"><b class="text-white">2. Sumá tu mejor resultado</b><p class="mt-1 text-sm leading-relaxed text-natura-silver">Podés reintentar. El sistema conserva solamente tu puntaje más alto de cada unidad.</p></div><div class="step"><b class="text-white">3. Alcanzá la meta</b><p class="mt-1 text-sm leading-relaxed text-natura-silver">Al completar todas las unidades y llegar al mínimo, se habilita tu diploma.</p></div></div></div>
+          <aside class="rounded-sm bg-white/[.03] border border-white/10 p-6 md:p-8"><p class="text-[11px] font-bold uppercase tracking-[.2em] text-teal-300">Reglas del desafío</p><div class="mt-6 grid gap-5"><div class="flex gap-4"><span class="rule-icon"><span class="iconify" data-icon="lucide:target" data-width="19"></span></span><p class="text-sm text-natura-silver"><b class="block text-white mb-1">Meta de aprobación</b>60 puntos para aprobar una unidad.</p></div><div class="flex gap-4"><span class="rule-icon"><span class="iconify" data-icon="lucide:trophy" data-width="19"></span></span><p class="text-sm text-natura-silver"><b class="block text-white mb-1">Meta final</b>910 de 1300 puntos y las 13 unidades aprobadas.</p></div><div class="flex gap-4"><span class="rule-icon"><span class="iconify" data-icon="lucide:award" data-width="19"></span></span><p class="text-sm text-natura-silver"><b class="block text-white mb-1">Diploma y premio</b>Descargá el diploma habilitado y presentalo al profesor.</p></div></div></aside>
+        </div>
+        <div class="mt-10 grid md:grid-cols-2 xl:grid-cols-3 gap-4" id="quiz-list"></div>
+        <section class="mt-12 rounded-sm border border-teal-400/20 bg-teal-400/5 p-6 md:p-8" id="progreso"><div class="flex flex-wrap items-start justify-between gap-5"><div><p class="text-xs font-bold uppercase tracking-widest text-teal-300">Mi progreso</p><p class="mt-3 font-heading text-4xl font-bold text-white"><span id="points">0</span> <span class="text-lg text-natura-silver">/ 1300 puntos</span></p><p class="mt-1 text-sm text-natura-silver"><span id="completed">0</span> de 13 unidades aprobadas · mínimo: 910 puntos y todas las unidades.</p></div><button id="diploma" disabled class="rounded-sm bg-white/10 px-5 py-3 text-xs font-bold uppercase tracking-wider text-white disabled:cursor-not-allowed disabled:opacity-40">Descargar diploma</button></div><div class="mt-7 grid sm:grid-cols-[1fr_180px_auto] gap-3 border-t border-white/10 pt-6"><label class="text-xs text-natura-silver">Tu nombre para el diploma<input id="student-name" class="mt-2 block w-full rounded-sm border border-white/15 bg-natura-black/60 px-3 py-3 text-sm text-white outline-none focus:border-teal-300" maxlength="70" placeholder="Nombre y apellido"></label><label class="text-xs text-natura-silver">Curso<input id="student-course" class="mt-2 block w-full rounded-sm border border-white/15 bg-natura-black/60 px-3 py-3 text-sm text-white outline-none focus:border-teal-300" maxlength="30" placeholder="Ej.: 1° A"></label><button id="save-student" class="self-end rounded-sm border border-teal-300/30 px-4 py-3 text-xs font-bold uppercase tracking-wider text-teal-200 hover:bg-teal-300/10">Guardar</button></div><p id="student-message" class="mt-3 text-xs text-natura-silverDark">Estos datos se guardan solo en este navegador.</p></section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 border-t border-white/5 px-5 py-7 text-center text-[11px] uppercase tracking-wider text-natura-silverDark">Ciencias Naturales · 1° Año · Prof. Javier Pereyra</footer>
+  <script src="js/quiz-data.js"></script><script src="js/quiz-app.js"></script><script>renderQuizCards(document.getElementById('quiz-list'));const d=QuizProgress.read(),p=QuizProgress.score(),c=QuizProgress.completed(),name=document.getElementById('student-name'),course=document.getElementById('student-course'),message=document.getElementById('student-message');name.value=d.student?.name||'';course.value=d.student?.course||'';document.getElementById('points').textContent=Math.round(p);document.getElementById('completed').textContent=c;document.getElementById('save-student').onclick=()=>{let x=QuizProgress.read();x.student={name:name.value.trim(),course:course.value.trim()};QuizProgress.save(x);message.textContent='Datos guardados en este navegador.'};const b=document.getElementById('diploma');b.disabled=!(p>=910&&c===13);b.onclick=()=>{let n=name.value.trim();if(!n){message.textContent='Escribí tu nombre antes de descargar el diploma.';name.focus();return}let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([diplomaSVG(n)],{type:'image/svg+xml'}));a.download='diploma-ciencias-naturales.svg';a.click();URL.revokeObjectURL(a.href)}</script>
+</body>
+</html>

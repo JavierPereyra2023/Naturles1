@@ -1,0 +1,267 @@
+- generic [active] [ref=f19e1]:
+  - navigation [ref=f19e2]:
+    - generic [ref=f19e4]:
+      - generic [ref=f19e5]:
+        - link "Inicio" [ref=f19e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f19e12]: /
+        - link "Fisica" [ref=f19e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f19e14]: /
+        - link "Sistema Solar" [ref=f19e15] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=f19e16]: /
+        - generic [ref=f19e17]: Exploracion
+      - generic [ref=f19e18]:
+        - generic [ref=f19e19]: Eje 3
+        - link "Volver" [ref=f19e20] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f19e24] [cursor=pointer]
+  - generic [ref=f19e33]:
+    - generic [ref=f19e34]: Eje 3 · Exploracion Espacial
+    - heading "Exploracion Espacial" [level=1] [ref=f19e37]
+    - paragraph [ref=f19e38]: De las ideas de Aristoteles a las misiones a Marte. La historia de como la humanidad cambio su forma de ver el universo y desarrollo las herramientas para explorarlo.
+    - generic [ref=f19e39]:
+      - generic [ref=f19e40]: Historia
+      - generic [ref=f19e41]: Telescopios
+      - generic [ref=f19e42]: Misiones
+      - generic [ref=f19e43]: Artemis
+  - generic [ref=f19e45]:
+    - complementary [ref=f19e46]:
+      - generic [ref=f19e47]:
+        - heading "En esta pagina" [level=3] [ref=f19e48]
+        - navigation [ref=f19e49]:
+          - link "01. Geocentrismo y heliocentrismo" [ref=f19e50] [cursor=pointer]:
+            - /url: "#historia"
+          - link "02. Instrumentos de observacion" [ref=f19e51] [cursor=pointer]:
+            - /url: "#instrumentos"
+          - link "03. Misiones actuales" [ref=f19e52] [cursor=pointer]:
+            - /url: "#misiones"
+          - link "04. Preguntas para pensar" [ref=f19e53] [cursor=pointer]:
+            - /url: "#para-pensar"
+    - main [ref=f19e54]:
+      - generic [ref=f19e55]:
+        - generic [ref=f19e56]:
+          - generic [ref=f19e57]: "01"
+          - heading "Del geocentrismo al heliocentrismo" [level=2] [ref=f19e58]
+        - paragraph [ref=f19e60]:
+          - text: Durante siglos se creyo que la Tierra era el centro del universo. Hizo falta la valentia de Copernico y Galileo para cambiar esa idea. La historia del paso del
+          - strong [ref=f19e61]: geocentrismo
+          - text: al
+          - strong [ref=f19e62]: heliocentrismo
+          - text: es una de las revoluciones mas importantes en la historia del pensamiento humano.
+        - generic [ref=f19e63]:
+          - text: “
+          - paragraph [ref=f19e64]: Durante siglos se creyo que la Tierra era el centro del universo. Hizo falta la valentia de Copernico y Galileo para cambiar esa idea.
+        - generic [ref=f19e65]:
+          - generic [ref=f19e66]:
+            - generic [ref=f19e67]: Siglo IV a.C.
+            - generic [ref=f19e68]:
+              - 'heading "Aristoteles y Ptolomeo: el geocentrismo" [level=3] [ref=f19e69]'
+              - paragraph [ref=f19e70]:
+                - text: Propusieron el
+                - strong [ref=f19e71]: modelo geocentrico
+                - text: ": la Tierra inmovil en el centro del universo y todos los astros girando a su alrededor en esferas perfectas. Este modelo domino el pensamiento occidental durante"
+                - strong [ref=f19e72]: 1.800 años
+                - text: ". Era apoyado por la Iglesia y parecia concordar con la experiencia cotidiana: vemos al Sol \"moverse\" por el cielo, no sentimos que la Tierra se mueva."
+          - generic [ref=f19e73]:
+            - generic [ref=f19e74]: "1543"
+            - generic [ref=f19e75]:
+              - 'heading "Nicolas Copernico: el heliocentrismo" [level=3] [ref=f19e76]'
+              - paragraph [ref=f19e77]:
+                - text: Publico
+                - emphasis [ref=f19e78]: Sobre las revoluciones de las esferas celestes
+                - text: ", proponiendo el"
+                - strong [ref=f19e79]: modelo heliocentrico
+                - text: ": el Sol en el centro y la Tierra —junto con los demas planetas— girando a su alrededor. Su libro salio publicado el mismo año de su muerte, en 1543. Fue un acto de enorme valentia intelectual que enfrento siglos de tradicion."
+          - generic [ref=f19e80]:
+            - generic [ref=f19e81]: "1610"
+            - generic [ref=f19e82]:
+              - 'heading "Galileo Galilei: el telescopio como prueba" [level=3] [ref=f19e83]'
+              - paragraph [ref=f19e84]:
+                - text: Apunto el
+                - strong [ref=f19e85]: telescopio
+                - text: al cielo y descubrio las
+                - strong [ref=f19e86]: lunas de Jupiter
+                - text: (mostrando que no todo orbita la Tierra), las
+                - strong [ref=f19e87]: fases de Venus
+                - text: (imposibles en el modelo geocentrico) y las manchas solares. Sus observaciones confirmaron el heliocentrismo. La Inquisicion lo juzgo, lo obligo a retractarse y paso el resto de su vida bajo arresto domiciliario. Recien en
+                - strong [ref=f19e88]: "1992"
+                - text: —359 años despues— la Iglesia lo rehabilito publicamente.
+          - generic [ref=f19e89]:
+            - generic [ref=f19e90]: 1609–1619
+            - generic [ref=f19e91]:
+              - 'heading "Johannes Kepler: las orbitas elipticas" [level=3] [ref=f19e92]'
+              - paragraph [ref=f19e93]:
+                - text: Completo el modelo de Copernico demostrando que las orbitas planetarias no son circulos perfectos sino
+                - strong [ref=f19e94]: elipses
+                - text: . Formulo las tres leyes del movimiento planetario que describen con precision matematica como se mueven los planetas alrededor del Sol.
+        - generic [ref=f19e95]:
+          - text: “
+          - paragraph [ref=f19e98]:
+            - strong [ref=f19e99]: La ciencia es una construccion historica y social.
+            - text: "Las ideas cientificas no son eternas ni absolutas: cambian cuando aparecen nuevas evidencias, nuevos instrumentos y nuevas formas de pensar. Cuestionar lo establecido es parte esencial del pensamiento cientifico."
+      - generic [ref=f19e105]:
+        - generic [ref=f19e106]:
+          - generic [ref=f19e107]: "02"
+          - heading "Instrumentos de observacion" [level=2] [ref=f19e108]
+        - paragraph [ref=f19e110]:
+          - text: El telescopio no "acerca" las imagenes como un zoom de camara. Lo que hace es
+          - strong [ref=f19e111]: captar mas luz que el ojo humano
+          - text: ", lo que permite ver objetos mucho mas debiles y lejanos, y ademas los"
+          - strong [ref=f19e112]: agranda
+          - text: . Cuanto mas grande es el espejo o la lente principal, mas luz puede recolectar y mas detalles puede revelar.
+        - generic [ref=f19e113]:
+          - generic [ref=f19e114]:
+            - heading "Telescopio refractor" [level=3] [ref=f19e116]
+            - paragraph [ref=f19e117]:
+              - text: Usa
+              - strong [ref=f19e118]: lentes
+              - text: "para captar y enfocar la luz. El primero que construyo Galileo en 1609 era de este tipo. Los grandes refractores modernos tienen limitaciones: las lentes muy grandes se deforman por su propio peso y producen aberraciones cromaticas (colores falsos)."
+          - generic [ref=f19e119]:
+            - heading "Telescopio reflector" [level=3] [ref=f19e123]
+            - paragraph [ref=f19e124]:
+              - text: Usa
+              - strong [ref=f19e125]: espejos
+              - text: curvos en lugar de lentes. Inventado por Newton. Los grandes observatorios modernos usan este diseño porque los espejos pueden ser mucho mas grandes sin deformarse y no sufren aberracion cromatica.
+        - heading "Grandes observatorios" [level=3] [ref=f19e126]
+        - generic [ref=f19e127]:
+          - generic [ref=f19e128]:
+            - heading "Hubble (1990)" [level=4] [ref=f19e129]
+            - paragraph [ref=f19e130]: Telescopio espacial en orbita terrestre. Libre de la distorsion atmosferica, revoluciono la astronomia con imagenes nitidisimas de galaxias lejanas. Sigue activo despues de 30+ años.
+          - generic [ref=f19e131]:
+            - heading "James Webb (2021)" [level=4] [ref=f19e132]
+            - paragraph [ref=f19e133]:
+              - text: El telescopio mas potente jamas construido. Observa en infrarrojo. Puede ver las
+              - strong [ref=f19e134]: primeras galaxias
+              - text: que se formaron y analizar atmosferas de exoplanetas.
+          - generic [ref=f19e135]:
+            - heading "VLT (Chile)" [level=4] [ref=f19e136]
+            - paragraph [ref=f19e137]:
+              - text: El Very Large Telescope, en el desierto de Atacama. Cuatro telescopios de 8,2 m cada uno.
+              - strong [ref=f19e138]: Argentina participa
+              - text: del Observatorio Europeo Austral (ESO) que lo opera.
+      - generic [ref=f19e144]:
+        - generic [ref=f19e145]:
+          - generic [ref=f19e146]: "03"
+          - heading "Misiones espaciales actuales" [level=2] [ref=f19e147]
+        - generic [ref=f19e148]:
+          - generic [ref=f19e149]:
+            - heading "Artemis (NASA)" [level=3] [ref=f19e157]
+            - paragraph [ref=f19e158]:
+              - text: Programa para
+              - strong [ref=f19e159]: volver a la Luna
+              - text: ". Llevara a la primera mujer y primera persona de color a la superficie lunar. Objetivo: establecer una"
+              - strong [ref=f19e160]: base lunar permanente
+              - text: como paso previo para futuras misiones a Marte.
+            - generic [ref=f19e161]:
+              - generic [ref=f19e162]: "Artemis I: 2022"
+              - generic [ref=f19e163]: Base lunar
+          - generic [ref=f19e164]:
+            - heading "Perseverance e Ingenuity (Marte)" [level=3] [ref=f19e171]
+            - paragraph [ref=f19e172]:
+              - text: Rover explorando la superficie de Marte desde 2021, acompañado por
+              - strong [ref=f19e173]: Ingenuity
+              - text: ", el"
+              - strong [ref=f19e174]: primer helicoptero
+              - text: en volar en otro planeta. Perseverance busca signos de vida pasada en el crater Jezero y recolecta muestras para traer a la Tierra.
+            - generic [ref=f19e175]:
+              - generic [ref=f19e176]: Marte
+              - generic [ref=f19e177]: Helicoptero
+          - generic [ref=f19e178]:
+            - heading "Estacion Espacial Internacional (ISS)" [level=3] [ref=f19e180]
+            - paragraph [ref=f19e181]:
+              - text: Laboratorio orbital donde viven y trabajan astronautas de distintos paises. Orbita a unos
+              - strong [ref=f19e182]: 400 km de altura
+              - text: y viaja a
+              - strong [ref=f19e183]: 28.000 km/h
+              - text: ", dando una vuelta completa a la Tierra cada 90 minutos. Se puede ver a simple vista desde la Tierra como un punto brillante que cruza el cielo."
+            - generic [ref=f19e184]:
+              - generic [ref=f19e185]: 400 km altitud
+              - generic [ref=f19e186]: 28.000 km/h
+          - generic [ref=f19e187]:
+            - heading "SAOCOM (CONAE, Argentina)" [level=3] [ref=f19e189]
+            - paragraph [ref=f19e190]:
+              - text: Satelites argentinos de observacion terrestre que usan
+              - strong [ref=f19e191]: radar de apertura sintetica
+              - text: ". Pueden ver a traves de las nubes y de noche. Se usan para monitoreo de cultivos, inundaciones y desastres naturales. Argentina tiene una agencia espacial propia:"
+              - strong [ref=f19e192]: CONAE
+              - text: .
+            - generic [ref=f19e193]:
+              - generic [ref=f19e194]: CONAE
+              - generic [ref=f19e195]: Radar
+        - generic [ref=f19e196]:
+          - generic [ref=f19e197]: Argentina en el espacio
+          - paragraph [ref=f19e198]:
+            - strong [ref=f19e199]: CONAE
+            - text: (Comision Nacional de Actividades Espaciales) es nuestra agencia espacial. Opera los satelites SAOCOM y esta construyendo el lanzador de satelites Tronador II. Argentina es uno de los pocos paises con capacidad espacial propia en America Latina.
+        - paragraph [ref=f19e200]: "La exploracion espacial no es solo para \"ver que hay alla afuera\". Genera beneficios concretos: GPS y navegacion satelital, comunicaciones globales, prediccion climatica, monitoreo ambiental, nuevos materiales, tratamientos medicos derivados de la investigacion espacial, e inspiracion y educacion para las nuevas generaciones."
+        - generic [ref=f19e201]:
+          - text: “
+          - paragraph [ref=f19e204]:
+            - strong [ref=f19e205]: "\"La Tierra es la cuna de la humanidad, pero no se puede vivir en la cuna para siempre.\""
+            - text: — Konstantin Tsiolkovsky, pionero de la astronáutica, 1911.
+      - generic [ref=f19e211]:
+        - generic [ref=f19e212]:
+          - generic [ref=f19e213]: "04"
+          - heading "Preguntas para pensar" [level=2] [ref=f19e214]
+        - generic [ref=f19e215]:
+          - generic [ref=f19e217]:
+            - generic [ref=f19e218]: "1."
+            - generic [ref=f19e219]:
+              - paragraph [ref=f19e220]: ¿Por que el modelo geocentrico duro tanto tiempo?
+              - paragraph [ref=f19e221]:
+                - text: "Por tres razones principales: (1)"
+                - strong [ref=f19e222]: coincidia con la experiencia cotidiana
+                - text: (vemos al Sol moverse, no sentimos la Tierra moverse), (2) tenia el apoyo de la Iglesia, que lo consideraba acorde a las escrituras, y (3) no habia
+                - strong [ref=f19e223]: instrumentos
+                - text: para medir el movimiento de la Tierra. El telescopio de Galileo aporto la evidencia que faltaba.
+          - generic [ref=f19e225]:
+            - generic [ref=f19e226]: "2."
+            - generic [ref=f19e227]:
+              - paragraph [ref=f19e228]: ¿Por que ponemos telescopios en el espacio si podemos construirlos en la Tierra?
+              - paragraph [ref=f19e229]:
+                - text: La atmosfera terrestre
+                - strong [ref=f19e230]: distorsiona y absorbe
+                - text: "parte de la luz que llega del espacio. Esto hace que las imagenes desde tierra sean menos nitidas (el \"titilar\" de las estrellas es por este efecto). Ademas, la atmosfera bloquea ciertos tipos de luz (como gran parte del infrarrojo y ultravioleta). En el espacio no hay atmosfera: las imagenes son perfectas."
+          - generic [ref=f19e232]:
+            - generic [ref=f19e233]: "3."
+            - generic [ref=f19e234]:
+              - paragraph [ref=f19e235]: ¿Que descubrio Galileo con su telescopio que cambio la historia?
+              - paragraph [ref=f19e236]:
+                - text: "Descubrio tres cosas fundamentales: (1)"
+                - strong [ref=f19e237]: Las lunas de Jupiter
+                - text: ": demostro que no todo orbita la Tierra. (2)"
+                - strong [ref=f19e238]: Las fases de Venus
+                - text: ": solo son posibles si Venus orbita al Sol. (3)"
+                - strong [ref=f19e239]: Las manchas solares
+                - text: ": el Sol no es \"perfecto e inmaculado\" como se creia, sino que tiene imperfecciones. Todas estas observaciones destruian el modelo geocentrico."
+          - generic [ref=f19e241]:
+            - generic [ref=f19e242]: "4."
+            - generic [ref=f19e243]:
+              - paragraph [ref=f19e244]: ¿Astronomia o astrologia? ¿Cual es la diferencia?
+              - paragraph [ref=f19e245]:
+                - text: La
+                - strong [ref=f19e246]: astronomia
+                - text: "es una ciencia: estudia los cuerpos celestes mediante observacion, medicion y metodo cientifico. La"
+                - strong [ref=f19e247]: astrologia
+                - text: "no es ciencia: pretende predecir el destino de las personas segun la posicion de los astros al nacer."
+                - strong [ref=f19e248]: No hay evidencia
+                - text: que respalde sus afirmaciones. Confundirlas es un error comun que debemos evitar.
+      - generic [ref=f19e249]:
+        - link "Tierra y Luna" [ref=f19e250] [cursor=pointer]:
+          - /url: tierra-luna.html
+        - generic [ref=f19e254]: Exploracion Espacial — Pagina 3 de 4
+        - link "Proyecto MAPI" [ref=f19e255] [cursor=pointer]:
+          - /url: mapi.html
+  - contentinfo [ref=f19e259]:
+    - generic [ref=f19e261]:
+      - generic [ref=f19e262]:
+        - generic [ref=f19e268]: Cs. Naturales
+        - generic [ref=f19e269]: 1° Año
+      - generic [ref=f19e270]:
+        - link "Inicio" [ref=f19e271] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Fisica" [ref=f19e272] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f19e273]: Prof. Pereyra, Javier

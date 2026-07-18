@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Energía potencial gravitatoria</title>
+  <desc id="descripcion">Una esfera a diferentes alturas muestra que la energía potencial aumenta con la altura.</desc>
+  <defs>
+    <linearGradient id="cielo" x1="0" x2="1"><stop stop-color="#071b2c"/><stop offset="1" stop-color="#0b3142"/></linearGradient>
+    <linearGradient id="colina" x1="0" x2="1"><stop stop-color="#174a42"/><stop offset="1" stop-color="#0d2a2d"/></linearGradient>
+    <filter id="brillo"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="flecha" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0L7 3L0 6Z" fill="#f6c75a"/></marker>
+  </defs>
+  <rect width="900" height="500" fill="url(#cielo)"/>
+  <path d="M0 445 C160 420 226 325 350 330 C512 334 566 205 710 232 C798 250 855 303 900 315 V500 H0Z" fill="url(#colina)"/>
+  <path d="M60 445H835" stroke="#99c1bd" stroke-width="3" opacity=".55"/>
+  <path d="M670 135V439" stroke="#f6c75a" stroke-width="4" stroke-dasharray="10 10" opacity=".85"><animate attributeName="stroke-dashoffset" values="0;-40" dur="2s" repeatCount="indefinite"/></path>
+  <circle cx="670" cy="135" r="29" fill="#f8d35f" filter="url(#brillo)"><animate attributeName="cy" values="135;147;135" dur="2.4s" repeatCount="indefinite"/></circle>
+  <circle cx="670" cy="326" r="22" fill="#8ce0df" opacity=".78"/>
+  <path d="M670 185v84" stroke="#f6c75a" stroke-width="5" marker-end="url(#flecha)"/>
+  <text x="78" y="110" fill="#eaf8f5" font-family="Arial, sans-serif" font-size="27" font-weight="700">ENERGÍA POTENCIAL GRAVITATORIA</text>
+  <text x="78" y="151" fill="#9ec8c5" font-family="Arial, sans-serif" font-size="22">Eₚ = m · g · h</text>
+  <text x="78" y="193" fill="#d7e7e5" font-family="Arial, sans-serif" font-size="18">A mayor altura h, mayor energía almacenada.</text>
+  <text x="708" y="139" fill="#fff4cc" font-family="Arial, sans-serif" font-size="18" font-weight="700">altura alta</text>
+  <text x="708" y="330" fill="#b4efea" font-family="Arial, sans-serif" font-size="18">altura baja</text>
+  <text x="692" y="242" fill="#f6d36e" font-family="Arial, sans-serif" font-size="17">al caer, Eₚ se transforma</text>
+</svg>

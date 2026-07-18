@@ -1,0 +1,336 @@
+- generic [active] [ref=f14e1]:
+  - navigation [ref=f14e2]:
+    - generic [ref=f14e4]:
+      - generic [ref=f14e5]:
+        - link "Inicio" [ref=f14e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f14e12]: /
+        - link "Fisica" [ref=f14e13] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f14e14]: /
+        - link "Movimientos" [ref=f14e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f14e16]:
+        - link "Movimientos" [ref=f14e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f14e21] [cursor=pointer]
+  - generic [ref=f14e30]:
+    - generic [ref=f14e31]: Eje 3
+    - heading "MRUV — Movimiento Acelerado" [level=1] [ref=f14e34]
+    - paragraph [ref=f14e35]: Cuando la velocidad cambia entra en escena la aceleracion. Del MRU al MRUV, la caida libre y los movimientos con aceleracion constante.
+    - generic [ref=f14e36]:
+      - generic [ref=f14e37]: MRUV
+      - generic [ref=f14e38]: Aceleracion
+      - generic [ref=f14e39]: Caida libre
+      - generic [ref=f14e40]: Gravedad
+  - generic [ref=f14e42]:
+    - complementary [ref=f14e43]:
+      - generic [ref=f14e44]:
+        - heading "En esta pagina" [level=3] [ref=f14e45]
+        - navigation [ref=f14e46]:
+          - link "01. Cuando la velocidad cambia" [ref=f14e47] [cursor=pointer]:
+            - /url: "#velocidad-cambia"
+          - link "02. La aceleracion" [ref=f14e48] [cursor=pointer]:
+            - /url: "#aceleracion"
+          - link "03. Graficos en MRUV" [ref=f14e49] [cursor=pointer]:
+            - /url: "#graficos-mruv"
+          - link "04. Caida libre" [ref=f14e50] [cursor=pointer]:
+            - /url: "#caida-libre"
+          - link "05. Para pensar" [ref=f14e51] [cursor=pointer]:
+            - /url: "#para-pensar"
+    - main [ref=f14e52]:
+      - generic [ref=f14e53]:
+        - generic [ref=f14e54]:
+          - generic [ref=f14e55]: "01"
+          - heading "Cuando la velocidad cambia" [level=2] [ref=f14e56]
+        - paragraph [ref=f14e58]:
+          - text: En el MRU la velocidad es constante. Pero en la mayoria de los movimientos que vemos a diario —un auto que arranca, una pelota que cae, un ascensor que frena— la velocidad
+          - strong [ref=f14e59]: cambia
+          - text: . Cuando la velocidad de un objeto aumenta, decimos que acelera. Cuando disminuye, decimos que desacelera (o frena).
+        - generic [ref=f14e60]: Si un movil cambia su velocidad, decimos que esta acelerando. La aceleracion mide ese cambio.
+        - generic [ref=f14e61]:
+          - paragraph [ref=f14e62]:
+            - text: El
+            - strong [ref=f14e63]: MRUV
+            - text: (Movimiento Rectilineo Uniformemente Variado) es el tipo de movimiento donde la
+            - strong [ref=f14e64]: aceleracion es constante
+            - text: ". Esto significa que la velocidad cambia de manera uniforme: en cada segundo que pasa, la velocidad aumenta (o disminuye) siempre la misma cantidad."
+          - paragraph [ref=f14e65]: A diferencia del MRU, donde la posicion cambia linealmente con el tiempo, en el MRUV la velocidad cambia linealmente y la posicion cambia de forma parabolica. Esto tiene consecuencias importantes a la hora de graficar y de calcular distancias recorridas.
+          - paragraph [ref=f14e66]: "Pensemos en un ejemplo cotidiano: cuando un colectivo arranca despues de un semaforo, su velocidad va aumentando gradualmente desde 0 km/h hasta la velocidad de circulacion. Ese aumento controlado es aceleracion en accion. Si el colectivero aprieta el acelerador siempre de la misma manera, la aceleracion es constante y estamos ante un MRUV."
+      - generic [ref=f14e72]:
+        - generic [ref=f14e73]:
+          - generic [ref=f14e74]: "02"
+          - heading "La aceleracion" [level=2] [ref=f14e75]
+        - paragraph [ref=f14e77]:
+          - text: La
+          - strong [ref=f14e78]: aceleracion
+          - text: (a) mide cuan rapido cambia la velocidad de un objeto. Nos dice cuantos metros por segundo aumenta (o disminuye) la velocidad en cada segundo que pasa. Su unidad en el Sistema Internacional es el
+          - strong [ref=f14e79]: metro por segundo al cuadrado (m/s²)
+          - text: .
+        - generic [ref=f14e80]:
+          - paragraph [ref=f14e81]: Ecuacion de la aceleracion
+          - generic [ref=f14e82]:
+            - generic [ref=f14e83]:
+              - generic [ref=f14e84]: a
+              - generic [ref=f14e86]: =
+              - generic [ref=f14e89]:
+                - generic [ref=f14e91]:
+                  - generic [ref=f14e92]: Δ
+                  - generic [ref=f14e94]: v
+                - generic [ref=f14e101]:
+                  - generic [ref=f14e102]: Δ
+                  - generic [ref=f14e104]: t
+              - generic [ref=f14e106]: =
+              - generic [ref=f14e109]:
+                - generic [ref=f14e111]:
+                  - generic [ref=f14e112]:
+                    - generic [ref=f14e113]: v
+                    - generic [ref=f14e115]: f
+                  - generic [ref=f14e118]: −
+                  - generic [ref=f14e120]:
+                    - generic [ref=f14e121]: v
+                    - generic [ref=f14e123]: i
+                - generic [ref=f14e131]:
+                  - generic [ref=f14e132]:
+                    - generic [ref=f14e133]: t
+                    - generic [ref=f14e135]: f
+                  - generic [ref=f14e138]: −
+                  - generic [ref=f14e140]:
+                    - generic [ref=f14e141]: t
+                    - generic [ref=f14e143]: i
+            - math [ref=f14e147]:
+              - generic [ref=f14e148]: a
+              - generic [ref=f14e149]: =
+              - generic [ref=f14e150]:
+                - generic [ref=f14e151]:
+                  - generic [ref=f14e152]: Δ
+                  - generic [ref=f14e153]: v
+                - generic [ref=f14e154]:
+                  - generic [ref=f14e155]: Δ
+                  - generic [ref=f14e156]: t
+              - generic [ref=f14e157]: =
+              - generic [ref=f14e158]:
+                - generic [ref=f14e159]:
+                  - generic [ref=f14e160]:
+                    - generic [ref=f14e161]: v
+                    - generic [ref=f14e162]: f
+                  - generic [ref=f14e163]: −
+                  - generic [ref=f14e164]:
+                    - generic [ref=f14e165]: v
+                    - generic [ref=f14e166]: i
+                - generic [ref=f14e167]:
+                  - generic [ref=f14e168]:
+                    - generic [ref=f14e169]: t
+                    - generic [ref=f14e170]: f
+                  - generic [ref=f14e171]: −
+                  - generic [ref=f14e172]:
+                    - generic [ref=f14e173]: t
+                    - generic [ref=f14e174]: i
+          - generic [ref=f14e175]:
+            - paragraph [ref=f14e176]: a = aceleracion (m/s²)
+            - paragraph [ref=f14e177]: "?v = variacion de velocidad = velocidad final menos velocidad inicial (m/s)"
+            - paragraph [ref=f14e178]: "?t = intervalo de tiempo (s)"
+            - paragraph [ref=f14e179]: vf = velocidad final (m/s)
+            - paragraph [ref=f14e180]: vi = velocidad inicial (m/s)
+        - generic [ref=f14e181]:
+          - paragraph [ref=f14e182]:
+            - strong [ref=f14e183]: "Interpretacion:"
+            - text: Una aceleracion de 2 m/s² significa que la velocidad aumenta
+            - strong [ref=f14e184]: 2 metros por segundo cada segundo
+            - text: . Si un objeto parte del reposo (vi = 0), despues de 1 segundo su velocidad sera 2 m/s, despues de 2 segundos sera 4 m/s, despues de 3 segundos sera 6 m/s, y asi sucesivamente.
+          - generic [ref=f14e185]: Un auto acelera de 0 a 100 km/h (27,8 m/s) en 10 segundos. Su aceleracion es a = 27,8 / 10 = 2,78 m/s².
+          - paragraph [ref=f14e186]:
+            - text: La aceleracion puede ser
+            - strong [ref=f14e187]: positiva
+            - text: (el objeto aumenta su velocidad) o
+            - strong [ref=f14e188]: negativa
+            - text: (el objeto disminuye su velocidad, es decir, frena). En la vida cotidiana, cuando decimos "acelerar" normalmente nos referimos a aumentar la velocidad, pero en fisica el termino abarca cualquier cambio de velocidad, incluida la desaceleracion.
+      - generic [ref=f14e189]:
+        - generic [ref=f14e190]:
+          - generic [ref=f14e191]: 02b
+          - heading "Graficos en MRUV" [level=2] [ref=f14e192]
+        - generic [ref=f14e193]:
+          - paragraph [ref=f14e194]:
+            - text: En el MRUV tenemos
+            - strong [ref=f14e195]: dos graficos fundamentales
+            - text: ": el de velocidad vs tiempo (una recta inclinada cuya pendiente es la aceleracion) y el de posicion vs tiempo (una parabola, porque la posicion crece de forma cuadratica)."
+          - generic [ref=f14e196]: En MRUV, la velocidad cambia linealmente con el tiempo (recta) y la posicion cambia de forma parabolica.
+        - generic [ref=f14e197]:
+          - generic [ref=f14e198]: Simulacion · Aceleracion y sus graficos
+          - img "Simulacion de movimiento uniformemente variado con graficos posicion-tiempo y velocidad-tiempo" [ref=f14e205]:
+            - generic [ref=f14e207]:
+              - generic [ref=f14e208]: 0 m
+              - generic [ref=f14e209]: 40 m
+              - generic [ref=f14e210]: 80 m
+              - generic [ref=f14e211]: 120 m
+              - generic [ref=f14e212]: 160 m
+              - generic [ref=f14e213]: 200 m
+            - generic [ref=f14e219]: x = 0 m
+            - generic [ref=f14e220]: v = 0.7 m/s
+            - generic [ref=f14e221]: t (s)
+            - generic [ref=f14e222]: x (m)
+            - generic [ref=f14e223]:
+              - generic [ref=f14e224]: "0"
+              - generic [ref=f14e225]: "2"
+              - generic [ref=f14e226]: "4"
+              - generic [ref=f14e227]: "6"
+              - generic [ref=f14e228]: "8"
+              - generic [ref=f14e229]: "10"
+              - generic [ref=f14e230]: "0"
+              - generic [ref=f14e231]: "100"
+              - generic [ref=f14e232]: "200"
+            - generic [ref=f14e234]: x = 0t + 2.0t²
+            - generic [ref=f14e235]: t (s)
+            - generic [ref=f14e236]: v (m/s)
+            - generic [ref=f14e237]:
+              - generic [ref=f14e238]: "0"
+              - generic [ref=f14e239]: "2"
+              - generic [ref=f14e240]: "4"
+              - generic [ref=f14e241]: "6"
+              - generic [ref=f14e242]: "8"
+              - generic [ref=f14e243]: "10"
+              - generic [ref=f14e244]: "0"
+              - generic [ref=f14e245]: "50"
+              - generic [ref=f14e246]: "100"
+            - generic [ref=f14e249]: v = 0 + 4.0t | a = 4 m/s²
+          - generic [ref=f14e250]:
+            - generic [ref=f14e251]:
+              - generic [ref=f14e252]: Velocidad inicial · 0 m/s
+              - slider "Velocidad inicial · 0 m/s" [ref=f14e253]: "0"
+            - generic [ref=f14e254]:
+              - generic [ref=f14e255]: Aceleracion · 4 m/s2
+              - slider "Aceleracion · 4 m/s2" [ref=f14e256]: "4"
+          - paragraph [ref=f14e257]:
+            - text: "El auto acelera constantemente: su"
+            - strong [ref=f14e258]: velocidad crece en linea recta
+            - text: y su
+            - strong [ref=f14e259]: posicion describe una parabola
+            - text: . Cambia la velocidad inicial y la aceleracion para ver como cambian los graficos.
+      - generic [ref=f14e265]:
+        - generic [ref=f14e266]:
+          - generic [ref=f14e267]: "03"
+          - heading "Caida libre" [level=2] [ref=f14e268]
+        - generic [ref=f14e269]:
+          - generic [ref=f14e270]: Dato curioso
+          - paragraph [ref=f14e271]: En la Luna, donde no hay aire, un martillo y una pluma caen al mismo tiempo. El astronauta David Scott lo demostro en la mision Apolo 15, en 1971, dejando caer ambos objetos simultaneamente ante las camaras. ¡Llegaron al suelo lunar exactamente juntos!
+        - generic [ref=f14e272]:
+          - paragraph [ref=f14e273]:
+            - text: La caida libre es un caso especial (y muy importante) de MRUV. Cuando soltamos un objeto cerca de la superficie de la Tierra, este cae con una aceleracion constante llamada
+            - strong [ref=f14e274]: aceleracion de la gravedad
+            - text: ", que se representa con la letra g."
+          - paragraph [ref=f14e275]:
+            - text: "En la Tierra, el valor de la gravedad es aproximadamente:"
+            - strong [ref=f14e276]: g = 9,8 m/s²
+            - text: . Esto significa que un objeto en caida libre aumenta su velocidad en 9,8 metros por segundo cada segundo que pasa. Es decir, al primer segundo viaja a 9,8 m/s, al segundo a 19,6 m/s, al tercero a 29,4 m/s, y asi en adelante.
+          - paragraph [ref=f14e277]:
+            - text: En la Tierra,
+            - strong [ref=f14e278]: todos los cuerpos caen con la misma aceleracion
+            - text: "si no hay resistencia del aire. Esto fue demostrado por Galileo hace mas de 400 años: una pluma y una piedra, en el vacio, caen a la misma velocidad. Lo que ocurre en la vida cotidiana es que el aire frena mas a la pluma por su forma y superficie, no porque \"pese menos\"."
+        - generic [ref=f14e279]:
+          - paragraph [ref=f14e280]: Ecuaciones de la caida libre
+          - paragraph [ref=f14e281]: (partiendo del reposo, sin resistencia del aire)
+          - generic [ref=f14e282]:
+            - generic [ref=f14e283]:
+              - generic [ref=f14e284]: v
+              - generic [ref=f14e286]: =
+              - generic [ref=f14e288]: g
+              - generic [ref=f14e290]: ⋅
+              - generic [ref=f14e292]: t
+            - math [ref=f14e295]:
+              - generic [ref=f14e296]: v
+              - generic [ref=f14e297]: =
+              - generic [ref=f14e298]: g
+              - generic [ref=f14e299]: ⋅
+              - generic [ref=f14e300]: t
+          - generic [ref=f14e301]:
+            - generic [ref=f14e302]:
+              - generic [ref=f14e303]: h
+              - generic [ref=f14e305]: =
+              - generic [ref=f14e308]:
+                - generic [ref=f14e309]: "1"
+                - generic [ref=f14e312]: "2"
+              - generic [ref=f14e319]: g
+              - generic [ref=f14e321]:
+                - generic [ref=f14e322]: t
+                - generic [ref=f14e324]: "2"
+            - math [ref=f14e328]:
+              - generic [ref=f14e329]: h
+              - generic [ref=f14e330]: =
+              - generic [ref=f14e331]:
+                - generic [ref=f14e332]: "1"
+                - generic [ref=f14e333]: "2"
+              - generic [ref=f14e334]: g
+              - generic [ref=f14e335]:
+                - generic [ref=f14e336]: t
+                - generic [ref=f14e337]: "2"
+          - generic [ref=f14e338]:
+            - paragraph [ref=f14e339]: v = velocidad en cada instante (m/s)
+            - paragraph [ref=f14e340]: h = altura recorrida (m)
+            - paragraph [ref=f14e341]: g = aceleracion de la gravedad = 9,8 m/s²
+            - paragraph [ref=f14e342]: t = tiempo de caida (s)
+        - generic [ref=f14e343]:
+          - paragraph [ref=f14e344]:
+            - strong [ref=f14e345]: "Ejemplo:"
+            - text: Si dejamos caer una piedra desde un puente y tarda 3 segundos en llegar al agua, ¿que velocidad tiene al tocar el agua y desde que altura cayo?
+          - generic [ref=f14e346]:
+            - paragraph [ref=f14e347]:
+              - text: v = g · t = 9,8 m/s² · 3 s =
+              - strong [ref=f14e348]: 29,4 m/s
+            - paragraph [ref=f14e349]:
+              - text: h = ½ · 9,8 m/s² · (3 s)² = ½ · 9,8 · 9 =
+              - strong [ref=f14e350]: 44,1 m
+          - paragraph [ref=f14e351]: "¡La piedra golpea el agua a casi 30 metros por segundo! Convertido a km/h: 29,4 · 3,6 ˜ 106 km/h. Por eso saltar desde lugares altos es tan peligroso: la velocidad acumulada por la gravedad es enorme en muy pocos segundos."
+        - 'figure "Figura 1 — Caida libre Un objeto en caida libre parte del reposo y su velocidad aumenta linealmente con el tiempo: v = g·t. La distancia recorrida crece con el cuadrado del tiempo: h = ½·g·t²." [ref=f14e352]':
+          - 'img "Caida libre Un objeto en caida libre parte del reposo y su velocidad aumenta linealmente con el tiempo: v = g·t. La dist"'
+      - generic [ref=f14e359]:
+        - generic [ref=f14e360]:
+          - generic [ref=f14e361]: "04"
+          - heading "Preguntas para pensar" [level=2] [ref=f14e362]
+        - paragraph [ref=f14e363]: Estas preguntas te invitan a reflexionar y conectar lo aprendido con situaciones reales. Ideal para debatir en clase o responder en la carpeta.
+        - generic [ref=f14e364]:
+          - generic [ref=f14e366]:
+            - generic [ref=f14e367]: "1."
+            - generic [ref=f14e368]:
+              - paragraph [ref=f14e369]: ¿Cual es la diferencia principal entre MRU y MRUV?
+              - paragraph [ref=f14e370]:
+                - text: En el MRU la
+                - strong [ref=f14e371]: velocidad es constante
+                - text: y la aceleracion es cero. En el MRUV la
+                - strong [ref=f14e372]: aceleracion es constante
+                - text: (distinta de cero) y la velocidad cambia de manera uniforme. En el MRU, la distancia recorrida crece linealmente con el tiempo; en el MRUV, la distancia crece de forma parabolica porque la velocidad va aumentando.
+          - generic [ref=f14e374]:
+            - generic [ref=f14e375]: "2."
+            - generic [ref=f14e376]:
+              - paragraph [ref=f14e377]: ¿Por que una pluma y una piedra no caen al mismo tiempo en el aire?
+              - paragraph [ref=f14e378]:
+                - text: Por la
+                - strong [ref=f14e379]: resistencia del aire
+                - text: . La pluma tiene una superficie grande y poco peso, por lo que el aire la frena mucho. La piedra, mas compacta y pesada, atraviesa el aire con mucha menos resistencia. Sin embargo, en el vacio (sin aire), ambas caerian exactamente juntas, como lo comprobo Galileo hace siglos y lo confirmo el astronauta David Scott en la Luna.
+          - generic [ref=f14e381]:
+            - generic [ref=f14e382]: "3."
+            - generic [ref=f14e383]:
+              - paragraph [ref=f14e384]: Si un auto frena, ¿su aceleracion es positiva o negativa?
+              - paragraph [ref=f14e385]:
+                - text: Es
+                - strong [ref=f14e386]: negativa
+                - text: "(tambien llamada desaceleracion). Si el auto va hacia adelante (velocidad positiva) y frena, la aceleracion es negativa porque la velocidad final es menor que la inicial. Matematicamente: a = (vf - vi) / ?t. Si vf < vi, el resultado es negativo. Sin embargo, el auto sigue estando en MRUV: su velocidad cambia de manera uniforme, solo que hacia valores menores."
+      - generic [ref=f14e387]:
+        - link "Articulo anterior MRU" [ref=f14e388] [cursor=pointer]:
+          - /url: mru.html
+          - generic [ref=f14e391]:
+            - generic [ref=f14e392]: Articulo anterior
+            - text: MRU
+        - link "Articulo siguiente Graficos del Movimiento" [ref=f14e393] [cursor=pointer]:
+          - /url: graficos.html
+          - generic [ref=f14e394]:
+            - generic [ref=f14e395]: Articulo siguiente
+            - text: Graficos del Movimiento
+  - contentinfo [ref=f14e398]:
+    - generic [ref=f14e400]:
+      - generic [ref=f14e401]:
+        - generic [ref=f14e405]: Cs. Naturales
+        - generic [ref=f14e406]: 1° Año
+      - generic [ref=f14e407]:
+        - link "Inicio" [ref=f14e408] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f14e409]: Prof. Pereyra, Javier

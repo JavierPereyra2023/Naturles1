@@ -1,0 +1,316 @@
+- generic [active] [ref=f20e1]:
+  - navigation [ref=f20e2]:
+    - generic [ref=f20e4]:
+      - generic [ref=f20e5]:
+        - link "Inicio" [ref=f20e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f20e12]: /
+        - link "Fisica" [ref=f20e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f20e14]: /
+        - link "Sistema Solar" [ref=f20e15] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=f20e16]: /
+        - generic [ref=f20e17]: MAPI
+      - generic [ref=f20e18]:
+        - generic [ref=f20e19]: Proyecto · Oct
+        - link "Volver" [ref=f20e20] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f20e24] [cursor=pointer]
+  - generic [ref=f20e33]:
+    - generic [ref=f20e34]: Proyecto Institucional · Octubre
+    - heading "Proyecto MAPI 2026" [level=1] [ref=f20e37]
+    - paragraph [ref=f20e38]: Maqueta Astronomica de Proporciones Interactiva. El proyecto anual de Ciencias Naturales donde construimos un modelo a escala del Sistema Solar con materiales reciclables, calculo de proporciones, trabajo en equipo y exposicion oral.
+    - generic [ref=f20e39]:
+      - generic [ref=f20e40]: MAPI
+      - generic [ref=f20e41]: Maqueta
+      - generic [ref=f20e42]: Escalas
+      - generic [ref=f20e43]: Proyecto
+  - generic [ref=f20e45]:
+    - complementary [ref=f20e46]:
+      - generic [ref=f20e47]:
+        - heading "En esta pagina" [level=3] [ref=f20e48]
+        - navigation [ref=f20e49]:
+          - link "01. Proyecto MAPI" [ref=f20e50] [cursor=pointer]:
+            - /url: "#mapi"
+          - link "02. Escalas" [ref=f20e51] [cursor=pointer]:
+            - /url: "#escalas"
+          - link "03. Materiales y construccion" [ref=f20e52] [cursor=pointer]:
+            - /url: "#materiales"
+          - link "04. Lo que aprendemos" [ref=f20e53] [cursor=pointer]:
+            - /url: "#aprendemos"
+          - link "05. Preguntas guia" [ref=f20e54] [cursor=pointer]:
+            - /url: "#preguntas"
+    - main [ref=f20e55]:
+      - generic [ref=f20e56]:
+        - generic [ref=f20e57]:
+          - generic [ref=f20e58]: "01"
+          - heading "Proyecto MAPI" [level=2] [ref=f20e59]
+        - paragraph [ref=f20e61]:
+          - text: La
+          - strong [ref=f20e62]: Maqueta Astronomica de Proporciones Interactiva (MAPI)
+          - text: es el proyecto anual de Ciencias Naturales para 1° año. Consiste en construir un modelo a escala del Sistema Solar que nos permita entender las distancias y tamanos reales, imposibles de representar en un libro o en una lamina.
+        - generic [ref=f20e63]:
+          - text: “
+          - paragraph [ref=f20e64]: La Maqueta Astronomica de Proporciones Interactiva (MAPI) es el proyecto anual de Ciencias Naturales. Construimos un modelo a escala del Sistema Solar.
+        - paragraph [ref=f20e65]:
+          - text: El Sistema Solar es tan inmenso que ninguna ilustracion de un libro de texto respeta las proporciones reales. Si dibujaramos el Sol de 1 cm, la Tierra seria un punto de 0,1 mm a 1 metro de distancia, y Neptuno estaria a 30 metros. En una hoja no entra. Con la maqueta, podemos representar
+          - strong [ref=f20e66]: la relacion de tamanos
+          - text: (con una escala) y
+          - strong [ref=f20e67]: la relacion de distancias
+          - text: (con otra escala diferente).
+        - generic [ref=f20e68]:
+          - generic [ref=f20e69]:
+            - heading "Construccion" [level=4] [ref=f20e72]
+            - paragraph [ref=f20e73]: Modelo a escala del Sistema Solar con materiales reciclables. Calculo de proporciones reales de tamaño y distancia.
+          - generic [ref=f20e74]:
+            - heading "Exposicion Oral" [level=4] [ref=f20e77]
+            - paragraph [ref=f20e78]: Guion de exposicion y defensa conceptual ante la comunidad escolar. Comparacion con imagenes reales de sondas espaciales.
+          - generic [ref=f20e79]:
+            - heading "Trabajo en Equipo" [level=4] [ref=f20e84]
+            - paragraph [ref=f20e85]: Formacion de grupos, asignacion de planetas y roles. Evaluacion con rubrica de precision conceptual, modelo, oralidad y creatividad.
+      - generic [ref=f20e91]:
+        - generic [ref=f20e92]:
+          - generic [ref=f20e93]: "02"
+          - heading "Escalas" [level=2] [ref=f20e94]
+        - paragraph [ref=f20e96]:
+          - text: Las distancias en el espacio son tan enormes que no podemos hacer una maqueta que respete
+          - strong [ref=f20e97]: tamaño y distancia a la vez
+          - text: . Elegimos una escala para representar los tamanos relativos de los planetas y otra para las distancias entre ellos.
+        - generic [ref=f20e98]:
+          - generic [ref=f20e99]: Para dimensionar
+          - paragraph [ref=f20e100]:
+            - text: Si el Sol fuera una pelota de futbol (22 cm), la Tierra seria una perlita de
+            - strong [ref=f20e101]: 2 mm
+            - text: a
+            - strong [ref=f20e102]: 24 metros
+            - text: de distancia. Neptuno estaria a
+            - strong [ref=f20e103]: 700 metros
+            - text: . ¡El espacio esta casi vacio!
+        - paragraph [ref=f20e104]: Si el Sol fuera una pelota de futbol de 22 cm de diametro, la Tierra seria una perlita de 2 mm a 24 metros de distancia. Jupiter seria una naranja de 2,4 cm a 124 metros. Neptuno estaria a 700 metros, casi siete cuadras. Asi de inmensas son las distancias en el espacio.
+        - generic [ref=f20e105]:
+          - heading "Tabla de tamanos proporcionales sugerida" [level=3] [ref=f20e107]
+          - table [ref=f20e109]:
+            - rowgroup [ref=f20e110]:
+              - row [ref=f20e111]:
+                - columnheader "Cuerpo" [ref=f20e112]
+                - columnheader "Diametro real (km)" [ref=f20e113]
+                - columnheader "Diametro en maqueta (cm)" [ref=f20e114]
+                - columnheader "Material sugerido" [ref=f20e115]
+            - rowgroup [ref=f20e116]:
+              - row [ref=f20e117]:
+                - cell "Sol" [ref=f20e118]
+                - cell "1.392.700" [ref=f20e119]
+                - cell "22,0" [ref=f20e120]
+                - cell "Pelota de futbol / globo grande" [ref=f20e121]
+              - row [ref=f20e122]:
+                - cell "Mercurio" [ref=f20e123]
+                - cell "4.879" [ref=f20e124]
+                - cell "0,08" [ref=f20e125]
+                - cell "Perlita / mostacilla" [ref=f20e126]
+              - row [ref=f20e127]:
+                - cell "Venus" [ref=f20e128]
+                - cell "12.104" [ref=f20e129]
+                - cell "0,19" [ref=f20e130]
+                - cell "Perlita mediana" [ref=f20e131]
+              - row [ref=f20e132]:
+                - cell "Tierra" [ref=f20e133]
+                - cell "12.742" [ref=f20e134]
+                - cell "0,20" [ref=f20e135]
+                - cell "Perlita azul" [ref=f20e136]
+              - row [ref=f20e137]:
+                - cell "Marte" [ref=f20e138]
+                - cell "6.779" [ref=f20e139]
+                - cell "0,11" [ref=f20e140]
+                - cell "Mostacilla roja" [ref=f20e141]
+              - row [ref=f20e142]:
+                - cell "Jupiter" [ref=f20e143]
+                - cell "139.820" [ref=f20e144]
+                - cell "2,2" [ref=f20e145]
+                - cell "Pelota de tenis / naranja" [ref=f20e146]
+              - row [ref=f20e147]:
+                - cell "Saturno" [ref=f20e148]
+                - cell "116.460" [ref=f20e149]
+                - cell "1,8" [ref=f20e150]
+                - cell "Pelota de ping-pong + anillo" [ref=f20e151]
+              - row [ref=f20e152]:
+                - cell "Urano" [ref=f20e153]
+                - cell "50.724" [ref=f20e154]
+                - cell "0,8" [ref=f20e155]
+                - cell "Canica grande" [ref=f20e156]
+              - row [ref=f20e157]:
+                - cell "Neptuno" [ref=f20e158]
+                - cell "49.244" [ref=f20e159]
+                - cell "0,78" [ref=f20e160]
+                - cell "Canica azul" [ref=f20e161]
+        - paragraph [ref=f20e162]: "Escala de tamaños sugerida: 1 cm = 63.300 km aproximadamente. La escala de distancias es independiente y la define cada grupo segun el espacio disponible para la exposicion."
+      - generic [ref=f20e168]:
+        - generic [ref=f20e169]:
+          - generic [ref=f20e170]: "03"
+          - heading "Materiales y construccion" [level=2] [ref=f20e171]
+        - paragraph [ref=f20e173]:
+          - text: La MAPI se construye con
+          - strong [ref=f20e174]: materiales accesibles y reciclables
+          - text: . La creatividad y la precision conceptual valen mas que los materiales caros. Lo importante es entender que representa cada elemento y poder explicarlo.
+        - generic [ref=f20e175]:
+          - generic [ref=f20e176]:
+            - heading "Materiales sugeridos" [level=3] [ref=f20e177]
+            - list [ref=f20e178]:
+              - listitem [ref=f20e179]:
+                - generic [ref=f20e182]:
+                  - strong [ref=f20e183]: Telgopor
+                  - text: (esferas de distintos tamanos) para los planetas
+              - listitem [ref=f20e184]:
+                - generic [ref=f20e187]:
+                  - strong [ref=f20e188]: Papel mache
+                  - text: para planetas grandes (Jupiter, Saturno)
+              - listitem [ref=f20e189]:
+                - generic [ref=f20e192]:
+                  - strong [ref=f20e193]: Alambre
+                  - text: para las orbitas y estructuras de soporte
+              - listitem [ref=f20e194]:
+                - generic [ref=f20e197]:
+                  - strong [ref=f20e198]: Pintura
+                  - text: (acrilica o tempera) para los colores caracteristicos
+              - listitem [ref=f20e199]:
+                - generic [ref=f20e202]:
+                  - strong [ref=f20e203]: Carton y madera
+                  - text: para la base de la maqueta
+              - listitem [ref=f20e204]:
+                - generic [ref=f20e207]:
+                  - strong [ref=f20e208]: Hilo o tanza
+                  - text: para colgar los planetas (maqueta suspendida)
+          - generic [ref=f20e209]:
+            - heading "Pasos de construccion" [level=3] [ref=f20e210]
+            - list [ref=f20e211]:
+              - listitem [ref=f20e212]:
+                - generic [ref=f20e213]: "1."
+                - generic [ref=f20e214]:
+                  - text: Calcular las
+                  - strong [ref=f20e215]: proporciones
+                  - text: de cada planeta segun la escala elegida.
+              - listitem [ref=f20e216]:
+                - generic [ref=f20e217]: "2."
+                - generic [ref=f20e218]:
+                  - text: Preparar las esferas de telgopor o papel mache con el
+                  - strong [ref=f20e219]: tamano correcto
+                  - text: .
+              - listitem [ref=f20e220]:
+                - generic [ref=f20e221]: "3."
+                - generic [ref=f20e222]:
+                  - text: Lijar y dar una base de pintura
+                  - strong [ref=f20e223]: blanca
+                  - text: a cada planeta.
+              - listitem [ref=f20e224]:
+                - generic [ref=f20e225]: "4."
+                - generic [ref=f20e226]:
+                  - text: Pintar con los
+                  - strong [ref=f20e227]: colores caracteristicos
+                  - text: (Marte rojo, Jupiter con bandas, etc.).
+              - listitem [ref=f20e228]:
+                - generic [ref=f20e229]: "5."
+                - generic [ref=f20e230]:
+                  - text: Armar la
+                  - strong [ref=f20e231]: estructura de soporte
+                  - text: con la base y los alambres de las orbitas.
+              - listitem [ref=f20e232]:
+                - generic [ref=f20e233]: "6."
+                - generic [ref=f20e234]:
+                  - text: Preparar
+                  - strong [ref=f20e235]: carteles
+                  - text: con el nombre, diametro real y distancia al Sol de cada planeta.
+      - generic [ref=f20e241]:
+        - generic [ref=f20e242]:
+          - generic [ref=f20e243]: "04"
+          - heading "Lo que aprendemos" [level=2] [ref=f20e244]
+        - generic [ref=f20e245]:
+          - generic [ref=f20e246]:
+            - heading "Dimensiones reales" [level=4] [ref=f20e250]
+            - paragraph [ref=f20e251]: Comprender las escalas reales del Sistema Solar. Entender por que en los libros no se pueden respetar las proporciones y por que necesitamos dos escalas diferentes para tamaño y distancia.
+          - generic [ref=f20e252]:
+            - heading "Trabajo en equipo" [level=4] [ref=f20e258]
+            - paragraph [ref=f20e259]: "Aprender a organizarse en grupo, dividir tareas, coordinar esfuerzos y resolver problemas juntos. La ciencia no se hace en solitario: se construye colectivamente."
+          - generic [ref=f20e260]:
+            - heading "Investigacion" [level=4] [ref=f20e266]
+            - paragraph [ref=f20e267]: Buscar informacion, comparar fuentes, seleccionar los datos relevantes y verificar que las proporciones sean correctas. Habilidades fundamentales para cualquier proyecto cientifico.
+          - generic [ref=f20e268]:
+            - heading "Creatividad" [level=4] [ref=f20e270]
+            - paragraph [ref=f20e271]: "Resolver como representar algo tan grande con materiales limitados. La creatividad es parte del pensamiento cientifico: encontrar soluciones ingeniosas a problemas reales."
+        - generic [ref=f20e272]:
+          - text: “
+          - paragraph [ref=f20e277]:
+            - strong [ref=f20e278]: La ciencia tambien se aprende construyendo.
+            - text: No se trata solo de leer y memorizar. Cuando armamos un modelo, tomamos decisiones, resolvemos problemas y entendemos de verdad como funcionan las cosas. La MAPI es ciencia en accion.
+      - generic [ref=f20e284]:
+        - generic [ref=f20e285]:
+          - generic [ref=f20e286]: "05"
+          - heading "Preguntas guia para el proyecto" [level=2] [ref=f20e287]
+        - paragraph [ref=f20e288]: Estas preguntas te ayudan a preparar la exposicion oral y a verificar que comprendiste los conceptos fundamentales detras de la maqueta.
+        - generic [ref=f20e289]:
+          - generic [ref=f20e291]:
+            - generic [ref=f20e292]: "1."
+            - generic [ref=f20e293]:
+              - paragraph [ref=f20e294]: ¿Por que no se puede hacer una maqueta del Sistema Solar con una sola escala?
+              - paragraph [ref=f20e295]:
+                - text: Porque los tamanos de los planetas son diminutos comparados con las distancias entre ellos. Si usamos una escala que haga visibles los planetas, las distancias serian enormes (cientos de metros). Si usamos una escala que quepa en el aula, los planetas serian invisibles. Por eso usamos
+                - strong [ref=f20e296]: dos escalas separadas
+                - text: ": una para tamanos y otra para distancias."
+          - generic [ref=f20e298]:
+            - generic [ref=f20e299]: "2."
+            - generic [ref=f20e300]:
+              - paragraph [ref=f20e301]: ¿Que planeta de tu maqueta fue el mas dificil de representar y por que?
+              - paragraph [ref=f20e302]:
+                - text: Respuesta personal de cada grupo. Algunos diran
+                - strong [ref=f20e303]: Jupiter
+                - text: por su tamaño (es el mas grande), otros
+                - strong [ref=f20e304]: Saturno
+                - text: por los anillos, otros
+                - strong [ref=f20e305]: Mercurio
+                - text: por lo pequeño. Lo importante es que puedas
+                - strong [ref=f20e306]: explicar el desafio y como lo resolviste
+                - text: .
+          - generic [ref=f20e308]:
+            - generic [ref=f20e309]: "3."
+            - generic [ref=f20e310]:
+              - paragraph [ref=f20e311]: Si tuvieras que explicarle el Sistema Solar a un nene de 6 años usando tu maqueta, ¿que le dirias?
+              - paragraph [ref=f20e312]:
+                - text: Esta pregunta evalua tu capacidad de
+                - strong [ref=f20e313]: comunicar conceptos complejos de forma sencilla
+                - text: ". No se trata de usar palabras dificiles, sino de encontrar la manera de que alguien sin conocimientos previos entienda lo esencial: que el Sol es una estrella enorme, que los planetas giran a su alrededor, y que las distancias son inmensas."
+          - generic [ref=f20e315]:
+            - generic [ref=f20e316]: "4."
+            - generic [ref=f20e317]:
+              - paragraph [ref=f20e318]: ¿Que fue lo que mas te sorprendio al armar la maqueta?
+              - paragraph [ref=f20e319]:
+                - text: Esta pregunta busca tu
+                - strong [ref=f20e320]: reflexion personal
+                - text: . La mayoria de los estudiantes se sorprenden al descubrir que el Sistema Solar es casi todo
+                - strong [ref=f20e321]: espacio vacio
+                - text: ", que los planetas gaseosos son enormes comparados con los rocosos, o que el Sol es inmensamente mas grande que todo lo demas junto. Conta tu experiencia."
+          - generic [ref=f20e323]:
+            - generic [ref=f20e324]: "5."
+            - generic [ref=f20e325]:
+              - paragraph [ref=f20e326]: ¿Como se organizaron como grupo? ¿Que harian distinto la proxima vez?
+              - paragraph [ref=f20e327]:
+                - text: Reflexion sobre el
+                - strong [ref=f20e328]: proceso de trabajo
+                - text: . ¿Se dividieron los planetas? ¿Alguien investigo, otro pinto, otro armo la estructura? ¿Que funciono bien y que mejorarian? La
+                - strong [ref=f20e329]: autoevaluacion
+                - text: es parte del aprendizaje.
+      - generic [ref=f20e330]:
+        - link "Exploracion" [ref=f20e331] [cursor=pointer]:
+          - /url: exploracion.html
+        - generic [ref=f20e335]: Proyecto MAPI — Pagina 4 de 4
+        - link "Fin de la unidad" [ref=f20e336]:
+          - /url: "#"
+  - contentinfo [ref=f20e338]:
+    - generic [ref=f20e340]:
+      - generic [ref=f20e341]:
+        - generic [ref=f20e347]: Cs. Naturales
+        - generic [ref=f20e348]: 1° Año
+      - generic [ref=f20e349]:
+        - link "Inicio" [ref=f20e350] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Fisica" [ref=f20e351] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f20e352]: Prof. Pereyra, Javier

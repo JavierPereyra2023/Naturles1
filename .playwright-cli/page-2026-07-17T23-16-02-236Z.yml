@@ -1,0 +1,250 @@
+- generic [active] [ref=f6e1]:
+  - navigation [ref=f6e2]:
+    - generic [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - link "Inicio" [ref=f6e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f6e12]: /
+        - link "Química" [ref=f6e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f6e14]: /
+        - link "Materia" [ref=f6e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f6e16]:
+        - link "Materia" [ref=f6e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f6e21] [cursor=pointer]
+  - generic [ref=f6e29]:
+    - generic [ref=f6e30]: Química · Materia
+    - heading "Sustancias" [level=1] [ref=f6e33]
+    - paragraph [ref=f6e34]: Simples y compuestas. La tabla periódica, los elementos químicos y cómo se representan mediante fórmulas.
+  - main [ref=f6e35]:
+    - generic [ref=f6e36]:
+      - heading "Sustancias simples" [level=2] [ref=f6e37]
+      - generic [ref=f6e43]:
+        - generic [ref=f6e44]: Dato clave
+        - text: De los 118 elementos conocidos, la mayoría se encuentra en la naturaleza y otros fueron sintetizados en laboratorio. El oxígeno es el elemento más abundante en la corteza terrestre.
+      - paragraph [ref=f6e45]:
+        - text: Una
+        - strong [ref=f6e46]: sustancia simple
+        - text: está formada por un solo tipo de átomo. También se llaman
+        - strong [ref=f6e47]: elementos químicos
+        - text: . No se pueden descomponer en sustancias más simples por métodos químicos comunes. Cada elemento tiene un nombre y un
+        - strong [ref=f6e48]: símbolo químico
+        - text: (una o dos letras, la primera siempre mayúscula).
+      - paragraph [ref=f6e49]: "Algunos elementos se presentan como átomos individuales (ej: el helio, He) y otros forman moléculas con átomos del mismo elemento (ej: el oxígeno del aire es O2, dos átomos de oxígeno unidos)."
+      - table [ref=f6e51]:
+        - rowgroup [ref=f6e52]:
+          - row [ref=f6e53]:
+            - columnheader "Elemento" [ref=f6e54]
+            - columnheader "Símbolo" [ref=f6e55]
+            - columnheader "Ejemplo de uso / Dónde se encuentra" [ref=f6e56]
+        - rowgroup [ref=f6e57]:
+          - row [ref=f6e58]:
+            - cell "Oxígeno" [ref=f6e59]
+            - cell "O (como O2)" [ref=f6e60]
+            - cell "Respiración, combustión. 21% del aire." [ref=f6e61]
+          - row [ref=f6e62]:
+            - cell "Hierro" [ref=f6e63]
+            - cell "Fe" [ref=f6e64]
+            - cell "Construcción, herramientas, hemoglobina en sangre." [ref=f6e65]
+          - row [ref=f6e66]:
+            - cell "Oro" [ref=f6e67]
+            - cell "Au" [ref=f6e68]
+            - cell "Joyería, electrónica. No se oxida." [ref=f6e69]
+          - row [ref=f6e70]:
+            - cell "Carbono" [ref=f6e71]
+            - cell "C" [ref=f6e72]
+            - cell "Base de la vida. Diamante, grafito, carbono orgánico." [ref=f6e73]
+          - row [ref=f6e74]:
+            - cell "Aluminio" [ref=f6e75]
+            - cell "Al" [ref=f6e76]
+            - cell "Latas, aviones, papel aluminio. Liviano y resistente." [ref=f6e77]
+          - row [ref=f6e78]:
+            - cell "Nitrógeno" [ref=f6e79]
+            - cell "N (como N2)" [ref=f6e80]
+            - cell "78% del aire. Fertilizantes." [ref=f6e81]
+          - row [ref=f6e82]:
+            - cell "Mercurio" [ref=f6e83]
+            - cell "Hg" [ref=f6e84]
+            - cell "Único metal líquido a temperatura ambiente." [ref=f6e85]
+      - 'figure "Ilustración: Tabla periódica de los elementos. Organiza los 118 elementos conocidos por número atómico creciente. Las columnas (grupos) comparten propiedades químicas." [ref=f6e86]':
+        - 'img "Ilustración: Tabla periódica de los elementos. Organiza los 118 elementos conocidos por número atómico creciente. Las co"'
+      - generic [ref=f6e88]: "\"La tabla periódica es como el mapa de un tesoro para los químicos. Cada elemento tiene su lugar y sus propiedades están relacionadas con su posición.\""
+    - generic [ref=f6e89]:
+      - heading "Sustancias compuestas" [level=2] [ref=f6e90]
+      - paragraph [ref=f6e93]:
+        - text: Una
+        - strong [ref=f6e94]: sustancia compuesta
+        - text: (o compuesto químico) está formada por
+        - strong [ref=f6e95]: dos o más elementos diferentes
+        - text: unidos químicamente en proporciones fijas. Los compuestos tienen propiedades distintas a las de los elementos que los forman.
+      - generic [ref=f6e96]:
+        - generic [ref=f6e97]:
+          - heading "Agua (H2O)" [level=4] [ref=f6e98]
+          - paragraph [ref=f6e99]: Dos átomos de hidrógeno + uno de oxígeno. Es líquida a temperatura ambiente, aunque el hidrógeno y el oxígeno son gases. Esencial para la vida.
+        - generic [ref=f6e100]:
+          - heading "Dióxido de carbono (CO2)" [level=4] [ref=f6e101]
+          - paragraph [ref=f6e102]: Un átomo de carbono + dos de oxígeno. Las plantas lo usan para la fotosíntesis. Lo exhalamos al respirar. Gas de efecto invernadero.
+        - generic [ref=f6e103]:
+          - heading "Sal de mesa (NaCl)" [level=4] [ref=f6e104]
+          - paragraph [ref=f6e105]: Sodio (un metal muy reactivo) + cloro (un gas tóxico). Juntos forman un compuesto estable, de uso alimentario en cantidades adecuadas y necesario para funciones del organismo.
+        - generic [ref=f6e106]:
+          - heading "Glucosa (C6H12O6)" [level=4] [ref=f6e107]
+          - paragraph [ref=f6e108]: Seis carbonos + doce hidrógenos + seis oxígenos. Es el azúcar que usan las células como fuente de energía.
+    - generic [ref=f6e109]:
+      - heading "Diferencia con las mezclas" [level=2] [ref=f6e110]
+      - paragraph [ref=f6e116]:
+        - text: Es importante no confundir
+        - strong [ref=f6e117]: sustancias
+        - text: con
+        - strong [ref=f6e118]: mezclas
+        - text: ". Las diferencias principales son:"
+      - table [ref=f6e120]:
+        - rowgroup [ref=f6e121]:
+          - row [ref=f6e122]:
+            - columnheader "Característica" [ref=f6e123]
+            - columnheader "Sustancia pura" [ref=f6e124]
+            - columnheader "Mezcla" [ref=f6e125]
+        - rowgroup [ref=f6e126]:
+          - row [ref=f6e127]:
+            - cell "Composición" [ref=f6e128]
+            - cell "Fija y definida" [ref=f6e129]
+            - cell "Variable (depende de las cantidades)" [ref=f6e130]
+          - row [ref=f6e131]:
+            - cell "Separación" [ref=f6e132]
+            - cell "Solo por métodos químicos (electrólisis, descomposición)" [ref=f6e133]
+            - cell "Por métodos físicos (filtración, decantación, evaporación)" [ref=f6e134]
+          - row [ref=f6e135]:
+            - cell "Propiedades" [ref=f6e136]
+            - cell "Constantes (punto de fusión y ebullición fijos)" [ref=f6e137]
+            - cell "Variables (dependen de la proporción)" [ref=f6e138]
+          - row [ref=f6e139]:
+            - cell "Ejemplos" [ref=f6e140]
+            - cell "Agua destilada, oxígeno, sal pura, azúcar" [ref=f6e141]
+            - cell "Agua de mar, aire, ensalada, granito" [ref=f6e142]
+      - paragraph [ref=f6e143]:
+        - text: El aire que respiramos es una
+        - strong [ref=f6e144]: mezcla
+        - text: de gases (nitrógeno, oxígeno, dióxido de carbono y otros), no una sustancia pura. El agua de mar es una mezcla de agua y sales. En cambio, el agua destilada (H2O pura) sí es una sustancia compuesta.
+    - generic [ref=f6e145]:
+      - heading "Fórmulas químicas" [level=2] [ref=f6e146]
+      - paragraph [ref=f6e149]:
+        - text: Las
+        - strong [ref=f6e150]: fórmulas químicas
+        - text: son una forma abreviada de representar las sustancias. Nos indican
+        - strong [ref=f6e151]: qué elementos
+        - text: la componen y
+        - strong [ref=f6e152]: en qué proporción
+        - text: se combinan sus átomos.
+      - paragraph [ref=f6e154]:
+        - generic [ref=f6e155]:
+          - generic [ref=f6e156]:
+            - generic [ref=f6e157]:
+              - generic [ref=f6e158]: H
+              - generic [ref=f6e160]: "2"
+            - generic [ref=f6e163]: O
+            - generic [ref=f6e165]: ","
+            - generic [ref=f6e167]: C
+            - generic [ref=f6e169]:
+              - generic [ref=f6e170]: O
+              - generic [ref=f6e172]: "2"
+            - generic [ref=f6e175]: ","
+            - generic [ref=f6e177]: "N"
+            - generic [ref=f6e179]: a
+            - generic [ref=f6e181]: C
+            - generic [ref=f6e183]: l
+            - generic [ref=f6e185]: ","
+            - generic [ref=f6e187]:
+              - generic [ref=f6e188]: C
+              - generic [ref=f6e190]: "6"
+            - generic [ref=f6e193]:
+              - generic [ref=f6e194]: H
+              - generic [ref=f6e198]:
+                - generic [ref=f6e199]: "1"
+                - generic [ref=f6e200]: "2"
+            - generic [ref=f6e201]:
+              - generic [ref=f6e202]: O
+              - generic [ref=f6e204]: "6"
+          - math [ref=f6e208]:
+            - generic [ref=f6e209]:
+              - generic [ref=f6e210]: H
+              - generic [ref=f6e211]: "2"
+            - generic [ref=f6e212]: O
+            - generic [ref=f6e213]: ","
+            - generic [ref=f6e214]: C
+            - generic [ref=f6e215]:
+              - generic [ref=f6e216]: O
+              - generic [ref=f6e217]: "2"
+            - generic [ref=f6e218]: ","
+            - generic [ref=f6e219]: "N"
+            - generic [ref=f6e220]: a
+            - generic [ref=f6e221]: C
+            - generic [ref=f6e222]: l
+            - generic [ref=f6e223]: ","
+            - generic [ref=f6e224]:
+              - generic [ref=f6e225]: C
+              - generic [ref=f6e226]: "6"
+            - generic [ref=f6e227]:
+              - generic [ref=f6e228]: H
+              - generic [ref=f6e229]: "12"
+            - generic [ref=f6e231]:
+              - generic [ref=f6e232]: O
+              - generic [ref=f6e233]: "6"
+      - paragraph [ref=f6e234]:
+        - text: En una fórmula química, los
+        - strong [ref=f6e235]: subíndices
+        - text: "indican cuántos átomos de cada elemento hay. Por ejemplo:"
+      - list [ref=f6e236]:
+        - listitem [ref=f6e237]:
+          - generic [ref=f6e240]:
+            - strong [ref=f6e241]: H2O
+            - text: ": 2 átomos de hidrógeno (H) y 1 átomo de oxígeno (O). Cuando no hay subíndice, se sobreentiende que es 1."
+        - listitem [ref=f6e242]:
+          - generic [ref=f6e245]:
+            - strong [ref=f6e246]: CO2
+            - text: ": 1 átomo de carbono (C) y 2 átomos de oxígeno (O)."
+        - listitem [ref=f6e247]:
+          - generic [ref=f6e250]:
+            - strong [ref=f6e251]: C6H12O6
+            - text: ": 6 átomos de carbono, 12 de hidrógeno y 6 de oxígeno. Es la fórmula de la glucosa."
+        - listitem [ref=f6e252]:
+          - generic [ref=f6e255]:
+            - strong [ref=f6e256]: H2SO4
+            - text: ": 2 hidrógenos, 1 azufre (S) y 4 oxígenos. Es el ácido sulfúrico."
+      - generic [ref=f6e257]:
+        - heading "¿Cómo se leen las fórmulas?" [level=4] [ref=f6e258]
+        - generic [ref=f6e259]:
+          - generic [ref=f6e260]:
+            - text: H2O
+            - paragraph [ref=f6e261]: Se lee "hache-dos-o". Dos átomos de hidrógeno y uno de oxígeno.
+          - generic [ref=f6e262]:
+            - text: NaCl
+            - paragraph [ref=f6e263]: Cloruro de sodio. Un átomo de sodio (Na) y uno de cloro (Cl).
+          - generic [ref=f6e264]:
+            - text: Fe2O3
+            - paragraph [ref=f6e265]: Óxido de hierro (III). Dos átomos de hierro (Fe) y tres de oxígeno.
+          - generic [ref=f6e266]:
+            - text: CH4
+            - paragraph [ref=f6e267]: Metano. Un átomo de carbono y cuatro de hidrógeno.
+    - generic [ref=f6e268]:
+      - heading "Preguntas para pensar" [level=2] [ref=f6e269]
+      - generic [ref=f6e278]:
+        - paragraph [ref=f6e279]: 1.¿Cuál es la diferencia entre una sustancia simple y una compuesta? Da dos ejemplos de cada una.
+        - paragraph [ref=f6e280]: 2.¿Por qué el agua de mar no es una sustancia pura? ¿Cómo podrías obtener agua pura a partir de ella?
+        - paragraph [ref=f6e281]: 3.Escribí la fórmula química del dióxido de carbono y explicá qué significa cada parte.
+        - paragraph [ref=f6e282]: 4.El sodio (Na) es un metal que reacciona violentamente con el agua y el cloro (Cl) es un gas venenoso. Sin embargo, juntos forman la sal de mesa (NaCl) que consumimos a diario. ¿Qué nos enseña esto sobre los compuestos químicos?
+    - navigation [ref=f6e283]:
+      - link "Materiales" [ref=f6e284] [cursor=pointer]:
+        - /url: materiales.html
+      - link "Índice de Materia" [ref=f6e287] [cursor=pointer]:
+        - /url: index.html
+  - contentinfo [ref=f6e290]:
+    - generic [ref=f6e292]:
+      - generic [ref=f6e293]:
+        - link "Inicio" [ref=f6e294] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f6e299]: ·
+        - link "Química" [ref=f6e300] [cursor=pointer]:
+          - /url: ../../index.html
+      - paragraph [ref=f6e301]: Ciencias Naturales · 1° año · Biología & Química

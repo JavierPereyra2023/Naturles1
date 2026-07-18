@@ -1,0 +1,245 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - generic [ref=f3e5]:
+        - link "Inicio" [ref=f3e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f3e12]: /
+        - link "Química" [ref=f3e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f3e14]: /
+        - link "Materia" [ref=f3e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f3e16]:
+        - link "Materia" [ref=f3e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f3e21] [cursor=pointer]
+  - generic [ref=f3e29]:
+    - generic [ref=f3e30]: Química · Materia
+    - heading "Propiedades de la Materia" [level=1] [ref=f3e33]
+    - paragraph [ref=f3e34]: Cada material tiene características que lo hacen único. Aprendé a identificarlas y clasificarlas.
+  - main [ref=f3e35]:
+    - generic [ref=f3e36]:
+      - heading "Propiedades organolépticas" [level=2] [ref=f3e37]
+      - paragraph [ref=f3e42]:
+        - text: Son aquellas que podemos percibir directamente con nuestros
+        - strong [ref=f3e43]: sentidos
+        - text: ": color, olor, sabor, textura, brillo, sonido. No necesitamos instrumentos para detectarlas, aunque sí debemos ser cuidadosos: no todo lo que brilla es oro, y no todo líquido transparente es agua."
+      - generic [ref=f3e44]:
+        - generic [ref=f3e45]:
+          - paragraph [ref=f3e53]: Color
+          - paragraph [ref=f3e54]: Vista
+        - generic [ref=f3e55]:
+          - paragraph [ref=f3e56]: Olor
+          - paragraph [ref=f3e57]: Olfato
+        - generic [ref=f3e58]:
+          - paragraph [ref=f3e63]: Textura
+          - paragraph [ref=f3e64]: Tacto
+        - generic [ref=f3e65]:
+          - paragraph [ref=f3e68]: Sabor
+          - paragraph [ref=f3e69]: Gusto
+      - generic [ref=f3e70]:
+        - generic [ref=f3e71]: Precaución
+        - text: En el laboratorio
+        - strong [ref=f3e72]: nunca
+        - text: se prueba ni se huele directamente una sustancia desconocida. Las propiedades organolépticas se observan con cuidado y técnicas seguras.
+      - paragraph [ref=f3e73]:
+        - text: Si bien son útiles en la vida cotidiana, las propiedades organolépticas tienen
+        - strong [ref=f3e74]: limitaciones
+        - text: ": son subjetivas (cada persona percibe distinto) y no permiten identificar con certeza una sustancia. Para eso necesitamos las propiedades físicas y químicas."
+    - generic [ref=f3e75]:
+      - heading "Propiedades físicas" [level=2] [ref=f3e76]
+      - paragraph [ref=f3e79]:
+        - text: Son aquellas que se pueden
+        - strong [ref=f3e80]: medir u observar
+        - text: "sin cambiar la composición química de la sustancia. Se dividen en dos tipos:"
+      - generic [ref=f3e81]:
+        - generic [ref=f3e82]:
+          - heading "Intensivas" [level=4] [ref=f3e83]
+          - paragraph [ref=f3e84]:
+            - text: "No dependen de la cantidad de materia. Ejemplos: densidad, punto de fusión, punto de ebullición, color, dureza, conductividad. Son"
+            - strong [ref=f3e85]: útiles para identificar sustancias
+            - text: .
+        - generic [ref=f3e86]:
+          - heading "Extensivas" [level=4] [ref=f3e87]
+          - paragraph [ref=f3e88]:
+            - text: "Dependen de la cantidad de materia. Ejemplos: masa, volumen, longitud, peso. Se"
+            - strong [ref=f3e89]: suman
+            - text: cuando se juntan dos cuerpos.
+      - generic [ref=f3e90]: "\"La densidad es una de las propiedades físicas más importantes. Dos objetos del mismo tamaño pueden tener masas muy diferentes si sus densidades son distintas.\""
+      - paragraph [ref=f3e91]:
+        - text: La
+        - strong [ref=f3e92]: densidad
+        - text: (
+        - generic [ref=f3e93]:
+          - generic [ref=f3e94]: d
+          - math [ref=f3e98]:
+            - generic [ref=f3e99]: d
+        - text: ") relaciona la masa y el volumen de un cuerpo:"
+      - generic [ref=f3e100]:
+        - paragraph [ref=f3e101]:
+          - generic [ref=f3e102]:
+            - generic [ref=f3e103]:
+              - generic [ref=f3e104]: d
+              - generic [ref=f3e106]: =
+              - generic [ref=f3e109]:
+                - generic [ref=f3e110]: m
+                - generic [ref=f3e113]: V
+            - math [ref=f3e121]:
+              - generic [ref=f3e122]: d
+              - generic [ref=f3e123]: =
+              - generic [ref=f3e124]:
+                - generic [ref=f3e125]: m
+                - generic [ref=f3e126]: V
+        - paragraph [ref=f3e127]:
+          - generic [ref=f3e128]:
+            - generic [ref=f3e129]: d
+            - math [ref=f3e133]:
+              - generic [ref=f3e134]: d
+          - text: = densidad (g/cm³ o kg/m³) ·
+          - generic [ref=f3e135]:
+            - generic [ref=f3e136]: m
+            - math [ref=f3e140]:
+              - generic [ref=f3e141]: m
+          - text: = masa (g o kg) ·
+          - generic [ref=f3e142]:
+            - generic [ref=f3e143]: V
+            - math [ref=f3e147]:
+              - generic [ref=f3e148]: V
+          - text: = volumen (cm³ o m³)
+      - paragraph [ref=f3e149]: "Otras propiedades físicas importantes:"
+      - list [ref=f3e150]:
+        - listitem [ref=f3e151]:
+          - generic [ref=f3e154]:
+            - strong [ref=f3e155]: Punto de fusión
+            - text: ": temperatura a la que un sólido pasa a líquido."
+        - listitem [ref=f3e156]:
+          - generic [ref=f3e159]:
+            - strong [ref=f3e160]: Punto de ebullición
+            - text: ": temperatura a la que un líquido pasa a gas."
+        - listitem [ref=f3e161]:
+          - generic [ref=f3e164]:
+            - strong [ref=f3e165]: Conductividad
+            - text: ": capacidad de transmitir calor o electricidad."
+        - listitem [ref=f3e166]:
+          - generic [ref=f3e169]:
+            - strong [ref=f3e170]: Dureza
+            - text: ": resistencia a ser rayado."
+        - listitem [ref=f3e171]:
+          - generic [ref=f3e174]:
+            - strong [ref=f3e175]: Solubilidad
+            - text: ": capacidad de disolverse en otra sustancia."
+    - generic [ref=f3e176]:
+      - heading "Propiedades químicas" [level=2] [ref=f3e177]
+      - paragraph [ref=f3e180]:
+        - text: Describen la
+        - strong [ref=f3e181]: capacidad de una sustancia para transformarse
+        - text: en otra diferente. Se manifiestan durante una reacción química, cuando cambia la composición del material.
+      - paragraph [ref=f3e182]:
+        - text: La diferencia clave entre un
+        - strong [ref=f3e183]: cambio físico
+        - text: y un
+        - strong [ref=f3e184]: cambio químico
+        - text: ": en el cambio físico la sustancia sigue siendo la misma (ej: el agua que se congela sigue siendo H2O); en el cambio químico aparece una sustancia nueva (ej: el hierro que se oxida se convierte en óxido de hierro)."
+      - generic [ref=f3e185]:
+        - generic [ref=f3e186]:
+          - heading "Combustión" [level=4] [ref=f3e189]
+          - paragraph [ref=f3e190]: "Reacción con oxígeno que libera energía. Ej: madera quemándose, vela encendida."
+        - generic [ref=f3e191]:
+          - heading "Oxidación" [level=4] [ref=f3e194]
+          - paragraph [ref=f3e195]: "Combinación lenta con oxígeno. Ej: hierro oxidándose, manzana oscureciéndose."
+        - generic [ref=f3e196]:
+          - heading "Reactividad" [level=4] [ref=f3e199]
+          - paragraph [ref=f3e200]: "Reacción con ácidos, bases u otras sustancias. Ej: zinc + ácido clorhídrico."
+    - generic [ref=f3e201]:
+      - 'heading "Ejemplo: la densidad del agua" [level=2] [ref=f3e202]'
+      - paragraph [ref=f3e205]: "El agua es una sustancia de referencia. Su densidad a 4°C es:"
+      - paragraph [ref=f3e207]:
+        - generic [ref=f3e208]:
+          - generic [ref=f3e209]:
+            - generic [ref=f3e210]:
+              - generic [ref=f3e211]: d
+              - generic [ref=f3e214]:
+                - generic [ref=f3e215]: a
+                - generic [ref=f3e217]: g
+                - generic [ref=f3e219]: u
+                - generic [ref=f3e221]: a
+            - generic [ref=f3e223]: =
+            - generic [ref=f3e225]: "1"
+            - generic [ref=f3e228]:
+              - generic [ref=f3e229]: g
+              - generic [ref=f3e237]:
+                - generic [ref=f3e238]: c
+                - generic [ref=f3e240]:
+                  - generic [ref=f3e241]: m
+                  - generic [ref=f3e243]: "3"
+            - generic [ref=f3e246]: =
+            - generic [ref=f3e248]:
+              - generic [ref=f3e249]: "1"
+              - generic [ref=f3e250]: "0"
+              - generic [ref=f3e251]: "0"
+              - generic [ref=f3e252]: "0"
+            - generic [ref=f3e254]:
+              - generic [ref=f3e256]:
+                - generic [ref=f3e257]: k
+                - generic [ref=f3e259]: g
+              - generic [ref=f3e266]:
+                - generic [ref=f3e267]: m
+                - generic [ref=f3e269]: "3"
+          - math [ref=f3e273]:
+            - generic [ref=f3e274]:
+              - generic [ref=f3e275]: d
+              - generic [ref=f3e276]:
+                - generic [ref=f3e277]: a
+                - generic [ref=f3e278]: g
+                - generic [ref=f3e279]: u
+                - generic [ref=f3e280]: a
+            - generic [ref=f3e281]: =
+            - generic [ref=f3e282]: "1"
+            - generic [ref=f3e283]:
+              - generic [ref=f3e284]: g
+              - generic [ref=f3e285]:
+                - generic [ref=f3e286]: c
+                - generic [ref=f3e287]:
+                  - generic [ref=f3e288]: m
+                  - generic [ref=f3e289]: "3"
+            - generic [ref=f3e290]: =
+            - generic [ref=f3e291]: "1000"
+            - generic [ref=f3e292]:
+              - generic [ref=f3e293]:
+                - generic [ref=f3e294]: k
+                - generic [ref=f3e295]: g
+              - generic [ref=f3e296]:
+                - generic [ref=f3e297]: m
+                - generic [ref=f3e298]: "3"
+      - paragraph [ref=f3e299]: "Esto significa que:"
+      - list [ref=f3e300]:
+        - listitem [ref=f3e301]:
+          - generic [ref=f3e304]: 1 cm³ de agua tiene una masa de 1 gramo.
+        - listitem [ref=f3e305]:
+          - generic [ref=f3e308]: 1 litro de agua (1000 cm³) tiene una masa de 1 kilogramo.
+        - listitem [ref=f3e309]:
+          - generic [ref=f3e312]: Si un objeto tiene densidad mayor que 1 g/cm³, se hunde en agua. Si es menor, flota.
+        - listitem [ref=f3e313]:
+          - generic [ref=f3e316]: El hielo flota en agua porque su densidad (0,92 g/cm³) es menor que la del agua líquida, algo muy poco común en la naturaleza.
+    - generic [ref=f3e317]:
+      - heading "Preguntas para pensar" [level=2] [ref=f3e318]
+      - generic [ref=f3e327]:
+        - paragraph [ref=f3e328]: "1.Clasificá estas propiedades en intensivas o extensivas: color, masa, densidad, volumen, punto de ebullición, longitud."
+        - paragraph [ref=f3e329]: 2.¿Por qué las propiedades organolépticas no son suficientes para identificar una sustancia en el laboratorio?
+        - paragraph [ref=f3e330]: 3.Un cubo de metal tiene 2 cm de lado y una masa de 16 g. ¿Cuál es su volumen? ¿Y su densidad? ¿De qué metal podría tratarse?
+        - paragraph [ref=f3e331]: 4.¿Qué diferencia hay entre un cambio físico y uno químico? Da un ejemplo de cada uno que no esté en el texto.
+    - navigation [ref=f3e332]:
+      - link "¿Qué es la Materia?" [ref=f3e333] [cursor=pointer]:
+        - /url: que-es-la-materia.html
+      - link "Medición Científica" [ref=f3e336] [cursor=pointer]:
+        - /url: medicion.html
+  - contentinfo [ref=f3e339]:
+    - generic [ref=f3e341]:
+      - generic [ref=f3e342]:
+        - link "Inicio" [ref=f3e343] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f3e348]: ·
+        - link "Química" [ref=f3e349] [cursor=pointer]:
+          - /url: ../../index.html
+      - paragraph [ref=f3e350]: Ciencias Naturales · 1° año · Biología & Química

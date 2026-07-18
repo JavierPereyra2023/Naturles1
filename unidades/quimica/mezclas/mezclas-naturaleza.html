@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -33,6 +33,11 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     ::selection { background: #22C55E; color: #080C0A; }
     body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    /* En esta página la fotografía acompaña solamente el encabezado: el artículo necesita un fondo sereno y legible. */
+    body.bg-quimica { background-image: none !important; background-attachment: scroll; }
+    body.bg-quimica::before { background: linear-gradient(180deg, #080C0A 0%, #0A100D 100%); }
+    main { position: relative; }
+    main::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 72% 38% at 50% 0%, rgba(34,197,94,0.055), transparent 70%); }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #080C0A; }
     ::-webkit-scrollbar-thumb { background: #22C55E; border-radius: 3px; }
@@ -87,7 +92,7 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }  </style>
-  <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   </head>
 <body class="bg-quimica">
 <div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#22C55E;width:0%;transition:width 0.15s ease-out;"></div>
@@ -137,8 +142,8 @@
 </nav>
 
 <section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
-  <div class="absolute inset-0 opacity-10">
-    <img src="https://loremflickr.com/600/400/science,nature,lab?lock=2922" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+  <div class="absolute inset-0 opacity-[0.14]">
+    <img src="../../../assets/backgrounds/bg-quimica-matraz.png" alt="" class="w-full h-full object-cover" style="filter: grayscale(82%) contrast(1.05);">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/70 to-natura-black"></div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
@@ -212,15 +217,15 @@
     <ul class="space-y-1.5 text-natura-silver text-base list-none mb-4">
       <li class="flex items-start gap-2">
         <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:check-circle" data-width="14"></span>
-        <span>Cloruro (Cl?) — 55% de las sales</span>
+        <span>Cloruro (Cl⁻) — aproximadamente 55% de las sales disueltas</span>
       </li>
       <li class="flex items-start gap-2">
         <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:check-circle" data-width="14"></span>
-        <span>Sodio (Na?) — 30% de las sales</span>
+        <span>Sodio (Na⁺) — aproximadamente 30% de las sales disueltas</span>
       </li>
       <li class="flex items-start gap-2">
         <span class="iconify text-natura-leaf flex-shrink-0 mt-0.5" data-icon="lucide:check-circle" data-width="14"></span>
-        <span>Sulfato (SO4²?), Magnesio (Mg²?), Calcio (Ca²?), Potasio (K?)</span>
+        <span>Sulfato (SO₄²⁻), magnesio (Mg²⁺), calcio (Ca²⁺) y potasio (K⁺)</span>
       </li>
     </ul>
   </section>

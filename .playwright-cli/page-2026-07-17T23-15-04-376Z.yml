@@ -1,0 +1,142 @@
+- generic [active] [ref=f2e1]:
+  - navigation [ref=f2e2]:
+    - generic [ref=f2e4]:
+      - generic [ref=f2e5]:
+        - link "Inicio" [ref=f2e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f2e12]: /
+        - link "Química" [ref=f2e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f2e14]: /
+        - link "Materia" [ref=f2e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f2e16]:
+        - link "Materia" [ref=f2e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f2e21] [cursor=pointer]
+  - generic [ref=f2e29]:
+    - generic [ref=f2e30]: Química · Materia
+    - heading "¿Qué es la Materia?" [level=1] [ref=f2e33]
+    - paragraph [ref=f2e34]: Todo lo que ocupa un lugar en el espacio y tiene masa. Desde una galaxia hasta una gota de agua.
+  - main [ref=f2e35]:
+    - generic [ref=f2e36]:
+      - heading "¿De qué está hecho todo?" [level=2] [ref=f2e37]
+      - generic [ref=f2e43]:
+        - generic [ref=f2e44]: Dato clave
+        - text: La palabra "materia" viene del latín
+        - emphasis [ref=f2e45]: materia
+        - text: ", que significa \"madera\" o \"sustancia de la que están hechas las cosas\"."
+      - paragraph [ref=f2e46]:
+        - text: Todo lo que podés ver, tocar y sentir está hecho de materia. La pantalla que estás mirando, el aire que respirás, el agua que tomás y hasta vos mismo. La materia es todo aquello que tiene
+        - strong [ref=f2e47]: masa
+        - text: y ocupa un
+        - strong [ref=f2e48]: volumen
+        - text: en el espacio.
+      - paragraph [ref=f2e49]:
+        - text: "En ciencias naturales, distinguimos tres conceptos importantes:"
+        - strong [ref=f2e50]: materia
+        - text: es la sustancia de la que están hechas las cosas;
+        - strong [ref=f2e51]: cuerpo
+        - text: es una porción limitada de materia (como una piedra, un libro, una silla); y
+        - strong [ref=f2e52]: sustancia
+        - text: es un tipo particular de materia con composición definida (como el agua, el hierro, el oxígeno).
+      - generic [ref=f2e53]: "\"No existe nada en el universo que no sea materia o energía. Todo lo que nos rodea es una manifestación de la materia en alguno de sus estados.\""
+    - generic [ref=f2e54]:
+      - heading "Masa, volumen y peso" [level=2] [ref=f2e55]
+      - paragraph [ref=f2e60]:
+        - text: No es lo mismo
+        - strong [ref=f2e61]: masa
+        - text: que
+        - strong [ref=f2e62]: peso
+        - text: . La masa es la cantidad de materia que tiene un cuerpo y se mide en kilogramos (kg). No cambia, estés donde estés. El peso, en cambio, es la fuerza con que la gravedad atrae esa masa y se mide en newtons (N). En la Luna pesarías seis veces menos, pero tu masa sería la misma.
+      - paragraph [ref=f2e63]:
+        - text: El
+        - strong [ref=f2e64]: volumen
+        - text: es el espacio que ocupa un cuerpo. Se mide en litros (L) o metros cúbicos (m³). Un litro de agua ocupa el mismo volumen que un litro de aceite, pero sus masas son diferentes porque tienen distinta densidad.
+      - generic [ref=f2e65]:
+        - heading "Unidades fundamentales" [level=4] [ref=f2e66]
+        - generic [ref=f2e67]:
+          - generic [ref=f2e68]:
+            - generic [ref=f2e69]: Masa
+            - text: kilogramo (kg)
+          - generic [ref=f2e70]:
+            - generic [ref=f2e71]: Volumen
+            - text: litro (L) o m³
+          - generic [ref=f2e72]:
+            - generic [ref=f2e73]: Peso (fuerza)
+            - text: newton (N)
+    - generic [ref=f2e74]:
+      - heading "Estados de agregación" [level=2] [ref=f2e75]
+      - paragraph [ref=f2e80]: "La materia se presenta en tres estados principales (en la Tierra):"
+      - generic [ref=f2e81]:
+        - generic [ref=f2e82]:
+          - heading "Sólido" [level=4] [ref=f2e118]
+          - paragraph [ref=f2e119]: Forma y volumen fijos. Partículas muy juntas y ordenadas. Solo vibran en su lugar.
+        - generic [ref=f2e120]:
+          - heading "Líquido" [level=4] [ref=f2e135]
+          - paragraph [ref=f2e136]: Volumen fijo, forma variable. Partículas cercanas que se deslizan entre sí.
+        - generic [ref=f2e137]:
+          - heading "Gaseoso" [level=4] [ref=f2e150]
+          - paragraph [ref=f2e151]: Forma y volumen variables. Partículas muy separadas, se mueven rápido y chocan entre sí.
+      - paragraph [ref=f2e152]:
+        - text: Los
+        - strong [ref=f2e153]: cambios de estado
+        - text: "ocurren cuando la materia gana o pierde energía térmica:"
+      - img [ref=f2e155]:
+        - generic [ref=f2e161]: FUSIÓN
+        - generic [ref=f2e164]: SOLIDIFICACIÓN
+        - generic [ref=f2e167]: SUBLIMACIÓN
+        - generic [ref=f2e170]: DEPOSICIÓN
+        - generic [ref=f2e173]: EVAPORACIÓN
+        - generic [ref=f2e176]: CONDENSACIÓN
+        - generic [ref=f2e179]: SÓLIDO
+        - generic [ref=f2e189]: LÍQUIDO
+        - generic [ref=f2e198]: GAS
+        - generic [ref=f2e207]:
+          - generic [ref=f2e210]: Gana calor (endotérmico)
+          - generic [ref=f2e212]: Pierde calor (exotérmico)
+    - generic [ref=f2e213]:
+      - heading "Modelo de partículas" [level=2] [ref=f2e214]
+      - paragraph [ref=f2e221]:
+        - text: Toda la materia está formada por
+        - strong [ref=f2e222]: partículas diminutas
+        - text: "(átomos, moléculas o iones) que no podemos ver a simple vista. Estas partículas:"
+      - list [ref=f2e223]:
+        - listitem [ref=f2e224]:
+          - generic [ref=f2e229]:
+            - text: Están en
+            - strong [ref=f2e230]: movimiento constante
+            - text: (mayor temperatura = mayor movimiento).
+        - listitem [ref=f2e231]:
+          - generic [ref=f2e236]:
+            - text: Tienen
+            - strong [ref=f2e237]: espacios vacíos
+            - text: entre ellas (mayores en gases, menores en sólidos).
+        - listitem [ref=f2e238]:
+          - generic [ref=f2e243]:
+            - text: Se
+            - strong [ref=f2e244]: atraen entre sí
+            - text: mediante fuerzas de cohesión (más fuertes en sólidos).
+      - paragraph [ref=f2e245]: Este modelo explica por qué los sólidos tienen forma fija (partículas muy unidas), los líquidos fluyen (partículas con cierta libertad) y los gases se expanden (partículas libres).
+    - generic [ref=f2e246]:
+      - generic [ref=f2e247]: Sabías que...
+      - paragraph [ref=f2e248]: "Existe un 4to estado de la materia: el plasma. Es el estado del Sol, de los relámpagos y de las pantallas de TV de plasma. En el universo, el 99% de la materia visible está en estado de plasma."
+    - generic [ref=f2e249]:
+      - heading "Preguntas para pensar" [level=2] [ref=f2e250]
+      - generic [ref=f2e259]:
+        - paragraph [ref=f2e260]: 1.¿Cuál es la diferencia entre materia, cuerpo y sustancia? Da un ejemplo de cada uno.
+        - paragraph [ref=f2e261]: 2.Si tenés 1 kg de plomo y 1 kg de plumas, ¿cuál tiene más masa? ¿Y cuál ocupa más volumen? ¿Por qué?
+        - paragraph [ref=f2e262]: 3.¿Qué pasa con las partículas de un cubito de hielo cuando se derrite? Describilo usando el modelo de partículas.
+        - paragraph [ref=f2e263]: 4.¿Por qué en la Luna un astronauta pesa menos aunque su masa no cambia?
+    - navigation [ref=f2e264]:
+      - link "Propiedades" [ref=f2e265] [cursor=pointer]:
+        - /url: propiedades.html
+  - contentinfo [ref=f2e268]:
+    - generic [ref=f2e270]:
+      - generic [ref=f2e271]:
+        - link "Inicio" [ref=f2e272] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f2e277]: ·
+        - link "Química" [ref=f2e278] [cursor=pointer]:
+          - /url: ../../index.html
+      - paragraph [ref=f2e279]: Ciencias Naturales · 1° año · Biología & Química

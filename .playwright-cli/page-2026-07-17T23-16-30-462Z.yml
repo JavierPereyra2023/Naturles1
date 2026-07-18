@@ -1,0 +1,399 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - generic [ref=f3e5]:
+        - link "Inicio" [ref=f3e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f3e12]: /
+        - link "Física" [ref=f3e13] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f3e14]: /
+        - link "Energía" [ref=f3e15] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=f3e16]: /
+        - generic [ref=f3e17]: Formas de Energía
+      - generic [ref=f3e18]:
+        - link "Energía" [ref=f3e19] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f3e23] [cursor=pointer]
+  - generic [ref=f3e31]:
+    - generic [ref=f3e32]: Física · La Energía
+    - heading "Formas de Energía" [level=1] [ref=f3e35]
+    - paragraph [ref=f3e36]: La energía se presenta de muchas maneras en la naturaleza. Conocer sus formas nos ayuda a entender cómo funciona el universo, desde una pelota que cae hasta la luz de una estrella.
+  - main [ref=f3e37]:
+    - generic [ref=f3e38]:
+      - generic [ref=f3e39]:
+        - generic [ref=f3e40]: "1"
+        - heading "Energía Cinética" [level=2] [ref=f3e41]
+      - paragraph [ref=f3e43]:
+        - text: "Todo cuerpo que se mueve posee un tipo de energía asociada a su movimiento: la"
+        - strong [ref=f3e44]: energía cinética
+        - text: . Cuanto más rápido se mueve un objeto y cuanto mayor es su masa, mayor es su energía cinética. Un camión que avanza lentamente puede tener más energía cinética que una moto a toda velocidad, porque la masa del camión es mucho mayor.
+      - generic [ref=f3e45]: Todo cuerpo en movimiento posee energía cinética. Depende de su masa y de su velocidad.
+      - paragraph [ref=f3e46]: "La energía cinética se calcula con la siguiente fórmula:"
+      - generic [ref=f3e48]:
+        - generic [ref=f3e49]:
+          - generic [ref=f3e50]:
+            - generic [ref=f3e51]: E
+            - generic [ref=f3e53]: c
+          - generic [ref=f3e56]: =
+          - generic [ref=f3e59]:
+            - generic [ref=f3e60]: "1"
+            - generic [ref=f3e63]: "2"
+          - generic [ref=f3e70]: m
+          - generic [ref=f3e72]:
+            - generic [ref=f3e73]: v
+            - generic [ref=f3e75]: "2"
+        - math [ref=f3e79]:
+          - generic [ref=f3e80]:
+            - generic [ref=f3e81]: E
+            - generic [ref=f3e82]: c
+          - generic [ref=f3e83]: =
+          - generic [ref=f3e84]:
+            - generic [ref=f3e85]: "1"
+            - generic [ref=f3e86]: "2"
+          - generic [ref=f3e87]: m
+          - generic [ref=f3e88]:
+            - generic [ref=f3e89]: v
+            - generic [ref=f3e90]: "2"
+      - paragraph [ref=f3e91]: "Donde:"
+      - list [ref=f3e92]:
+        - listitem [ref=f3e93]:
+          - strong [ref=f3e94]:
+            - text: E
+            - subscript [ref=f3e95]: c
+          - text: = energía cinética, medida en joules (J)
+        - listitem [ref=f3e96]:
+          - strong [ref=f3e97]: m
+          - text: = masa del cuerpo, en kilogramos (kg)
+        - listitem [ref=f3e98]:
+          - strong [ref=f3e99]: v
+          - text: = velocidad del cuerpo, en metros por segundo (m/s)
+      - generic [ref=f3e100]:
+        - generic [ref=f3e101]: Dato curioso
+        - paragraph [ref=f3e102]: Una pelota de tenis sacada a 200 km/h tiene menos energía cinética que un camión a 5 km/h, porque la masa influye mucho más. ¡La masa de un camión puede ser 35000 veces mayor!
+      - paragraph [ref=f3e103]:
+        - text: Observá que la velocidad está elevada al cuadrado (
+        - strong [ref=f3e104]: v²
+        - text: "). Esto significa que si duplicás la velocidad, la energía cinética no se duplica: ¡se cuadruplica! Por eso un choque a 80 km/h es mucho más destructivo que uno a 40 km/h."
+      - paragraph [ref=f3e105]:
+        - strong [ref=f3e106]: "Ejemplo:"
+        - text: "Un auto de 1000 kg que viaja a 20 m/s (72 km/h) tiene una energía cinética de:"
+      - generic [ref=f3e108]:
+        - generic [ref=f3e109]:
+          - generic [ref=f3e110]:
+            - generic [ref=f3e111]: E
+            - generic [ref=f3e113]: c
+          - generic [ref=f3e116]: =
+          - generic [ref=f3e119]:
+            - generic [ref=f3e120]: "1"
+            - generic [ref=f3e123]: "2"
+          - generic [ref=f3e130]: ×
+          - generic [ref=f3e132]:
+            - generic [ref=f3e133]: "1"
+            - generic [ref=f3e134]: "0"
+            - generic [ref=f3e135]: "0"
+            - generic [ref=f3e136]: "0"
+          - generic [ref=f3e137]:
+            - generic [ref=f3e138]: k
+            - generic [ref=f3e139]: g
+          - generic [ref=f3e140]: ×
+          - generic [ref=f3e142]: (
+          - generic [ref=f3e144]:
+            - generic [ref=f3e145]: "2"
+            - generic [ref=f3e146]: "0"
+          - generic [ref=f3e147]:
+            - generic [ref=f3e148]: m
+            - generic [ref=f3e149]: /
+            - generic [ref=f3e150]: s
+          - generic [ref=f3e151]:
+            - generic [ref=f3e152]: )
+            - generic [ref=f3e154]: "2"
+          - generic [ref=f3e157]: =
+          - generic [ref=f3e159]:
+            - generic [ref=f3e160]: "5"
+            - generic [ref=f3e161]: "0"
+            - generic [ref=f3e162]: "0"
+          - generic [ref=f3e163]: ×
+          - generic [ref=f3e165]:
+            - generic [ref=f3e166]: "4"
+            - generic [ref=f3e167]: "0"
+            - generic [ref=f3e168]: "0"
+          - generic [ref=f3e169]: =
+          - generic [ref=f3e171]:
+            - generic [ref=f3e172]: "2"
+            - generic [ref=f3e173]: "0"
+            - generic [ref=f3e174]: "0"
+          - generic [ref=f3e175]:
+            - generic [ref=f3e176]: "0"
+            - generic [ref=f3e177]: "0"
+            - generic [ref=f3e178]: "0"
+          - generic [ref=f3e179]: J
+        - math [ref=f3e182]:
+          - generic [ref=f3e183]:
+            - generic [ref=f3e184]: E
+            - generic [ref=f3e185]: c
+          - generic [ref=f3e186]: =
+          - generic [ref=f3e187]:
+            - generic [ref=f3e188]: "1"
+            - generic [ref=f3e189]: "2"
+          - generic [ref=f3e190]: ×
+          - generic [ref=f3e191]: "1000"
+          - generic [ref=f3e192]: kg
+          - generic [ref=f3e193]: ×
+          - generic [ref=f3e194]: (
+          - generic [ref=f3e195]: "20"
+          - generic [ref=f3e196]: m/s
+          - generic [ref=f3e197]:
+            - generic [ref=f3e198]: )
+            - generic [ref=f3e199]: "2"
+          - generic [ref=f3e200]: =
+          - generic [ref=f3e201]: "500"
+          - generic [ref=f3e202]: ×
+          - generic [ref=f3e203]: "400"
+          - generic [ref=f3e204]: =
+          - generic [ref=f3e205]: "200"
+          - generic [ref=f3e206]: "000"
+          - generic [ref=f3e207]: J
+      - paragraph [ref=f3e208]: Esos 200.000 J equivalen a la energía necesaria para levantar 100 kg a 200 metros de altura. ¡Impresionante!
+      - figure "FIGURA 1 · Representación de la energía cinética de un vehículo en movimiento" [ref=f3e209]:
+        - img "· Representación de la energía cinética de un vehículo en movimiento"
+    - generic [ref=f3e214]:
+      - generic [ref=f3e215]:
+        - generic [ref=f3e216]: "2"
+        - heading "Energía Potencial Gravitatoria" [level=2] [ref=f3e217]
+      - paragraph [ref=f3e219]:
+        - text: Un objeto que se encuentra a cierta altura del suelo no se está moviendo, pero
+        - strong [ref=f3e220]: tiene energía almacenada
+        - text: . Esa energía "en reserva" se llama
+        - strong [ref=f3e221]: energía potencial gravitatoria
+        - text: . Si el objeto cae, esa energía se libera y se transforma en energía cinética.
+      - generic [ref=f3e222]: Un objeto en altura almacena energía por su posición en el campo gravitatorio.
+      - paragraph [ref=f3e223]: "La energía potencial gravitatoria se calcula así:"
+      - generic [ref=f3e225]:
+        - generic [ref=f3e226]:
+          - generic [ref=f3e227]:
+            - generic [ref=f3e228]: E
+            - generic [ref=f3e230]: p
+          - generic [ref=f3e233]: =
+          - generic [ref=f3e235]: m
+          - generic [ref=f3e237]: g
+          - generic [ref=f3e239]: h
+        - math [ref=f3e242]:
+          - generic [ref=f3e243]:
+            - generic [ref=f3e244]: E
+            - generic [ref=f3e245]: p
+          - generic [ref=f3e246]: =
+          - generic [ref=f3e247]: m
+          - generic [ref=f3e248]: g
+          - generic [ref=f3e249]: h
+      - paragraph [ref=f3e250]: "Donde:"
+      - list [ref=f3e251]:
+        - listitem [ref=f3e252]:
+          - strong [ref=f3e253]:
+            - text: E
+            - subscript [ref=f3e254]: p
+          - text: = energía potencial gravitatoria, en joules (J)
+        - listitem [ref=f3e255]:
+          - strong [ref=f3e256]: m
+          - text: = masa del cuerpo, en kilogramos (kg)
+        - listitem [ref=f3e257]:
+          - strong [ref=f3e258]: g
+          - text: = aceleración de la gravedad en la Tierra ˜ 9,8 m/s²
+        - listitem [ref=f3e259]:
+          - strong [ref=f3e260]: h
+          - text: = altura a la que se encuentra el cuerpo, en metros (m)
+      - paragraph [ref=f3e261]:
+        - strong [ref=f3e262]: "Ejemplo:"
+        - text: "Una maceta de 2 kg en un balcón a 10 m de altura almacena:"
+      - generic [ref=f3e264]:
+        - generic [ref=f3e265]:
+          - generic [ref=f3e266]:
+            - generic [ref=f3e267]: E
+            - generic [ref=f3e269]: p
+          - generic [ref=f3e272]: =
+          - generic [ref=f3e274]: "2"
+          - generic [ref=f3e276]:
+            - generic [ref=f3e277]: k
+            - generic [ref=f3e278]: g
+          - generic [ref=f3e279]: ×
+          - generic [ref=f3e281]: "9"
+          - generic [ref=f3e283]: ","
+          - generic [ref=f3e285]: "8"
+          - generic [ref=f3e287]:
+            - generic [ref=f3e288]:
+              - generic [ref=f3e289]: m
+              - generic [ref=f3e290]: /
+              - generic [ref=f3e291]: s
+            - generic [ref=f3e292]: "2"
+          - generic [ref=f3e295]: ×
+          - generic [ref=f3e297]:
+            - generic [ref=f3e298]: "1"
+            - generic [ref=f3e299]: "0"
+          - generic [ref=f3e300]: m
+          - generic [ref=f3e302]: =
+          - generic [ref=f3e304]:
+            - generic [ref=f3e305]: "1"
+            - generic [ref=f3e306]: "9"
+            - generic [ref=f3e307]: "6"
+          - generic [ref=f3e308]: J
+        - math [ref=f3e311]:
+          - generic [ref=f3e312]:
+            - generic [ref=f3e313]: E
+            - generic [ref=f3e314]: p
+          - generic [ref=f3e315]: =
+          - generic [ref=f3e316]: "2"
+          - generic [ref=f3e317]: kg
+          - generic [ref=f3e318]: ×
+          - generic [ref=f3e319]: "9"
+          - generic [ref=f3e320]: ","
+          - generic [ref=f3e321]: "8"
+          - generic [ref=f3e322]:
+            - generic [ref=f3e323]: m/s
+            - generic [ref=f3e324]: "2"
+          - generic [ref=f3e325]: ×
+          - generic [ref=f3e326]: "10"
+          - generic [ref=f3e327]: m
+          - generic [ref=f3e328]: =
+          - generic [ref=f3e329]: "196"
+          - generic [ref=f3e330]: J
+      - paragraph [ref=f3e331]: Esa energía se transforma en cinética si la maceta cae. Justo antes de tocar el suelo, casi toda la energía potencial se habrá convertido en cinética (descontando una pequeña parte que se pierde por el rozamiento con el aire).
+      - figure "FIGURA 2 · Energía potencial gravitatoria según la altura" [ref=f3e332]:
+        - img "· Energía potencial gravitatoria según la altura"
+    - generic [ref=f3e337]:
+      - generic [ref=f3e338]:
+        - generic [ref=f3e339]: "3"
+        - heading "Energía Mecánica" [level=2] [ref=f3e340]
+      - paragraph [ref=f3e342]:
+        - text: La
+        - strong [ref=f3e343]: energía mecánica
+        - text: de un cuerpo es la suma de su energía cinética y su energía potencial. Es una de las formas más importantes para estudiar el movimiento de los objetos.
+      - generic [ref=f3e345]:
+        - generic [ref=f3e346]:
+          - generic [ref=f3e347]:
+            - generic [ref=f3e348]: E
+            - generic [ref=f3e350]: m
+          - generic [ref=f3e353]: =
+          - generic [ref=f3e355]:
+            - generic [ref=f3e356]: E
+            - generic [ref=f3e358]: c
+          - generic [ref=f3e361]: +
+          - generic [ref=f3e363]:
+            - generic [ref=f3e364]: E
+            - generic [ref=f3e366]: p
+        - math [ref=f3e370]:
+          - generic [ref=f3e371]:
+            - generic [ref=f3e372]: E
+            - generic [ref=f3e373]: m
+          - generic [ref=f3e374]: =
+          - generic [ref=f3e375]:
+            - generic [ref=f3e376]: E
+            - generic [ref=f3e377]: c
+          - generic [ref=f3e378]: +
+          - generic [ref=f3e379]:
+            - generic [ref=f3e380]: E
+            - generic [ref=f3e381]: p
+      - generic [ref=f3e382]:
+        - generic [ref=f3e383]: Idea clave
+        - paragraph [ref=f3e384]: En un sistema ideal sin rozamiento, la energía mecánica se conserva. En la práctica, siempre hay algo de fricción que convierte parte de la energía en calor.
+      - paragraph [ref=f3e385]:
+        - text: En un sistema ideal sin rozamiento,
+        - strong [ref=f3e386]: la energía mecánica total se conserva
+        - text: . Esto significa que la energía cinética y la potencial pueden intercambiarse, pero la suma de ambas permanece constante.
+      - paragraph [ref=f3e387]:
+        - strong [ref=f3e388]: "Ejemplo: la montaña rusa."
+        - text: "En la cima de la subida, el carrito tiene mucha energía potencial y poca cinética (está casi detenido). A medida que baja, la energía potencial se transforma en cinética y el carrito acelera. En el punto más bajo, la velocidad es máxima y la altura es mínima: casi toda la energía es cinética."
+      - paragraph [ref=f3e389]:
+        - text: Este intercambio entre E
+        - subscript [ref=f3e390]: c
+        - text: y E
+        - subscript [ref=f3e391]: p
+        - text: se repite en cada subida y bajada. Si no hubiera rozamiento, el carrito subiría y bajaría eternamente. En la realidad, la fricción convierte parte de la energía mecánica en calor, por eso la montaña rusa necesita un motor que empuje el carrito al inicio.
+    - generic [ref=f3e395]:
+      - generic [ref=f3e396]:
+        - generic [ref=f3e397]: "4"
+        - heading "Otras formas de energía" [level=2] [ref=f3e398]
+      - paragraph [ref=f3e399]: Además de la cinética, la potencial y la mecánica, la energía se manifiesta de muchas otras formas. Acá te presentamos las más importantes.
+      - generic [ref=f3e400]:
+        - generic [ref=f3e401]:
+          - heading "Energía Térmica" [level=3] [ref=f3e403]
+          - paragraph [ref=f3e404]:
+            - text: Es la energía asociada al
+            - strong [ref=f3e405]: movimiento desordenado de las partículas
+            - text: (átomos y moléculas) que componen un cuerpo. Cuanto mayor es la temperatura de un objeto, más rápido vibran o se mueven sus partículas y mayor es su energía térmica. Cuando tocamos algo caliente, sentimos esa energía transferirse a nuestra piel.
+        - generic [ref=f3e406]:
+          - heading "Energía Química" [level=3] [ref=f3e408]
+          - paragraph [ref=f3e409]:
+            - text: Es la energía
+            - strong [ref=f3e410]: almacenada en los enlaces químicos
+            - text: que unen a los átomos dentro de las moléculas. Está presente en los alimentos que comemos, en las pilas y baterías, en los combustibles como la nafta y el gas, y en la leña que se quema. Cuando ocurre una reacción química, parte de esa energía se libera.
+        - generic [ref=f3e411]:
+          - heading "Energía Eléctrica" [level=3] [ref=f3e415]
+          - paragraph [ref=f3e416]:
+            - text: Es la energía asociada al
+            - strong [ref=f3e417]: movimiento de cargas eléctricas
+            - text: "(electrones) a través de un conductor, como un cable de cobre. Es la forma de energía que más usamos en la vida cotidiana: alimenta las luces, los electrodomésticos, las computadoras y los celulares."
+        - generic [ref=f3e418]:
+          - heading "Energía Nuclear" [level=3] [ref=f3e420]
+          - paragraph [ref=f3e421]:
+            - text: Es la energía
+            - strong [ref=f3e422]: almacenada en el núcleo de los átomos
+            - text: . Se libera cuando los núcleos atómicos se dividen (fisión) o se unen (fusión). Es la energía que alimenta al Sol y a las estrellas, y la que se aprovecha en las centrales nucleares para generar electricidad.
+        - generic [ref=f3e423]:
+          - heading "Energía Radiante" [level=3] [ref=f3e425]
+          - paragraph [ref=f3e426]:
+            - text: Es la energía transportada por las
+            - strong [ref=f3e427]: ondas electromagnéticas
+            - text: ", como la luz visible, los rayos X, las microondas y las ondas de radio. La luz solar es la principal fuente de energía radiante que recibe la Tierra y es la base de casi toda la vida en el planeta."
+    - generic [ref=f3e428]:
+      - generic [ref=f3e429]: Sabías que...
+      - paragraph [ref=f3e430]: "Un rayo puede liberar hasta 5 gigajoules de energía: suficiente para abastecer el consumo eléctrico de una casa promedio durante un mes entero."
+    - generic [ref=f3e434]:
+      - generic [ref=f3e435]:
+        - generic [ref=f3e436]: "5"
+        - heading "Preguntas para pensar" [level=2] [ref=f3e437]
+      - paragraph [ref=f3e438]: Reflexioná sobre lo aprendido y respondé en tu carpeta.
+      - generic [ref=f3e439]:
+        - generic [ref=f3e441]:
+          - generic [ref=f3e442]: "1."
+          - generic [ref=f3e443]:
+            - paragraph [ref=f3e444]: ¿Qué tipo de energía tiene un arquero justo antes de soltar la flecha? ¿Y la flecha en pleno vuelo?
+            - paragraph [ref=f3e445]: Antes de soltar, el arco tensado almacena energía potencial elástica. Al soltar, esa energía se transforma en cinética de la flecha. Durante el vuelo, la flecha posee energía cinética y también una pequeña cantidad de potencial gravitatoria porque está a cierta altura del suelo.
+        - generic [ref=f3e447]:
+          - generic [ref=f3e448]: "2."
+          - generic [ref=f3e449]:
+            - paragraph [ref=f3e450]: ¿Por qué un martillo puede clavar un clavo pero tu mano no, aunque apliques la misma fuerza?
+            - paragraph [ref=f3e451]: El martillo tiene masa y se mueve a cierta velocidad, por lo tanto posee energía cinética. Cuando golpea el clavo, esa energía se concentra en un área muy pequeña (la cabeza del clavo) y se transfiere al clavo, que penetra la madera. La mano no acumula la misma energía cinética porque se mueve más lento y tiene menos masa concentrada.
+        - generic [ref=f3e453]:
+          - generic [ref=f3e454]: "3."
+          - generic [ref=f3e455]:
+            - paragraph [ref=f3e456]: Si la Luna tiene menos gravedad que la Tierra, ¿un objeto a 10 m de altura en la Luna tiene más o menos energía potencial que en la Tierra?
+            - paragraph [ref=f3e457]:
+              - text: Tiene
+              - strong [ref=f3e458]: menos
+              - text: "energía potencial, porque la aceleración de la gravedad en la Luna es aproximadamente 1,6 m/s² (seis veces menor que en la Tierra). Con la misma masa y altura, la energía potencial es proporcional a g: E"
+              - subscript [ref=f3e459]: p
+              - text: = m × g × h. Si g es menor, E
+              - subscript [ref=f3e460]: p
+              - text: también lo es.
+        - generic [ref=f3e462]:
+          - generic [ref=f3e463]: "4."
+          - generic [ref=f3e464]:
+            - paragraph [ref=f3e465]: Nombra dos objetos de tu vida cotidiana que posean energía química y dos que posean energía eléctrica.
+            - paragraph [ref=f3e466]: "Energía química: una pila, una barra de cereal. Energía eléctrica: un cargador enchufado, el cable de una lamparita conectada a la corriente. ¡Buscá tus propios ejemplos!"
+    - generic [ref=f3e467]:
+      - link "Energía" [ref=f3e468] [cursor=pointer]:
+        - /url: index.html
+      - link "Transformaciones" [ref=f3e472] [cursor=pointer]:
+        - /url: transformaciones.html
+  - contentinfo [ref=f3e474]:
+    - generic [ref=f3e476]:
+      - generic [ref=f3e477]:
+        - generic [ref=f3e481]: Cs. Naturales
+        - generic [ref=f3e482]: 1° Año
+      - generic [ref=f3e483]:
+        - link "Inicio" [ref=f3e484] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Física" [ref=f3e485] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f3e486]: Prof. Pereyra, Javier

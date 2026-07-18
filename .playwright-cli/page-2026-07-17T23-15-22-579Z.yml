@@ -1,0 +1,151 @@
+- generic [active] [ref=f4e1]:
+  - navigation [ref=f4e2]:
+    - generic [ref=f4e4]:
+      - generic [ref=f4e5]:
+        - link "Inicio" [ref=f4e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f4e12]: /
+        - link "Química" [ref=f4e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f4e14]: /
+        - link "Materia" [ref=f4e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f4e16]:
+        - link "Materia" [ref=f4e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f4e21] [cursor=pointer]
+  - generic [ref=f4e29]:
+    - generic [ref=f4e30]: Química · Materia
+    - heading "Tipos de Materiales" [level=1] [ref=f4e33]
+    - paragraph [ref=f4e34]: Desde la madera de los árboles hasta los plásticos modernos. Clasificamos los materiales por su origen y composición.
+  - main [ref=f4e35]:
+    - generic [ref=f4e36]:
+      - heading "Clasificación por origen" [level=2] [ref=f4e37]
+      - paragraph [ref=f4e40]:
+        - text: Los materiales que usamos a diario provienen de distintas fuentes. Según su
+        - strong [ref=f4e41]: origen
+        - text: ", los clasificamos en tres grandes grupos:"
+      - generic [ref=f4e42]:
+        - generic [ref=f4e43]:
+          - heading "Naturales" [level=4] [ref=f4e48]
+          - paragraph [ref=f4e49]: Se obtienen directamente de la naturaleza sin transformación química profunda. Incluyen materiales de origen vegetal, animal y mineral.
+          - generic [ref=f4e50]:
+            - generic [ref=f4e51]: Madera
+            - generic [ref=f4e52]: Algodón
+            - generic [ref=f4e53]: Lana
+            - generic [ref=f4e54]: Piedra
+            - generic [ref=f4e55]: Cuero
+        - generic [ref=f4e56]:
+          - heading "Artificiales" [level=4] [ref=f4e59]
+          - paragraph [ref=f4e60]: Se fabrican transformando materiales naturales mediante procesos físicos (no cambian su composición química).
+          - generic [ref=f4e61]:
+            - generic [ref=f4e62]: Papel
+            - generic [ref=f4e63]: Vidrio
+            - generic [ref=f4e64]: Acero
+            - generic [ref=f4e65]: Bronce
+            - generic [ref=f4e66]: Cerámica
+        - generic [ref=f4e67]:
+          - heading "Sintéticos" [level=4] [ref=f4e70]
+          - paragraph [ref=f4e71]: Se fabrican mediante reacciones químicas a partir de otras sustancias. No existen en la naturaleza tal cual.
+          - generic [ref=f4e72]:
+            - generic [ref=f4e73]: Plástico
+            - generic [ref=f4e74]: Nailon
+            - generic [ref=f4e75]: Poliéster
+            - generic [ref=f4e76]: Silicona
+      - generic [ref=f4e77]: "\"No todos los materiales 'artificiales' son malos, ni todos los 'naturales' son buenos. Lo importante es entender su origen y su impacto en el ambiente.\""
+      - paragraph [ref=f4e78]:
+        - text: "Una pregunta frecuente: ¿el papel es natural o artificial? La madera es natural, pero el papel se obtiene transformándola mecánica y físicamente, por eso se considera"
+        - strong [ref=f4e79]: artificial
+        - text: ". El nailon, en cambio, se sintetiza a partir del petróleo mediante reacciones químicas: es"
+        - strong [ref=f4e80]: sintético
+        - text: .
+    - generic [ref=f4e81]:
+      - heading "Clasificación por composición" [level=2] [ref=f4e82]
+      - paragraph [ref=f4e85]:
+        - text: Otra forma de clasificar los materiales es según su
+        - strong [ref=f4e86]: composición química y estructura interna
+        - text: ":"
+      - generic [ref=f4e87]:
+        - generic [ref=f4e88]:
+          - heading "Metales" [level=4] [ref=f4e89]
+          - paragraph [ref=f4e92]: "Buenos conductores de calor y electricidad. Dúctiles (se pueden hacer hilos) y maleables (se pueden hacer láminas). Ejemplos: hierro, aluminio, cobre, oro, plata. La mayoría son sólidos a temperatura ambiente (excepto el mercurio, que es líquido)."
+        - generic [ref=f4e93]:
+          - heading "Cerámicos" [level=4] [ref=f4e94]
+          - paragraph [ref=f4e99]: "Duros, frágiles y resistentes al calor. Malos conductores eléctricos (aislantes). Se obtienen calentando arcillas y otros minerales. Ejemplos: ladrillo, porcelana, vidrio, cemento, loza."
+        - generic [ref=f4e100]:
+          - heading "Polímeros" [level=4] [ref=f4e101]
+          - paragraph [ref=f4e106]: "Formados por moléculas muy largas (macromoléculas) hechas de unidades que se repiten. Livianos, flexibles y aislantes. Ejemplos: polietileno (bolsas), PVC (caños), nailon (telas), teflón (sartenes). Pueden ser naturales (celulosa, caucho) o sintéticos (plásticos)."
+        - generic [ref=f4e107]:
+          - heading "Materiales compuestos" [level=4] [ref=f4e108]
+          - paragraph [ref=f4e114]: "Combinan dos o más materiales para obtener propiedades superiores. Ejemplos: hormigón armado (cemento + acero), fibra de vidrio (vidrio + plástico), fibra de carbono, madera contrachapada."
+    - generic [ref=f4e115]:
+      - heading "Usos cotidianos" [level=2] [ref=f4e116]
+      - paragraph [ref=f4e121]: "Cada tipo de material tiene aplicaciones según sus propiedades. Veamos algunos ejemplos de la vida diaria:"
+      - table [ref=f4e123]:
+        - rowgroup [ref=f4e124]:
+          - row [ref=f4e125]:
+            - columnheader "Material" [ref=f4e126]
+            - columnheader "Tipo" [ref=f4e127]
+            - columnheader "Propiedad clave" [ref=f4e128]
+            - columnheader "Uso común" [ref=f4e129]
+        - rowgroup [ref=f4e130]:
+          - row [ref=f4e131]:
+            - cell "Cobre" [ref=f4e132]
+            - cell "Metal" [ref=f4e133]
+            - cell "Alta conductividad eléctrica" [ref=f4e134]
+            - cell "Cables eléctricos" [ref=f4e135]
+          - row [ref=f4e136]:
+            - cell "Vidrio" [ref=f4e137]
+            - cell "Cerámico" [ref=f4e138]
+            - cell "Transparente, impermeable" [ref=f4e139]
+            - cell "Ventanas, botellas" [ref=f4e140]
+          - row [ref=f4e141]:
+            - cell "Polietileno" [ref=f4e142]
+            - cell "Polímero" [ref=f4e143]
+            - cell "Flexible, liviano" [ref=f4e144]
+            - cell "Bolsas, envases" [ref=f4e145]
+          - row [ref=f4e146]:
+            - cell "Aluminio" [ref=f4e147]
+            - cell "Metal" [ref=f4e148]
+            - cell "Liviano, no se oxida fácil" [ref=f4e149]
+            - cell "Latas, papel aluminio" [ref=f4e150]
+          - row [ref=f4e151]:
+            - cell "Madera" [ref=f4e152]
+            - cell "Natural" [ref=f4e153]
+            - cell "Resistente, renovable" [ref=f4e154]
+            - cell "Muebles, construcción" [ref=f4e155]
+          - row [ref=f4e156]:
+            - cell "Nailon" [ref=f4e157]
+            - cell "Polímero sintético" [ref=f4e158]
+            - cell "Resistente, elástico" [ref=f4e159]
+            - cell "Ropa, cuerdas" [ref=f4e160]
+      - generic [ref=f4e161]:
+        - generic [ref=f4e162]: Dato curioso
+        - text: El vidrio no es un sólido cristalino, es un
+        - strong [ref=f4e163]: sólido amorfo
+        - text: ". Sus partículas no están ordenadas en una estructura regular. Fluye muy lentamente con el tiempo: los vidrios de las catedrales antiguas son más gruesos en la base que en la parte superior."
+      - paragraph [ref=f4e164]:
+        - text: La
+        - strong [ref=f4e165]: elección del material
+        - text: adecuado para cada uso depende de sus propiedades. Para hacer un cable eléctrico necesitamos un metal conductor como el cobre; para el mango de una sartén necesitamos un material aislante térmico como la madera o el plástico; para una botella de agua necesitamos algo impermeable y liviano como el plástico o el vidrio.
+    - generic [ref=f4e166]:
+      - heading "Preguntas para pensar" [level=2] [ref=f4e167]
+      - generic [ref=f4e176]:
+        - paragraph [ref=f4e177]: "1.Clasificá estos materiales según su origen (natural, artificial, sintético): cuero, acero, plástico, lana, papel, nailon, piedra."
+        - paragraph [ref=f4e178]: 2.¿Por qué los cables eléctricos se hacen de cobre y no de plástico? ¿Qué propiedad es determinante?
+        - paragraph [ref=f4e179]: 3.Nombra tres objetos de tu casa e identifica de qué material están hechos y por qué se eligió ese material.
+        - paragraph [ref=f4e180]: 4.¿Qué ventajas y desventajas tiene usar plásticos en lugar de vidrio para envases de bebidas?
+    - navigation [ref=f4e181]:
+      - link "Medición" [ref=f4e182] [cursor=pointer]:
+        - /url: medicion.html
+      - link "Sustancias" [ref=f4e185] [cursor=pointer]:
+        - /url: sustancias.html
+  - contentinfo [ref=f4e188]:
+    - generic [ref=f4e190]:
+      - generic [ref=f4e191]:
+        - link "Inicio" [ref=f4e192] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f4e197]: ·
+        - link "Química" [ref=f4e198] [cursor=pointer]:
+          - /url: ../../index.html
+      - paragraph [ref=f4e199]: Ciencias Naturales · 1° año · Biología & Química

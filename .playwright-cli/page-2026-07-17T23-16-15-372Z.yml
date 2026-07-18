@@ -1,0 +1,92 @@
+- generic [active] [ref=f1e1]:
+  - navigation [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - generic [ref=f1e5]:
+        - link "Inicio" [ref=f1e6] [cursor=pointer]:
+          - /url: ../../inicio.html
+        - generic [ref=f1e12]: /
+        - generic [ref=f1e13]: Física
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]: Ejes 2 y 3
+        - link "Volver" [ref=f1e16] [cursor=pointer]:
+          - /url: ../../inicio.html
+        - button "Buscar tema" [ref=f1e20] [cursor=pointer]
+  - generic [ref=f1e25]:
+    - 'img "Globo de plasma: electricidad en acción" [ref=f1e27]'
+    - generic [ref=f1e30]:
+      - generic [ref=f1e31]: Ejes 2 y 3
+      - heading "Física — Energía y Movimiento" [level=1] [ref=f1e34]
+      - paragraph [ref=f1e35]: Desde las formas de energía que mueven el mundo hasta la inmensidad del Sistema Solar. Aprendemos a medir, graficar y entender los fenómenos físicos que nos rodean.
+      - generic [ref=f1e36]:
+        - generic [ref=f1e37]: Energía
+        - generic [ref=f1e38]: Calor y Sonido
+        - generic [ref=f1e39]: Movimiento
+        - generic [ref=f1e40]: Sistema Solar
+        - generic [ref=f1e41]: MAPI
+  - generic [ref=f1e43]:
+    - generic [ref=f1e44]: Temas de la Unidad
+    - generic [ref=f1e47]:
+      - 'link "Relámpago: descarga eléctrica atmosférica Las Energías — Diversidad y Cambio Formas de energía: mecánica, eléctrica, química, nuclear, lumínica y sonora. Principio de conservación y transformación de la energía. Fuentes renovables y no renovables. Energía Mecánica Conservación Renovables" [ref=f1e48] [cursor=pointer]':
+        - /url: energia/index.html
+        - 'img "Relámpago: descarga eléctrica atmosférica" [ref=f1e50]'
+        - generic [ref=f1e51]:
+          - heading "Las Energías — Diversidad y Cambio" [level=3] [ref=f1e56]
+          - paragraph [ref=f1e57]: "Formas de energía: mecánica, eléctrica, química, nuclear, lumínica y sonora. Principio de conservación y transformación de la energía. Fuentes renovables y no renovables."
+          - generic [ref=f1e58]:
+            - generic [ref=f1e59]: Energía Mecánica
+            - generic [ref=f1e60]: Conservación
+            - generic [ref=f1e61]: Renovables
+      - 'link "Metal al rojo vivo: transferencia de calor Intercambios de Energía Ondas de luz y sonido. Propagación del calor: conducción, convección y radiación. Transferencia de energía entre cuerpos y el entorno. Fuentes renovables y no renovables. Luz y Sonido Conducción Radiación" [ref=f1e62] [cursor=pointer]':
+        - /url: calor-sonido/index.html
+        - 'img "Metal al rojo vivo: transferencia de calor" [ref=f1e64]'
+        - generic [ref=f1e65]:
+          - heading "Intercambios de Energía" [level=3] [ref=f1e70]
+          - paragraph [ref=f1e71]: "Ondas de luz y sonido. Propagación del calor: conducción, convección y radiación. Transferencia de energía entre cuerpos y el entorno. Fuentes renovables y no renovables."
+          - generic [ref=f1e72]:
+            - generic [ref=f1e73]: Luz y Sonido
+            - generic [ref=f1e74]: Conducción
+            - generic [ref=f1e75]: Radiación
+      - link "Movimientos Los Movimientos Gráficos posición-tiempo. Concepto de velocidad. Interpretación de trayectorias. Uso de GeoGebra para modelar y analizar movimientos. Actividades prácticas de medición. Posición-Tiempo Velocidad GeoGebra" [ref=f1e76] [cursor=pointer]:
+        - /url: movimientos/index.html
+        - img "Movimientos" [ref=f1e78]
+        - generic [ref=f1e79]:
+          - heading "Los Movimientos" [level=3] [ref=f1e84]
+          - paragraph [ref=f1e85]: Gráficos posición-tiempo. Concepto de velocidad. Interpretación de trayectorias. Uso de GeoGebra para modelar y analizar movimientos. Actividades prácticas de medición.
+          - generic [ref=f1e86]:
+            - generic [ref=f1e87]: Posición-Tiempo
+            - generic [ref=f1e88]: Velocidad
+            - generic [ref=f1e89]: GeoGebra
+      - 'link "El Sistema Solar con el Sol y los planetas en sus órbitas El Sistema Solar Planetas del Sistema Solar. Escalas de tamaño y distancia. Geocentrismo vs. heliocentrismo. Instrumentos de exploración espacial. Proyecto MAPI: modelo a escala. Planetas Heliocentrismo MAPI" [ref=f1e90] [cursor=pointer]':
+        - /url: sistema-solar/index.html
+        - img "El Sistema Solar con el Sol y los planetas en sus órbitas" [ref=f1e92]
+        - generic [ref=f1e93]:
+          - heading "El Sistema Solar" [level=3] [ref=f1e98]
+          - paragraph [ref=f1e99]: "Planetas del Sistema Solar. Escalas de tamaño y distancia. Geocentrismo vs. heliocentrismo. Instrumentos de exploración espacial. Proyecto MAPI: modelo a escala."
+          - generic [ref=f1e100]:
+            - generic [ref=f1e101]: Planetas
+            - generic [ref=f1e102]: Heliocentrismo
+            - generic [ref=f1e103]: MAPI
+  - generic [ref=f1e106]:
+    - generic [ref=f1e107]: MAPI
+    - generic [ref=f1e108]:
+      - generic [ref=f1e109]: Proyecto Institucional · Octubre
+      - heading "Muestra Anual de Proyectos Institucionales — El Sistema Solar" [level=3] [ref=f1e113]: Muestra Anual de ProyectosInstitucionales — El Sistema Solar
+      - generic [ref=f1e114]:
+        - generic [ref=f1e115]:
+          - generic [ref=f1e116]: Construcción
+          - paragraph [ref=f1e120]: Modelo a escala del Sistema Solar con materiales reciclables. Cálculo de proporciones reales de tamaño y distancia.
+        - generic [ref=f1e121]:
+          - generic [ref=f1e122]: Exposición Oral
+          - paragraph [ref=f1e126]: Guión de exposición y defensa conceptual ante la comunidad escolar. Comparación con imágenes reales de sondas.
+        - generic [ref=f1e127]:
+          - generic [ref=f1e128]: Trabajo en Equipo
+          - paragraph [ref=f1e134]: Formación de grupos, asignación de planetas y roles. Evaluación con rúbrica de precisión conceptual, modelo, oralidad y creatividad.
+  - contentinfo [ref=f1e135]:
+    - generic [ref=f1e137]:
+      - generic [ref=f1e138]:
+        - generic [ref=f1e142]: Cs. Naturales
+        - generic [ref=f1e143]: 1° Año
+      - generic [ref=f1e144]:
+        - link "Inicio" [ref=f1e145] [cursor=pointer]:
+          - /url: ../../inicio.html
+        - generic [ref=f1e146]: Prof. Pereyra, Javier

@@ -66,6 +66,9 @@ body.bg-quimica::after {
 body.bg-moleculas::after {
   background: radial-gradient(ellipse 85% 60% at 40% 8%, rgba(234,179,8,0.24) 0%, transparent 58%);
 }
+body.bg-energia::after {
+  background: none;
+}
 
 /* === PORTADA / HERO estilizado ===
    El primer <section class="relative ..."> de cada pagina recibe:
@@ -144,6 +147,11 @@ body.bg-moleculas > section.relative.overflow-hidden::before {
     radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.42) 0%, transparent 55%),
     radial-gradient(ellipse 50% 40% at 80% 100%, rgba(99, 102, 241, 0.28) 0%, transparent 55%);
 }
+body.bg-energia > section.relative.overflow-hidden::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,189,248,0.42) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 100%, rgba(34,211,238,0.26) 0%, transparent 55%);
+}
 
 /* Asegurar que el contenido del hero este sobre el gradiente */
 body[class*="bg-"] > section.relative.overflow-hidden > .max-w-4xl,
@@ -200,4 +208,52 @@ body.bg-quimica {
 }
 body.bg-moleculas {
   background-image: url('../backgrounds/bg-moleculas-atomos.png');
+}
+
+/* === Corrección de composición =================================================
+   La imagen temática pertenece al encabezado. Dejarla fija en todo el body hacía
+   que invadiera tarjetas, tablas y texto largo; cada artículo recupera así un
+   fondo tranquilo y legible después del hero. */
+body[class*="bg-"] {
+  background-image: none !important;
+  background-attachment: scroll;
+  background-color: #080C0A;
+}
+
+body[class*="bg-"] > section.relative.overflow-hidden:first-of-type {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+body[class*="bg-"] > section.relative.overflow-hidden:first-of-type::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(8,12,10,0.88) 0%, rgba(8,12,10,0.62) 52%, rgba(8,12,10,0.36) 100%), linear-gradient(180deg, rgba(8,12,10,0.24), rgba(8,12,10,0.88));
+}
+
+body.bg-ecosistemas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-ecosistemas-bosque.png') !important; }
+body.bg-celulas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-celulas-microscopio.png') !important; }
+body.bg-fotosintesis > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-fotosintesis-planta.png') !important; }
+body.bg-cuerpo-humano > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.png') !important; }
+body.bg-sistema-solar > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sistema-solar-espacio.png') !important; }
+body.bg-calor > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-calor-llamas.png') !important; }
+body.bg-sonido > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sonido-ondas.png') !important; }
+body.bg-movimiento > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-movimiento-velocidad.png') !important; }
+body.bg-luz > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-luz-espectro.png') !important; }
+body.bg-agua > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-agua-gotas.png') !important; }
+body.bg-quimica > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-quimica-matraz.png') !important; }
+body.bg-moleculas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-moleculas-atomos.png') !important; }
+body.bg-energia > section.relative.overflow-hidden:first-of-type {
+  background-color: #080C0A !important;
+  background-image: none !important;
+}
+body.bg-energia > section.relative.overflow-hidden:first-of-type::after {
+  background:
+    linear-gradient(90deg, rgba(8,12,10,0.48) 0%, rgba(8,12,10,0.16) 54%, rgba(8,12,10,0.22) 100%),
+    linear-gradient(180deg, rgba(8,12,10,0.04) 0%, rgba(8,12,10,0.10) 56%, rgba(8,12,10,0.72) 100%);
 }

@@ -1,0 +1,3 @@
+[     203ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[     349ms] [LOG] Live reload enabled. @ http://127.0.0.1:5502/unidades/quimica/index.html:367
+[    2860ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:5502/favicon.ico:0

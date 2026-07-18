@@ -1,0 +1,171 @@
+- generic [active] [ref=f11e1]:
+  - navigation [ref=f11e2]:
+    - generic [ref=f11e4]:
+      - generic [ref=f11e5]:
+        - link "Inicio" [ref=f11e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f11e12]: /
+        - link "Física" [ref=f11e13] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f11e14]: /
+        - link "Calor y Sonido" [ref=f11e15] [cursor=pointer]:
+          - /url: index.html
+      - generic [ref=f11e16]:
+        - link "Calor y Sonido" [ref=f11e17] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f11e21] [cursor=pointer]
+  - generic [ref=f11e29]:
+    - generic [ref=f11e30]: Física · Calor y Sonido
+    - heading "La Luz y los colores" [level=1] [ref=f11e33]
+    - paragraph [ref=f11e34]: La luz es una onda electromagnética que viaja a 300.000 km/s. Descubrí el espectro completo, por qué la luz blanca esconde todos los colores y cómo un prisma los separa.
+  - main [ref=f11e37]:
+    - generic [ref=f11e38]:
+      - generic [ref=f11e39]:
+        - generic [ref=f11e40]: "01"
+        - heading "¿Qué es la luz?" [level=2] [ref=f11e41]
+      - paragraph [ref=f11e43]:
+        - text: La luz es una
+        - strong [ref=f11e44]: onda electromagnética
+        - text: ": una perturbación que transporta energía y que, a diferencia del sonido, no necesita ningún medio material para viajar. Por eso la luz del Sol puede atravesar el vacío del espacio y llegar hasta nosotros. Todas las ondas electromagnéticas viajan en el vacío a la misma velocidad altísima: 300.000 kilómetros por segundo."
+      - generic [ref=f11e45]: "\"La luz no necesita aire ni agua para viajar: puede cruzar el vacío del espacio.\""
+      - generic [ref=f11e46]:
+        - generic [ref=f11e47]:
+          - heading "Onda electromagnética" [level=3] [ref=f11e48]
+          - paragraph [ref=f11e53]: No necesita medio material y puede viajar en el vacío. La luz visible, los rayos X, las ondas de radio y los ultravioleta son todas ondas electromagnéticas.
+        - generic [ref=f11e54]:
+          - heading "Velocidad de la luz" [level=3] [ref=f11e55]
+          - paragraph [ref=f11e58]:
+            - text: En el vacío viaja a ˜
+            - strong [ref=f11e59]: 300.000 km/s
+            - text: ", casi un millón de veces más rápido que el sonido. Es la mayor velocidad posible en el universo."
+    - generic [ref=f11e61]:
+      - generic [ref=f11e62]:
+        - generic [ref=f11e63]: "02"
+        - heading "El espectro electromagnético" [level=2] [ref=f11e64]
+      - paragraph [ref=f11e66]:
+        - text: La luz que vemos es apenas una
+        - strong [ref=f11e67]: delgadísima franja
+        - text: "de un enorme conjunto de ondas electromagnéticas. Todas viajan a la misma velocidad, pero se diferencian en su frecuencia y longitud de onda: desde las ondas de radio (kilómetros de largo) hasta los rayos gamma (más chicos que un átomo)."
+      - generic [ref=f11e68]:
+        - generic [ref=f11e69]: El espectro electromagnético completo
+        - img "Espectro electromagnético desde ondas de radio hasta rayos gamma, con la luz visible ampliada" [ref=f11e72]:
+          - generic [ref=f11e74]: ← Mayor longitud de onda · menor frecuencia
+          - generic [ref=f11e75]: Menor λ · mayor frecuencia →
+          - generic [ref=f11e76]: Radio
+          - generic [ref=f11e77]: Microondas
+          - generic [ref=f11e78]: Infrarrojo
+          - generic [ref=f11e79]: Visible
+          - generic [ref=f11e80]: Ultravioleta
+          - generic [ref=f11e81]: Rayos X
+          - generic [ref=f11e82]: Gamma
+          - generic [ref=f11e94]: Rojo · ~700 nm
+          - generic [ref=f11e95]: Violeta · ~400 nm
+          - generic [ref=f11e96]: lo único que ven nuestros ojos
+        - paragraph [ref=f11e97]:
+          - text: De izquierda a derecha la
+          - strong [ref=f11e98]: longitud de onda se achica
+          - text: y la
+          - strong [ref=f11e99]: frecuencia aumenta
+          - text: (mirá cómo la onda de arriba se comprime). El infrarrojo es el "calor" que sentimos; el ultravioleta nos quema la piel; los rayos X atraviesan el cuerpo; los gamma son los más energéticos. En el medio, una franja minúscula entre los
+          - strong [ref=f11e100]: 400 y 700 nanómetros
+          - text: "es todo lo que nuestros ojos pueden ver: la luz visible."
+      - generic [ref=f11e101]:
+        - generic [ref=f11e102]: ¿Un nanómetro?
+        - text: "Un nanómetro (nm) es la millonésima parte de un milímetro. La luz visible mide entre 400 nm (violeta) y 700 nm (rojo): ¡miles de veces más fina que un cabello!"
+      - paragraph [ref=f11e103]:
+        - text: Muchos aparatos que usás todos los días funcionan con ondas de este espectro que
+        - emphasis [ref=f11e104]: "no"
+        - text: "vemos: el control remoto usa infrarrojo, el wifi y el microondas usan microondas, la radio usa ondas de radio y las radiografías usan rayos X. Son todas \"luz\", solo que invisible para nuestros ojos."
+    - generic [ref=f11e106]:
+      - generic [ref=f11e107]:
+        - generic [ref=f11e108]: "03"
+        - heading "La luz blanca y el prisma" [level=2] [ref=f11e109]
+      - paragraph [ref=f11e111]:
+        - text: ¿Por qué la luz del Sol es blanca si está hecha de colores? Porque cuando todos los colores se mezclan en partes iguales, los percibimos como blanco. Para "desarmar" esa mezcla usamos un
+        - strong [ref=f11e112]: prisma
+        - text: ": como cada color tiene distinta longitud de onda, cada uno se desvía un ángulo diferente al atravesar el vidrio. Esto se llama"
+        - strong [ref=f11e113]: dispersión
+        - text: .
+      - generic [ref=f11e114]:
+        - generic [ref=f11e115]: La luz blanca atraviesa un prisma
+        - img "Luz blanca que entra a un prisma y se descompone en los colores del arcoíris" [ref=f11e118]:
+          - generic [ref=f11e119]: Luz blanca
+          - generic [ref=f11e121]: prisma
+          - generic [ref=f11e131]: Rojo
+          - generic [ref=f11e132]: Naranja
+          - generic [ref=f11e133]: Amarillo
+          - generic [ref=f11e134]: Verde
+          - generic [ref=f11e135]: Azul
+          - generic [ref=f11e136]: Índigo
+          - generic [ref=f11e137]: Violeta
+        - paragraph [ref=f11e138]:
+          - text: El
+          - strong [ref=f11e139]: violeta
+          - text: (menor longitud de onda) se desvía
+          - strong [ref=f11e140]: más
+          - text: que el
+          - strong [ref=f11e141]: rojo
+          - text: "(mayor longitud de onda). Por eso salen separados formando el orden del arcoíris. De hecho, ¡un arcoíris es exactamente esto: el Sol descomponiéndose en millones de gotitas de lluvia que funcionan como prismas diminutos!"
+      - generic [ref=f11e142]:
+        - generic [ref=f11e143]: Sabías que...
+        - paragraph [ref=f11e144]:
+          - text: En 1666, Isaac Newton demostró con un prisma que la luz blanca contenía todos los colores. Después usó un
+          - emphasis [ref=f11e145]: segundo
+          - text: prisma invertido para volver a unirlos en luz blanca, probando que el color venía de la luz y no del vidrio.
+    - generic [ref=f11e147]:
+      - generic [ref=f11e148]:
+        - generic [ref=f11e149]: "04"
+        - heading "¿Por qué vemos los colores?" [level=2] [ref=f11e150]
+      - paragraph [ref=f11e152]:
+        - text: "Los objetos no \"tienen\" color por sí mismos: el color que vemos depende de qué partes de la luz"
+        - strong [ref=f11e153]: reflejan
+        - text: y cuáles
+        - strong [ref=f11e154]: absorben
+        - text: . Cuando la luz blanca ilumina un objeto, este absorbe algunos colores y rebota otros. Los colores que rebotan son los que llegan a nuestros ojos.
+      - generic [ref=f11e155]:
+        - generic [ref=f11e156]:
+          - heading "Una manzana roja" [level=3] [ref=f11e157]
+          - paragraph [ref=f11e158]:
+            - text: Refleja la luz
+            - strong [ref=f11e159]: roja
+            - text: "y absorbe el resto. Por eso la vemos roja: es el único color que rebota hacia nuestros ojos."
+        - generic [ref=f11e160]:
+          - heading "Un objeto blanco" [level=3] [ref=f11e161]
+          - paragraph [ref=f11e162]:
+            - text: Refleja
+            - strong [ref=f11e163]: todos
+            - text: "los colores por igual. Por eso lo vemos blanco: nos devuelve la luz completa."
+        - generic [ref=f11e164]:
+          - heading "Un objeto negro" [level=3] [ref=f11e165]
+          - paragraph [ref=f11e166]:
+            - text: Absorbe
+            - strong [ref=f11e167]: casi toda
+            - text: la luz y refleja muy poca. Por eso lo vemos negro y se calienta más al sol.
+      - generic [ref=f11e168]: "\"El color no está en los objetos: está en la luz que reflejan y en nuestros ojos que la interpretan.\""
+    - generic [ref=f11e170]:
+      - generic [ref=f11e171]:
+        - generic [ref=f11e172]: "05"
+        - heading "Preguntas para pensar" [level=2] [ref=f11e173]
+      - generic [ref=f11e174]:
+        - paragraph [ref=f11e176]: 1. El control remoto del televisor usa luz infrarroja. ¿Por qué no la podemos ver, si también es una onda electromagnética como la luz visible?
+        - paragraph [ref=f11e178]: 2. Si un prisma separa la luz blanca en colores, ¿qué pasaría si pusieras un segundo prisma invertido después del primero?
+        - paragraph [ref=f11e180]: 3. ¿Por qué una remera negra te da más calor al sol que una blanca? Relacionalo con la luz que absorbe y refleja.
+        - paragraph [ref=f11e182]: 4. El violeta se desvía más que el rojo al pasar por el prisma. ¿Qué tiene que ver eso con su longitud de onda?
+  - generic [ref=f11e184]:
+    - link "El Sonido" [ref=f11e185] [cursor=pointer]:
+      - /url: sonido.html
+    - link "Calor y Sonido" [ref=f11e189] [cursor=pointer]:
+      - /url: index.html
+    - link "Luz y Materiales" [ref=f11e197] [cursor=pointer]:
+      - /url: materiales.html
+  - contentinfo [ref=f11e201]:
+    - generic [ref=f11e203]:
+      - generic [ref=f11e204]:
+        - generic [ref=f11e208]: Cs. Naturales
+        - generic [ref=f11e209]: 1° Año
+      - generic [ref=f11e210]:
+        - link "Inicio" [ref=f11e211] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Física" [ref=f11e212] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=f11e213]: Prof. Pereyra, Javier

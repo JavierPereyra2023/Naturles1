@@ -1,0 +1,193 @@
+- generic [active] [ref=f9e1]:
+  - navigation [ref=f9e2]:
+    - generic [ref=f9e4]:
+      - generic [ref=f9e5]:
+        - link "Inicio" [ref=f9e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f9e12]: /
+        - link "Química" [ref=f9e13] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f9e14]: /
+        - link "Mezclas" [ref=f9e15] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=f9e16]: /
+        - generic [ref=f9e17]: Separación
+      - generic [ref=f9e18]:
+        - link "Mezclas" [ref=f9e19] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=f9e23] [cursor=pointer]
+  - generic [ref=f9e31]:
+    - generic [ref=f9e32]: Química · Mezclas
+    - heading "Métodos de Separación" [level=1] [ref=f9e35]
+    - paragraph [ref=f9e36]: Cada mezcla se separa con la técnica adecuada. Conocé los métodos físicos para recuperar los componentes puros.
+    - generic [ref=f9e37]:
+      - generic [ref=f9e38]: Filtración
+      - generic [ref=f9e39]: Destilación
+      - generic [ref=f9e40]: Cromatografía
+  - main [ref=f9e41]:
+    - generic [ref=f9e42]:
+      - heading "¿Por qué separar?" [level=2] [ref=f9e43]
+      - paragraph [ref=f9e48]:
+        - text: Una de las propiedades más importantes de las mezclas es que sus componentes pueden separarse mediante
+        - strong [ref=f9e49]: métodos físicos
+        - text: . Esto las diferencia de los compuestos, que requieren reacciones químicas para descomponerse. Conocer estos métodos es fundamental tanto en el laboratorio como en la industria y en la vida cotidiana.
+      - generic [ref=f9e50]: «El arte de la química no es solo combinar sustancias, sino también saber separarlas para obtener materiales puros.»
+      - paragraph [ref=f9e51]:
+        - text: Cada método de separación aprovecha una
+        - strong [ref=f9e52]: propiedad física
+        - text: "diferente: el tamaño de partícula, la densidad, el punto de ebullición, la solubilidad o las propiedades magnéticas. Elegir el método correcto depende de qué tipo de mezcla tenemos y qué componentes queremos separar."
+      - 'figure "Ilustración: Técnicas de separación en el laboratorio." [ref=f9e53]':
+        - 'img "Ilustración: Técnicas de separación en el laboratorio." [ref=f9e54]'
+    - generic [ref=f9e56]:
+      - heading "Métodos según el tipo de mezcla" [level=2] [ref=f9e57]
+      - generic [ref=f9e65]:
+        - heading "Filtración" [level=3] [ref=f9e66]
+        - paragraph [ref=f9e67]:
+          - strong [ref=f9e68]: ¿Para qué sirve?
+          - text: Separar un
+          - strong [ref=f9e69]: sólido insoluble
+          - text: de un
+          - strong [ref=f9e70]: líquido
+          - text: ". Ejemplo clásico: arena y agua."
+        - paragraph [ref=f9e71]:
+          - strong [ref=f9e72]: ¿Cómo funciona?
+          - text: La mezcla se hace pasar a través de un material poroso (papel de filtro, colador, tela) que retiene las partículas sólidas y deja pasar el líquido. El sólido retenido se llama
+          - strong [ref=f9e73]: residuo
+          - text: y el líquido que pasa se llama
+          - strong [ref=f9e74]: filtrado
+          - text: .
+        - paragraph [ref=f9e75]:
+          - emphasis [ref=f9e78]: "En casa: colar los fideos, filtrar café, usar un colador de té."
+      - generic [ref=f9e84]:
+        - heading "Decantación" [level=3] [ref=f9e85]
+        - paragraph [ref=f9e86]:
+          - strong [ref=f9e87]: ¿Para qué sirve?
+          - text: Separar
+          - strong [ref=f9e88]: líquidos inmiscibles
+          - text: "(que no se mezclan) con distinta densidad. Ejemplo: agua y aceite."
+        - paragraph [ref=f9e89]:
+          - strong [ref=f9e90]: ¿Cómo funciona?
+          - text: Se deja reposar la mezcla hasta que el líquido más denso va al fondo y el menos denso queda arriba. Luego se usa una
+          - strong [ref=f9e91]: ampolla de decantación
+          - text: (embudo con llave) para separar ambos líquidos abriendo la llave y dejando salir primero el líquido de abajo.
+      - generic [ref=f9e99]:
+        - heading "Tamizado" [level=3] [ref=f9e100]
+        - paragraph [ref=f9e101]:
+          - strong [ref=f9e102]: ¿Para qué sirve?
+          - text: Separar
+          - strong [ref=f9e103]: sólidos de distinto tamaño
+          - text: ". Ejemplo: harina y piedritas, arena y grava."
+        - paragraph [ref=f9e104]:
+          - strong [ref=f9e105]: ¿Cómo funciona?
+          - text: Se hace pasar la mezcla por un tamiz (colador de malla). Las partículas más pequeñas atraviesan los orificios y las más grandes quedan retenidas. Es uno de los métodos más antiguos usados por la humanidad.
+      - generic [ref=f9e111]:
+        - heading "Imantación (separación magnética)" [level=3] [ref=f9e112]
+        - paragraph [ref=f9e113]:
+          - strong [ref=f9e114]: ¿Para qué sirve?
+          - text: Separar mezclas donde
+          - strong [ref=f9e115]: un componente es magnético
+          - text: "(hierro, níquel, cobalto). Ejemplo: arena con limaduras de hierro."
+        - paragraph [ref=f9e116]:
+          - strong [ref=f9e117]: ¿Cómo funciona?
+          - text: Se acerca un imán a la mezcla y el material magnético es atraído, separándose del resto. Se usa industrialmente para reciclar metales y en minería.
+      - generic [ref=f9e123]:
+        - heading "Destilación" [level=3] [ref=f9e124]
+        - paragraph [ref=f9e125]:
+          - strong [ref=f9e126]: ¿Para qué sirve?
+          - text: Separar
+          - strong [ref=f9e127]: líquidos con distinto punto de ebullición
+          - text: "o un líquido de un sólido disuelto. Ejemplo: agua y alcohol, o separar agua de la sal disuelta."
+        - paragraph [ref=f9e128]:
+          - strong [ref=f9e129]: ¿Cómo funciona?
+          - text: La mezcla se calienta. El componente con menor punto de ebullición se evapora primero. Ese vapor pasa por un tubo refrigerante (condensador) donde se enfría y vuelve a estado líquido, recogiéndose en otro recipiente. Es
+          - strong [ref=f9e130]: evaporación + condensación
+          - text: .
+        - paragraph [ref=f9e131]:
+          - emphasis [ref=f9e134]: Se usa para obtener agua destilada, bebidas alcohólicas, y en la refinación del petróleo (destilación fraccionada).
+      - generic [ref=f9e145]:
+        - heading "Cromatografía" [level=3] [ref=f9e146]
+        - paragraph [ref=f9e147]:
+          - strong [ref=f9e148]: ¿Para qué sirve?
+          - text: Separar componentes de una mezcla según su
+          - strong [ref=f9e149]: afinidad
+          - text: "por un medio (fase estacionaria). Ejemplo clásico: separar los pigmentos de una tinta o de las hojas verdes."
+        - paragraph [ref=f9e150]:
+          - strong [ref=f9e151]: ¿Cómo funciona?
+          - text: Se coloca una gota de la mezcla sobre un papel de filtro y se sumerge el borde en un solvente. El solvente asciende por capilaridad y arrastra los componentes a distintas velocidades según su afinidad, separándolos en bandas de colores.
+    - generic [ref=f9e152]:
+      - heading "Tabla resumen" [level=2] [ref=f9e153]
+      - table [ref=f9e159]:
+        - rowgroup [ref=f9e160]:
+          - row [ref=f9e161]:
+            - columnheader "Método" [ref=f9e162]
+            - columnheader "¿Qué separa?" [ref=f9e163]
+            - columnheader "Propiedad usada" [ref=f9e164]
+            - columnheader "Ejemplo" [ref=f9e165]
+        - rowgroup [ref=f9e166]:
+          - row [ref=f9e167]:
+            - cell "Filtración" [ref=f9e168]
+            - cell "Sólido insoluble + líquido" [ref=f9e169]
+            - cell "Tamaño de partícula" [ref=f9e170]
+            - cell "Arena y agua" [ref=f9e171]
+          - row [ref=f9e172]:
+            - cell "Decantación" [ref=f9e173]
+            - cell "Líquidos inmiscibles" [ref=f9e174]
+            - cell "Densidad" [ref=f9e175]
+            - cell "Agua y aceite" [ref=f9e176]
+          - row [ref=f9e177]:
+            - cell "Tamizado" [ref=f9e178]
+            - cell "Sólidos de distinto tamaño" [ref=f9e179]
+            - cell "Tamaño de partícula" [ref=f9e180]
+            - cell "Harina y piedritas" [ref=f9e181]
+          - row [ref=f9e182]:
+            - cell "Imantación" [ref=f9e183]
+            - cell "Componente magnético" [ref=f9e184]
+            - cell "Magnetismo" [ref=f9e185]
+            - cell "Arena + limaduras de Fe" [ref=f9e186]
+          - row [ref=f9e187]:
+            - cell "Destilación" [ref=f9e188]
+            - cell "Líquidos con distinto p.e." [ref=f9e189]
+            - cell "Punto de ebullición" [ref=f9e190]
+            - cell "Agua y alcohol" [ref=f9e191]
+          - row [ref=f9e192]:
+            - cell "Cromatografía" [ref=f9e193]
+            - cell "Mezclas complejas" [ref=f9e194]
+            - cell "Afinidad química" [ref=f9e195]
+            - cell "Tintas, pigmentos" [ref=f9e196]
+    - generic [ref=f9e197]:
+      - generic [ref=f9e198]: Sabías que...
+      - paragraph [ref=f9e199]: La destilación se usa para separar el alcohol del agua. Como el alcohol hierve a 78°C y el agua a 100°C, se evaporan por separado. Este método permite producir bebidas destiladas y combustibles.
+    - generic [ref=f9e200]:
+      - heading "Preguntas para pensar" [level=2] [ref=f9e201]
+      - generic [ref=f9e210]:
+        - generic [ref=f9e211]:
+          - paragraph [ref=f9e212]: 1.Tenés una mezcla de agua, sal disuelta y arena. ¿Qué método(s) usarías para separar todos los componentes? Describí el orden.
+          - group [ref=f9e213]:
+            - generic "Ver respuesta" [ref=f9e214] [cursor=pointer]
+        - generic [ref=f9e215]:
+          - paragraph [ref=f9e216]: 2.¿Qué diferencia hay entre evaporación y destilación como métodos de separación?
+          - group [ref=f9e217]:
+            - generic "Ver respuesta" [ref=f9e218] [cursor=pointer]
+        - generic [ref=f9e219]:
+          - paragraph [ref=f9e220]: 3.¿Por qué no se puede usar filtración para separar agua con sal disuelta?
+          - group [ref=f9e221]:
+            - generic "Ver respuesta" [ref=f9e222] [cursor=pointer]
+    - generic [ref=f9e223]:
+      - link "Tipos de Mezclas" [ref=f9e224] [cursor=pointer]:
+        - /url: tipos-mezclas.html
+      - link "Mezclas" [ref=f9e228] [cursor=pointer]:
+        - /url: index.html
+      - link "Naturaleza" [ref=f9e236] [cursor=pointer]:
+        - /url: mezclas-naturaleza.html
+  - contentinfo [ref=f9e240]:
+    - generic [ref=f9e242]:
+      - generic [ref=f9e243]:
+        - link "Inicio" [ref=f9e244] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=f9e249]: ·
+        - link "Química" [ref=f9e250] [cursor=pointer]:
+          - /url: ../../index.html
+        - generic [ref=f9e251]: ·
+        - link "Mezclas" [ref=f9e252] [cursor=pointer]:
+          - /url: index.html
+      - paragraph [ref=f9e253]: Ciencias Naturales · 1° año · Biología & Química
