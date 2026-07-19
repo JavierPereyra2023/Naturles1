@@ -70,6 +70,69 @@ body.bg-energia::after {
   background: none;
 }
 
+/* === ÍNDICE LATERAL DE CONTENIDOS ===
+   Las páginas extensas de Biología ya declaran enlaces data-toc.
+   Este bloque unifica su aspecto y conserva una versión limpia en móvil. */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 6.5rem; }
+
+.auto-toc-wrap { margin-top: 1.25rem; margin-bottom: -1rem; }
+.auto-toc { max-width: 54rem; border-left: 2px solid rgba(94, 234, 212, .35); padding: .15rem 0 .15rem 1rem; }
+.auto-toc-title { color: rgba(232, 245, 241, .78); font: 700 .68rem/1.2 Inter, sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 .5rem; }
+.auto-toc nav { display: flex; flex-wrap: wrap; gap: .2rem .25rem; }
+.auto-toc .toc-link { display: inline-block; }
+@media (min-width: 1024px) {
+  .auto-toc-wrap { margin-top: 2rem; margin-bottom: -1.25rem; }
+  .auto-toc { max-width: none; }
+}
+.toc-link {
+  position: relative;
+  display: block;
+  border-left: 1px solid rgba(255,255,255,.08);
+  padding: .42rem .65rem .42rem .85rem;
+  color: #7f9085;
+  font-family: 'Inter', sans-serif;
+  font-size: .69rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease;
+}
+.toc-link::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #DC2626;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform .22s ease;
+}
+.toc-link:hover,
+.toc-link:focus-visible,
+.toc-link.active {
+  color: #f3f7f4;
+  border-left-color: rgba(220,38,38,.35);
+  background: rgba(220,38,38,.06);
+  transform: translateX(2px);
+  outline: none;
+}
+.toc-link:hover::before,
+.toc-link:focus-visible::before,
+.toc-link.active::before { transform: scaleY(1); }
+@media (max-width: 1023px) {
+  .toc-link { font-size: .75rem; }
+}
+
+/* Los fondos de portada deben acompañar al contenido, no desaparecer bajo el overlay. */
+body[class*="bg-"] section.relative.overflow-hidden > div.absolute.inset-0:has(> img) {
+  opacity: .36 !important;
+}
+body[class*="bg-"] section.relative.overflow-hidden > div.absolute.bg-gradient-to-b {
+  background-image: linear-gradient(180deg, rgba(8,12,10,.52) 0%, rgba(8,12,10,.10) 52%, rgba(8,12,10,.72) 100%) !important;
+}
+
 /* === PORTADA / HERO estilizado ===
    El primer <section class="relative ..."> de cada pagina recibe:
    - Fondo transparente (deja ver el body)

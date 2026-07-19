@@ -1,3 +1,58 @@
+const QUIZ_EXTRA = {
+  materia: [
+    ['Dos objetos ocupan el mismo volumen, pero uno tiene más masa. ¿Cuál es más denso?', ['El de menor masa','El de mayor masa','Ambos siempre tienen la misma densidad','No se puede comparar'],1,'A igual volumen, mayor masa implica mayor densidad.'],
+    ['¿Cuál es una unidad adecuada para medir la masa de una manzana?', ['Kilogramo o gramo','Litro','Metro cuadrado','Grado Celsius'],0,'La masa se expresa habitualmente en gramos o kilogramos.'],
+    ['Una propiedad intensiva se caracteriza porque...', ['Depende de la cantidad de materia','No depende de la cantidad de materia','Solo se mide con una balanza','Siempre es visible'],1,'La densidad y la temperatura son ejemplos de propiedades intensivas.']],
+  mezclas: [
+    ['Una ensalada con aceite, agua y verduras es una mezcla...', ['Homogénea','Heterogénea','Una sustancia pura','Un elemento'],1,'Se distinguen varias fases o componentes.'],
+    ['Para obtener la sal del agua salada se puede usar...', ['Evaporación','Imantación','Filtración','Tamizado'],0,'Al evaporarse el agua, la sal queda como residuo.'],
+    ['La filtración permite separar...', ['Un sólido insoluble de un líquido','Dos líquidos miscibles','Dos gases','Una sustancia pura en sus elementos'],0,'El filtro retiene el sólido insoluble y deja pasar el líquido.']],
+  agua: [
+    ['En la potabilización, la desinfección busca principalmente...', ['Agregar nutrientes','Reducir microorganismos peligrosos','Aumentar la salinidad','Congelar el agua'],1,'La desinfección reduce microorganismos que pueden causar enfermedades.'],
+    ['¿Cuál es una acción responsable para ahorrar agua?', ['Dejar la canilla abierta','Reparar pérdidas y cerrar la canilla','Usar agua potable para limpiar veredas siempre','Volcar residuos al río'],1,'Reparar pérdidas y evitar usos innecesarios reduce el consumo.'],
+    ['La condensación ocurre cuando el agua pasa de...', ['Sólido a líquido','Líquido a gas','Gas a líquido','Líquido a sólido'],2,'El vapor se enfría y forma gotas de agua líquida.']],
+  energia: [
+    ['Cuando una lámpara se enciende, parte de la energía eléctrica se transforma en...', ['Luz y calor','Masa','Agua','Gravedad'],0,'Ninguna transformación es perfectamente eficiente: también suele liberarse calor.'],
+    ['Un objeto ubicado a cierta altura posee energía...', ['Cinética únicamente','Potencial gravitatoria','Sonora únicamente','Química únicamente'],1,'La altura respecto de una referencia permite asociar energía potencial gravitatoria.'],
+    ['La energía se conserva cuando...', ['Desaparece por completo','Se transforma o transfiere sin crearse ni destruirse','Solo queda en los seres vivos','No hay movimiento'],1,'La energía puede cambiar de forma y transferirse, pero la cantidad total se conserva.']],
+  'calor-sonido': [
+    ['En una habitación, el calor pasa espontáneamente de...', ['La pared fría al aire caliente','El cuerpo más caliente al más frío','La sombra al Sol','Un objeto vacío a otro'],1,'La transferencia espontánea ocurre por diferencia de temperatura.'],
+    ['Una guitarra produce sonido cuando...', ['Sus cuerdas vibran','Sus cuerdas se derriten','Absorbe toda la luz','No hay medio material'],0,'La vibración de la cuerda produce una perturbación que se propaga por el aire.'],
+    ['Un material transparente permite principalmente que la luz...', ['Lo atraviese y podamos ver a través de él','Desaparezca','Se convierta en sonido siempre','Se vuelva materia'],0,'El vidrio limpio es un ejemplo de material transparente.']],
+  movimientos: [
+    ['En un gráfico velocidad-tiempo, una línea horizontal indica...', ['Velocidad constante','Reposo siempre','Aceleración creciente','Cambio de trayectoria'],0,'La velocidad permanece constante cuando no cambia con el tiempo.'],
+    ['La pendiente de un gráfico posición-tiempo representa...', ['La masa','La velocidad','La temperatura','El volumen'],1,'La variación de posición por unidad de tiempo es la velocidad.'],
+    ['Si un ciclista recorre 120 m en 20 s, su rapidez media es...', ['2 m/s','6 m/s','20 m/s','140 m/s'],1,'Rapidez media = distancia / tiempo = 120 m / 20 s = 6 m/s.']],
+  'sistema-solar': [
+    ['La traslación de la Tierra alrededor del Sol se relaciona principalmente con...', ['Las estaciones junto con la inclinación del eje','El día y la noche','Las fases de la Luna únicamente','Los terremotos'],0,'Las estaciones se explican por la traslación y la inclinación del eje terrestre.'],
+    ['La Luna brilla porque...', ['Produce luz como una estrella','Refleja luz del Sol','Tiene fuego en su superficie','Absorbe la oscuridad'],1,'La Luna no es una estrella: vemos luz solar reflejada en su superficie.'],
+    ['Los planetas interiores son, en general...', ['Rocosos y cercanos al Sol','Gaseosos y más lejanos','Todos satélites','Cometas con cola'],0,'Mercurio, Venus, Tierra y Marte son planetas rocosos interiores.']],
+  'seres-vivos': [
+    ['La nutrición de un ser vivo incluye...', ['Obtener y utilizar materia y energía','Solo dormir','Cambiar de especie','No intercambiar sustancias'],0,'La nutrición permite incorporar materia y obtener energía para las funciones vitales.'],
+    ['Una adaptación es...', ['Una característica que favorece la vida en un ambiente','Un cambio instantáneo elegido por un individuo','Una enfermedad siempre','Una clasificación sin criterio'],0,'Las adaptaciones son características que pueden favorecer la supervivencia y reproducción.'],
+    ['Un ecosistema está formado por...', ['Seres vivos y factores no vivos que interactúan','Solo animales','Solo agua','Una única especie aislada'],0,'Incluye componentes bióticos y abióticos, además de sus relaciones.']],
+  celulas: [
+    ['Una célula vegetal se diferencia de una animal porque posee...', ['Cloroplastos y pared celular','Huesos y músculos','Solo membrana celular','Pulmones'],0,'Los cloroplastos participan en la fotosíntesis y la pared celular brinda sostén.'],
+    ['El núcleo de una célula eucariota contiene principalmente...', ['El material genético','La sangre','El alimento sin transformar','La pared del organismo'],0,'El núcleo contiene el ADN organizado en cromosomas.'],
+    ['Las células procariotas se caracterizan por...', ['No tener núcleo delimitado por membrana','Tener muchos órganos','Ser siempre animales','No tener material genético'],0,'Su material genético se encuentra en una región del citoplasma, sin núcleo membranoso.']],
+  ecologia: [
+    ['La capacidad de carga de un ambiente es...', ['La cantidad máxima de individuos que puede sostener en ciertas condiciones','El número de especies extintas','La velocidad de un depredador','La cantidad de lluvia de un día'],0,'Depende de los recursos y condiciones del ambiente.'],
+    ['En una cadena trófica, la energía comienza principalmente en...', ['El Sol','Los descomponedores','Los consumidores secundarios','El suelo únicamente'],0,'Los productores captan energía solar y la incorporan a materia orgánica.'],
+    ['Los descomponedores cumplen la función de...', ['Reciclar materia al degradar restos','Producir luz solar','Cazar siempre','Eliminar todos los nutrientes'],0,'Hongos y bacterias descomponen materia orgánica y devuelven nutrientes al ambiente.']],
+  plantas: [
+    ['Las hojas son importantes para la fotosíntesis porque...', ['Captan luz y permiten el intercambio de gases','Absorben sangre','Forman huesos','Producen sonidos'],0,'En las hojas se encuentran muchos cloroplastos y estomas.'],
+    ['El tallo ayuda principalmente a...', ['Sostener hojas y transportar sustancias','Digestionar alimentos','Producir neuronas','Formar una columna vertebral'],0,'Conduce agua y sales minerales, y distribuye sustancias elaboradas.'],
+    ['Una planta es autótrofa porque...', ['Produce materia orgánica a partir de sustancias simples','Solo come otros animales','No necesita energía','No intercambia gases'],0,'Mediante la fotosíntesis fabrica materia orgánica usando luz, agua y dióxido de carbono.']],
+  animales: [
+    ['Los invertebrados se caracterizan por...', ['No tener columna vertebral','Tener cloroplastos','Ser todos microscópicos','Vivir solo en el agua'],0,'Es un grupo muy diverso que incluye insectos, moluscos, arácnidos y muchos otros animales.'],
+    ['Una adaptación de un animal es...', ['Una característica que favorece su supervivencia','Un órgano que todos los animales comparten','Una roca de su hábitat','Una mezcla de sustancias'],0,'Las adaptaciones se relacionan con el ambiente y el modo de vida.'],
+    ['En una red trófica, un herbívoro suele actuar como...', ['Consumidor primario','Productor','Descomponedor exclusivamente','Factor abiótico'],0,'Se alimenta de productores, por eso ocupa el nivel de consumidor primario.']],
+  'cuerpo-humano': [
+    ['El sistema respiratorio permite principalmente...', ['Intercambiar oxígeno y dióxido de carbono','Digerir grasas','Mover los huesos','Filtrar la orina'],0,'El intercambio gaseoso permite incorporar oxígeno y eliminar dióxido de carbono.'],
+    ['El sistema nervioso coordina respuestas mediante...', ['Señales y órganos especializados','Raíces','Filtros de agua','Cloroplastos'],0,'Recibe información, la procesa y coordina respuestas del organismo.'],
+    ['La sangre transporta...', ['Gases, nutrientes y desechos','Solo huesos','Luz solar','Paredes celulares'],0,'La circulación distribuye sustancias y contribuye al equilibrio interno.']]
+};
+
 window.QUIZ_UNITS = [
   {id:'materia', area:'quimica', title:'Materia y propiedades', icon:'lucide:scale', questions:[
     ['¿Cuál es una propiedad extensiva?', ['Densidad','Masa','Color','Solubilidad'],1,'La masa depende de la cantidad de material.'],
@@ -51,4 +106,4 @@ window.QUIZ_UNITS = [
     ['El sistema digestivo transforma...', ['Alimentos en nutrientes aprovechables','Oxígeno en sangre','Huesos en músculos','Luz en sonido'],0,'Obtiene nutrientes que las células pueden usar.'],
     ['El corazón impulsa la sangre por...', ['El sistema circulatorio','El sistema solar','Las raíces','Los pulmones solamente'],0,'La circulación transporta sustancias por el cuerpo.'],
     ['Cuidar el cuerpo incluye...', ['Alimentación, descanso y actividad física','Ignorar señales de malestar','No tomar agua','Dormir muy poco siempre'],0,'La salud es integral: física, emocional y social.']]}
-].map(unit => ({...unit, questions: unit.questions.map((q,i) => ({id:unit.id+'-'+i, text:q[0], options:q[1], correct:q[2], feedback:q[3], points:100/3}))}));
+].map(unit => ({...unit, questions: [...unit.questions, ...(QUIZ_EXTRA[unit.id] || [])].map((q,i) => ({id:unit.id+'-'+i, text:q[0], options:q[1], correct:q[2], feedback:q[3], points:100/(unit.questions.length + (QUIZ_EXTRA[unit.id] || []).length)}))}));

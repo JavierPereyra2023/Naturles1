@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Mezclas presentes en la naturaleza</title>
+  <desc id="descripcion">Escena educativa en castellano que muestra aire, agua y suelo como ejemplos de mezclas homogéneas y heterogéneas.</desc>
+  <defs>
+    <linearGradient id="cielo" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#102b3c"/><stop offset="1" stop-color="#1e5b61"/></linearGradient>
+    <linearGradient id="suelo" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#754f32"/><stop offset="1" stop-color="#2d211c"/></linearGradient>
+    <linearGradient id="agua" x1="0" x2="1"><stop stop-color="#42c9d2"/><stop offset="1" stop-color="#1b728a"/></linearGradient>
+  </defs>
+  <rect width="1200" height="560" fill="url(#cielo)"/>
+  <circle cx="1000" cy="108" r="58" fill="#f6d365" opacity=".9"/>
+  <text x="64" y="76" fill="#b7f3ec" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="5">MEZCLAS EN LA NATURALEZA</text>
+  <text x="64" y="110" fill="#e0f2ef" font-family="Arial, sans-serif" font-size="18">La materia que nos rodea combina sustancias de diferentes maneras.</text>
+  <path d="M0 300q160-100 320 0t320 0 320 0 320 0v260H0z" fill="#1c6865" opacity=".75"/>
+  <path d="M0 390q150-80 300 0t300 0 300 0 300 0 300 0v170H0z" fill="url(#suelo)"/>
+  <path d="M0 380q180-55 360 0t360 0 360 0 360 0v35q-180-55-360 0t-360 0-360 0-360 0z" fill="url(#agua)"/>
+  <g fill="none" stroke="#b7f3ec" stroke-width="3" opacity=".85">
+    <path d="M180 180q45-35 90 0t90 0 90 0 90 0"/>
+    <path d="M180 210q45-35 90 0t90 0 90 0 90 0"/>
+  </g>
+  <g fill="#f1c27d" opacity=".85"><circle cx="120" cy="430" r="9"/><circle cx="185" cy="480" r="12"/><circle cx="260" cy="430" r="7"/><circle cx="330" cy="500" r="10"/><circle cx="400" cy="450" r="8"/></g>
+  <g font-family="Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <rect x="88" y="145" width="180" height="58" rx="29" fill="#0d202d" stroke="#b7f3ec" stroke-width="2"/><text x="178" y="181" fill="#fff" font-size="22">AIRE</text>
+    <rect x="470" y="424" width="180" height="58" rx="29" fill="#0d202d" stroke="#83e5e2" stroke-width="2"/><text x="560" y="460" fill="#fff" font-size="22">AGUA</text>
+    <rect x="930" y="430" width="180" height="58" rx="29" fill="#0d202d" stroke="#e8b77b" stroke-width="2"/><text x="1020" y="466" fill="#fff" font-size="22">SUELO</text>
+  </g>
+  <text x="150" y="530" fill="#d8ffff" font-family="Arial, sans-serif" font-size="19">Aire: mezcla homogénea de gases</text>
+  <text x="725" y="530" fill="#ffe1b5" font-family="Arial, sans-serif" font-size="19">Suelo: mezcla heterogénea de minerales y materia orgánica</text>
+</svg>

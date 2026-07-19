@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Mezclas y métodos de separación</title>
+  <desc id="descripcion">Ilustración en castellano de una mezcla heterogénea de agua y aceite, junto con la filtración y la decantación.</desc>
+  <defs>
+    <linearGradient id="fondo" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#102a2a"/><stop offset="1" stop-color="#071414"/></linearGradient>
+    <linearGradient id="vidrio" x1="0" x2="1"><stop stop-color="#d8ffff" stop-opacity=".38"/><stop offset=".5" stop-color="#8de1dd" stop-opacity=".12"/><stop offset="1" stop-color="#d8ffff" stop-opacity=".3"/></linearGradient>
+    <linearGradient id="aceite" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f6d365"/><stop offset="1" stop-color="#c68b28"/></linearGradient>
+    <linearGradient id="agua" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#43c6c0"/><stop offset="1" stop-color="#147c82"/></linearGradient>
+    <filter id="sombra"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1200" height="560" fill="url(#fondo)"/>
+  <circle cx="1040" cy="70" r="170" fill="#32c5bb" opacity=".08"/>
+  <text x="64" y="78" fill="#91eee3" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="5">MEZCLAS Y SEPARACIÓN</text>
+  <text x="64" y="112" fill="#d9e9e5" font-family="Arial, sans-serif" font-size="18">Observar las fases ayuda a elegir el método adecuado.</text>
+  <g filter="url(#sombra)">
+    <path d="M120 190h190l-18 260q-2 23-25 23H163q-23 0-25-23z" fill="url(#vidrio)" stroke="#a9efea" stroke-width="3"/>
+    <path d="M141 332h148l-7 118q-2 23-25 23h-84q-23 0-25-23z" fill="url(#agua)"/>
+    <path d="M143 282h144l2 50H141z" fill="url(#aceite)"/>
+    <path d="M139 282h150" stroke="#fff4b0" stroke-width="3" opacity=".8"/>
+    <path d="M139 332h150" stroke="#b9fff6" stroke-width="3" opacity=".8"/>
+  </g>
+  <text x="215" y="510" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="700">MEZCLA HETEROGÉNEA</text>
+  <text x="215" y="538" text-anchor="middle" fill="#f6d365" font-family="Arial, sans-serif" font-size="18">dos fases visibles</text>
+  <g filter="url(#sombra)">
+    <path d="M475 185h190l-88 166v99h-14v-99z" fill="url(#vidrio)" stroke="#a9efea" stroke-width="3"/>
+    <path d="M523 352h94v98h-94z" fill="#4aa9a5" opacity=".85"/>
+    <path d="M444 175h250" stroke="#d8ffff" stroke-width="12" stroke-linecap="round"/>
+    <path d="M491 205h158" stroke="#fff" stroke-width="3" opacity=".7"/>
+  </g>
+  <text x="570" y="510" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="700">FILTRACIÓN</text>
+  <text x="570" y="538" text-anchor="middle" fill="#a9efea" font-family="Arial, sans-serif" font-size="18">separa un sólido de un líquido</text>
+  <g filter="url(#sombra)">
+    <path d="M805 190h180v180q0 30-30 30H835q-30 0-30-30z" fill="url(#vidrio)" stroke="#a9efea" stroke-width="3"/>
+    <path d="M820 295h150v75q0 30-30 30h-90q-30 0-30-30z" fill="url(#agua)"/>
+    <path d="M820 264h150v31H820z" fill="url(#aceite)"/>
+    <path d="M820 264h150" stroke="#fff4b0" stroke-width="3"/>
+    <path d="M895 152v112" stroke="#a9efea" stroke-width="13" stroke-linecap="round"/>
+    <path d="M875 144h40" stroke="#d8ffff" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <text x="895" y="456" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="700">DECANTACIÓN</text>
+  <text x="895" y="484" text-anchor="middle" fill="#a9efea" font-family="Arial, sans-serif" font-size="18">separa líquidos que no se mezclan</text>
+</svg>

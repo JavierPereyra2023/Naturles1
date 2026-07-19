@@ -113,6 +113,7 @@
     .nav-link-podcast::after { background: #E8A87C; }
     .nav-link-esi::after { background: #14B8A6; }
     .nav-link-eai::after { background: #22C55E; }
+    .nav-link-quiz::after { background: #14B8A6; }
 
     .mobile-menu {
       transform: translateX(100%);
@@ -184,6 +185,8 @@
       body { background: white; color: black; }
     }
   </style>
+  <link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+  <script src="assets/backgrounds/auto-toc.js?v=6"></script>
 </head>
 <body>
   <script>
@@ -219,7 +222,7 @@
           <a href="podcast/index.html" class="nav-link nav-link-podcast text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-podcast transition-colors">Podcast</a>
           <a href="esi.html" class="nav-link nav-link-esi text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-greenLight transition-colors">ESI</a>
           <a href="eai.html" class="nav-link nav-link-eai text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-leaf transition-colors">EAI</a>
-          <a href="evaluaciones/bienvenida.html" class="inline-flex items-center gap-1.5 rounded-sm bg-natura-green px-3 py-2 text-xs font-bold uppercase tracking-wider text-natura-black transition-colors hover:bg-natura-greenLight">
+          <a href="evaluaciones/index.html" class="nav-link nav-link-quiz inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-natura-silver hover:text-natura-greenLight transition-colors">
             <span class="iconify" data-icon="lucide:circle-help" data-width="15"></span>
             Quiz
           </a>
@@ -256,7 +259,7 @@
           <a href="#biologia" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-natura-bio transition-colors">Biología</a>
           <a href="#revista" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-white transition-colors">Revista</a>
           <a href="podcast/index.html" class="mobile-link font-heading text-xl font-bold uppercase tracking-wider text-white hover:text-natura-podcast transition-colors">Podcast</a>
-          <a href="evaluaciones/bienvenida.html" class="mobile-link inline-flex items-center gap-2 font-heading text-xl font-bold uppercase tracking-wider text-natura-green hover:text-natura-greenLight transition-colors">
+          <a href="evaluaciones/index.html" class="mobile-link inline-flex items-center gap-2 font-heading text-xl font-bold uppercase tracking-wider text-natura-green hover:text-natura-greenLight transition-colors">
             <span class="iconify" data-icon="lucide:circle-help" data-width="19"></span>
             Quiz
           </a>
@@ -277,7 +280,7 @@
   <!-- ============================================ -->
   <section class="relative min-h-screen flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="https://loremflickr.com/600/400/science,nature,lab?lock=8523" alt="Ciencias Naturales" class="hero-img w-full h-full object-cover">
+      <img src="assets/hero-ciencias-naturales.png" alt="Paisaje natural con montañas, lago y vegetación, símbolo de la exploración científica" class="hero-img w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-r from-natura-black via-natura-black/90 to-natura-black/40"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-natura-black via-transparent to-natura-black/40"></div>
       <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 55% at 20% 40%, rgba(13,148,136,0.25) 0%, transparent 65%); pointer-events: none;"></div>
