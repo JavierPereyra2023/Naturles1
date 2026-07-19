@@ -76,13 +76,13 @@ body.bg-energia::after {
 html { scroll-behavior: smooth; }
 [id] { scroll-margin-top: 6.5rem; }
 
-.auto-toc-wrap { margin-top: 1.25rem; margin-bottom: -1rem; }
+.auto-toc-wrap { margin-top: 1.25rem; margin-bottom: 0; position: relative; z-index: 3; }
 .auto-toc { max-width: 54rem; border-left: 2px solid rgba(94, 234, 212, .35); padding: .15rem 0 .15rem 1rem; }
 .auto-toc-title { color: rgba(232, 245, 241, .78); font: 700 .68rem/1.2 Inter, sans-serif; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 .5rem; }
 .auto-toc nav { display: flex; flex-wrap: wrap; gap: .2rem .25rem; }
 .auto-toc .toc-link { display: inline-block; }
 @media (min-width: 1024px) {
-  .auto-toc-wrap { margin-top: 2rem; margin-bottom: -1.25rem; }
+  .auto-toc-wrap { margin-top: 2rem; margin-bottom: 0; }
   .auto-toc { max-width: none; }
 }
 .toc-link {

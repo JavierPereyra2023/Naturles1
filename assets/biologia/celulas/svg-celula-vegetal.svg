@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 560" role="img" aria-labelledby="t d">
+<title id="t">Modelo tridimensional de una célula eucariota vegetal</title>
+<desc id="d">Célula vegetal con pared celular de celulosa, membrana, núcleo, gran vacuola central, cloroplastos con grana, mitocondrias y retículo endoplasmático.</desc>
+<defs>
+  <radialGradient id="bgV" cx=".42" cy=".3" r="1.05">
+    <stop offset="0" stop-color="#fdfaf3"/><stop offset=".55" stop-color="#f1ecdd"/><stop offset="1" stop-color="#ded7c0"/>
+  </radialGradient>
+  <radialGradient id="vigV" cx=".5" cy=".46" r=".75">
+    <stop offset=".62" stop-color="#5c6b40" stop-opacity="0"/><stop offset="1" stop-color="#5c6b40" stop-opacity=".16"/>
+  </radialGradient>
+  <linearGradient id="wallV" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#e6f3cb"/><stop offset=".5" stop-color="#badb98"/><stop offset="1" stop-color="#8ab86e"/>
+  </linearGradient>
+  <radialGradient id="cytoV" fx=".4" fy=".32">
+    <stop offset="0" stop-color="#f4fbdf"/><stop offset=".5" stop-color="#d7ecae"/><stop offset="1" stop-color="#a8cf7f"/>
+  </radialGradient>
+  <radialGradient id="vacV" fx=".38" fy=".3">
+    <stop offset="0" stop-color="#f2feff"/><stop offset=".55" stop-color="#c9edf0"/><stop offset="1" stop-color="#8ecdd2"/>
+  </radialGradient>
+  <radialGradient id="nucV" fx=".36" fy=".32">
+    <stop offset="0" stop-color="#f1dcff"/><stop offset=".5" stop-color="#c78cea"/><stop offset=".85" stop-color="#9b56cb"/><stop offset="1" stop-color="#7c3baa"/>
+  </radialGradient>
+  <radialGradient id="noloV" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#8f47c0"/><stop offset=".6" stop-color="#5c2687"/><stop offset="1" stop-color="#421661"/>
+  </radialGradient>
+  <radialGradient id="chlG" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#c9e89e"/><stop offset=".6" stop-color="#7fba58"/><stop offset="1" stop-color="#4e8f3c"/>
+  </radialGradient>
+  <radialGradient id="mitoGV" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#ffd5ab"/><stop offset=".55" stop-color="#ff9f60"/><stop offset="1" stop-color="#e4673a"/>
+  </radialGradient>
+  <filter id="soft2V"><feGaussianBlur stdDeviation="2"/></filter>
+  <filter id="soft6V"><feGaussianBlur stdDeviation="6"/></filter>
+  <filter id="soft12V"><feGaussianBlur stdDeviation="12"/></filter>
+  <filter id="dsV" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="2" dy="6" stdDeviation="5" flood-color="#3d5e2a" flood-opacity=".35"/>
+  </filter>
+  <filter id="grainV" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="11" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0" result="a"/>
+    <feComposite in="a" in2="SourceGraphic" operator="in"/>
+  </filter>
+  <clipPath id="clipV"><rect x="164" y="144" width="372" height="272" rx="72"/></clipPath>
+  <clipPath id="mitoClipV"><ellipse rx="26" ry="11.5"/></clipPath>
+  <g id="granaV" fill="#33682c">
+    <rect x="-6" y="-6" width="12" height="2.6" rx="1.3"/>
+    <rect x="-6" y="-2.4" width="12" height="2.6" rx="1.3"/>
+    <rect x="-6" y="1.2" width="12" height="2.6" rx="1.3"/>
+    <rect x="-6" y="4.8" width="12" height="2.6" rx="1.3"/>
+  </g>
+  <g id="chlV">
+    <ellipse rx="35" ry="17.5" fill="url(#chlG)" stroke="#3f7a34" stroke-width="2.6"/>
+    <use href="#granaV" transform="translate(-16 -1) rotate(-4)"/>
+    <use href="#granaV" transform="translate(0 1)"/>
+    <use href="#granaV" transform="translate(16 -1) rotate(4)"/>
+    <ellipse cx="-10" cy="-7" rx="13" ry="4" fill="#e7f7c8" opacity=".5" transform="rotate(-12)"/>
+  </g>
+  <g id="mitoV">
+    <ellipse rx="28" ry="13.5" fill="url(#mitoGV)" stroke="#b34a2e" stroke-width="2.2"/>
+    <g clip-path="url(#mitoClipV)" fill="none" stroke="#a03d22" stroke-width="2" opacity=".85">
+      <path d="M-14 -14 q6 7 0 14 q-6 7 0 14"/>
+      <path d="M0 -14 q6 7 0 14 q-6 7 0 14"/>
+      <path d="M14 -14 q6 7 0 14 q-6 7 0 14"/>
+    </g>
+  </g>
+</defs>
+
+<rect width="700" height="560" rx="28" fill="url(#bgV)"/>
+<rect width="700" height="560" rx="28" fill="url(#vigV)"/>
+<g transform="translate(350 280) scale(1.15) translate(-350 -280)">
+<ellipse cx="185" cy="70" rx="190" ry="95" fill="#ffffff" opacity=".5" filter="url(#soft12V)"/>
+<ellipse cx="352" cy="470" rx="250" ry="26" fill="#2f4426" opacity=".17" filter="url(#soft6V)"/>
+<ellipse cx="352" cy="466" rx="180" ry="15" fill="#2f4426" opacity=".18" filter="url(#soft2V)"/>
+
+<g>
+  <!-- pared celular -->
+  <rect x="140" y="120" width="420" height="320" rx="88" fill="url(#wallV)" stroke="#6d9c58" stroke-width="3.5"/>
+  <rect x="152" y="132" width="396" height="296" rx="80" fill="none" stroke="#7fae66" stroke-width="9" opacity=".5"/>
+  <!-- membrana + citoplasma -->
+  <rect x="164" y="144" width="372" height="272" rx="72" fill="url(#cytoV)"/>
+  <rect x="164" y="144" width="372" height="272" rx="72" fill="none" stroke="#5d8a4c" stroke-width="2.5"/>
+
+  <g clip-path="url(#clipV)">
+    <rect x="164" y="144" width="372" height="272" rx="72" fill="#3d5e2a" filter="url(#grainV)" opacity=".06"/>
+    <ellipse cx="350" cy="400" rx="180" ry="50" fill="#6a9448" opacity=".22" filter="url(#soft12V)"/>
+
+    <!-- corrientes citoplasmáticas -->
+    <g fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity=".22" filter="url(#soft6V)">
+      <path d="M190 240 C230 180 320 160 400 172"/>
+      <path d="M210 380 C270 415 380 420 450 392"/>
+    </g>
+
+    <!-- vacuola central -->
+    <g filter="url(#dsV)">
+      <ellipse cx="322" cy="282" rx="120" ry="94" fill="url(#vacV)" stroke="#69b3b8" stroke-width="3.5"/>
+    </g>
+    <path d="M240 244 C260 202 322 186 380 194" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".65" filter="url(#soft2V)"/>
+    <ellipse cx="300" cy="300" rx="26" ry="16" fill="#ffffff" opacity=".28"/>
+    <ellipse cx="360" cy="255" rx="14" ry="9" fill="#ffffff" opacity=".24"/>
+
+    <!-- retículo endoplasmático -->
+    <g fill="none" stroke="#8fb4d9" stroke-width="4.5" stroke-linecap="round" opacity=".9">
+      <path d="M430 180 C402 162 372 160 344 170"/>
+      <path d="M436 200 C410 186 382 186 356 196"/>
+    </g>
+    <g fill="#3a6a99">
+      <circle cx="414" cy="176" r="1.9"/><circle cx="388" cy="171" r="1.9"/><circle cx="362" cy="174" r="1.9"/>
+      <circle cx="418" cy="196" r="1.9"/><circle cx="392" cy="192" r="1.9"/><circle cx="368" cy="197" r="1.9"/>
+    </g>
+
+    <!-- núcleo -->
+    <g filter="url(#dsV)">
+      <circle cx="472" cy="222" r="46" fill="url(#nucV)"/>
+    </g>
+    <circle cx="472" cy="222" r="45" fill="none" stroke="#f6e6ff" stroke-width="2.6" opacity=".9"/>
+    <circle cx="472" cy="222" r="40.5" fill="none" stroke="#5e2a8c" stroke-width="1.8" opacity=".55"/>
+    <g fill="#53227e">
+      <circle cx="514" cy="222" r="1.9"/><circle cx="501.6" cy="251.6" r="1.9"/><circle cx="472" cy="264" r="1.9"/>
+      <circle cx="442.4" cy="251.6" r="1.9"/><circle cx="430" cy="222" r="1.9"/><circle cx="442.4" cy="192.4" r="1.9"/>
+      <circle cx="472" cy="180" r="1.9"/><circle cx="501.6" cy="192.4" r="1.9"/>
+    </g>
+    <path d="M448 210 C460 202 472 214 486 206 M446 234 C460 228 474 240 492 232" fill="none" stroke="#dcaef0" stroke-width="1.7" opacity=".5"/>
+    <circle cx="462" cy="212" r="13" fill="url(#noloV)" stroke="#4a1e66" stroke-width="1.3"/>
+    <ellipse cx="457" cy="207" rx="4" ry="2.4" fill="#e9cffc" opacity=".8" transform="rotate(-35 457 207)"/>
+
+    <!-- cloroplastos -->
+    <use href="#chlV" transform="translate(206 192) rotate(-22)"/>
+    <use href="#chlV" transform="translate(196 344) rotate(24)"/>
+    <use href="#chlV" transform="translate(478 348) rotate(-14)"/>
+    <use href="#chlV" transform="translate(296 158) rotate(6) scale(.95)"/>
+    <use href="#chlV" transform="translate(522 300) rotate(80) scale(.85)"/>
+
+    <!-- mitocondrias -->
+    <use href="#mitoV" transform="translate(252 398) rotate(-12)"/>
+    <use href="#mitoV" transform="translate(396 404) rotate(15) scale(.9)"/>
+
+    <!-- ribosomas libres -->
+    <g fill="#5e7a3d" opacity=".55">
+      <circle cx="180" cy="250" r="2"/><circle cx="205" cy="280" r="2"/><circle cx="180" cy="310" r="2"/><circle cx="490" cy="170" r="2"/>
+      <circle cx="510" cy="200" r="2"/><circle cx="455" cy="300" r="2"/><circle cx="470" cy="380" r="2"/><circle cx="330" cy="410" r="2"/>
+      <circle cx="215" cy="400" r="2"/><circle cx="505" cy="250" r="2"/><circle cx="250" cy="130" r="2"/><circle cx="430" cy="135" r="2"/>
+    </g>
+    <ellipse cx="245" cy="185" rx="120" ry="55" fill="#ffffff" opacity=".16" filter="url(#soft12V)"/>
+  </g>
+
+  <!-- plasmodesmos -->
+  <g stroke="#6d9c58" stroke-width="2" opacity=".6">
+    <path d="M300 424 V438"/><path d="M330 426 V440"/><path d="M360 426 V440"/><path d="M390 424 V438"/>
+  </g>
+  <!-- brillo de la pared -->
+  <path d="M196 168 C240 132 330 124 420 132" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".5" filter="url(#soft2V)"/>
+  <path d="M520 350 C480 410 380 432 300 424" fill="none" stroke="#4e7a38" stroke-width="6" stroke-linecap="round" opacity=".22" filter="url(#soft6V)"/>
+</g>
+</g>
+</svg>

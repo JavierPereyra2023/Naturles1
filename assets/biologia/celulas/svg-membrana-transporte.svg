@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="t d">
+<title id="t">Modelo de la membrana plasmática: mosaico fluido</title>
+<desc id="d">Bicapa de fosfolípidos con colesterol, proteína de canal, bomba de transporte activo, glucoproteína con glucocálix y proteína periférica. Se muestran difusión simple, difusión facilitada y transporte activo.</desc>
+<defs>
+  <radialGradient id="bgM" cx=".42" cy=".28" r="1.05">
+    <stop offset="0" stop-color="#fbfaf4"/><stop offset=".55" stop-color="#f0eee2"/><stop offset="1" stop-color="#dcdcca"/>
+  </radialGradient>
+  <radialGradient id="vigM" cx=".5" cy=".46" r=".78">
+    <stop offset=".62" stop-color="#4a5c52" stop-opacity="0"/><stop offset="1" stop-color="#4a5c52" stop-opacity=".14"/>
+  </radialGradient>
+  <radialGradient id="headM" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#dcf8f4"/><stop offset=".6" stop-color="#6fd0c6"/><stop offset="1" stop-color="#3ba79c"/>
+  </radialGradient>
+  <linearGradient id="protM" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f7cf7e"/><stop offset=".55" stop-color="#e8a34e"/><stop offset="1" stop-color="#c97a24"/>
+  </linearGradient>
+  <linearGradient id="pumpM" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f0a7c0"/><stop offset=".55" stop-color="#d66795"/><stop offset="1" stop-color="#b84577"/>
+  </linearGradient>
+  <linearGradient id="glyM" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#c9b3ec"/><stop offset=".55" stop-color="#9a7bd0"/><stop offset="1" stop-color="#7a58b4"/>
+  </linearGradient>
+  <filter id="soft2M"><feGaussianBlur stdDeviation="2"/></filter>
+  <filter id="soft8M"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="dsM" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="1.5" dy="4" stdDeviation="3.5" flood-color="#4a3b2a" flood-opacity=".3"/>
+  </filter>
+  <marker id="arrAm" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto">
+    <path d="M0 0l9 4-9 4z" fill="#d18a2e"/>
+  </marker>
+  <marker id="arrTe" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto">
+    <path d="M0 0l9 4-9 4z" fill="#2e8f88"/>
+  </marker>
+  <marker id="arrPk" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto">
+    <path d="M0 0l9 4-9 4z" fill="#b84577"/>
+  </marker>
+  <g id="plM">
+    <path d="M-4.5 9 C-8 28 -2 44 -6 62 C-8 74 -4 82 -6 90" fill="none" stroke="#39a99e" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M4.5 9 C8 26 2 46 6 62 C9 76 3 84 5 92" fill="none" stroke="#2e9388" stroke-width="3.6" stroke-linecap="round"/>
+    <circle r="11" fill="url(#headM)" stroke="#2e8f88" stroke-width="1.6"/>
+    <circle cx="-3.5" cy="-4" r="2.6" fill="#eafffc" opacity=".8"/>
+  </g>
+  <g id="cholM">
+    <rect x="-4" y="-7.5" width="8" height="15" rx="3.5" fill="#f2b04e" stroke="#cf8322" stroke-width="1.6"/>
+    <path d="M0 7.5 L0 13" stroke="#cf8322" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</defs>
+
+<rect width="900" height="560" rx="28" fill="url(#bgM)"/>
+<rect width="900" height="560" rx="28" fill="url(#vigM)"/>
+<ellipse cx="220" cy="60" rx="230" ry="90" fill="#ffffff" opacity=".45" filter="url(#soft8M)"/>
+
+<!-- zonas -->
+<rect x="28" y="72" width="844" height="118" rx="20" fill="#bfe3dc" opacity=".22"/>
+<rect x="28" y="372" width="844" height="118" rx="20" fill="#e8dcc2" opacity=".25"/>
+
+<!-- flechas de transporte (detrás de la bicapa) -->
+<g fill="none" stroke-width="4" stroke-linecap="round">
+  <path d="M196 118 V415" stroke="#d18a2e" stroke-dasharray="9 8" marker-end="url(#arrAm)"/>
+  <path d="M300 112 V428" stroke="#2e8f88" marker-end="url(#arrTe)"/>
+  <path d="M640 425 V148" stroke="#b84577" marker-end="url(#arrPk)"/>
+</g>
+
+<!-- núcleo hidrofóbico -->
+<path d="M60 262 Q450 222 840 262 L840 298 Q450 338 60 298 Z" fill="#ddefea" opacity=".85"/>
+
+<!-- bicapa: folleto superior -->
+<g>
+  <use href="#plM" transform="translate(60 222)"/>
+  <use href="#plM" transform="translate(99 218.9)"/>
+  <use href="#plM" transform="translate(177 212.9)"/>
+  <use href="#plM" transform="translate(216 210.2)"/>
+  <use href="#plM" transform="translate(255 207.9)"/>
+  <use href="#plM" transform="translate(333 204.2)"/>
+  <use href="#plM" transform="translate(372 203)"/>
+  <use href="#plM" transform="translate(411 202.2)"/>
+  <use href="#plM" transform="translate(450 202)"/>
+  <use href="#plM" transform="translate(489 202.2)"/>
+  <use href="#plM" transform="translate(528 203)"/>
+  <use href="#plM" transform="translate(567 204.2)"/>
+  <use href="#plM" transform="translate(606 205.8)"/>
+  <use href="#plM" transform="translate(684 210.2)"/>
+  <use href="#plM" transform="translate(723 212.9)"/>
+  <use href="#plM" transform="translate(762 215.8)"/>
+  <use href="#plM" transform="translate(801 218.9)"/>
+  <use href="#plM" transform="translate(840 222)"/>
+</g>
+<!-- bicapa: folleto inferior -->
+<g>
+  <use href="#plM" transform="translate(60 338) scale(1 -1)"/>
+  <use href="#plM" transform="translate(99 341.1) scale(1 -1)"/>
+  <use href="#plM" transform="translate(177 347.1) scale(1 -1)"/>
+  <use href="#plM" transform="translate(216 349.8) scale(1 -1)"/>
+  <use href="#plM" transform="translate(255 352.1) scale(1 -1)"/>
+  <use href="#plM" transform="translate(333 355.8) scale(1 -1)"/>
+  <use href="#plM" transform="translate(372 357) scale(1 -1)"/>
+  <use href="#plM" transform="translate(411 357.8) scale(1 -1)"/>
+  <use href="#plM" transform="translate(450 358) scale(1 -1)"/>
+  <use href="#plM" transform="translate(489 357.8) scale(1 -1)"/>
+  <use href="#plM" transform="translate(528 357) scale(1 -1)"/>
+  <use href="#plM" transform="translate(567 355.8) scale(1 -1)"/>
+  <use href="#plM" transform="translate(606 354.2) scale(1 -1)"/>
+  <use href="#plM" transform="translate(684 349.8) scale(1 -1)"/>
+  <use href="#plM" transform="translate(723 347.1) scale(1 -1)"/>
+  <use href="#plM" transform="translate(762 344.2) scale(1 -1)"/>
+  <use href="#plM" transform="translate(801 341.1) scale(1 -1)"/>
+  <use href="#plM" transform="translate(840 338) scale(1 -1)"/>
+</g>
+
+<!-- colesterol -->
+<use href="#cholM" transform="translate(180 262) rotate(-10)"/>
+<use href="#cholM" transform="translate(370 258) rotate(9)"/>
+<use href="#cholM" transform="translate(560 257) rotate(-8)"/>
+<use href="#cholM" transform="translate(740 262) rotate(11)"/>
+<use href="#cholM" transform="translate(240 302) rotate(8)"/>
+<use href="#cholM" transform="translate(430 306) rotate(-9)"/>
+<use href="#cholM" transform="translate(620 304) rotate(10)"/>
+<use href="#cholM" transform="translate(782 300) rotate(-11)"/>
+
+<!-- glucoproteína con glucocálix -->
+<g filter="url(#dsM)">
+  <rect x="112" y="196" width="36" height="170" rx="16" fill="url(#glyM)" stroke="#644399" stroke-width="3"/>
+</g>
+<g stroke="#5f9c44" stroke-width="2" fill="#8fce6e">
+  <path d="M130 196 L124 178 L140 170 L126 156 L142 146 L131 134" fill="none"/>
+  <circle cx="124" cy="176" r="5.5"/><circle cx="140" cy="168" r="5.5"/><circle cx="126" cy="154" r="5.5"/>
+  <circle cx="142" cy="144" r="5.5"/><circle cx="131" cy="132" r="5.5"/>
+</g>
+
+<!-- proteína de canal -->
+<g filter="url(#dsM)">
+  <path d="M284 196 C272 240 272 320 284 364 C290 372 310 372 316 364 C328 320 328 240 316 196 C310 188 290 188 284 196 Z" fill="url(#protM)" stroke="#b3611d" stroke-width="3"/>
+</g>
+<rect x="294" y="202" width="12" height="156" rx="6" fill="#fdfaf2" stroke="#b3611d" stroke-width="2"/>
+
+<!-- bomba de transporte activo -->
+<g filter="url(#dsM)">
+  <path d="M618 200 C600 230 606 260 614 280 C604 310 610 350 626 364 C640 374 662 370 668 356 C678 330 672 300 666 282 C676 252 672 220 658 202 C648 190 626 190 618 200 Z" fill="url(#pumpM)" stroke="#96406b" stroke-width="3"/>
+</g>
+
+<!-- proteína periférica -->
+<g filter="url(#dsM)">
+  <ellipse cx="470" cy="392" rx="34" ry="14" fill="#b79ae0" stroke="#7a58b4" stroke-width="2.5"/>
+</g>
+
+<!-- moléculas -->
+<g fill="#d18a2e">
+  <circle cx="190" cy="150" r="6.5"/><circle cx="205" cy="134" r="6.5"/><circle cx="184" cy="122" r="6.5"/>
+  <circle cx="188" cy="440" r="6.5"/><circle cx="206" cy="452" r="6.5"/><circle cx="197" cy="425" r="6.5"/>
+</g>
+<g fill="#2e8f88">
+  <circle cx="285" cy="148" r="6.5"/><circle cx="305" cy="128" r="6.5"/><circle cx="320" cy="155" r="6.5"/>
+  <circle cx="290" cy="446" r="6.5"/><circle cx="312" cy="458" r="6.5"/>
+</g>
+<g fill="#b84577">
+  <circle cx="625" cy="445" r="6.5"/><circle cx="650" cy="458" r="6.5"/><circle cx="612" cy="462" r="6.5"/>
+  <circle cx="628" cy="138" r="6.5"/><circle cx="652" cy="124" r="6.5"/>
+</g>
+<!-- ATP -->
+<polygon points="700,368 706,382 721,382 709,391 713,406 700,397 687,406 691,391 679,382 694,382" fill="#f2c94c" stroke="#d19a1d" stroke-width="2"/>
+
+<!-- etiquetas -->
+<g font-family="'Segoe UI',Arial,sans-serif" fill="#64748b">
+  <text x="450" y="52" text-anchor="middle" font-size="13" letter-spacing="4.5">ESPACIO EXTRACELULAR</text>
+  <text x="450" y="522" text-anchor="middle" font-size="13" letter-spacing="4.5">CITOPLASMA</text>
+</g>
+<g font-family="'Segoe UI',Arial,sans-serif" font-size="11.5" fill="#475569">
+  <text x="36" y="100">Glucoproteína con glucocálix</text>
+  <path d="M150 104 L136 128" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="330" y="128">Proteína de canal</text>
+  <path d="M338 133 L314 190" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="692" y="106">Bomba de transporte activo</text>
+  <path d="M700 112 L660 192" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="770" y="238">Colesterol</text>
+  <path d="M772 244 L746 258" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="872" y="452" text-anchor="end">Fosfolípido</text>
+  <path d="M812 446 L803 356" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="508" y="458">Proteína periférica</text>
+  <path d="M545 450 L492 402" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+</g>
+<g font-family="'Segoe UI',Arial,sans-serif" font-size="11.5" font-weight="600">
+  <text x="196" y="480" text-anchor="middle" fill="#a86a1d">Difusión simple</text>
+  <text x="330" y="446" fill="#2e8f88">Difusión facilitada</text>
+  <text x="676" y="448" fill="#96406b">Transporte activo</text>
+  <text x="726" y="392" fill="#a86a1d">ATP → ADP</text>
+</g>
+</svg>

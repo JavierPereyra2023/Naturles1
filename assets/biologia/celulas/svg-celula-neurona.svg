@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="t d">
+<title id="t">Modelo de una neurona</title>
+<desc id="d">Neurona con dendritas, soma con núcleo, axón cubierto por vaina de mielina con nódulos de Ranvier y terminales sinápticas. Las flechas indican el sentido del impulso nervioso.</desc>
+<defs>
+  <radialGradient id="bgN" cx=".42" cy=".28" r="1.05">
+    <stop offset="0" stop-color="#faf9f4"/><stop offset=".55" stop-color="#efeee4"/><stop offset="1" stop-color="#dcdccd"/>
+  </radialGradient>
+  <radialGradient id="vigN" cx=".5" cy=".46" r=".78">
+    <stop offset=".62" stop-color="#3f4a5c" stop-opacity="0"/><stop offset="1" stop-color="#3f4a5c" stop-opacity=".14"/>
+  </radialGradient>
+  <radialGradient id="somaN" fx=".38" fy=".32">
+    <stop offset="0" stop-color="#e2e9f9"/><stop offset=".5" stop-color="#b3c3e8"/><stop offset="1" stop-color="#8ba3d4"/>
+  </radialGradient>
+  <radialGradient id="nucN" fx=".36" fy=".32">
+    <stop offset="0" stop-color="#f1dcff"/><stop offset=".5" stop-color="#c78cea"/><stop offset=".85" stop-color="#9b56cb"/><stop offset="1" stop-color="#7c3baa"/>
+  </radialGradient>
+  <radialGradient id="noloN" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#8f47c0"/><stop offset=".6" stop-color="#5c2687"/><stop offset="1" stop-color="#421661"/>
+  </radialGradient>
+  <linearGradient id="myeG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f6d67c"/><stop offset=".55" stop-color="#e8a34e"/><stop offset="1" stop-color="#cf8322"/>
+  </linearGradient>
+  <radialGradient id="boutG" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#d9c6f5"/><stop offset=".55" stop-color="#9a7bd0"/><stop offset="1" stop-color="#7a58b4"/>
+  </radialGradient>
+  <radialGradient id="mitoGN" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#ffd5ab"/><stop offset=".55" stop-color="#ff9f60"/><stop offset="1" stop-color="#e4673a"/>
+  </radialGradient>
+  <filter id="soft2N"><feGaussianBlur stdDeviation="2"/></filter>
+  <filter id="soft8N"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="dsN" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="1.5" dy="4" stdDeviation="3.5" flood-color="#3b4a6b" flood-opacity=".3"/>
+  </filter>
+  <filter id="grainN" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="9" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0" result="a"/>
+    <feComposite in="a" in2="SourceGraphic" operator="in"/>
+  </filter>
+  <marker id="arrAmN" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto">
+    <path d="M0 0l9 4-9 4z" fill="#d18a2e"/>
+  </marker>
+  <clipPath id="somaClipN">
+    <path d="M118 262 C112 232 128 205 160 197 C190 190 225 196 245 218 C262 237 266 268 258 296 C250 326 228 348 196 354 C164 360 134 348 120 322 C110 302 112 282 118 262 Z"/>
+  </clipPath>
+  <clipPath id="mitoClipN"><ellipse rx="26" ry="11.5"/></clipPath>
+  <g id="mitoN">
+    <ellipse rx="28" ry="13.5" fill="url(#mitoGN)" stroke="#b34a2e" stroke-width="2.2"/>
+    <g clip-path="url(#mitoClipN)" fill="none" stroke="#a03d22" stroke-width="2" opacity=".85">
+      <path d="M-14 -14 q6 7 0 14 q-6 7 0 14"/>
+      <path d="M0 -14 q6 7 0 14 q-6 7 0 14"/>
+      <path d="M14 -14 q6 7 0 14 q-6 7 0 14"/>
+    </g>
+  </g>
+  <g id="myeN">
+    <rect x="0" y="-21" width="86" height="42" rx="20" fill="url(#myeG)" stroke="#b3611d" stroke-width="2.5"/>
+    <path d="M12 -8 C30 -14 56 -14 74 -8 M12 8 C30 14 56 14 74 8" fill="none" stroke="#a86a1d" stroke-width="2" opacity=".7"/>
+    <ellipse cx="26" cy="-11" rx="17" ry="4.5" fill="#ffe9b0" opacity=".6"/>
+  </g>
+  <g id="boutN">
+    <circle r="12" fill="url(#boutG)" stroke="#644399" stroke-width="2.5"/>
+    <circle cx="-4" cy="-4" r="3" fill="#efe4fc" opacity=".8"/>
+    <circle cx="3" cy="3" r="2" fill="#644399" opacity=".8"/>
+    <circle cx="-2" cy="5" r="1.6" fill="#644399" opacity=".8"/>
+  </g>
+</defs>
+
+<rect width="900" height="560" rx="28" fill="url(#bgN)"/>
+<rect width="900" height="560" rx="28" fill="url(#vigN)"/>
+<ellipse cx="220" cy="60" rx="230" ry="90" fill="#ffffff" opacity=".45" filter="url(#soft8N)"/>
+<ellipse cx="450" cy="498" rx="360" ry="20" fill="#2a3446" opacity=".13" filter="url(#soft8N)"/>
+<ellipse cx="185" cy="472" rx="120" ry="14" fill="#2a3446" opacity=".16" filter="url(#soft2N)"/>
+
+<!-- dendritas -->
+<g fill="none" stroke-linecap="round">
+  <g stroke="#7b8fc4">
+    <path d="M150 212 C128 190 108 168 88 112" stroke-width="16"/>
+    <path d="M112 162 C95 155 80 152 66 146" stroke-width="11"/>
+    <path d="M120 250 C95 240 68 228 38 196" stroke-width="16"/>
+    <path d="M76 226 C60 230 48 236 36 244" stroke-width="11"/>
+    <path d="M115 300 C88 310 60 328 34 352" stroke-width="16"/>
+    <path d="M68 322 C54 320 44 320 32 318" stroke-width="11"/>
+    <path d="M150 342 C132 368 112 398 96 436" stroke-width="16"/>
+    <path d="M202 198 C210 170 212 142 206 112" stroke-width="16"/>
+    <path d="M214 154 C226 146 236 138 246 128" stroke-width="11"/>
+    <path d="M222 348 C232 376 234 402 226 432" stroke-width="16"/>
+    <path d="M236 394 C248 402 258 410 266 420" stroke-width="11"/>
+  </g>
+  <g stroke="#a9bcdf">
+    <path d="M150 212 C128 190 108 168 88 112" stroke-width="10"/>
+    <path d="M112 162 C95 155 80 152 66 146" stroke-width="6.5"/>
+    <path d="M120 250 C95 240 68 228 38 196" stroke-width="10"/>
+    <path d="M76 226 C60 230 48 236 36 244" stroke-width="6.5"/>
+    <path d="M115 300 C88 310 60 328 34 352" stroke-width="10"/>
+    <path d="M68 322 C54 320 44 320 32 318" stroke-width="6.5"/>
+    <path d="M150 342 C132 368 112 398 96 436" stroke-width="10"/>
+    <path d="M202 198 C210 170 212 142 206 112" stroke-width="10"/>
+    <path d="M214 154 C226 146 236 138 246 128" stroke-width="6.5"/>
+    <path d="M222 348 C232 376 234 402 226 432" stroke-width="10"/>
+    <path d="M236 394 C248 402 258 410 266 420" stroke-width="6.5"/>
+  </g>
+</g>
+
+<!-- axón (bajo la mielina) -->
+<path d="M270 280 H700" fill="none" stroke="#7b8fc4" stroke-width="24" stroke-linecap="round"/>
+<path d="M270 280 H700" fill="none" stroke="#a9bcdf" stroke-width="17" stroke-linecap="round"/>
+
+<!-- cono de emergencia + soma -->
+<path d="M246 258 C262 266 278 270 298 272 L298 288 C278 290 262 294 248 302 Z" fill="#9db3e0" stroke="#7b8fc4" stroke-width="2"/>
+<g filter="url(#dsN)">
+  <path d="M118 262 C112 232 128 205 160 197 C190 190 225 196 245 218 C262 237 266 268 258 296 C250 326 228 348 196 354 C164 360 134 348 120 322 C110 302 112 282 118 262 Z" fill="url(#somaN)" stroke="#6f86bc" stroke-width="3"/>
+</g>
+<g clip-path="url(#somaClipN)">
+  <path d="M118 262 C112 232 128 205 160 197 C190 190 225 196 245 218 C262 237 266 268 258 296 C250 326 228 348 196 354 C164 360 134 348 120 322 C110 302 112 282 118 262 Z" fill="#2a3a5c" filter="url(#grainN)" opacity=".07"/>
+  <!-- cuerpos de Nissl (RER) -->
+  <g fill="#5b8fc9" opacity=".85">
+    <rect x="208" y="296" width="16" height="5" rx="2.5" transform="rotate(18 216 298)"/>
+    <rect x="146" y="316" width="16" height="5" rx="2.5" transform="rotate(-14 154 318)"/>
+    <rect x="130" y="238" width="16" height="5" rx="2.5" transform="rotate(24 138 240)"/>
+    <rect x="212" y="230" width="16" height="5" rx="2.5" transform="rotate(-20 220 232)"/>
+    <rect x="152" y="222" width="14" height="5" rx="2.5" transform="rotate(8 159 224)"/>
+    <rect x="222" y="318" width="14" height="5" rx="2.5" transform="rotate(-30 229 320)"/>
+  </g>
+  <use href="#mitoN" transform="translate(228 330) rotate(-20) scale(.55)"/>
+  <use href="#mitoN" transform="translate(136 296) rotate(35) scale(.5)"/>
+</g>
+
+<!-- núcleo -->
+<circle cx="180" cy="268" r="32" fill="url(#nucN)" stroke="#5e2a8c" stroke-width="2"/>
+<circle cx="180" cy="268" r="31" fill="none" stroke="#f6e6ff" stroke-width="2.2" opacity=".9"/>
+<g fill="#53227e">
+  <circle cx="207" cy="268" r="1.6"/><circle cx="199.1" cy="287.1" r="1.6"/><circle cx="180" cy="295" r="1.6"/>
+  <circle cx="160.9" cy="287.1" r="1.6"/><circle cx="153" cy="268" r="1.6"/><circle cx="160.9" cy="248.9" r="1.6"/>
+  <circle cx="180" cy="241" r="1.6"/><circle cx="199.1" cy="248.9" r="1.6"/>
+</g>
+<path d="M164 258 C172 252 180 260 190 254 M162 280 C172 275 182 284 194 278" fill="none" stroke="#dcaef0" stroke-width="1.5" opacity=".55"/>
+<circle cx="173" cy="261" r="9.5" fill="url(#noloN)" stroke="#4a1e66" stroke-width="1.2"/>
+<ellipse cx="169.5" cy="257" rx="3" ry="1.8" fill="#e9cffc" opacity=".85" transform="rotate(-35 169.5 257)"/>
+
+<!-- vaina de mielina + nódulos -->
+<use href="#myeN" transform="translate(296 280)"/>
+<use href="#myeN" transform="translate(398 280)"/>
+<use href="#myeN" transform="translate(500 280)"/>
+<use href="#myeN" transform="translate(602 280)"/>
+<g fill="none" stroke="#d18a2e" stroke-width="3" stroke-linecap="round">
+  <path d="M384 273 L392 280 L384 287 M390 273 L398 280 L390 287"/>
+  <path d="M486 273 L494 280 L486 287 M492 273 L500 280 L492 287"/>
+  <path d="M588 273 L596 280 L588 287 M594 273 L602 280 L594 287"/>
+</g>
+
+<!-- terminales sinápticas -->
+<g fill="none" stroke-linecap="round">
+  <g stroke="#7b8fc4" stroke-width="13">
+    <path d="M690 280 C722 272 744 252 762 232"/>
+    <path d="M690 280 C726 282 752 283 778 283"/>
+    <path d="M690 280 C718 292 738 314 756 336"/>
+    <path d="M748 326 C760 336 766 344 772 352" stroke-width="8"/>
+  </g>
+  <g stroke="#a9bcdf" stroke-width="8">
+    <path d="M690 280 C722 272 744 252 762 232"/>
+    <path d="M690 280 C726 282 752 283 778 283"/>
+    <path d="M690 280 C718 292 738 314 756 336"/>
+    <path d="M748 326 C760 336 766 344 772 352" stroke-width="4.5"/>
+  </g>
+</g>
+<use href="#boutN" transform="translate(764 230)"/>
+<use href="#boutN" transform="translate(782 283)"/>
+<use href="#boutN" transform="translate(758 338)"/>
+<use href="#boutN" transform="translate(774 354) scale(.7)"/>
+<g fill="#7a58b4" opacity=".7">
+  <circle cx="800" cy="292" r="2.5"/><circle cx="808" cy="300" r="2"/><circle cx="804" cy="284" r="2"/>
+</g>
+
+<!-- etiquetas -->
+<g font-family="'Segoe UI',Arial,sans-serif" font-size="12" fill="#475569">
+  <text x="44" y="88">Dendritas</text>
+  <path d="M76 94 L88 108" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="252" y="172">Núcleo</text>
+  <path d="M254 178 L208 246" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="44" y="452">Soma (cuerpo celular)</text>
+  <path d="M96 446 L128 372" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="470" y="172">Vaina de mielina</text>
+  <path d="M500 178 L522 254" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="340" y="452">Axón</text>
+  <path d="M352 444 L390 300" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="508" y="452">Nódulo de Ranvier</text>
+  <path d="M560 444 L592 302" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+  <text x="716" y="428">Terminales sinápticas</text>
+  <path d="M742 420 L756 352" stroke="#94a3b8" stroke-width="1.1" fill="none"/>
+</g>
+<g font-family="'Segoe UI',Arial,sans-serif" font-size="11" font-weight="600" fill="#a86a1d">
+  <text x="316" y="238">Impulso nervioso</text>
+</g>
+<path d="M316 246 H430" fill="none" stroke="#d18a2e" stroke-width="2.5" marker-end="url(#arrAmN)"/>
+</svg>

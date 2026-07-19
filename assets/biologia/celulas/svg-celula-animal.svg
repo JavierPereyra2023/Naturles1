@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 560" role="img" aria-labelledby="t d">
+<title id="t">Modelo tridimensional de una célula eucariota animal</title>
+<desc id="d">Célula animal en corte transversal con microvellosidades, núcleo con nucléolo y poros, retículo endoplasmático rugoso y liso, aparato de Golgi, mitocondrias, lisosomas y centríolos.</desc>
+<defs>
+  <radialGradient id="bgA" cx=".42" cy=".3" r="1.05">
+    <stop offset="0" stop-color="#fdfaf4"/><stop offset=".55" stop-color="#f2ebdf"/><stop offset="1" stop-color="#e0d5c3"/>
+  </radialGradient>
+  <radialGradient id="vigA" cx=".5" cy=".46" r=".75">
+    <stop offset=".62" stop-color="#7a5c40" stop-opacity="0"/><stop offset="1" stop-color="#7a5c40" stop-opacity=".16"/>
+  </radialGradient>
+  <linearGradient id="mvG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f9c6dc"/><stop offset="1" stop-color="#dd8cb4"/>
+  </linearGradient>
+  <radialGradient id="cytoA" fx=".38" fy=".3">
+    <stop offset="0" stop-color="#fdf0f6"/><stop offset=".45" stop-color="#f6d0e1"/><stop offset=".8" stop-color="#e9adc9"/><stop offset="1" stop-color="#d68fb5"/>
+  </radialGradient>
+  <linearGradient id="rimA" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffe9f4"/><stop offset=".5" stop-color="#efa9cb"/><stop offset="1" stop-color="#b05b8f"/>
+  </linearGradient>
+  <radialGradient id="nucA" fx=".36" fy=".32">
+    <stop offset="0" stop-color="#f1dcff"/><stop offset=".5" stop-color="#c78cea"/><stop offset=".85" stop-color="#9b56cb"/><stop offset="1" stop-color="#7c3baa"/>
+  </radialGradient>
+  <radialGradient id="noloA" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#8f47c0"/><stop offset=".6" stop-color="#5c2687"/><stop offset="1" stop-color="#421661"/>
+  </radialGradient>
+  <linearGradient id="rerA" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#a9cdec"/><stop offset="1" stop-color="#6292c4"/>
+  </linearGradient>
+  <linearGradient id="golgiA" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f4c571"/><stop offset="1" stop-color="#d97f2e"/>
+  </linearGradient>
+  <radialGradient id="mitoG" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#ffd5ab"/><stop offset=".55" stop-color="#ff9f60"/><stop offset="1" stop-color="#e4673a"/>
+  </radialGradient>
+  <radialGradient id="lysoG" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#f9d3ec"/><stop offset=".6" stop-color="#c95ca2"/><stop offset="1" stop-color="#9e3e7e"/>
+  </radialGradient>
+  <radialGradient id="peroG" fx=".35" fy=".3">
+    <stop offset="0" stop-color="#ccf3ea"/><stop offset=".6" stop-color="#50b4a1"/><stop offset="1" stop-color="#308577"/>
+  </radialGradient>
+  <linearGradient id="centG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#c4e9e0"/><stop offset="1" stop-color="#5fb3a3"/>
+  </linearGradient>
+  <filter id="soft2"><feGaussianBlur stdDeviation="2"/></filter>
+  <filter id="soft6"><feGaussianBlur stdDeviation="6"/></filter>
+  <filter id="soft12"><feGaussianBlur stdDeviation="12"/></filter>
+  <filter id="dsA" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="2" dy="7" stdDeviation="6" flood-color="#5e2a5e" flood-opacity=".38"/>
+  </filter>
+  <filter id="grainA" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="7" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0" result="a"/>
+    <feComposite in="a" in2="SourceGraphic" operator="in"/>
+  </filter>
+  <clipPath id="clipA"><ellipse cx="350" cy="282" rx="222" ry="159"/></clipPath>
+  <clipPath id="mitoClipA"><ellipse rx="30" ry="13"/></clipPath>
+  <path id="mvA" d="M-8 0 C-9 -12 -7 -24 -3 -33 C-1 -37 3 -37 5 -33 C9 -24 10 -12 8 0 Z" fill="url(#mvG)" stroke="#c9739c" stroke-width="1.2"/>
+  <g id="mitoA">
+    <ellipse rx="33" ry="16" fill="url(#mitoG)" stroke="#b34a2e" stroke-width="2.4"/>
+    <g clip-path="url(#mitoClipA)" fill="none" stroke="#a03d22" stroke-width="2.2" opacity=".85">
+      <path d="M-21 -16 q7 8 0 16 q-7 8 0 16"/>
+      <path d="M-7 -16 q7 8 0 16 q-7 8 0 16"/>
+      <path d="M7 -16 q7 8 0 16 q-7 8 0 16"/>
+      <path d="M21 -16 q7 8 0 16 q-7 8 0 16"/>
+    </g>
+    <ellipse cx="-9" cy="-6" rx="12" ry="4.5" fill="#ffe6c9" opacity=".55" transform="rotate(-14)"/>
+  </g>
+  <g id="lysoA">
+    <circle r="10" fill="url(#lysoG)" stroke="#a03d7c" stroke-width="1.6"/>
+    <circle cx="-3" cy="-3.5" r="2.4" fill="#fff" opacity=".75"/>
+  </g>
+</defs>
+
+<rect width="700" height="560" rx="28" fill="url(#bgA)"/>
+<rect width="700" height="560" rx="28" fill="url(#vigA)"/>
+<g transform="translate(350 280) scale(1.18) translate(-350 -280)">
+<ellipse cx="185" cy="70" rx="190" ry="95" fill="#ffffff" opacity=".5" filter="url(#soft12)"/>
+<ellipse cx="350" cy="482" rx="240" ry="26" fill="#3f2a3a" opacity=".16" filter="url(#soft6)"/>
+<ellipse cx="350" cy="478" rx="165" ry="15" fill="#3f2a3a" opacity=".18" filter="url(#soft2)"/>
+
+<g>
+  <!-- microvellosidades: fila posterior -->
+  <g opacity=".85">
+    <use href="#mvA" transform="translate(118.1 227.3) rotate(-72) scale(.7)"/>
+    <use href="#mvA" transform="translate(138.7 193.5) rotate(-60) scale(.7)"/>
+    <use href="#mvA" transform="translate(168.7 163.6) rotate(-48) scale(.7)"/>
+    <use href="#mvA" transform="translate(206.5 138.8) rotate(-36) scale(.7)"/>
+    <use href="#mvA" transform="translate(250.7 120.4) rotate(-24) scale(.7)"/>
+    <use href="#mvA" transform="translate(299.2 108.9) rotate(-12) scale(.7)"/>
+    <use href="#mvA" transform="translate(350 105) scale(.7)"/>
+    <use href="#mvA" transform="translate(400.8 108.9) rotate(12) scale(.7)"/>
+    <use href="#mvA" transform="translate(449.3 120.4) rotate(24) scale(.7)"/>
+    <use href="#mvA" transform="translate(493.5 138.8) rotate(36) scale(.7)"/>
+    <use href="#mvA" transform="translate(531.3 163.6) rotate(48) scale(.7)"/>
+    <use href="#mvA" transform="translate(561.3 193.5) rotate(60) scale(.7)"/>
+    <use href="#mvA" transform="translate(581.9 227.3) rotate(72) scale(.7)"/>
+  </g>
+  <!-- cuerpo celular -->
+  <ellipse cx="350" cy="282" rx="248" ry="181" fill="url(#cytoA)"/>
+
+  <g clip-path="url(#clipA)">
+    <ellipse cx="350" cy="282" rx="222" ry="159" fill="#5e2b4e" filter="url(#grainA)" opacity=".07"/>
+    <ellipse cx="350" cy="402" rx="195" ry="62" fill="#8a4a72" opacity=".2" filter="url(#soft12)"/>
+
+    <!-- citoesqueleto -->
+    <g stroke="#b58ba8" stroke-width="1.6" opacity=".5">
+      <path d="M240 200 L146 130"/><path d="M240 200 L168 292"/><path d="M240 200 L302 118"/>
+      <path d="M240 200 L426 128"/><path d="M240 200 L196 380"/><path d="M240 200 L540 176"/>
+    </g>
+
+    <!-- retículo endoplasmático liso -->
+    <g fill="none" stroke="#c9a9e6" stroke-width="5.5" stroke-linecap="round" opacity=".9">
+      <path d="M430 150 C470 132 520 140 536 168 C548 190 528 206 500 196"/>
+      <path d="M462 122 C500 112 540 124 552 148"/>
+    </g>
+
+    <!-- núcleo -->
+    <g filter="url(#dsA)">
+      <circle cx="298" cy="272" r="80" fill="url(#nucA)"/>
+    </g>
+    <circle cx="298" cy="272" r="79" fill="none" stroke="#f6e6ff" stroke-width="3" opacity=".9"/>
+    <circle cx="298" cy="272" r="71.5" fill="none" stroke="#5e2a8c" stroke-width="2.2" opacity=".55"/>
+    <g fill="#53227e">
+      <circle cx="373.5" cy="272" r="2.4"/><circle cx="363.4" cy="309.8" r="2.4"/><circle cx="335.8" cy="337.4" r="2.4"/>
+      <circle cx="298" cy="347.5" r="2.4"/><circle cx="260.3" cy="337.4" r="2.4"/><circle cx="232.6" cy="309.8" r="2.4"/>
+      <circle cx="222.5" cy="272" r="2.4"/><circle cx="232.6" cy="234.2" r="2.4"/><circle cx="260.3" cy="206.6" r="2.4"/>
+      <circle cx="298" cy="196.5" r="2.4"/><circle cx="335.8" cy="206.6" r="2.4"/><circle cx="363.4" cy="234.2" r="2.4"/>
+    </g>
+    <g fill="none" stroke="#dcaef0" stroke-width="2" opacity=".5">
+      <path d="M252 250 C270 236 292 258 312 244 S340 250 352 238"/>
+      <path d="M246 292 C268 282 288 300 310 290 S344 292 356 284"/>
+      <path d="M262 318 C282 310 300 324 322 315"/>
+    </g>
+    <circle cx="282" cy="256" r="21" fill="url(#noloA)" stroke="#4a1e66" stroke-width="1.5"/>
+    <ellipse cx="274" cy="247" rx="6" ry="3.5" fill="#e9cffc" opacity=".8" transform="rotate(-35 274 247)"/>
+
+    <!-- retículo endoplasmático rugoso -->
+    <g fill="none" stroke="url(#rerA)" stroke-width="8" stroke-linecap="round">
+      <path d="M386 216 C430 200 480 202 522 224"/>
+      <path d="M392 246 C436 232 486 236 528 260"/>
+      <path d="M394 276 C440 266 488 272 526 298"/>
+      <path d="M390 306 C432 300 478 310 512 336"/>
+    </g>
+    <g fill="#3a6a99">
+      <circle cx="410" cy="214" r="2.3"/><circle cx="452" cy="209" r="2.3"/><circle cx="492" cy="216" r="2.3"/><circle cx="516" cy="226" r="2.3"/>
+      <circle cx="414" cy="245" r="2.3"/><circle cx="458" cy="241" r="2.3"/><circle cx="500" cy="251" r="2.3"/><circle cx="520" cy="261" r="2.3"/>
+      <circle cx="418" cy="277" r="2.3"/><circle cx="462" cy="277" r="2.3"/><circle cx="502" cy="289" r="2.3"/><circle cx="520" cy="299" r="2.3"/>
+      <circle cx="412" cy="308" r="2.3"/><circle cx="455" cy="311" r="2.3"/><circle cx="492" cy="323" r="2.3"/><circle cx="508" cy="335" r="2.3"/>
+    </g>
+
+    <!-- aparato de Golgi -->
+    <g transform="translate(205 366) rotate(-16)">
+      <g fill="none" stroke="url(#golgiA)" stroke-width="8.5" stroke-linecap="round">
+        <path d="M-56 -16 C-22 -30 22 -30 56 -16"/>
+        <path d="M-52 -4 C-20 -16 20 -16 52 -4"/>
+        <path d="M-46 8 C-18 -2 18 -2 46 8"/>
+        <path d="M-38 20 C-14 10 14 10 38 20"/>
+      </g>
+      <g fill="#f4c984" stroke="#cf7c2a" stroke-width="1.5">
+        <circle cx="58" cy="-22" r="5.5"/><circle cx="66" cy="-10" r="4"/><circle cx="-58" cy="-2" r="5"/>
+        <circle cx="-48" cy="26" r="4.5"/><circle cx="40" cy="28" r="3.5"/>
+      </g>
+    </g>
+
+    <!-- mitocondrias -->
+    <use href="#mitoA" transform="translate(168 192) rotate(-28)"/>
+    <use href="#mitoA" transform="translate(240 150) rotate(40) scale(.9)"/>
+    <use href="#mitoA" transform="translate(150 300) rotate(65) scale(.85)"/>
+    <use href="#mitoA" transform="translate(520 352) rotate(18) scale(1.05)"/>
+    <use href="#mitoA" transform="translate(430 398) rotate(-8) scale(.9)"/>
+    <use href="#mitoA" transform="translate(300 412) rotate(30) scale(.8)"/>
+
+    <!-- lisosomas, peroxisoma, vesículas -->
+    <use href="#lysoA" transform="translate(162 332)"/>
+    <use href="#lysoA" transform="translate(548 300) scale(.85)"/>
+    <use href="#lysoA" transform="translate(338 168) scale(.7)"/>
+    <g>
+      <circle cx="455" cy="158" r="7" fill="url(#peroG)" stroke="#2f8576" stroke-width="1.4"/>
+      <circle cx="453" cy="155.5" r="1.7" fill="#fff" opacity=".7"/>
+    </g>
+    <g fill="#f3c6dd" stroke="#c9739c" stroke-width="1.2" opacity=".9">
+      <circle cx="560" cy="250" r="5"/><circle cx="140" cy="255" r="4.5"/><circle cx="505" cy="168" r="4"/>
+    </g>
+
+    <!-- centríolos -->
+    <g transform="translate(238 192) rotate(25) scale(.8)">
+      <rect x="-16" y="-6" width="32" height="12" rx="6" fill="url(#centG)" stroke="#35796c" stroke-width="2"/>
+      <path d="M-8 -5 V5 M0 -5 V5 M8 -5 V5" stroke="#35796c" stroke-width="1.6"/>
+      <g transform="translate(19 -8) rotate(90)">
+        <rect x="-14" y="-5" width="28" height="10" rx="5" fill="url(#centG)" stroke="#35796c" stroke-width="2"/>
+        <path d="M-7 -4 V4 M0 -4 V4 M7 -4 V4" stroke="#35796c" stroke-width="1.4"/>
+      </g>
+    </g>
+
+    <!-- ribosomas libres -->
+    <g fill="#8a5f9e" opacity=".55">
+      <circle cx="180" cy="225" r="2"/><circle cx="200" cy="255" r="2"/><circle cx="160" cy="270" r="2"/><circle cx="395" cy="180" r="2"/>
+      <circle cx="415" cy="350" r="2"/><circle cx="450" cy="330" r="2"/><circle cx="560" cy="330" r="2"/><circle cx="255" cy="390" r="2"/>
+      <circle cx="330" cy="395" r="2"/><circle cx="480" cy="385" r="2"/><circle cx="195" cy="150" r="2"/><circle cx="545" cy="195" r="2"/>
+      <circle cx="380" cy="420" r="2"/><circle cx="135" cy="215" r="2"/>
+    </g>
+
+    <!-- brillo especular superior -->
+    <ellipse cx="245" cy="185" rx="150" ry="70" fill="#ffffff" opacity=".18" filter="url(#soft12)"/>
+  </g>
+
+  <!-- borde de membrana -->
+  <ellipse cx="350" cy="282" rx="248" ry="181" fill="none" stroke="url(#rimA)" stroke-width="13" opacity=".95"/>
+  <ellipse cx="350" cy="282" rx="240" ry="173" fill="none" stroke="#a8578a" stroke-width="2" opacity=".4"/>
+  <path d="M158 236 C190 150 300 108 420 116" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity=".55" filter="url(#soft2)"/>
+  <path d="M520 380 C470 425 390 445 320 438" fill="none" stroke="#ff9ec6" stroke-width="6" stroke-linecap="round" opacity=".25" filter="url(#soft6)"/>
+
+  <!-- microvellosidades: fila frontal -->
+  <use href="#mvA" transform="translate(111.3 245.2) rotate(-78)"/>
+  <use href="#mvA" transform="translate(127.2 210) rotate(-66)"/>
+  <use href="#mvA" transform="translate(152.6 177.9) rotate(-54)"/>
+  <use href="#mvA" transform="translate(186.8 150.5) rotate(-42)"/>
+  <use href="#mvA" transform="translate(228 128.7) rotate(-30)"/>
+  <use href="#mvA" transform="translate(274.6 113.7) rotate(-18)"/>
+  <use href="#mvA" transform="translate(324.4 105.9) rotate(-6)"/>
+  <use href="#mvA" transform="translate(375.6 105.9) rotate(6)"/>
+  <use href="#mvA" transform="translate(425.4 113.7) rotate(18)"/>
+  <use href="#mvA" transform="translate(472 128.7) rotate(30)"/>
+  <use href="#mvA" transform="translate(513.2 150.5) rotate(42)"/>
+  <use href="#mvA" transform="translate(547.4 177.9) rotate(54)"/>
+  <use href="#mvA" transform="translate(572.8 210) rotate(66)"/>
+  <use href="#mvA" transform="translate(588.7 245.2) rotate(78)"/>
+</g>
+</g>
+</svg>
