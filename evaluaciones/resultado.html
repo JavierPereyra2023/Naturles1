@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis del resultado | Ciencias Naturales</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}body{font-family:Inter,sans-serif;background:#080c0a;color:#c8d4cc}.grid-lines{background-image:linear-gradient(rgba(20,184,166,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(20,184,166,.06) 1px,transparent 1px);background-size:42px 42px}.question{border:1px solid rgba(255,255,255,.1);border-left:3px solid #ef4444;background:rgba(255,255,255,.03)}.question.ok{border-left-color:#22c55e}.answer{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025)}.feedback{border-left:2px solid #fbbf24;background:rgba(251,191,36,.06)}
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+  <div class="grid-lines fixed inset-0 pointer-events-none"></div>
+  <nav class="relative z-10 border-b border-white/5 bg-[#080c0a]/90 backdrop-blur-md"><div class="mx-auto flex h-16 max-w-4xl items-center justify-between px-5"><a href="index.html" class="font-heading text-sm font-bold uppercase tracking-wider text-white">Cs. Naturales</a><a id="back-quiz" href="index.html" class="text-xs font-bold uppercase tracking-wider text-teal-300">Volver a quizzes</a></div></nav>
+  <main id="analysis" class="relative z-10 mx-auto max-w-4xl px-5 py-10 sm:py-14"></main>
+  <script>
+    const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    let data;try{data=JSON.parse(localStorage.getItem('naturales1.quiz.progreso.v1')||'{}')}catch{data={}}
+    const requested=new URLSearchParams(location.search).get('unidad');
+    const r=(requested&&data.units?.[requested]?.lastResult)||data.lastResult,app=document.getElementById('analysis');
+    if(!r){app.innerHTML='<section class="rounded-sm border border-white/10 bg-white/[.03] p-8 text-center"><h1 class="font-heading text-3xl font-bold text-white">Todavía no hay un resultado</h1><p class="mt-3 text-sm text-[#a8b5ad]">Completá un quiz para consultar el análisis detallado.</p><a href="index.html" class="mt-7 inline-flex rounded-sm bg-teal-600 px-5 py-3 text-xs font-bold uppercase tracking-wider text-white">Ir a los quizzes</a></section>'}else{
+      const wrong=r.questions.map((q,i)=>({...q,index:i,answer:r.answers[i],ok:r.answers[i]===q.correct}));
+      const errors=wrong.filter(q=>!q.ok),percent=Math.round(r.score);
+      document.getElementById('back-quiz').href='quiz.html?unidad='+encodeURIComponent(r.unitId);
+      app.innerHTML=`<header><p class="text-[11px] font-bold uppercase tracking-[.2em] text-teal-300">${esc(r.area)} · ${esc(r.title)}</p><h1 class="mt-3 font-heading text-4xl font-bold text-white">Análisis detallado</h1><p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#a8b5ad]">Acá podés revisar exactamente qué concepto necesitás fortalecer. No es solo ver si estuvo bien o mal: es entender por qué.</p></header><section class="mt-8 grid gap-3 sm:grid-cols-3"><div class="rounded-sm border border-white/10 bg-white/[.03] p-4"><p class="text-[10px] font-bold uppercase tracking-widest text-[#5a6b60]">Resultado</p><p class="mt-2 font-heading text-3xl font-bold text-white">${percent} puntos</p></div><div class="rounded-sm border border-white/10 bg-white/[.03] p-4"><p class="text-[10px] font-bold uppercase tracking-widest text-[#5a6b60]">Correctas</p><p class="mt-2 font-heading text-3xl font-bold text-green-300">${r.correct} / ${r.total}</p></div><div class="rounded-sm border border-white/10 bg-white/[.03] p-4"><p class="text-[10px] font-bold uppercase tracking-widest text-[#5a6b60]">Para revisar</p><p class="mt-2 font-heading text-3xl font-bold text-amber-300">${errors.length}</p></div></section><section class="mt-10"><div class="flex flex-wrap items-end justify-between gap-3"><div><p class="text-[11px] font-bold uppercase tracking-[.2em] text-amber-300">Devolución conceptual</p><h2 class="mt-2 font-heading text-3xl font-bold text-white">${errors.length?'Errores para fortalecer':'¡Excelente! No hay errores para revisar'}</h2></div><a href="quiz.html?unidad=${encodeURIComponent(r.unitId)}" class="rounded-sm border border-teal-300/30 px-4 py-3 text-xs font-bold uppercase tracking-wider text-teal-200">Reintentar unidad</a></div><div class="mt-5 grid gap-4">${(errors.length?errors:wrong).map(q=>`<article class="question ${q.ok?'ok':''} rounded-sm p-5"><div class="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wider"><span class="rounded-full bg-white/10 px-2.5 py-1 text-[#c8d4cc]">${esc(q.topic||'Concepto central')}</span><span class="rounded-full bg-white/10 px-2.5 py-1 text-[#a8b5ad]">Nivel: ${esc(q.difficulty||'—')}</span><span class="${q.ok?'text-green-300':'text-red-300'}">${q.ok?'Correcta':'Para revisar'}</span></div><h3 class="mt-4 text-base font-bold leading-relaxed text-white">${esc(q.text)}</h3><p class="answer mt-4 rounded-sm p-3 text-xs ${q.ok?'text-green-200':'text-red-200'}"><b>Tu respuesta:</b> ${q.answer===undefined?'Sin responder':esc(q.options[q.answer])}</p>${!q.ok?`<p class="answer mt-2 rounded-sm p-3 text-xs text-green-200"><b>Respuesta correcta:</b> ${esc(q.options[q.correct])}</p>`:''}<div class="feedback mt-4 rounded-sm p-4"><p class="text-[10px] font-bold uppercase tracking-widest text-amber-300">Concepto para comprender</p><p class="mt-2 text-sm leading-relaxed text-[#c8d4cc]">${esc(q.feedback)}</p></div></article>`).join('')}</div></section>`;
+    }
+  </script>
+</body>
+</html>

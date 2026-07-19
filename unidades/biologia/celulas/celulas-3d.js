@@ -36,6 +36,15 @@
     const photo=document.querySelector('.photo-card img');
     if(photo){photo.src='../../../assets/biologia/celulas/bacterias-microscopia.png';photo.alt='Bacterias alargadas observadas mediante microscopía de fluorescencia';}
   }
+  if(document.title.startsWith('La neurona')&&!document.querySelector('[data-neuron-photo]')){
+    const modelCard=document.querySelector('[data-cell-model]')?.closest('.cell-card');
+    if(modelCard){
+      const figure=document.createElement('figure');
+      figure.className='photo-card'; figure.dataset.neuronPhoto=''; figure.style.margin='16px 0 0';
+      figure.innerHTML='<img src="../../../assets/biologia/celulas/neurona-fotorealista.png" alt="Neurona observada mediante microscopía de fluorescencia" loading="lazy"><figcaption><strong>Neurona en microscopía de fluorescencia</strong>La imagen muestra el soma, las dendritas y el axón extendido; el modelo 3D permite estudiar cada región por separado.</figcaption>';
+      modelCard.after(figure);
+    }
+  }
   document.querySelectorAll('[data-cell-model]').forEach(initModel);
   document.querySelectorAll('[data-tabs] button').forEach(button=>button.addEventListener('click',()=>{
     const group=button.closest('[data-tabs]'), target=button.dataset.tab;
