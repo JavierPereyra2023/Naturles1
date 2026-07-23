@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geotérmica | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { natura: { black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28', silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60', green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E', leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626' } }, fontFamily: { heading: ['Playfair Display', 'Georgia', 'serif'], body: ['Cormorant Garamond', 'Georgia', 'serif'], ui: ['Inter', 'sans-serif'] } } }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter { float: left; font-family: 'Playfair Display', Georgia, serif; font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0; color: #3B82F6; font-weight: 700; }
+    .pull-quote { border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04); }
+    .sidebar-note { float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px; border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem; line-height: 1.55; background: rgba(59,130,246,0.03); clear: right; }
+    .sidebar-note .note-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6; font-family: 'Inter', sans-serif; }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder { border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px; text-align: center; color: #5A6B60; margin: 32px 0; font-family: 'Inter', sans-serif; font-size: 12px; }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .magazine-divider { display: flex; align-items: center; gap: 14px; margin: 36px 0; color: rgba(59,130,246,0.3); }
+    .magazine-divider::before, .magazine-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, currentColor, transparent); }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .vent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .vent-grid { grid-template-columns: 1fr; } }
+    .vent-card { border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 2px; }
+    .vent-card.pros { border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.03); }
+    .vent-card.cons { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.03); }
+    .vent-card h4 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .vent-card ul { list-style: none; padding: 0; margin: 0; }
+    .vent-card li { font-size: 0.85rem; line-height: 1.6; color: #A8B5AD; padding: 4px 0; padding-left: 20px; position: relative; }
+    .vent-card li::before { position: absolute; left: 0; }
+    .vent-card.pros li::before { content: '+'; color: #22C55E; font-weight: 700; }
+    .vent-card.cons li::before { content: '-'; color: #EF4444; font-weight: 700; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
+</head>
+<body class="bg-energia">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Energía</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="fuentes-energia.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Fuentes</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Geotérmica</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="fuentes-energia.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Fuentes</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Energía Geotérmica</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Geotérmica</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">El calor del interior de la Tierra es una fuente constante y confiable. La Cordillera de los Andes le da a Argentina un enorme potencial geotérmico.</p>
+  </div>
+  <div class="energy-hero-visual max-w-4xl mx-auto px-4 md:px-6">
+    <img src="../../../assets/fisica/energia/geotermica-real.png" alt="Planta geotérmica con vapor en un paisaje volcánico de montaña" class="energy-hero-image" width="1128" height="749" fetchpriority="high">
+    <p class="energy-hero-caption">El calor interno de la Tierra</p>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#usos" class="toc-link" data-toc>02. Usos</a>
+          <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
+          <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
+          <a href="#matriz-energetica" class="toc-link" data-toc>05. En la matriz</a>
+          <a href="#implicancia" class="toc-link" data-toc>06. Implicancia real</a>
+          <a href="#ventajas-desventajas" class="toc-link" data-toc>07. Ventajas y desventajas</a>
+      </nav>
+    </div>
+  </aside>
+
+<main class="flex-1 min-w-0 space-y-12">
+
+  <section class="animate-fadeInUp" id="que-es">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">1</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Qué es?</h2>
+    </div>
+    <figure class="energy-figure"><img src="../../../assets/fisica/energia/geotermica-explicativa.png" alt="Pozos y tuberías de una instalación geotérmica en un paisaje volcánico" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">El agua caliente y el vapor del subsuelo pueden extraerse mediante pozos para producir electricidad o calor útil.</figcaption></figure>
+    <p class="article-dropcap text-lg leading-relaxed text-natura-silverLight mb-5">La energía geotérmica aprovecha el calor almacenado en el interior de la Tierra. El planeta libera constantemente calor desde su núcleo, donde las temperaturas superan los 5.000°C. Este calor se manifiesta en la superficie a través de volcanes, géiseres, aguas termales y, de manera más sutil, a través del gradiente geotérmico: la temperatura aumenta aproximadamente 25-30°C por cada kilómetro de profundidad.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Existen diferentes tipos de aprovechamiento según la temperatura del recurso. La <strong class="text-white">alta entalpía</strong> (temperaturas superiores a 150°C) se encuentra en zonas volcánicas y permite generar electricidad. La <strong class="text-white">media y baja entalpía</strong> (entre 30 y 150°C) se utiliza para calefacción urbana, baños termales, invernaderos y procesos industriales. Las <strong class="text-white">bombas de calor geotérmicas</strong> aprovechan la temperatura constante del subsuelo (aproximadamente 15°C a pocos metros de profundidad) para climatizar viviendas, funcionando como calefacción en invierno y refrigeración en verano.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En las zonas volcánicas de la Cordillera de los Andes, el agua subterránea se calienta al entrar en contacto con rocas calientes a profundidad, formando reservorios de agua caliente y vapor que pueden extraerse mediante perforaciones para generar electricidad o calor útil.</p>
+    <div class="pull-quote">"El interior de la Tierra es un reactor nuclear natural: el calor proviene de la desintegración de elementos radiactivos como el uranio, el torio y el potasio."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="usos">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Usos</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La energía geotérmica tiene aplicaciones muy variadas, desde la generación de electricidad hasta usos turísticos y residenciales:</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Generación eléctrica:</strong> Plantas de vapor seco (el vapor sale directamente del pozo), plantas flash (agua caliente a presión que se vaporiza al liberarse) y plantas de ciclo binario (un fluido secundario con menor punto de ebullición permite aprovechar temperaturas de 100-150°C).</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Calefacción urbana (district heating):</strong> Redes de agua caliente que distribuyen calor a edificios, hospitales, escuelas y viviendas en zonas cercanas a reservorios geotérmicos.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Baños termales y turismo de salud:</strong> Las aguas termales de la Cordillera son un atractivo turístico y terapéutico.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Invernaderos y acuicultura:</strong> El agua caliente permite cultivar plantas y criar peces en zonas frías durante todo el año.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Bombas de calor geotérmicas:</strong> Sistemas para climatización de viviendas que aprovechan la temperatura constante del subsuelo.</span></li>
+    </ul>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En Argentina, la <strong class="text-white">planta geotérmica Copahue</strong> (Neuquén) es la única destinada a generación eléctrica, aunque es un proyecto experimental de 1 MW. Los baños termales son el uso más extendido: <strong class="text-white">Termas de Río Hondo</strong> (Santiago del Estero), <strong class="text-white">Copahue</strong>, <strong class="text-white">Caviahue</strong> y <strong class="text-white">Los Molles</strong> (Neuquén) son destinos tradicionales.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="rendimiento">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">3</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Rendimiento</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La eficiencia de conversión de las plantas geotérmicas es relativamente baja, entre <strong class="text-white">10% y 20%</strong>, debido a que el vapor y el agua caliente tienen temperaturas moderadas comparadas con las de una central térmica de combustión. Sin embargo, lo que pierden en eficiencia lo ganan en constancia.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El factor de capacidad de una planta geotérmica es extraordinariamente alto: <strong class="text-white">70-90%</strong>. Esto significa que la planta genera electricidad casi todo el tiempo, 24 horas al día, los 7 días de la semana, los 365 días del año. No depende del clima ni del ciclo día-noche. Es, junto con la nuclear, una de las pocas fuentes capaces de proporcionar <strong class="text-white">electricidad de base</strong> sin emisiones.</p>
+    <div class="sidebar-note"><span class="note-label">Ciclo binario</span>Las plantas de ciclo binario permiten aprovechar temperaturas más bajas (100-150°C) utilizando un fluido secundario con punto de ebullición menor que el del agua. Esto amplía enormemente los sitios donde es viable la geotermia eléctrica. Argentina tiene gran potencial para esta tecnología.</div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El principal costo de la energía geotérmica está en la <strong class="text-white">exploración y perforación</strong> inicial. Perforar pozos de 2 a 4 km de profundidad es muy costoso y existe el riesgo de no encontrar un reservorio comercialmente explotable. Sin embargo, una vez en operación, los costos operativos son bajos y estables.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="lugar-geografico">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">4</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Lugar en Argentina</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La <strong class="text-white">Cordillera de los Andes</strong>, volcánicamente activa, concentra el mayor potencial geotérmico de Argentina. Las zonas más prometedoras son:</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Copahue (Neuquén):</strong> Primera y única planta geotérmica de Argentina, proyecto piloto de 1 MW con potencial estimado de 30 MW.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Domuyo (Neuquén):</strong> Considerado el mayor reservorio geotérmico de América del Sur, con temperaturas subterráneas excepcionalmente altas.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Tuzgle (Salta), Los Andes (Mendoza), Valle del Cura (San Juan):</strong> Sitios con alto potencial identificado, en etapa de estudio y exploración.</span></li>
+    </ul>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El proyecto <strong class="text-white">GEOFAR</strong>, impulsado por el Consejo Federal de Inversiones (CFI), busca desarrollar el sector geotérmico argentino mediante estudios de prefactibilidad, capacitación técnica y promoción de inversiones.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="matriz-energetica">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">En la matriz energética</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La energía geotérmica representa <strong class="text-white">menos del 0,1%</strong> de la matriz eléctrica argentina. La única planta en operación es Copahue (Neuquén), con apenas <strong class="text-white">1 MW</strong> de potencia instalada y funcionamiento experimental.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Sin embargo, el potencial estimado es muy significativo. Según el <strong class="text-white">Servicio Geológico Minero Argentino (SEGEMAR)</strong>, el potencial geotérmico de la Cordillera de los Andes supera los <strong class="text-white">500 MW</strong> de capacidad instalable. El <strong class="text-white">Plan Energético Nacional</strong> contempla incentivos específicos para proyectos geotérmicos, aunque hasta ahora no se han concretado desarrollos comerciales de gran escala.</p>
+    <div class="pull-quote">"Domuyo, en Neuquén, es considerado el mayor reservorio geotérmico de Sudamérica y podría abastecer de electricidad a toda la provincia."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="implicancia">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">6</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Implicancia real</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina tiene uno de los <strong class="text-white">potenciales geotérmicos más grandes de América Latina</strong>, pero el desarrollo es muy lento. Copahue, con solo 1 MW, es la única experiencia de generación eléctrica geotérmica del país, y su funcionamiento es más experimental que comercial.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El caso de <strong class="text-white">Domuyo</strong> (Neuquén) es paradigmático: las investigaciones indican que podría albergar el mayor reservorio geotérmico de Sudamérica, con potencial para abastecer de electricidad a toda la provincia de Neuquén. Sin embargo, el desarrollo sigue paralizado por las barreras que enfrenta el sector.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Las principales barreras son el <strong class="text-white">alto riesgo de exploración</strong> (perforar pozos profundos es caro y no siempre se encuentra un reservorio viable), la <strong class="text-white">falta de un marco regulatorio específico</strong> para la geotermia, y la <strong class="text-white">competencia con otras renovables</strong> más baratas, como la solar y la eólica. En el corto plazo, el uso más extendido de la geotermia en Argentina sigue siendo el <strong class="text-white">turismo termal</strong>, un recurso valioso pero de bajo impacto energético.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-200" id="ventajas-desventajas">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">7</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Ventajas y desventajas</h2>
+    </div>
+    <div class="vent-grid">
+      <div class="vent-card pros">
+        <h4 class="text-natura-leaf">Ventajas</h4>
+        <ul>
+          <li>Constante (no intermitente, genera 24/7/365)</li>
+          <li>Factor de capacidad muy alto (70-90%)</li>
+          <li>Baja huella de terreno (ocupa poco espacio)</li>
+          <li>No emite CO₂ (plantas de ciclo binario: casi cero)</li>
+          <li>Larga vida útil (30-50 años)</li>
+          <li>Produce electricidad de base</li>
+        </ul>
+      </div>
+      <div class="vent-card cons">
+        <h4 class="text-natura-bio">Desventajas</h4>
+        <ul>
+          <li>Solo viable en zonas volcánicas o tectónicas</li>
+          <li>Alto riesgo y costo de exploración (perforación)</li>
+          <li>Puede liberar gases como H₂S (sulfuro de hidrógeno)</li>
+          <li>Requiere grandes cantidades de agua</li>
+          <li>Riesgo de inducir sismicidad</li>
+          <li>Enfriamiento del reservorio con el tiempo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="mareomotriz.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors"><span class="iconify" data-icon="lucide:arrow-left" data-width="13"></span> Mareomotriz</a>
+    <a href="biomasa.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">Biomasa <span class="iconify" data-icon="lucide:arrow-right" data-width="13"></span></a>
+  </div>
+
+</main></div></div>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:flame" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){var els = document.querySelectorAll('section[id]');function c(){var h=window.innerHeight;els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<h-80)e.classList.add('visible');});}c();window.addEventListener('scroll',c,{passive:true});})();
+</script>
+<script>
+(function(){var topics = [
+  {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+  {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+  {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+  {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+  {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+  {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+  {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+  {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+  {n:"Formas de energia",u:"Fisica",s:"Energia",l:"formas-energia.html",c:"#3B82F6"},
+  {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"transformaciones.html",c:"#3B82F6"},
+  {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"fuentes-energia.html",c:"#3B82F6"},
+  {n:"Energia solar",u:"Fisica",s:"Energia",l:"solar.html",c:"#3B82F6"},
+  {n:"Energia eolica",u:"Fisica",s:"Energia",l:"eolica.html",c:"#3B82F6"},
+  {n:"Energia hidroelectrica",u:"Fisica",s:"Energia",l:"hidroelectrica.html",c:"#3B82F6"},
+  {n:"Energia mareomotriz",u:"Fisica",s:"Energia",l:"mareomotriz.html",c:"#3B82F6"},
+  {n:"Energia geotermica",u:"Fisica",s:"Energia",l:"geotermica.html",c:"#3B82F6"},
+  {n:"Energia de biomasa",u:"Fisica",s:"Energia",l:"biomasa.html",c:"#3B82F6"},
+  {n:"Petroleo",u:"Fisica",s:"Energia",l:"petroleo.html",c:"#3B82F6"},
+  {n:"Carbon",u:"Fisica",s:"Energia",l:"carbon.html",c:"#3B82F6"},
+  {n:"Gas natural",u:"Fisica",s:"Energia",l:"gas-natural.html",c:"#3B82F6"},
+  {n:"Energia nuclear",u:"Fisica",s:"Energia",l:"nuclear.html",c:"#3B82F6"},
+  {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+  {n:"Ondas",u:"Fisica",s:"Ondas",l:"../calor-sonido/ondas.html",c:"#3B82F6"},
+  {n:"El Sonido",u:"Fisica",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+  {n:"Materiales",u:"Fisica",s:"Calor",l:"../calor-sonido/materiales.html",c:"#3B82F6"},
+  {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+  {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+  {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../movimientos/graficos.html",c:"#3B82F6"},
+  {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+  {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+  {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+  {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+  {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+  {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+  {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+  {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+  {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+  {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+  {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+  {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+  {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+  {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+  {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+  {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+  {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+  {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+  {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+  {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+  {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+  {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+  {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+  {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+  {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+  {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+  {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+  {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

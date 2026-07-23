@@ -1,0 +1,61 @@
+/* Fixes globales responsive — libro interactivo Cs. Naturales */
+img, video, canvas, svg { max-width: 100%; height: auto; }
+iframe { max-width: 100%; }
+
+/* Evitar desborde horizontal habitual */
+body { overflow-x: hidden; }
+table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Targets táctiles */
+button, .answer, a.btn-primary, a.btn-ghost, .quiz-card, .mode-card {
+  touch-action: manipulation;
+}
+
+/* Navs densos en móvil */
+@media (max-width: 640px) {
+  .sidebar-note { float: none !important; width: 100% !important; margin: 16px 0 !important; }
+  .article-dropcap::first-letter { font-size: 3.2rem !important; }
+
+  /* Hotspots del hub de quizzes */
+  .area-hotspot {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: inline-flex !important;
+    margin: 0.35rem;
+  }
+
+  /* Cards quiz en columna legible */
+  .quiz-card {
+    min-height: auto !important;
+    padding: 14px !important;
+    gap: 10px !important;
+  }
+  .quiz-card h3 { font-size: 17px !important; }
+  .quiz-card b { font-size: 16px !important; }
+
+  /* Simulaciones / SVG anchos */
+  .sim-wrap, .chart-wrap, [class*="svg-"], .mruv-sim {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Breadcrumbs largos */
+@media (max-width: 480px) {
+  nav .flex.items-center.gap-2.text-xs {
+    font-size: 10px;
+    flex-wrap: wrap;
+    max-width: 70%;
+  }
+}
+
+/* Safe area iOS */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

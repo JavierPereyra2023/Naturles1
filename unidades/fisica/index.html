@@ -40,6 +40,18 @@
     .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
     .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
     .content-card:hover { border-color: rgba(59, 130, 246, 0.3); transform: translateY(-4px); }
+    .topic-grid { align-items: stretch; }
+    .topic-card { display: flex; flex-direction: column; height: 100%; }
+    .topic-card-body { display: flex; flex: 1; flex-direction: column; }
+    .topic-card-tags { margin-top: auto; }
+    .topic-link { display: inline-flex; align-items: center; min-height: 2rem; padding: .32rem .55rem; border: 1px solid rgba(59,130,246,.18); border-radius: 3px; color: #60A5FA; background: rgba(59,130,246,.06); text-decoration: none; transition: all .2s ease; }
+    .topic-link:hover, .topic-link:focus-visible { color: #fff; background: rgba(59,130,246,.2); border-color: rgba(96,165,250,.55); outline: none; }
+    .topic-card-title { color: #fff; text-decoration: none; }
+    .topic-card-title:hover, .topic-card-title:focus-visible { color: #93C5FD; }
+    @media (min-width: 768px) {
+      .topic-card { min-height: 31rem; }
+      .topic-card-image { height: 12rem; }
+    }
     .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
     .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
 /* --- CINEMATIC GRAIN OVERLAY --- */
@@ -74,6 +86,7 @@
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
   </style>
   <link rel="stylesheet" href="../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../assets/responsive-fixes.css">
 <script src="../../assets/backgrounds/auto-toc.js?v=5"></script>
 </head>
 <body class="bg-sistema-solar">
@@ -163,99 +176,111 @@
         <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Temas de la Unidad</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+      <div class="topic-grid grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
 
         <!-- Card 1: Las Energías -->
-        <a href="energia/index.html" class="content-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-100 block no-underline">
-          <div class="h-44 md:h-48 overflow-hidden">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-100 block">
+          <div class="topic-card-image h-44 md:h-48 overflow-hidden">
             <img src="../../assets/fisica/index/energia-card.jpg" alt="Paneles solares al atardecer: las energías renovables en la vida cotidiana" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(30%);">
             <div class="grain-overlay"></div>
           </div>
-          <div class="p-5 md:p-6">
+          <div class="topic-card-body p-5 md:p-6">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5"></span>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Energía</span>
               <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
             </div>
-            <h3 class="font-heading text-lg md:text-xl font-bold text-white mb-2">Las Energías — Diversidad y Cambio</h3>
-            <p class="text-xs text-natura-silver leading-relaxed mb-4">
-              Formas de energía: mecánica, eléctrica, química, nuclear, lumínica y sonora. Principio de conservación y transformación de la energía. Fuentes renovables y no renovables.
+            <h3 class="font-heading text-lg md:text-xl font-bold mb-2"><a href="energia/index.html" class="topic-card-title">Las Energías — Diversidad y Cambio</a></h3>
+            <p class="text-xs text-natura-silver leading-relaxed mb-3">
+              Formas, transformaciones y fuentes de energía. Cada fuente con sus datos en Argentina.
             </p>
-            <div class="flex flex-wrap gap-2">
+            <div class="mb-3 border-t border-white/5 pt-3">
+              <p class="text-[9px] font-bold uppercase tracking-[.12em] text-natura-silverDark mb-2">🌱 Renovables</p>
+              <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+                <a href="energia/solar.html" class="topic-link">Solar</a><a href="energia/eolica.html" class="topic-link">Eólica</a><a href="energia/hidroelectrica.html" class="topic-link">Hidroeléctrica</a><a href="energia/mareomotriz.html" class="topic-link">Mareomotriz</a><a href="energia/geotermica.html" class="topic-link">Geotérmica</a><a href="energia/biomasa.html" class="topic-link">Biomasa</a>
+              </div>
+            </div>
+            <div class="mb-3">
+              <p class="text-[9px] font-bold uppercase tracking-[.12em] text-natura-silverDark mb-2">🪨 No renovables</p>
+              <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+                <a href="energia/petroleo.html" class="topic-link">Petróleo</a><a href="energia/carbon.html" class="topic-link">Carbón</a><a href="energia/gas-natural.html" class="topic-link">Gas natural</a><a href="energia/nuclear.html" class="topic-link">Nuclear</a>
+              </div>
+            </div>
+            <div class="topic-card-tags flex flex-wrap gap-2">
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Energía Mecánica</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Conservación</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Renovables</span>
             </div>
           </div>
-        </a>
+        </article>
 
         <!-- Card 2: Intercambios de Energía -->
-        <a href="calor-sonido/index.html" class="content-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-200 block no-underline">
-          <div class="h-44 md:h-48 overflow-hidden">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-200 block">
+          <div class="topic-card-image h-44 md:h-48 overflow-hidden">
             <img src="../../assets/fisica/index/calor-card.jpg" alt="Lava volcánica: ejemplo extremo de transferencia de calor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(30%);">
             <div class="grain-overlay"></div>
           </div>
-          <div class="p-5 md:p-6">
+          <div class="topic-card-body p-5 md:p-6">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5"></span>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Calor y sonido</span>
               <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
             </div>
-            <h3 class="font-heading text-lg md:text-xl font-bold text-white mb-2">Intercambios de Energía</h3>
+            <h3 class="font-heading text-lg md:text-xl font-bold mb-2"><a href="calor-sonido/index.html" class="topic-card-title">Intercambios de Energía</a></h3>
             <p class="text-xs text-natura-silver leading-relaxed mb-4">
               Ondas de luz y sonido. Propagación del calor: conducción, convección y radiación. Transferencia de energía entre cuerpos y el entorno. Fuentes renovables y no renovables.
             </p>
-            <div class="flex flex-wrap gap-2">
+            <div class="topic-card-tags flex flex-wrap gap-2">
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Luz y Sonido</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Conducción</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Radiación</span>
             </div>
           </div>
-        </a>
+        </article>
 
         <!-- Card 3: Los Movimientos -->
-        <a href="movimientos/index.html" class="content-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block no-underline">
-          <div class="h-44 md:h-48 overflow-hidden">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block">
+          <div class="topic-card-image h-44 md:h-48 overflow-hidden">
             <img src="../../assets/fisica/movimientos/xy-graph.jpg" alt="Movimientos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(30%);">
             <div class="grain-overlay"></div>
           </div>
-          <div class="p-5 md:p-6">
+          <div class="topic-card-body p-5 md:p-6">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5"></span>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Movimiento</span>
               <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
             </div>
-            <h3 class="font-heading text-lg md:text-xl font-bold text-white mb-2">Los Movimientos</h3>
+            <h3 class="font-heading text-lg md:text-xl font-bold mb-2"><a href="movimientos/index.html" class="topic-card-title">Los Movimientos</a></h3>
             <p class="text-xs text-natura-silver leading-relaxed mb-4">
               Gráficos posición-tiempo. Concepto de velocidad. Interpretación de trayectorias. Uso de GeoGebra para modelar y analizar movimientos. Actividades prácticas de medición.
             </p>
-            <div class="flex flex-wrap gap-2">
+            <div class="topic-card-tags flex flex-wrap gap-2">
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Posición-Tiempo</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">Velocidad</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5">GeoGebra</span>
             </div>
           </div>
-        </a>
+        </article>
 
         <!-- Card 4: El Sistema Solar -->
-        <a href="sistema-solar/index.html" class="content-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block no-underline">
-          <div class="h-44 md:h-48 overflow-hidden">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block">
+          <div class="topic-card-image h-44 md:h-48 overflow-hidden">
             <img src="../../assets/fisica/sistema-solar/solar-system-hub.jpg" alt="El Sistema Solar con el Sol y los planetas en sus órbitas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(12%);">
             <div class="grain-overlay"></div>
           </div>
-          <div class="p-5 md:p-6">
+          <div class="topic-card-body p-5 md:p-6">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5"></span>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">Astronomía</span>
               <span class="iconify text-natura-water opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
             </div>
-            <h3 class="font-heading text-lg md:text-xl font-bold text-white mb-2">El Sistema Solar</h3>
+            <h3 class="font-heading text-lg md:text-xl font-bold mb-2"><a href="sistema-solar/index.html" class="topic-card-title">El Sistema Solar</a></h3>
             <p class="text-xs text-natura-silver leading-relaxed mb-4">
               Planetas del Sistema Solar. Escalas de tamaño y distancia. Geocentrismo vs. heliocentrismo. Instrumentos de exploración espacial. Proyecto MAPI: modelo a escala.
             </p>
-            <div class="flex flex-wrap gap-2">
+            <div class="topic-card-tags flex flex-wrap gap-2">
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/10 text-natura-water px-2 py-0.5">Planetas</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/10 text-natura-water px-2 py-0.5">Heliocentrismo</span>
               <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/10 text-natura-water px-2 py-0.5">MAPI</span>
             </div>
           </div>
-        </a>
+        </article>
 
       </div>
     </div>
@@ -304,6 +329,21 @@
     </div>
   </section>
 
+  <!-- Quiz CTA -->
+  <section class="px-4 md:px-6 pb-4">
+    <div class="max-w-3xl mx-auto rounded-2xl border border-natura-energy/25 bg-natura-energy/5 p-6 md:p-8 text-center">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy mb-2" style="font-family:'Inter',sans-serif;">¿Lo entendiste?</p>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Probá los quizzes de Física</h2>
+      <p class="text-natura-silver text-base md:text-lg mb-6 max-w-xl mx-auto">Energía, calor y sonido, movimientos y Sistema Solar. Modo práctica o desafío.</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="../../evaluaciones/quiz.html?unidad=energia" class="inline-flex items-center gap-2 bg-natura-energy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm">Energía</a>
+        <a href="../../evaluaciones/quiz.html?unidad=calor-sonido" class="inline-flex items-center gap-2 bg-natura-energy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm">Calor y sonido</a>
+        <a href="../../evaluaciones/quiz.html?unidad=movimientos" class="inline-flex items-center gap-2 bg-natura-energy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm">Movimientos</a>
+        <a href="../../evaluaciones/quiz.html?unidad=sistema-solar" class="inline-flex items-center gap-2 bg-natura-energy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm">Sistema Solar</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================================================== -->
   <!-- FOOTER -->
   <!-- ===================================================== -->
@@ -338,6 +378,16 @@
     {n:"Formas de energía",u:"Física",s:"Energía",l:"../fisica/energia/formas-energia.html",c:"#3B82F6"},
     {n:"Transformaciones de energía",u:"Física",s:"Energía",l:"../fisica/energia/transformaciones.html",c:"#3B82F6"},
     {n:"Fuentes de energía",u:"Física",s:"Energía",l:"../fisica/energia/fuentes-energia.html",c:"#3B82F6"},
+    {n:"Energía solar",u:"Física",s:"Energía",l:"../fisica/energia/solar.html",c:"#3B82F6"},
+    {n:"Energía eólica",u:"Física",s:"Energía",l:"../fisica/energia/eolica.html",c:"#3B82F6"},
+    {n:"Energía hidroeléctrica",u:"Física",s:"Energía",l:"../fisica/energia/hidroelectrica.html",c:"#3B82F6"},
+    {n:"Energía mareomotriz",u:"Física",s:"Energía",l:"../fisica/energia/mareomotriz.html",c:"#3B82F6"},
+    {n:"Energía geotérmica",u:"Física",s:"Energía",l:"../fisica/energia/geotermica.html",c:"#3B82F6"},
+    {n:"Energía de biomasa",u:"Física",s:"Energía",l:"../fisica/energia/biomasa.html",c:"#3B82F6"},
+    {n:"Petróleo",u:"Física",s:"Energía",l:"../fisica/energia/petroleo.html",c:"#3B82F6"},
+    {n:"Carbón",u:"Física",s:"Energía",l:"../fisica/energia/carbon.html",c:"#3B82F6"},
+    {n:"Gas natural",u:"Física",s:"Energía",l:"../fisica/energia/gas-natural.html",c:"#3B82F6"},
+    {n:"Energía nuclear",u:"Física",s:"Energía",l:"../fisica/energia/nuclear.html",c:"#3B82F6"},
     {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../fisica/calor-sonido/calor-temperatura.html",c:"#3B82F6"},
     {n:"Ondas",u:"Física",s:"Ondas",l:"../fisica/calor-sonido/ondas.html",c:"#3B82F6"},
     {n:"El Sonido",u:"Física",s:"Sonido",l:"../fisica/calor-sonido/sonido.html",c:"#3B82F6"},

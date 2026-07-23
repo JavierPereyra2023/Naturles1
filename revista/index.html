@@ -116,6 +116,7 @@
 .search-no-results { padding:16px; text-align:center; color:#9A958A; font-family:'Inter',sans-serif; font-size:13px; }
   </style>
   <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../assets/responsive-fixes.css">
   <script src="../assets/backgrounds/auto-toc.js?v=6"></script>
 </head>
 <body class="bg-ecosistemas" >
@@ -174,7 +175,7 @@
         <span class="bg-gradient-to-r from-violet-400 via-purple-400 to-natura-energy bg-clip-text text-transparent">REVISTA</span>
       </h1>
       <p class="text-xl md:text-2xl italic text-revista-textMuted mb-6" style="font-family: 'Playfair Display', Georgia, serif;">Historias de ciencia que no están en los libros</p>
-      <p class="text-revista-text max-w-xl mx-auto leading-relaxed">Artículos, curiosidades y hallazgos científicos que se conectan con lo que aprendemos en clase. Desde premios IG Nobel hasta materiales del futuro.</p>
+      <p class="text-revista-text max-w-xl mx-auto leading-relaxed">Curiosidades de física, biología y química: arcoíris dobles, noches polares, sinestesia, gatos cuánticos e IG Nobel. Ciencia que asombra y se conecta con la clase.</p>
       <div class="flex justify-center mt-6">
         <div class="accent-line-revista"></div>
       </div>
@@ -183,12 +184,12 @@
     <!-- Stats Row -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 max-w-3xl mx-auto">
       <div class="text-center py-4 px-6 bg-revista-paper border border-revista-line animate-fadeInUp">
-        <p class="text-3xl font-bold text-revista-gold" style="font-family: 'Playfair Display', Georgia, serif;">1</p>
-        <p class="text-[12px] uppercase tracking-wider text-revista-textDim mt-1" style="font-family: 'Inter', sans-serif;">Artículo publicado</p>
+        <p class="text-3xl font-bold text-revista-gold" style="font-family: 'Playfair Display', Georgia, serif;">5</p>
+        <p class="text-[12px] uppercase tracking-wider text-revista-textDim mt-1" style="font-family: 'Inter', sans-serif;">Artículos publicados</p>
       </div>
       <div class="text-center py-4 px-6 bg-revista-paper border border-revista-line animate-fadeInUp delay-100">
         <p class="text-3xl font-bold text-revista-gold" style="font-family: 'Playfair Display', Georgia, serif;">3</p>
-        <p class="text-[12px] uppercase tracking-wider text-revista-textDim mt-1" style="font-family: 'Inter', sans-serif;">Próximamente: Física · Química · Biología</p>
+        <p class="text-[12px] uppercase tracking-wider text-revista-textDim mt-1" style="font-family: 'Inter', sans-serif;">Áreas: Física · Bio · Frontera</p>
       </div>
       <div class="text-center py-4 px-6 bg-revista-paper border border-revista-line animate-fadeInUp delay-200">
         <span class="iconify text-3xl text-revista-gold" data-icon="lucide:link" data-width="32"></span>
@@ -206,8 +207,8 @@
     <!-- Left Column: Articles -->
     <div class="flex-1 md:w-2/3 space-y-8">
 
-      <!-- Featured Article (large card) -->
-      <a href="rana-levitacion.html" class="block">
+      <!-- Featured -->
+      <a href="rana-levitacion.html" class="block article-card-link">
         <article class="article-card bg-revista-paper overflow-hidden group animate-fadeInUp">
           <div class="md:grid md:grid-cols-5">
             <div class="md:col-span-2 overflow-hidden">
@@ -215,60 +216,83 @@
             </div>
             <div class="md:col-span-3 p-6 md:p-8 flex flex-col justify-center">
               <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5 inline-block w-fit mb-3" style="font-family: 'Inter', sans-serif;">Física · IG Nobel 2000</span>
-              <h2 class="text-2xl md:text-3xl font-bold text-white leading-tight mb-2 group-hover:text-revista-gold transition-colors" style="font-family: 'Playfair Display', Georgia, serif;">La rana que voló: cuando el magnetismo desafía la gravedad</h2>
+              <h2 class="text-2xl md:text-3xl font-bold text-white leading-tight mb-2 group-hover:text-revista-gold transition-colors" style="font-family: 'Playfair Display', Georgia, serif;">La rana que voló</h2>
               <p class="text-revista-textMuted text-base leading-relaxed mb-4">Andréy Gueim ganó el IG Nobel por hacer levitar una rana viva. Diez años después, ganó el Nobel de verdad.</p>
-              <div class="flex flex-wrap items-center gap-3">
-                <div class="flex flex-wrap gap-1.5">
-                  <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-1.5 py-0.5" style="font-family: 'Inter', sans-serif;">Magnetismo</span>
-                  <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-1.5 py-0.5" style="font-family: 'Inter', sans-serif;">Diamagnetismo</span>
-                  <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-1.5 py-0.5" style="font-family: 'Inter', sans-serif;">Física</span>
-                  <span class="text-[9px] uppercase tracking-wider border border-revista-gold/20 text-revista-gold px-1.5 py-0.5" style="font-family: 'Inter', sans-serif;">IG Nobel</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between mt-4 pt-3 border-t border-revista-line">
-                <span class="text-[11px] text-revista-textDim uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">8 min de lectura</span>
-                <span class="text-[11px] italic text-revista-textMuted">Revista Cs. Naturales</span>
+              <div class="flex items-center justify-between mt-2 pt-3 border-t border-revista-line">
+                <span class="text-[11px] text-revista-textDim uppercase tracking-wider" style="font-family: 'Inter', sans-serif;">8 min</span>
+                <span class="text-[11px] italic text-revista-textMuted">Destacado</span>
               </div>
             </div>
           </div>
         </article>
       </a>
 
-      <!-- Próximamente Section Header -->
-      <div class="pt-4">
-        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-revista-gold mb-6" style="font-family: 'Inter', sans-serif;">Próximamente</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Card 1: Materiales superconductores -->
-          <article class="article-card bg-revista-paper p-6 opacity-70">
-            <div class="flex items-start justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Química</span>
-              <span class="iconify text-revista-textDim" data-icon="lucide:lock" data-width="16"></span>
+      <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-revista-gold pt-2" style="font-family: 'Inter', sans-serif;">Más curiosidades</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <a href="doble-arcoiris.html" class="block">
+          <article class="article-card bg-revista-paper overflow-hidden group h-full">
+            <div class="h-36 overflow-hidden"><img src="../assets/backgrounds/bg-luz-espectro.png" alt="Doble arcoíris" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+            <div class="p-5">
+              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Física · Luz</span>
+              <h3 class="text-lg font-bold text-white mt-2 mb-1 group-hover:text-revista-gold transition-colors" style="font-family: 'Playfair Display', Georgia, serif;">Doble arcoíris</h3>
+              <p class="text-sm text-revista-textMuted leading-relaxed">Dos arcos, colores invertidos: la luz se refleja dos veces en la gota.</p>
             </div>
-            <h3 class="text-lg font-bold text-white mb-2" style="font-family: 'Playfair Display', Georgia, serif;">Materiales superconductores</h3>
-            <p class="text-base text-revista-textMuted leading-relaxed mb-3">Descubrí cómo ciertos materiales pueden conducir electricidad sin resistencia a temperaturas extremadamente bajas.</p>
-            <span class="text-[11px] font-bold uppercase tracking-wider text-revista-gold" style="font-family: 'Inter', sans-serif;">Próximamente</span>
           </article>
-
-          <!-- Card 2: Grafeno -->
-          <article class="article-card bg-revista-paper p-6 opacity-70">
-            <div class="flex items-start justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Química / Física</span>
-              <span class="iconify text-revista-textDim" data-icon="lucide:lock" data-width="16"></span>
+        </a>
+        <a href="noche-polar.html" class="block">
+          <article class="article-card bg-revista-paper overflow-hidden group h-full">
+            <div class="h-36 overflow-hidden"><img src="../assets/backgrounds/bg-sistema-solar-espacio.png" alt="Noche polar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+            <div class="p-5">
+              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Tierra y Universo</span>
+              <h3 class="text-lg font-bold text-white mt-2 mb-1 group-hover:text-revista-gold transition-colors" style="font-family: 'Playfair Display', Georgia, serif;">Meses de solo noche</h3>
+              <p class="text-sm text-revista-textMuted leading-relaxed">La inclinación del eje y las noches polares, sin mitos.</p>
             </div>
-            <h3 class="text-lg font-bold text-white mb-2" style="font-family: 'Playfair Display', Georgia, serif;">El grafeno: el material del futuro</h3>
-            <p class="text-base text-revista-textMuted leading-relaxed mb-3">Una sola capa de átomos de carbono que es 200 veces más fuerte que el acero y conduce electricidad mejor que el cobre.</p>
-            <span class="text-[11px] font-bold uppercase tracking-wider text-revista-gold" style="font-family: 'Inter', sans-serif;">Próximamente</span>
           </article>
-
-          <!-- Card 3: Científicas -->
-          <article class="article-card bg-revista-paper p-6 opacity-70 md:col-span-2">
-            <div class="flex items-start justify-between mb-3">
-              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Biología</span>
-              <span class="iconify text-revista-textDim" data-icon="lucide:lock" data-width="16"></span>
+        </a>
+        <a href="sinestesia.html" class="block">
+          <article class="article-card bg-revista-paper overflow-hidden group h-full">
+            <div class="h-36 overflow-hidden"><img src="../assets/biologia/cuerpo-humano/brain-anatomy.jpg" alt="Sinestesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+            <div class="p-5">
+              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Biología · Nervioso</span>
+              <h3 class="text-lg font-bold text-white mt-2 mb-1 group-hover:text-revista-gold transition-colors" style="font-family: 'Playfair Display', Georgia, serif;">Sinestesia</h3>
+              <p class="text-sm text-revista-textMuted leading-relaxed">Cuando el cerebro cruza colores, sonidos y sabores.</p>
             </div>
-            <h3 class="text-lg font-bold text-white mb-2" style="font-family: 'Playfair Display', Georgia, serif;">Científicas que cambiaron el mundo</h3>
-            <p class="text-base text-revista-textMuted leading-relaxed mb-3">Historias de mujeres que revolucionaron la ciencia: desde Marie Curie hasta investigadoras argentinas contemporáneas.</p>
-            <span class="text-[11px] font-bold uppercase tracking-wider text-revista-gold" style="font-family: 'Inter', sans-serif;">Próximamente</span>
+          </article>
+        </a>
+        <a href="gato-schrodinger.html" class="block">
+          <article class="article-card bg-revista-paper overflow-hidden group h-full">
+            <div class="h-36 overflow-hidden"><img src="../assets/backgrounds/bg-moleculas-atomos.png" alt="Gato de Schrödinger" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+            <div class="p-5">
+              <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Frontera · Modelos</span>
+              <h3 class="text-lg font-bold text-white mt-2 mb-1 group-hover:text-revista-gold transition-colors" style="font-family: 'Playfair Display', Georgia, serif;">El gato de Schrödinger</h3>
+              <p class="text-sm text-revista-textMuted leading-relaxed">Un experimento mental para pensar la ciencia (sin gatos en peligro).</p>
+            </div>
+          </article>
+        </a>
+      </div>
+
+      <div class="pt-2">
+        <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-revista-gold mb-4" style="font-family: 'Inter', sans-serif;">Próximamente</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <article class="article-card bg-revista-paper p-5 opacity-75">
+            <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Física</span>
+            <h3 class="text-base font-bold text-white mt-2 mb-1" style="font-family: 'Playfair Display', Georgia, serif;">Entrelazamiento y “teletransportación”</h3>
+            <p class="text-sm text-revista-textMuted">No es magia de la tele: es correlación cuántica.</p>
+          </article>
+          <article class="article-card bg-revista-paper p-5 opacity-75">
+            <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Frontera</span>
+            <h3 class="text-base font-bold text-white mt-2 mb-1" style="font-family: 'Playfair Display', Georgia, serif;">¿La IA piensa?</h3>
+            <p class="text-sm text-revista-textMuted">Simular lenguaje vs. entender — con evidencia de labs.</p>
+          </article>
+          <article class="article-card bg-revista-paper p-5 opacity-75">
+            <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Química / Física</span>
+            <h3 class="text-base font-bold text-white mt-2 mb-1" style="font-family: 'Playfair Display', Georgia, serif;">Antimateria y materia oscura</h3>
+            <p class="text-sm text-revista-textMuted">Lo que no vemos… y lo que se aniquila al tocarse.</p>
+          </article>
+          <article class="article-card bg-revista-paper p-5 opacity-75">
+            <span class="text-[9px] font-bold uppercase tracking-[0.15em] bg-revista-gold/10 text-revista-gold px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Bio + mates</span>
+            <h3 class="text-base font-bold text-white mt-2 mb-1" style="font-family: 'Playfair Display', Georgia, serif;">Pandemias y matemática</h3>
+            <p class="text-sm text-revista-textMuted">Curvas, modelos simples y salud pública.</p>
           </article>
         </div>
       </div>
@@ -281,21 +305,21 @@
         <h4 class="text-[11px] font-bold uppercase tracking-[0.2em] text-revista-gold mb-4" style="font-family: 'Inter', sans-serif;">Categorías</h4>
         <ul class="space-y-3">
           <li>
-            <a href="#" class="flex items-center justify-between group py-1.5 border-b border-revista-line">
+            <a href="doble-arcoiris.html" class="flex items-center justify-between group py-1.5 border-b border-revista-line">
               <span class="text-revista-text text-sm group-hover:text-revista-gold transition-colors">Física</span>
-              <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">1 artículo</span>
+              <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">3</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center justify-between group py-1.5 border-b border-revista-line">
-              <span class="text-revista-text text-sm group-hover:text-revista-gold transition-colors">Química</span>
-              <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">Próximamente</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-between group py-1.5 border-b border-revista-line border-b-0">
+            <a href="sinestesia.html" class="flex items-center justify-between group py-1.5 border-b border-revista-line">
               <span class="text-revista-text text-sm group-hover:text-revista-gold transition-colors">Biología</span>
-              <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">Próximamente</span>
+              <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">1</span>
+            </a>
+          </li>
+          <li>
+            <a href="gato-schrodinger.html" class="flex items-center justify-between group py-1.5 border-b border-revista-line border-b-0">
+              <span class="text-revista-text text-sm group-hover:text-revista-gold transition-colors">Frontera</span>
+              <span class="text-[11px] text-revista-textDim" style="font-family: 'Inter', sans-serif;">1</span>
             </a>
           </li>
         </ul>

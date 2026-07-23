@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energía Eólica | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; } .delay-300 { animation-delay: 300ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .magazine-divider { display: flex; align-items: center; gap: 12px; margin: 40px 0; color: #242C28; }
+    .magazine-divider::before, .magazine-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
+    .magazine-divider span { font-size: 10px; font-family: 'Inter', sans-serif; letter-spacing: 0.2em; color: #5A6B60; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .toc-link {
+      display: block; border-left: 1px solid rgba(255,255,255,.08);
+      padding: .42rem .65rem .42rem .85rem;
+      color: #7f9085; font-family: 'Inter', sans-serif;
+      font-size: .69rem; line-height: 1.35;
+      text-decoration: none; transition: color .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease;
+    }
+    .toc-link::before {
+      content: ''; position: absolute; left: -1px; top: 0; bottom: 0;
+      width: 2px; background: #3B82F6; transform: scaleY(0); transform-origin: center; transition: transform .22s ease;
+    }
+    .toc-link:hover, .toc-link.active { color: #f3f7f4; border-left-color: rgba(59,130,246,.35); background: rgba(59,130,246,.06); transform: translateX(2px); }
+    .toc-link:hover::before, .toc-link.active::before { transform: scaleY(1); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
+</head>
+<body class="bg-energia">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Energía</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Eólica</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="solar.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Solar</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Energía Eólica</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Energía <span class="text-natura-energy">Eólica</span></h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">El viento mueve turbinas que generan electricidad. La Patagonia argentina tiene algunos de los vientos más intensos y constantes del mundo.</p>
+  </div>
+  <div class="energy-hero-visual max-w-4xl mx-auto px-4 md:px-6">
+    <img src="../../../assets/fisica/energia/eolica-real.png" alt="Aerogeneradores en la estepa patagónica al amanecer" class="energy-hero-image" width="1128" height="749" fetchpriority="high">
+    <p class="energy-hero-caption">El viento como fuente de electricidad</p>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#usos" class="toc-link" data-toc>02. Usos</a>
+          <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
+          <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
+          <a href="#matriz-energetica" class="toc-link" data-toc>05. En la matriz</a>
+          <a href="#implicancia" class="toc-link" data-toc>06. Implicancia real</a>
+          <a href="#ventajas-desventajas" class="toc-link" data-toc>07. Ventajas y desventajas</a>
+      </nav>
+    </div>
+  </aside>
+
+<main class="flex-1 min-w-0 space-y-12">
+
+  <section class="animate-fadeInUp" id="que-es">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">1</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Qué es?</h2>
+    </div>
+    <p class="article-dropcap text-lg leading-relaxed text-natura-silverLight mb-5">La energía eólica aprovecha la energía cinética del viento para generar electricidad. El viento mueve las aspas de un aerogenerador, que están conectadas a un rotor. Este rotor hace girar un generador eléctrico, produciendo electricidad. Es una de las tecnologías renovables de más rápido crecimiento en el mundo y Argentina es uno de los países con mayor potencial.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La cantidad de energía que puede extraerse del viento depende de la velocidad del viento elevada al cubo (<strong class="text-white">P ∝ v³</strong>): si la velocidad del viento se duplica, la potencia disponible se multiplica por ocho. Por eso la ubicación de los parques eólicos es crucial: una pequeña diferencia en la velocidad media del viento tiene un impacto enorme en la producción.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Los aerogeneradores modernos son máquinas impresionantes: sus torres miden entre 80 y 120 metros de altura (como un edificio de 30 pisos) y el diámetro de sus aspas alcanza los 50 a 100 metros. Cada turbina puede generar entre 2 y 5 MW de potencia, suficiente para abastecer a cientos de hogares.</p>
+    <div class="pull-quote">"Si la velocidad del viento se duplica, la potencia disponible en el aerogenerador se multiplica por ocho."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="usos">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Usos</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El uso principal de la energía eólica es la <strong class="text-white">generación eléctrica</strong> en parques eólicos, que pueden estar en tierra (onshore) o en el mar (offshore). En Argentina, todos los parques eólicos son onshore y se concentran en la Patagonia, aunque también hay proyectos en Buenos Aires y La Rioja.</li></p>
+    <aside class="sidebar-note"><span class="note-label">Molinos tradicionales</span>Antes de la electricidad, los molinos de viento se usaban para moler granos y bombear agua. En Argentina todavía se ven molinos multipala en zonas rurales para extraer agua de pozos, una aplicación clásica de la energía eólica.</aside>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Parque Eólico Rawson</strong> (Chubut): 250 MW de capacidad, uno de los más grandes del país. Ubicado en la costa atlántica, donde los vientos superan los 11 m/s de promedio.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Parque Eólico Madryn</strong> (Chubut): 200 MW, también en la provincia de Chubut, cerca de Puerto Madryn.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Parque Eólico Arauco</strong> (La Rioja): 200 MW, uno de los pocos parques fuera de la Patagonia con buena performance.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Bombeo de agua:</strong> Los tradicionales molinos de viento multipala se usan en zonas rurales para extraer agua de pozos, sin necesidad de electricidad.</span></li>
+    </ul>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="rendimiento">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">3</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Rendimiento</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La eficiencia de los aerogeneradores modernos es notable: convierten entre el <strong class="text-white">40% y 50%</strong> de la energía cinética del viento en electricidad. Existe un límite teórico máximo conocido como el <strong class="text-white">Límite de Betz</strong> (59,3%), que establece que ninguna turbina puede extraer más del 59,3% de la energía del viento que la atraviesa.</p>
+    <div class="sidebar-note"><span class="note-label">Factor de capacidad</span>Eólica en Patagonia: 40-50%. Promedio mundial: 25-30%. Solar: 18-25%. Hidroeléctrica: 40-60%. Térmica: 60-85%. La Patagonia argentina tiene el factor de capacidad eólico más alto del mundo.</div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El factor de capacidad (la relación entre lo que una planta genera realmente y lo que generaría si funcionara al máximo todo el tiempo) es excepcional en Argentina: oscila entre <strong class="text-white">30% y 45%</strong> en los parques patagónicos, muy por encima del promedio mundial de 25-30%. En la Patagonia, los vientos promedio superan los 10-12 m/s, condiciones ideales para la generación eólica.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La tecnología sigue mejorando: las turbinas actuales son más grandes, más eficientes y más confiables que las de hace una década. Los factores de capacidad han pasado del 20% en 2000 al 35-45% actual en los mejores sitios.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="lugar-geografico">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">4</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Lugar en Argentina</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina tiene uno de los mejores recursos eólicos del planeta, especialmente en la <strong class="text-white">Patagonia</strong>. Los vientos constantes y fuertes de la región, impulsados por los vientos del Oeste y la cercanía al océano, crean condiciones inmejorables para la generación eólica.</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Chubut:</strong> Rawson, Madryn, Diadema. Es la provincia con mayor capacidad instalada del país.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Santa Cruz:</strong> Puerto Deseado, San Julián, Cañadón León. Vientos aún más intensos que en Chubut.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Río Negro:</strong> Pomona, General Conesa. Proyectos en desarrollo con buenos factores de capacidad.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Buenos Aires:</strong> Tandil, Bahía Blanca, Necochea. Parques eólicos en regiones más cercanas a los centros de consumo.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">La Rioja:</strong> Arauco. El parque eólico más importante del norte argentino.</span></li>
+    </ul>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El <strong class="text-white">Corredor Eólico Patagónico</strong> es una región que abarca el este de Chubut y Santa Cruz, donde los factores de capacidad alcanzan el 50%, los más altos del mundo. Esta región es comparable a los mejores sitios de Dinamarca, Reino Unido y Alemania, pero con mucho más espacio disponible.</p>
+    <figure class="energy-figure"><img src="../../../assets/fisica/energia/eolica-explicativa.png" alt="Aerogenerador moderno sobre la estepa patagónica" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">La velocidad del viento y el diseño del aerogenerador determinan cuánta energía cinética puede transformarse en electricidad.</figcaption></figure>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="matriz-energetica">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">En la matriz energética</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La energía eólica es la fuente renovable no hidroeléctrica que más aporta a la matriz eléctrica argentina. En 2024 representó aproximadamente el <strong class="text-white">10%</strong> de la electricidad total del país, superando por primera vez a la nuclear y acercándose a la hidroeléctrica.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El crecimiento fue explosivo a partir de 2018, impulsado por las <strong class="text-white">Rondas RenovAR</strong>, un programa de licitaciones que garantizó contratos de largo plazo para proyectos renovables. La capacidad instalada eólica pasó de menos de 500 MW en 2017 a más de <strong class="text-white">3.200 MW</strong> en 2024. Se espera que esta cifra supere los 5.000 MW para 2030.</p>
+    <div class="pull-quote">"La energía eólica pasó de ser casi inexistente en 2017 a generar el 10% de la electricidad argentina en 2024."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="implicancia">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">6</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Implicancia real</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina es el país con <strong class="text-white">mejor factor de capacidad eólico del mundo</strong>, superando a Dinamarca, Alemania y el Reino Unido. Esto significa que cada aerogenerador instalado en la Patagonia produce más electricidad por unidad de potencia que en cualquier otro lugar del planeta. Es una ventaja comparativa enorme que el país está empezando a aprovechar.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El principal desafío es la <strong class="text-white">transmisión</strong>: los parques eólicos están en el sur (donde está el recurso) pero los centros de consumo están en el centro y norte del país (AMBA, Litoral, Córdoba). Para llevar esa energía se necesitan líneas de alta tensión de miles de kilómetros. El <strong class="text-white">Gasoducto NK</strong> y las nuevas líneas de transmisión planificadas ayudarán a integrar la energía eólica patagónica al sistema nacional.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La eólica genera <strong class="text-white">empleo local</strong> en regiones con poca industria. La construcción y operación de parques eólicos en Chubut y Santa Cruz ha creado cientos de puestos de trabajo directos e indirectos. Empresas como <strong class="text-white">Genneia</strong>, <strong class="text-white">YPF Luz</strong> y <strong class="text-white">Petroquímica Comodoro Rivadavia</strong> lideran el desarrollo eólico en el país.</p>
+    <figure class="energy-figure"><img src="../../../assets/fisica/energia/eolica-patagonia.png" alt="Parque eólico extendido sobre la estepa patagónica" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">La Patagonia combina grandes extensiones y vientos constantes, condiciones favorables para parques eólicos de alta producción.</figcaption></figure>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-200" id="ventajas-desventajas">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">7</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Ventajas y desventajas</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="border border-white/5 bg-natura-dark p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-greenLight mb-3 flex items-center gap-2"><span class="iconify" data-icon="lucide:check-circle" data-width="18"></span>Ventajas</h3>
+        <ul class="space-y-2" style="font-size:0.95rem;line-height:1.5;">
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Viento abundante y constante en la Patagonia argentina.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Bajo costo operativo una vez instalado el aerogenerador.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>No emite CO₂ ni contaminantes durante su operación.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Crea empleo local en regiones con baja industrialización.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Puede generar electricidad las 24 horas (a diferencia de la solar).</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>El terreno de los parques eólicos puede compartirse con ganadería.</span></li>
+        </ul>
+      </div>
+      <div class="border border-white/5 bg-natura-dark p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-bio mb-3 flex items-center gap-2"><span class="iconify" data-icon="lucide:alert-circle" data-width="18"></span>Desventajas</h3>
+        <ul class="space-y-2" style="font-size:0.95rem;line-height:1.5;">
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Intermitente: en días sin viento la generación cae drásticamente.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Impacto visual y ruido: las turbinas son grandes y generan sonido.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Puede afectar aves migratorias y murciélagos en las rutas de vuelo.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Alta inversión inicial (aunque los costos han bajado mucho).</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Dificultad de transmisión: la Patagonia está lejos de los centros de consumo.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Las aspas tienen una vida útil limitada y son difíciles de reciclar.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="solar.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors"><span class="iconify" data-icon="lucide:arrow-left" data-width="13"></span> Solar</a>
+    <a href="hidroelectrica.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">Hidroeléctrica <span class="iconify" data-icon="lucide:arrow-right" data-width="13"></span></a>
+  </div>
+
+</main></div></div>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:wind" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){var els = document.querySelectorAll('section[id]');function c(){var h=window.innerHeight;els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<h-80)e.classList.add('visible');});}c();window.addEventListener('scroll',c,{passive:true});})();
+</script>
+<script>
+(function(){var topics = [
+  {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+  {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+  {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+  {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+  {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+  {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+  {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+  {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+  {n:"Formas de energia",u:"Fisica",s:"Energia",l:"formas-energia.html",c:"#3B82F6"},
+  {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"transformaciones.html",c:"#3B82F6"},
+  {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"fuentes-energia.html",c:"#3B82F6"},
+  {n:"Energia solar",u:"Fisica",s:"Energia",l:"solar.html",c:"#3B82F6"},
+  {n:"Energia eolica",u:"Fisica",s:"Energia",l:"eolica.html",c:"#3B82F6"},
+  {n:"Energia hidroelectrica",u:"Fisica",s:"Energia",l:"hidroelectrica.html",c:"#3B82F6"},
+  {n:"Energia mareomotriz",u:"Fisica",s:"Energia",l:"mareomotriz.html",c:"#3B82F6"},
+  {n:"Energia geotermica",u:"Fisica",s:"Energia",l:"geotermica.html",c:"#3B82F6"},
+  {n:"Energia de biomasa",u:"Fisica",s:"Energia",l:"biomasa.html",c:"#3B82F6"},
+  {n:"Petroleo",u:"Fisica",s:"Energia",l:"petroleo.html",c:"#3B82F6"},
+  {n:"Carbon",u:"Fisica",s:"Energia",l:"carbon.html",c:"#3B82F6"},
+  {n:"Gas natural",u:"Fisica",s:"Energia",l:"gas-natural.html",c:"#3B82F6"},
+  {n:"Energia nuclear",u:"Fisica",s:"Energia",l:"nuclear.html",c:"#3B82F6"},
+  {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+  {n:"Ondas",u:"Fisica",s:"Ondas",l:"../calor-sonido/ondas.html",c:"#3B82F6"},
+  {n:"El Sonido",u:"Fisica",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+  {n:"Materiales",u:"Fisica",s:"Calor",l:"../calor-sonido/materiales.html",c:"#3B82F6"},
+  {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+  {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+  {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../movimientos/graficos.html",c:"#3B82F6"},
+  {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+  {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+  {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+  {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+  {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+  {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+  {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+  {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+  {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+  {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+  {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+  {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+  {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+  {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+  {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+  {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+  {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+  {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+  {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+  {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+  {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+  {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+  {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+  {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+  {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+  {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+  {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+  {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

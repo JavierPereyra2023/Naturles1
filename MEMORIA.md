@@ -167,19 +167,37 @@ Revisar que estén alineadas con:
 - Ley 27.621 de Educación Ambiental Integral.
 - Diseño Curricular de Provincia de Buenos Aires.
 
+## Implementado 2026-07-22 (libro interactivo)
+
+### Quizzes (Fase 2)
+- Banco ampliado: **13 unidades × 10 preguntas = 130** en `evaluaciones/js/quiz-data.js`.
+- Modos **Práctica** (no guarda mejor puntaje) y **Desafío**.
+- Feedback por tema + CTA “Repasar el tema” a la lección.
+- Diplomas simplificados en `quiz-app.js`.
+- Cards “¿Lo entendiste?” en índices de Química, Física y Biología.
+
+### Responsive (Fase 3)
+- `assets/responsive-fixes.css` global (imágenes, tablas, touch, hotspots quiz, sidebars).
+- Ajustes en hub de quizzes y células 3D (`celulas-3d.css`).
+- Linked desde inicio, evaluaciones, revista e índices de unidad.
+
+### Revista (Fase 4 — Lote A + Schrödinger)
+Artículos nuevos:
+- `revista/doble-arcoiris.html`
+- `revista/noche-polar.html`
+- `revista/sinestesia.html`
+- `revista/gato-schrodinger.html`
+- Estilos compartidos: `assets/revista-article.css`
+- Índice y card de `inicio.html` actualizados (5 artículos).
+- Próximamente listado: entrelazamiento, IA, antimateria/materia oscura, pandemias.
+
 ## Próximos pasos sugeridos
 
-1. Cargar o generar los audios del podcast.
-2. Revisar responsive en celular de páginas principales.
-3. Completar más artículos de Revista.
-4. Crear una página índice de actividades prácticas o laboratorio.
-5. Agregar actividades evaluativas por unidad.
-6. Revisar accesibilidad básica:
-   - textos alternativos,
-   - contraste,
-   - foco de teclado,
-   - títulos claros.
-7. Preparar despliegue en GitHub + Vercel.
+1. Cargar audios del podcast (`podcast/audio/*.mp3`) — a cargo del docente.
+2. Revista lote B/C: entrelazamiento, antimateria, materia oscura, pandemias, ¿la IA piensa?
+3. Reemplazar `loremflickr` restantes (Química, Podcast).
+4. Actividades de laboratorio índice.
+5. Despliegue GitHub + Vercel.
 
 ## Notas técnicas
 

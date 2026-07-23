@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbón | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { natura: { black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28', silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60', green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E', leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626' } }, fontFamily: { heading: ['Playfair Display', 'Georgia', 'serif'], body: ['Cormorant Garamond', 'Georgia', 'serif'], ui: ['Inter', 'sans-serif'] } } }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter { float: left; font-family: 'Playfair Display', Georgia, serif; font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0; color: #3B82F6; font-weight: 700; }
+    .pull-quote { border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04); }
+    .sidebar-note { float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px; border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem; line-height: 1.55; background: rgba(59,130,246,0.03); clear: right; }
+    .sidebar-note .note-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6; font-family: 'Inter', sans-serif; }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .magazine-divider { display: flex; align-items: center; gap: 14px; margin: 36px 0; color: rgba(59,130,246,0.3); }
+    .magazine-divider::before, .magazine-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, currentColor, transparent); }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .vent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .vent-grid { grid-template-columns: 1fr; } }
+    .vent-card { border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 2px; }
+    .vent-card.pros { border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.03); }
+    .vent-card.cons { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.03); }
+    .vent-card h4 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .vent-card ul { list-style: none; padding: 0; margin: 0; }
+    .vent-card li { font-size: 0.85rem; line-height: 1.6; color: #A8B5AD; padding: 4px 0; padding-left: 20px; position: relative; }
+    .vent-card li::before { position: absolute; left: 0; }
+    .vent-card.pros li::before { content: '+'; color: #22C55E; font-weight: 700; }
+    .vent-card.cons li::before { content: '-'; color: #EF4444; font-weight: 700; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
+</head>
+<body class="bg-energia">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Energía</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="fuentes-energia.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Fuentes</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Carbón</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="fuentes-energia.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Fuentes</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Energía · No Renovable</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3"><span class="text-natura-energy">Carbón</span></h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">El combustible fósil más abundante y también el más contaminante. En Argentina tiene un rol marginal, concentrado en la Patagonia.
+    </p>
+  </div>
+  <div class="energy-hero-visual max-w-4xl mx-auto px-4 md:px-6">
+    <img src="../../../assets/fisica/energia/carbon-real.png" alt="Mina de carbón a cielo abierto con maquinaria de extracción" class="energy-hero-image" width="1128" height="749" fetchpriority="high">
+    <p class="energy-hero-caption">Un combustible fósil de origen geológico</p>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto px-4 md:px-6">
+  <div class="auto-toc-wrap">
+    <div class="auto-toc">
+      <div class="auto-toc-title">Contenidos</div>
+      <nav>
+        <a href="#que-es" class="toc-link">¿Qué es?</a>
+        <a href="#usos" class="toc-link">Usos</a>
+        <a href="#rendimiento" class="toc-link">Rendimiento</a>
+        <a href="#argentina" class="toc-link">Lugar en Argentina</a>
+        <a href="#matriz" class="toc-link">En la matriz</a>
+        <a href="#implicancia" class="toc-link">Implicancia real</a>
+        <a href="#ventajas-desventajas" class="toc-link">Ventajas y desventajas</a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<article class="max-w-4xl mx-auto px-4 md:px-6 py-8">
+
+  <section id="que-es" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Qué es el carbón?</h2>
+    <div class="article-dropcap text-base md:text-lg leading-relaxed text-natura-silver space-y-4">
+      <figure class="energy-figure"><img src="../../../assets/fisica/energia/carbon-explicativa.png" alt="Capa de carbón expuesta entre estratos de roca" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">El carbón se formó a partir de restos vegetales enterrados y transformados durante millones de años bajo presión y temperatura.</figcaption></figure>
+      <p>El carbón es una roca sedimentaria de color negro formada por restos vegetales acumulados hace aproximadamente 300 millones de años, durante el período Carbonífero. Grandes bosques y pantanos quedaron enterrados bajo capas de sedimentos y, sometidos a presión y temperatura durante millones de años, se transformaron en carbón.</p>
+      <p>Existen diferentes tipos según su contenido de carbono y poder calorífico: turba (menos del 60% de carbono), lignito (60-70%), carbón bituminoso (70-85%) y antracita (más del 85%, el de mayor calidad). A mayor contenido de carbono, mayor poder calorífico y menor cantidad de impurezas.</p>
+      <div class="pull-quote">"El carbón fue el combustible que impulsó la Revolución Industrial y, durante más de un siglo, fue la principal fuente de energía del mundo."</div>
+      <p>Se extrae mediante minería subterránea (pozos y túneles) o a cielo abierto (grandes excavaciones que remueven la capa superficial). La minería a cielo abierto es más barata pero mucho más destructiva para el paisaje y los ecosistemas.</p>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:flame" data-width="16"></span></span>
+  </div>
+
+  <section id="usos" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Usos del carbón</h2>
+    <div class="text-base md:text-lg leading-relaxed text-natura-silver space-y-4">
+      <p>El principal uso del carbón es la generación termoeléctrica: las centrales de carbón queman el mineral para calentar agua, producir vapor y mover turbinas que generan electricidad. En Argentina, el uso de carbón se concentra casi exclusivamente en la Central Térmica Río Turbio (Santa Cruz, 240 MW).</p>
+      <p>En la siderurgia, el carbón se transforma en coque (carbón purificado) que se utiliza como combustible y agente reductor en la fabricación de acero. La siderurgia argentina (Acindar, Siderar) utiliza carbón coquizable importado. También se usa en la producción de cemento y, en menor medida, en calefacción.</p>
+      <p>A nivel global, el carbón sigue siendo la segunda fuente de electricidad más importante, con China (60% de su electricidad), India (70%), Alemania (30%) y Estados Unidos (20%) como principales consumidores.</p>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:bar-chart-3" data-width="16"></span></span>
+  </div>
+
+  <section id="rendimiento" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Rendimiento energético</h2>
+    <div class="text-base md:text-lg leading-relaxed text-natura-silver space-y-4">
+      <p>Las centrales de carbón convencionales tienen una eficiencia del 33-40%, mientras que las centrales supercríticas más modernas alcanzan hasta el 45%. El poder calorífico del carbón bituminoso es de 24-35 MJ/kg, menor que el del petróleo.</p>
+      <p>Las centrales de carbón tienen baja eficiencia pero alta disponibilidad: su factor de capacidad (porcentaje del tiempo que operan a plena potencia) es del 60-80%, lo que las hace confiables para generar electricidad de carga base.</p>
+      <div class="sidebar-note">
+        <span class="note-label">Huella de carbono</span>
+        El carbón emite aproximadamente 1.000 g CO₂/kWh, frente a ~450 g del gas natural y ~50 g de la energía solar. Es el combustible fósil más contaminante por unidad de electricidad generada.
+      </div>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:map-pin" data-width="16"></span></span>
+  </div>
+
+  <section id="argentina" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Lugar en Argentina</h2>
+    <div class="text-base md:text-lg leading-relaxed text-natura-silver space-y-4">
+      <p>El único yacimiento de carbón en operación en Argentina es Río Turbio, en la provincia de Santa Cruz. Produce aproximadamente 100.000 toneladas por año, muy por debajo de su capacidad potencial. El carbón de Río Turbio es de baja calidad (lignito-bituminoso) con alto contenido de cenizas.</p>
+      <p>Existen otros yacimientos en La Pampa (Casa de Piedra), Mendoza (Malargüe) y Neuquén (Picún Leufú), pero permanecen sin explotar por razones económicas y ambientales. La empresa estatal YCRT (Yacimientos Carboníferos Río Turbio) opera la mina y la central térmica.</p>
+      <p>El carbón de Río Turbio es de baja calidad, lo que reduce su poder calorífico y aumenta las emisiones contaminantes por unidad de energía generada. La mina opera por debajo de su capacidad instalada.</p>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:pie-chart" data-width="16"></span></span>
+  </div>
+
+  <section id="matriz" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">El carbón en la matriz energética</h2>
+    <div class="text-base md:text-lg leading-relaxed text-natura-silver space-y-4">
+      <p>El carbón representa menos del 1% de la electricidad generada en Argentina. Es una fuente marginal en la matriz local, a diferencia de países como China (60% de su electricidad), India (70%), Alemania (30%) o Estados Unidos (20%).</p>
+      <p>Argentina importa carbón para usos industriales, especialmente coque para la siderurgia. La producción local de Río Turbio es insuficiente incluso para abastecer la central térmica que funciona junto a la mina.</p>
+      <p>A nivel global, el carbón sigue siendo la segunda fuente de electricidad más importante, pero su participación está disminuyendo en los países desarrollados debido a las metas climáticas y la competencia del gas natural y las energías renovables.</p>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:globe" data-width="16"></span></span>
+  </div>
+
+  <section id="implicancia" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Implicancia real</h2>
+    <div class="text-base md:text-lg leading-relaxed text-natura-silver space-y-4">
+      <p>YCRT (Yacimientos Carboníferos Río Turbio) es una empresa estatal que da empleo a aproximadamente 3.000 personas en la provincia de Santa Cruz. La Central Térmica Río Turbio es la única del país que utiliza carbón nacional para generar electricidad.</p>
+      <p>La producción local de carbón es insuficiente y de baja calidad, por lo que la central opera por debajo de su capacidad instalada. Argentina tiene reservas de carbón sin explotar, pero el costo ambiental y económico hace inviable su desarrollo masivo.</p>
+      <p>A nivel global, el carbón es el mayor contribuyente individual al cambio climático. El mundo tiende a eliminar progresivamente el carbón para cumplir con las metas del Acuerdo de París. Países como Alemania, Reino Unido y Canadá han anunciado planes para cerrar todas sus centrales de carbón en las próximas décadas.</p>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:scale" data-width="16"></span></span>
+  </div>
+
+  <section id="ventajas-desventajas" class="mb-8">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Ventajas y desventajas</h2>
+    <div class="vent-grid">
+      <div class="vent-card pros">
+        <h4>Ventajas</h4>
+        <ul>
+          <li>Abundante a nivel global (reservas para más de 100 años)</li>
+          <li>Barato: costo de extracción bajo en comparación con otras fuentes</li>
+          <li>Tecnología madura, confiable y ampliamente probada</li>
+          <li>Alta disponibilidad (no intermitente, funciona 24/7)</li>
+          <li>Almacenable sin pérdidas significativas</li>
+        </ul>
+      </div>
+      <div class="vent-card cons">
+        <h4>Desventajas</h4>
+        <ul>
+          <li>El más contaminante: más CO₂ por kWh que cualquier otro combustible</li>
+          <li>Minería peligrosa (derrumbes, silicosis, explosiones)</li>
+          <li>Emisiones de azufre (lluvia ácida) y mercurio (contaminación)</li>
+          <li>Cenizas tóxicas que requieren disposición especial</li>
+          <li>Extracción a cielo abierto destruye paisajes y ecosistemas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:arrow-left-right" data-width="16"></span></span>
+  </div>
+
+  <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 py-6 border-t border-white/5">
+    <a href="petroleo.html" class="flex items-center gap-2 text-natura-silver hover:text-white transition-colors group">
+      <span class="iconify text-natura-energy" data-icon="lucide:arrow-left" data-width="18"></span>
+      <div class="text-left">
+        <div class="text-[10px] uppercase tracking-widest text-natura-silverDark font-ui">Anterior</div>
+        <div class="font-heading text-sm text-natura-silver group-hover:text-white transition-colors">Petróleo</div>
+      </div>
+    </a>
+    <a href="gas-natural.html" class="flex items-center gap-2 text-natura-silver hover:text-white transition-colors group sm:ml-auto">
+      <div class="text-right">
+        <div class="text-[10px] uppercase tracking-widest text-natura-silverDark font-ui">Siguiente</div>
+        <div class="font-heading text-sm text-natura-silver group-hover:text-white transition-colors">Gas Natural</div>
+      </div>
+      <span class="iconify text-natura-energy" data-icon="lucide:arrow-right" data-width="18"></span>
+    </a>
+  </div>
+
+</article>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+    {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+    {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+    {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+    {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+    {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+    {n:"Formas de energia",u:"Fisica",s:"Energia",l:"formas-energia.html",c:"#3B82F6"},
+    {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"transformaciones.html",c:"#3B82F6"},
+    {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"fuentes-energia.html",c:"#3B82F6"},
+    {n:"Energia solar",u:"Fisica",s:"Energia",l:"solar.html",c:"#3B82F6"},
+    {n:"Energia eolica",u:"Fisica",s:"Energia",l:"eolica.html",c:"#3B82F6"},
+    {n:"Energia hidroelectrica",u:"Fisica",s:"Energia",l:"hidroelectrica.html",c:"#3B82F6"},
+    {n:"Energia mareomotriz",u:"Fisica",s:"Energia",l:"mareomotriz.html",c:"#3B82F6"},
+    {n:"Energia geotermica",u:"Fisica",s:"Energia",l:"geotermica.html",c:"#3B82F6"},
+    {n:"Energia de biomasa",u:"Fisica",s:"Energia",l:"biomasa.html",c:"#3B82F6"},
+    {n:"Petroleo",u:"Fisica",s:"Energia",l:"petroleo.html",c:"#3B82F6"},
+    {n:"Carbon",u:"Fisica",s:"Energia",l:"carbon.html",c:"#3B82F6"},
+    {n:"Gas natural",u:"Fisica",s:"Energia",l:"gas-natural.html",c:"#3B82F6"},
+    {n:"Energia nuclear",u:"Fisica",s:"Energia",l:"nuclear.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"Ondas",u:"Fisica",s:"Ondas",l:"../calor-sonido/ondas.html",c:"#3B82F6"},
+    {n:"El Sonido",u:"Fisica",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+    {n:"Materiales",u:"Fisica",s:"Calor",l:"../calor-sonido/materiales.html",c:"#3B82F6"},
+    {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../movimientos/graficos.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+    {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+    {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+    {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+    {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+    {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+    {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+    {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

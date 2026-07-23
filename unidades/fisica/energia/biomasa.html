@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biomasa | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { natura: { black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28', silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60', green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E', leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626' } }, fontFamily: { heading: ['Playfair Display', 'Georgia', 'serif'], body: ['Cormorant Garamond', 'Georgia', 'serif'], ui: ['Inter', 'sans-serif'] } } }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .article-dropcap::first-letter { float: left; font-family: 'Playfair Display', Georgia, serif; font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0; color: #3B82F6; font-weight: 700; }
+    .pull-quote { border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04); }
+    .sidebar-note { float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px; border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem; line-height: 1.55; background: rgba(59,130,246,0.03); clear: right; }
+    .sidebar-note .note-label { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6; font-family: 'Inter', sans-serif; }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder { border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px; text-align: center; color: #5A6B60; margin: 32px 0; font-family: 'Inter', sans-serif; font-size: 12px; }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .magazine-divider { display: flex; align-items: center; gap: 14px; margin: 36px 0; color: rgba(59,130,246,0.3); }
+    .magazine-divider::before, .magazine-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, currentColor, transparent); }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .vent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .vent-grid { grid-template-columns: 1fr; } }
+    .vent-card { border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 2px; }
+    .vent-card.pros { border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.03); }
+    .vent-card.cons { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.03); }
+    .vent-card h4 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .vent-card ul { list-style: none; padding: 0; margin: 0; }
+    .vent-card li { font-size: 0.85rem; line-height: 1.6; color: #A8B5AD; padding: 4px 0; padding-left: 20px; position: relative; }
+    .vent-card li::before { position: absolute; left: 0; }
+    .vent-card.pros li::before { content: '+'; color: #22C55E; font-weight: 700; }
+    .vent-card.cons li::before { content: '-'; color: #EF4444; font-weight: 700; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
+</head>
+<body class="bg-energia">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Energía</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="fuentes-energia.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Fuentes</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Biomasa</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="fuentes-energia.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Fuentes</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Energía de Biomasa</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Biomasa</h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">La materia orgánica puede convertirse en electricidad, calor y combustibles. Argentina aprovecha sus residuos agrícolas para generar energía renovable.</p>
+  </div>
+  <div class="energy-hero-visual max-w-4xl mx-auto px-4 md:px-6">
+    <img src="../../../assets/fisica/energia/biomasa-real.png" alt="Planta de biomasa junto a residuos vegetales y campos agrícolas" class="energy-hero-image" width="1128" height="749" fetchpriority="high">
+    <p class="energy-hero-caption">Residuos orgánicos transformados en energía</p>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#usos" class="toc-link" data-toc>02. Usos</a>
+          <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
+          <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
+          <a href="#matriz-energetica" class="toc-link" data-toc>05. En la matriz</a>
+          <a href="#implicancia" class="toc-link" data-toc>06. Implicancia real</a>
+          <a href="#ventajas-desventajas" class="toc-link" data-toc>07. Ventajas y desventajas</a>
+      </nav>
+    </div>
+  </aside>
+
+<main class="flex-1 min-w-0 space-y-12">
+
+  <section class="animate-fadeInUp" id="que-es">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">1</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Qué es?</h2>
+    </div>
+    <figure class="energy-figure"><img src="../../../assets/fisica/energia/biomasa-explicativa.png" alt="Residuos agrícolas ingresando a una planta de aprovechamiento de biomasa" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">Los residuos agrícolas, como el bagazo, pueden convertirse en calor, electricidad o biocombustibles.</figcaption></figure>
+    <p class="article-dropcap text-lg leading-relaxed text-natura-silverLight mb-5">La energía de biomasa es la energía almacenada en la materia orgánica: plantas, residuos agrícolas, forestales, estiércol animal y basura urbana. Toda esta materia orgánica contiene energía química que puede liberarse mediante combustión directa, descomposición anaeróbica o transformación en biocombustibles líquidos o gaseosos.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En esencia, la biomasa es una forma de <strong class="text-white">energía solar almacenada</strong>. Las plantas capturan dióxido de carbono (CO₂) de la atmósfera y, mediante la fotosíntesis, convierten la energía del Sol en materia orgánica. Cuando quemamos biomasa o la transformamos en combustible, liberamos esa energía. Por eso se considera <strong class="text-white">carbono neutral</strong>: el CO₂ emitido durante la combustión fue previamente capturado por las plantas durante su crecimiento.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Las principales formas de aprovechamiento son la <strong class="text-white">combustión directa</strong> (quemar biomasa para generar calor o electricidad), la <strong class="text-white">descomposición anaeróbica</strong> (microorganismos descomponen materia orgánica en ausencia de oxígeno, produciendo biogás) y la <strong class="text-white">transformación en biocombustibles</strong> como el biodiésel (a partir de aceites vegetales) y el bioetanol (a partir de la fermentación de azúcares y almidones).</p>
+    <div class="pull-quote">"La biomasa es la única fuente renovable que puede proporcionar electricidad, calor y combustibles para el transporte de manera simultánea."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="usos">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Usos</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La biomasa tiene una enorme versatilidad de usos. Los principales son:</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Generación eléctrica:</strong> Centrales que queman biomasa (residuos forestales, agrícolas, bagazo de caña) para producir vapor y accionar turbinas.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Calefacción:</strong> Calderas de pellets de madera, leña, estufas a biomasa para calefacción domiciliaria e industrial.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Biocombustibles para transporte:</strong> Biodiésel (de soja, colza, aceites usados) y bioetanol (de maíz, caña de azúcar, sorgo).</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Biogás:</strong> Producido a partir de rellenos sanitarios, estiércol animal y residuos de la industria alimenticia. Se usa para generar electricidad o como combustible.</span></li>
+    </ul>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En Argentina, la biomasa tiene un lugar destacado: el país es el <strong class="text-white">3er productor mundial de biodiésel</strong> (principalmente a partir de soja). El bioetanol se produce a partir de maíz (Córdoba, Santa Fe) y de caña de azúcar (Tucumán, Salta, Jujuy). Los ingenios azucareros generan electricidad quemando bagazo de caña (cogeneración), abasteciendo su propio consumo y vendiendo excedentes a la red.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="rendimiento">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">3</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Rendimiento</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La eficiencia de la biomasa varía según la tecnología de conversión. La <strong class="text-white">combustión directa</strong> para generación eléctrica tiene una eficiencia del <strong class="text-white">20-30%</strong>, similar a la de una central térmica pequeña. La <strong class="text-white">cogeneración</strong> (producción simultánea de electricidad y calor útil) puede alcanzar eficiencias del <strong class="text-white">60-80%</strong>, siendo mucho más eficiente.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En biocombustibles, la eficiencia de conversión es alta: el biodiésel a partir de aceites vegetales alcanza un <strong class="text-white">80-90%</strong>, mientras que el bioetanol a partir de caña de azúcar rinde aproximadamente <strong class="text-white">70-90 litros por tonelada</strong> de caña. El maíz produce alrededor de <strong class="text-white">400 litros de bioetanol por tonelada</strong>, y la soja unos <strong class="text-white">180 litros de biodiésel por tonelada</strong>.</p>
+    <div class="sidebar-note"><span class="note-label">Factor de capacidad</span>Las centrales de biomasa tienen un factor de capacidad de 50-80%, dependiendo de la disponibilidad del combustible. A diferencia de la solar o la eólica, la biomasa puede generar electricidad de forma continua siempre que haya materia prima disponible.</div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El rendimiento energético general de la biomasa depende en gran medida de la <strong class="text-white">logística de recolección y transporte</strong> de la materia prima. Los residuos agrícolas y forestales suelen estar dispersos, y trasladarlos hasta la planta de procesamiento consume energía y genera costos.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="lugar-geografico">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">4</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Lugar en Argentina</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina tiene una gran diversidad de recursos biomásicos distribuidos en todo el territorio:</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Región Pampeana:</strong> Soja y maíz para biodiésel y bioetanol. Es el corazón de la industria de biocombustibles argentina.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">NOA (Noroeste):</strong> Caña de azúcar en Tucumán, Salta y Jujuy. Producción de bioetanol y cogeneración eléctrica con bagazo en los ingenios azucareros.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Litoral (Misiones, Corrientes):</strong> Residuos forestales de aserraderos e industrias de la madera, con potencial para generación eléctrica y calefacción.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Grandes ciudades:</strong> Biogás de rellenos sanitarios, como el del CEAMSE en Buenos Aires, uno de los más grandes del país.</span></li>
+    </ul>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Córdoba y Santa Fe concentran los principales <strong class="text-white">clusters de biodiésel</strong>, con plantas de gran escala que exportan a todo el mundo. Los ingenios azucareros tucumanos son pioneros en la <strong class="text-white">cogeneración con bagazo</strong>, generando electricidad para autoconsumo y excedentes que se inyectan a la red eléctrica nacional.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="matriz-energetica">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">En la matriz energética</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La biomasa representa aproximadamente el <strong class="text-white">2-3%</strong> de la electricidad generada en Argentina, incluyendo la cogeneración de los ingenios azucareros, las centrales de residuos forestales y el biogás de rellenos sanitarios.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En biocombustibles, Argentina es un actor global: es el <strong class="text-white">3er productor mundial de biodiésel</strong> (detrás de Indonesia y Estados Unidos) y uno de los principales productores de bioetanol de la región. Produce aproximadamente <strong class="text-white">3 millones de toneladas de biodiésel al año</strong>, principalmente a partir de soja.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La <strong class="text-white">Ley de Biocombustibles (26.093)</strong> establece cortes obligatorios de mezcla con combustibles fósiles: <strong class="text-white">5% de biodiésel</strong> en el gasoil y <strong class="text-white">12% de bioetanol</strong> en las naftas. Este marco legal garantiza un mercado interno estable para los biocombustibles argentinos.</p>
+    <div class="pull-quote">"Argentina es el 3er productor mundial de biodiésel, con aproximadamente 3 millones de toneladas anuales, principalmente a partir de soja."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="implicancia">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">6</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Implicancia real</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina es un <strong class="text-white">líder mundial en biocombustibles</strong>, con una industria consolidada que produce millones de toneladas de biodiésel y bioetanol cada año. El corte obligatorio garantiza una demanda interna estable, y los excedentes se exportan a mercados como Europa y Estados Unidos.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La <strong class="text-white">cogeneración con bagazo de caña</strong> es un caso de éxito en los ingenios tucumanos: permite a los ingenios ser autosuficientes energéticamente y vender excedentes a la red, utilizando un residuo que antes se desechaba. La biomasa forestal tiene un potencial enorme en Misiones y Corrientes, todavía poco explotado.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El principal desafío de los biocombustibles argentinos es la <strong class="text-white">competencia con la producción de alimentos</strong>: el biodiésel de soja y el bioetanol de maíz utilizan tierras cultivables que podrían destinarse a la alimentación. El biogás de rellenos sanitarios, en cambio, no compite con la producción de alimentos y además reduce las emisiones de metano, un gas de efecto invernadero muy potente.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-200" id="ventajas-desventajas">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">7</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Ventajas y desventajas</h2>
+    </div>
+    <div class="vent-grid">
+      <div class="vent-card pros">
+        <h4 class="text-natura-leaf">Ventajas</h4>
+        <ul>
+          <li>Utiliza residuos (valoriza desechos orgánicos)</li>
+          <li>Carbono neutral (CO₂ emitido fue capturado antes)</li>
+          <li>Genera empleo rural y desarrollo local</li>
+          <li>Diversifica la matriz energética</li>
+          <li>Reduce emisiones de metano (biogás)</li>
+          <li>Disponible 24/7 (no intermitente)</li>
+        </ul>
+      </div>
+      <div class="vent-card cons">
+        <h4 class="text-natura-bio">Desventajas</h4>
+        <ul>
+          <li>Compite con la producción de alimentos</li>
+          <li>Emisiones locales (humo, material particulado)</li>
+          <li>Requiere grandes volúmenes de materia prima</li>
+          <li>Logística de recolección y transporte costosa</li>
+          <li>Rendimiento energético relativamente bajo</li>
+          <li>Riesgo de deforestación si no es sostenible</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="geotermica.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors"><span class="iconify" data-icon="lucide:arrow-left" data-width="13"></span> Geotérmica</a>
+    <a href="fuentes-energia.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">Ver todas las fuentes <span class="iconify" data-icon="lucide:arrow-right" data-width="13"></span></a>
+  </div>
+
+</main></div></div>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:trees" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){var els = document.querySelectorAll('section[id]');function c(){var h=window.innerHeight;els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<h-80)e.classList.add('visible');});}c();window.addEventListener('scroll',c,{passive:true});})();
+</script>
+<script>
+(function(){var topics = [
+  {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+  {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+  {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+  {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+  {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+  {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+  {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+  {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+  {n:"Formas de energia",u:"Fisica",s:"Energia",l:"formas-energia.html",c:"#3B82F6"},
+  {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"transformaciones.html",c:"#3B82F6"},
+  {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"fuentes-energia.html",c:"#3B82F6"},
+  {n:"Energia solar",u:"Fisica",s:"Energia",l:"solar.html",c:"#3B82F6"},
+  {n:"Energia eolica",u:"Fisica",s:"Energia",l:"eolica.html",c:"#3B82F6"},
+  {n:"Energia hidroelectrica",u:"Fisica",s:"Energia",l:"hidroelectrica.html",c:"#3B82F6"},
+  {n:"Energia mareomotriz",u:"Fisica",s:"Energia",l:"mareomotriz.html",c:"#3B82F6"},
+  {n:"Energia geotermica",u:"Fisica",s:"Energia",l:"geotermica.html",c:"#3B82F6"},
+  {n:"Energia de biomasa",u:"Fisica",s:"Energia",l:"biomasa.html",c:"#3B82F6"},
+  {n:"Petroleo",u:"Fisica",s:"Energia",l:"petroleo.html",c:"#3B82F6"},
+  {n:"Carbon",u:"Fisica",s:"Energia",l:"carbon.html",c:"#3B82F6"},
+  {n:"Gas natural",u:"Fisica",s:"Energia",l:"gas-natural.html",c:"#3B82F6"},
+  {n:"Energia nuclear",u:"Fisica",s:"Energia",l:"nuclear.html",c:"#3B82F6"},
+  {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+  {n:"Ondas",u:"Fisica",s:"Ondas",l:"../calor-sonido/ondas.html",c:"#3B82F6"},
+  {n:"El Sonido",u:"Fisica",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+  {n:"Materiales",u:"Fisica",s:"Calor",l:"../calor-sonido/materiales.html",c:"#3B82F6"},
+  {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+  {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+  {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../movimientos/graficos.html",c:"#3B82F6"},
+  {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+  {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+  {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+  {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+  {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+  {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+  {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+  {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+  {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+  {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+  {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+  {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+  {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+  {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+  {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+  {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+  {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+  {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+  {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+  {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+  {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+  {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+  {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+  {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+  {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+  {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+  {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+  {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

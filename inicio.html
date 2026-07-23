@@ -41,7 +41,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     ::selection { background: #0D9488; color: #080C0A; }
-    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; overflow-x: hidden; }
 
 
     ::-webkit-scrollbar { width: 6px; }
@@ -186,6 +186,7 @@
     }
   </style>
   <link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="assets/responsive-fixes.css">
   <script src="assets/backgrounds/auto-toc.js?v=6"></script>
 </head>
 <body>
@@ -565,12 +566,12 @@
             <span class="text-violet-400">Revista</span> de Ciencias
           </h2>
           <p class="text-lg text-natura-silver leading-relaxed mb-4 max-w-lg">
-            Historias de ciencia que no están en los libros. Artículos, curiosidades y descubrimientos que conectan con lo que aprendemos en clase. Premios IG Nobel, materiales del futuro y científicas que cambiaron el mundo.
+            Curiosidades que no están en el libro de texto: IG Nobel, doble arcoíris, noche polar, sinestesia y el gato de Schrödinger. Cada nota cierra con un puente a la unidad de clase.
           </p>
           <div class="flex flex-wrap gap-2 mb-6">
+            <span class="text-[9px] font-semibold uppercase tracking-wider bg-violet-400/10 text-violet-400 px-2.5 py-1">5 artículos</span>
             <span class="text-[9px] font-semibold uppercase tracking-wider bg-violet-400/10 text-violet-400 px-2.5 py-1">IG Nobel</span>
             <span class="text-[9px] font-semibold uppercase tracking-wider bg-violet-400/10 text-violet-400 px-2.5 py-1">Física</span>
-            <span class="text-[9px] font-semibold uppercase tracking-wider bg-violet-400/10 text-violet-400 px-2.5 py-1">Química</span>
             <span class="text-[9px] font-semibold uppercase tracking-wider bg-violet-400/10 text-violet-400 px-2.5 py-1">Biología</span>
           </div>
           <a href="revista/index.html" class="inline-flex items-center gap-2 border border-violet-400/30 hover:border-violet-400/60 text-violet-400 hover:text-violet-300 text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all duration-200 hover:bg-violet-400/5">
@@ -579,21 +580,32 @@
           </a>
         </div>
 
-        <!-- Right: Article preview card -->
-        <a href="revista/rana-levitacion.html" class="revista-card block bg-[#141A16] overflow-hidden group no-underline">
-          <div class="relative h-48 overflow-hidden">
-            <img src="assets/card-revista-index.png" alt="Revista - La rana que voló" class="w-full h-full object-cover object-right-top group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#141A16] via-[#141A16]/40 to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="text-[9px] font-bold uppercase tracking-wider bg-violet-400/20 text-violet-400 px-2.5 py-1">Artículo Destacado</span>
+        <!-- Right: Article preview cards -->
+        <div class="grid gap-3">
+          <a href="revista/rana-levitacion.html" class="revista-card block bg-[#141A16] overflow-hidden group no-underline">
+            <div class="relative h-40 overflow-hidden">
+              <img src="assets/card-revista-index.png" alt="Revista - La rana que voló" class="w-full h-full object-cover object-right-top group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#141A16] via-[#141A16]/40 to-transparent"></div>
+              <div class="absolute top-3 left-3">
+                <span class="text-[9px] font-bold uppercase tracking-wider bg-violet-400/20 text-violet-400 px-2.5 py-1">Destacado</span>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <div class="text-violet-400/70 text-[10px] font-bold uppercase tracking-wider mb-1">IG Nobel · Física</div>
+                <div class="font-heading text-base font-bold text-white">La rana que voló</div>
+              </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 p-5">
-              <div class="text-violet-400/70 text-[11px] font-bold uppercase tracking-wider mb-1">IG Nobel 2000 · Física</div>
-              <div class="font-heading text-lg font-bold text-white">La rana que voló</div>
-              <div class="text-xs text-[#9A958A] mt-1">Cuando el magnetismo desafía la gravedad</div>
-            </div>
+          </a>
+          <div class="grid grid-cols-2 gap-3">
+            <a href="revista/doble-arcoiris.html" class="revista-card block bg-[#141A16] p-4 no-underline hover:border-violet-400/40">
+              <div class="text-violet-400/80 text-[9px] font-bold uppercase tracking-wider mb-1">Física</div>
+              <div class="font-heading text-sm font-bold text-white leading-snug">Doble arcoíris</div>
+            </a>
+            <a href="revista/sinestesia.html" class="revista-card block bg-[#141A16] p-4 no-underline hover:border-violet-400/40">
+              <div class="text-violet-400/80 text-[9px] font-bold uppercase tracking-wider mb-1">Biología</div>
+              <div class="font-heading text-sm font-bold text-white leading-snug">Sinestesia</div>
+            </a>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>

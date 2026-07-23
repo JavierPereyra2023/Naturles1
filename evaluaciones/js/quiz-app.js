@@ -1,51 +1,280 @@
-(function(){
-  const units=window.QUIZ_UNITS||[];
-  const key='naturales1.quiz.progreso.v1';
-  const pass=60;
-  const prize=90;
-  const totalPoints=units.length*100;
-  const requiredPoints=Math.ceil(totalPoints*.7);
-  const read=()=>{try{return JSON.parse(localStorage.getItem(key)||'{"student":{},"units":{}}')}catch{return {student:{},units:{}}}};
-  const save=data=>{try{localStorage.setItem(key,JSON.stringify(data))}catch{}};
-  const area={quimica:{name:'Quimica',color:'#22C55E'},fisica:{name:'Fisica',color:'#3B82F6'},biologia:{name:'Biologia',color:'#DC2626'}};
-  const topicMap={
-    materia:['Propiedades de la materia','Medicion','Clasificacion'],mezclas:['Tipos de mezclas','Separacion de mezclas','Aplicaciones'],agua:['Propiedades del agua','Ciclo del agua','Cuidado del agua'],
-    energia:['Formas de energia','Transformaciones','Conservacion'], 'calor-sonido':['Calor','Sonido','Luz'],movimientos:['MRU','Graficos','Rapidez y aceleracion'],'sistema-solar':['Sistema Solar','Movimientos terrestres','Modelos'],
-    'seres-vivos':['Caracteristicas','Clasificacion','Biodiversidad'],celulas:['Teoria celular','Organelas','Tipos de celulas'],ecologia:['Poblaciones','Relaciones ecologicas','Factores ambientales'],plantas:['Estructuras','Fotosintesis','Reproduccion'],animales:['Clasificacion','Adaptaciones','Alimentacion'],'cuerpo-humano':['Sistemas','Funciones vitales','Salud']
+(function () {
+  const units = window.QUIZ_UNITS || [];
+  const key = 'naturales1.quiz.progreso.v1';
+  const pass = 60;
+  const prize = 90;
+  const totalPoints = units.length * 100;
+  const requiredPoints = Math.ceil(totalPoints * 0.7);
+
+  const read = () => {
+    try {
+      return JSON.parse(localStorage.getItem(key) || '{"student":{},"units":{}}');
+    } catch {
+      return { student: {}, units: {} };
+    }
   };
-  const questionMeta=(u,i)=>({topic:(topicMap[u.id]||['Conceptos centrales'])[i%(topicMap[u.id]?.length||1)],difficulty:['Inicial','Intermedio','Desafio'][Math.min(i,2)]});
-  const score=()=>{const d=read();return units.reduce((t,u)=>t+(d.units[u.id]?.best||0),0)};
-  const completed=()=>{const d=read();return units.filter(u=>(d.units[u.id]?.best||0)>=pass).length};
-  const resetScores=()=>{const d=read();d.units={};delete d.lastResult;save(d);return d};
-  const aggregateStats=()=>{const d=read(),stats={};units.forEach(u=>{const unit=d.units[u.id];Object.entries(unit?.stats||{}).forEach(([topic,v])=>{stats[topic]??={correct:0,total:0};stats[topic].correct+=v.correct||0;stats[topic].total+=v.total||0})});return stats};
-  window.QuizProgress={read,save,units,pass,prize,totalPoints,requiredPoints,area,score,completed,resetScores,aggregateStats,questionMeta,achievement:()=>null};
-  window.renderQuizCards=function(target){
-    const d=read();
-    target.innerHTML=Object.keys(area).map(a=>`<h3 class="quiz-area" id="${a}">${area[a].name}</h3>`+units.filter(u=>u.area===a).map(u=>{const p=d.units[u.id]?.best||0;const level=p>=prize?'Premio':p>=pass?'Aprobada':'Pendiente';return `<a href="quiz.html?unidad=${u.id}" class="quiz-card" style="--area:${area[u.area].color}"><span class="iconify" data-icon="${u.icon}"></span><div><small>${area[u.area].name} · ${level}</small><h3>${u.title}</h3><p>${p?`Mejor resultado: ${Math.round(p)} puntos · ${d.units[u.id]?.attempts||0} intentos`:`${u.questions.length} preguntas · 100 puntos`}</p></div><b>${p>=pass?'✓':'→'}</b></a>`}).join('')).join('');
+  const save = (data) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch {}
   };
-  const esc=value=>String(value||'').replace(/[<&>"']/g,'');
-  const achievement=points=>points>=100?{label:'Estrella · Platino · 100%',color:'#e5e7eb'}:points>=90?{label:'Sol · Oro · 90–99%',color:'#fbbf24'}:points>=80?{label:'Tierra · Plata · 80–89%',color:'#cbd5e1'}:{label:'Luna · Bronce · 60–79%',color:'#d97706'};
-  window.diplomaSVG=function(name,course,title='Unidad completada',points=0){const final=String(title).startsWith('Diploma final');const average=final?Math.round(points/Math.max(units.length,1)):Math.round(points);const a=achievement(average);return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b211b"/><stop offset="1" stop-color="#07100d"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="1200" height="850" fill="url(#bg)"/><circle cx="1040" cy="110" r="160" fill="#14b8a6" opacity=".07"/><circle cx="170" cy="730" r="190" fill="#facc15" opacity=".05"/><rect x="32" y="32" width="1136" height="786" rx="10" fill="none" stroke="#2dd4bf" stroke-width="3"/><path d="M100 120h180M920 730h180" stroke="#facc15" stroke-width="2" opacity=".7"/><g transform="translate(600 145)"><path d="M-38 48l-24 72 62-35 62 35-24-72" fill="#0f766e" stroke="#5eead4" stroke-width="4"/><circle r="72" fill="#123c31" stroke="${a.color}" stroke-width="7" filter="url(#glow)"/><circle r="57" fill="none" stroke="${a.color}" stroke-width="2" opacity=".6"/><path d="M0-38l11 25 28 3-21 19 6 28-24-14-24 14 6-28-21-19 28-3z" fill="${a.color}"/></g><text x="600" y="285" text-anchor="middle" fill="#5eead4" font-family="Georgia" font-size="38" letter-spacing="3">CERTIFICADO DE LOGRO</text><text x="600" y="345" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="25">Se reconoce a</text><text x="600" y="425" text-anchor="middle" fill="white" font-family="Georgia" font-style="italic" font-size="60">${esc(name)}</text><text x="600" y="480" text-anchor="middle" fill="#facc15" font-family="Arial" font-size="24" letter-spacing="2">POR FINALIZAR LA UNIDAD</text><text x="600" y="530" text-anchor="middle" fill="#ffffff" font-family="Georgia" font-size="38">${esc(final?'Ciencias Naturales · todas las unidades':title)}</text><text x="600" y="580" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="24">Curso: ${esc(course)||'—'} · Puntaje: ${average}%</text><rect x="385" y="610" width="430" height="48" rx="24" fill="${a.color}" opacity=".16" stroke="${a.color}"/><text x="600" y="642" text-anchor="middle" fill="${a.color}" font-family="Arial" font-weight="bold" font-size="20">${a.label}</text><text x="600" y="705" text-anchor="middle" fill="#91a79b" font-family="Arial" font-size="16">Escala: 60% aprobado · 80% intermedio · 90% premio · 100% dominio total</text><text x="600" y="755" text-anchor="middle" fill="#5eead4" font-family="Arial" font-size="20">Prof. Javier Pereyra · ${new Date().toLocaleDateString('es-AR')}</text></svg>`};
-  window.diplomaSVG=function(name,course,title='Diploma de logro',points=0){return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850"><rect width="1200" height="850" fill="#08110e"/><rect x="32" y="32" width="1136" height="786" rx="8" fill="none" stroke="#2dd4bf" stroke-width="3"/><text x="600" y="170" text-anchor="middle" fill="#5eead4" font-family="Georgia" font-size="38">CIENCIAS NATURALES · 1° AÑO</text><text x="600" y="285" text-anchor="middle" fill="white" font-family="Georgia" font-size="68">${esc(title)}</text><text x="600" y="375" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="28">Se reconoce a</text><text x="600" y="455" text-anchor="middle" fill="#5eead4" font-family="Georgia" font-style="italic" font-size="58">${esc(name)}</text><text x="600" y="515" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="26">Curso: ${esc(course)||'—'}</text><text x="600" y="580" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="26">Por completar ${esc(title.toLowerCase())} con ${Math.round(points)} puntos</text><text x="600" y="710" text-anchor="middle" fill="#5eead4" font-family="Arial" font-size="23">Prof. Javier Pereyra · ${new Date().toLocaleDateString('es-AR')}</text></svg>`};
-  window.QuizProgress.printUnitDiploma=function(unit,points){const d=read();let name=d.student?.name||prompt('Escribi tu nombre para el diploma:')||'';if(!name)return;let course=d.student?.course||'';const win=window.open('','_blank','width=1000,height=760');if(!win){alert('Permití las ventanas emergentes para generar el diploma.');return}win.document.write(`<html><head><title>Diploma - ${esc(unit.title)}</title><style>body{margin:0;background:#08110e;display:grid;place-items:center;min-height:100vh}img{width:min(94vw,900px);height:auto}</style></head><body><img alt="Diploma de ${esc(unit.title)}" src="data:image/svg+xml;charset=utf-8,${encodeURIComponent(diplomaSVG(name,course,'Diploma de unidad: '+unit.title,points))}"><script>window.onload=()=>setTimeout(()=>window.print(),350)</script></body></html>`);win.document.close()};
-  window.QuizProgress.achievement=achievement;
-  const legacyDiplomaSVG=window.diplomaSVG;
-  window.diplomaSVG=function(name,course,title='Unidad completada',points=0){const final=String(title).startsWith('Diploma final');const average=final?Math.round(points/Math.max(units.length,1)):Math.round(points);const a=achievement(average);let svg=legacyDiplomaSVG(name,course,title,points);svg=svg.replace('Diploma de logro',final?'CERTIFICADO FINAL':'CERTIFICADO DE UNIDAD').replace(/<text x="600" y="570"[\s\S]*?<\/text>/,`<text x="600" y="570" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="26">Finalizo la unidad: ${esc(final?'Ciencias Naturales · todas las unidades':title)}</text>`).replace(/<text x="600" y="620"[\s\S]*?<\/text>/,`<text x="600" y="620" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="24">Puntaje alcanzado: ${average}% · Curso: ${esc(course)||'—'}</text>`).replace('</svg>',`<g transform="translate(600 120)"><path d="M-25 34l-18 56 43-24 43 24-18-56" fill="#0f766e" stroke="#5eead4" stroke-width="3"/><circle r="48" fill="#123c31" stroke="${a.color}" stroke-width="6"/><path d="M0-27l8 18 20 2-15 14 4 20-17-10-17 10 4-20-15-14 20-2z" fill="${a.color}"/></g><text x="600" y="680" text-anchor="middle" fill="${a.color}" font-family="Arial" font-weight="bold" font-size="22">${a.label}</text><text x="600" y="745" text-anchor="middle" fill="#91a79b" font-family="Arial" font-size="16">Escala: 60% aprobado · 80% intermedio · 90% premio · 100% dominio total</text></svg>`);return svg};
-  const decoratedDiplomaSVG=window.diplomaSVG;
-  window.diplomaSVG=(name,course,title,points)=>decoratedDiplomaSVG(name,course,title,points).replace(/Escala:[\s\S]*?<\/text>/,'Escala: Luna · Bronce 60–79% · Tierra · Plata 80–89% · Sol · Oro 90–99% · Estrella · Platino 100%</text>');
-  function initDashboard(){
-    const box=document.getElementById('progreso');if(!box)return;
-    const topicsTitle=document.querySelector('#temas h2');const topicsLead=document.querySelector('#temas h2 + p');const topicsEyebrow=topicsTitle?.previousElementSibling;if(topicsEyebrow)topicsEyebrow.textContent='Antes del desafío';if(topicsTitle)topicsTitle.textContent='Repasá los temas antes del desafío.';if(topicsLead)topicsLead.textContent='Volvé a las unidades, revisá los contenidos y preparate para resolver los quizzes con más seguridad.';
-    document.querySelectorAll('.subject-visual').forEach((card,i)=>{const destinations=['../unidades/quimica/index.html','../unidades/fisica/index.html','../unidades/biologia/index.html'];if(destinations[i])card.href=destinations[i]});
-    const choose=document.querySelector('a[href="#temas"]');if(choose&&!document.getElementById('hero-progress-link')){const link=document.createElement('a');link.id='hero-progress-link';link.href='progreso.html';link.className='quiz-button mt-8 ml-2 inline-flex items-center gap-3 rounded-sm border border-teal-300/40 bg-teal-300/10 px-6 py-4 text-xs font-extrabold uppercase tracking-[.16em] text-teal-200 transition-all duration-200 hover:bg-teal-300/20';link.innerHTML='<span class="iconify" data-icon="lucide:chart-line" data-width="18"></span> Ver mi progreso';choose.parentNode.append(link)}
-    const actionRow=box.querySelector('.flex.flex-wrap.items-start');
-    if(actionRow&&!document.getElementById('reset-progress')){const b=document.createElement('button');b.id='reset-progress';b.className='rounded-sm border border-red-300/30 px-4 py-3 text-xs font-bold uppercase tracking-wider text-red-200 hover:bg-red-300/10';b.textContent='Borrar puntajes';b.onclick=()=>{if(confirm('Se borraran los puntajes e intentos, pero se conservaran tu nombre y curso. Continuar?')){resetScores();location.reload()}};actionRow.append(b)}
-    const oldStats=document.getElementById('performance-stats');if(oldStats)oldStats.remove();
-    const d=read(),saved=units.filter(u=>d.units[u.id]?.lastResult);let links=document.getElementById('saved-analysis-links');if(!links){links=document.createElement('div');links.id='saved-analysis-links';links.className='mt-7 border-t border-white/10 pt-6';box.append(links)}links.innerHTML=saved.length?`<p class="text-[11px] font-bold uppercase tracking-[.2em] text-teal-300">Consultar respuestas guardadas</p><div class="mt-3 flex flex-wrap gap-2">${saved.map(u=>`<a href="resultado.html?unidad=${encodeURIComponent(u.id)}" class="rounded-sm border border-teal-300/25 bg-teal-300/5 px-4 py-3 text-xs font-bold text-teal-200 hover:bg-teal-300/10">${u.title} · Ver análisis</a>`).join('')}</div>`:'';return;
-    if(document.getElementById('performance-stats'))return;
-    const stats=document.createElement('div');stats.id='performance-stats';stats.className='mt-8 border-t border-white/10 pt-7';box.append(stats);
-    const draw=()=>{const d=read(),agg=aggregateStats(),rows=units.map(u=>{const r=d.units[u.id],p=r?.best||0;return `<div class="rounded-sm border border-white/10 bg-white/[.025] p-4"><div class="flex items-center justify-between gap-3"><b class="text-sm text-white">${u.title}</b><span class="text-xs font-bold ${p>=pass?'text-teal-300':'text-natura-silverDark'}">${p?Math.round(p)+' puntos':'Sin intento'}</span></div><div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full rounded-full ${p>=prize?'bg-amber-300':p>=pass?'bg-teal-300':'bg-white/20'}" style="width:${Math.min(p,100)}%"></div></div><p class="mt-2 text-[10px] text-natura-silverDark">${r?.attempts||0} intentos · ${p>=prize?'Premio alcanzado':p>=pass?'Unidad aprobada':'Fortalecer contenidos'}</p></div>`}).join('');const topics=Object.entries(agg).sort((a,b)=>(a[1].correct/Math.max(a[1].total,1))-(b[1].correct/Math.max(b[1].total,1)));stats.innerHTML=`<div class="flex flex-wrap items-end justify-between gap-3"><div><p class="text-[11px] font-bold uppercase tracking-[.2em] text-teal-300">Estadistica de rendimiento</p><h3 class="mt-2 font-heading text-2xl font-bold text-white">En que mejoraste y que fortalecer</h3></div><p class="text-xs text-natura-silverDark">Aprobacion: ${pass} · Premio: ${prize}</p></div><div class="mt-5 grid gap-3 sm:grid-cols-2">${rows}</div><div class="mt-6 grid gap-4 md:grid-cols-2"><div class="rounded-sm border border-white/10 bg-white/[.025] p-4"><p class="text-[10px] font-bold uppercase tracking-widest text-teal-300">Fortalezas</p><div class="mt-3 grid gap-2">${topics.slice(-3).reverse().map(([t,v])=>`<p class="flex justify-between gap-3 text-xs text-natura-silver"><span>${t}</span><b class="text-green-300">${Math.round(v.correct/Math.max(v.total,1)*100)}%</b></p>`).join('')||'<p class="text-xs text-natura-silverDark">Todavia no hay datos.</p>'}</div></div><div class="rounded-sm border border-white/10 bg-white/[.025] p-4"><p class="text-[10px] font-bold uppercase tracking-widest text-amber-300">Para fortalecer</p><div class="mt-3 grid gap-2">${topics.slice(0,3).map(([t,v])=>`<p class="flex justify-between gap-3 text-xs text-natura-silver"><span>${t}</span><b class="text-amber-300">${Math.round(v.correct/Math.max(v.total,1)*100)}%</b></p>`).join('')||'<p class="text-xs text-natura-silverDark">Al responder quizzes apareceran tus temas.</p>'}</div></div></div><p class="mt-5 text-[11px] leading-relaxed text-natura-silverDark">El progreso se guarda unicamente en este navegador. Para el diploma, el boton abre la impresion del navegador: elegi <b>Guardar como PDF</b>.</p>`};draw();
+
+  const area = {
+    quimica: { name: 'Química', color: '#22C55E' },
+    fisica: { name: 'Física', color: '#3B82F6' },
+    biologia: { name: 'Biología', color: '#DC2626' }
+  };
+
+  const diffLabel = ['Inicial', 'Intermedio', 'Desafío'];
+  const questionMeta = (u, i, q) => ({
+    topic: (q && q.topic) || (u.topics && u.topics[i % u.topics.length]) || 'Conceptos centrales',
+    difficulty: diffLabel[Math.min((q && q.difficulty != null ? q.difficulty : i % 3), 2)]
+  });
+
+  const score = () => {
+    const d = read();
+    return units.reduce((t, u) => t + (d.units[u.id]?.best || 0), 0);
+  };
+  const completed = () => {
+    const d = read();
+    return units.filter((u) => (d.units[u.id]?.best || 0) >= pass).length;
+  };
+  const resetScores = () => {
+    const d = read();
+    d.units = {};
+    delete d.lastResult;
+    save(d);
+    return d;
+  };
+  const aggregateStats = () => {
+    const d = read();
+    const stats = {};
+    units.forEach((u) => {
+      const unit = d.units[u.id];
+      Object.entries(unit?.stats || {}).forEach(([topic, v]) => {
+        stats[topic] ??= { correct: 0, total: 0 };
+        stats[topic].correct += v.correct || 0;
+        stats[topic].total += v.total || 0;
+      });
+    });
+    return stats;
+  };
+
+  const ensureStudent = () => {
+    const d = read();
+    if (d.student?.name) return d.student;
+    const name = (prompt('Escribí tu nombre para guardar tu progreso y diplomas:') || '').trim();
+    if (!name) return d.student || {};
+    const course = (prompt('Curso (ej: 1°4):') || '').trim();
+    d.student = { name, course };
+    save(d);
+    return d.student;
+  };
+
+  window.QuizProgress = {
+    read,
+    save,
+    units,
+    pass,
+    prize,
+    totalPoints,
+    requiredPoints,
+    area,
+    score,
+    completed,
+    resetScores,
+    aggregateStats,
+    questionMeta,
+    ensureStudent,
+    achievement: () => null
+  };
+
+  window.renderQuizCards = function (target) {
+    const d = read();
+    target.innerHTML = Object.keys(area)
+      .map(
+        (a) =>
+          `<h3 class="quiz-area" id="${a}">${area[a].name}</h3>` +
+          units
+            .filter((u) => u.area === a)
+            .map((u) => {
+              const p = d.units[u.id]?.best || 0;
+              const level = p >= prize ? 'Premio' : p >= pass ? 'Aprobada' : 'Pendiente';
+              return `<a href="quiz.html?unidad=${u.id}" class="quiz-card" style="--area:${area[u.area].color}"><span class="iconify" data-icon="${u.icon}"></span><div><small>${area[u.area].name} · ${level}</small><h3>${u.title}</h3><p>${p ? `Mejor: ${Math.round(p)} pts · ${d.units[u.id]?.attempts || 0} intentos` : `${u.questions.length} preguntas · 100 pts`}</p></div><b>${p >= pass ? '✓' : '→'}</b></a>`;
+            })
+            .join('')
+      )
+      .join('');
+  };
+
+  const esc = (value) =>
+    String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  const achievement = (points) =>
+    points >= 100
+      ? { label: 'Estrella · Platino · 100%', color: '#e5e7eb' }
+      : points >= 90
+        ? { label: 'Sol · Oro · 90–99%', color: '#fbbf24' }
+        : points >= 80
+          ? { label: 'Tierra · Plata · 80–89%', color: '#cbd5e1' }
+          : { label: 'Luna · Bronce · 60–79%', color: '#d97706' };
+
+  window.diplomaSVG = function (name, course, title, points) {
+    const final = String(title || '').startsWith('Diploma final');
+    const average = final ? Math.round(points / Math.max(units.length, 1)) : Math.round(points);
+    const a = achievement(average);
+    const heading = final ? 'CERTIFICADO FINAL' : 'CERTIFICADO DE UNIDAD';
+    const detail = final
+      ? 'Completó los desafíos de Ciencias Naturales'
+      : `Finalizó la unidad: ${esc(title)}`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850">
+      <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b211b"/><stop offset="1" stop-color="#07100d"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <rect width="1200" height="850" fill="url(#bg)"/>
+      <rect x="32" y="32" width="1136" height="786" rx="10" fill="none" stroke="#2dd4bf" stroke-width="3"/>
+      <g transform="translate(600 130)"><circle r="52" fill="#123c31" stroke="${a.color}" stroke-width="6" filter="url(#glow)"/><path d="M0-28l8 18 20 2-15 14 4 20-17-10-17 10 4-20-15-14 20-2z" fill="${a.color}"/></g>
+      <text x="600" y="230" text-anchor="middle" fill="#5eead4" font-family="Georgia" font-size="34" letter-spacing="3">${heading}</text>
+      <text x="600" y="290" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="22">Ciencias Naturales · 1° Año</text>
+      <text x="600" y="360" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="24">Se reconoce a</text>
+      <text x="600" y="430" text-anchor="middle" fill="white" font-family="Georgia" font-style="italic" font-size="52">${esc(name)}</text>
+      <text x="600" y="490" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="22">Curso: ${esc(course) || '—'}</text>
+      <text x="600" y="550" text-anchor="middle" fill="#ffffff" font-family="Georgia" font-size="26">${detail}</text>
+      <text x="600" y="600" text-anchor="middle" fill="#c8d4cc" font-family="Arial" font-size="22">Puntaje: ${average}% · ${a.label}</text>
+      <text x="600" y="680" text-anchor="middle" fill="#5eead4" font-family="Arial" font-size="20">Prof. Javier Pereyra · ${new Date().toLocaleDateString('es-AR')}</text>
+      <text x="600" y="740" text-anchor="middle" fill="#91a79b" font-family="Arial" font-size="14">Escala: Luna 60–79% · Tierra 80–89% · Sol 90–99% · Estrella 100%</text>
+    </svg>`;
+  };
+
+  window.QuizProgress.achievement = achievement;
+
+  function diplomaToPDF(svgContent, filename) {
+    if (typeof html2pdf === 'undefined') {
+      alert('Error al cargar el generador de PDF. Recargá la página e intentá de nuevo.');
+      return;
+    }
+    const div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.left = '-9999px';
+    div.style.top = '0';
+    div.style.width = '1200px';
+    div.style.height = '850px';
+    div.style.backgroundColor = '#080C0A';
+    div.innerHTML = svgContent;
+    document.body.appendChild(div);
+    html2pdf()
+      .set({
+        margin: 0,
+        filename: filename + '.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#080C0A', logging: false },
+        jsPDF: { unit: 'px', format: [1200, 850], orientation: 'landscape' }
+      })
+      .from(div)
+      .save()
+      .then(function () { if (div.parentNode) div.parentNode.removeChild(div); })
+      .catch(function () { if (div.parentNode) div.parentNode.removeChild(div); alert('No se pudo generar el PDF. Intentá de nuevo.'); });
   }
-  window.QuizProgress.printFinalDiploma=function(){const d=read();let name=d.student?.name||prompt('Escribi tu nombre para el diploma:')||'';if(!name)return;let course=d.student?.course||'';const win=window.open('','_blank','width=1000,height=760');if(!win){alert('PermitÃ­ las ventanas emergentes para generar el diploma.');return}win.document.write(`<html><head><title>Diploma final - Ciencias Naturales</title><style>body{margin:0;background:#08110e;display:grid;place-items:center;min-height:100vh}img{width:min(94vw,900px);height:auto}</style></head><body><img alt="Diploma final de Ciencias Naturales" src="data:image/svg+xml;charset=utf-8,${encodeURIComponent(diplomaSVG(name,course,'Diploma final de logro',score()))}"><script>window.onload=()=>setTimeout(()=>window.print(),350)<\/script></body></html>`);win.document.close()};
-  document.addEventListener('DOMContentLoaded',()=>{initDashboard();const finalButton=document.getElementById('diploma');if(finalButton)finalButton.onclick=()=>QuizProgress.printFinalDiploma()});
+
+  window.QuizProgress.printUnitDiploma = function (unit, points) {
+    const d = read();
+    let name = d.student?.name || '';
+    if (!name) {
+      const s = ensureStudent();
+      name = s.name || '';
+    }
+    if (!name) return;
+    const course = d.student?.course || '';
+    diplomaToPDF(diplomaSVG(name, course, unit.title, points), 'Diploma - ' + unit.title);
+  };
+
+  window.QuizProgress.printFinalDiploma = function () {
+    const d = read();
+    let name = d.student?.name || '';
+    if (!name) {
+      const s = ensureStudent();
+      name = s.name || '';
+    }
+    if (!name) return;
+    const course = d.student?.course || '';
+    diplomaToPDF(diplomaSVG(name, course, 'Diploma final', score()), 'Diploma final - Ciencias Naturales');
+  };
+
+  function initDashboard() {
+    const box = document.getElementById('progreso');
+    if (!box) return;
+    const topicsTitle = document.querySelector('#temas h2');
+    const topicsLead = document.querySelector('#temas h2 + p');
+    const topicsEyebrow = topicsTitle?.previousElementSibling;
+    if (topicsEyebrow) topicsEyebrow.textContent = 'Antes del desafío';
+    if (topicsTitle) topicsTitle.textContent = 'Repasá los temas antes del desafío.';
+    if (topicsLead)
+      topicsLead.textContent =
+        'Volvé a las unidades, revisá los contenidos y preparate para resolver los quizzes con más seguridad.';
+    document.querySelectorAll('.subject-visual').forEach((card, i) => {
+      const destinations = [
+        '../unidades/quimica/index.html',
+        '../unidades/fisica/index.html',
+        '../unidades/biologia/index.html'
+      ];
+      if (destinations[i]) card.href = destinations[i];
+    });
+    const choose = document.querySelector('a[href="#temas"]');
+    if (choose && !document.getElementById('hero-progress-link')) {
+      const link = document.createElement('a');
+      link.id = 'hero-progress-link';
+      link.href = 'progreso.html';
+      link.className =
+        'quiz-button mt-8 ml-0 sm:ml-2 inline-flex items-center gap-3 rounded-sm border border-teal-300/40 bg-teal-300/10 px-6 py-4 text-xs font-extrabold uppercase tracking-[.16em] text-teal-200 transition-all duration-200 hover:bg-teal-300/20';
+      link.innerHTML =
+        '<span class="iconify" data-icon="lucide:chart-line" data-width="18"></span> Ver mi progreso';
+      choose.parentNode.append(link);
+    }
+    const actionRow = box.querySelector('.flex.flex-wrap.items-start');
+    if (actionRow && !document.getElementById('reset-progress')) {
+      const b = document.createElement('button');
+      b.id = 'reset-progress';
+      b.className =
+        'rounded-sm border border-red-300/30 px-4 py-3 text-xs font-bold uppercase tracking-wider text-red-200 hover:bg-red-300/10';
+      b.textContent = 'Borrar puntajes';
+      b.onclick = () => {
+        if (
+          confirm(
+            'Se borrarán los puntajes e intentos, pero se conservarán tu nombre y curso. ¿Continuar?'
+          )
+        ) {
+          resetScores();
+          location.reload();
+        }
+      };
+      actionRow.append(b);
+    }
+    const d = read();
+    const saved = units.filter((u) => d.units[u.id]?.lastResult);
+    let links = document.getElementById('saved-analysis-links');
+    if (!links) {
+      links = document.createElement('div');
+      links.id = 'saved-analysis-links';
+      links.className = 'mt-7 border-t border-white/10 pt-6';
+      box.append(links);
+    }
+    links.innerHTML = saved.length
+      ? `<p class="text-[11px] font-bold uppercase tracking-[.2em] text-teal-300">Consultar respuestas guardadas</p><div class="mt-3 flex flex-wrap gap-2">${saved
+          .map(
+            (u) =>
+              `<a href="resultado.html?unidad=${encodeURIComponent(u.id)}" class="rounded-sm border border-teal-300/25 bg-teal-300/5 px-4 py-3 text-xs font-bold text-teal-200 hover:bg-teal-300/10">${u.title} · Ver análisis</a>`
+          )
+          .join('')}</div>`
+      : '';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initDashboard();
+    const finalButton = document.getElementById('diploma');
+    if (finalButton) finalButton.onclick = () => QuizProgress.printFinalDiploma();
+  });
 })();

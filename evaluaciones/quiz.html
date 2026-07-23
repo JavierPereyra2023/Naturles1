@@ -2,7 +2,7 @@
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Quiz interactivo de Ciencias Naturales para 1° año de secundaria.">
   <title>Quiz — Ciencias Naturales 1° Año</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -36,11 +36,14 @@
     .rise { animation: rise .6s cubic-bezier(.16,1,.3,1) both; }
     .pop { animation: pop .45s cubic-bezier(.16,1,.3,1) both; }
 
-    .answer { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 15px 16px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); border-radius: 2px; color: #C8D4CC; font-size: 14px; line-height: 1.45; transition: border-color .2s, background .2s, transform .2s; cursor: pointer; }
-    .answer:not(:disabled):hover, .answer:not(:disabled):focus-visible { border-color: rgba(45,212,191,.6); background: rgba(13,148,136,.09); transform: translateX(4px); outline: none; }
+    .answer { display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; padding: 14px 14px; min-height: 52px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); border-radius: 2px; color: #C8D4CC; font-size: 14px; line-height: 1.45; transition: border-color .2s, background .2s, transform .2s; cursor: pointer; }
+    .answer:not(:disabled):hover, .answer:not(:disabled):focus-visible { border-color: rgba(45,212,191,.6); background: rgba(13,148,136,.09); outline: none; }
+    @media (min-width: 640px) {
+      .answer:not(:disabled):hover { transform: translateX(4px); }
+    }
     .answer:disabled { cursor: default; }
-    .answer .letter { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(45,212,191,.35); background: rgba(20,184,166,.08); color: #5EEAD4; font-size: 12px; font-weight: 800; border-radius: 2px; transition: inherit; }
-    .answer .marks { flex: 0 0 auto; position: relative; width: 18px; height: 18px; margin-left: auto; }
+    .answer .letter { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(45,212,191,.35); background: rgba(20,184,166,.08); color: #5EEAD4; font-size: 12px; font-weight: 800; border-radius: 2px; margin-top: 1px; }
+    .answer .marks { flex: 0 0 auto; position: relative; width: 18px; height: 18px; margin-left: auto; margin-top: 6px; }
     .answer .mark { position: absolute; inset: 0; font-size: 18px; opacity: 0; transition: opacity .2s; }
     .answer.correct { border-color: rgba(34,197,94,.7); background: rgba(34,197,94,.1); }
     .answer.correct .letter { border-color: rgba(34,197,94,.7); background: rgba(34,197,94,.15); color: #4ADE80; }
@@ -54,17 +57,19 @@
     .feedback.ok { border-color: #22C55E; background: rgba(34,197,94,.07); }
     .feedback.bad { border-color: #EF4444; background: rgba(239,68,68,.07); }
 
-    .btn-primary { display: inline-flex; align-items: center; gap: 10px; border-radius: 2px; background: #0D9488; padding: 15px 26px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: #080C0A; transition: all .2s; box-shadow: 0 0 0 1px rgba(20,184,166,.25), 0 10px 30px rgba(13,148,136,.22); }
-    .btn-primary:not(:disabled):hover { background: #14B8A6; transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(45,212,191,.6), 0 14px 38px rgba(13,148,136,.32); }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 2px; background: #0D9488; padding: 15px 22px; min-height: 48px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: #080C0A; transition: all .2s; box-shadow: 0 0 0 1px rgba(20,184,166,.25), 0 10px 30px rgba(13,148,136,.22); text-decoration: none; }
+    .btn-primary:not(:disabled):hover { background: #14B8A6; }
     .btn-primary:disabled { opacity: .3; cursor: not-allowed; }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; border-radius: 2px; border: 1px solid rgba(255,255,255,.18); padding: 15px 26px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; color: #C8D4CC; transition: all .2s; }
+    .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 2px; border: 1px solid rgba(255,255,255,.18); padding: 15px 22px; min-height: 48px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: #C8D4CC; transition: all .2s; text-decoration: none; background: transparent; cursor: pointer; }
     .btn-ghost:hover { border-color: rgba(45,212,191,.5); color: #fff; background: rgba(20,184,166,.07); }
+
+    .mode-card { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); padding: 20px; text-align: left; transition: .25s; cursor: pointer; width: 100%; color: inherit; }
+    .mode-card:hover, .mode-card:focus-visible { border-color: rgba(45,212,191,.5); background: rgba(20,184,166,.08); outline: none; transform: translateY(-2px); }
 
     .progress-track { height: 5px; background: rgba(255,255,255,.07); border-radius: 99px; overflow: hidden; }
     .progress-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #0D9488, #2DD4BF); transition: width .5s cubic-bezier(.16,1,.3,1); }
 
     .review-item { display: flex; gap: 14px; padding: 16px; border: 1px solid rgba(255,255,255,.08); border-radius: 2px; background: rgba(255,255,255,.02); }
-    .review-section { display: none; }
     .review-item .state { flex: 0 0 auto; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 99px; font-size: 14px; }
     .review-item.ok .state { background: rgba(34,197,94,.13); color: #4ADE80; }
     .review-item.bad .state { background: rgba(239,68,68,.13); color: #F87171; }
@@ -73,41 +78,44 @@
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
   </style>
   <link rel="stylesheet" href="../assets/backgrounds/backgrounds.css">
-  <script src="../assets/backgrounds/auto-toc.js?v=6"></script>
+  <link rel="stylesheet" href="../assets/responsive-fixes.css">
 </head>
 <body class="min-h-screen overflow-x-hidden">
   <div class="fixed inset-0 grid-lines pointer-events-none"></div>
 
   <nav class="relative z-10 border-b border-white/5 bg-natura-black/80 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-      <a href="../inicio.html" class="flex items-center gap-2 group" aria-label="Volver al inicio de Ciencias Naturales">
-        <span class="w-8 h-8 bg-natura-green rounded-sm grid place-items-center text-natura-black group-hover:bg-natura-greenLight transition-colors"><span class="iconify" data-icon="lucide:flask-conical" data-width="17"></span></span>
-        <span class="font-heading text-base font-bold tracking-wide text-white uppercase">Cs. Naturales</span>
+    <div class="max-w-6xl mx-auto px-4 sm:px-5 h-14 sm:h-16 flex items-center justify-between gap-3">
+      <a href="../inicio.html" class="flex items-center gap-2 group min-w-0" aria-label="Volver al inicio">
+        <span class="w-8 h-8 bg-natura-green rounded-sm grid place-items-center text-natura-black group-hover:bg-natura-greenLight transition-colors shrink-0"><span class="iconify" data-icon="lucide:flask-conical" data-width="17"></span></span>
+        <span class="font-heading text-sm sm:text-base font-bold tracking-wide text-white uppercase truncate">Cs. Naturales</span>
       </a>
-      <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors">
-        <span class="iconify" data-icon="lucide:arrow-left" data-width="15"></span> Volver a los quizzes
+      <a href="index.html" class="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors shrink-0">
+        <span class="iconify" data-icon="lucide:arrow-left" data-width="15"></span> Quizzes
       </a>
     </div>
   </nav>
 
-  <main class="relative z-10 max-w-3xl mx-auto px-5 py-10 sm:py-14">
+  <main class="relative z-10 max-w-3xl mx-auto px-4 sm:px-5 py-8 sm:py-14">
     <div id="app"></div>
   </main>
 
   <footer class="relative z-10 border-t border-white/5 px-5 py-7 text-center text-[11px] uppercase tracking-wider text-natura-silverDark">Ciencias Naturales · 1° Año · Prof. Javier Pereyra</footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="js/quiz-data.js"></script>
   <script src="js/quiz-app.js"></script>
   <script>
-    const id = new URLSearchParams(location.search).get('unidad');
+    const params = new URLSearchParams(location.search);
+    const id = params.get('unidad');
+    let mode = params.get('modo'); // practica | desafio | null (elegir)
     const u = QUIZ_UNITS.find(x => x.id === id);
     const app = document.getElementById('app');
     let n = 0, answers = [];
 
     if (!u) {
-      app.innerHTML = `<div class="rise rounded-sm border border-white/10 bg-white/[.03] p-10 text-center">
+      app.innerHTML = `<div class="rise rounded-sm border border-white/10 bg-white/[.03] p-8 sm:p-10 text-center">
         <span class="iconify text-4xl text-red-400" data-icon="lucide:circle-alert"></span>
-        <h1 class="mt-4 font-heading text-3xl font-bold text-white">Quiz no encontrado</h1>
+        <h1 class="mt-4 font-heading text-2xl sm:text-3xl font-bold text-white">Quiz no encontrado</h1>
         <p class="mt-2 text-sm text-natura-silver">El enlace no corresponde a ninguna unidad.</p>
         <a href="index.html" class="btn-primary mt-7">Volver a los quizzes</a>
       </div>`;
@@ -116,138 +124,211 @@
 
     const area = QuizProgress.area[u.area];
     document.title = `${u.title} · Quiz · Ciencias Naturales`;
+    const practice = mode === 'practica';
     const shuffle = list => [...list].sort(() => Math.random() - .5);
-    const questions = shuffle(u.questions.map((q, questionIndex) => ({...q, ...QuizProgress.questionMeta(u, questionIndex)}))).map(q => {
-      const options = shuffle(q.options.map((text, index) => ({text, index})));
-      return {...q, options: options.map(o => o.text), correct: options.findIndex(o => o.index === q.correct)};
-    });
 
-    const head = () => `
-      <header class="rise">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <span class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.18em]" style="border-color:${area.color}44;color:${area.color};background:${area.color}11">
-            <span class="iconify" data-icon="${u.icon}" data-width="14"></span> ${area.name}
-          </span>
-          <span class="text-[11px] font-bold uppercase tracking-[.18em] text-natura-silverDark">Pregunta <span class="text-white">${n + 1}</span> / ${questions.length}</span>
-        </div>
-        <div class="progress-track mt-4"><div class="progress-bar" id="bar" style="width:${n / questions.length * 100}%"></div></div>
-        <h1 class="mt-6 font-heading text-3xl sm:text-4xl font-bold text-white">${u.title}</h1>
-      </header>`;
+    function startQuiz() {
+      if (!practice) QuizProgress.ensureStudent();
+      const questions = shuffle(u.questions.map((q, questionIndex) => {
+        const meta = QuizProgress.questionMeta(u, questionIndex, q);
+        const options = shuffle(q.options.map((text, index) => ({ text, index })));
+        return {
+          ...q,
+          topic: meta.topic,
+          difficulty: meta.difficulty,
+          options: options.map(o => o.text),
+          correct: options.findIndex(o => o.index === q.correct)
+        };
+      }));
 
-    function draw() {
-      const q = questions[n];
-      const last = n === questions.length - 1;
-      app.innerHTML = head() + `
-        <section class="rise mt-8">
-          <div class="mt-7 flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-[.14em]"><span class="rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-teal-200">${q.topic}</span><span class="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-natura-silver">Nivel: ${q.difficulty}</span></div>
-          <h2 class="mt-5 font-heading text-2xl sm:text-[28px] font-bold leading-snug text-white">${q.text}</h2>
-          <div class="mt-7 grid gap-3" role="group" aria-label="Opciones de respuesta">
-            ${q.options.map((o, i) => `
-              <button class="answer" data-i="${i}">
-                <span class="letter">${'ABCD'[i]}</span>
-                <span>${o}</span>
-                <span class="marks"><span class="mark mark-check iconify" data-icon="lucide:circle-check"></span><span class="mark mark-x iconify" data-icon="lucide:circle-x"></span></span>
-              </button>`).join('')}
+      const head = () => `
+        <header class="rise">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.18em]" style="border-color:${area.color}44;color:${area.color};background:${area.color}11">
+              <span class="iconify" data-icon="${u.icon}" data-width="14"></span> ${area.name}
+            </span>
+            <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-[.14em] text-natura-silverDark">
+              ${practice ? 'Modo práctica · ' : ''}Pregunta <span class="text-white">${n + 1}</span> / ${questions.length}
+            </span>
           </div>
-          <div id="feedback" class="mt-5" aria-live="polite"></div>
-          <div class="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-6">
-            <p class="text-[11px] text-natura-silverDark">Elegí una opción · teclas <b class="text-natura-silver">1-4</b> o <b class="text-natura-silver">A-D</b></p>
-            <button id="next" disabled class="btn-primary">
-              ${last ? 'Ver resultado' : 'Siguiente'} <span class="iconify" data-icon="lucide:arrow-right" data-width="15"></span>
-            </button>
-          </div>
-        </section>`;
-      document.querySelectorAll('.answer').forEach(b => b.onclick = () => select(+b.dataset.i));
-      document.getElementById('next').onclick = () => { n++; n < questions.length ? draw() : finish(); };
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+          <div class="progress-track mt-4"><div class="progress-bar" id="bar" style="width:${n / questions.length * 100}%"></div></div>
+          <h1 class="mt-5 sm:mt-6 font-heading text-2xl sm:text-4xl font-bold text-white leading-tight">${u.title}</h1>
+        </header>`;
 
-    function select(i) {
-      if (answers[n] !== undefined) return;
-      answers[n] = i;
-      const q = questions[n];
-      const ok = i === q.correct;
-      document.querySelectorAll('.answer').forEach(b => {
-        const bi = +b.dataset.i;
-        b.disabled = true;
-        if (bi === q.correct) b.classList.add('correct');
-        else if (bi === i) b.classList.add('wrong');
-        else b.classList.add('dimmed');
+      function draw() {
+        const q = questions[n];
+        const last = n === questions.length - 1;
+        app.innerHTML = head() + `
+          <section class="rise mt-6 sm:mt-8">
+            <div class="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-[.14em]">
+              <span class="rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-teal-200">${q.topic}</span>
+              <span class="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-natura-silver">Nivel: ${q.difficulty}</span>
+            </div>
+            <h2 class="mt-4 sm:mt-5 font-heading text-xl sm:text-[28px] font-bold leading-snug text-white">${q.text}</h2>
+            <div class="mt-5 sm:mt-7 grid gap-2.5 sm:gap-3" role="group" aria-label="Opciones de respuesta">
+              ${q.options.map((o, i) => `
+                <button type="button" class="answer" data-i="${i}">
+                  <span class="letter">${'ABCD'[i]}</span>
+                  <span class="flex-1 min-w-0">${o}</span>
+                  <span class="marks"><span class="mark mark-check iconify" data-icon="lucide:circle-check"></span><span class="mark mark-x iconify" data-icon="lucide:circle-x"></span></span>
+                </button>`).join('')}
+            </div>
+            <div id="feedback" class="mt-5" aria-live="polite"></div>
+            <div class="mt-6 sm:mt-7 flex flex-col-reverse sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-3 border-t border-white/5 pt-6">
+              <p class="text-[11px] text-natura-silverDark text-center sm:text-left">Elegí una opción · teclas <b class="text-natura-silver">1-4</b> o <b class="text-natura-silver">A-D</b></p>
+              <button id="next" type="button" disabled class="btn-primary w-full sm:w-auto">
+                ${last ? 'Ver resultado' : 'Siguiente'} <span class="iconify" data-icon="lucide:arrow-right" data-width="15"></span>
+              </button>
+            </div>
+          </section>`;
+        document.querySelectorAll('.answer').forEach(b => b.onclick = () => select(+b.dataset.i));
+        document.getElementById('next').onclick = () => { n++; n < questions.length ? draw() : finish(questions); };
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function select(i) {
+        if (answers[n] !== undefined) return;
+        answers[n] = i;
+        const q = questions[n];
+        const ok = i === q.correct;
+        document.querySelectorAll('.answer').forEach(b => {
+          const bi = +b.dataset.i;
+          b.disabled = true;
+          if (bi === q.correct) b.classList.add('correct');
+          else if (bi === i) b.classList.add('wrong');
+          else b.classList.add('dimmed');
+        });
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback pop ${ok ? 'ok' : 'bad'}">
+            <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.14em] ${ok ? 'text-green-400' : 'text-red-400'}">
+              <span class="iconify" data-icon="${ok ? 'lucide:party-popper' : 'lucide:lightbulb'}" data-width="16"></span>
+              ${ok ? '¡Correcto!' : 'No era esa…'}
+            </p>
+            <p class="mt-1.5 text-sm leading-relaxed text-natura-silverLight">${q.feedback}</p>
+          </div>`;
+        document.getElementById('bar').style.width = ((n + 1) / questions.length * 100) + '%';
+        const next = document.getElementById('next');
+        next.disabled = false;
+        next.focus();
+      }
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && answers[n] !== undefined && !document.getElementById('next')?.disabled) {
+          document.getElementById('next').click();
+          return;
+        }
+        const map = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 };
+        const i = map[e.key.toLowerCase()];
+        if (i !== undefined && answers[n] === undefined) document.querySelector(`.answer[data-i="${i}"]`)?.click();
       });
-      document.getElementById('feedback').innerHTML = `
-        <div class="feedback pop ${ok ? 'ok' : 'bad'}">
-          <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.14em] ${ok ? 'text-green-400' : 'text-red-400'}">
-            <span class="iconify" data-icon="${ok ? 'lucide:party-popper' : 'lucide:lightbulb'}" data-width="16"></span>
-            ${ok ? '¡Correcto!' : 'No era esa…'}
-          </p>
-          <p class="mt-1.5 text-sm leading-relaxed text-natura-silverLight">${q.feedback}</p>
-        </div>`;
-      document.getElementById('bar').style.width = ((n + 1) / questions.length * 100) + '%';
-      const next = document.getElementById('next');
-      next.disabled = false;
-      next.focus();
+
+      draw();
     }
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && answers[n] !== undefined && !document.getElementById('next')?.disabled) { document.getElementById('next').click(); return; }
-      const map = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 };
-      const i = map[e.key.toLowerCase()];
-      if (i !== undefined && answers[n] === undefined) document.querySelector(`.answer[data-i="${i}"]`)?.click();
-    });
-
-    function finish() {
+    function finish(questions) {
       const correct = answers.reduce((s, a, i) => s + (a === questions[i].correct ? 1 : 0), 0);
       const score = Math.round(correct / questions.length * 100);
       const d = QuizProgress.read();
       const old = d.units[u.id]?.best || 0;
-      const attempts = (d.units[u.id]?.attempts || 0) + 1;
-      const previousStats=d.units[u.id]?.stats||{};
-      const stats={...previousStats};
-      const attemptStats={};
-      questions.forEach((q,i)=>{const topic=q.topic||QuizProgress.questionMeta(u,i).topic;const item=stats[topic]||{correct:0,total:0};item.total+=1;if(answers[i]===q.correct)item.correct+=1;stats[topic]=item});
-      questions.forEach((q,i)=>{const topic=q.topic||QuizProgress.questionMeta(u,i).topic;const item=attemptStats[topic]||{correct:0,total:0};item.total+=1;if(answers[i]===q.correct)item.correct+=1;attemptStats[topic]=item});
-      d.units[u.id] = { best: Math.max(old, score), last: score, attempts, stats, history:[...(d.units[u.id]?.history||[]),{score,date:new Date().toISOString()}].slice(-10) };
-      const resultData={unitId:u.id,title:u.title,area:area.name,score,correct,total:questions.length,answers:answers.slice(),questions:questions.map(q=>({text:q.text,options:q.options,correct:q.correct,feedback:q.feedback,topic:q.topic,difficulty:q.difficulty}))};
-      d.lastResult=resultData;d.units[u.id].lastResult=resultData;
-      QuizProgress.save(d);
+      let attempts = d.units[u.id]?.attempts || 0;
+      const previousStats = d.units[u.id]?.stats || {};
+      const stats = { ...previousStats };
+      const attemptStats = {};
+      questions.forEach((q, i) => {
+        const topic = q.topic || 'Conceptos';
+        const item = attemptStats[topic] || { correct: 0, total: 0 };
+        item.total += 1;
+        if (answers[i] === q.correct) item.correct += 1;
+        attemptStats[topic] = item;
+        if (!practice) {
+          const acc = stats[topic] || { correct: 0, total: 0 };
+          acc.total += 1;
+          if (answers[i] === q.correct) acc.correct += 1;
+          stats[topic] = acc;
+        }
+      });
+
+      const resultData = {
+        unitId: u.id, title: u.title, area: area.name, score, correct,
+        total: questions.length, answers: answers.slice(), practice,
+        questions: questions.map(q => ({
+          text: q.text, options: q.options, correct: q.correct,
+          feedback: q.feedback, topic: q.topic, difficulty: q.difficulty
+        }))
+      };
+
+      if (!practice) {
+        attempts += 1;
+        d.units[u.id] = {
+          best: Math.max(old, score),
+          last: score,
+          attempts,
+          stats,
+          history: [...(d.units[u.id]?.history || []), { score, date: new Date().toISOString() }].slice(-10),
+          lastResult: resultData
+        };
+        d.lastResult = resultData;
+        QuizProgress.save(d);
+      }
 
       const passed = score >= QuizProgress.pass;
-      const newBest = score > old;
+      const newBest = !practice && score > old;
       const C = 439.8, col = passed ? '#2DD4BF' : '#F87171';
-      const performanceRows=Object.entries(attemptStats).map(([topic,v])=>{const pct=Math.round(v.correct/v.total*100);const tone=pct>=80?'text-green-300':pct>=QuizProgress.pass?'text-teal-300':'text-amber-300';return `<div class="rounded-sm border border-white/10 bg-white/[.025] p-3 text-left"><div class="flex items-center justify-between gap-3"><span class="text-xs text-natura-silver">${topic}</span><b class="text-xs ${tone}">${pct}%</b></div><div class="mt-2 h-1 overflow-hidden rounded-full bg-white/10"><div class="h-full rounded-full ${pct>=80?'bg-green-300':pct>=QuizProgress.pass?'bg-teal-300':'bg-amber-300'}" style="width:${pct}%"></div></div><p class="mt-2 text-[10px] text-natura-silverDark">${v.correct} de ${v.total} correctas</p></div>`}).join('');
+      const lesson = u.lesson || (window.QUIZ_LESSONS && QUIZ_LESSONS[u.id]) || '../inicio.html';
+      const wrongTopics = Object.entries(attemptStats)
+        .filter(([, v]) => v.correct < v.total)
+        .sort((a, b) => a[1].correct / a[1].total - b[1].correct / b[1].total)
+        .slice(0, 3)
+        .map(([t]) => t);
+
+      const performanceRows = Object.entries(attemptStats).map(([topic, v]) => {
+        const pct = Math.round(v.correct / v.total * 100);
+        const tone = pct >= 80 ? 'text-green-300' : pct >= QuizProgress.pass ? 'text-teal-300' : 'text-amber-300';
+        return `<div class="rounded-sm border border-white/10 bg-white/[.025] p-3 text-left"><div class="flex items-center justify-between gap-3"><span class="text-xs text-natura-silver">${topic}</span><b class="text-xs ${tone}">${pct}%</b></div><div class="mt-2 h-1 overflow-hidden rounded-full bg-white/10"><div class="h-full rounded-full ${pct >= 80 ? 'bg-green-300' : pct >= QuizProgress.pass ? 'bg-teal-300' : 'bg-amber-300'}" style="width:${pct}%"></div></div><p class="mt-2 text-[10px] text-natura-silverDark">${v.correct} de ${v.total} correctas</p></div>`;
+      }).join('');
 
       app.innerHTML = `
-        <section class="rise rounded-sm border border-white/10 bg-white/[.03] p-7 sm:p-10 text-center">
-          <p class="text-[11px] font-bold uppercase tracking-[.2em]" style="color:${area.color}">${area.name} · ${u.title}</p>
-          <div class="relative mx-auto mt-8 h-44 w-44">
-            <svg viewBox="0 0 160 160" class="h-full w-full -rotate-0">
+        <section class="rise rounded-sm border border-white/10 bg-white/[.03] p-5 sm:p-10 text-center">
+          <p class="text-[11px] font-bold uppercase tracking-[.2em]" style="color:${area.color}">${area.name} · ${u.title}${practice ? ' · Práctica' : ''}</p>
+          <div class="relative mx-auto mt-6 sm:mt-8 h-36 w-36 sm:h-44 sm:w-44">
+            <svg viewBox="0 0 160 160" class="h-full w-full">
               <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/>
               <circle id="ring" cx="80" cy="80" r="70" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" transform="rotate(-90 80 80)" style="transition:stroke-dashoffset 1.3s cubic-bezier(.16,1,.3,1)"/>
             </svg>
-            <div class="ring-num"><div><p class="font-heading text-5xl font-bold text-white" id="num">0</p><p class="text-[10px] font-bold uppercase tracking-[.18em] text-natura-silverDark">puntos</p></div></div>
+            <div class="ring-num"><div><p class="font-heading text-4xl sm:text-5xl font-bold text-white" id="num">0</p><p class="text-[10px] font-bold uppercase tracking-[.18em] text-natura-silverDark">puntos</p></div></div>
           </div>
-          <h1 class="mt-7 font-heading text-3xl sm:text-4xl font-bold ${passed ? 'text-teal-300' : 'text-white'}">${passed ? '¡Unidad aprobada!' : 'Todavía no…'}</h1>
+          <h1 class="mt-6 sm:mt-7 font-heading text-2xl sm:text-4xl font-bold ${passed ? 'text-teal-300' : 'text-white'}">${practice ? (passed ? '¡Buen repaso!' : 'Seguí practicando') : (passed ? '¡Unidad aprobada!' : 'Todavía no…')}</h1>
           <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-natura-silver">
             Respondiste bien <b class="text-white">${correct} de ${questions.length}</b> preguntas.
-            ${passed ? `${newBest ? 'Nuevo mejor puntaje. ¡Gran trabajo!' : 'Aprobaste de nuevo, ¡muy bien!'} ${score >= QuizProgress.prize ? 'Además alcanzaste el nivel premio: presentá este resultado al profesor.' : `Con ${QuizProgress.prize} puntos podés alcanzar el premio docente.`}` : `Necesitás ${QuizProgress.pass} puntos para aprobar. Revisá la devolución y reintentá.`}
+            ${practice
+              ? 'Este modo no modifica tu mejor puntaje guardado.'
+              : passed
+                ? `${newBest ? 'Nuevo mejor puntaje. ¡Gran trabajo!' : 'Aprobaste de nuevo, ¡muy bien!'} ${score >= QuizProgress.prize ? 'Alcanzaste el nivel premio.' : `Con ${QuizProgress.prize} puntos llegás al premio docente.`}`
+                : `Necesitás ${QuizProgress.pass} puntos para aprobar. Revisá la devolución y reintentá.`}
           </p>
-          <div class="mx-auto mt-7 grid max-w-md grid-cols-3 gap-3 text-center">
-            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-2xl font-bold text-white">${Math.round(Math.max(old, score))}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">Mejor puntaje</p></div>
-            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-2xl font-bold text-white">${attempts}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">${attempts === 1 ? 'Intento' : 'Intentos'}</p></div>
-            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-2xl font-bold" style="color:${col}">${passed ? 'Sí' : 'No'}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">Aprobada</p></div>
+          ${wrongTopics.length ? `<div class="mx-auto mt-5 max-w-md rounded-sm border border-amber-300/20 bg-amber-300/[.05] p-4 text-left"><p class="text-[10px] font-bold uppercase tracking-widest text-amber-300">Para repasar</p><p class="mt-2 text-sm text-natura-silver">Repasá sobre todo: <b class="text-white">${wrongTopics.join(', ')}</b>.</p></div>` : ''}
+          <div class="mx-auto mt-6 grid max-w-md grid-cols-3 gap-2 sm:gap-3 text-center">
+            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-xl sm:text-2xl font-bold text-white">${practice ? '—' : Math.round(Math.max(old, score))}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">Mejor</p></div>
+            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-xl sm:text-2xl font-bold text-white">${practice ? '—' : attempts}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">Intentos</p></div>
+            <div class="rounded-sm border border-white/8 bg-white/[.02] p-3"><p class="font-heading text-xl sm:text-2xl font-bold" style="color:${col}">${passed ? 'Sí' : 'No'}</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.14em] text-natura-silverDark">${practice ? 'Meta' : 'Aprobada'}</p></div>
           </div>
-          <div class="mx-auto mt-7 max-w-2xl rounded-sm border border-teal-300/15 bg-teal-300/[.04] p-5 text-left"><div class="flex flex-wrap items-end justify-between gap-3"><div><p class="text-[10px] font-bold uppercase tracking-[.18em] text-teal-300">Tu desempeño en esta unidad</p><h2 class="mt-1 font-heading text-2xl font-bold text-white">Qué dominaste y qué reforzar</h2></div><span class="text-xs text-natura-silverDark">${score>=QuizProgress.prize?'Nivel premio':score>=QuizProgress.pass?'Nivel aprobado':'Nivel de práctica'}</span></div><div class="mt-4 grid gap-3 sm:grid-cols-2">${performanceRows}</div><p class="mt-4 text-[11px] leading-relaxed text-natura-silverDark">Los porcentajes corresponden a este intento. En <b class="text-natura-silver">Ver mi progreso</b> se acumulan tus resultados para observar tu evolución.</p></div>
-          <div class="mt-9 flex flex-wrap justify-center gap-3">
-            ${passed ? `<button onclick="QuizProgress.printUnitDiploma(u,${Math.max(old,score)})" class="btn-primary"><span class="iconify" data-icon="lucide:award" data-width="15"></span> Guardar diploma PDF</button>` : ''}
-            <a href="resultado.html?unidad=${u.id}" class="btn-ghost"><span class="iconify" data-icon="lucide:file-search" data-width="15"></span> Ver análisis detallado</a>
-            <a href="progreso.html" class="btn-primary"><span class="iconify" data-icon="lucide:chart-line" data-width="15"></span> Ver mi progreso</a>
-            <button onclick="location.reload()" class="btn-ghost"><span class="iconify" data-icon="lucide:rotate-ccw" data-width="15"></span> Reintentar</button>
+          <div class="mx-auto mt-6 sm:mt-7 max-w-2xl rounded-sm border border-teal-300/15 bg-teal-300/[.04] p-4 sm:p-5 text-left">
+            <p class="text-[10px] font-bold uppercase tracking-[.18em] text-teal-300">Desempeño por tema</p>
+            <h2 class="mt-1 font-heading text-xl sm:text-2xl font-bold text-white">Qué dominaste y qué reforzar</h2>
+            <div class="mt-4 grid gap-3 sm:grid-cols-2">${performanceRows}</div>
+          </div>
+          <div class="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
+            <a href="${lesson}" class="btn-primary"><span class="iconify" data-icon="lucide:book-open" data-width="15"></span> Repasar el tema</a>
+            ${!practice && passed ? `<button type="button" onclick="QuizProgress.printUnitDiploma(u,${Math.max(old, score)})" class="btn-primary"><span class="iconify" data-icon="lucide:award" data-width="15"></span> Diploma PDF</button>` : ''}
+            ${!practice ? `<a href="resultado.html?unidad=${u.id}" class="btn-ghost"><span class="iconify" data-icon="lucide:file-search" data-width="15"></span> Análisis</a>` : ''}
+            <a href="progreso.html" class="btn-ghost"><span class="iconify" data-icon="lucide:chart-line" data-width="15"></span> Progreso</a>
+            <button type="button" onclick="location.href='quiz.html?unidad=${u.id}&modo=${practice ? 'practica' : 'desafio'}'" class="btn-ghost"><span class="iconify" data-icon="lucide:rotate-ccw" data-width="15"></span> Reintentar</button>
           </div>
         </section>
 
-        <section class="review-section rise mt-10">
+        <section class="rise mt-8 sm:mt-10">
           <p class="text-[11px] font-bold uppercase tracking-[.2em] text-natura-green">Devolución</p>
-          <h2 class="mt-2 font-heading text-2xl font-bold text-white">Revisá tus respuestas</h2>
+          <h2 class="mt-2 font-heading text-xl sm:text-2xl font-bold text-white">Revisá tus respuestas</h2>
           <div class="mt-5 grid gap-3">
             ${questions.map((q, i) => {
               const ok = answers[i] === q.correct;
@@ -267,8 +348,11 @@
         </section>`;
 
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        document.getElementById('ring').style.strokeDashoffset = C * (1 - score / 100);
-        const num = document.getElementById('num'), t0 = performance.now();
+        const ring = document.getElementById('ring');
+        if (ring) ring.style.strokeDashoffset = C * (1 - score / 100);
+        const num = document.getElementById('num');
+        if (!num) return;
+        const t0 = performance.now();
         (function tick(t) {
           const p = Math.min((t - t0) / 1200, 1);
           num.textContent = Math.round(score * (1 - Math.pow(1 - p, 3)));
@@ -278,7 +362,43 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    draw();
+    if (mode === 'practica' || mode === 'desafio') {
+      startQuiz();
+    } else {
+      app.innerHTML = `
+        <div class="rise">
+          <span class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.18em]" style="border-color:${area.color}44;color:${area.color};background:${area.color}11">
+            <span class="iconify" data-icon="${u.icon}" data-width="14"></span> ${area.name}
+          </span>
+          <h1 class="mt-5 font-heading text-3xl sm:text-5xl font-bold text-white leading-tight">${u.title}</h1>
+          <p class="mt-3 text-sm sm:text-base text-natura-silver max-w-lg leading-relaxed">${u.questions.length} preguntas · feedback inmediato · podés reintentar cuando quieras.</p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <button type="button" class="mode-card" id="mode-practica">
+              <span class="iconify text-teal-300" data-icon="lucide:book-open" data-width="22"></span>
+              <h2 class="mt-3 font-heading text-xl font-bold text-white">Práctica</h2>
+              <p class="mt-2 text-xs text-natura-silver leading-relaxed">Repasá sin que cuente para tu mejor puntaje. Ideal antes de un desafío.</p>
+            </button>
+            <button type="button" class="mode-card" id="mode-desafio">
+              <span class="iconify text-amber-300" data-icon="lucide:trophy" data-width="22"></span>
+              <h2 class="mt-3 font-heading text-xl font-bold text-white">Desafío</h2>
+              <p class="mt-2 text-xs text-natura-silver leading-relaxed">Suma intentos y guarda tu mejor resultado. Aprobás con ${QuizProgress.pass}+ puntos.</p>
+            </button>
+          </div>
+          <a href="${u.lesson || '../inicio.html'}" class="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-natura-silverDark hover:text-teal-300 transition-colors">
+            <span class="iconify" data-icon="lucide:book-marked" data-width="14"></span> Primero quiero repasar el tema
+          </a>
+        </div>`;
+      document.getElementById('mode-practica').onclick = () => {
+        history.replaceState(null, '', `quiz.html?unidad=${u.id}&modo=practica`);
+        mode = 'practica';
+        startQuiz();
+      };
+      document.getElementById('mode-desafio').onclick = () => {
+        history.replaceState(null, '', `quiz.html?unidad=${u.id}&modo=desafio`);
+        mode = 'desafio';
+        startQuiz();
+      };
+    }
   </script>
 </body>
 </html>

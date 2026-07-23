@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energía Solar | Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; } .delay-300 { animation-delay: 300ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .accent-line-fisica { width: 60px; height: 2px; background: linear-gradient(90deg, #3B82F6, transparent); }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #3B82F6; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #3B82F6; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(59,130,246,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .figure-placeholder {
+      border: 1px dashed rgba(255,255,255,0.1); padding: 40px 20px;
+      text-align: center; color: #5A6B60; margin: 32px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+    }
+    .magazine-divider { display: flex; align-items: center; gap: 12px; margin: 40px 0; color: #242C28; }
+    .magazine-divider::before, .magazine-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
+    .magazine-divider span { font-size: 10px; font-family: 'Inter', sans-serif; letter-spacing: 0.2em; color: #5A6B60; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .toc-link {
+      display: block; border-left: 1px solid rgba(255,255,255,.08);
+      padding: .42rem .65rem .42rem .85rem;
+      color: #7f9085; font-family: 'Inter', sans-serif;
+      font-size: .69rem; line-height: 1.35;
+      text-decoration: none; transition: color .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease;
+    }
+    .toc-link::before {
+      content: ''; position: absolute; left: -1px; top: 0; bottom: 0;
+      width: 2px; background: #3B82F6; transform: scaleY(0); transform-origin: center; transition: transform .22s ease;
+    }
+    .toc-link:hover, .toc-link.active { color: #f3f7f4; border-left-color: rgba(59,130,246,.35); background: rgba(59,130,246,.06); transform: translateX(2px); }
+    .toc-link:hover::before, .toc-link.active::before { transform: scaleY(1); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
+</head>
+<body class="bg-energia">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Energía</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Solar</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="fuentes-energia.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Fuentes</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-20 pb-10 bg-natura-black overflow-hidden">
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Energía Solar</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-3">Energía <span class="text-natura-energy">Solar</span></h1>
+    <p class="text-lg text-natura-silver max-w-2xl leading-relaxed">La energía del Sol es la más abundante de todas. Argentina cuenta con algunos de los niveles de radiación más altos del planeta, especialmente en el Noroeste y Cuyo.</p>
+  </div>
+  <div class="energy-hero-visual max-w-4xl mx-auto px-4 md:px-6">
+    <img src="../../../assets/fisica/energia/solar-real.png" alt="Parque solar fotovoltaico en un paisaje árido de la cordillera argentina" class="energy-hero-image" width="1128" height="749" fetchpriority="high">
+    <p class="energy-hero-caption">Conversión de la radiación solar en electricidad</p>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#usos" class="toc-link" data-toc>02. Usos</a>
+          <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
+          <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
+          <a href="#matriz-energetica" class="toc-link" data-toc>05. En la matriz</a>
+          <a href="#implicancia" class="toc-link" data-toc>06. Implicancia real</a>
+          <a href="#ventajas-desventajas" class="toc-link" data-toc>07. Ventajas y desventajas</a>
+      </nav>
+    </div>
+  </aside>
+
+<main class="flex-1 min-w-0 space-y-12">
+
+  <section class="animate-fadeInUp" id="que-es">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">1</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Qué es?</h2>
+    </div>
+    <p class="article-dropcap text-lg leading-relaxed text-natura-silverLight mb-5">La energía solar proviene de la radiación electromagnética que emite el Sol. Cada segundo, el Sol libera una cantidad de energía equivalente a millones de bombas atómicas, y una pequeña fracción de esa energía llega a la Tierra en forma de luz y calor. Esa fracción, sin embargo, es inmensa: en una sola hora, la Tierra recibe más energía del Sol de la que toda la humanidad consume en un año entero.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Esta energía se captura mediante dos tecnologías principales. Los <strong class="text-white">paneles fotovoltaicos</strong> aprovechan el efecto fotoeléctrico para convertir la luz solar directamente en electricidad: cuando los fotones golpean un material semiconductor (generalmente silicio), liberan electrones y generan una corriente eléctrica. Los <strong class="text-white">colectores térmicos</strong>, en cambio, absorben el calor del Sol para calentar agua o aire, utilizados en termotanques solares y calefacción.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La energía solar es la fuente renovable con mayor potencial en la Tierra. Su principal desafío es la intermitencia: solo está disponible durante el día y su intensidad varía según las nubes y la estación del año. Por eso suele combinarse con baterías u otras fuentes para garantizar el suministro continuo.</p>
+    <div class="pull-quote">"En una hora, la Tierra recibe más energía del Sol de la que la humanidad consume en un año entero."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="usos">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Usos</h2>
+    </div>
+    <aside class="sidebar-note"><span class="note-label">Generación Distribuida</span>En Argentina, la Ley 27.424 de Generación Distribuida permite que hogares y comercios instalen paneles solares e inyecten los excedentes de electricidad a la red eléctrica, recibiendo una compensación económica. Cada vez más provincias adhieren a esta ley.</aside>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La energía solar tiene una enorme variedad de aplicaciones, desde pequeños dispositivos hasta grandes centrales eléctricas. Los usos más comunes incluyen:</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Generación eléctrica:</strong> Paneles solares instalados en hogares, comercios, industrias y grandes parques solares. Los sistemas pueden ser aislados (con baterías) o conectados a la red.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Calentamiento de agua:</strong> Termotanques y calefones solares que usan colectores térmicos para calentar agua sin consumir gas ni electricidad. Son muy eficientes en zonas con buena radiación.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Bombeo de agua:</strong> Sistemas solares para riego agrícola y abastecimiento de agua en zonas rurales sin acceso a la red eléctrica.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Iluminación pública:</strong> Farolas solares con paneles integrados y baterías, cada vez más comunes en calles, plazas y rutas argentinas.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Pequeños dispositivos:</strong> Calculadoras, relojes, cargadores portátiles y satélites utilizan celdas solares para funcionar.</span></li>
+    </ul>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="rendimiento">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">3</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Rendimiento</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La eficiencia de los paneles solares comerciales típicos oscila entre <strong class="text-white">15% y 22%</strong>. En laboratorio, los paneles más avanzados alcanzan hasta <strong class="text-white">47%</strong> de eficiencia utilizando células multiunión (varias capas de materiales que capturan diferentes longitudes de onda de la luz solar).</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El rendimiento real de un panel depende de varios factores: la intensidad de la radiación solar en el lugar, la orientación e inclinación del panel, la temperatura (los paneles pierden eficiencia cuando se calientan demasiado), la presencia de sombras y el mantenimiento (polvo y suciedad reducen la captación).</p>
+    <div class="sidebar-note"><span class="note-label">Comparación</span>Paneles solares: 15-22% eficiencia. Eólica: 40-50%. Hidroeléctrica: 70-90%. Térmica (gas): 35-45%. Solar térmica: hasta 70%. Aunque la eficiencia de los paneles es baja, el combustible (el Sol) es gratuito e inagotable.</div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">En Argentina, la radiación solar promedio es de <strong class="text-white">5 a 7 kWh/m²/día</strong> en la región del Noroeste (NOA), uno de los valores más altos del mundo. Esto significa que un panel de 300 W en Salta genera hasta un 40% más de electricidad que el mismo panel instalado en Alemania, donde la energía solar es una industria consolidada. El factor de capacidad de las plantas fotovoltaicas en Argentina suele estar entre <strong class="text-white">18% y 25%</strong>, dependiendo de la ubicación.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="lugar-geografico">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">4</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Lugar en Argentina</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina tiene un recurso solar excepcional. El mapa de radiación solar muestra que las regiones con mayor potencial son:</p>
+    <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">NOA (Noroeste Argentino):</strong> Salta, Jujuy, Catamarca, La Rioja y Tucumán reciben más de 6.5 kWh/m²/día, equivalentes a las mejores zonas del desierto del Sahara.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Cuyo:</strong> San Juan y Mendoza tienen radiaciones muy altas, superando los 6 kWh/m²/día en amplias zonas.</span></li>
+      <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Centro y Patagonia:</strong> La radiación disminuye hacia el sur, pero sigue siendo mayor que en la mayor parte de Europa.</span></li>
+    </ul>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Entre los proyectos más importantes del país se destaca <strong class="text-white">Cauchari</strong>, en la provincia de Jujuy: un parque solar de 300 MW de potencia (ampliable a 400 MW) que comenzó a operar en 2019. Es uno de los parques solares más grandes de Sudamérica, con 1.200.000 paneles solares instalados a 4.200 metros sobre el nivel del mar. También son relevantes los parques de <strong class="text-white">Ullum</strong> (San Juan, más de 100 MW), <strong class="text-white">Nonogasta</strong> (La Rioja) y los proyectos en la Puna salteña.</p>
+    <figure class="energy-figure"><img src="../../../assets/fisica/energia/solar-explicativa.png" alt="Paneles solares instalados en el techo de una vivienda frente a la cordillera" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">Imagen ilustrativa: la generación distribuida permite que una vivienda produzca electricidad con el recurso solar local.</figcaption></figure>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="matriz-energetica">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">5</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">En la matriz energética</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La energía solar representa actualmente entre el <strong class="text-white">2% y 3%</strong> de la generación eléctrica total de Argentina. Aunque su participación es todavía pequeña, está creciendo a un ritmo acelerado. En 2018, antes de las Rondas RenovAR, la solar era prácticamente inexistente en la matriz nacional.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Dos factores están impulsando su expansión. El primero es la <strong class="text-white">Ley 27.424 de Generación Distribuida</strong> (2018), que permite que hogares, comercios e industrias instalen paneles solares e inyecten la electricidad sobrante a la red, recibiendo una compensación en la factura. El segundo es la reducción drástica del costo de los paneles: en la última década, el precio por watt instalado bajó más del 80%, haciendo que la energía solar sea competitiva sin subsidios en la mayoría del país.</p>
+    <div class="pull-quote">"El costo de los paneles solares bajó más del 80% en la última década, haciendo que la energía solar sea competitiva sin subsidios."</div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La meta oficial es alcanzar un <strong class="text-white">20% de energías renovables</strong> en la matriz eléctrica para 2025, y la solar es una de las tecnologías llamadas a contribuir significativamente, especialmente con los nuevos proyectos en el NOA y Cuyo.</p>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="implicancia">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">6</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Implicancia real</h2>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">Argentina tiene uno de los recursos solares más privilegiados del mundo, pero aprovecharlo plenamente requiere superar desafíos importantes. La principal dificultad es que las zonas de mayor radiación (NOA, Puna) tienen baja densidad de población y están lejos de los centros de consumo del Litoral y el AMBA. Esto exige invertir en líneas de alta tensión para transportar la electricidad solar a miles de kilómetros.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4"><strong class="text-white">Cauchari</strong> (Jujuy) es un hito de la energía solar argentina y latinoamericana. Sus 1.200.000 paneles generan suficiente electricidad para abastecer a más de 100.000 hogares. El proyecto se construyó en la Puna jujeña, a más de 4.000 metros de altura, donde el aire es más limpio y la radiación solar es intensa. Además, el parque se conecta al Sistema Argentino de Interconexión (SADI) mediante una línea de 345 kV.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La caída del costo de los paneles ha abierto la puerta a la <strong class="text-white">generación distribuida</strong>: cada vez más hogares argentinos instalan paneles en sus techos y reducen su factura eléctrica. Provincias como San Juan, Mendoza, Salta y Córdoba lideran en instalaciones. También está surgiendo una incipiente industria local de fabricación de paneles solares, que podría crear empleo calificado y reducir la dependencia de importaciones.</p>
+    <figure class="energy-figure"><img src="../../../assets/fisica/energia/solar-cauchari.png" alt="Parque solar fotovoltaico en la Puna jujeña" class="energy-figure-image" width="1672" height="941" loading="lazy"><figcaption class="energy-figure-caption">Referencia didáctica: Cauchari reúne 1.200.000 paneles solares a 4.200 m de altura en Jujuy. La fotografía es ilustrativa.</figcaption></figure>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-200" id="ventajas-desventajas">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">7</span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Ventajas y desventajas</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="border border-white/5 bg-natura-dark p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-greenLight mb-3 flex items-center gap-2"><span class="iconify" data-icon="lucide:check-circle" data-width="18"></span>Ventajas</h3>
+        <ul class="space-y-2" style="font-size:0.95rem;line-height:1.5;">
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Inagotable a escala humana — el Sol seguirá brillando por miles de millones de años.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Gratuita — una vez instalados los paneles, el "combustible" no cuesta nada.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Bajo mantenimiento — los paneles no tienen partes móviles y duran 25-30 años.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Modular y escalable — desde una calculadora hasta un parque solar de cientos de MW.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Silenciosa y sin emisiones durante su operación.</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Ideal para zonas aisladas sin acceso a la red eléctrica.</span></li>
+        </ul>
+      </div>
+      <div class="border border-white/5 bg-natura-dark p-5 rounded-sm">
+        <h3 class="font-heading text-lg font-bold text-natura-bio mb-3 flex items-center gap-2"><span class="iconify" data-icon="lucide:alert-circle" data-width="18"></span>Desventajas</h3>
+        <ul class="space-y-2" style="font-size:0.95rem;line-height:1.5;">
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Intermitente — solo genera durante el día y su producción varía con las nubes.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Requiere almacenamiento (baterías) o respaldo de otra fuente para la noche.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Ocupa grandes extensiones de terreno para plantas de gran escala.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Los paneles contienen materiales tóxicos en su fabricación (silicio, cadmio, plomo).</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>El reciclaje de paneles al final de su vida útil aún es incipiente y costoso.</span></li>
+          <li class="flex gap-2"><span class="text-natura-bio mt-0.5">&#10007;</span><span>Alta inversión inicial, aunque se recupera con el ahorro en la factura eléctrica.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex items-center justify-between pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="fuentes-energia.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-silverDark hover:text-white transition-colors"><span class="iconify" data-icon="lucide:arrow-left" data-width="13"></span> Fuentes de Energía</a>
+    <a href="eolica.html" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">Eólica <span class="iconify" data-icon="lucide:arrow-right" data-width="13"></span></a>
+  </div>
+
+</main></div></div>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:sun" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){var els = document.querySelectorAll('section[id]');function c(){var h=window.innerHeight;els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<h-80)e.classList.add('visible');});}c();window.addEventListener('scroll',c,{passive:true});})();
+</script>
+<script>
+(function(){var topics = [
+  {n:"Que es la materia?",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+  {n:"Propiedades de la materia",u:"Quimica",s:"Materia",l:"../../quimica/materia-propiedades/propiedades.html",c:"#22C55E"},
+  {n:"Tipos de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+  {n:"Separacion de mezclas",u:"Quimica",s:"Mezclas",l:"../../quimica/mezclas/separacion.html",c:"#22C55E"},
+  {n:"Propiedades del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/propiedades-agua.html",c:"#22C55E"},
+  {n:"Ciclo del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/ciclo-agua.html",c:"#22C55E"},
+  {n:"Usos del agua",u:"Quimica",s:"Agua",l:"../../quimica/agua/usos-contaminacion.html",c:"#22C55E"},
+  {n:"Potabilizacion",u:"Quimica",s:"Agua",l:"../../quimica/agua/potabilizacion.html",c:"#22C55E"},
+  {n:"Formas de energia",u:"Fisica",s:"Energia",l:"formas-energia.html",c:"#3B82F6"},
+  {n:"Transformaciones de energia",u:"Fisica",s:"Energia",l:"transformaciones.html",c:"#3B82F6"},
+  {n:"Fuentes de energia",u:"Fisica",s:"Energia",l:"fuentes-energia.html",c:"#3B82F6"},
+  {n:"Energia solar",u:"Fisica",s:"Energia",l:"solar.html",c:"#3B82F6"},
+  {n:"Energia eolica",u:"Fisica",s:"Energia",l:"eolica.html",c:"#3B82F6"},
+  {n:"Energia hidroelectrica",u:"Fisica",s:"Energia",l:"hidroelectrica.html",c:"#3B82F6"},
+  {n:"Energia mareomotriz",u:"Fisica",s:"Energia",l:"mareomotriz.html",c:"#3B82F6"},
+  {n:"Energia geotermica",u:"Fisica",s:"Energia",l:"geotermica.html",c:"#3B82F6"},
+  {n:"Energia de biomasa",u:"Fisica",s:"Energia",l:"biomasa.html",c:"#3B82F6"},
+  {n:"Petroleo",u:"Fisica",s:"Energia",l:"petroleo.html",c:"#3B82F6"},
+  {n:"Carbon",u:"Fisica",s:"Energia",l:"carbon.html",c:"#3B82F6"},
+  {n:"Gas natural",u:"Fisica",s:"Energia",l:"gas-natural.html",c:"#3B82F6"},
+  {n:"Energia nuclear",u:"Fisica",s:"Energia",l:"nuclear.html",c:"#3B82F6"},
+  {n:"Calor y temperatura",u:"Fisica",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+  {n:"Ondas",u:"Fisica",s:"Ondas",l:"../calor-sonido/ondas.html",c:"#3B82F6"},
+  {n:"El Sonido",u:"Fisica",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+  {n:"Materiales",u:"Fisica",s:"Calor",l:"../calor-sonido/materiales.html",c:"#3B82F6"},
+  {n:"MRU - Movimiento uniforme",u:"Fisica",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+  {n:"MRUV - Movimiento acelerado",u:"Fisica",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+  {n:"Graficos de movimiento",u:"Fisica",s:"Movimientos",l:"../movimientos/graficos.html",c:"#3B82F6"},
+  {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+  {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/tierra-luna.html",c:"#3B82F6"},
+  {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/exploracion.html",c:"#3B82F6"},
+  {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"../sistema-solar/mapi.html",c:"#3B82F6"},
+  {n:"Caracteristicas de los seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+  {n:"Clasificacion de seres vivos",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/clasificacion.html",c:"#DC2626"},
+  {n:"Ecosistemas",u:"Biologia",s:"Seres Vivos",l:"../../biologia/seres-vivos/ecosistemas.html",c:"#DC2626"},
+  {n:"Tipos de celulas",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+  {n:"Organelas celulares",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/organelas.html",c:"#DC2626"},
+  {n:"Niveles de organizacion",u:"Biologia",s:"Celulas",l:"../../biologia/celulas/niveles-organizacion.html",c:"#DC2626"},
+  {n:"Poblaciones",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/poblaciones.html",c:"#DC2626"},
+  {n:"Factores poblacionales",u:"Biologia",s:"Ecologia",l:"../../biologia/ecologia/factores-poblacionales.html",c:"#DC2626"},
+  {n:"Fotosintesis",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+  {n:"Estructuras de las plantas",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/estructuras.html",c:"#DC2626"},
+  {n:"Germinacion",u:"Biologia",s:"Plantas",l:"../../biologia/plantas/germinacion.html",c:"#DC2626"},
+  {n:"Alimentacion animal",u:"Biologia",s:"Animales",l:"../../biologia/animales/alimentacion.html",c:"#DC2626"},
+  {n:"Vertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/vertebrados.html",c:"#DC2626"},
+  {n:"Invertebrados",u:"Biologia",s:"Animales",l:"../../biologia/animales/invertebrados.html",c:"#DC2626"},
+  {n:"Fauna local",u:"Biologia",s:"Animales",l:"../../biologia/animales/fauna-local.html",c:"#DC2626"},
+  {n:"Circulacion sanguinea",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
+  {n:"Digestion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+  {n:"Sistema endocrino",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
+  {n:"Esqueleto",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
+  {n:"Respiracion",u:"Biologia",s:"Cuerpo Humano",l:"../../biologia/cuerpo-humano/respiracion.html",c:"#DC2626"},
+  {n:"La rana que volo",u:"Revista",s:"Revista",l:"../../../revista/rana-levitacion.html",c:"#C9A96E"},
+  {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"},
+  {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+  {n:"EAI",u:"EAI",s:"EAI",l:"../../../eai.html",c:"#22C55E"}
+];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>
