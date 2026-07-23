@@ -69,7 +69,7 @@ const RAW = {
   },
   energia: {
     area: 'fisica', title: 'Energía', icon: 'lucide:zap',
-    topics: ['Formas de energía', 'Transformaciones', 'Conservación'],
+    topics: ['Formas de energía', 'Transformaciones', 'Conservación', 'Fuentes renovables', 'Fuentes no renovables', 'Energía en Argentina'],
     questions: [
       ['La energía asociada al movimiento es...', ['Térmica', 'Cinética', 'Química', 'Nuclear'], 1, 'Un objeto que se mueve posee energía cinética.', 0],
       ['En una linterna, la energía química de la pila se transforma principalmente en...', ['Luz', 'Masa', 'Sonido solamente', 'Materia'], 0, 'La pila permite producir energía eléctrica que se convierte en luz.', 0],
@@ -80,7 +80,17 @@ const RAW = {
       ['Un resorte comprimido almacena principalmente energía...', ['Elástica', 'Sonora', 'Nuclear', 'Luminosa'], 0, 'Al deformarse elásticamente, el resorte guarda energía potencial elástica.', 1],
       ['En una rampa, al bajar un carrito la energía potencial se transforma en...', ['Cinética (y algo de calor por fricción)', 'Solo masa', 'Solo color', 'Nada: desaparece'], 0, 'Al bajar gana velocidad; parte se disipa por fricción como calor.', 1],
       ['El kWh que aparece en la boleta de luz mide...', ['Masa de electrones', 'Energía eléctrica consumida', 'Temperatura de la casa', 'Velocidad de la corriente'], 1, 'Es una unidad de energía usada en el consumo doméstico.', 2],
-      ['Una fuente renovable de energía es...', ['El sol (energía solar)', 'El carbón siempre', 'El petróleo únicamente', 'El gas natural solo'], 0, 'La energía solar se renueva a escala humana; los combustibles fósiles no.', 1]
+      ['Una fuente renovable de energía es...', ['El sol (energía solar)', 'El carbón siempre', 'El petróleo únicamente', 'El gas natural solo'], 0, 'La energía solar se renueva a escala humana; los combustibles fósiles no.', 1],
+      ['Los paneles fotovoltaicos convierten principalmente...', ['Luz solar en energía eléctrica', 'Viento en energía química', 'Calor terrestre en petróleo', 'Mareas en carbón'], 0, 'El efecto fotovoltaico permite transformar la radiación solar en corriente eléctrica.', 0],
+      ['En un aerogenerador, la energía cinética del viento se transforma primero en...', ['Movimiento de las aspas y del eje', 'Energía nuclear', 'Combustible líquido', 'Agua potable'], 0, 'El viento hace girar las palas y ese movimiento acciona el generador.', 1],
+      ['Una central hidroeléctrica aprovecha principalmente...', ['La energía potencial y cinética del agua', 'La combustión del carbón', 'La radiación de la Luna', 'La energía química del uranio'], 0, 'El agua ubicada a cierta altura adquiere energía potencial y al caer mueve turbinas.', 0],
+      ['La energía mareomotriz se caracteriza porque utiliza...', ['El movimiento periódico de las mareas', 'La descomposición de residuos', 'La combustión de gas natural', 'La luz de las estrellas'], 0, 'Las mareas producen corrientes y diferencias de altura que pueden mover turbinas.', 1],
+      ['La energía geotérmica aprovecha...', ['El calor interno de la Tierra', 'La energía química del carbón', 'La luz reflejada por la Luna', 'El movimiento de los automóviles'], 0, 'El calor del subsuelo puede utilizarse para calefacción o para generar electricidad.', 0],
+      ['La biomasa puede producir energía a partir de...', ['Residuos orgánicos y agrícolas', 'Rocas sin materia orgánica', 'Agua destilada solamente', 'Luz sin ningún material'], 0, 'El bagazo, los residuos forestales y otros materiales orgánicos pueden transformarse en energía.', 0],
+      ['¿Cuál de estas fuentes es un combustible fósil líquido?', ['Petróleo', 'Energía solar', 'Energía eólica', 'Energía mareomotriz'], 0, 'El petróleo se formó a partir de materia orgánica durante millones de años.', 1],
+      ['Durante su combustión, el carbón suele generar...', ['Emisiones de dióxido de carbono y otros contaminantes', 'Solo vapor de agua', 'Radiación solar', 'Oxígeno en grandes cantidades'], 0, 'El carbón es un combustible fósil con elevadas emisiones y contaminantes atmosféricos.', 1],
+      ['El gas natural está compuesto principalmente por...', ['Metano', 'Oxígeno', 'Hierro', 'Cloruro de sodio'], 0, 'El metano es el componente principal del gas natural.', 0],
+      ['En una central nuclear, la fisión del uranio produce principalmente...', ['Calor que luego se usa para generar electricidad', 'Viento que mueve aspas', 'Biomasa para combustión', 'Mareas artificiales'], 0, 'La fisión libera calor; ese calor produce vapor que mueve turbinas.', 1]
     ]
   },
   'calor-sonido': {
