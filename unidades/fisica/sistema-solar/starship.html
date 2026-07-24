@@ -7,6 +7,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="../../../assets/three/starship-scene.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -97,6 +101,23 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+.rocket3d-wrap { position: relative; height: 520vh; }
+.rocket3d-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #080C0A; }
+.rocket3d-canvas-host { position: absolute; inset: 0; }
+.rocket3d-canvas-host canvas { display: block; width: 100%; height: 100%; }
+.rocket3d-fallback { display: none; position: absolute; inset: 0; }
+.rocket3d-text-col { position: relative; z-index: 2; height: 100%; display: flex; align-items: center; }
+.rocket3d-text-inner { position: relative; width: min(380px, 90vw); min-height: 260px; }
+.rocket3d-step { position: absolute; top: 50%; left: 0; width: 100%; opacity: 0; transform: translateY(calc(-50% + 18px)); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+.rocket3d-step.active { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
+.rocket3d-mobile-fade { position: absolute; inset: 0; pointer-events: none; display: none; }
+@media (min-width: 768px) {
+  .rocket3d-canvas-host { left: 38%; right: 0; }
+}
+@media (max-width: 767px) {
+  .rocket3d-wrap { height: 380vh; }
+  .rocket3d-mobile-fade { display: block; background: linear-gradient(180deg, rgba(8,12,10,0.1) 0%, rgba(8,12,10,0.6) 55%, rgba(8,12,10,0.94) 100%); }
+}
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
 </head>
@@ -178,6 +199,95 @@
   </div>
 </section>
 
+<!-- MODELO 3D INTERACTIVO -->
+<section class="relative bg-natura-black" id="modelo-3d">
+  <div id="starship-wrap" class="rocket3d-wrap">
+    <div class="rocket3d-sticky">
+      <div data-starship-canvas-host class="rocket3d-canvas-host">
+        <canvas id="starship-canvas"></canvas>
+      </div>
+      <div class="rocket3d-mobile-fade"></div>
+
+      <div data-starship-fallback class="rocket3d-fallback">
+        <img src="../../../assets/fisica/sistema-solar/starship-hero.png" alt="Cohete Starship y Super Heavy" class="w-full h-full object-cover opacity-40">
+      </div>
+
+      <div class="rocket3d-text-col max-w-7xl mx-auto px-4 md:px-6 w-full">
+        <div class="rocket3d-text-inner">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="accent-line"></div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-natura-water">Modelo 3D interactivo</span>
+          </div>
+
+          <div class="rocket3d-step active" data-step-index="0">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">01 / 06 · Bahía de carga</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Nariz de la <span class="text-natura-water">nave</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">A diferencia del Falcon 9, el Starship no tiene cofia desechable: la punta es parte de la nave y vuelve entera. Adentro hay una bahía de <strong class="text-white">1.000 m³</strong> para satélites, carga o hasta 100 pasajeros. Una compuerta lateral se abre en órbita y se vuelve a cerrar.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">02 / 06 · Control aerodinámico</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Cuatro <span class="text-natura-water">aletas</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Dos aletas delanteras y dos traseras, más grandes. Al volver de órbita la nave cae <strong class="text-white">de panza</strong>, como un paracaidista, y mueve las aletas para frenar y mantener el equilibrio. Recién a último momento gira y se pone vertical para aterrizar.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">03 / 06 · Tanques CH₄ / LOX + escudo</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Cuerpo de la <span class="text-natura-water">nave</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Un cilindro de <strong class="text-white">9 metros de diámetro</strong> hecho de acero inoxidable. Adentro lleva metano líquido y oxígeno líquido separados por una mampara. Toda la cara que mira hacia abajo en la reentrada está cubierta por unas <strong class="text-natura-water">18.000 baldosas cerámicas</strong> negras.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="3">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">04 / 06 · 3 Raptor + 3 Raptor Vacuum</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Motores de la <span class="text-natura-water">nave</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Seis motores en la base: tres <strong class="text-white">Raptor normales</strong>, que pueden inclinarse para dirigir la nave y encenderse al aterrizar, y tres <strong class="text-natura-water">Raptor Vacuum</strong> con campanas mucho más anchas, fijas, que sólo rinden bien en el vacío del espacio.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">05 / 06 · Primera etapa</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Super <span class="text-natura-water">Heavy</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">El propulsor de <strong class="text-white">71 metros</strong> que sostiene todo. Arriba tiene el <strong class="text-natura-water">anillo de hot-staging</strong>, que deja escapar los gases cuando la nave enciende sus motores todavía acoplada. Cuatro aletas de rejilla lo guían en el descenso y dos pivotes laterales quedan apoyados sobre los brazos de la torre.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="5">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">06 / 06 · 33 motores Raptor</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">La base del <span class="text-natura-water">propulsor</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Treinta y tres motores repartidos en tres anillos: <strong class="text-white">3 en el centro</strong> que se inclinan para dirigir el cohete, 10 en el anillo del medio y 20 en el exterior. Juntos entregan <strong class="text-natura-water">74.000 kN</strong> de empuje, el doble que el Saturno V.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-[10px] uppercase tracking-[0.25em] text-natura-silverDark py-4">Desplazate para recorrer el cohete ↓</p>
+</section>
+
+<!-- VIDEO QUINTO VUELO -->
+<section class="relative py-14 md:py-20 bg-natura-black" id="video-vuelo">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="accent-line"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-water">Vuelo de prueba real</span>
+    </div>
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">El quinto vuelo de prueba (IFT-5)</h2>
+    <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6 max-w-3xl">
+      Mirá el despegue del Super Heavy y, minutos después, la histórica captura del propulsor con los brazos "Mechazilla" de la torre de lanzamiento — la primera vez que se logró.
+    </p>
+    <div class="rounded-2xl overflow-hidden content-card bg-natura-gray">
+      <video id="starship-video" controls playsinline preload="metadata" poster="../../../assets/fisica/sistema-solar/starship-hero.png" class="w-full h-auto block">
+        <source src="../../../assets/video/starship-fifth-flight-test.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var v = document.getElementById('starship-video');
+  if (!v) return;
+  v.addEventListener('ended', function(){ v.currentTime = 0; });
+})();
+</script>
+
 <!-- MAIN CONTENT -->
 <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
   <div class="lg:flex gap-10">
@@ -186,6 +296,8 @@
       <div class="sticky top-24">
         <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
         <nav class="space-y-0.5">
+          <a href="#modelo-3d" class="toc-link" data-toc>Vista 3D interactiva</a>
+          <a href="#video-vuelo" class="toc-link" data-toc>Video: quinto vuelo (IFT-5)</a>
           <a href="#arquitectura" class="toc-link active" data-toc>01. Arquitectura apilada</a>
           <a href="#super-heavy" class="toc-link" data-toc>02. Super Heavy</a>
           <a href="#starship" class="toc-link" data-toc>03. Starship (nave)</a>
@@ -365,7 +477,7 @@
               <span class="iconify text-natura-water text-2xl" data-icon="lucide:shield" data-width="24"></span>
               <h3 class="font-heading font-semibold text-white text-lg">Escudo térmico</h3>
             </div>
-            <p class="text-natura-silver text-base-l Relaxed">Cubierto con <strong class="text-natura-water">~1.200 baldosas cerámicas</strong> que resisten el calor brutal de la reentrada (~1.600 °C). Es lo que protege a la nave de quemarse al volver.</p>
+            <p class="text-natura-silver text-base leading-relaxed">Cubierto con <strong class="text-natura-water">~1.200 baldosas cerámicas</strong> que resisten el calor brutal de la reentrada (~1.600 °C). Es lo que protege a la nave de quemarse al volver.</p>
           </div>
 
           <div class="content-card bg-natura-gray rounded-2xl p-6">
@@ -466,7 +578,7 @@
           <div class="bg-natura-gray rounded-2xl p-6 content-card">
             <div class="flex items-center gap-3 mb-3">
               <span class="iconify text-natura-water text-2xl" data-icon="lucide:globe" data-width="24"></span>
-              <h3 class="font-heading font-semibold text-white">Starlink第二代 (V3)</h3>
+              <h3 class="font-heading font-semibold text-white">Starlink Segunda Generación (V3)</h3>
             </div>
             <p class="text-natura-silver text-base leading-relaxed mb-3">
               Una nueva generación de satélites Starlink se lanzará con Starship. Cada vuelo podrá llevar <strong class="text-white">más de 60 satélites</strong> mucho más grandes, con más capacidad.
@@ -622,7 +734,7 @@
 </script>
 <script>
 (function(){
-  var els = document.querySelectorAll('section');
+  var els = document.querySelectorAll('section:not(#modelo-3d)');
   if (!els.length) return;
   var obs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){

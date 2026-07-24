@@ -7,6 +7,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module" src="../../../assets/three/falcon9-scene.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -97,6 +101,23 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+.rocket3d-wrap { position: relative; height: 520vh; }
+.rocket3d-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #080C0A; }
+.rocket3d-canvas-host { position: absolute; inset: 0; }
+.rocket3d-canvas-host canvas { display: block; width: 100%; height: 100%; }
+.rocket3d-fallback { display: none; position: absolute; inset: 0; }
+.rocket3d-text-col { position: relative; z-index: 2; height: 100%; display: flex; align-items: center; }
+.rocket3d-text-inner { position: relative; width: min(380px, 90vw); min-height: 260px; }
+.rocket3d-step { position: absolute; top: 50%; left: 0; width: 100%; opacity: 0; transform: translateY(calc(-50% + 18px)); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+.rocket3d-step.active { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
+.rocket3d-mobile-fade { position: absolute; inset: 0; pointer-events: none; display: none; }
+@media (min-width: 768px) {
+  .rocket3d-canvas-host { left: 38%; right: 0; }
+}
+@media (max-width: 767px) {
+  .rocket3d-wrap { height: 380vh; }
+  .rocket3d-mobile-fade { display: block; background: linear-gradient(180deg, rgba(8,12,10,0.1) 0%, rgba(8,12,10,0.6) 55%, rgba(8,12,10,0.94) 100%); }
+}
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
 </head>
@@ -178,6 +199,95 @@
   </div>
 </section>
 
+<!-- MODELO 3D INTERACTIVO -->
+<section class="relative bg-natura-black" id="modelo-3d">
+  <div id="falcon9-wrap" class="rocket3d-wrap">
+    <div class="rocket3d-sticky">
+      <div data-falcon9-canvas-host class="rocket3d-canvas-host">
+        <canvas id="falcon9-canvas"></canvas>
+      </div>
+      <div class="rocket3d-mobile-fade"></div>
+
+      <div data-falcon9-fallback class="rocket3d-fallback">
+        <img src="../../../assets/fisica/sistema-solar/falcon-9-hero.png" alt="Cohete Falcon 9" class="w-full h-full object-cover opacity-40">
+      </div>
+
+      <div class="rocket3d-text-col max-w-7xl mx-auto px-4 md:px-6 w-full">
+        <div class="rocket3d-text-inner">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="accent-line"></div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-natura-energy">Modelo 3D interactivo</span>
+          </div>
+
+          <div class="rocket3d-step active" data-step-index="0">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">01 / 06 · Carga útil</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Cofia <span class="text-natura-energy">(Fairing)</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">En la punta del cohete, una cápsula de dos piezas protege al satélite o la nave durante el ascenso por la atmósfera. Se desprende apenas el Falcon 9 sale del aire denso.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">02 / 06 · Motor Merlin Vacuum</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Segunda <span class="text-natura-energy">etapa</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Impulsada por un único motor Merlin 1D optimizado para el vacío. Enciende después de la separación y lleva la carga útil hasta la órbita final.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">03 / 06 · Conexión entre etapas</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Inter<span class="text-natura-energy">etapa</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Una estructura rígida une la primera y la segunda etapa. Aloja los mecanismos que las separan con pequeños explosivos a los 2 minutos y 30 segundos de vuelo.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="3">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">04 / 06 · Tanques RP-1 / LOX + 9 Merlin</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Primera <span class="text-natura-energy">etapa</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">La parte más grande del cohete. Sus tanques almacenan queroseno (RP-1) y oxígeno líquido (LOX) que alimentan los nueve motores Merlin 1D durante el despegue.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">05 / 06 · Grid fins</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Aletas de <span class="text-natura-energy">rejilla</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Cuatro aletas metálicas se despliegan durante la reentrada y maniobran la primera etapa como un planeador hipersónico, guiándola hacia el punto de aterrizaje.</p>
+          </div>
+
+          <div class="rocket3d-step" data-step-index="5">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">06 / 06 · Aterrizaje vertical</span>
+            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mt-2 mb-3">Patas de <span class="text-natura-energy">aterrizaje</span></h3>
+            <p class="text-sm md:text-base text-natura-silver leading-relaxed">Cerca del final del descenso, cuatro patas se despliegan desde el cuerpo del cohete. Absorben el impacto y permiten que la etapa se pose de pie, lista para volar de nuevo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="text-center text-[10px] uppercase tracking-[0.25em] text-natura-silverDark py-4">Desplazate para recorrer el cohete ↓</p>
+</section>
+
+<!-- VIDEO DESPEGUE -->
+<section class="relative py-14 md:py-20 bg-natura-black" id="video-despegue">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="accent-line"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Despegue real</span>
+    </div>
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Así despega un Falcon 9</h2>
+    <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6 max-w-3xl">
+      Después de ver sus partes en el modelo 3D, mirá el cohete real elevándose con sus nueve motores Merlin encendidos.
+    </p>
+    <div class="rounded-2xl overflow-hidden content-card bg-natura-gray">
+      <video id="falcon9-video" controls playsinline preload="metadata" poster="../../../assets/fisica/sistema-solar/falcon-9-hero.png" class="w-full h-auto block">
+        <source src="../../../assets/video/falcon-9-overview.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var v = document.getElementById('falcon9-video');
+  if (!v) return;
+  v.addEventListener('ended', function(){ v.currentTime = 0; });
+})();
+</script>
+
 <!-- MAIN CONTENT -->
 <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
   <div class="lg:flex gap-10">
@@ -186,6 +296,8 @@
       <div class="sticky top-24">
         <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
         <nav class="space-y-0.5">
+          <a href="#modelo-3d" class="toc-link" data-toc>Vista 3D interactiva</a>
+          <a href="#video-despegue" class="toc-link" data-toc>Video: despegue real</a>
           <a href="#caracteristicas" class="toc-link active" data-toc>01. Características</a>
           <a href="#reutilizable" class="toc-link" data-toc>02. Reutilización: la revolución</a>
           <a href="#aterrizaje" class="toc-link" data-toc>03. Cómo aterriza</a>
@@ -589,7 +701,7 @@
 </script>
 <script>
 (function(){
-  var els = document.querySelectorAll('section');
+  var els = document.querySelectorAll('section:not(#modelo-3d)');
   if (!els.length) return;
   var obs = new IntersectionObserver(function(entries){
     entries.forEach(function(e){

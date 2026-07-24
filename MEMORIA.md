@@ -191,13 +191,105 @@ Artículos nuevos:
 - Índice y card de `inicio.html` actualizados (5 artículos).
 - Próximamente listado: entrelazamiento, IA, antimateria/materia oscura, pandemias.
 
-## Próximos pasos sugeridos
+## Implementado 2026-07-24 (Falcon 9: modelo 3D, video y lanzamientos en vivo)
 
+### Modelo 3D interactivo del Falcon 9
+- Nueva sección scrollytelling en `unidades/fisica/sistema-solar/falcon-9.html` (estilo spacex.com/vehicles/falcon-9), entre el hero y "01. Características".
+- Cohete wireframe **procedural** (sin archivo GLTF externo) en `assets/three/falcon9-scene.js`, con Three.js cargado por CDN vía `importmap` (sin build tools).
+- 6 pasos sincronizados con el scroll: cofia, segunda etapa, interetapa, primera etapa, aletas de rejilla, patas de aterrizaje. Texto y resaltado de color cambian según el paso.
+- Fallback a imagen estática (`falcon-9-hero.png`) si el navegador no soporta WebGL.
+
+### Video de despegue real
+- Nueva sección "Despegue real" en `falcon-9.html`, justo después del modelo 3D.
+- Archivo en `assets/video/falcon-9-overview.mp4` (renombrado desde el original, que tenía espacios y caracteres especiales en el nombre — rompía la URL).
+- Al terminar, vuelve solo al frame inicial (evita quedar en pantalla negra al final).
+- Se corrigió `__server.js` (servidor local de desarrollo) para reconocer `.mp4`/`.webm` con el content-type correcto — antes los servía como `application/octet-stream` y el navegador no los reproducía.
+
+### Próximos lanzamientos de SpaceX (en vivo)
+- Nueva sección en `unidades/fisica/sistema-solar/tecnologia-espacial.html` (página hub, no en cada página de cohete individual).
+- Fuente de datos: **Launch Library 2** (`ll.thespacedevs.com`) — gratuita, sin API key, con CORS habilitado. Confirmado con una llamada real en julio 2026.
+- **Importante**: la API `api.spacexdata.com` (la que recomiendan muchos tutoriales viejos) está **caída** (error 525) — no usarla.
+- Módulo `assets/js/spacex-launches.js`, con foco en seguridad porque el sitio lo usan estudiantes:
+  - Nunca usa `innerHTML` con datos de la API — solo `textContent`/`createElement`, para eliminar cualquier vector de XSS.
+  - Valida el tipo de cada campo (nombre, fecha, cohete, sitio, estado) antes de mostrarlo; si algo no es válido, se omite esa tarjeta.
+  - No carga imágenes remotas de la API (evita contenido/tracking no controlado).
+  - Único link de salida hardcodeado en el HTML (`spacex.com/launches`), nunca generado a partir de la respuesta de la API.
+  - `fetch` con timeout de 8s (`AbortController`) y `try/catch` en todo el flujo, con estado de error prolijo si la API falla.
+- Se actualiza solo, sin que el estudiante recargue la página: caché en `localStorage` (1h, para no pegarle a la API en cada carga) + refresco automático en segundo plano cada 20 min mientras la pestaña está visible, y al volver a la pestaña si pasó ese tiempo.
+
+### Video del quinto vuelo de prueba de Starship (IFT-5)
+- Nueva sección "Vuelo de prueba real" en `unidades/fisica/sistema-solar/starship.html`, mismo patrón que el video de Falcon 9 (después del hero, antes del contenido principal, con TOC y auto-rewind al terminar).
+- Archivo en `assets/video/starship-fifth-flight-test.mp4` (renombrado desde el original con espacios en el nombre).
+- Texto conecta el video con el contenido ya existente sobre "Mechazilla" (sección 02 de la página).
+- De paso, corregidos 2 bugs preexistentes encontrados en `starship.html` al editar el archivo: una clase CSS rota (`text-base-l Relaxed` → `text-base leading-relaxed`, línea ~396) y texto en chino mezclado por error en un título (`Starlink第二代` → `Starlink Segunda Generación`, línea ~497). Sin relación con el video, corregidos porque eran evidentes y triviales.
+
+**Completado en esta sesión:**
+- ✅ Modelo 3D interactivo + video de despegue en los **tres** cohetes (Falcon 9, Falcon Heavy y Starship).
+- ✅ Video de Falcon Heavy renombrado a `falcon-heavy-launch.mp4` y conectado.
+
+**Pendiente de verificación:**
+- Confirmación visual manual: renderings de los modelos 3D (no se pudo ver en esta sesión por limitación del navegador de la sesión). El docente debería probar en su navegador:
+  ```bash
+  node __server.js
+  # Luego visitar:
+  http://localhost:8080/unidades/fisica/sistema-solar/falcon-9.html
+  http://localhost:8080/unidades/fisica/sistema-solar/starship.html
+  http://localhost:8080/unidades/fisica/sistema-solar/falcon-heavy.html
+  ```
+  Y verificar que el scroll interactivo, los videos y los colores se ven bien (incluso en mobile).
+- El widget de lanzamientos depende 100% de internet (API externa) — si el aula se queda sin conexión un día de clase, se muestra el estado de fallback con el link a spacex.com, pero no hay datos offline.
+- Convendría hacer una pasada de `grep` por el resto del sitio buscando clases CSS rotas similares a `text-base-l Relaxed` o texto no-español mezclado, ya que apareció sin buscarlo en esta iteración — no se descarta que haya casos parecidos en otras páginas generadas de forma similar.
+- `__server.js` no implementa `Range` requests, así que adelantar/retroceder en videos puede ir lento en navegadores antiguos. No afecta a `file://` ni a hosting real, pero convendría si el docente lo quiere para testing más fluido.
+
+## Implementado 2026-07-24 (Starship: modelo 3D interactivo)
+
+### Modelo 3D wireframe del Starship + Super Heavy
+- Nuevo `assets/three/starship-scene.js`: escena Three.js propia para el Starship, con la misma mecánica que `falcon9-scene.js` (wireframe con `EdgesGeometry`, recorrido por scroll con contenedor sticky, cámara que interpola entre waypoints, parte activa resaltada en color y las demás en gris).
+- Color de acento `#38BDF8` (`natura-water`), el que ya usaba la página del Starship, en vez del azul del Falcon 9.
+- Nueva sección "Modelo 3D interactivo" en `starship.html`, entre el hero y el video del IFT-5, con entrada propia en el TOC ("Vista 3D interactiva").
+- Seis pasos con las especificaciones de cada parte: nariz/bahía de carga, las cuatro aletas, cuerpo de la nave (tanques CH₄/LOX + escudo térmico), motores de la nave (3 Raptor + 3 Raptor Vacuum), Super Heavy (anillo de hot-staging, grid fins, pivotes de captura) y los 33 Raptor de la base.
+- Geometría a escala del cohete real: 121 m totales repartidos entre propulsor (71 m) y nave (50 m), cuerpo de 9 m de diámetro, 33 motores en tres anillos (3 + 10 + 20) y 6 motores en la nave con las campanas Vacuum visiblemente más anchas.
+- Se agregaron a `starship.html` el `importmap` de Three.js, los estilos `.rocket3d-*` y la exclusión de `#modelo-3d` del observer de `.reveal` (si no, la sección sticky se queda en opacidad 0), igual que en `falcon-9.html`.
+
+**Verificado:** el módulo carga sin errores de consola, `init()` construye la escena completa (no cae al fallback), el canvas toma el tamaño del contenedor y el mapeo scroll → paso recorre los 6 pasos de principio a fin.
+
+**No verificado:** el aspecto visual del render. En el navegador de esta sesión `requestAnimationFrame` no se ejecuta (el panel no compone frames), así que no se pudo sacar captura ni ver el cohete dibujado. Conviene que el docente lo mire en su propio navegador (`node __server.js` → `http://localhost:8080/unidades/fisica/sistema-solar/starship.html`) y avise si alguna proporción quedó rara.
+
+## Implementado 2026-07-24 (Falcon Heavy: modelo 3D + video de despegue)
+
+### Video de despegue
+- Nueva sección "Despegue real" en `falcon-heavy.html`, justo después del modelo 3D, con el mismo patrón que Falcon 9 y Starship (auto-rewind al terminar, poster con el hero de la página, entrada en el TOC).
+- Archivo renombrado a `assets/video/falcon-heavy-launch.mp4` (el original venía como `Blastoff! SpaceX Falcon Heavy rocket launches 6.6 ton satellite... (online-video-cutter.com).mp4`, con espacios y signos que complican las rutas).
+- El texto de la sección apunta la atención al aterrizaje simultáneo de los dos núcleos laterales, que es lo distintivo de este cohete.
+
+### Modelo 3D wireframe del Falcon Heavy
+- Nuevo `assets/three/falcon-heavy-scene.js`, misma mecánica que las otras dos escenas, acento `#3B82F6` (`natura-energy`, el que ya usaba la página).
+- Geometría de tres núcleos: el central reutiliza las medidas exactas de la escena del Falcon 9 y los dos laterales son el mismo tanque rematado en cono en vez de interetapa, separados ±1,1 unidades sobre el eje X, con anclajes visibles entre núcleos.
+- 27 motores modelados de verdad (9 por núcleo en formación octaweb: 1 central + anillo de 8), más aletas de rejilla y patas en los tres núcleos.
+- Seis pasos: cofia, segunda etapa, núcleos laterales, núcleo central reforzado, los 27 motores y la recuperación triple. El último paso abre la cámara para ver el cohete entero, que es donde mejor se aprecia la configuración de tres cuerpos.
+- Se agregaron a `falcon-heavy.html` el `importmap` de Three.js, los estilos `.rocket3d-*` y la exclusión de `#modelo-3d` del observer de `.reveal`.
+
+**Verificado:** módulo sin errores de consola, escena construida completa (no cae al fallback), canvas dimensionado (790×720 en viewport de 1280), mapeo scroll → paso recorriendo los 6 pasos, y el `.mp4` servido correctamente (HTTP 200, 12,4 MB, `video/mp4`).
+
+**No verificado:** el render en sí, por la misma razón que en Starship (el panel del navegador de la sesión no compone frames, `requestAnimationFrame` no corre, no hay captura posible).
+
+**Nota aparte sobre `__server.js`:** no implementa `Range` requests, así que devuelve el video entero en cada pedido. Al previsualizar con este servidor, adelantar/retroceder dentro de los videos puede fallar o ser lento. No afecta al sitio abierto con `file://` ni a un hosting real. No se tocó porque es un helper de desarrollo, fuera del alcance del pedido.
+
+## Estado actual (resumido)
+
+✅ **Completado:**
+- Todas las páginas de cohetes (Falcon 9, Falcon Heavy, Starship) con modelo 3D interactivo y video de despegue real.
+- Widget de próximos lanzamientos SpaceX en vivo (con datos de Launch Library 2).
+- Revista lote A (5 artículos: rana levitación, doble arcoíris, noche polar, sinestesia, Schrödinger).
+- Sistema de navegación, colores por temática, TOC por página.
+
+⏳ **Pendiente de hacer:**
 1. Cargar audios del podcast (`podcast/audio/*.mp3`) — a cargo del docente.
 2. Revista lote B/C: entrelazamiento, antimateria, materia oscura, pandemias, ¿la IA piensa?
 3. Reemplazar `loremflickr` restantes (Química, Podcast).
 4. Actividades de laboratorio índice.
 5. Despliegue GitHub + Vercel.
+6. **Confirmación visual manual** de modelos 3D, videos y widget (ver "Pendiente de verificación" en la sección anterior).
 
 ## Notas técnicas
 
