@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIGO — Ondas Gravitacionales | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #38BDF8; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #38BDF8; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #38BDF8, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(56, 189, 248, 0.25); }
+    .highlight-box { border-left: 3px solid #38BDF8; background: rgba(56, 189, 248, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(56, 189, 248, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #38BDF8; border-left-color: #38BDF8; }
+    .toc-link:hover { color: white; }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #38BDF8;
+    }
+    .pull-quote {
+      border-left: 4px solid #38BDF8; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(56,189,248,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #38BDF8;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(56,189,248,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(56,189,248,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #38BDF8;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(56,189,248,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+</head>
+<body class="bg-sistema-solar">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#38BDF8;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-water transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-water transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-water transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="tecnologia-espacial.html" class="text-natura-silverDark hover:text-natura-water transition-colors">Tecnología</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-water font-semibold">LIGO</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2.5 py-1 hidden sm:inline">Nobel 2017</span>
+        <a href="tecnologia-espacial.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.32]"><img src="../../../assets/fisica/sistema-solar/ligo-hero.png" alt="" class="w-full h-full object-cover"></div>
+  <div class="absolute inset-0 opacity-[0.55]" style="background: linear-gradient(135deg, #0E7490 0%, #1E40AF 100%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/58 via-natura-black/18 to-natura-black/78"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-water">NSF/Caltech · Detector de ondas gravitacionales</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        LIGO y las <span class="text-natura-water">Ondas Gravitacionales</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Un instrumento gigante que "escucha" las vibraciones del universo. En 2015 detectó por primera vez las ondas gravitacionales predichas por Einstein cien años antes. Premio Nobel de Física 2017.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">2015</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Láser</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">4 km de brazos</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Nobel 2017</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
+        <nav class="space-y-0.5">
+          <a href="#que-son" class="toc-link active" data-toc>01. ¿Qué son las ondas gravitacionales?</a>
+          <a href="#como-funciona" class="toc-link" data-toc>02. ¿Cómo funciona LIGO?</a>
+          <a href="#deteccion" class="toc-link" data-toc>03. La primera detección</a>
+          <a href="#catALOGO" class="toc-link" data-toc>04. Catálogo de detecciones</a>
+          <a href="#para-pensar" class="toc-link" data-toc>05. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. Qué son -->
+      <section id="que-son" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Qué son las ondas gravitacionales?</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            En 1916, <strong class="text-white">Albert Einstein</strong> predijo que el espacio no era un simple escenario donde ocurren las cosas, sino que <strong class="text-natura-water">puede curvarse y vibrar</strong>. Cuando objetos muy masivos se mueven —como dos agujeros negros en espiral— generan <strong class="text-white">onditas en el espacio-tiempo</strong> que se propagan en todas direcciones, como las ondas en un lago cuando cae una piedra.
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Si una pelota rueda sobre una lona elástica, deforma la lona. Una pelota pesada, mucho más. Si dos pelotas pesadas bailan en la lona, generan ondas. El espacio funciona de manera similar: la materia lo deforma, y los movimientos bruscos generan ondas.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:wave" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">No son ondas de sonido</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Las ondas gravitacionales son <strong class="text-white">ondulaciones del espacio mismo</strong>. No necesitan aire ni agua para propagarse: viajan por el vacío a la velocidad de la luz.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:zoom-in" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Increíblemente débiles</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Cuando pasan por la Tierra, <strong class="text-natura-energy">deforman todo</strong>... pero solo una fracción del tamaño de un protón. Por eso tardamos 100 años en detectarlas.</p>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">La velocidad de la luz</span>
+          <p>Las ondas gravitacionales viajan a la <strong>velocidad de la luz</strong> (300.000 km/s). Cuando dos agujeros negros fusionan a millones de años luz, la "noticia" tarda millones de años en llegar a nosotros.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. Cómo funciona -->
+      <section id="como-funciona" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Cómo funciona LIGO?</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            <strong class="text-white">LIGO</strong> (Laser Interferometer Gravitational-Wave Observatory) es un instrumento enorme en forma de <strong class="text-natura-water">L</strong>: dos tubos rectos de <strong class="text-white">4 kilómetros</strong> de largo cada uno, unidos en ángulo recto. Tiene <strong class="text-natura-energy">dos versiones</strong> idénticas: una en Louisiana (Livingston) y otra en Washington (Hanford), separadas 3.000 km.
+          </p>
+        </div>
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-4">El truco del interferómetro</h3>
+
+        <div class="bg-natura-gray rounded-2xl p-6 content-card mb-4">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="iconify text-natura-water text-2xl" data-icon="lucide:git-branch" data-width="24"></span>
+            <h4 class="font-heading font-semibold text-white text-lg">Paso a paso</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <p class="text-natura-silver text-base leading-relaxed">Un <strong class="text-white">láser</strong> divide su haz en dos rayos perpendiculares.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <p class="text-natura-silver text-base leading-relaxed">Cada rayo recorre uno de los brazos de 4 km, rebota en un <strong class="text-white">espejo</strong> al final y vuelve.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <p class="text-natura-silver text-base leading-relaxed">Los dos rayos se <strong class="text-natura-water">recombinan</strong> en un detector. Si las distancias recorridas fueron iguales, se cancelan (interferencia destructiva).</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">4.</span>
+              <p class="text-natura-silver text-base leading-relaxed">Si pasa una onda gravitacional, deforma el espacio: un brazo se estira y el otro se encoge, aunque sea por una <strong class="text-white">millonésima de billón de metro</strong>. La luz ya no se cancela y se detecta una señal.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-4">Ficha técnica</h3>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:ruler" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Longitud de brazos</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">4 km</p>
+            <p class="text-xs text-natura-silverDark mt-1">Cada uno</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:building" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Ubicaciones</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">2 (EE.UU.)</p>
+            <p class="text-xs text-natura-silverDark mt-1">Livingston + Hanford</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:zoom-in" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Sensibilidad</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">10⁻¹⁸ m</p>
+            <p class="text-xs text-natura-silverDark mt-1">Millonésima del protón</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:users" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Científicos</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">~1.000</p>
+            <p class="text-xs text-natura-silverDark mt-1">De 20+ países</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:shield" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Aislamiento</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">Vacío</p>
+            <p class="text-xs text-natura-silverDark mt-1">En el interior de los tubos</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:dollar-sign" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Costo</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">~1.100 M USD</p>
+            <p class="text-xs text-natura-silverDark mt-1">Construcción + mejoras</p>
+          </div>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-water text-xl flex-shrink-0 mt-0.5" data-icon="lucide:lightbulb" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-water">¿Por qué dos detectores?</strong> Una señal debe aparecer en <strong class="text-white">ambos a la vez</strong> para ser confirmada. Eso descarta ruidos locales (un camión pasando, un terremoto, truenos). Si LIGO Livingston detecta una señal y LIGO Hanford la detecta <strong class="text-natura-water">milisegundos después</strong>, se puede triangular la dirección de donde vino.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. La primera detección -->
+      <section id="deteccion" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">GW150914: la primera detección</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El <strong class="text-white">14 de septiembre de 2015</strong>, a las 09:50:45 hora UTC, los dos LIGO detectaron una señal clara. Duró apenas <strong class="text-natura-water">0,2 segundos</strong>, pero era inconfundible: el "chirp" característico de dos agujeros negros espiralando y fusionándose. La señal fue nombrada <strong class="text-white">GW150914</strong> (Gravitational Wave, 2015-09-14).
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Cien años después de que Einstein predijera las ondas gravitacionales, escuchamos por primera vez el universo. No con luz, no con sonido, sino con vibraciones del propio espacio.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:circle" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Qué pasó</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Dos <strong class="text-white">agujeros negros</strong> de 29 y 36 masas solares, orbitando uno alrededor del otro, se fusionaron. El resultado fue un agujero negro de <strong class="text-natura-water">62 masas</strong>. ¿Falta masa? ¡3 masas solares se convirtieron en pura energía gravitacional!</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:zap" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Energía liberada</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">La energía emitida en forma de ondas gravitacionales durante la fusión equivale a <strong class="text-white">3 masas solares</strong> multiplicadas por c²: <strong class="text-natura-energy">~5 × 10⁴⁷ joules</strong>. Incomprensible para nuestro día a día.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:globe" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">¿Dónde pasó?</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">A unos <strong class="text-white">1.300 millones de años luz</strong> de la Tierra. O sea que la fusión ocurrió cuando la Tierra todavía no tenía vida compleja, y la señal tardó todo ese tiempo en llegar.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:award" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Repercusión</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Los descubidores <strong class="text-white">Rainer Weiss, Barry Barish y Kip Thorne</strong> recibieron el <strong class="text-natura-water">Premio Nobel de Física 2017</strong>. Se abrió una nueva ventana para observar el universo.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Catálogo -->
+      <section id="catALOGO" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El catálogo de detecciones</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6">
+            Después de GW150914, LIGO siguió detectando eventos. Con la incorporación del detector europeo <strong class="text-white">Virgo</strong> (Italia) y el japonés <strong class="text-natura-energy">KAGRA</strong>, la red de detección creció. Hasta 2026, hay más de <strong class="text-natura-water">300 eventos confirmados</strong>. La astronomía de ondas gravitacionales es una nueva rama.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:circle" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Fusión de agujeros negros</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              La mayoría de las detecciones. Incluyen <strong class="text-white">masas inesperadas</strong>: agujeros negros de 80-100 masas solares que no se pensaba que existieran.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">~95%</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:sparkles" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Fusión de estrellas de neutrones</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Detectada en 2017 (GW170817). Permitió ver la misma fusión con <strong class="text-white">telescopios convencionales</strong>. Se confirmó que las fusiones de neutrones producen <strong class="text-natura-energy">oro y platino</strong>.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">GW170817</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:alert-triangle" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Masa mixta</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Posibles <strong class="text-white">agujeros negros tragando estrellas de neutrones</strong>. Eventos raros que confirman la existencia de Asimétrica-Mass Black Holes.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-leaf/10 text-natura-leaf px-2 py-0.5 rounded-full">GW190426</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:trending-up" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Background cósmico</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              En 2023, las colaboraciones de los distintos detectores <strong class="text-white">combinaron datos</strong> para encontrar un "rumor de fondo" de ondas gravitacionales de baja frecuencia.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">NANOGrav</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">El futuro:LISA</span>
+          <p>La ESA lanzará en 2035 un nuevo detector espacial llamado <strong>LISA</strong> (Laser Interferometer Space Antenna). Tendrá tres naves separadas por <strong>2,5 millones de km</strong> y detectará ondas de <strong>frecuencias más bajas</strong>, provenientes de fusiones de agujeros negros supermasivos.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 05. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">05</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Cómo puede algo tan débil como una "millonésima del protón" ser detectable?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque LIGO mide la luz del láser, que recorre 4 km muchas veces. Una diferencia de <strong class="text-white">10⁻¹⁸ metros</strong> en el brazo acumula un desfase óptico detectable. Es como medir el grosor de un cabello a la distancia de la estrella más cercana.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué las ondas gravitacionales son tan difíciles de detectar?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque la <strong class="text-white">gravedad es la fuerza más débil</strong> de las cuatro que conocemos. Para que el espacio vibre lo suficiente, tienen que moverse masas enormes (agujeros negros) a velocidades altísimas. Y cuando llegan a la Tierra, la vibración es <strong class="text-natura-water">ínfima</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Qué tiene que ver LIGO con el sonido?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Las ondas gravitacionales tienen frecuencias que van de <strong class="text-white">10 a 1000 Hz</strong>: ¡el rango del sonido humano! Por eso cuando LIGO detecta una señal, la podemos <strong class="text-natura-water">convertir en un "sonido"</strong> y escuchar el chirrido de dos agujeros negros fusionándose a millones de años luz.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="webb.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-water/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>James Webb</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">LIGO — Telescopio 3 de 4</div>
+
+        <a href="radiotelescopios.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-water/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>Radiotelescopios</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-water flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:wave" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-water transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-water transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Cohete Falcon 9",u:"Fisica",s:"Sistema Solar",l:"falcon-9.html",c:"#3B82F6"},
+    {n:"Cohete Falcon Heavy",u:"Fisica",s:"Sistema Solar",l:"falcon-heavy.html",c:"#3B82F6"},
+    {n:"Cohete Starship",u:"Fisica",s:"Sistema Solar",l:"starship.html",c:"#3B82F6"},
+    {n:"Telescopio Hubble",u:"Fisica",s:"Sistema Solar",l:"hubble.html",c:"#3B82F6"},
+    {n:"Telescopio James Webb",u:"Fisica",s:"Sistema Solar",l:"webb.html",c:"#3B82F6"},
+    {n:"LIGO y ondas gravitacionales",u:"Fisica",s:"Sistema Solar",l:"ligo.html",c:"#3B82F6"},
+    {n:"Radiotelescopios",u:"Fisica",s:"Sistema Solar",l:"radiotelescopios.html",c:"#3B82F6"},
+    {n:"Tecnologia espacial",u:"Fisica",s:"Sistema Solar",l:"tecnologia-espacial.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"exploracion.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"tierra-luna.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"mapi.html",c:"#3B82F6"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

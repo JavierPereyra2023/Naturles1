@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telescopio Hubble — Tecnología Espacial | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59, 130, 246, 0.25); }
+    .highlight-box { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #3B82F6; border-left-color: #3B82F6; }
+    .toc-link:hover { color: white; }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #3B82F6;
+    }
+    .pull-quote {
+      border-left: 4px solid #3B82F6; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(59,130,246,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #3B82F6;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(59,130,246,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+</head>
+<body class="bg-sistema-solar">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="tecnologia-espacial.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Tecnología</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Hubble</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3</span>
+        <a href="tecnologia-espacial.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.42]">
+    <img src="../../../assets/fisica/sistema-solar/hubble-hero.png" alt="Telescopio Espacial Hubble" class="w-full h-full object-cover" style="filter: grayscale(20%) brightness(0.75) contrast(1.08);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/68 via-natura-black/18 to-natura-black/78"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">NASA · Telescopio espacial</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Telescopio <span class="text-natura-energy">Hubble</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Más de 30 años en órbita tomando las imágenes más espectaculares del universo. Pionero de los telescopios espaciales. Nació con un defecto en el espejo que casi arruina la misión, pero cinco reparaciones lo convirtieron en una leyenda.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Lanzado 1990</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Órbita baja</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Luz visible</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">NASA/ESA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
+        <nav class="space-y-0.5">
+          <a href="#diseno" class="toc-link active" data-toc>01. Diseño y órbita</a>
+          <a href="#lanzamiento" class="toc-link" data-toc>02. El desastre del espejo</a>
+          <a href="#reparaciones" class="toc-link" data-toc>03. Las reparaciones</a>
+          <a href="#descubrimientos" class="toc-link" data-toc>04. Descubrimientos</a>
+          <a href="#para-pensar" class="toc-link" data-toc>05. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. Diseño y órbita -->
+      <section id="diseno" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Diseño y órbita</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El <strong class="text-white">Hubble</strong> es un telescopio reflector de <strong class="text-natura-energy">2,4 metros</strong> de diámetro. Orbita la Tierra a unos <strong class="text-white">540 km de altura</strong>, muy por encima de la atmósfera que distorsiona las imágenes. Está en una <strong class="text-natura-energy">órbita baja</strong>, lo que permitió que astronautas del transbordador espacial lo visitaran cinco veces para arreglarlo y更新的仪器.
+          </p>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">¿Por qué en el espacio?</span>
+          <p>La <strong>atmósfera</strong> absorbe y distorsiona la luz que llega del espacio. Por eso las estrellas "titilan" en el cielo. Un telescopio en el espacio evita esa distorsión y obtiene imágenes mucho más nítidas. Además, puede captar tipos de luz (como el ultravioleta) que la atmósfera bloquea.</p>
+        </div>
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-4">Ficha técnica</h3>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:ruler" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Espejo principal</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">2,4 m</p>
+            <p class="text-xs text-natura-silverDark mt-1">Diámetro del espejo primario</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Órbita</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">540 km</p>
+            <p class="text-xs text-natura-silverDark mt-1">Órbita baja terrestre</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:weight" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Masa</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">11.110 kg</p>
+            <p class="text-xs text-natura-silverDark mt-1">Como dos elefantes adultos</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:eye" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Tipo de luz</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">Visible + UV</p>
+            <p class="text-xs text-natura-silverDark mt-1">Luz visible y ultravioleta cercano</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:rocket" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Lanzamiento</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">24 abr 1990</p>
+            <p class="text-xs text-natura-silverDark mt-1">Desde el transbordador Discovery</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:database" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Datos</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">~200 TB</p>
+            <p class="text-xs text-natura-silverDark mt-1">Archivos públicos acumulados</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. El desastre del espejo -->
+      <section id="lanzamiento" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El espejo "miope" (1990)</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            A las pocas semanas del lanzamiento, los ingenieros notaron algo terrible: las imágenes del Hubble estaban <strong class="text-white">borrosas</strong>. Después de una investigación, descubrieron la causa: el espejo principal, pulido con una precisión absurda, tenía un <strong class="text-natura-energy">defecto de 2 micrones</strong> (la 50ª parte del diámetro de un cabello). Era como tener un telescopio con miopía.
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Para tener una idea: el espejo estaba esmerilado con una tolerancia de 1/50 del largo de onda de la luz. Pero 2 micrones era suficiente para arruinar todo. Fue la vergüenza más grande de la NASA.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:alert-triangle" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">El error</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Un instrumento de prueba (<strong class="text-white">reflector nulo</strong>) estaba mal calibrado. No detectó el error antes del lanzamiento. La empresa que construyó el espejo, <strong class="text-natura-energy">Perkin-Elmer</strong>, perdió mucha reputación.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:wrench" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">La solución</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">En lugar de traerlo a la Tierra (caro y arriesgado), fabricaron unas <strong class="text-white">gafas espaciales</strong>: una nueva cámara con óptica correctiva que compensaba el defecto.</p>
+          </div>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-energy text-xl flex-shrink-0 mt-0.5" data-icon="lucide:lightbulb" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-energy">La ventaja de estar en órbita baja.</strong> Si el Hubble hubiera estado en una órbita muy alta (como el James Webb), no se habría podido reparar. La decisión de ponerlo a <strong class="text-white">540 km de altura</strong> (accesible para los transbordadores) terminó salvando la misión.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. Las reparaciones -->
+      <section id="reparaciones" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Las cinco misiones de servicio</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            Entre 1993 y 2009, los astronautas visitaron el Hubble <strong class="text-white">cinco veces</strong> en misiones del transbordador. No solo repararon el espejo defectuoso: también le <strong class="text-natura-energy">instalaron instrumentos nuevos</strong> cada vez, manteniendo al telescopio actualizado. Es el artefacto más atendido en la historia de la astronáutica.
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-6">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">SM 1 — 1993</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">COSTAR: las "gafas" del Hubble</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Se instaló <strong class="text-white">COSTAR</strong> (Corrective Optics Space Telescope Axial Replacement), un módulo con <strong class="text-natura-energy">5 espejos diminutos</strong> que corregían el defecto del espejo principal. Las imágenes mejoraron inmediatamente.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">SM 2 — 1997</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Nuevos instrumentos</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Se instalaron <strong class="text-white">STIS</strong> (espectrógrafo) y <strong class="text-natura-energy">NICMOS</strong> (cámara infrarroja). Esto extendió la visión del Hubble más allá de la luz visible.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">SM 3A — 1999</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Reparación urgente</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Después de un fallo en los giroscopios, los astronautas tuvieron que <strong class="text-white">reparar el telescopio en una misión de emergencia</strong>. Fue una de las misiones más arriesgadas del programa.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">SM 3B — 2002</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Cámara avanzada</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Se instaló <strong class="text-white">ACS</strong> (Advanced Camera for Surveys), que tomó muchas de las imágenes más icónicas del Hubble, como los <strong class="text-natura-energy">Pilares de la Creación</strong>.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">SM 4 — 2009</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">La última visita</h4>
+              <p class="text-natura-silver text-base leading-relaxed">La última misión de servicio. Se instalaron <strong class="text-white">WFC3</strong> y <strong class="text-natura-energy">COS</strong>, la última gran mejora. Desde entonces, el Hubble opera solo y va perdiendo altitud gradualmente.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Descubrimientos -->
+      <section id="descubrimientos" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Descubrimientos que cambiaron la astronomía</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6">
+            En más de 30 años de operaciones, el Hubble ha realizado <strong class="text-white">más de 1,5 millones de observaciones</strong> y producido los datos de más de <strong class="text-natura-energy">20.000 artículos científicos</strong>. Algunos hallazgos que cambiaron lo que sabemos del universo:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:clock" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">La edad del universo</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Midiendo cefeidas (estelas pulsantes) en galaxias lejanas, ayudó a precisar que el universo tiene <strong class="text-white">13.800 millones de años</strong>.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Cosmos</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:zoom-in" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Campo profundo del Hubble</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Apuntó a un <strong class="text-white">punto "vacío"</strong> del cielo durante 10 días. La imagen reveló <strong class="text-natura-energy">miles de galaxias</strong>, algunas de cuando el universo tenía apenas 500 millones de años.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">1995</span>
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">HDF</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:globe" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Energía oscura</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Confirmó que la expansión del universo se está <strong class="text-white">acelerando</strong>, probablemente por una fuerza misteriosa llamada <strong class="text-natura-energy">energía oscura</strong>.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-leaf/10 text-natura-leaf px-2 py-0.5 rounded-full">Nobel 2011</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:mountain" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Pilares de la Creación</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              La imagen más famosa: <strong class="text-white">nubes de gas y polvo</strong> en la nebulosa del Águila, donde nacen estrellas nuevas. Se convirtió en un ícono de la astronomía.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">1995 / 2015</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:planet" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Atmósferas de exoplanetas</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Fue el primero en medir la composición de la <strong class="text-white">atmósfera de un planeta fuera del Sistema Solar</strong>, detectando vapor de agua, sodio y otros elementos.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">HD 209458b</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:disc" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Discos protoplanetarios</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Fotografió los <strong class="text-white">discos de polvo</strong> alrededor de estrellas jóvenes donde se están formando planetas. Como un "MAPI" en otras estrellas.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Formación</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">¿Y su final?</span>
+          <p>El Hubble <strong>sigue operando</strong> en 2026, pero va perdiendo altura poco a poco. Se espera que reingrese a la atmósfera entre 2030 y 2040. La NASA y SpaceX están estudiando una misión para <strong>alargar su vida</strong> empujándolo a una órbita más alta.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 05. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">05</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué un telescopio en el espacio puede ver más que uno en la Tierra?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">La atmósfera nos protege de la radiación pero también <strong class="text-white">distorsiona la luz</strong> y absorbe ciertos colores (ultravioleta, infrarrojo). En el espacio, el telescopio opera en la oscuridad y estabilidad del vacío. No es que "acerque" nada, es que <strong class="text-natura-energy">capta más luz sin perturbaciones</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué el espejo no se reemplaza en órbita?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Reemplazar el espejo principal hubiera requerido <strong class="text-white">desmontar el telescopio entero</strong> en el espacio, algo imposible para los astronautas. Por eso se optó por el "truco" de la óptica correctiva: agregar <strong class="text-natura-energy">pequeños espejos que compensan</strong> el defecto del grande.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué el Hubble usó espejos y no lentes?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque un espejo grande es <strong class="text-white">más liviano, más fácil de construir y no sufre aberración cromática</strong>. Además, un espejo se puede apoyar por detrás (no se deforma por su peso), mientras que una lente grande se deforma por la gravedad.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="starship.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Starship</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">Hubble — Telescopio 1 de 4</div>
+
+        <a href="webb.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>Telescopio James Webb</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:satellite" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Cohete Falcon 9",u:"Fisica",s:"Sistema Solar",l:"falcon-9.html",c:"#3B82F6"},
+    {n:"Cohete Falcon Heavy",u:"Fisica",s:"Sistema Solar",l:"falcon-heavy.html",c:"#3B82F6"},
+    {n:"Cohete Starship",u:"Fisica",s:"Sistema Solar",l:"starship.html",c:"#3B82F6"},
+    {n:"Telescopio Hubble",u:"Fisica",s:"Sistema Solar",l:"hubble.html",c:"#3B82F6"},
+    {n:"Telescopio James Webb",u:"Fisica",s:"Sistema Solar",l:"webb.html",c:"#3B82F6"},
+    {n:"LIGO y ondas gravitacionales",u:"Fisica",s:"Sistema Solar",l:"ligo.html",c:"#3B82F6"},
+    {n:"Radiotelescopios",u:"Fisica",s:"Sistema Solar",l:"radiotelescopios.html",c:"#3B82F6"},
+    {n:"Tecnologia espacial",u:"Fisica",s:"Sistema Solar",l:"tecnologia-espacial.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"exploracion.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"tierra-luna.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"mapi.html",c:"#3B82F6"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starship y Super Heavy — Tecnología Espacial | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #38BDF8; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #38BDF8; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #38BDF8, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(56, 189, 248, 0.25); }
+    .highlight-box { border-left: 3px solid #38BDF8; background: rgba(56, 189, 248, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(56, 189, 248, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #38BDF8; border-left-color: #38BDF8; }
+    .toc-link:hover { color: white; }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #38BDF8;
+    }
+    .pull-quote {
+      border-left: 4px solid #38BDF8; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(56,189,248,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #38BDF8;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(56,189,248,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(56,189,248,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #38BDF8;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(56,189,248,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+</head>
+<body class="bg-sistema-solar">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#38BDF8;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-water transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-water transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-water transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="tecnologia-espacial.html" class="text-natura-silverDark hover:text-natura-water transition-colors">Tecnología</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-water font-semibold">Starship</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2.5 py-1 hidden sm:inline">Eje 3</span>
+        <a href="tecnologia-espacial.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.32]"><img src="../../../assets/fisica/sistema-solar/starship-hero.png" alt="" class="w-full h-full object-cover"></div>
+  <div class="absolute inset-0 opacity-[0.55]" style="background: linear-gradient(135deg, #0C4A6E 0%, #0F172A 100%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/58 via-natura-black/18 to-natura-black/78"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-water">SpaceX · El cohete más grande</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Starship <span class="text-natura-water">+ Super Heavy</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        El cohete más grande y poderoso jamás construido. Completamente reutilizable, con 33 motores Raptor en su primera etapa. Diseñado para volver a la Luna y, eventualmente, llevar humanos a Marte.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">33 Raptor</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Metano + LOX</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Totalmente reutilizable</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Artemis III</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
+        <nav class="space-y-0.5">
+          <a href="#arquitectura" class="toc-link active" data-toc>01. Arquitectura apilada</a>
+          <a href="#super-heavy" class="toc-link" data-toc>02. Super Heavy</a>
+          <a href="#starship" class="toc-link" data-toc>03. Starship (nave)</a>
+          <a href="#raptor" class="toc-link" data-toc>04. Motores Raptor</a>
+          <a href="#marte" class="toc-link" data-toc>05. Rumbo a Marte</a>
+          <a href="#para-pensar" class="toc-link" data-toc>06. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. Arquitectura -->
+      <section id="arquitectura" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Una arquitectura completamente nueva</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            Hasta el Falcon Heavy, los cohetes tenían <strong class="text-white">una pieza "de usar y tirar"</strong> arriba (la segunda etapa o la cápsula). El Starship cambia eso: <strong class="text-natura-water">ambas piezas</strong> —el propulsor y la nave— son <strong class="text-white">totalmente reutilizables</strong>. Vuelven a la Tierra, aterrizan, se reabastecen y vuelven a volar.
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>El objetivo es construir un sistema de transporte espacial parecido a un avión: cargar combustible, embarcar, despegar, aterrizar, y repetir. Miles de veces.</p>
+        </div>
+
+        <div class="bg-natura-gray rounded-2xl p-6 content-card mb-6">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="iconify text-natura-water text-2xl" data-icon="lucide:layers" data-width="24"></span>
+            <h3 class="font-heading font-semibold text-white text-lg">Dos etapas apiladas</h3>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-wider text-natura-water mb-2">Super Heavy (1ª etapa)</p>
+              <p class="text-natura-silver text-base leading-relaxed mb-2">El propulsor gigante de <strong class="text-white">70 m</strong>. Enciende sus <strong class="text-natura-water">33 motores Raptor</strong> en el despegue. Se separa a los ~3 minutos y vuelve a la plataforma de lanzamiento.</p>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-wider text-natura-water mb-2">Starship (2ª etapa / nave)</p>
+              <p class="text-natura-silver text-base leading-relaxed mb-2">La nave de <strong class="text-white">50 m</strong> que sigue hasta órbita. Tiene 6 motores Raptor y espacio para <strong class="text-natura-water">100 personas o 100 toneladas</strong> de carga.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">El sistema completo</span>
+          <p>Apilados, el cohete mide <strong>121 metros</strong>: más alto que el Saturno V que llevó al hombre a la Luna. Es el cohete más alto y más potente jamás construido.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. Super Heavy -->
+      <section id="super-heavy" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Super Heavy: el propulsor gigante</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El <strong class="text-white">Super Heavy</strong> es la primera etapa del Starship. Es básicamente un depósito gigantesco de combustible con motores en la base. Su función es levantar al Starship fuera de la atmósfera más densa y luego <strong class="text-natura-water">regresar para ser reutilizado</strong>.
+          </p>
+        </div>
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-4">Ficha técnica</h3>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:ruler" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Altura</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">71 m</p>
+            <p class="text-xs text-natura-silverDark mt-1">Un edificio de 23 pisos</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:flame" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Motores</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">33 × Raptor</p>
+            <p class="text-xs text-natura-silverDark mt-1">El récord de motores en un cohete</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:zap" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Empuje total</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">74.000 kN</p>
+            <p class="text-xs text-natura-silverDark mt-1">Más que el Saturno V</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:weight" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Masa total</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">~3.600 t</p>
+            <p class="text-xs text-natura-silverDark mt-1">Cargado de propelente</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:droplet" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Propelente</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">CH₄ + LOX</p>
+            <p class="text-xs text-natura-silverDark mt-1">Metano y oxígeno líquido</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-water" data-icon="lucide:rotate-ccw" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Aterrizaje</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">"Mechazilla"</p>
+            <p class="text-xs text-natura-silverDark mt-1">Brazos que lo atrapan</p>
+          </div>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-water text-xl flex-shrink-0 mt-0.5" data-icon="lucide:lightbulb" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-water">¿Por qué tantos motores?</strong> Tener 33 motores le da a SpaceX dos ventajas enormes: <strong class="text-white">(1)</strong> Si uno o dos motores fallan, los demás pueden compensar y la misión sigue (como pasó en algunos vuelos de prueba). <strong class="text-natura-water">(2)</strong> Cada motor individual es más chico y más fácil de fabricar en serie.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. Starship nave -->
+      <section id="starship" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Starship: la nave</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            La pieza de arriba se llama simplemente <strong class="text-white">"Starship"</strong> o nave. Es donde van los pasajeros, la carga o el satélite. Tiene forma de bala con aletas y <strong class="text-natura-water">aletas tipo "delantal"</strong> en la base que sirven para controlar la caída en la atmósfera.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:users" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Capacidad humana</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Hasta <strong class="text-natura-water">100 personas</strong> en vuelos largos. Para la Luna con Artemisa, transportará astronautas de la NASA.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:package" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Capacidad de carga</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Hasta <strong class="text-natura-water">100-150 toneladas</strong> en órbita baja. Es el doble que el Falcon Heavy.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:shield" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Escudo térmico</h3>
+            </div>
+            <p class="text-natura-silver text-base-l Relaxed">Cubierto con <strong class="text-natura-water">~1.200 baldosas cerámicas</strong> que resisten el calor brutal de la reentrada (~1.600 °C). Es lo que protege a la nave de quemarse al volver.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:rotate-ccw" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Aterrizaje</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Vuelve a la Tierra y aterriza en posición <strong class="text-white">vertical</strong>, igual que el Falcon 9 pero en una escala mucho mayor.</p>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">El "Mechazilla"</span>
+          <p>La torre de lanzamiento del Starship tiene unos <strong>enormes brazos mecánicos</strong> ("Mechazilla") que sostienen al cohete antes del despegue. En el futuro, intentarán que esos mismos brazos <strong>atrapen al Super Heavy</strong> cuando regrese, evitando que tenga patas.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Raptor -->
+      <section id="raptor" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El motor Raptor: un salto cuántico</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El <strong class="text-white">Raptor</strong> es el corazón del Starship. Es un motor de <strong class="text-natura-water">ciclo de combustión stage-combustion</strong> alimentado por <strong class="text-white">metano y oxígeno líquido</strong>. Es el primer motor de este tipo en volar en un cohete orbital.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:droplet" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">¿Por qué metano?</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Mars tiene agua y CO₂. Con un poco de química, podríamos <strong class="text-natura-water">fabricar metano en el propio Marte</strong> para cargar el Starship de regreso. Es el combustible "marciano" por excelencia.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:zap" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Versiones del Raptor</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Hay dos versiones: <strong class="text-white">Raptor 2</strong> para Super Heavy (más empuje) y <strong class="text-natura-water">Raptor Vacuum</strong> optimizada para el espacio (con boquilla más grande).</p>
+          </div>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-water text-xl flex-shrink-0 mt-0.5" data-icon="lucide:flame" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-water">Comparación de empuje.</strong> Un solo Raptor 2 produce ~2.300 kN de empuje, más que el motor de un Boeing 747. Ahora multiplicá eso por 33: el Super Heavy tiene más empuje que <strong class="text-white">24 Boeings 747 funcionando al máximo</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 05. Marte -->
+      <section id="marte" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">05</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Rumbo a la Luna y a Marte</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El Starship no es solo un cohete: es un <strong class="text-white">sistema de transporte interplanetario</strong>. Entre sus misiones previstas están <strong class="text-natura-water">Artemis III</strong> (volver a la Luna en 2027), varias misiones lunares con Japón, y la gran apuesta: <strong class="text-white">colonizar Marte</strong>.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:moon" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">HLS — Artemis III</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Una versión del Starship será el <strong class="text-white">módulo de alunizaje</strong> de la NASA. Llevará astronautas desde la órbita lunar hasta la superficie de la Luna en la misión <strong class="text-natura-water">Artemis III</strong>.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">NASA</span>
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Luna</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:globe" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Starlink第二代 (V3)</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Una nueva generación de satélites Starlink se lanzará con Starship. Cada vuelo podrá llevar <strong class="text-white">más de 60 satélites</strong> mucho más grandes, con más capacidad.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Internet</span>
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Starlink</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:rocket" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Vuelos de prueba (IFT)</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              SpaceX está probando el Starship en vuelos suborbitales desde 2023. Ha realizado <strong class="text-natura-water">varios IFT</strong> (Integrated Flight Test), algunos exitosos y otros con problemas. Es parte del proceso de desarrollo.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Pruebas</span>
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Boca Chica</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:globe" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">La apuesta por Marte</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Elon Musk afirma que el objetivo final es <strong class="text-white">hacer a la humanidad multiplanetaria</strong>. Una colonia en Marte actuaría como "seguro" para la especie ante eventuales catastrophes en la Tierra.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Marte</span>
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Futuro</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 06. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-water text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">06</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué usar metano en lugar de queroseno?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">El queroseno deja <strong class="text-white">residuos de coque</strong> en los motores que complican la reutilización. El metano es <strong class="text-natura-water">"más limpio"</strong> y se puede producir en Marte. Es como elegir nafta premium en vez de diesel para un auto que querés usar muchas veces.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué las pruebas fallan tanto?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">SpaceX vuela con la filosofía de <strong class="text-white">"fallar rápido, aprender rápido"</strong>. Lanzar un Starship es relativamente barato comparado con otros cohetes. Prefieren <strong class="text-natura-water">perder varias plataformas</strong> en pruebas y aprender, que hacer 10 años de ensayos en tierra.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-water font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Es realmente posible colonizar Marte?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Hay enormes desafíos: <strong class="text-white">radiación cósmica, baja gravedad, atmósfera irrespirable, temperaturas extremas</strong>. Marte no es "una segunda Tierra" sino un ambiente hostil. Algunos científicos creen que es posible a largo plazo; otros piensan que es ciencia ficción.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="falcon-heavy.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-water/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Falcon Heavy</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">Starship — Cohete 3 de 3</div>
+
+        <a href="hubble.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-water/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>Telescopio Hubble</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-water flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:rocket" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-water transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-water transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Cohete Falcon 9",u:"Fisica",s:"Sistema Solar",l:"falcon-9.html",c:"#3B82F6"},
+    {n:"Cohete Falcon Heavy",u:"Fisica",s:"Sistema Solar",l:"falcon-heavy.html",c:"#3B82F6"},
+    {n:"Cohete Starship",u:"Fisica",s:"Sistema Solar",l:"starship.html",c:"#3B82F6"},
+    {n:"Telescopio Hubble",u:"Fisica",s:"Sistema Solar",l:"hubble.html",c:"#3B82F6"},
+    {n:"Telescopio James Webb",u:"Fisica",s:"Sistema Solar",l:"webb.html",c:"#3B82F6"},
+    {n:"LIGO y ondas gravitacionales",u:"Fisica",s:"Sistema Solar",l:"ligo.html",c:"#3B82F6"},
+    {n:"Radiotelescopios",u:"Fisica",s:"Sistema Solar",l:"radiotelescopios.html",c:"#3B82F6"},
+    {n:"Tecnologia espacial",u:"Fisica",s:"Sistema Solar",l:"tecnologia-espacial.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"exploracion.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"tierra-luna.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"mapi.html",c:"#3B82F6"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

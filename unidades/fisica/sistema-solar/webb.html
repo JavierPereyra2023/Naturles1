@@ -1,0 +1,723 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telescopio James Webb — Tecnología Espacial | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59, 130, 246, 0.25); }
+    .highlight-box { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #3B82F6; border-left-color: #3B82F6; }
+    .toc-link:hover { color: white; }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #3B82F6;
+    }
+    .pull-quote {
+      border-left: 4px solid #3B82F6; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(59,130,246,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #3B82F6;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(59,130,246,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+</head>
+<body class="bg-sistema-solar">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="tecnologia-espacial.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Tecnología</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">James Webb</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3</span>
+        <a href="tecnologia-espacial.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.32]"><img src="../../../assets/fisica/sistema-solar/webb-hero.png" alt="" class="w-full h-full object-cover"></div>
+  <div class="absolute inset-0 opacity-[0.55]" style="background: linear-gradient(135deg, #92400E 0%, #7C2D12 100%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/58 via-natura-black/18 to-natura-black/78"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">NASA/ESA/CSA · Telescopio infrarrojo</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        James <span class="text-natura-energy">Webb</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        El telescopio más potente jamás construido. Lanzado el 25 de diciembre de 2021, opera en el punto L2 a 1,5 millones de km de la Tierra. Ve el universo en infrarrojo y puede mirar las primeras galaxias que se formaron después del Big Bang.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Lanzado 2021</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Infrarrojo</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Punto L2</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Espejo de 6,5 m</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
+        <nav class="space-y-0.5">
+          <a href="#espejo" class="toc-link active" data-toc>01. El espejo dorado</a>
+          <a href="#infrarrojo" class="toc-link" data-toc>02. Infrarrojo: la clave</a>
+          <a href="#l2" class="toc-link" data-toc>03. El punto L2</a>
+          <a href="#lanzamiento" class="toc-link" data-toc>04. Plegado y despliegue</a>
+          <a href="#resultados" class="toc-link" data-toc>05. Primeros resultados</a>
+          <a href="#para-pensar" class="toc-link" data-toc>06. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. El espejo -->
+      <section id="espejo" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El espejo segmentado y dorado</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El espejo principal del Webb es enorme: <strong class="text-white">6,5 metros de diámetro</strong>, casi <strong class="text-natura-energy">3 veces más grande</strong> que el Hubble. Pero no se pudo construir en una sola pieza porque no entraba en ningún cohete. La solución fue hacerlo <strong class="text-white">segmentado</strong>: <strong class="text-natura-energy">18 hexágonos</strong> de berilio cubiertos de oro que se despliegan en el espacio.
+          </p>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">¿Por qué dorado?</span>
+          <p>El espejo está cubierto con una capa microscópica de <strong>oro puro</strong> (~100 nanómetros). El oro refleja muy bien la <strong>luz infrarroja</strong>, que es lo que observa el Webb. Apenas unos gramos de oro alcanzan para toda la superficie.</p>
+        </div>
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-4">Ficha técnica</h3>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:ruler" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Espejo</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">6,5 m</p>
+            <p class="text-xs text-natura-silverDark mt-1">18 hexágonos de berilio</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:orbit" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Distancia a la Tierra</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">1,5 M km</p>
+            <p class="text-xs text-natura-silverDark mt-1">En el punto Lagrange L2</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:eye" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Tipo de luz</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">Infrarrojo</p>
+            <p class="text-xs text-natura-silverDark mt-1">No visible al ojo humano</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:shield" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Escudo solar</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">5 capas</p>
+            <p class="text-xs text-natura-silverDark mt-1">Tamaño de una cancha de tenis</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:temperature" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Temperatura</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">-233 °C</p>
+            <p class="text-xs text-natura-silverDark mt-1">Lado frío del telescopio</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:dollar-sign" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Costo</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">10.000 M USD</p>
+            <p class="text-xs text-natura-silverDark mt-1">El más caro de la historia</p>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. Infrarrojo -->
+      <section id="infrarrojo" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Infrarrojo: la clave para mirar el pasado</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El Hubble observa en <strong class="text-white">luz visible</strong>, la misma que ven nuestros ojos. El Webb observa en <strong class="text-natura-energy">infrarrojo</strong>, una luz que no podemos ver pero sentimos como calor. Esto es clave porque el universo se está <strong class="text-white">expandiendo</strong>: la luz de galaxias lejanas se "estira" y se vuelve infrarroja antes de llegar a nosotros.
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Para ver el universo lejano hay que mirar en infrarrojo. Es como buscar tus antepasados en un álbum de fotos viejas: cuanto más atrás en el tiempo, más "corrido al rojo" aparece.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:clock" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Ver las primeras galaxias</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Las primeras galaxias se formaron hace <strong class="text-natura-energy">13.000 millones de años</strong>. Su luz, después de viajar tanto, llega como infrarrojo. Solo un telescopio infrarrojo puede detectarla.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:eye" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">A través del polvo</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">El polvo cósmico <strong class="text-white">bloquea la luz visible</strong> pero deja pasar el infrarrojo. El Webb puede ver dentro de nubes donde nacen estrellas y sistemas planetarios.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:atom" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Atmósferas de exoplanetas</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Cuando un exoplaneta pasa frente a su estrella, el Webb analiza la luz infrarroja que <strong class="text-natura-energy">atraviesa su atmósfera</strong> y detecta qué gases contiene (vapor de agua, metano, CO₂).</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:thermometer" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">El gran problema del calor</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">El problema es que <strong class="text-white">todo lo caliente</strong> emite infrarrojo, incluido el telescopio mismo. Hay que enfriarlo a <strong class="text-natura-energy">-233 °C</strong> para que no se "enjuague" su propia imagen.</p>
+          </div>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-energy text-xl flex-shrink-0 mt-0.5" data-icon="lucide:lightbulb" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-energy">El escudo solar.</strong> El Webb tiene un enorme <strong class="text-white">paraguas de 5 capas</strong> del tamaño de una cancha de tenis. Mantiene al telescopio en sombra permanente, así el lado que mira al espacio está a -233 °C mientras el lado que mira al Sol está a +85 °C. Diferencia de más de 300 °C en pocos metros.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. Punto L2 -->
+      <section id="l2" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El punto L2: una ubicación privilegiada</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El Webb no orbita la Tierra como el Hubble. Está en un punto especial del espacio llamado <strong class="text-natura-energy">L2</strong> (Lagrange 2), a <strong class="text-white">1,5 millones de kilómetros</strong> de la Tierra. En ese lugar, las fuerzas gravitacionales de la Tierra y el Sol se equilibran, y el telescopio puede "flotar" siguiendo a la Tierra en su órbita.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:shield" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Ventajas de L2</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">El telescopio está siempre del <strong class="text-white">mismo lado de la Tierra</strong>, con el Sol y la Tierra "atrás". Eso le permite usar un solo escudo solar y estar siempre en sombra.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:alert-triangle" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Desventajas</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Está <strong class="text-natura-energy">lejos</strong>: si algo falla, no se puede ir a repararlo (a diferencia del Hubble). La última "ventana de mantenimiento" se cerró para siempre.</p>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">¿Por qué L2?</span>
+          <p>El Sol, la Tierra y la Luna emiten <strong>radiación infrarroja</strong> que interferiría con las observaciones del Webb. En L2, el escudo solar bloquea las tres fuentes a la vez. Es el mejor lugar para un telescopio infrarrojo.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Plegado y despliegue -->
+      <section id="lanzamiento" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Plegado como origami en el espacio</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El Webb era demasiado grande para cualquier cohete. Tuvo que viajar <strong class="text-white">plegado</strong> como un origami dentro del cohete Ariane 5, y luego <strong class="text-natura-energy">desplegarse solo</strong> en el espacio. Durante dos semanas se ejecutaron <strong class="text-white">344 operaciones</strong> que no se podían repetir. Si una sola fallaba, la misión se perdía.
+          </p>
+        </div>
+
+        <div class="space-y-4 mb-6">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">Día 1</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">El lanzamiento (25 dic 2021)</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Un cohete <strong class="text-white">Ariane 5</strong> de la Agencia Espacial Europea (ESA) lo llevó al espacio. La fecha fue elegida para minimizar el consumo de combustible.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">Días 1-3</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Escudo solar</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Se desplegó el <strong class="text-white">paraguas de 5 capas</strong>. Cada capa se tensó con motores especiales. Crítico: si una membrana se traba, todo se arruina.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">Días 5-10</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Espejo secundario</h4>
+              <p class="text-natura-silver text-base leading-relaxed">El pequeño espejo que dirige la luz del primario hacia los instrumentos se desplegó en su lugar. Otro momento de máxima tensión.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">Días 12-14</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Espejo principal</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Los <strong class="text-natura-energy">18 hexágonos</strong> del espejo principal se desplegaron uno por uno. Es el momento más complejo: cada uno debe quedar alineado con precisión nanométrica.</p>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card flex gap-5">
+            <div class="flex-shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy bg-natura-energy/15 px-2.5 py-1 rounded-full">Mes 6</span>
+            </div>
+            <div>
+              <h4 class="font-heading font-semibold text-white mb-1">Calibración final</h4>
+              <p class="text-natura-silver text-base leading-relaxed">Después de meses de enfriamiento y alineación, el telescopio quedó <strong class="text-white">100% operativo</strong>. La primera imagen se tomó en julio de 2022.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 05. Primeros resultados -->
+      <section id="resultados" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">05</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Primeros resultados asombrosos</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6">
+            En apenas dos años, el Webb revolucionó la astronomía. Algunos de sus hallazgos más importantes:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:globe" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Las galaxias más lejanas</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Encontró galaxias que existieron cuando el universo tenía <strong class="text-white">menos de 350 millones de años</strong>. Son las más antiguas y lejanas jamás vistas.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">JADES-GS-z14-0</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:star" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Nacimiento de estrellas</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Imágenes espectaculares de <strong class="text-white">discos protoplanetarios</strong> y chorros de gas en estrellas recién nacidas. Se ven estructuras nunca antes observadas.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">HH 211</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:atom" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Atmósferas de exoplanetas</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Detectó por primera vez <strong class="text-natura-energy">CO₂ en la atmósfera</strong> de un exoplaneta. También vapor de agua, metano y otros gases en mundos distantes.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-leaf/10 text-natura-leaf px-2 py-0.5 rounded-full">WASP-39b</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:mountain" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Pilares de la Creación (2.0)</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Volvió a fotografiar los famosos <strong class="text-white">Pilares de la Creación</strong> del Hubble, pero en infrarrojo. Ahora se pueden ver las <strong class="text-natura-energy">estrellas bebés</strong> dentro de las nubes.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">2022</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:circle" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Agujeros negros supermasivos</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Observó agujeros negros en el centro de galaxias pequeñas del universo primitivo. Sorpresa: eran <strong class="text-white">más masivos de lo esperado</strong> para su edad.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">Quásares</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:orbits" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Primera imagen: SMACS 0723</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              La primera imagen pública fue el <strong class="text-natura-energy">campo profundo más profundo</strong> jamás tomado: miles de galaxias en un punto del tamaño de un grano de arena sostenido a brazo largo.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">12 jul 2022</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 06. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">06</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué el Webb observa en infrarrojo y no en luz visible como el Hubble?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Por dos razones: (1) Las galaxias más lejanas tienen su luz <strong class="text-white">"corrida al rojo"</strong> por la expansión del universo, así que llegan como infrarrojo. (2) El polvo cósmico <strong class="text-natura-energy">bloquea la luz visible</strong> pero deja pasar el infrarrojo, permitiendo ver dentro de nubes de formación estelar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué se ubica a 1,5 millones de km y no más cerca?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">En el punto L2, el telescopio puede mantener una posición estable con <strong class="text-white">muy poco combustible</strong>, y el escudo solar bloquea simultáneamente al Sol, la Tierra y la Luna. Más cerca (como el Hubble) sería más fácil de reparar pero el escudo no funcionaría tan bien.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué el espejo tiene que estar tan frío?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque cualquier objeto caliente <strong class="text-white">emite radiación infrarroja</strong>. Si el telescopio no estuviera helado, su propio "calor" contaminaría las imágenes. Por eso el escudo solar lo mantiene a -233 °C, así solo capta la luz infrarroja del cosmos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="hubble.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Hubble</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">James Webb — Telescopio 2 de 4</div>
+
+        <a href="ligo.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>LIGO</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:satellite" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Cohete Falcon 9",u:"Fisica",s:"Sistema Solar",l:"falcon-9.html",c:"#3B82F6"},
+    {n:"Cohete Falcon Heavy",u:"Fisica",s:"Sistema Solar",l:"falcon-heavy.html",c:"#3B82F6"},
+    {n:"Cohete Starship",u:"Fisica",s:"Sistema Solar",l:"starship.html",c:"#3B82F6"},
+    {n:"Telescopio Hubble",u:"Fisica",s:"Sistema Solar",l:"hubble.html",c:"#3B82F6"},
+    {n:"Telescopio James Webb",u:"Fisica",s:"Sistema Solar",l:"webb.html",c:"#3B82F6"},
+    {n:"LIGO y ondas gravitacionales",u:"Fisica",s:"Sistema Solar",l:"ligo.html",c:"#3B82F6"},
+    {n:"Radiotelescopios",u:"Fisica",s:"Sistema Solar",l:"radiotelescopios.html",c:"#3B82F6"},
+    {n:"Tecnologia espacial",u:"Fisica",s:"Sistema Solar",l:"tecnologia-espacial.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"exploracion.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"tierra-luna.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"mapi.html",c:"#3B82F6"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>

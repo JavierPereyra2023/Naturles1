@@ -1,0 +1,654 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falcon Heavy — Tecnología Espacial | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(59, 130, 246, 0.25); }
+    .highlight-box { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+    .toc-link { display: block; font-size: 12px; color: #A8B5AD; padding: 6px 0 6px 12px; border-left: 2px solid transparent; transition: all 0.2s; }
+    .toc-link.active { color: #3B82F6; border-left-color: #3B82F6; }
+    .toc-link:hover { color: white; }
+    .drop-cap > p:first-of-type::first-letter {
+      font-size: 4.2em; float: left; line-height: 0.7; padding: 6px 10px 0 0;
+      font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      color: #3B82F6;
+    }
+    .pull-quote {
+      border-left: 4px solid #3B82F6; padding: 16px 20px; margin: 24px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.5; background: rgba(59,130,246,0.04);
+      position: relative; color: #C8D4CC;
+    }
+    .pull-quote::before {
+      content: '\201C'; font-size: 3.5em; font-family: 'Playfair Display', Georgia, serif;
+      position: absolute; left: 10px; top: -12px; opacity: 0.12; line-height: 1;
+      color: #3B82F6;
+    }
+    .sidebar-note {
+      float: right; width: 230px; margin: 6px 0 18px 22px; padding: 14px;
+      border: 1px solid rgba(59,130,246,0.15); font-size: 0.73rem;
+      line-height: 1.55; background: rgba(59,130,246,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #3B82F6;
+    }
+    @media (max-width: 640px) {
+      .sidebar-note { float: none; width: 100%; margin: 16px 0; }
+    }
+    .magazine-divider {
+      display: flex; align-items: center; gap: 14px; margin: 36px 0;
+      color: rgba(59,130,246,0.4);
+    }
+    .magazine-divider::before, .magazine-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+    }
+    .magazine-divider .divider-icon { flex-shrink: 0; opacity: 0.5; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+</head>
+<body class="bg-sistema-solar">
+
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#3B82F6;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: celula, MRU, fotosintesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar busqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Sistema Solar</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="tecnologia-espacial.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Tecnología</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy font-semibold">Falcon Heavy</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Eje 3</span>
+        <a href="tecnologia-espacial.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+            <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.32]"><img src="../../../assets/fisica/sistema-solar/falcon-heavy-hero.png" alt="" class="w-full h-full object-cover"></div>
+  <div class="absolute inset-0 opacity-[0.55]" style="background: linear-gradient(135deg, #1E293B 0%, #0C4A6E 100%);"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/58 via-natura-black/18 to-natura-black/78"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">SpaceX · Supercohete</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Falcon <span class="text-natura-energy">Heavy</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Tres núcleos Falcon 9 juntos formando el cohete más potente del mundo en su momento. Capaz de levantar el doble de carga que cualquier cohete operativo, y de mandar un automóvil al espacio profundo.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">27 motores</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">Carga pesada</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Tesla Roadster</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">GOES-U</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 lg:py-14">
+  <div class="lg:flex gap-10">
+
+    <aside class="hidden lg:block w-52 flex-shrink-0">
+      <div class="sticky top-24">
+        <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4">En esta pagina</h3>
+        <nav class="space-y-0.5">
+          <a href="#diseno" class="toc-link active" data-toc>01. El diseño</a>
+          <a href="#primer-vuelo" class="toc-link" data-toc>02. El primer vuelo</a>
+          <a href="#misiones" class="toc-link" data-toc>03. Misiones emblemáticas</a>
+          <a href="#comparacion" class="toc-link" data-toc>04. Comparación histórica</a>
+          <a href="#para-pensar" class="toc-link" data-toc>05. Preguntas para pensar</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 space-y-12">
+
+      <!-- 01. El diseño -->
+      <section id="diseno" class="animate-fadeInUp">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">01</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El diseño: tres Falcon 9 juntos</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            Construir un cohete gigantesco desde cero es carísimo y arriesgado. SpaceX tomó otra decisión: <strong class="text-white">tomar tres núcleos Falcon 9 ya probados</strong> y unirlos en la base. El resultado es el <strong class="text-natura-energy">Falcon Heavy</strong>: dos cohetes "laterales" (boosters) que se desprenden poco después del despegue, y un núcleo central que sigue hasta órbita.
+          </p>
+        </div>
+
+        <div class="pull-quote">
+          <p>Es como juntar tres locomotoras para mover un tren más pesado. La ventaja es que cada locomotora ya existía, ya estaba probada y ya se sabía aterrizarla.</p>
+        </div>
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-4">Ficha técnica</h3>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:ruler" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Altura</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">70 m</p>
+            <p class="text-xs text-natura-silverDark mt-1">Igual que el Falcon 9</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:flame" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Motores totales</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">27 × Merlin</p>
+            <p class="text-xs text-natura-silverDark mt-1">9 en cada núcleo</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:package" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Carga a órbita baja</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">~64 t</p>
+            <p class="text-xs text-natura-silverDark mt-1">Aprox. 64.000 kg</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:globe" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Carga a Marte</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">~16,8 t</p>
+            <p class="text-xs text-natura-silverDark mt-1">Envía carga al planeta rojo</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:zap" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Empuje al despegue</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">22.800 kN</p>
+            <p class="text-xs text-natura-silverDark mt-1">Equivale a ~18 Boeing 747</p>
+          </div>
+
+          <div class="stat-box bg-natura-gray rounded-2xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="iconify text-natura-energy" data-icon="lucide:rocket" data-width="18"></span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-natura-silverDark">Primer vuelo</span>
+            </div>
+            <p class="font-heading font-bold text-2xl text-white">6 feb 2018</p>
+            <p class="text-xs text-natura-silverDark mt-1">Desde Cabo Cañaveral</p>
+          </div>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-label">El récord por un rato</span>
+          <p>Cuando debutó en 2018, el Falcon Heavy era el <strong>cohete más potente del mundo en operación</strong>, solo superado por el Saturno V (que llevó astronautas a la Luna en los 60 y 70). Multiplicó por dos la capacidad de carga del siguiente cohete disponible.</p>
+        </div>
+
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 02. El primer vuelo -->
+      <section id="primer-vuelo" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">02</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El primer vuelo (2018): un Tesla en el espacio</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-4">
+            El <strong class="text-white">6 de febrero de 2018</strong>, el Falcon Heavy realizó su vuelo inaugural desde la plataforma 39A del Centro Espacial Kennedy — la misma plataforma desde donde partieron las misiones Apollo a la Luna. Para probar que el cohete podía poner cosas en el espacio profundo, Elon Musk decidió que la carga útil sería un <strong class="text-natura-energy">automóvil Tesla Roadster rojo cereza</strong> con un maniquí vestido de astronauta al volante.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:rocket" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Despegue perfecto</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Los 27 motores Merlin se encendieron en simultáneo, generando un empuje equivalente a casi <strong class="text-natura-energy">20 aviones jumbo</strong>. El temblor se sintió a kilómetros de distancia.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:target" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">Aterrizaje doble</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">Los dos <strong class="text-white">boosters laterales</strong> se separaron a los +2 minutos y regresaron sincronizados a la Tierra, aterrizando en dos plataformas diferentes. Una imagen icónica de la ingeniería.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:car" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">El Tesla en órbita</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">El Roadster y su conductor ("<strong class="text-natura-energy">Starman</strong>") entraron en una órbita que se cruza con la de Marte. El auto sigue dando vueltas al Sol y se espera que <strong class="text-white">orbite por millones de años</strong>.</p>
+          </div>
+
+          <div class="content-card bg-natura-gray rounded-2xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:radio" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white text-lg">El último mensaje</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed">La canción <strong class="text-white">"Space Oddity" de David Bowie</strong> sonaba en los parlantes del Tesla. Es probablemente el único auto que ha viajado a la velocidad de escape de la Tierra mientras suena Bowie.</p>
+          </div>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-energy text-xl flex-shrink-0 mt-0.5" data-icon="lucide:lightbulb" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-energy">¿Por qué gastar un cohete en un auto?</strong> El Falcon Heavy necesitaba demostrar que podía lanzar carga al espacio profundo. Como <strong class="text-white">no había un cliente real</strong> para el primer vuelo, Musk usó su propio Tesla. Era una forma creativa y muy publicitada de validar el cohete sin riesgo comercial.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 03. Misiones emblemáticas -->
+      <section id="misiones" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">03</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Misiones emblemáticas</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:cloud-rain" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">GOES-U (2024)</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Satélite meteorológico de la NOAA, el más moderno de Estados Unidos. Da <strong class="text-white">pronósticos del clima</strong>, detecta huracanes y monitorea rayos. Fue el <strong class="text-natura-water">último lanzamiento del Falcon Heavy</strong> hasta ahora.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">NOAA</span>
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Clima</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-energy text-2xl" data-icon="lucide:earth" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Europa Clipper (2024)</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Misión de la NASA hacia la luna Europa de Júpiter, donde hay un <strong class="text-white">océano bajo el hielo</strong>. El Falcon Heavy lanzó la sonda que estudiará si hay condiciones para la vida.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">NASA</span>
+              <span class="text-[9px] bg-natura-energy/10 text-natura-energy px-2 py-0.5 rounded-full">Júpiter</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-leaf text-2xl" data-icon="lucide:military" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Misiones de seguridad (USA)</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              La Fuerza Espacial de Estados Unidos lanzó varios <strong class="text-white">satélites clasificados</strong> en Falcon Heavy. Es uno de los pocos cohetes capaces de poner <strong class="text-natura-leaf">carga militar pesada</strong> en órbita geoestacionaria.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-leaf/10 text-natura-leaf px-2 py-0.5 rounded-full">Militar</span>
+              <span class="text-[9px] bg-natura-leaf/10 text-natura-leaf px-2 py-0.5 rounded-full">Geoestacionaria</span>
+            </div>
+          </div>
+
+          <div class="bg-natura-gray rounded-2xl p-6 content-card">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="iconify text-natura-water text-2xl" data-icon="lucide:radio" data-width="24"></span>
+              <h3 class="font-heading font-semibold text-white">Viasat, Inmarsat, EchoStar</h3>
+            </div>
+            <p class="text-natura-silver text-base leading-relaxed mb-3">
+              Satélites de <strong class="text-white">comunicaciones</strong> enormes (cada uno del tamaño de un auto). El Falcon Heavy los puso en órbita geoestacionaria a 36.000 km de altura, dando internet y teléfono a continentes enteros.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Comunicaciones</span>
+              <span class="text-[9px] bg-natura-water/10 text-natura-water px-2 py-0.5 rounded-full">Geosync</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 04. Comparación -->
+      <section id="comparacion" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">04</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">El Falcon Heavy en contexto</h2>
+        </div>
+
+        <div class="drop-cap">
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed mb-6">
+            Aunque cuando se lanzó el Falcon Heavy era el cohete más potente del mundo, su papel actual es de <strong class="text-white">puente</strong>. SpaceX ya está retirada su producción para reemplazarlo por el <strong class="text-natura-energy">Starship</strong>, que es completamente reutilizable y todavía más grande. Mientras tanto, sigue siendo una opción confiable para misiones pesadas.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-white/10">
+                <th class="text-left py-3 px-4 text-natura-silverDark font-bold uppercase text-[10px] tracking-wider">Cohete</th>
+                <th class="text-left py-3 px-4 text-natura-silverDark font-bold uppercase text-[10px] tracking-wider">Carga a LEO</th>
+                <th class="text-left py-3 px-4 text-natura-silverDark font-bold uppercase text-[10px] tracking-wider">Reutilizable</th>
+                <th class="text-left py-3 px-4 text-natura-silverDark font-bold uppercase text-[10px] tracking-wider">En servicio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-white/5">
+                <td class="py-3 px-4 text-white font-semibold">Falcon 9</td>
+                <td class="py-3 px-4 text-natura-silver">22,8 t</td>
+                <td class="py-3 px-4 text-natura-leaf">Sí (parcial)</td>
+                <td class="py-3 px-4 text-natura-energy">2010 —</td>
+              </tr>
+              <tr class="border-b border-white/5 bg-natura-energy/5">
+                <td class="py-3 px-4 text-white font-semibold">Falcon Heavy</td>
+                <td class="py-3 px-4 text-natura-silver">63,8 t</td>
+                <td class="py-3 px-4 text-natura-leaf">Sí (parcial)</td>
+                <td class="py-3 px-4 text-natura-energy">2018 —</td>
+              </tr>
+              <tr class="border-b border-white/5">
+                <td class="py-3 px-4 text-white font-semibold">Saturn V (Apolo)</td>
+                <td class="py-3 px-4 text-natura-silver">140 t</td>
+                <td class="py-3 px-4 text-natura-leaf">No</td>
+                <td class="py-3 px-4 text-natura-silverDark">1967 — 1973</td>
+              </tr>
+              <tr class="border-b border-white/5">
+                <td class="py-3 px-4 text-white font-semibold">Ariane 5 (ESA)</td>
+                <td class="py-3 px-4 text-natura-silver">~21 t</td>
+                <td class="py-3 px-4 text-natura-leaf">No</td>
+                <td class="py-3 px-4 text-natura-silverDark">1996 — 2023</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 text-white font-semibold">Starship (futuro)</td>
+                <td class="py-3 px-4 text-natura-silver">~100-150 t</td>
+                <td class="py-3 px-4 text-natura-leaf">Sí (total)</td>
+                <td class="py-3 px-4 text-natura-water">En desarrollo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="highlight-box rounded-2xl p-6 mt-6">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-energy text-xl flex-shrink-0 mt-0.5" data-icon="lucide:trending-up" data-width="20"></span>
+            <div>
+              <p class="text-natura-silverLight text-sm leading-relaxed">
+                <strong class="text-natura-energy">El precio de bajar a la Tierra.</strong> Reutilizar un cohete reduce los costos enormemente, pero también requiere motores más complejos y misiones más limitadas. El Falcon Heavy todavía pierde los boosters laterales en algunas misiones (no siempre se recuperan). El objetivo final de SpaceX es un cohete 100% reutilizable, y el Starship es su apuesta.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="magazine-divider">
+        <span class="iconify divider-icon" data-icon="lucide:sparkles" data-width="14"></span>
+      </div>
+
+      <!-- 05. Preguntas para pensar -->
+      <section id="para-pensar" class="animate-fadeInUp delay-100">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">05</span>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Preguntas para pensar</h2>
+        </div>
+
+        <div class="space-y-3">
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">1.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué 27 motores en lugar de uno más grande?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">En cohetería se usa lo que se llama "ley de los motores". Un motor más grande es <strong class="text-white">más difícil de diseñar, probar y fabricar</strong>. Muchos motores más chicos permiten mayor <strong class="text-natura-energy">redundancia</strong>: si uno falla, los otros pueden compensar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">2.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué los boosters laterales se separan tan rápido?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Para ahorrar peso. Llevar boosters vacíos consume combustible. Se separan a los <strong class="text-natura-energy">2:30 minutos</strong> del despegue, cuando ya cumplieron su función de empujar al cohete a través de la atmósfera más densa.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card rounded-sm p-4 bg-natura-gray">
+            <div class="flex items-start gap-3">
+              <span class="text-natura-energy font-heading font-bold text-lg flex-shrink-0">3.</span>
+              <div>
+                <p class="font-heading font-semibold text-white text-sm mb-1">¿Por qué se descontinúa el Falcon Heavy?</p>
+                <p class="text-lg text-natura-silverDark leading-relaxed">Porque el Starship hace todo lo que hace el Falcon Heavy pero mejor: <strong class="text-white">más carga, totalmente reutilizable y más barato</strong>. SpaceX prefiere concentrar recursos en el cohete que viene en lugar de mantener dos líneas de producto.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NAVEGACION ENTRE TEMAS -->
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <a href="falcon-9.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Falcon 9</span>
+        </a>
+
+        <div class="text-[11px] text-natura-silverDark text-center">Falcon Heavy — Cohete 2 de 3</div>
+
+        <a href="starship.html" class="flex items-center justify-center gap-2 border border-white/10 hover:border-natura-energy/30 text-natura-silver hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 transition-all">
+          <span>Starship</span>
+          <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+        </a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-12">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:rocket" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.animate-fadeInUp').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Cohete Falcon 9",u:"Fisica",s:"Sistema Solar",l:"falcon-9.html",c:"#3B82F6"},
+    {n:"Cohete Falcon Heavy",u:"Fisica",s:"Sistema Solar",l:"falcon-heavy.html",c:"#3B82F6"},
+    {n:"Cohete Starship",u:"Fisica",s:"Sistema Solar",l:"starship.html",c:"#3B82F6"},
+    {n:"Telescopio Hubble",u:"Fisica",s:"Sistema Solar",l:"hubble.html",c:"#3B82F6"},
+    {n:"Telescopio James Webb",u:"Fisica",s:"Sistema Solar",l:"webb.html",c:"#3B82F6"},
+    {n:"LIGO y ondas gravitacionales",u:"Fisica",s:"Sistema Solar",l:"ligo.html",c:"#3B82F6"},
+    {n:"Radiotelescopios",u:"Fisica",s:"Sistema Solar",l:"radiotelescopios.html",c:"#3B82F6"},
+    {n:"Tecnologia espacial",u:"Fisica",s:"Sistema Solar",l:"tecnologia-espacial.html",c:"#3B82F6"},
+    {n:"Exploracion espacial",u:"Fisica",s:"Sistema Solar",l:"exploracion.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Fisica",s:"Sistema Solar",l:"sol-planetas.html",c:"#3B82F6"},
+    {n:"La Tierra y la Luna",u:"Fisica",s:"Sistema Solar",l:"tierra-luna.html",c:"#3B82F6"},
+    {n:"Proyecto MAPI",u:"Fisica",s:"Sistema Solar",l:"mapi.html",c:"#3B82F6"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body>
+</html>
