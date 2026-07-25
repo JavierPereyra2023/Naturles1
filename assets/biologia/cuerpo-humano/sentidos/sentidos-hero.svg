@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
+  <title id="t">Los cinco sentidos</title><desc id="d">Perfil humano rodeado por símbolos de vista, oído, gusto, olfato y tacto.</desc>
+  <defs><radialGradient id="g"><stop stop-color="#14b8a6" stop-opacity=".28"/><stop offset="1" stop-color="#080c0a" stop-opacity="0"/></radialGradient><filter id="gl"><feGaussianBlur stdDeviation="8"/></filter></defs>
+  <rect width="1200" height="620" fill="#080c0a"/><circle cx="760" cy="300" r="270" fill="url(#g)"/>
+  <path d="M738 90c-108 26-164 113-146 215 9 52 43 83 60 118 15 31 10 71-8 111h257c-25-51-24-94-4-135 27-57 70-96 55-179-19-103-111-154-214-130Z" fill="#101b18" stroke="#2dd4bf" stroke-width="4"/>
+  <path d="M703 219c32-35 83-35 117 0-36 32-83 32-117 0Z" fill="none" stroke="#99f6e4" stroke-width="5"/><circle cx="761" cy="219" r="15" fill="#14b8a6"/>
+  <path d="M878 245c45 2 51 66 9 86-20 10-31 33-18 49" fill="none" stroke="#67e8f9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M735 338q39 31 79 0" fill="none" stroke="#fda4af" stroke-width="6" stroke-linecap="round"/>
+  <path d="M728 268q36 18 8 53" fill="none" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
+  <g fill="none" stroke-width="4">
+    <circle cx="475" cy="150" r="58" stroke="#99f6e4"/><path d="M438 150q37-35 74 0-37 35-74 0Z" stroke="#99f6e4"/><circle cx="475" cy="150" r="10" fill="#14b8a6" stroke="none"/>
+    <circle cx="1040" cy="175" r="58" stroke="#67e8f9"/><path d="M1028 138c-35 20-30 83 4 76 21-4 15-34 37-39" stroke="#67e8f9" stroke-linecap="round"/>
+    <circle cx="477" cy="440" r="58" stroke="#fda4af"/><path d="M444 423q34-25 67 0v27q-33 30-67 0Z" stroke="#fda4af"/>
+    <circle cx="1040" cy="430" r="58" stroke="#fbbf24"/><path d="M1038 389v48m-20-34v42m40-40v42m-58-22v35m77-30v31c0 31-17 48-39 48-28 0-44-16-44-43" stroke="#fbbf24" stroke-linecap="round"/>
+  </g>
+  <g fill="#c8d4cc" font-family="Arial,sans-serif" font-size="18" font-weight="700" text-anchor="middle"><text x="475" y="235">VISTA</text><text x="1040" y="260">OÍDO</text><text x="477" y="525">GUSTO Y OLFATO</text><text x="1040" y="515">TACTO</text></g>
+</svg>

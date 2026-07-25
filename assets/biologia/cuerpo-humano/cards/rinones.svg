@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Riñones humanos</title><desc id="d">Ilustración anatómica estilizada de los riñones y vías urinarias, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#32151a"/><stop offset="1" stop-color="#080c0a"/></radialGradient><linearGradient id="k"><stop stop-color="#ef4444"/><stop offset="1" stop-color="#7f1d1d"/></linearGradient></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><path d="M442 115c-102-20-184 70-166 183 17 106 102 151 205 103 48-23 58-76 39-122-17-42-12-111 25-136-25-17-66-21-103-28Z" fill="url(#k)" stroke="#fda4af" stroke-width="9"/><path d="M758 115c102-20 184 70 166 183-17 106-102 151-205 103-48-23-58-76-39-122 17-42 12-111-25-136 25-17 66-21 103-28Z" fill="url(#k)" stroke="#fda4af" stroke-width="9"/>
+  <path d="M505 263h95m95 0h-95M600 42v425" stroke="#fb7185" stroke-width="22" stroke-linecap="round"/><path d="M471 401v113m258-113v113" stroke="#f9a8d4" stroke-width="12"/><path d="M471 514q129 68 258 0v49H471Z" fill="#a855f7" opacity=".75" stroke="#d8b4fe" stroke-width="6"/>
+  <path d="M377 156q93 88 63 207m383-207q-93 88-63 207" fill="none" stroke="#fecdd3" stroke-width="7" opacity=".55"/>
+</svg>

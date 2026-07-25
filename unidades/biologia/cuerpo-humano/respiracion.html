@@ -116,7 +116,7 @@
 <!-- HERO -->
 <section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 opacity-10">
-    <img src="../../../assets/biologia/cuerpo-humano/lungs-anatomy.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+    <img src="../../../assets/biologia/cuerpo-humano/cards/pulmones-fotorealista.png" alt="" class="w-full h-full object-cover object-right">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
   <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
@@ -152,9 +152,11 @@
           <a href="#funcin-principal" class="toc-link active" data-toc>01. Función principal</a>
           <a href="#recorrido-del-aire" class="toc-link" data-toc>02. Recorrido del aire</a>
           <a href="#mecnica-respiratoria" class="toc-link" data-toc>03. Mecánica respiratoria</a>
-          <a href="#estadstica-impactante" class="toc-link" data-toc>04. Estadística impactante</a>
-          <a href="#conexin-con-el-sistema-circulatorio" class="toc-link" data-toc>05. Conexión con el Sistema Circulatorio</a>
-          <a href="#preguntas-para-pensar" class="toc-link" data-toc>06. Preguntas para pensar</a>
+          <a href="#hematosis" class="toc-link" data-toc>04. Hematosis</a>
+          <a href="#frecuencia-respiratoria" class="toc-link" data-toc>05. Frecuencia respiratoria</a>
+          <a href="#estadstica-impactante" class="toc-link" data-toc>06. Estadística impactante</a>
+          <a href="#conexin-con-el-sistema-circulatorio" class="toc-link" data-toc>07. Conexión con el Sistema Circulatorio</a>
+          <a href="#preguntas-para-pensar" class="toc-link" data-toc>08. Preguntas para pensar</a>
       </nav>
     </div>
   </aside>
@@ -245,22 +247,71 @@
         <h2 class="font-heading text-lg md:text-xl font-bold text-white">Mecánica respiratoria</h2>
       </div>
       <div class="accent-line mb-5"></div>
-      <p class="text-base text-natura-silver mb-5 leading-relaxed">La respiración tiene dos fases: la entrada y la salida del aire. El músculo que lo hace posible es el <strong class="text-natura-silverLight">diafragma</strong>, una membrana ubicada debajo de los pulmones.</p>
+      <p class="text-base text-natura-silver mb-5 leading-relaxed">La respiración tiene dos fases: la entrada y la salida del aire. Los pulmones <strong class="text-natura-silverLight">no tienen músculos propios</strong>: no pueden inflarse solos. Quienes hacen el trabajo son dos grupos musculares: el <strong class="text-natura-silverLight">diafragma</strong>, una lámina muscular ubicada debajo de los pulmones, y los <strong class="text-natura-silverLight">músculos intercostales</strong>, que se encuentran entre las costillas. Al cambiar el tamaño de la caja torácica cambian la presión interna, y el aire entra o sale por esa diferencia de presión.</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div class="content-card rounded-lg p-5 md:p-6 bg-natura-dark/50">
           <div class="flex items-center gap-3 mb-3">
             <span class="iconify text-natura-water text-xl" data-icon="lucide:arrow-down-circle"></span>
-            <h3 class="font-heading text-base font-semibold text-natura-water">Inspiración</h3>
+            <h3 class="font-heading text-base font-semibold text-natura-water">Inspiración · proceso activo</h3>
           </div>
-          <p class="text-base text-natura-silverLight leading-relaxed">El <span class="iconify text-natura-energy inline" data-icon="lucide:move-down" data-width="14"></span> diafragma <strong class="text-white">baja</strong>, los pulmones se expanden y el aire rico en <span class="text-natura-water font-semibold">\(O_2\)</span> entra activamente por la diferencia de presión.</p>
+          <p class="text-base text-natura-silverLight leading-relaxed">El diafragma <strong class="text-white">se contrae</strong> y baja; los intercostales externos <strong class="text-white">se contraen</strong> y elevan las costillas. El tórax aumenta de volumen, la presión interna baja y el aire rico en <span class="text-natura-water font-semibold">\(O_2\)</span> entra empujado por la presión atmosférica.</p>
         </div>
         <div class="content-card rounded-lg p-5 md:p-6 bg-natura-dark/50">
           <div class="flex items-center gap-3 mb-3">
             <span class="iconify text-natura-energy text-xl" data-icon="lucide:arrow-up-circle"></span>
-            <h3 class="font-heading text-base font-semibold text-natura-energy">Espiración</h3>
+            <h3 class="font-heading text-base font-semibold text-natura-energy">Espiración · pasiva en reposo</h3>
           </div>
-          <p class="text-base text-natura-silverLight leading-relaxed">El <span class="iconify text-natura-energy inline" data-icon="lucide:move-up" data-width="14"></span> diafragma <strong class="text-white">sube</strong>, los pulmones se contraen y se expulsa el aire cargado con <span class="text-natura-energy font-semibold">\(CO_2\)</span>. En reposo es un proceso pasivo.</p>
+          <p class="text-base text-natura-silverLight leading-relaxed">El diafragma <strong class="text-white">se relaja</strong> y sube; los intercostales <strong class="text-white">se relajan</strong> y las costillas descienden. El tórax disminuye de volumen, la presión interna sube y sale el aire cargado con <span class="text-natura-energy font-semibold">\(CO_2\)</span>. En reposo no gasta energía: el tejido elástico del pulmón vuelve solo a su tamaño.</p>
         </div>
+      </div>
+
+      <!-- TABLA: qué se contrae y qué se relaja -->
+      <div class="content-card bg-natura-dark rounded-lg mt-6 overflow-x-auto" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-3 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:table-2" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Qué se contrae y qué se relaja</span>
+        </div>
+        <table class="w-full text-left border-collapse min-w-[560px]" style="font-family:'Inter',sans-serif;">
+          <thead>
+            <tr class="text-[10px] uppercase tracking-wider text-natura-silverDark">
+              <th class="px-5 py-2 font-semibold border-b border-white/10">Estructura</th>
+              <th class="px-5 py-2 font-semibold border-b border-white/10 text-natura-water">Inspiración (entra aire)</th>
+              <th class="px-5 py-2 font-semibold border-b border-white/10 text-natura-energy">Espiración (sale aire)</th>
+            </tr>
+          </thead>
+          <tbody class="text-[13px] text-natura-silver">
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Diafragma</td>
+              <td class="px-5 py-3 border-b border-white/5"><strong class="text-natura-water">SE CONTRAE</strong> · baja y se aplana</td>
+              <td class="px-5 py-3 border-b border-white/5"><strong class="text-natura-energy">SE RELAJA</strong> · sube en forma de cúpula</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Intercostales externos</td>
+              <td class="px-5 py-3 border-b border-white/5"><strong class="text-natura-water">SE CONTRAEN</strong> · elevan las costillas</td>
+              <td class="px-5 py-3 border-b border-white/5"><strong class="text-natura-energy">SE RELAJAN</strong> · las costillas descienden</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Volumen del tórax</td>
+              <td class="px-5 py-3 border-b border-white/5">Aumenta</td>
+              <td class="px-5 py-3 border-b border-white/5">Disminuye</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Presión dentro del pulmón</td>
+              <td class="px-5 py-3 border-b border-white/5">Disminuye (menor que la atmosférica)</td>
+              <td class="px-5 py-3 border-b border-white/5">Aumenta (mayor que la atmosférica)</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Pulmones</td>
+              <td class="px-5 py-3 border-b border-white/5">Se expanden</td>
+              <td class="px-5 py-3 border-b border-white/5">Se achican (retroceso elástico)</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 text-natura-silverLight font-semibold">Gasto de energía</td>
+              <td class="px-5 py-3">Proceso <strong class="text-white">activo</strong></td>
+              <td class="px-5 py-3">Proceso <strong class="text-white">pasivo</strong> en reposo</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- ANIMACIÓN: mecánica respiratoria -->
@@ -271,13 +322,26 @@
         </div>
         <div class="px-5">
           <svg id="respSvg" viewBox="0 0 640 360" class="w-full max-w-lg mx-auto" role="img" aria-label="Animación de la mecánica respiratoria: los pulmones se expanden cuando el diafragma baja">
-            <!-- caja torácica (costillas sugeridas) -->
-            <g stroke="rgba(200,212,204,0.12)" stroke-width="5" fill="none" stroke-linecap="round">
-              <path d="M185 130 Q320 160 455 130"/>
-              <path d="M180 170 Q320 202 460 170"/>
-              <path d="M178 210 Q320 244 462 210"/>
-              <path d="M180 250 Q320 284 460 250"/>
+            <!-- caja torácica (costillas) + músculos intercostales -->
+            <g id="caja">
+              <g id="intercostales" stroke="#F472B6" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.35">
+                <path d="M183 150 Q199 156 215 161"/><path d="M457 150 Q441 156 425 161"/>
+                <path d="M179 190 Q195 197 211 203"/><path d="M461 190 Q445 197 429 203"/>
+                <path d="M179 230 Q195 238 211 245"/><path d="M461 230 Q445 238 429 245"/>
+              </g>
+              <g stroke="rgba(200,212,204,0.28)" stroke-width="5" fill="none" stroke-linecap="round">
+                <path d="M185 130 Q320 160 455 130"/>
+                <path d="M180 170 Q320 202 460 170"/>
+                <path d="M178 210 Q320 244 462 210"/>
+                <path d="M180 250 Q320 284 460 250"/>
+              </g>
             </g>
+            <g stroke="#4E6058" stroke-width="1.1" fill="none">
+              <path d="M462 137 L496 134"/><path d="M448 197 L496 195"/>
+            </g>
+            <text x="502" y="138" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" font-weight="700">COSTILLAS</text>
+            <text x="502" y="193" fill="#F472B6" font-size="10" font-family="Inter,sans-serif" font-weight="700">INTERCOSTALES</text>
+            <text x="502" y="206" fill="#8B6474" font-size="9" font-family="Inter,sans-serif">entre las costillas</text>
             <!-- tráquea y bronquios -->
             <rect x="313" y="22" width="14" height="62" rx="6" fill="rgba(200,212,204,0.25)"/>
             <path d="M320 84 L268 112 M320 84 L372 112" stroke="rgba(200,212,204,0.25)" stroke-width="10" stroke-linecap="round" fill="none"/>
@@ -307,11 +371,13 @@
               <text x="338" y="16" fill="#F59E0B" font-size="11" font-family="Inter,sans-serif" font-weight="600">sale aire (CO₂)</text>
             </g>
             <text id="respFase" x="120" y="40" fill="#A8B5AD" font-size="12" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">INSPIRACIÓN</text>
-            <text id="respDesc" x="120" y="56" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">el diafragma baja</text>
+            <text id="respDesc" x="120" y="56" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">el diafragma se contrae y baja</text>
+            <text id="respDesc2" x="120" y="70" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">los intercostales se contraen</text>
+            <text id="respVol" x="120" y="90" fill="#38BDF8" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">↑ volumen · ↓ presión</text>
           </svg>
         </div>
         <p class="px-5 pb-5 pt-2 text-base text-natura-silver leading-relaxed">
-          Cuando el diafragma <strong class="text-natura-silverLight">se contrae y baja</strong>, el tórax se agranda y la presión interna disminuye: el aire entra solo, empujado por la presión atmosférica. Cuando el diafragma <strong class="text-natura-silverLight">se relaja y sube</strong>, los pulmones se achican como un globo que se desinfla y el aire con CO₂ sale. No es el aire el que mueve a los pulmones: es el diafragma el que hace todo el trabajo.
+          Cuando el diafragma <strong class="text-natura-silverLight">se contrae y baja</strong> y los intercostales <strong class="text-natura-silverLight">se contraen</strong> elevando las costillas, el tórax se agranda y la presión interna disminuye: el aire entra solo, empujado por la presión atmosférica. Cuando ambos <strong class="text-natura-silverLight">se relajan</strong>, el tórax vuelve a su tamaño, los pulmones se achican como un globo que se desinfla y el aire con \(CO_2\) sale. No es el aire el que mueve a los pulmones: son los músculos los que hacen todo el trabajo, y el aire los sigue.
         </p>
       </div>
       <script>
@@ -322,6 +388,8 @@
         var dia = document.getElementById('diafragma');
         var airIn = document.getElementById('airIn'), airOut = document.getElementById('airOut');
         var fase = document.getElementById('respFase'), desc = document.getElementById('respDesc');
+        var desc2 = document.getElementById('respDesc2'), vol = document.getElementById('respVol');
+        var caja = document.getElementById('caja'), inter = document.getElementById('intercostales');
         var CYCLE = 5; // segundos por respiración
         function frame(ms) {
           var t = (ms / 1000) % CYCLE;
@@ -330,13 +398,21 @@
           var s = 'scale(' + (1 + 0.10 * ph) + ',' + (1 + 0.16 * ph) + ')';
           lungL.setAttribute('transform', s);
           lungR.setAttribute('transform', s);
+          // las costillas se elevan y ensanchan al inspirar (giran sobre su articulación posterior)
+          caja.setAttribute('transform', 'translate(320 200) scale(' + (1 + 0.05 * ph) + ',1) translate(-320 -200) translate(0 ' + (-10 * ph).toFixed(1) + ')');
+          // los intercostales se acortan y engrosan al contraerse
+          inter.setAttribute('opacity', (0.35 + 0.5 * ph).toFixed(2));
+          inter.setAttribute('stroke-width', (9 + 4 * ph).toFixed(1));
           // el diafragma baja al inspirar (control de la curva: arriba relajado, abajo contraído)
           var cy = 255 + 60 * ph;
           dia.setAttribute('d', 'M178 295 Q320 ' + cy.toFixed(1) + ' 462 295');
           airIn.setAttribute('opacity', inhaling ? '1' : '0');
           airOut.setAttribute('opacity', inhaling ? '0' : '1');
           fase.textContent = inhaling ? 'INSPIRACIÓN' : 'ESPIRACIÓN';
-          desc.textContent = inhaling ? 'el diafragma baja' : 'el diafragma sube';
+          desc.textContent = inhaling ? 'el diafragma SE CONTRAE y baja' : 'el diafragma SE RELAJA y sube';
+          desc2.textContent = inhaling ? 'los intercostales SE CONTRAEN' : 'los intercostales SE RELAJAN';
+          vol.textContent = inhaling ? '↑ volumen · ↓ presión' : '↓ volumen · ↑ presión';
+          vol.setAttribute('fill', inhaling ? '#38BDF8' : '#F59E0B');
           requestAnimationFrame(frame);
         }
         requestAnimationFrame(frame);
@@ -345,10 +421,202 @@
     </section>
     <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
 
-    <!-- 04 · Estadística impactante -->
-    <section class="animate-fadeInUp delay-400" id="estadstica-impactante">
+    <!-- 04 · Hematosis -->
+    <section class="animate-fadeInUp delay-100" id="hematosis">
       <div class="flex items-center gap-3 mb-4">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Hematosis: el intercambio gaseoso</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+
+      <div class="content-card highlight-box rounded-lg p-5 md:p-6 mb-5">
+        <p class="text-sm md:text-lg text-natura-silverLight leading-relaxed">
+          Se llama <strong class="text-white">hematosis</strong> al intercambio de gases que ocurre entre el aire de los alvéolos y la sangre de los capilares pulmonares. Allí la sangre <strong class="text-natura-silverLight">carboxigenada</strong> (pobre en \(O_2\) y rica en \(CO_2\)) se transforma en sangre <strong class="text-natura-silverLight">oxigenada</strong>.
+        </p>
+      </div>
+
+      <p class="text-base text-natura-silver mb-4 leading-relaxed">Ventilar los pulmones no alcanza: el oxígeno todavía tiene que <em>pasar</em> del aire a la sangre. Ese paso ocurre en la <strong class="text-natura-silverLight">membrana alvéolo-capilar</strong>, formada apenas por la pared del alvéolo y la pared del capilar, ambas de una sola capa de células. Su espesor total es de unos <strong class="text-natura-silverLight">0,5 micrones</strong>: unas 200 veces más fina que una hoja de papel.</p>
+
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">El intercambio no gasta energía: es un fenómeno físico llamado <strong class="text-natura-silverLight">difusión</strong>. Cada gas se mueve espontáneamente desde donde está más concentrado hacia donde está menos concentrado. En el alvéolo hay mucho \(O_2\) y poco \(CO_2\); en la sangre que llega, al revés. Por eso el \(O_2\) entra a la sangre y el \(CO_2\) sale hacia el alvéolo, al mismo tiempo y en direcciones opuestas.</p>
+
+      <!-- DIAGRAMA: hematosis -->
+      <div class="content-card bg-natura-dark rounded-lg overflow-hidden" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:git-compare-arrows" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Diagrama · Alvéolo y capilar</span>
+        </div>
+        <div class="px-5">
+          <svg viewBox="0 0 640 430" class="w-full max-w-2xl mx-auto" role="img" aria-label="Esquema de la hematosis: un alvéolo lleno de aire con mucho oxígeno y poco dióxido de carbono, separado por la membrana alvéolo-capilar de un capilar sanguíneo. El oxígeno difunde del alvéolo a la sangre y el dióxido de carbono de la sangre al alvéolo. La sangre entra azul, pobre en oxígeno, y sale roja, rica en oxígeno.">
+            <defs>
+              <linearGradient id="hemGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#38BDF8" stop-opacity=".24"/>
+                <stop offset="0.40" stop-color="#38BDF8" stop-opacity=".18"/>
+                <stop offset="0.60" stop-color="#EF4444" stop-opacity=".18"/>
+                <stop offset="1" stop-color="#EF4444" stop-opacity=".28"/>
+              </linearGradient>
+            </defs>
+
+            <!-- bronquiolo -->
+            <path d="M300 6 V54" stroke="rgba(200,212,204,0.22)" stroke-width="24" stroke-linecap="round" fill="none"/>
+            <text x="326" y="30" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">BRONQUIOLO</text>
+
+            <!-- alvéolo -->
+            <path d="M150 200 C142 118 200 56 300 56 C400 56 458 118 450 200 Z" fill="#0E1815" stroke="#C8D4CC" stroke-width="2.5"/>
+            <text x="300" y="84" fill="#C8D4CC" font-size="13" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">ALVÉOLO</text>
+            <text x="300" y="100" fill="#7E9188" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">aire: mucho O₂ · poco CO₂</text>
+
+            <!-- gases dentro del alvéolo -->
+            <g fill="#34D399">
+              <circle cx="196" cy="132" r="5"/><circle cx="238" cy="118" r="5"/><circle cx="272" cy="148" r="5"/>
+              <circle cx="322" cy="124" r="5"/><circle cx="360" cy="150" r="5"/><circle cx="398" cy="128" r="5"/>
+              <circle cx="216" cy="164" r="5"/><circle cx="304" cy="166" r="5"/><circle cx="412" cy="164" r="5"/>
+            </g>
+            <g fill="#F59E0B">
+              <circle cx="256" cy="132" r="4"/><circle cx="378" cy="112" r="4"/>
+            </g>
+
+            <!-- membrana alvéolo-capilar -->
+            <rect x="30" y="200" width="580" height="16" fill="rgba(200,212,204,0.09)"/>
+            <g stroke="rgba(200,212,204,0.35)" stroke-width="1.2" stroke-dasharray="4 4">
+              <path d="M30 200 H610"/><path d="M30 216 H610"/>
+            </g>
+            <path d="M480 208 L536 168" stroke="#4E6058" stroke-width="1.2" fill="none"/>
+            <text x="542" y="152" fill="#C8D4CC" font-size="10" font-family="Inter,sans-serif" font-weight="700">MEMBRANA</text>
+            <text x="542" y="165" fill="#C8D4CC" font-size="10" font-family="Inter,sans-serif" font-weight="700">ALVÉOLO-CAPILAR</text>
+            <text x="542" y="178" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">0,5 µm</text>
+
+            <!-- capilar -->
+            <rect x="30" y="216" width="580" height="80" rx="40" fill="url(#hemGrad)" stroke="rgba(200,212,204,0.22)" stroke-width="1.5"/>
+            <g>
+              <ellipse cx="100" cy="256" rx="22" ry="13" fill="#38BDF8"/><ellipse cx="100" cy="256" rx="9" ry="5" fill="#1E7BA8"/>
+              <ellipse cx="220" cy="256" rx="22" ry="13" fill="#4FA3D0"/><ellipse cx="220" cy="256" rx="9" ry="5" fill="#2A6E90"/>
+              <ellipse cx="340" cy="256" rx="22" ry="13" fill="#9B7A9E"/><ellipse cx="340" cy="256" rx="9" ry="5" fill="#6B5270"/>
+              <ellipse cx="460" cy="256" rx="22" ry="13" fill="#DE5A56"/><ellipse cx="460" cy="256" rx="9" ry="5" fill="#9B2C2C"/>
+              <ellipse cx="570" cy="256" rx="22" ry="13" fill="#EF4444"/><ellipse cx="570" cy="256" rx="9" ry="5" fill="#9B2C2C"/>
+            </g>
+            <polygon points="26,256 8,247 8,265" fill="#38BDF8"/>
+            <polygon points="632,256 614,247 614,265" fill="#EF4444"/>
+            <text x="320" y="316" fill="#A8B5AD" font-size="11" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">CAPILAR SANGUÍNEO</text>
+
+            <!-- difusión de O2 hacia la sangre -->
+            <g stroke="#34D399" stroke-width="2.4" fill="none">
+              <path d="M150 186 V232"/><path d="M260 186 V232"/><path d="M370 186 V232"/>
+            </g>
+            <g fill="#34D399">
+              <polygon points="150,240 143,226 157,226"/><polygon points="260,240 253,226 267,226"/><polygon points="370,240 363,226 377,226"/>
+            </g>
+            <text x="260" y="180" fill="#34D399" font-size="12" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">O₂</text>
+
+            <!-- difusión de CO2 hacia el alvéolo -->
+            <g stroke="#F59E0B" stroke-width="2.4" fill="none">
+              <path d="M205 232 V186"/><path d="M315 232 V186"/><path d="M425 232 V186"/>
+            </g>
+            <g fill="#F59E0B">
+              <polygon points="205,178 198,192 212,192"/><polygon points="315,178 308,192 322,192"/><polygon points="425,178 418,192 432,192"/>
+            </g>
+            <text x="425" y="172" fill="#F59E0B" font-size="12" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">CO₂</text>
+
+            <!-- rótulos de entrada y salida -->
+            <text x="16" y="348" fill="#38BDF8" font-size="11" font-family="Inter,sans-serif" font-weight="700">SANGRE CARBOXIGENADA</text>
+            <text x="16" y="363" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">pobre en O₂ · rica en CO₂</text>
+            <text x="16" y="377" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">llega por la arteria pulmonar</text>
+
+            <text x="624" y="348" fill="#EF4444" font-size="11" font-family="Inter,sans-serif" text-anchor="end" font-weight="700">SANGRE OXIGENADA</text>
+            <text x="624" y="363" fill="#7E9188" font-size="10" font-family="Inter,sans-serif" text-anchor="end">rica en O₂ · pobre en CO₂</text>
+            <text x="624" y="377" fill="#7E9188" font-size="10" font-family="Inter,sans-serif" text-anchor="end">sale por las venas pulmonares</text>
+
+            <text x="320" y="412" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">HEMATOSIS · cada gas se mueve por DIFUSIÓN: de donde hay más hacia donde hay menos</text>
+          </svg>
+        </div>
+        <p class="px-5 pb-5 pt-2 text-base text-natura-silver leading-relaxed">
+          Fijate que los glóbulos rojos <strong class="text-natura-silverLight">cambian de color a lo largo del capilar</strong>: entran azules (carboxigenados) y salen rojos (oxigenados). Ese cambio no es magia ni pintura: es la <strong class="text-natura-silverLight">hemoglobina</strong> que, al unirse al oxígeno, se vuelve de un rojo brillante. La misma escena ocurre, pero al revés, en los capilares de todos los tejidos del cuerpo.
+        </p>
+      </div>
+
+      <div class="content-card highlight-box-warn rounded-lg p-5 mt-5">
+        <p class="text-base text-natura-silverLight leading-relaxed"><strong class="text-white">Ojo con la palabra "respiración".</strong> La <strong>respiración pulmonar</strong> es el movimiento de aire que acabás de ver. La <strong>hematosis</strong> es el pasaje de gases entre el alvéolo y la sangre. La <strong>respiración celular</strong> es otra cosa: ocurre dentro de las mitocondrias de cada célula, donde el \(O_2\) se usa para obtener energía de los nutrientes y se produce \(CO_2\). Las tres están conectadas, pero no son sinónimos.</p>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 05 · Frecuencia respiratoria -->
+    <section class="animate-fadeInUp delay-200" id="frecuencia-respiratoria">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <h2 class="font-heading text-lg md:text-xl font-bold text-white">Frecuencia respiratoria</h2>
+      </div>
+      <div class="accent-line mb-5"></div>
+
+      <p class="text-base text-natura-silver mb-5 leading-relaxed">La <strong class="text-natura-silverLight">frecuencia respiratoria</strong> es la cantidad de respiraciones completas (una inspiración + una espiración) que hacemos en un minuto. No es un número fijo: cambia con la edad, con la actividad física, con la temperatura corporal y hasta con las emociones.</p>
+
+      <!-- DIAGRAMA: frecuencia respiratoria -->
+      <div class="content-card bg-natura-dark rounded-lg overflow-hidden" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:activity" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Gráfico · Reposo frente a ejercicio</span>
+        </div>
+        <div class="px-5">
+          <svg viewBox="0 0 640 380" class="w-full max-w-2xl mx-auto" role="img" aria-label="Gráfico comparativo de la frecuencia respiratoria. En reposo se registran unas 15 respiraciones por minuto, amplias y espaciadas. Durante el ejercicio se registran unas 40 respiraciones por minuto, más frecuentes y más profundas.">
+            <!-- reposo -->
+            <text x="70" y="42" fill="#38BDF8" font-size="13" font-family="Inter,sans-serif" font-weight="700">EN REPOSO · ≈ 15 respiraciones por minuto</text>
+            <text x="70" y="58" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif">subida = inspiración (el diafragma se contrae) · bajada = espiración (se relaja)</text>
+            <path d="M70 140 Q114 52 158 140 H202.5 Q246.5 52 290.5 140 H335 Q379 52 423 140 H467.5 Q511.5 52 555.5 140 H600"
+                  fill="none" stroke="#38BDF8" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M70 140 H600" fill="none" stroke="rgba(200,212,204,0.14)" stroke-width="1" stroke-dasharray="4 5"/>
+
+            <!-- ejercicio -->
+            <text x="70" y="172" fill="#F59E0B" font-size="13" font-family="Inter,sans-serif" font-weight="700">DURANTE EL EJERCICIO · ≈ 40 respiraciones por minuto</text>
+            <text x="70" y="188" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif">más seguidas y más profundas: las células piden más O₂ y producen más CO₂</text>
+            <path d="M70 262 Q87 138 104 262 H118.2 Q135.2 138 152.2 262 H166.4 Q183.4 138 200.4 262 H214.5 Q231.5 138 248.5 262 H262.7 Q279.7 138 296.7 262 H310.9 Q327.9 138 344.9 262 H359.1 Q376.1 138 393.1 262 H407.3 Q424.3 138 441.3 262 H455.5 Q472.5 138 489.5 262 H503.6 Q520.6 138 537.6 262 H551.8 Q568.8 138 585.8 262 H600"
+                  fill="none" stroke="#F59E0B" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M70 262 H600" fill="none" stroke="rgba(200,212,204,0.14)" stroke-width="1" stroke-dasharray="4 5"/>
+
+            <!-- eje de tiempo -->
+            <path d="M70 290 H600" fill="none" stroke="rgba(200,212,204,0.25)" stroke-width="1.4"/>
+            <g stroke="rgba(200,212,204,0.25)" stroke-width="1.4">
+              <path d="M70 290 V297"/><path d="M202.5 290 V297"/><path d="M335 290 V297"/>
+              <path d="M467.5 290 V297"/><path d="M600 290 V297"/>
+            </g>
+            <g fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">
+              <text x="70" y="311">0</text><text x="202.5" y="311">4</text><text x="335" y="311">8</text>
+              <text x="467.5" y="311">12</text><text x="600" y="311">16</text>
+            </g>
+            <text x="335" y="330" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">tiempo (segundos)</text>
+
+            <!-- valores de referencia -->
+            <text x="320" y="360" fill="#7E9188" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">VALORES DE REFERENCIA EN REPOSO (respiraciones por minuto)</text>
+            <text x="320" y="374" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">bebé 30 a 50 · niño 20 a 30 · adolescente y adulto 12 a 20</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+        <div class="content-card rounded-lg p-5 bg-natura-dark/50">
+          <h3 class="font-heading text-base font-semibold text-white mb-2">¿Quién decide cuánto respiramos?</h3>
+          <p class="text-base text-natura-silverLight leading-relaxed">No lo decidimos nosotros. En el <strong class="text-natura-silverLight">bulbo raquídeo</strong>, en la base del encéfalo, hay un centro respiratorio que ajusta la frecuencia de forma automática, incluso mientras dormimos. Lo llamativo es <strong class="text-white">qué mide</strong> ese centro: no controla principalmente el oxígeno, sino la cantidad de \(CO_2\) en la sangre. Si el \(CO_2\) sube, ordena respirar más rápido y más profundo.</p>
+        </div>
+        <div class="content-card rounded-lg p-5 bg-natura-dark/50">
+          <h3 class="font-heading text-base font-semibold text-white mb-2">Qué la hace subir</h3>
+          <ul class="text-base text-natura-silverLight leading-relaxed space-y-1.5">
+            <li>· <strong class="text-natura-silverLight">Ejercicio físico</strong>: los músculos consumen más \(O_2\) y generan más \(CO_2\).</li>
+            <li>· <strong class="text-natura-silverLight">Fiebre</strong>: el metabolismo se acelera.</li>
+            <li>· <strong class="text-natura-silverLight">Altura</strong>: hay menos \(O_2\) en el aire de montaña.</li>
+            <li>· <strong class="text-natura-silverLight">Emociones</strong> intensas: miedo, nervios, sorpresa.</li>
+            <li>· <strong class="text-natura-silverLight">Enfermedades respiratorias</strong>: asma, bronquiolitis, neumonía.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-card highlight-box-warn rounded-lg p-5 mt-5">
+        <p class="text-base text-natura-silverLight leading-relaxed"><strong class="text-white">Actividad: medí tu frecuencia respiratoria.</strong> Sentate y quedate quieto un minuto. Apoyá una mano sobre el abdomen y contá cuántas veces sube en 30 segundos; multiplicá por 2. Anotá el valor. Después caminá rápido o subí una escalera durante 2 minutos y volvé a medir enseguida. Compará los dos números con tus compañeros y respondé: ¿por qué el cuerpo necesita respirar más veces justo cuando los músculos trabajan?</p>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- 06 · Estadística impactante -->
+    <section class="animate-fadeInUp delay-400" id="estadstica-impactante">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
         <h2 class="font-heading text-lg md:text-xl font-bold text-white">Estadística impactante</h2>
       </div>
       <div class="accent-line mb-5"></div>
@@ -369,7 +637,7 @@
     <!-- 05 · Conexión con el Sistema Circulatorio -->
     <section class="animate-fadeInUp delay-100" id="conexin-con-el-sistema-circulatorio">
       <div class="flex items-center gap-3 mb-4">
-        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
         <h2 class="font-heading text-lg md:text-xl font-bold text-white">Conexión con el Sistema Circulatorio</h2>
       </div>
       <div class="accent-line mb-5"></div>
@@ -397,10 +665,10 @@
     </section>
     <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
 
-    <!-- 06 · Preguntas para pensar -->
+    <!-- 08 · Preguntas para pensar -->
     <section class="animate-fadeInUp delay-200" id="preguntas-para-pensar">
       <div class="flex items-center gap-3 mb-4">
-        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">08</span>
         <h2 class="font-heading text-lg md:text-xl font-bold text-white">Preguntas para pensar</h2>
       </div>
       <div class="accent-line mb-5"></div>

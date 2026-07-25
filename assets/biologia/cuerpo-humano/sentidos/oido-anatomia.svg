@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="oidoT oidoD">
+  <title id="oidoT">Anatomía del oído — externo, medio e interno</title>
+  <desc id="oidoD">El oído externo (pabellón y conducto auditivo) recoge las vibraciones del aire. En el oído medio el tímpano vibra y mueve los huesecillos martillo, yunque y estribo, que empujan la ventana oval. En el oído interno la cóclea o caracol transforma la vibración en impulsos nerviosos y los canales semicirculares informan sobre la posición de la cabeza; ambas señales viajan por el nervio auditivo hacia el cerebro. La trompa de Eustaquio comunica el oído medio con la garganta e iguala la presión.</desc>
+  <style>
+    .lbl{font:600 15px Inter,"Helvetica Neue",Arial,sans-serif;fill:#C8D4CC;letter-spacing:.05em}
+    .sub{font:400 12px Inter,Arial,sans-serif;fill:#7E9188;letter-spacing:.02em}
+    .cap{font:700 11px Inter,Arial,sans-serif;fill:#55675C;letter-spacing:.2em}
+    .zone{font:700 12px Inter,Arial,sans-serif;fill:#4E8A92;letter-spacing:.22em}
+    .num{font:700 12px Inter,Arial,sans-serif;fill:#C6B282}
+    .ldr{stroke:#4E6058;stroke-width:1.3;fill:none}
+    .dot{fill:#93A99D}
+  </style>
+
+  <text x="28" y="32" class="cap">OÍDO HUMANO · CORTE FRONTAL</text>
+
+  <!-- Divisiones de las tres regiones -->
+  <g stroke="#2C4E52" stroke-width="1.2" stroke-dasharray="5 8">
+    <path d="M340 70 V520"/><path d="M520 70 V520"/>
+  </g>
+  <text x="180" y="54" class="zone" text-anchor="middle">OÍDO EXTERNO</text>
+  <text x="430" y="54" class="zone" text-anchor="middle">OÍDO MEDIO</text>
+  <text x="700" y="54" class="zone" text-anchor="middle">OÍDO INTERNO</text>
+
+  <!-- SONIDO -->
+  <g fill="none" stroke="#5FD0E0" stroke-width="2.2" opacity=".75">
+    <path d="M12 216 Q34 258 12 300"/>
+    <path d="M26 202 Q54 258 26 314"/>
+    <path d="M40 188 Q74 258 40 328"/>
+  </g>
+  <text x="12" y="352" class="sub" fill="#5FD0E0">SONIDO</text>
+
+  <!-- PABELLÓN AURICULAR -->
+  <path d="M204 200 C198 148 168 118 128 124 C82 131 58 182 58 240 C58 300 78 356 108 392 C132 420 172 418 182 392 C190 372 190 348 188 330 Z"
+        fill="rgba(214,160,154,.08)" stroke="#D6A09A" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="none" stroke="#B5827D" stroke-width="2.3" stroke-linecap="round">
+    <path d="M182 236 C154 226 130 246 128 280 C126 314 142 340 166 350"/>
+    <path d="M186 250 C164 258 154 286 160 312 C166 338 188 350 208 344"/>
+    <path d="M204 282 C218 278 226 292 221 308 C216 322 204 325 197 318"/>
+    <path d="M150 378 C160 394 174 396 182 388"/>
+  </g>
+
+  <!-- CONDUCTO AUDITIVO EXTERNO -->
+  <path d="M200 268 C244 262 300 268 344 274 L344 314 C300 320 244 326 200 320 Z"
+        fill="#241A1C" stroke="#C79B95" stroke-width="2"/>
+
+  <!-- CAVIDAD DEL OÍDO MEDIO -->
+  <rect x="352" y="232" width="156" height="142" rx="14" fill="#0F1615" stroke="#2C4A46" stroke-width="1.6"/>
+
+  <!-- TÍMPANO -->
+  <path d="M342 268 Q358 300 348 336" fill="none" stroke="#F2B4BC" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- HUESECILLOS -->
+  <g fill="#E9D6AC" stroke="#E9D6AC" stroke-linecap="round">
+    <path d="M351 334 L367 283" stroke-width="8" fill="none"/>
+    <circle cx="379" cy="268" r="12" stroke="none"/>
+    <circle cx="410" cy="262" r="13" stroke="none"/>
+    <path d="M413 274 L431 308" stroke-width="7" fill="none"/>
+    <path d="M436 312 L494 296 M436 318 L494 328" stroke-width="6" fill="none"/>
+  </g>
+  <text x="379" y="243" class="num" text-anchor="middle">1</text>
+  <text x="410" y="236" class="num" text-anchor="middle">2</text>
+  <text x="462" y="348" class="num" text-anchor="middle">3</text>
+
+  <!-- VENTANA OVAL -->
+  <path d="M506 294 L506 330" fill="none" stroke="#3FC3D6" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- TROMPA DE EUSTAQUIO -->
+  <path d="M378 374 C364 412 340 452 302 482" fill="none" stroke="#C79B95" stroke-width="16" stroke-linecap="round" opacity=".32"/>
+  <path d="M378 374 C364 412 340 452 302 482" fill="none" stroke="#D6A09A" stroke-width="1.6" stroke-dasharray="6 7" opacity=".85"/>
+
+  <!-- NERVIO AUDITIVO -->
+  <path d="M590 292 C670 268 774 244 880 238" fill="none" stroke="#C0AF7A" stroke-width="20" stroke-linecap="round" opacity=".28"/>
+  <path d="M590 292 C670 268 774 244 880 238" fill="none" stroke="#E4D7A6" stroke-width="1.6" stroke-dasharray="7 8" opacity=".7"/>
+
+  <!-- CANALES SEMICIRCULARES -->
+  <g fill="none" stroke="#4FC4D6" stroke-width="11" opacity=".85" stroke-linecap="round">
+    <ellipse cx="570" cy="152" rx="26" ry="48" transform="rotate(-30 570 152)"/>
+    <ellipse cx="626" cy="140" rx="50" ry="25" transform="rotate(12 626 140)"/>
+    <ellipse cx="612" cy="204" rx="26" ry="46" transform="rotate(64 612 204)"/>
+    <path d="M552 198 L548 272"/>
+    <path d="M582 238 L566 276"/>
+  </g>
+
+  <!-- VESTÍBULO -->
+  <ellipse cx="556" cy="300" rx="30" ry="26" fill="rgba(63,195,214,.16)" stroke="#3FC3D6" stroke-width="2.8"/>
+  <path d="M508 312 L530 308" fill="none" stroke="#3FC3D6" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- CÓCLEA -->
+  <path d="M556 326 C580 348 606 366 630 378" fill="none" stroke="#3FC3D6" stroke-width="13" stroke-linecap="round"/>
+  <path d="M632 380 A82.5 82.5 0 0 0 797 380 A71.5 71.5 0 0 0 654 380 A60.5 60.5 0 0 0 775 380 A49.5 49.5 0 0 0 676 380 A38.5 38.5 0 0 0 753 380 A28.5 28.5 0 0 0 696 380 A20.5 20.5 0 0 0 737 380"
+        fill="none" stroke="#3FC3D6" stroke-width="13" stroke-linecap="round"/>
+
+  <!-- LÍNEAS GUÍA -->
+  <g class="ldr">
+    <path d="M92 180 L44 126"/>
+    <path d="M270 292 L200 452"/>
+    <path d="M344 294 L306 134"/>
+    <path d="M410 249 L416 148"/>
+    <path d="M506 312 L554 452"/>
+    <path d="M370 400 L332 490"/>
+    <path d="M648 128 L720 102"/>
+    <path d="M556 274 L508 218"/>
+    <path d="M720 468 L758 506"/>
+    <path d="M800 246 L836 202"/>
+  </g>
+  <g class="dot">
+    <circle cx="92" cy="180" r="3"/><circle cx="270" cy="292" r="3"/><circle cx="344" cy="294" r="3"/>
+    <circle cx="410" cy="249" r="3"/><circle cx="506" cy="312" r="3"/><circle cx="370" cy="400" r="3"/>
+    <circle cx="648" cy="128" r="3"/><circle cx="556" cy="274" r="3"/><circle cx="720" cy="468" r="3"/>
+    <circle cx="800" cy="246" r="3"/>
+  </g>
+
+  <!-- ETIQUETAS -->
+  <text x="24" y="92" class="lbl">PABELLÓN</text>
+  <text x="24" y="109" class="sub">(oreja)</text>
+
+  <text x="194" y="468" class="lbl" text-anchor="end">CONDUCTO AUDITIVO</text>
+
+  <text x="300" y="122" class="lbl" text-anchor="middle">TÍMPANO</text>
+
+  <text x="416" y="136" class="lbl" text-anchor="middle">HUESECILLOS</text>
+  <text x="416" y="153" class="sub" text-anchor="middle">1 martillo · 2 yunque · 3 estribo</text>
+
+  <text x="560" y="468" class="lbl">VENTANA OVAL</text>
+
+  <text x="326" y="506" class="lbl" text-anchor="end">TROMPA DE EUSTAQUIO</text>
+  <text x="326" y="523" class="sub" text-anchor="end">iguala la presión con la garganta</text>
+
+  <text x="726" y="88" class="lbl">CANALES</text>
+  <text x="726" y="106" class="lbl">SEMICIRCULARES</text>
+  <text x="726" y="123" class="sub">equilibrio y posición</text>
+
+  <text x="502" y="210" class="lbl" text-anchor="end">VESTÍBULO</text>
+
+  <text x="764" y="512" class="lbl">CÓCLEA</text>
+  <text x="764" y="529" class="sub">(caracol)</text>
+
+  <text x="884" y="192" class="lbl" text-anchor="end">NERVIO AUDITIVO</text>
+  <text x="884" y="209" class="sub" text-anchor="end">(vestibulococlear) · al cerebro</text>
+</svg>

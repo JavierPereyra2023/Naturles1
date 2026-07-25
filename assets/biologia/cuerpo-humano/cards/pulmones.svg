@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Pulmones humanos</title><desc id="d">Ilustración estilizada de tráquea, bronquios y pulmones, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#12343b"/><stop offset="1" stop-color="#080c0a"/></radialGradient><linearGradient id="l"><stop stop-color="#fb7185"/><stop offset="1" stop-color="#7f1d1d"/></linearGradient></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><path d="M600 32v192" stroke="#cbd5e1" stroke-width="46" stroke-linecap="round"/><path d="M600 196 484 310M600 196l116 114" fill="none" stroke="#cbd5e1" stroke-width="35" stroke-linecap="round"/>
+  <path d="M544 205c-183-72-326 17-346 180-17 136 93 177 300 151 56-7 71-50 68-111Z" fill="url(#l)" stroke="#fda4af" stroke-width="9"/>
+  <path d="M656 205c183-72 326 17 346 180 17 136-93 177-300 151-56-7-71-50-68-111Z" fill="url(#l)" stroke="#fda4af" stroke-width="9"/>
+  <g fill="none" stroke="#fecdd3" stroke-width="9" opacity=".7"><path d="M490 304 390 374m100-70-18 129m-82-59-73 73m393-143 100 70m-100-70 18 129m82-59 73 73"/><path d="M390 374l-67-20m67 20 9 78m411-78 67-20m-67 20-9 78"/></g>
+  <g fill="#f9a8d4" opacity=".68"><circle cx="299" cy="464" r="19"/><circle cx="329" cy="432" r="17"/><circle cx="375" cy="466" r="21"/><circle cx="901" cy="464" r="19"/><circle cx="871" cy="432" r="17"/><circle cx="825" cy="466" r="21"/></g>
+</svg>

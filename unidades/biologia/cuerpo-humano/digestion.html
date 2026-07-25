@@ -114,7 +114,7 @@
 <!-- HERO -->
 <section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 opacity-10">
-    <img src="../../../assets/biologia/cuerpo-humano/digestive-anatomy.jpg" alt="" class="w-full h-full object-cover" style="filter: grayscale(100%);">
+    <img src="../../../assets/biologia/cuerpo-humano/cards/digestion-fotorealista.png" alt="" class="w-full h-full object-cover object-right">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
   <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
@@ -155,10 +155,12 @@
       <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
       <nav class="space-y-0.5">
           <a href="#funcin-principal" class="toc-link active" data-toc>01. Función Principal</a>
-          <a href="#recorrido-del-alimento" class="toc-link" data-toc>02. Recorrido del Alimento</a>
-          <a href="#rganos-anexos" class="toc-link" data-toc>03. Órganos Anexos</a>
-          <a href="#dato-curioso" class="toc-link" data-toc>04. Dato Curioso</a>
-          <a href="#preguntas-para-pensar" class="toc-link" data-toc>05. Preguntas para Pensar</a>
+          <a href="#mecanica-y-quimica" class="toc-link" data-toc>02. Mecánica y Química</a>
+          <a href="#recorrido-del-alimento" class="toc-link" data-toc>03. Recorrido del Alimento</a>
+          <a href="#rganos-anexos" class="toc-link" data-toc>04. Órganos Anexos</a>
+          <a href="#absorcion" class="toc-link" data-toc>05. La Absorción</a>
+          <a href="#dato-curioso" class="toc-link" data-toc>06. Dato Curioso</a>
+          <a href="#preguntas-para-pensar" class="toc-link" data-toc>07. Preguntas para Pensar</a>
       </nav>
     </div>
   </aside>
@@ -184,10 +186,84 @@
       </p>
     </section>
 
-    <!-- SECTION 2: Recorrido del alimento -->
-    <section class="animate-fadeInUp delay-100" id="recorrido-del-alimento">
+    <!-- SECTION 2: Digestión mecánica y química -->
+    <section class="animate-fadeInUp delay-100" id="mecanica-y-quimica">
       <div class="flex items-center gap-3 mb-5">
         <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Digestión Mecánica y Química</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-6">Digerir no es una sola cosa: son dos procesos que ocurren <strong class="text-natura-silverLight">al mismo tiempo</strong> a lo largo de todo el tubo digestivo.</p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="content-card bg-natura-dark p-5 md:p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:hammer" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Digestión mecánica</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">Es un cambio <strong class="text-natura-silverLight">físico</strong>: el alimento se rompe en trozos más chicos, pero sigue siendo la misma sustancia. La hacen los dientes al masticar, la lengua al mezclar, los movimientos del estómago que baten el contenido y la bilis, que parte las grasas en gotitas diminutas. Su función es <strong class="text-natura-silverLight">aumentar la superficie</strong> para que las enzimas puedan trabajar más rápido: es más fácil disolver azúcar molida que un terrón entero.</p>
+        </div>
+        <div class="content-card bg-natura-dark p-5 md:p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:flask-conical" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Digestión química</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">Es un cambio <strong class="text-natura-silverLight">químico</strong>: las moléculas grandes de los alimentos se rompen y se transforman en moléculas distintas y mucho más pequeñas. La hacen las <strong class="text-natura-silverLight">enzimas</strong>, sustancias producidas por el cuerpo que aceleran esas reacciones. Cada enzima trabaja sobre un tipo de nutriente y necesita condiciones propias: la pepsina, por ejemplo, solo funciona en el medio muy ácido del estómago.</p>
+        </div>
+      </div>
+
+      <div class="content-card bg-natura-dark rounded-sm overflow-x-auto mb-6" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-3 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:table-2" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Qué ocurre en cada tramo</span>
+        </div>
+        <table class="w-full text-left border-collapse min-w-[620px]" style="font-family:'Inter',sans-serif;">
+          <thead>
+            <tr class="text-[10px] uppercase tracking-wider text-natura-silverDark">
+              <th class="px-5 py-2 font-semibold border-b border-white/10">Órgano</th>
+              <th class="px-5 py-2 font-semibold border-b border-white/10">Digestión mecánica</th>
+              <th class="px-5 py-2 font-semibold border-b border-white/10">Digestión química</th>
+            </tr>
+          </thead>
+          <tbody class="text-[13px] text-natura-silver">
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Boca</td>
+              <td class="px-5 py-3 border-b border-white/5">Los dientes trituran; la lengua mezcla y forma el <strong class="text-natura-silverLight">bolo alimenticio</strong>.</td>
+              <td class="px-5 py-3 border-b border-white/5">La <strong class="text-natura-silverLight">amilasa salival</strong> empieza a romper el almidón en azúcares más simples.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Esófago</td>
+              <td class="px-5 py-3 border-b border-white/5">Ondas de <strong class="text-natura-silverLight">peristaltismo</strong> empujan el bolo hacia abajo.</td>
+              <td class="px-5 py-3 border-b border-white/5">No hay: es solo un conducto de paso.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Estómago</td>
+              <td class="px-5 py-3 border-b border-white/5">Sus paredes musculares baten el bolo hasta volverlo una papilla: el <strong class="text-natura-silverLight">quimo</strong>.</td>
+              <td class="px-5 py-3 border-b border-white/5">El <strong class="text-natura-silverLight">jugo gástrico</strong> (ácido clorhídrico + pepsina) empieza a digerir las proteínas.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 border-b border-white/5 text-natura-silverLight font-semibold">Intestino delgado</td>
+              <td class="px-5 py-3 border-b border-white/5">El peristaltismo mezcla y avanza; la <strong class="text-natura-silverLight">bilis</strong> emulsiona las grasas.</td>
+              <td class="px-5 py-3 border-b border-white/5">El <strong class="text-natura-silverLight">jugo pancreático</strong> y el <strong class="text-natura-silverLight">jugo intestinal</strong> terminan de romper glúcidos, proteínas y grasas.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-3 text-natura-silverLight font-semibold">Intestino grueso</td>
+              <td class="px-5 py-3">Compacta lo que no se absorbió y forma la materia fecal.</td>
+              <td class="px-5 py-3">Ya no hay enzimas propias: trabaja la <strong class="text-natura-silverLight">microbiota</strong> (bacterias beneficiosas).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-box p-5">
+        <p class="text-base text-natura-silver leading-relaxed"><strong class="text-natura-silverLight">El peristaltismo</strong> es el movimiento que hace avanzar el alimento: los músculos de la pared del tubo digestivo se contraen y se relajan formando ondas, como cuando apretás un tubo de dentífrico de abajo hacia arriba. Es involuntario y tan eficaz que funciona incluso en contra de la gravedad: un astronauta puede tragar en el espacio, y vos podrías beber agua colgando cabeza abajo.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Recorrido del alimento -->
+    <section class="animate-fadeInUp delay-100" id="recorrido-del-alimento">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
         <div class="accent-line"></div>
         <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Recorrido del Alimento</h2>
       </div>
@@ -354,10 +430,10 @@
       </script>
     </section>
 
-    <!-- SECTION 3: Órganos anexos -->
+    <!-- SECTION 4: Órganos anexos -->
     <section class="animate-fadeInUp delay-200" id="rganos-anexos">
       <div class="flex items-center gap-3 mb-5">
-        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
         <div class="accent-line"></div>
         <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Órganos Anexos</h2>
       </div>
@@ -399,10 +475,124 @@
       </div>
     </section>
 
-    <!-- SECTION 4: Dato curioso -->
+    <!-- SECTION 5: La absorción -->
+    <section class="animate-fadeInUp delay-300" id="absorcion">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">La Absorción: de la comida a la sangre</h2>
+      </div>
+
+      <div class="highlight-box p-5 md:p-6 mb-6">
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed">Digerir no alcanza. Los nutrientes ya rotos todavía están <strong class="text-white">dentro del tubo digestivo</strong>, que técnicamente es un conducto que atraviesa el cuerpo: aún no entraron a él. La <strong class="text-white">absorción</strong> es el paso de esos nutrientes desde el interior del intestino hacia la sangre, y ocurre casi por completo en el <strong class="text-white">intestino delgado</strong>.</p>
+      </div>
+
+      <p class="text-base text-natura-silver mb-4 leading-relaxed">Para absorber hace falta superficie, y el intestino resolvió el problema plegándose tres veces: la pared forma pliegues, cada pliegue está cubierto de <strong class="text-natura-silverLight">vellosidades</strong> (unos 6 millones de proyecciones con forma de dedo), y cada célula de la vellosidad tiene a su vez <strong class="text-natura-silverLight">microvellosidades</strong>. El resultado es una superficie de absorción enorme dentro de un tubo de apenas 6 metros.</p>
+
+      <p class="text-base text-natura-silver mb-6 leading-relaxed">Dentro de cada vellosidad hay dos redes de transporte esperando: una <strong class="text-natura-silverLight">red de capilares sanguíneos</strong> y un <strong class="text-natura-silverLight">vaso quilífero</strong> (un vaso linfático central). No todos los nutrientes viajan por el mismo camino.</p>
+
+      <!-- DIAGRAMA: absorción en las vellosidades -->
+      <div class="content-card bg-natura-dark rounded-sm overflow-hidden mb-6" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:git-fork" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Diagrama · Vellosidades intestinales</span>
+        </div>
+        <div class="px-5">
+          <svg viewBox="0 0 640 420" class="w-full max-w-2xl mx-auto" role="img" aria-label="Corte de la pared del intestino delgado con cuatro vellosidades. En la luz del intestino hay nutrientes ya digeridos. Dentro de cada vellosidad hay una red de capilares sanguíneos y un vaso quilífero central. La glucosa y los aminoácidos pasan a los capilares y viajan por la vena porta hasta el hígado; las grasas pasan al vaso quilífero y viajan por el sistema linfático.">
+            <text x="16" y="26" fill="#C8D4CC" font-size="11" font-family="Inter,sans-serif" font-weight="700">LUZ DEL INTESTINO</text>
+            <text x="16" y="40" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">nutrientes ya digeridos</text>
+
+            <!-- leyenda -->
+            <circle cx="478" cy="24" r="5" fill="#34D399"/>
+            <text x="492" y="28" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">glucosa · aminoácidos</text>
+            <circle cx="478" cy="46" r="5" fill="#FBBF24"/>
+            <text x="492" y="50" fill="#7E9188" font-size="10" font-family="Inter,sans-serif">grasas</text>
+
+            <!-- nutrientes en la luz -->
+            <g fill="#34D399">
+              <circle cx="90" cy="66" r="5"/><circle cx="150" cy="84" r="5"/><circle cx="212" cy="62" r="5"/>
+              <circle cx="268" cy="86" r="5"/><circle cx="326" cy="64" r="5"/><circle cx="384" cy="84" r="5"/>
+              <circle cx="440" cy="70" r="5"/><circle cx="118" cy="96" r="5"/><circle cx="356" cy="96" r="5"/>
+            </g>
+            <g fill="#FBBF24">
+              <circle cx="182" cy="94" r="5"/><circle cx="300" cy="70" r="5"/><circle cx="414" cy="94" r="5"/>
+            </g>
+
+            <!-- vellosidades -->
+            <g fill="#6B3A3F" stroke="#E9A9A0" stroke-width="2.2">
+              <path d="M84 250 C81 172 87 114 110 106 C133 114 139 172 136 250 Z"/>
+              <path d="M189 250 C186 172 192 114 215 106 C238 114 244 172 241 250 Z"/>
+              <path d="M294 250 C291 172 297 114 320 106 C343 114 349 172 346 250 Z"/>
+              <path d="M399 250 C396 172 402 114 425 106 C448 114 454 172 451 250 Z"/>
+            </g>
+            <!-- vasos quilíferos -->
+            <g stroke="#E6F0EA" stroke-width="7" stroke-linecap="round" opacity=".72">
+              <path d="M110 244 V136"/><path d="M215 244 V136"/><path d="M320 244 V136"/><path d="M425 244 V136"/>
+            </g>
+            <!-- capilares -->
+            <g stroke="#EF4444" stroke-width="3" fill="none">
+              <path d="M98 246 C95 174 101 132 110 128 C119 132 125 174 122 246"/>
+              <path d="M203 246 C200 174 206 132 215 128 C224 132 230 174 227 246"/>
+              <path d="M308 246 C305 174 311 132 320 128 C329 132 335 174 332 246"/>
+              <path d="M413 246 C410 174 416 132 425 128 C434 132 440 174 437 246"/>
+            </g>
+
+            <!-- pared del intestino -->
+            <rect x="30" y="250" width="580" height="86" fill="#4A2A2E"/>
+            <path d="M30 250 H610" stroke="#E9A9A0" stroke-width="2.2" fill="none"/>
+
+            <!-- vía sanguínea -->
+            <rect x="40" y="266" width="536" height="20" rx="10" fill="rgba(239,68,68,0.28)" stroke="#EF4444" stroke-width="1.4"/>
+            <polygon points="596,276 574,265 574,287" fill="#EF4444"/>
+            <text x="308" y="280" fill="#F5D0D0" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">RED DE CAPILARES → VENA PORTA</text>
+
+            <!-- vía linfática -->
+            <rect x="40" y="300" width="536" height="20" rx="10" fill="rgba(230,240,234,0.16)" stroke="#C8D4CC" stroke-width="1.4"/>
+            <polygon points="596,310 574,299 574,321" fill="#C8D4CC"/>
+            <text x="308" y="314" fill="#D8E2DC" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">VASOS LINFÁTICOS</text>
+
+            <!-- etiquetas -->
+            <g stroke="#4E6058" stroke-width="1.2" fill="none">
+              <path d="M446 126 L488 116"/>
+              <path d="M437 180 L488 172"/>
+              <path d="M425 216 L488 224"/>
+            </g>
+            <g fill="#93A99D">
+              <circle cx="446" cy="126" r="3"/><circle cx="437" cy="180" r="3"/><circle cx="425" cy="216" r="3"/>
+            </g>
+            <text x="494" y="112" fill="#C8D4CC" font-size="11" font-family="Inter,sans-serif" font-weight="700">VELLOSIDAD</text>
+            <text x="494" y="126" fill="#C8D4CC" font-size="11" font-family="Inter,sans-serif" font-weight="700">INTESTINAL</text>
+            <text x="494" y="168" fill="#EF4444" font-size="11" font-family="Inter,sans-serif" font-weight="700">CAPILARES</text>
+            <text x="494" y="182" fill="#EF4444" font-size="11" font-family="Inter,sans-serif" font-weight="700">SANGUÍNEOS</text>
+            <text x="494" y="222" fill="#D8E2DC" font-size="11" font-family="Inter,sans-serif" font-weight="700">VASO</text>
+            <text x="494" y="236" fill="#D8E2DC" font-size="11" font-family="Inter,sans-serif" font-weight="700">QUILÍFERO</text>
+
+            <!-- destinos -->
+            <circle cx="20" cy="364" r="5" fill="#34D399"/>
+            <text x="34" y="368" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif">Glucosa y aminoácidos → capilares → VENA PORTA → HÍGADO → resto del cuerpo</text>
+            <circle cx="20" cy="386" r="5" fill="#FBBF24"/>
+            <text x="34" y="390" fill="#A8B5AD" font-size="10" font-family="Inter,sans-serif">Grasas → vaso quilífero → SISTEMA LINFÁTICO → desembocan en la sangre cerca del corazón</text>
+            <text x="320" y="412" fill="#5A6B60" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">unos 6 millones de vellosidades multiplican la superficie de absorción</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-3">Primera parada: el hígado</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">La sangre que sale del intestino no va directo al corazón: primero pasa por el hígado a través de la <strong class="text-natura-silverLight">vena porta</strong>. Allí se controla la cantidad de glucosa, se almacenan reservas y se neutralizan sustancias tóxicas. Recién después los nutrientes salen a repartirse por todo el cuerpo mediante el <a href="circulacion.html#que-transporta-la-sangre" class="text-natura-bio underline decoration-dotted underline-offset-2">sistema circulatorio</a>.</p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-3">Lo que absorbe el intestino grueso</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">Cuando el material llega al intestino grueso ya casi no quedan nutrientes. Allí se absorben principalmente <strong class="text-natura-silverLight">agua y sales minerales</strong>, y por eso el contenido se va compactando. La <strong class="text-natura-silverLight">microbiota</strong> que vive en él fabrica algunas vitaminas (como la K y varias del grupo B) que también se absorben. Si el material avanza demasiado rápido, no da tiempo a absorber el agua: eso es la diarrea.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Dato curioso -->
     <section class="animate-fadeInUp delay-300" id="dato-curioso">
       <div class="flex items-center gap-3 mb-5">
-        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
         <div class="accent-line"></div>
         <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Dato Curioso</h2>
       </div>
@@ -417,10 +607,10 @@
       </div>
     </section>
 
-    <!-- SECTION 5: Preguntas para pensar -->
+    <!-- SECTION 7: Preguntas para pensar -->
     <section class="animate-fadeInUp delay-400" id="preguntas-para-pensar">
       <div class="flex items-center gap-3 mb-5">
-        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
         <div class="accent-line"></div>
         <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Preguntas para Pensar</h2>
       </div>

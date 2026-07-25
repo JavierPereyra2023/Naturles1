@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Sistema endocrino</title><desc id="d">Silueta humana con glándulas endocrinas destacadas, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#1e293b"/><stop offset="1" stop-color="#080c0a"/></radialGradient><filter id="gl"><feGaussianBlur stdDeviation="10"/></filter></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><path d="M600 55c-54 0-92 39-92 91 0 41 21 70 48 84l-27 61-103 60 52 58 72-35-19 181h138l-19-181 72 35 52-58-103-60-27-61c27-14 48-43 48-84 0-52-38-91-92-91Z" fill="#172554" stroke="#60a5fa" stroke-width="7"/>
+  <g filter="url(#gl)" opacity=".7"><circle cx="600" cy="126" r="24" fill="#a78bfa"/><circle cx="600" cy="248" r="23" fill="#22d3ee"/><circle cx="600" cy="315" r="27" fill="#f472b6"/><circle cx="547" cy="375" r="21" fill="#fbbf24"/><circle cx="653" cy="375" r="21" fill="#fbbf24"/><ellipse cx="600" cy="432" rx="50" ry="22" fill="#fb7185"/><circle cx="568" cy="498" r="18" fill="#c084fc"/><circle cx="632" cy="498" r="18" fill="#c084fc"/></g>
+  <g stroke="#e0f2fe" stroke-width="3" fill="none" opacity=".8"><circle cx="600" cy="126" r="19"/><path d="M581 248q19-24 38 0-19 24-38 0Z"/><circle cx="600" cy="315" r="22"/><path d="M533 375q14-17 28 0-14 17-28 0Zm106 0q14-17 28 0-14 17-28 0Z"/><ellipse cx="600" cy="432" rx="43" ry="16"/></g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Músculos humanos</title><desc id="d">Ilustración estilizada de grupos musculares, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#3f1d1d"/><stop offset="1" stop-color="#080c0a"/></radialGradient><linearGradient id="m"><stop stop-color="#ef4444"/><stop offset="1" stop-color="#7f1d1d"/></linearGradient></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><circle cx="600" cy="88" r="57" fill="#d97757"/><path d="M566 147q34 22 68 0l79 58 95 184-63 31-86-150 22 264H519l22-264-86 150-63-31 95-184Z" fill="url(#m)" stroke="#fca5a5" stroke-width="6"/>
+  <g fill="none" stroke="#fecaca" stroke-width="8" opacity=".7"><path d="M600 161v372M506 214q94 76 188 0M535 283q65 42 130 0M535 343q65 38 130 0M432 290l91 66m245-66-91 66M537 417l63 42 63-42M543 479l57 34 57-34"/></g>
+  <g fill="#fb7185" opacity=".65"><ellipse cx="523" cy="236" rx="43" ry="66"/><ellipse cx="677" cy="236" rx="43" ry="66"/><ellipse cx="468" cy="340" rx="34" ry="82"/><ellipse cx="732" cy="340" rx="34" ry="82"/><ellipse cx="562" cy="423" rx="36" ry="69"/><ellipse cx="638" cy="423" rx="36" ry="69"/></g>
+</svg>

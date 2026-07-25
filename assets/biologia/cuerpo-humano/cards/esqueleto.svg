@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Esqueleto humano</title><desc id="d">Ilustración estilizada del esqueleto humano, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#15313c"/><stop offset="1" stop-color="#080c0a"/></radialGradient><filter id="g"><feGaussianBlur stdDeviation="14"/></filter></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><circle cx="600" cy="300" r="240" fill="#38bdf8" opacity=".12" filter="url(#g)"/>
+  <g fill="none" stroke="#dbeafe" stroke-linecap="round" stroke-linejoin="round"><circle cx="600" cy="86" r="54" stroke-width="14"/><path d="M575 130h50M600 141v268M516 205q84-67 168 0M518 209l-120 166m284-166 120 166M552 414q48 40 96 0M565 427l-64 146m134-146 64 146" stroke-width="16"/><g stroke-width="8"><path d="M600 170q-91 18-70 112 70 49 140 0 21-94-70-112Z"/><path d="M548 190q52 25 104 0M535 220q65 31 130 0M535 251q65 31 130 0M544 283q56 29 112 0"/><path d="M600 151v260"/><path d="M398 375l-21 75m425-75 21 75M501 573l-25 23m223-23 25 23"/></g></g>
+</svg>

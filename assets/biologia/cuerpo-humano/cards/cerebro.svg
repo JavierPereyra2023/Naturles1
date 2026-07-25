@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Cerebro humano</title><desc id="d">Ilustración estilizada del cerebro humano, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#25133e"/><stop offset="1" stop-color="#080c0a"/></radialGradient><linearGradient id="c"><stop stop-color="#c4b5fd"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#4338ca"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="18"/></filter></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><ellipse cx="600" cy="310" rx="360" ry="230" fill="#8b5cf6" opacity=".18" filter="url(#g)"/>
+  <path d="M591 113c-60-77-181-52-206 28-88-24-170 54-144 144-55 50-25 146 54 159 18 86 122 120 189 66 42 55 126 55 168 0 67 54 171 20 189-66 79-13 109-109 54-159 26-90-56-168-144-144-25-80-146-105-206-28-29-16-75-16-104 0Z" fill="url(#c)" stroke="#ddd6fe" stroke-width="10"/>
+  <g fill="none" stroke="#ede9fe" stroke-width="10" stroke-linecap="round" opacity=".7"><path d="M600 113v393"/><path d="M333 212q97-60 180 17m-232 70q107-56 220 2m-192 103q95-55 191 4m367-196q-97-60-180 17m232 70q-107-56-220 2m192 103q-95-55-191 4"/><path d="M415 154q-38 52 18 95m-119 57q-26 54 35 84m436-236q38 52-18 95m119 57q26 54-35 84"/><path d="M478 228q70 35 11 91m233-91q-70 35-11 91M451 406q59-49 103 4m195-4q-59-49-103 4"/></g>
+</svg>

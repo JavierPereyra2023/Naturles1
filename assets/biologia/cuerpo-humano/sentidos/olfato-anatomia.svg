@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="olfT olfD">
+  <title id="olfT">Sistema olfatorio — corte sagital de la nariz</title>
+  <desc id="olfD">Corte de la cavidad nasal con los tres cornetes, el epitelio olfatorio en el techo, la lámina cribosa, el bulbo olfatorio y el tracto olfatorio que lleva la señal a la corteza olfatoria y al sistema límbico. Una ampliación muestra las células receptoras con sus cilios sumergidos en el moco, donde se disuelven las moléculas del olor.</desc>
+  <style>
+    .lbl{font:600 15px Inter,"Helvetica Neue",Arial,sans-serif;fill:#C8D4CC;letter-spacing:.05em}
+    .sub{font:400 12px Inter,Arial,sans-serif;fill:#7E9188;letter-spacing:.02em}
+    .cap{font:700 11px Inter,Arial,sans-serif;fill:#55675C;letter-spacing:.2em}
+    .mini{font:600 11px Inter,Arial,sans-serif;fill:#9C8BC4;letter-spacing:.08em}
+    .ldr{stroke:#4E6058;stroke-width:1.3;fill:none}
+    .dot{fill:#93A99D}
+  </style>
+
+  <text x="28" y="34" class="cap">VÍA OLFATORIA · CORTE SAGITAL</text>
+
+  <!-- TRACTO OLFATORIO hacia el cerebro -->
+  <path d="M330 112 C420 100 490 94 560 94" fill="none" stroke="#8B5CF6" stroke-width="16" stroke-linecap="round" opacity=".55"/>
+  <polygon points="576,94 558,85 558,103" fill="#A78BFA"/>
+
+  <!-- PERFIL DE LA NARIZ Y MUCOSA NASAL -->
+  <path d="M186 150 C168 190 152 226 120 252 C102 266 106 282 128 288 L166 294
+           C164 306 168 316 180 322 L440 322 L440 168 L200 168 Z"
+        fill="#3E2B2E" stroke="#D9A6A0" stroke-width="2.6" stroke-linejoin="round"/>
+  <!-- nasofaringe -->
+  <path d="M440 322 L440 424 C440 442 424 452 404 452 L404 322 Z" fill="#2E2124" stroke="#D9A6A0" stroke-width="2"/>
+  <!-- narina -->
+  <path d="M128 288 L166 294" fill="none" stroke="#0C100E" stroke-width="6"/>
+
+  <!-- CORNETES (superior, medio, inferior) -->
+  <g fill="#8C4A50" stroke="#E7A9A4" stroke-width="2">
+    <path d="M404 194 C362 188 320 192 294 204 C312 214 352 214 404 208 Z"/>
+    <path d="M416 234 C360 224 298 230 262 248 C290 262 350 262 416 252 Z"/>
+    <path d="M424 282 C356 270 282 278 240 298 C276 312 346 312 424 300 Z"/>
+  </g>
+  <g class="sub" fill="#F0C0BB" text-anchor="middle">
+    <text x="352" y="207">1</text><text x="346" y="251">2</text><text x="352" y="299">3</text>
+  </g>
+
+  <!-- LÁMINA CRIBOSA -->
+  <path d="M204 154 H346" fill="none" stroke="#C6D2CA" stroke-width="9" stroke-linecap="round"/>
+  <g fill="#0C100E">
+    <rect x="216" y="150" width="4" height="9" rx="2"/><rect x="236" y="150" width="4" height="9" rx="2"/>
+    <rect x="256" y="150" width="4" height="9" rx="2"/><rect x="276" y="150" width="4" height="9" rx="2"/>
+    <rect x="296" y="150" width="4" height="9" rx="2"/><rect x="316" y="150" width="4" height="9" rx="2"/>
+  </g>
+
+  <!-- EPITELIO OLFATORIO -->
+  <path d="M206 172 H344" fill="none" stroke="#A78BFA" stroke-width="8" stroke-linecap="round"/>
+  <!-- filetes del nervio olfatorio atravesando la lámina -->
+  <g stroke="#A78BFA" stroke-width="2.4" stroke-linecap="round" opacity=".9">
+    <path d="M218 168 V136"/><path d="M238 168 V134"/><path d="M258 168 V132"/>
+    <path d="M278 168 V132"/><path d="M298 168 V134"/><path d="M318 168 V136"/>
+  </g>
+
+  <!-- BULBO OLFATORIO -->
+  <ellipse cx="272" cy="116" rx="76" ry="21" fill="rgba(167,139,250,.22)" stroke="#A78BFA" stroke-width="3"/>
+  <g fill="#A78BFA" opacity=".55">
+    <circle cx="232" cy="116" r="7"/><circle cx="256" cy="112" r="7"/>
+    <circle cx="282" cy="118" r="7"/><circle cx="308" cy="113" r="7"/>
+  </g>
+
+  <!-- Marca de la zona ampliada -->
+  <circle cx="276" cy="176" r="12" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-dasharray="4 4"/>
+
+  <!-- AIRE CON MOLÉCULAS -->
+  <path d="M92 344 C112 322 132 306 148 294 C176 272 208 248 232 226" fill="none" stroke="#34D399" stroke-width="2" stroke-dasharray="7 6" opacity=".85"/>
+  <polygon points="238,218 226,232 240,234" fill="#34D399"/>
+  <g fill="#34D399">
+    <circle cx="98" cy="338" r="4.5"/><circle cx="124" cy="316" r="4"/>
+    <circle cx="158" cy="288" r="4.5"/><circle cx="196" cy="256" r="4"/>
+  </g>
+
+  <text x="196" y="292" class="sub" text-anchor="middle" fill="#6E8078">CAVIDAD NASAL</text>
+
+  <!-- ============ AMPLIACIÓN ============ -->
+  <text x="540" y="240" class="cap" fill="#7B6BA8">AMPLIACIÓN DEL EPITELIO OLFATORIO</text>
+  <rect x="540" y="250" width="342" height="250" rx="6" fill="#130F1C" stroke="#443A63" stroke-width="1.4"/>
+
+  <!-- moco -->
+  <rect x="548" y="414" width="326" height="50" rx="4" fill="rgba(167,139,250,.13)"/>
+  <text x="556" y="446" class="mini" fill="#6E5F95">MOCO</text>
+
+  <!-- células receptoras -->
+  <g>
+    <g stroke="#C4B5FD" stroke-width="2.4" fill="none" stroke-linecap="round">
+      <path d="M720 336 V292"/><path d="M796 336 V292"/><path d="M862 336 V292"/>
+      <path d="M720 378 V412"/><path d="M796 378 V412"/><path d="M862 378 V412"/>
+    </g>
+    <g fill="rgba(167,139,250,.3)" stroke="#A78BFA" stroke-width="2.4">
+      <ellipse cx="720" cy="357" rx="15" ry="21"/>
+      <ellipse cx="796" cy="357" rx="15" ry="21"/>
+      <ellipse cx="862" cy="357" rx="15" ry="21"/>
+    </g>
+    <!-- cilios -->
+    <g stroke="#DDD6FE" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".9">
+      <path d="M720 412 C702 424 694 436 690 450"/><path d="M720 412 C712 428 708 440 706 452"/>
+      <path d="M720 412 C726 428 730 440 732 452"/><path d="M720 412 C738 424 746 436 750 450"/>
+      <path d="M796 412 C778 424 770 436 766 450"/><path d="M796 412 C788 428 784 440 782 452"/>
+      <path d="M796 412 C804 428 808 440 810 452"/><path d="M796 412 C814 424 822 436 826 450"/>
+      <path d="M862 412 C848 424 842 436 838 450"/><path d="M862 412 C858 428 856 440 855 452"/>
+      <path d="M862 412 C870 428 872 440 873 452"/>
+    </g>
+  </g>
+  <!-- moléculas del olor -->
+  <g fill="#34D399">
+    <circle cx="698" cy="438" r="4"/><circle cx="736" cy="444" r="4"/><circle cx="772" cy="432" r="4"/>
+    <circle cx="812" cy="442" r="4"/><circle cx="846" cy="434" r="4"/><circle cx="656" cy="446" r="4"/>
+  </g>
+  <polygon points="711,270 703,284 719,284" fill="#C4B5FD"/>
+  <text x="711" y="266" class="mini" text-anchor="middle">AL BULBO OLFATORIO</text>
+  <text x="711" y="486" class="mini" text-anchor="middle" fill="#5E8F76">AIRE DE LA CAVIDAD NASAL · MOLÉCULAS DEL OLOR</text>
+
+  <g stroke="#5B4F7E" stroke-width="1.1" fill="none">
+    <path d="M588 300 H700"/><path d="M664 356 H700"/><path d="M596 424 H698"/>
+  </g>
+  <text x="552" y="304" class="mini">AXÓN</text>
+  <text x="552" y="360" class="mini">CÉLULA RECEPTORA</text>
+  <text x="552" y="428" class="mini">CILIOS</text>
+
+  <!-- LÍNEAS GUÍA -->
+  <g class="ldr">
+    <path d="M250 108 L186 66"/>
+    <path d="M212 156 L172 118"/>
+    <path d="M240 174 L124 186"/>
+    <path d="M400 250 L500 214"/>
+    <path d="M300 322 L300 412"/>
+    <path d="M140 300 L104 406"/>
+    <path d="M440 108 L444 84"/>
+  </g>
+  <g class="dot">
+    <circle cx="250" cy="108" r="3"/><circle cx="212" cy="156" r="3"/><circle cx="240" cy="174" r="3"/>
+    <circle cx="400" cy="250" r="3"/><circle cx="300" cy="322" r="3"/><circle cx="140" cy="300" r="3"/>
+    <circle cx="440" cy="108" r="3"/>
+  </g>
+
+  <!-- ETIQUETAS -->
+  <text x="24" y="60" class="lbl">BULBO OLFATORIO</text>
+  <text x="24" y="114" class="lbl">LÁMINA CRIBOSA</text>
+  <text x="24" y="176" class="lbl">EPITELIO</text>
+  <text x="24" y="194" class="lbl">OLFATORIO</text>
+  <text x="506" y="196" class="lbl">CORNETES</text>
+  <text x="506" y="213" class="sub">1 superior · 2 medio · 3 inferior</text>
+  <text x="300" y="430" class="lbl" text-anchor="middle">PALADAR</text>
+  <text x="24" y="424" class="lbl">AIRE CON</text>
+  <text x="24" y="442" class="lbl">MOLÉCULAS</text>
+  <text x="444" y="76" class="lbl" text-anchor="middle">TRACTO OLFATORIO</text>
+  <text x="592" y="72" class="lbl">CORTEZA OLFATORIA</text>
+  <text x="592" y="90" class="sub">sistema límbico: memoria y emoción</text>
+</svg>

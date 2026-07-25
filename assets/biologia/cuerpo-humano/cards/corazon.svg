@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="t d">
+  <title id="t">Corazón humano</title><desc id="d">Ilustración anatómica estilizada del corazón, sin rótulos.</desc>
+  <defs><radialGradient id="b"><stop stop-color="#31141b"/><stop offset="1" stop-color="#080c0a"/></radialGradient><linearGradient id="h" x2="1" y2="1"><stop stop-color="#ef4444"/><stop offset=".55" stop-color="#9f1239"/><stop offset="1" stop-color="#4c0519"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="20"/></filter></defs>
+  <rect width="1200" height="600" fill="url(#b)"/><circle cx="650" cy="310" r="230" fill="#ef4444" opacity=".12" filter="url(#g)"/>
+  <path d="M612 130c-64-66-179-42-216 47-51 124 67 255 244 343 176-88 294-219 243-343-37-89-152-113-216-47l-27 31Z" fill="url(#h)" stroke="#fb7185" stroke-width="10"/>
+  <path d="M617 169c-48 77-57 195-23 323M668 161c55 87 54 207 12 333" fill="none" stroke="#fecdd3" stroke-opacity=".42" stroke-width="14"/>
+  <path d="M548 112V33c0-29 42-34 51-7l32 96M708 111V35c0-30 45-31 49-2l13 117M786 160l79-92c19-22 54 5 35 28l-81 99" fill="none" stroke="#e11d48" stroke-width="32" stroke-linecap="round"/>
+  <path d="M477 220c75 16 128 55 167 119 36-67 91-107 169-119" fill="none" stroke="#fda4af" stroke-width="9" opacity=".7"/>
+</svg>

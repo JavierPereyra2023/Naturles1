@@ -16,7 +16,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8,12,10,0.58) 0%, rgba(8,12,10,0.48) 50%, rgba(8,12,10,0.70) 100%);
+  background: linear-gradient(180deg, rgba(8,12,10,0.40) 0%, rgba(8,12,10,0.30) 50%, rgba(8,12,10,0.56) 100%);
   z-index: -2;
   pointer-events: none;
 }
@@ -127,10 +127,10 @@ html { scroll-behavior: smooth; }
 
 /* Los fondos de portada deben acompañar al contenido, no desaparecer bajo el overlay. */
 body[class*="bg-"] section.relative.overflow-hidden > div.absolute.inset-0:has(> img) {
-  opacity: .36 !important;
+  opacity: .50 !important;
 }
 body[class*="bg-"] section.relative.overflow-hidden > div.absolute.bg-gradient-to-b {
-  background-image: linear-gradient(180deg, rgba(8,12,10,.52) 0%, rgba(8,12,10,.10) 52%, rgba(8,12,10,.72) 100%) !important;
+  background-image: linear-gradient(180deg, rgba(8,12,10,.40) 0%, rgba(8,12,10,.06) 52%, rgba(8,12,10,.58) 100%) !important;
 }
 
 /* === PORTADA / HERO estilizado ===
@@ -302,7 +302,7 @@ body[class*="bg-"] > section.relative.overflow-hidden:first-of-type::after {
 body.bg-ecosistemas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-ecosistemas-bosque.png') !important; }
 body.bg-celulas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-celulas-microscopio.png') !important; }
 body.bg-fotosintesis > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-fotosintesis-planta.png') !important; }
-body.bg-cuerpo-humano > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.png') !important; }
+body.bg-cuerpo-humano > section.relative.overflow-hidden:first-of-type:not(:has(> div.absolute img)) { background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.png') !important; }
 body.bg-sistema-solar > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sistema-solar-espacio.png') !important; }
 body.bg-calor > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-calor-llamas.png') !important; }
 body.bg-sonido > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sonido-ondas.png') !important; }
