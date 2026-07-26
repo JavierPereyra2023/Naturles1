@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Diagrama de la fuerza nuclear débil">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <pattern id="gridND" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowND" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#FBBF24"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg4)"/>
+  <rect width="800" height="500" fill="url(#gridND)"/>
+
+  <!-- Title -->
+  <text x="40" y="50" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3">FUERZA FUNDAMENTAL · 04</text>
+  <text x="40" y="86" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="32" font-weight="800">Fuerza Nuclear Débil</text>
+  <text x="40" y="112" fill="#5A6B60" font-family="Inter, sans-serif" font-size="12">Responsable de la radiactividad y las desintegraciones</text>
+
+  <!-- Decay diagram (main) -->
+  <g transform="translate(400, 290)">
+    <!-- Before: neutron -->
+    <g transform="translate(-200, 0)">
+      <circle r="36" fill="rgba(59,130,246,0.18)" stroke="#3B82F6" stroke-width="2.5"/>
+      <text y="6" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="22" font-weight="800">n</text>
+      <text y="64" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="11" font-weight="600">NEUTRÓN</text>
+      <text y="80" text-anchor="middle" fill="#5A6B60" font-family="Inter, sans-serif" font-size="9">carga: 0</text>
+    </g>
+
+    <!-- Big arrow: decay -->
+    <g transform="translate(-110, 0)">
+      <line x1="0" y1="0" x2="80" y2="0" stroke="#FBBF24" stroke-width="3" marker-end="url(#arrowND)"/>
+      <text x="40" y="-12" text-anchor="middle" fill="#FBBF24" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">DECAIMIENTO β⁻</text>
+      <text x="40" y="22" text-anchor="middle" fill="#5A6B60" font-family="Inter, sans-serif" font-size="9" font-style="italic">~15 min vida media</text>
+    </g>
+
+    <!-- After: proton + electron + antineutrino -->
+    <g transform="translate(40, -50)">
+      <circle r="26" fill="rgba(239,68,68,0.18)" stroke="#EF4444" stroke-width="2"/>
+      <text y="5" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="16" font-weight="800">p⁺</text>
+      <text y="48" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="10" font-weight="600">PROTÓN</text>
+    </g>
+
+    <g transform="translate(120, 30)">
+      <circle r="22" fill="rgba(96,165,250,0.18)" stroke="#60A5FA" stroke-width="2"/>
+      <text y="5" text-anchor="middle" fill="#60A5FA" font-family="Inter, sans-serif" font-size="14" font-weight="800">e⁻</text>
+      <text y="44" text-anchor="middle" fill="#60A5FA" font-family="Inter, sans-serif" font-size="10" font-weight="600">ELECTRÓN</text>
+    </g>
+
+    <g transform="translate(200, -40)">
+      <circle r="20" fill="rgba(34,197,94,0.18)" stroke="#22C55E" stroke-width="2"/>
+      <text y="5" text-anchor="middle" fill="#22C55E" font-family="Inter, sans-serif" font-size="13" font-weight="800">ν̄</text>
+      <text y="42" text-anchor="middle" fill="#22C55E" font-family="Inter, sans-serif" font-size="10" font-weight="600">ANTINEUTRINO</text>
+    </g>
+
+    <!-- Connectors from neutron area to products -->
+    <g fill="none" stroke="#FBBF24" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.6">
+      <path d="M -150 -10 Q -50 -40 20 -45"/>
+      <path d="M -150 10 Q 0 30 100 30"/>
+      <path d="M -150 -8 Q 30 -50 180 -40"/>
+    </g>
+  </g>
+
+  <!-- W boson exchange (left small) -->
+  <g transform="translate(80, 200)">
+    <rect x="0" y="0" width="240" height="120" fill="rgba(251,191,36,0.06)" stroke="rgba(251,191,36,0.3)" stroke-width="1"/>
+    <text x="12" y="22" fill="#FBBF24" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">MEDIADOR: BOSÓN W⁻</text>
+
+    <!-- Neutron becomes proton (quark flip: d → u) -->
+    <g transform="translate(40, 70)">
+      <circle r="16" fill="rgba(59,130,246,0.15)" stroke="#3B82F6" stroke-width="1.5"/>
+      <text y="4" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="11" font-weight="800">d</text>
+      <text y="34" text-anchor="middle" fill="#5A6B60" font-family="Inter, sans-serif" font-size="8">down</text>
+    </g>
+
+    <line x1="62" y1="70" x2="120" y2="70" stroke="#FBBF24" stroke-width="2" marker-end="url(#arrowND)"/>
+    <text x="91" y="62" text-anchor="middle" fill="#FBBF24" font-family="Inter, sans-serif" font-size="10" font-weight="700">W⁻</text>
+
+    <g transform="translate(140, 70)">
+      <circle r="16" fill="rgba(239,68,68,0.15)" stroke="#EF4444" stroke-width="1.5"/>
+      <text y="4" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="11" font-weight="800">u</text>
+      <text y="34" text-anchor="middle" fill="#5A6B60" font-family="Inter, sans-serif" font-size="8">up</text>
+    </g>
+
+    <g transform="translate(195, 70)">
+      <circle r="14" fill="rgba(96,165,250,0.15)" stroke="#60A5FA" stroke-width="1.5"/>
+      <text y="4" text-anchor="middle" fill="#60A5FA" font-family="Inter, sans-serif" font-size="10" font-weight="800">e⁻</text>
+    </g>
+
+    <text x="120" y="108" text-anchor="middle" fill="#5A6B60" font-family="Inter, sans-serif" font-size="8" font-style="italic">un quark "down" se transforma en "up" emitiendo un W⁻</text>
+  </g>
+
+  <!-- Bottom: applications -->
+  <g transform="translate(360, 200)">
+    <text x="0" y="0" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">APLICACIONES</text>
+    <g transform="translate(0, 18)">
+      <circle cx="6" cy="6" r="3" fill="#FBBF24"/>
+      <text x="18" y="10" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">Datación por carbono-14</text>
+    </g>
+    <g transform="translate(0, 38)">
+      <circle cx="6" cy="6" r="3" fill="#FBBF24"/>
+      <text x="18" y="10" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">Reacciones dentro del Sol</text>
+    </g>
+    <g transform="translate(0, 58)">
+      <circle cx="6" cy="6" r="3" fill="#FBBF24"/>
+      <text x="18" y="10" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">Medicina nuclear (radioterapia)</text>
+    </g>
+  </g>
+
+  <!-- Bottom info bar -->
+  <g transform="translate(40, 460)">
+    <rect x="0" y="0" width="720" height="28" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.2)"/>
+    <text x="14" y="18" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="600">Alcance: 10⁻¹⁸ m (subatómico)</text>
+    <text x="290" y="18" fill="#5A6B60" font-family="Inter, sans-serif" font-size="10">Mediada por bosones W⁺, W⁻ y Z⁰ · descubierta en 1968 (Nobel 1979)</text>
+  </g>
+</svg>

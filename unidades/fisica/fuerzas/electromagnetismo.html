@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Electromagnetismo · Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { natura: { black:'#080C0A', dark:'#0E1410', gray:'#161C18', mid:'#242C28', silver:'#A8B5AD', silverLight:'#C8D4CC', silverDark:'#5A6B60', green:'#0D9488', greenLight:'#14B8A6', leaf:'#22C55E', water:'#38BDF8', energy:'#3B82F6', bio:'#DC2626', podcast:'#E8A87C' } } },
+      fontFamily: { heading: ['Playfair Display','Georgia','serif'], body: ['Cormorant Garamond','Georgia','serif'], ui: ['Inter','sans-serif'] } } }
+  </script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    ::selection { background:#A78BFA; color:#080C0A; }
+    body { font-family:'Cormorant Garamond',Georgia,serif; background:#080C0A; color:#D0D8D2; }
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#080C0A; } ::-webkit-scrollbar-thumb { background:#A78BFA; border-radius:3px; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .animate-fadeInUp { animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .accent-line { width:60px; height:3px; background:linear-gradient(90deg,#A78BFA,#38BDF8); }
+    .content-card { border:1px solid rgba(255,255,255,0.05); transition:all 0.3s ease; }
+    .content-card:hover { border-color:rgba(167,139,250,0.3); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(167,139,250,0.5); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .hero-figure { position:relative; height:340px; overflow:hidden; border:1px solid rgba(167,139,250,0.2); background:#0E1410; }
+    .hero-figure object { width:100%; height:100%; pointer-events:none; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/responsive-fixes.css">
+  <script src="../../../assets/backgrounds/auto-toc.js?v=6"></script>
+</head>
+<body class="bg-energia">
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: gravedad, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy">Electromagnetismo</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver a Fuerzas</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 md:pt-24 md:pb-12 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-25" style="z-index: 0;">
+    <img src="../../../assets/fisica/fuerzas/svg-electromagnetismo.svg" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(2px);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/30 to-natura-black" style="z-index: 1;"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="accent-line"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Fuerza fundamental · 02</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight mb-3">
+      <span class="bg-gradient-to-r from-natura-water to-natura-energy bg-clip-text text-transparent">El Electromagnetismo</span>
+    </h1>
+    <p class="text-base md:text-lg text-natura-silver max-w-2xl leading-relaxed">La fuerza que hace funcionar tu celular, ilumina tu casa, pega un imán en la heladera y une átomos para formar todo lo que tocás. La más presente en tu vida diaria.</p>
+  </div>
+</section>
+
+<!-- DIAGRAMA -->
+<section class="py-6 md:py-8 bg-natura-dark">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="hero-figure">
+      <object data="../../../assets/fisica/fuerzas/svg-electromagnetismo.svg" type="image/svg+xml"></object>
+    </div>
+    <p class="text-[11px] text-natura-silverDark mt-2 italic text-center" style="font-family: 'Inter', sans-serif;">Cargas opuestas se atraen, iguales se repelen. Imanes: polos N y S. La luz es una onda con campos eléctrico y magnético oscilando juntos.</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-14">
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Una sola fuerza, dos caras</h2>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">
+      En el siglo XIX, James Clerk Maxwell demostró que la <strong class="text-natura-energy">electricidad</strong> y el <strong class="text-natura-water">magnetismo</strong> son dos manifestaciones de una única fuerza: el <strong class="text-white">electromagnetismo</strong>. Una carga eléctrica en movimiento genera un campo magnético, y un campo magnético variable genera una corriente eléctrica.
+    </p>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+      Por eso, cuando movés un imán cerca de un cable, hacés circular electrones por el cable. Y cuando hacés circular electrones por un cable, generás un campo magnético alrededor. Esa idea es la base de los motores, los generadores, los parlantes y los transformadores.
+    </p>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Electricidad: las cargas</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="content-card bg-natura-gray p-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">Cargas positivas y negativas</h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">Toda la materia está hecha de átomos, y los átomos tienen protones (carga <strong class="text-red-400">+</strong>) y electrones (carga <strong class="text-blue-400">−</strong>). Las cargas <strong class="text-white">iguales se repelen</strong>, las <strong class="text-white">opuestas se atraen</strong>.</p>
+        <p class="text-base text-natura-silver leading-relaxed">La unidad de carga es el <strong class="text-white">coulomb (C)</strong>. Un electrón tiene apenas 1,6 × 10⁻¹⁹ C, así que necesitás muchísimos para hacer un trabajo útil.</p>
+      </div>
+      <div class="content-card bg-natura-gray p-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">Ley de Coulomb</h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">La fuerza entre dos cargas es proporcional al producto de las cargas e inversamente proporcional al cuadrado de la distancia:</p>
+        <div class="bg-natura-mid p-3 text-center font-mono text-natura-water text-lg my-3">F = k · q₁ · q₂ / r²</div>
+        <p class="text-sm text-natura-silverDark italic" style="font-family: 'Inter', sans-serif;">k = 9 × 10⁹ N·m²/C². <br>Igual que la gravedad, pero con cargas eléctricas en vez de masas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Magnetismo: los imanes</h2>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-4">
+      Un imán tiene dos polos, <strong class="text-red-400">Norte (N)</strong> y <strong class="text-blue-400">Sur (S)</strong>. Los polos opuestos se atraen, los iguales se repelen. Alrededor de todo imán hay un <strong class="text-natura-water">campo magnético</strong> invisible: las líneas de campo salen del polo N y entran por el polo S.
+    </p>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+      La Tierra misma es un gran imán: el polo norte magnético está cerca del polo sur geográfico, y por eso la brújula (una aguja imantada) apunta al norte. El campo magnético terrestre también nos protege del viento solar — desvía las partículas cargadas que vienen del Sol.
+    </p>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">La luz, una onda electromagnética</h2>
+    <div class="bg-gradient-to-r from-natura-energy/10 to-transparent border border-natura-energy/30 p-5">
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">
+        Maxwell demostró que la luz es una onda que se propaga por el espacio combinando un campo eléctrico (E) y un campo magnético (B) que oscilan en ángulo recto entre sí, y avanzan juntos en dirección perpendicular a ambos.
+      </p>
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">
+        Esa onda la vemos como <strong class="text-white">luz visible</strong> cuando su longitud de onda está entre 400 y 700 nanómetros. Pero el espectro electromagnético es enorme: incluye las ondas de radio, las microondas, el infrarrojo, el ultravioleta, los rayos X y los rayos gamma. Todas son lo mismo: electromagnetismo, en distintas frecuencias.
+      </p>
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+        Tu celular recibe ondas de radio, tu control remoto emite infrarrojo, el Sol nos manda luz visible y ultravioleta, y un hospital usa rayos X para verte los huesos. <strong class="text-natura-water">Todo es lo mismo, cambiando la frecuencia</strong>.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <div class="bg-gradient-to-r from-natura-water/10 to-transparent border border-natura-water/30 p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="iconify text-natura-water" data-icon="lucide:zap" data-width="22"></span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Experimento casero · Imanes y clips</h2>
+      </div>
+      <p class="text-base text-natura-silver leading-relaxed mb-3">Necesitás: un imán (de heladera sirve) y varios clips metálicos.</p>
+      <p class="text-base text-natura-silver leading-relaxed mb-3">Acercá el imán a un clip. ¿Lo levanta? Ahora, sin tocar el imán al clip, mantenelo cerca y pasá un segundo imán por arriba. ¿Ves que el clip sigue "saltando" hacia el imán, aunque lo toques con el otro imán? Eso es porque el campo magnético atraviesa el espacio vacío.</p>
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+        Ahora juntá dos imanes. Si los polos son iguales, vas a sentir que se repelen y cuesta un montón unirlos. Si son distintos, se atraen solos. Eso es la fuerza magnética en acción.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Para pensar</h2>
+    <div class="space-y-3">
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si froto un globo contra el pelo, el globo queda "cargado" y pega papelitos. ¿Qué pasó?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Al frotar, el globo le saca electrones al pelo. El globo queda con carga negativa extra, el pelo con carga positiva. Los papelitos (neutros en general) se polarizan: el lado más cercano al globo se induce positivo y el otro negativo, y la atracción gana. La parte de tu pelo se levanta porque ambos quedaron con cargas iguales (+ y +).</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          ¿Por qué la brújula apunta al norte?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Porque la Tierra misma es un imán gigante: tiene un campo magnético generado por el movimiento del hierro líquido en su núcleo. La aguja de la brújula es un pequeño imán que se alinea con ese campo, igual que una brújula de smartphone usa un sensor que mide ese mismo campo.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si la luz es una onda electromagnética, ¿cómo puede viajar por el vacío (en el espacio no hay aire)?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Porque la luz NO necesita un medio para propagarse. A diferencia del sonido, que necesita aire, agua o algo para vibrar, las ondas electromagnéticas son oscilaciones de los campos E y B, que existen en todo el espacio. Por eso llega luz del Sol, de estrellas lejanísimas y de galaxias a millones de años luz: atraviesa el vacío del espacio sin problemas.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="mt-12 pt-6 border-t border-white/10 flex flex-wrap gap-3 justify-between" style="font-family: 'Inter', sans-serif;">
+    <a href="gravedad.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> Anterior: Gravedad
+    </a>
+    <a href="nuclear-fuerte.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">
+      Siguiente: Nuclear fuerte <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+    </a>
+  </section>
+</article>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});}, { threshold: 0.1 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Electromagnetismo",u:"Física",s:"Fuerzas",l:"electromagnetismo.html",c:"#A78BFA"},
+    {n:"Gravedad",u:"Física",s:"Fuerzas",l:"gravedad.html",c:"#3B82F6"},
+    {n:"Nuclear fuerte",u:"Física",s:"Fuerzas",l:"nuclear-fuerte.html",c:"#FB923C"},
+    {n:"Rozamiento",u:"Física",s:"Fuerzas",l:"rozamiento.html",c:"#F59E0B"},
+    {n:"La Luz y los colores",u:"Física",s:"Calor",l:"../calor-sonido/luz.html",c:"#3B82F6"},
+    {n:"El Sonido",u:"Física",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"}
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){
+      var a=document.createElement('a');a.href=t.l;a.className='search-result-item';
+      a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+      results.appendChild(a);
+    });}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script src="../../../assets/backgrounds/auto-toc.js" defer></script>
+</body>
+</html>

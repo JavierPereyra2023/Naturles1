@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Las Fuerzas de la Naturaleza · Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #3B82F6; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; } .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; } .delay-500 { animation-delay: 500ms; }
+    .accent-line-fisica { width: 60px; height: 3px; background: linear-gradient(90deg, #3B82F6, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.35s ease; }
+    .content-card:hover { border-color: rgba(59,130,246,0.35); transform: translateY(-4px); }
+    .topic-card { display: flex; flex-direction: column; height: 100%; }
+    .topic-card-body { display: flex; flex: 1; flex-direction: column; }
+    .topic-card-tags { margin-top: auto; }
+    .topic-card-image { position: relative; overflow: hidden; height: 200px; }
+    .topic-card-image img, .topic-card-image svg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .topic-card:hover .topic-card-image img, .topic-card:hover .topic-card-image svg { transform: scale(1.04); }
+    .topic-card-title { color: #fff; text-decoration: none; }
+    .topic-card-title:hover, .topic-card-title:focus-visible { color: #93C5FD; }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(59, 130, 246, 0.35); transform: translateY(-2px); }
+    .hero-image-wrap { position: relative; height: 320px; overflow: hidden; border: 1px solid rgba(59,130,246,0.2); }
+    .hero-image-wrap img, .hero-image-wrap svg { width: 100%; height: 100%; object-fit: cover; }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+  <link rel="stylesheet" href="../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../assets/responsive-fixes.css">
+  <script src="../../assets/backgrounds/auto-toc.js?v=6"></script>
+</head>
+<body class="bg-energia">
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: gravedad, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs" style="font-family: 'Inter', sans-serif;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy">Las Fuerzas</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2.5 py-1 hidden sm:inline">Nuevo</span>
+        <a href="../index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver a Física</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="z-index: 0;">
+    <img src="../../../assets/fisica/fuerzas/svg-hero-fuerzas.svg" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.65;">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/60 via-natura-black/50 to-natura-black" style="z-index: 1;"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line-fisica"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Física · Nuevo · 2026</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight mb-4">
+        <span class="bg-gradient-to-r from-natura-energy via-natura-water to-natura-greenLight bg-clip-text text-transparent">Las Fuerzas</span> <span class="text-white">de la Naturaleza</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-2xl leading-relaxed">
+        ¿Por qué caemos al piso y no flotamos? ¿Por qué los imanes atraen a otros metales? ¿Qué mantiene unido el núcleo de un átomo? En esta unidad vas a conocer las 4 fuerzas fundamentales que rigen todo el universo, más una fuerza cotidiana que experimentás a cada rato: el rozamiento.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">4 fuerzas fundamentales</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-3 py-1">1 fuerza cotidiana</span>
+        <span class="text-[9px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-3 py-1">Experimentos caseros</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="w-full h-px bg-gradient-to-r from-transparent via-natura-energy/20 to-transparent"></div>
+
+<!-- STATS -->
+<section class="bg-natura-dark py-10">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+      <div class="stat-box bg-natura-gray p-4 md:p-5 text-center">
+        <div class="font-heading text-3xl md:text-4xl font-bold text-natura-energy">4</div>
+        <div class="text-[10px] uppercase tracking-[0.18em] text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Fundamentales</div>
+      </div>
+      <div class="stat-box bg-natura-gray p-4 md:p-5 text-center">
+        <div class="font-heading text-3xl md:text-4xl font-bold text-natura-water">5</div>
+        <div class="text-[10px] uppercase tracking-[0.18em] text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Páginas</div>
+      </div>
+      <div class="stat-box bg-natura-gray p-4 md:p-5 text-center">
+        <div class="font-heading text-3xl md:text-4xl font-bold text-natura-leaf">1</div>
+        <div class="text-[10px] uppercase tracking-[0.18em] text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Experimento</div>
+      </div>
+      <div class="stat-box bg-natura-gray p-4 md:p-5 text-center">
+        <div class="font-heading text-3xl md:text-4xl font-bold text-natura-podcast">10</div>
+        <div class="text-[10px] uppercase tracking-[0.18em] text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Preguntas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="bg-natura-dark pb-6">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-5">
+      <div class="accent-line-fisica"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy" style="font-family: 'Inter', sans-serif;">¿Qué son las fuerzas?</span>
+    </div>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3" style="font-family: 'Cormorant Garamond', serif;">
+      Una <strong class="text-white">fuerza</strong> es todo aquello que puede cambiar el estado de movimiento de un cuerpo, o deformarlo. Cuando pateás una pelota, la fuerza de tu pie la acelera; cuando la gravedad la jala hacia abajo, vuelve a acelerar; cuando el aire la frena, la desacelera. Todo cambio en el universo es producto de alguna fuerza.
+    </p>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed" style="font-family: 'Cormorant Garamond', serif;">
+      Los físicos descubrieron que <strong class="text-white">toda la enorme variedad de fuerzas que vemos en la vida cotidiana</strong> —el roce, los resortes, los imanes, las patadas— <strong class="text-white">se reduce a solo 4 fuerzas fundamentales</strong> que actúan en la naturaleza. Son las reglas del juego con las que se construye todo lo que existe.
+    </p>
+  </div>
+</section>
+
+<!-- CARDS -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+
+  <!-- Fila 1: las 4 fundamentales -->
+  <div class="mb-4">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="iconify text-natura-energy" data-icon="lucide:atom" data-width="22"></span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide text-white">Las 4 fuerzas fundamentales</h2>
+    </div>
+    <p class="text-base text-natura-silver mb-6 max-w-3xl" style="font-family: 'Cormorant Garamond', serif;">
+      Estas son las fuerzas con las que la naturaleza construye todo. Las que veíamos en clase (gravedad, magnetismo, electricidad) son manifestaciones de estas cuatro.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+
+    <!-- Gravedad -->
+    <a href="gravedad.html" class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal">
+      <div class="topic-card-image">
+        <object data="../../../assets/fisica/fuerzas/svg-gravedad.svg" type="image/svg+xml" style="width: 100%; height: 100%; pointer-events: none;"></object>
+      </div>
+      <div class="topic-card-body p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[9px] font-bold uppercase tracking-wider" style="background: rgba(59,130,246,0.15); color: #60A5FA; padding: 2px 8px; font-family: 'Inter', sans-serif;">01 · Gravedad</span>
+          <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold mb-2"><span class="topic-card-title">La Gravedad</span></h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3" style="font-family: 'Cormorant Garamond', serif;">
+          La atracción entre todas las masas. La que te mantiene en el piso y la que mantiene a la Tierra orbitando el Sol.
+        </p>
+        <div class="topic-card-tags flex flex-wrap gap-1.5">
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5" style="font-family: 'Inter', sans-serif;">F = m·g</span>
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/10 text-natura-energy px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Newton</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Electromagnetismo -->
+    <a href="electromagnetismo.html" class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal">
+      <div class="topic-card-image">
+        <object data="../../../assets/fisica/fuerzas/svg-electromagnetismo.svg" type="image/svg+xml" style="width: 100%; height: 100%; pointer-events: none;"></object>
+      </div>
+      <div class="topic-card-body p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[9px] font-bold uppercase tracking-wider" style="background: rgba(167,139,250,0.15); color: #A78BFA; padding: 2px 8px; font-family: 'Inter', sans-serif;">02 · Electromagnetismo</span>
+          <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold mb-2"><span class="topic-card-title">El Electromagnetismo</span></h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3" style="font-family: 'Cormorant Garamond', serif;">
+          Cargas eléctricas e imanes. La fuerza que enciende tu celular, hace que veas colores y une átomos en moléculas.
+        </p>
+        <div class="topic-card-tags flex flex-wrap gap-1.5">
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/10 text-natura-water px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Cargas</span>
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/10 text-natura-water px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Imanes</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Nuclear fuerte -->
+    <a href="nuclear-fuerte.html" class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal">
+      <div class="topic-card-image">
+        <object data="../../../assets/fisica/fuerzas/svg-nuclear-fuerte.svg" type="image/svg+xml" style="width: 100%; height: 100%; pointer-events: none;"></object>
+      </div>
+      <div class="topic-card-body p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[9px] font-bold uppercase tracking-wider" style="background: rgba(251,146,60,0.15); color: #FB923C; padding: 2px 8px; font-family: 'Inter', sans-serif;">03 · Nuclear fuerte</span>
+          <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold mb-2"><span class="topic-card-title">La Nuclear Fuerte</span></h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3" style="font-family: 'Cormorant Garamond', serif;">
+          La más intensa de todas. Mantiene juntos a los quarks dentro de los protones y neutrones, y al núcleo atómico entero.
+        </p>
+        <div class="topic-card-tags flex flex-wrap gap-1.5">
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-podcast/10 text-natura-podcast px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Gluones</span>
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-podcast/10 text-natura-podcast px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Núcleo</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Nuclear débil -->
+    <a href="nuclear-debil.html" class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal">
+      <div class="topic-card-image">
+        <object data="../../../assets/fisica/fuerzas/svg-nuclear-debil.svg" type="image/svg+xml" style="width: 100%; height: 100%; pointer-events: none;"></object>
+      </div>
+      <div class="topic-card-body p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[9px] font-bold uppercase tracking-wider" style="background: rgba(251,191,36,0.15); color: #FBBF24; padding: 2px 8px; font-family: 'Inter', sans-serif;">04 · Nuclear débil</span>
+          <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold mb-2"><span class="topic-card-title">La Nuclear Débil</span></h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3" style="font-family: 'Cormorant Garamond', serif;">
+          La que cambia el "sabor" de las partículas. Responsable de la radiactividad y de que el Sol brille.
+        </p>
+        <div class="topic-card-tags flex flex-wrap gap-1.5">
+          <span class="text-[8px] font-semibold uppercase tracking-wider" style="background: rgba(251,191,36,0.15); color: #FBBF24; padding: 2px 8px; font-family: 'Inter', sans-serif;">Bosones W, Z</span>
+          <span class="text-[8px] font-semibold uppercase tracking-wider" style="background: rgba(251,191,36,0.15); color: #FBBF24; padding: 2px 8px; font-family: 'Inter', sans-serif;">Radiactividad</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Fila 2: la fuerza cotidiana -->
+  <div class="mb-4">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="iconify text-natura-podcast" data-icon="lucide:hand" data-width="22"></span>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide text-white">Una fuerza cotidiana</h2>
+    </div>
+    <p class="text-base text-natura-silver mb-6 max-w-3xl" style="font-family: 'Cormorant Garamond', serif;">
+      Además de las fundamentales, hay una fuerza que experimentás todo el tiempo y no es "fundamental" — sino que es el resultado combinado del electromagnetismo entre los átomos de dos superficies en contacto.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+    <a href="rozamiento.html" class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal">
+      <div class="topic-card-image">
+        <object data="../../../assets/fisica/fuerzas/svg-rozamiento.svg" type="image/svg+xml" style="width: 100%; height: 100%; pointer-events: none;"></object>
+      </div>
+      <div class="topic-card-body p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[9px] font-bold uppercase tracking-wider" style="background: rgba(245,158,11,0.15); color: #F59E0B; padding: 2px 8px; font-family: 'Inter', sans-serif;">05 · Rozamiento</span>
+          <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
+        </div>
+        <h3 class="font-heading text-xl font-bold mb-2"><span class="topic-card-title">El Rozamiento</span></h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3" style="font-family: 'Cormorant Garamond', serif;">
+          La fuerza que te frena cuando patinas, que te permite caminar sin resbalar y que gasta las suelas de tus zapatillas.
+        </p>
+        <div class="topic-card-tags flex flex-wrap gap-1.5">
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-podcast/10 text-natura-podcast px-2 py-0.5" style="font-family: 'Inter', sans-serif;">f = μ·N</span>
+          <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-podcast/10 text-natura-podcast px-2 py-0.5" style="font-family: 'Inter', sans-serif;">Cinético y estático</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card resumen / tabla -->
+    <div class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal md:col-span-2">
+      <div class="topic-card-image" style="height: 280px;">
+        <object data="../../../assets/fisica/fuerzas/svg-tabla-fuerzas.svg" type="image/svg+xml" style="width: 100%; height: 100%; pointer-events: none;"></object>
+      </div>
+      <div class="topic-card-body p-5">
+        <h3 class="font-heading text-xl font-bold mb-2 text-white">Tabla comparativa</h3>
+        <p class="text-base text-natura-silver leading-relaxed" style="font-family: 'Cormorant Garamond', serif;">
+          Mirá la diferencia de intensidad entre las 4 fuerzas fundamentales: la gravedad es 10³⁶ veces más débil que el electromagnetismo. Por eso un imán de heladera puede levantar un clip mientras toda la Tierra tira de él para abajo.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON / RESUMEN -->
+  <section class="mt-8 bg-natura-gray p-6 md:p-8 border border-white/5">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="iconify text-natura-energy" data-icon="lucide:lightbulb" data-width="22"></span>
+      <h2 class="font-heading text-xl md:text-2xl font-bold uppercase text-white">Idea clave</h2>
+    </div>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed" style="font-family: 'Cormorant Garamond', serif;">
+      La <strong class="text-natura-energy">gravedad</strong> domina a escala cósmica (planetas, estrellas, galaxias). El <strong class="text-natura-water">electromagnetismo</strong> domina a escala humana (electricidad, luz, química). Las fuerzas <strong class="text-natura-podcast">nucleares</strong> dominan a escala subatómica (el interior de los átomos). Las 4 juntas explican todo lo que pasa en el universo, desde el movimiento de una pluma hasta la fusión en el corazón de una estrella.
+    </p>
+  </section>
+</div>
+
+<!-- Quiz CTA -->
+<section class="px-4 md:px-6 pb-12">
+  <div class="max-w-3xl mx-auto rounded-2xl border border-natura-energy/25 bg-natura-energy/5 p-6 md:p-8 text-center">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-energy mb-2" style="font-family:'Inter',sans-serif;">¿Lo entendiste?</p>
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Quiz: Las Fuerzas de la Naturaleza</h2>
+    <p class="text-natura-silver text-base md:text-lg mb-6 max-w-xl mx-auto">Poné a prueba lo que aprendiste sobre las 4 fuerzas fundamentales y el rozamiento.</p>
+    <a href="../../../evaluaciones/quiz.html?unidad=fuerzas" class="inline-flex items-center gap-2 bg-natura-energy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-sm">
+      <span class="iconify" data-icon="lucide:circle-help" data-width="14"></span>
+      Hacer el quiz
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Gravedad",u:"Física",s:"Fuerzas",l:"gravedad.html",c:"#3B82F6"},
+    {n:"Electromagnetismo",u:"Física",s:"Fuerzas",l:"electromagnetismo.html",c:"#A78BFA"},
+    {n:"Nuclear fuerte",u:"Física",s:"Fuerzas",l:"nuclear-fuerte.html",c:"#FB923C"},
+    {n:"Nuclear débil",u:"Física",s:"Fuerzas",l:"nuclear-debil.html",c:"#FBBF24"},
+    {n:"Rozamiento",u:"Física",s:"Fuerzas",l:"rozamiento.html",c:"#F59E0B"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../energia/formas-energia.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Calor y temperatura",u:"Física",s:"Calor",l:"../calor-sonido/calor-temperatura.html",c:"#3B82F6"},
+    {n:"El Sonido",u:"Física",s:"Sonido",l:"../calor-sonido/sonido.html",c:"#3B82F6"},
+    {n:"El Sol y los planetas",u:"Física",s:"Sistema Solar",l:"../sistema-solar/sol-planetas.html",c:"#3B82F6"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../../biologia/plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Mezclas",u:"Química",s:"Mezclas",l:"../../quimica/mezclas/tipos-mezclas.html",c:"#22C55E"},
+    {n:"Podcast de Ciencias",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"}
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){
+      var a=document.createElement('a');a.href=t.l;a.className='search-result-item';
+      a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+      results.appendChild(a);
+    });}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script src="../../assets/backgrounds/auto-toc.js" defer></script>
+</body>
+</html>

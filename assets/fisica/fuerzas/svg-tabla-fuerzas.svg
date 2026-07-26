@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Tabla comparativa de las 4 fuerzas fundamentales">
+  <defs>
+    <linearGradient id="bgTab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <pattern id="gridT" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgTab)"/>
+  <rect width="800" height="500" fill="url(#gridT)"/>
+
+  <!-- Title -->
+  <text x="40" y="50" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3">RESUMEN</text>
+  <text x="40" y="86" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="32" font-weight="800">Las 4 fuerzas de la naturaleza</text>
+  <text x="40" y="112" fill="#5A6B60" font-family="Inter, sans-serif" font-size="12">Comparación de intensidad, alcance y partícula mediadora</text>
+
+  <!-- Table header -->
+  <g transform="translate(40, 160)">
+    <rect x="0" y="0" width="720" height="32" fill="rgba(59,130,246,0.10)"/>
+    <text x="20" y="20" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">FUERZA</text>
+    <text x="220" y="20" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">ACCIÓN SOBRE</text>
+    <text x="420" y="20" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">ALCANCE</text>
+    <text x="540" y="20" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">INTENSIDAD RELATIVA</text>
+    <text x="710" y="20" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5" text-anchor="end">MEDIADOR</text>
+  </g>
+
+  <!-- Row 1: Gravedad -->
+  <g transform="translate(40, 200)">
+    <line x1="0" y1="0" x2="720" y2="0" stroke="rgba(255,255,255,0.05)"/>
+    <g transform="translate(20, 30)">
+      <circle r="6" fill="#3B82F6"/>
+      <text x="16" y="4" fill="white" font-family="Inter, sans-serif" font-size="13" font-weight="700">Gravedad</text>
+    </g>
+    <text x="220" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">Toda materia con masa</text>
+    <text x="420" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">Infinito</text>
+    <g transform="translate(540, 30)">
+      <rect x="0" y="-7" width="14" height="14" fill="#3B82F6" opacity="0.9"/>
+      <text x="22" y="4" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">1 (la más débil)</text>
+    </g>
+    <text x="710" y="34" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="end">gravitón (hipotético)</text>
+  </g>
+
+  <!-- Row 2: Electromagnetismo -->
+  <g transform="translate(40, 250)">
+    <line x1="0" y1="0" x2="720" y2="0" stroke="rgba(255,255,255,0.05)"/>
+    <g transform="translate(20, 30)">
+      <circle r="6" fill="#A78BFA"/>
+      <text x="16" y="4" fill="white" font-family="Inter, sans-serif" font-size="13" font-weight="700">Electromagnetismo</text>
+    </g>
+    <text x="220" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">Cargas eléctricas</text>
+    <text x="420" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">Infinito</text>
+    <g transform="translate(540, 30)">
+      <rect x="0" y="-7" width="40" height="14" fill="#A78BFA" opacity="0.9"/>
+      <text x="48" y="4" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">10³⁶ más fuerte</text>
+    </g>
+    <text x="710" y="34" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="end">fotón (γ)</text>
+  </g>
+
+  <!-- Row 3: Nuclear fuerte -->
+  <g transform="translate(40, 300)">
+    <line x1="0" y1="0" x2="720" y2="0" stroke="rgba(255,255,255,0.05)"/>
+    <g transform="translate(20, 30)">
+      <circle r="6" fill="#FB923C"/>
+      <text x="16" y="4" fill="white" font-family="Inter, sans-serif" font-size="13" font-weight="700">Nuclear fuerte</text>
+    </g>
+    <text x="220" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">Quarks (color)</text>
+    <text x="420" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">~10⁻¹⁵ m</text>
+    <g transform="translate(540, 30)">
+      <rect x="0" y="-7" width="160" height="14" fill="#FB923C" opacity="0.9"/>
+      <text x="168" y="4" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">10³⁸ más fuerte</text>
+    </g>
+    <text x="710" y="34" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="end">gluón (g)</text>
+  </g>
+
+  <!-- Row 4: Nuclear débil -->
+  <g transform="translate(40, 350)">
+    <line x1="0" y1="0" x2="720" y2="0" stroke="rgba(255,255,255,0.05)"/>
+    <g transform="translate(20, 30)">
+      <circle r="6" fill="#FBBF24"/>
+      <text x="16" y="4" fill="white" font-family="Inter, sans-serif" font-size="13" font-weight="700">Nuclear débil</text>
+    </g>
+    <text x="220" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">Sabor de quarks / leptones</text>
+    <text x="420" y="34" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11">~10⁻¹⁸ m</text>
+    <g transform="translate(540, 30)">
+      <rect x="0" y="-7" width="34" height="14" fill="#FBBF24" opacity="0.9"/>
+      <text x="42" y="4" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10">10²⁵ más fuerte</text>
+    </g>
+    <text x="710" y="34" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="end">bosones W⁺ W⁻ Z⁰</text>
+  </g>
+
+  <!-- Footer note -->
+  <g transform="translate(40, 440)">
+    <line x1="0" y1="0" x2="720" y2="0" stroke="rgba(255,255,255,0.05)"/>
+    <text x="0" y="22" fill="#5A6B60" font-family="Inter, sans-serif" font-size="10" font-style="italic">A la gravedad le faltan 36 órdenes de magnitud para igualar al electromagnetismo. Por eso los imanes de la heladera pueden levantar un clip mientras toda la Tierra intenta atraerlo.</text>
+  </g>
+</svg>

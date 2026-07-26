@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Materia y Propiedades podcast">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5">
+      <stop offset="0" stop-color="#22C55E" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#22C55E" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots1" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="1" fill="rgba(255,255,255,0.04)"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg1)"/>
+  <rect width="600" height="400" fill="url(#dots1)"/>
+  <rect width="600" height="400" fill="url(#glow1)"/>
+  <!-- Badge episodio -->
+  <g transform="translate(28, 28)">
+    <rect x="0" y="0" width="76" height="24" rx="2" fill="#22C55E" opacity="0.15"/>
+    <text x="38" y="16" text-anchor="middle" fill="#22C55E" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">EP 01</text>
+  </g>
+  <!-- Decoration bottom -->
+  <g transform="translate(28, 360)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#22C55E" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <g transform="translate(300, 200)">
+    <!-- Frasco sólido -->
+    <g transform="translate(-160, 0)">
+      <rect x="-32" y="-60" width="64" height="120" fill="rgba(34,197,94,0.08)" stroke="#22C55E" stroke-width="2" rx="3"/>
+      <rect x="-28" y="-20" width="56" height="78" fill="#22C55E" opacity="0.4"/>
+      <rect x="-30" y="-78" width="60" height="20" fill="#22C55E" opacity="0.6" rx="2"/>
+      <text x="0" y="92" text-anchor="middle" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="1">SÓLIDO</text>
+    </g>
+    <!-- Frasco líquido -->
+    <g transform="translate(0, 0)">
+      <rect x="-32" y="-60" width="64" height="120" fill="rgba(34,197,94,0.08)" stroke="#22C55E" stroke-width="2" rx="3"/>
+      <path d="M -28 10 Q -28 8 -26 8 L 26 8 Q 28 8 28 10 L 28 56 Q 28 58 26 58 L -26 58 Q -28 58 -28 56 Z" fill="#22C55E" opacity="0.45"/>
+      <path d="M -28 10 Q -14 6 0 10 T 28 10" fill="none" stroke="#22C55E" stroke-width="1.5" opacity="0.7"/>
+      <rect x="-30" y="-78" width="60" height="20" fill="#22C55E" opacity="0.6" rx="2"/>
+      <text x="0" y="92" text-anchor="middle" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="1">LÍQUIDO</text>
+    </g>
+    <!-- Frasco gas -->
+    <g transform="translate(160, 0)">
+      <rect x="-32" y="-60" width="64" height="120" fill="rgba(34,197,94,0.08)" stroke="#22C55E" stroke-width="2" rx="3"/>
+      <circle cx="-12" cy="20" r="6" fill="#22C55E" opacity="0.7"/>
+      <circle cx="14" cy="0" r="5" fill="#22C55E" opacity="0.7"/>
+      <circle cx="0" cy="40" r="4" fill="#22C55E" opacity="0.6"/>
+      <circle cx="16" cy="50" r="3" fill="#22C55E" opacity="0.5"/>
+      <circle cx="-18" cy="-10" r="3" fill="#22C55E" opacity="0.6"/>
+      <rect x="-30" y="-78" width="60" height="20" fill="#22C55E" opacity="0.6" rx="2"/>
+      <text x="0" y="92" text-anchor="middle" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="1">GAS</text>
+    </g>
+    <!-- Title -->
+    <text x="0" y="-130" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="28" font-weight="800">Materia y sus Propiedades</text>
+  </g>
+</svg>

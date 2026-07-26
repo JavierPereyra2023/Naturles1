@@ -1,0 +1,31 @@
+# Exported by three-d-stage
+newmtl steel_dark
+Kd 0.2831 0.3185 0.3564
+Ks 0.2000 0.2000 0.2000
+Ns 116
+d 1.0000
+
+newmtl steel
+Kd 0.6795 0.7084 0.7454
+Ks 0.2000 0.2000 0.2000
+Ns 136
+d 1.0000
+
+newmtl engine_black
+Kd 0.0194 0.0212 0.0252
+Ks 0.2000 0.2000 0.2000
+Ns 100
+d 1.0000
+
+newmtl plumbing
+Kd 0.0423 0.0467 0.0545
+Ks 0.2000 0.2000 0.2000
+Ns 110
+d 1.0000
+
+newmtl tile_black
+Kd 0.0103 0.0116 0.0144
+Ks 0.2000 0.2000 0.2000
+Ns 30
+d 1.0000
+

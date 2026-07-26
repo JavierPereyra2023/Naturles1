@@ -83,6 +83,111 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+.rocket-card-3d {
+  content-visibility: auto;
+  contain-intrinsic-size: 780px;
+}
+.rocket-card-3d:hover { transform: none; }
+.rocket-model-viewport {
+  position: relative;
+  height: clamp(470px, 64vw, 620px);
+  min-height: 460px;
+  background: #05070a;
+}
+.rocket-model-viewport iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.rocket-model-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: radial-gradient(120% 90% at 62% 42%, #14171c 0%, #0a0c10 45%, #05070a 100%);
+  color: #8D99A8;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.rocket-model-placeholder[hidden] { display: none; }
+.rocket-model-shell:fullscreen,
+.rocket-model-shell:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  background: #05070a;
+}
+.rocket-model-shell:fullscreen .rocket-model-viewport,
+.rocket-model-shell:-webkit-full-screen .rocket-model-viewport {
+  flex: 1 1 auto;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.rocket-model-shell:fullscreen .rocket-mobile-specs,
+.rocket-model-shell:-webkit-full-screen .rocket-mobile-specs {
+  flex: 0 0 auto;
+}
+.rocket-model-shell::backdrop {
+  background: #05070a;
+}
+.rocket-mobile-specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.rocket-mobile-specs div {
+  min-width: 0;
+  padding: 10px 12px;
+  background: #101712;
+  font-family: 'Inter', sans-serif;
+}
+.rocket-mobile-specs span,
+.rocket-mobile-specs strong {
+  display: block;
+}
+.rocket-mobile-specs span {
+  margin-bottom: 3px;
+  color: #738078;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.rocket-mobile-specs strong {
+  color: #D8E0DA;
+  font-size: 11px;
+  font-weight: 600;
+}
+@media (min-width: 1024px) {
+  .rocket-model-viewport {
+    height: 600px;
+  }
+}
+@media (min-width: 640px) {
+  .rocket-mobile-specs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .rocket-model-viewport {
+    height: 440px;
+    min-height: 440px;
+  }
+}
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
 <script src="../../../assets/backgrounds/auto-toc.js?v=5"></script>
@@ -243,76 +348,175 @@
       <h2 class="font-heading text-lg md:text-xl font-bold uppercase tracking-wider text-white">Cohetes de SpaceX</h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+    <div class="space-y-8 mb-14">
 
       <!-- Falcon 9 -->
-      <a href="falcon-9.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
-        <div class="relative h-44 overflow-hidden">
-          <img src="../../../assets/fisica/sistema-solar/falcon-9-hero.png" alt="Cohete Falcon 9 despegando" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
-          <div class="grain-overlay"></div>
-          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Falcon 9</span>
-        </div>
-        <div class="p-5">
-          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-energy transition-colors mb-2">Falcon 9</h3>
-          <p class="text-xs text-natura-silver leading-relaxed mb-3">El caballo de batalla de SpaceX. Cohete de dos etapas parcialmente reutilizable. Ha completado más de 300 misiones llevando satélites, astronautas y suministros.</p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Reutilizable</span>
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Merlin</span>
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Crew Dragon</span>
+      <article class="content-card rocket-card-3d bg-natura-gray overflow-hidden group">
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,0.72fr)_minmax(0,1.28fr)]">
+          <div class="flex flex-col">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="../../../assets/fisica/sistema-solar/falcon-9-hero-night.png" alt="Cohete Falcon 9 en la plataforma de lanzamiento durante la noche" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+              <div class="grain-overlay"></div>
+              <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Falcon 9</span>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col flex-1">
+              <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-natura-energy mb-2">Plano y funcionamiento</p>
+              <h3 class="font-heading font-bold text-xl md:text-2xl text-white mb-3">Falcon 9</h3>
+              <p class="text-sm text-natura-silver leading-relaxed mb-4">El caballo de batalla de SpaceX. Cohete de dos etapas parcialmente reutilizable. Ha completado más de 300 misiones llevando satélites, astronautas y suministros.</p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Reutilizable</span>
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Merlin</span>
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Crew Dragon</span>
+              </div>
+              <a href="falcon-9.html" class="mt-auto inline-flex items-center gap-2 text-natura-energy hover:text-white transition-colors">
+                <span class="text-[10px] font-bold uppercase tracking-wider">Ver plano y explicación</span>
+                <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+              </a>
+            </div>
           </div>
-          <div class="flex items-center gap-1.5 mt-4 text-natura-energy">
-            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
-            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          <div class="rocket-model-shell border-t lg:border-t-0 lg:border-l border-white/10">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-black/20 border-b border-white/10">
+              <span class="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-wider text-natura-energy">
+                <span class="iconify" data-icon="lucide:box" data-width="14"></span>
+                Diseño terminado · 3D interactivo
+              </span>
+              <div class="flex items-center gap-3">
+                <span class="hidden md:inline text-[9px] uppercase tracking-wider text-natura-silverDark">Arrastrá para rotar</span>
+                <a href="../../../modelos3D_rocket/falcon-9/falcon9-3d.html" target="_blank" rel="noopener" data-rocket-fullscreen aria-pressed="false" aria-label="Ver el modelo 3D de Falcon 9 a pantalla completa" class="inline-flex items-center justify-center gap-2 rounded-sm bg-natura-energy px-3 py-2 text-[9px] font-bold uppercase tracking-wider text-natura-black shadow-[0_0_18px_rgba(59,130,246,0.25)] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                  <span class="iconify text-sm" data-fullscreen-icon data-icon="lucide:maximize-2"></span>
+                  <span data-fullscreen-label>Pantalla completa</span>
+                </a>
+              </div>
+            </div>
+            <div class="rocket-model-viewport">
+              <div class="rocket-model-placeholder">
+                <span class="iconify text-natura-energy" data-icon="lucide:loader-circle" data-width="18"></span>
+                Preparando Falcon 9
+              </div>
+              <iframe data-rocket-iframe data-src="../../../modelos3D_rocket/falcon-9/falcon9-3d.html" title="Modelo 3D terminado del cohete Falcon 9" loading="lazy" allow="fullscreen"></iframe>
+            </div>
+            <div class="rocket-mobile-specs" aria-label="Especificaciones del Falcon 9">
+              <div><span>Altura</span><strong>70 m</strong></div>
+              <div><span>Diámetro</span><strong>3,7 m</strong></div>
+              <div><span>Carga a órbita baja</span><strong>22.800 kg</strong></div>
+              <div><span>Motores</span><strong>9 Merlin + 1 Vacuum</strong></div>
+            </div>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- Falcon Heavy -->
-      <a href="falcon-heavy.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
-        <div class="relative h-44 overflow-hidden">
-          <img src="../../../assets/fisica/sistema-solar/falcon-heavy-hero.png" alt="Cohete Falcon Heavy en la plataforma de lanzamiento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
-          <div class="grain-overlay"></div>
-          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Falcon Heavy</span>
-        </div>
-        <div class="p-5">
-          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-energy transition-colors mb-2">Falcon Heavy</h3>
-          <p class="text-xs text-natura-silver leading-relaxed mb-3">Tres núcleos Falcon 9 unidos. Fue el cohete más potente del mundo en operación. Capaz de enviar 64 toneladas a órbita baja o un auto al espacio profundo.</p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">27 motores</span>
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Carga pesada</span>
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Tesla Roadster</span>
+      <article class="content-card rocket-card-3d bg-natura-gray overflow-hidden group">
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,0.72fr)_minmax(0,1.28fr)]">
+          <div class="flex flex-col">
+            <div class="relative h-48 sm:h-60 lg:h-56 overflow-hidden">
+              <img src="../../../assets/fisica/sistema-solar/falcon-heavy-hero.png" alt="Cohete Falcon Heavy en la plataforma de lanzamiento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+              <div class="grain-overlay"></div>
+              <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-energy/20 text-natura-energy px-2.5 py-1">Falcon Heavy</span>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col flex-1">
+              <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-natura-energy mb-2">Plano y funcionamiento</p>
+              <h3 class="font-heading font-bold text-xl md:text-2xl text-white mb-3">Falcon Heavy</h3>
+              <p class="text-sm text-natura-silver leading-relaxed mb-4">Tres núcleos Falcon 9 unidos. Fue el cohete más potente del mundo en operación. Capaz de enviar 64 toneladas a órbita baja o un auto al espacio profundo.</p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">27 motores</span>
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Carga pesada</span>
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Tesla Roadster</span>
+              </div>
+              <a href="falcon-heavy.html" class="mt-auto inline-flex items-center gap-2 text-natura-energy hover:text-white transition-colors">
+                <span class="text-[10px] font-bold uppercase tracking-wider">Ver plano y explicación</span>
+                <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+              </a>
+            </div>
           </div>
-          <div class="flex items-center gap-1.5 mt-4 text-natura-energy">
-            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
-            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          <div class="rocket-model-shell border-t lg:border-t-0 lg:border-l border-white/10">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-black/20 border-b border-white/10">
+              <span class="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-wider text-natura-energy">
+                <span class="iconify" data-icon="lucide:box" data-width="14"></span>
+                Diseño terminado · 3D interactivo
+              </span>
+              <div class="flex items-center gap-3">
+                <span class="hidden md:inline text-[9px] uppercase tracking-wider text-natura-silverDark">Arrastrá para rotar</span>
+                <a href="../../../modelos3D_rocket/falcon-heavy-3d.html" target="_blank" rel="noopener" data-rocket-fullscreen aria-pressed="false" aria-label="Ver el modelo 3D de Falcon Heavy a pantalla completa" class="inline-flex items-center justify-center gap-2 rounded-sm bg-natura-energy px-3 py-2 text-[9px] font-bold uppercase tracking-wider text-natura-black shadow-[0_0_18px_rgba(59,130,246,0.25)] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                  <span class="iconify text-sm" data-fullscreen-icon data-icon="lucide:maximize-2"></span>
+                  <span data-fullscreen-label>Pantalla completa</span>
+                </a>
+              </div>
+            </div>
+            <div class="rocket-model-viewport">
+              <div class="rocket-model-placeholder">
+                <span class="iconify text-natura-energy" data-icon="lucide:loader-circle" data-width="18"></span>
+                Preparando Falcon Heavy
+              </div>
+              <iframe data-rocket-iframe data-src="../../../modelos3D_rocket/falcon-heavy-3d.html" title="Modelo 3D terminado del cohete Falcon Heavy" loading="lazy" allow="fullscreen"></iframe>
+            </div>
+            <div class="rocket-mobile-specs" aria-label="Especificaciones del Falcon Heavy">
+              <div><span>Altura</span><strong>70 m</strong></div>
+              <div><span>Ancho</span><strong>12,2 m</strong></div>
+              <div><span>Carga a órbita baja</span><strong>63.800 kg</strong></div>
+              <div><span>Motores</span><strong>27 Merlin</strong></div>
+            </div>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- Starship -->
-      <a href="starship.html" class="content-card relative bg-natura-gray overflow-hidden group cursor-pointer block no-underline">
-        <div class="relative h-44 overflow-hidden">
-          <img src="../../../assets/fisica/sistema-solar/starship-hero.png" alt="Sistema Starship y Super Heavy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
-          <div class="grain-overlay"></div>
-          <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-water/20 text-natura-water px-2.5 py-1">Starship + Super Heavy</span>
-        </div>
-        <div class="p-5">
-          <h3 class="font-heading font-bold text-base text-white group-hover:text-natura-water transition-colors mb-2">Starship y Super Heavy</h3>
-          <p class="text-xs text-natura-silver leading-relaxed mb-3">El cohete más grande y poderoso jamás construido. Completamente reutilizable. Diseñado para llevar personas a la Luna y, eventualmente, a Marte.</p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">33 Raptor</span>
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">Metano</span>
-            <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">Marte</span>
+      <article class="content-card rocket-card-3d bg-natura-gray overflow-hidden group">
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,0.72fr)_minmax(0,1.28fr)]">
+          <div class="flex flex-col">
+            <div class="relative h-48 sm:h-60 lg:h-56 overflow-hidden">
+              <img src="../../../assets/fisica/sistema-solar/starship-hero.png" alt="Sistema Starship y Super Heavy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-natura-gray via-transparent to-transparent"></div>
+              <div class="grain-overlay"></div>
+              <span class="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider bg-natura-water/20 text-natura-water px-2.5 py-1">Starship + Super Heavy</span>
+            </div>
+            <div class="p-5 md:p-6 flex flex-col flex-1">
+              <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-natura-water mb-2">Plano y funcionamiento</p>
+              <h3 class="font-heading font-bold text-xl md:text-2xl text-white mb-3">Starship y Super Heavy</h3>
+              <p class="text-sm text-natura-silver leading-relaxed mb-4">El cohete más grande y poderoso jamás construido. Completamente reutilizable. Diseñado para llevar personas a la Luna y, eventualmente, a Marte.</p>
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">33 Raptor</span>
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">Metano</span>
+                <span class="text-[8px] font-semibold uppercase tracking-wider bg-natura-water/15 text-natura-water px-2 py-0.5">Marte</span>
+              </div>
+              <a href="starship.html" class="mt-auto inline-flex items-center gap-2 text-natura-water hover:text-white transition-colors">
+                <span class="text-[10px] font-bold uppercase tracking-wider">Ver plano y explicación</span>
+                <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+              </a>
+            </div>
           </div>
-          <div class="flex items-center gap-1.5 mt-4 text-natura-water">
-            <span class="text-[11px] font-semibold uppercase tracking-wider">Explorar tema</span>
-            <span class="iconify opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="14"></span>
+          <div class="rocket-model-shell border-t lg:border-t-0 lg:border-l border-white/10">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-black/20 border-b border-white/10">
+              <span class="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-wider text-natura-water">
+                <span class="iconify" data-icon="lucide:box" data-width="14"></span>
+                Diseño terminado · 3D interactivo
+              </span>
+              <div class="flex items-center gap-3">
+                <span class="hidden md:inline text-[9px] uppercase tracking-wider text-natura-silverDark">Arrastrá para rotar</span>
+                <a href="../../../modelos3D_rocket/starship/starship.html" target="_blank" rel="noopener" data-rocket-fullscreen aria-pressed="false" aria-label="Ver el modelo 3D de Starship a pantalla completa" class="inline-flex items-center justify-center gap-2 rounded-sm bg-natura-energy px-3 py-2 text-[9px] font-bold uppercase tracking-wider text-natura-black shadow-[0_0_18px_rgba(59,130,246,0.25)] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                  <span class="iconify text-sm" data-fullscreen-icon data-icon="lucide:maximize-2"></span>
+                  <span data-fullscreen-label>Pantalla completa</span>
+                </a>
+              </div>
+            </div>
+            <div class="rocket-model-viewport">
+              <div class="rocket-model-placeholder">
+                <span class="iconify text-natura-water" data-icon="lucide:loader-circle" data-width="18"></span>
+                Preparando Starship
+              </div>
+              <iframe data-rocket-iframe data-src="../../../modelos3D_rocket/starship/starship.html" title="Modelo 3D terminado del sistema Starship y Super Heavy" loading="lazy" allow="fullscreen"></iframe>
+            </div>
+            <div class="rocket-mobile-specs" aria-label="Especificaciones de Starship">
+              <div><span>Altura total</span><strong>124 m</strong></div>
+              <div><span>Diámetro</span><strong>9 m</strong></div>
+              <div><span>Motores</span><strong>33 + 6 Raptor</strong></div>
+              <div><span>Propelente</span><strong>Metano + oxígeno</strong></div>
+            </div>
           </div>
         </div>
-      </a>
+      </article>
 
     </div>
 
@@ -440,6 +644,131 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.rocket-card-3d'));
+  var frames = Array.prototype.slice.call(document.querySelectorAll('[data-rocket-iframe]'));
+  var visibility = new Map();
+  var activeFrame = null;
+
+  if (!frames.length) return;
+
+  function placeholderFor(frame) {
+    return frame.parentElement.querySelector('.rocket-model-placeholder');
+  }
+
+  function unload(frame) {
+    var placeholder = placeholderFor(frame);
+    if (placeholder) placeholder.hidden = false;
+    frame.setAttribute('src', 'about:blank');
+  }
+
+  function activate(frame) {
+    if (!frame || frame === activeFrame && frame.getAttribute('src') !== 'about:blank') return;
+
+    if (activeFrame && activeFrame !== frame) unload(activeFrame);
+    activeFrame = frame;
+
+    var placeholder = placeholderFor(frame);
+    if (placeholder) placeholder.hidden = false;
+    frame.setAttribute('src', frame.getAttribute('data-src'));
+  }
+
+  frames.forEach(function(frame) {
+    frame.addEventListener('load', function() {
+      if (frame === activeFrame && frame.getAttribute('src') !== 'about:blank') {
+        var placeholder = placeholderFor(frame);
+        if (placeholder) placeholder.hidden = true;
+      }
+    });
+  });
+
+  function fullscreenElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
+  }
+
+  function syncFullscreenControls() {
+    var current = fullscreenElement();
+    document.querySelectorAll('[data-rocket-fullscreen]').forEach(function(control) {
+      var expanded = current === control.closest('.rocket-model-shell');
+      var label = control.querySelector('[data-fullscreen-label]');
+      var icon = control.querySelector('[data-fullscreen-icon]');
+      control.setAttribute('aria-pressed', String(expanded));
+      if (label) label.textContent = expanded ? 'Salir de pantalla completa' : 'Pantalla completa';
+      if (icon) icon.setAttribute('data-icon', expanded ? 'lucide:minimize-2' : 'lucide:maximize-2');
+    });
+  }
+
+  document.querySelectorAll('[data-rocket-fullscreen]').forEach(function(control) {
+    control.addEventListener('click', function(event) {
+      var shell = control.closest('.rocket-model-shell');
+      var frame = shell && shell.querySelector('[data-rocket-iframe]');
+      var request = shell && (shell.requestFullscreen || shell.webkitRequestFullscreen);
+      var exit = document.exitFullscreen || document.webkitExitFullscreen;
+      var current = fullscreenElement();
+
+      if (!shell || !request || !exit) return;
+      event.preventDefault();
+
+      if (current === shell) {
+        Promise.resolve(exit.call(document)).catch(function() {
+          window.location.href = control.href;
+        });
+        return;
+      }
+
+      activate(frame);
+      Promise.resolve(request.call(shell)).catch(function() {
+        window.location.href = control.href;
+      });
+    });
+  });
+
+  document.addEventListener('fullscreenchange', syncFullscreenControls);
+  document.addEventListener('webkitfullscreenchange', syncFullscreenControls);
+  syncFullscreenControls();
+
+  if (!('IntersectionObserver' in window)) {
+    activate(frames[0]);
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    var fullscreenShell = fullscreenElement();
+    if (fullscreenShell && fullscreenShell.classList.contains('rocket-model-shell')) {
+      activate(fullscreenShell.querySelector('[data-rocket-iframe]'));
+      return;
+    }
+
+    entries.forEach(function(entry) {
+      visibility.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
+    });
+
+    var mostVisible = null;
+    var highestRatio = 0;
+    cards.forEach(function(card) {
+      var ratio = visibility.get(card) || 0;
+      if (ratio > highestRatio) {
+        highestRatio = ratio;
+        mostVisible = card;
+      }
+    });
+
+    if (mostVisible && highestRatio >= 0.18) {
+      activate(mostVisible.querySelector('[data-rocket-iframe]'));
+    } else if (activeFrame) {
+      unload(activeFrame);
+      activeFrame = null;
+    }
+  }, {threshold: [0, 0.18, 0.35, 0.55]});
+
+  cards.forEach(function(card) {
+    visibility.set(card, 0);
+    observer.observe(card);
+  });
+})();
+</script>
 
 <script>
 (function(){

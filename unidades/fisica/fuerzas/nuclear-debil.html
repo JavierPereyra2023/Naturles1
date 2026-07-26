@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuerza Nuclear Débil · Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { natura: { black:'#080C0A', dark:'#0E1410', gray:'#161C18', mid:'#242C28', silver:'#A8B5AD', silverLight:'#C8D4CC', silverDark:'#5A6B60', green:'#0D9488', greenLight:'#14B8A6', leaf:'#22C55E', water:'#38BDF8', energy:'#3B82F6', bio:'#DC2626', podcast:'#E8A87C' } } },
+      fontFamily: { heading: ['Playfair Display','Georgia','serif'], body: ['Cormorant Garamond','Georgia','serif'], ui: ['Inter','sans-serif'] } } }
+  </script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    ::selection { background:#FBBF24; color:#080C0A; }
+    body { font-family:'Cormorant Garamond',Georgia,serif; background:#080C0A; color:#D0D8D2; }
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#080C0A; } ::-webkit-scrollbar-thumb { background:#FBBF24; border-radius:3px; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .animate-fadeInUp { animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .accent-line { width:60px; height:3px; background:linear-gradient(90deg,#FBBF24,#22C55E); }
+    .content-card { border:1px solid rgba(255,255,255,0.05); transition:all 0.3s ease; }
+    .content-card:hover { border-color:rgba(251,191,36,0.3); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(251,191,36,0.5); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .hero-figure { position:relative; height:340px; overflow:hidden; border:1px solid rgba(251,191,36,0.2); background:#0E1410; }
+    .hero-figure object { width:100%; height:100%; pointer-events:none; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/responsive-fixes.css">
+  <script src="../../../assets/backgrounds/auto-toc.js?v=6"></script>
+</head>
+<body class="bg-energia">
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: gravedad, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy">Nuclear débil</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver a Fuerzas</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 md:pt-24 md:pb-12 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-25" style="z-index: 0;">
+    <img src="../../../assets/fisica/fuerzas/svg-nuclear-debil.svg" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(2px);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/30 to-natura-black" style="z-index: 1;"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="accent-line"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Fuerza fundamental · 04</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight mb-3">
+      <span class="bg-gradient-to-r from-natura-leaf to-natura-podcast bg-clip-text text-transparent">Fuerza Nuclear Débil</span>
+    </h1>
+    <p class="text-base md:text-lg text-natura-silver max-w-2xl leading-relaxed">La más misteriosa de las cuatro. Es la única fuerza que puede cambiar el "tipo" de partícula: transforma un neutrón en un protón, o un quark en otro. Es la causa de la radiactividad y de las reacciones que encienden el Sol.</p>
+  </div>
+</section>
+
+<!-- DIAGRAMA -->
+<section class="py-6 md:py-8 bg-natura-dark">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="hero-figure">
+      <object data="../../../assets/fisica/fuerzas/svg-nuclear-debil.svg" type="image/svg+xml"></object>
+    </div>
+    <p class="text-[11px] text-natura-silverDark mt-2 italic text-center" style="font-family: 'Inter', sans-serif;">Decaimiento beta: un neutrón se transforma en un protón, un electrón y un antineutrino.</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-14">
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">La fuerza que cambia identidades</h2>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">
+      Las otras tres fuerzas (gravedad, electromagnetismo, nuclear fuerte) pueden <em>mover</em> partículas, pero no las <em>transforman</em>. La <strong class="text-natura-podcast">fuerza nuclear débil</strong> es la única que puede convertir una partícula en otra distinta. Por ejemplo, hace que un <strong class="text-white">neutrón se transforme en un protón</strong>, soltando un electrón y un antineutrino.
+    </p>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+      Esta transformación se llama <strong class="text-white">decaimiento beta</strong>, y es la causa de la radiactividad. Los elementos químicos que tienen demasiados neutrones en el núcleo son <em>inestables</em>: tarde o temprano, alguno de esos neutrones se transforma en protón, y el átomo se convierte en otro elemento. Por ejemplo, el carbono-14 (que tiene 8 neutrones) se convierte en nitrógeno-14.
+    </p>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">El bosón W: el "mensajero"</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="content-card bg-natura-gray p-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">¿Cómo cambia el neutrón?</h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">Un neutrón está hecho de un quark "up" y dos quarks "down". La fuerza débil hace que uno de los quarks "down" se transforme en un quark "up" emitiendo una partícula llamada <strong class="text-natura-podcast">bosón W⁻</strong>. El bosón W⁻ vive apenas una trillonésima de segundo, y se transforma en un electrón y un antineutrino.</p>
+        <p class="text-sm text-natura-silverDark italic" style="font-family: 'Inter', sans-serif;">El neutrón pasó a tener 2 "up" y 1 "down" — eso es un protón. Cambio de identidad en un instante.</p>
+      </div>
+      <div class="content-card bg-natura-gray p-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">Las partículas mediadoras</h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">La fuerza débil tiene <strong class="text-white">tres partículas mediadoras</strong>:</p>
+        <ul class="text-sm text-natura-silver space-y-1" style="font-family: 'Inter', sans-serif;">
+          <li><strong class="text-natura-podcast">W⁺</strong> y <strong class="text-natura-podcast">W⁻</strong>: cambian el tipo de partícula (producen decaimiento beta).</li>
+          <li><strong class="text-natura-podcast">Z⁰</strong>: solo "rebotan" partículas sin cambiarlas (dispersión neutra).</li>
+        </ul>
+        <p class="text-sm text-natura-silverDark mt-3 italic" style="font-family: 'Inter', sans-serif;">Estas partículas se descubrieron en 1983 en el CERN. Los teóricos Glashow, Weinberg y Salam ya habían predicho en 1968 cómo funcionaban, y ganaron el Nobel en 1979.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">¿Dónde actúa la fuerza débil?</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-podcast">
+        <span class="iconify text-natura-podcast flex-shrink-0 mt-1" data-icon="lucide:hourglass" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Datación por carbono-14</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">Los arqueólogos saben la edad de un hueso o un objeto de madera midiendo cuánto carbono-14 le queda. El C-14 se desintegra por la fuerza débil con una vida media de 5.730 años.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-energy">
+        <span class="iconify text-natura-energy flex-shrink-0 mt-1" data-icon="lucide:sun" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Reacciones en el Sol</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">El primer paso de la cadena protón-protón (que enciende el Sol) es un protón transformándose en neutrón, emitiendo un positrón y un neutrino. Eso es la fuerza débil en acción.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-bio">
+        <span class="iconify text-natura-bio flex-shrink-0 mt-1" data-icon="lucide:skull" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Radiactividad</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">Un átomo de uranio-238 (92 protones) se desintegra con el tiempo y se va transformando en torio, radio, radón, polonio, plomo... todo a través de decaimientos beta y alfa, hasta quedar en un elemento estable.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-leaf">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-1" data-icon="lucide:activity" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Medicina nuclear</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">En los tratamientos de radioterapia, se usan isótopos que se desintegran por fuerza débil. Detectores especiales registran esa radiación y permiten tratar tumores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Comparación rápida con la fuerza fuerte</h2>
+    <div class="bg-natura-gray border border-natura-podcast/30 p-5">
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+        La fuerza fuerte y la fuerza débil son las dos que operan a escala del núcleo atómico, pero son opuestas en casi todo:
+      </p>
+      <ul class="text-base text-natura-silver space-y-2 mt-3" style="font-family: 'Cormorant Garamond', serif;">
+        <li>• La <strong class="text-natura-podcast">fuerte</strong> <em>pega</em> a los quarks entre sí. La <strong class="text-natura-leaf">débil</strong> <em>cambia</em> un quark por otro.</li>
+        <li>• La fuerte es la más intensa de las 4. La débil es la segunda más débil (apenas más fuerte que la gravedad).</li>
+        <li>• Las dos tienen un alcance muy corto (menor al femtómetro), pero la débil es aún más corta.</li>
+        <li>• Las partículas mediadoras: la fuerte usa <strong class="text-natura-podcast">gluones</strong>, la débil usa los <strong class="text-natura-leaf">bosones W y Z</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Para pensar</h2>
+    <div class="space-y-3">
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si el neutrón se transforma solo, ¿por qué dentro del núcleo es estable?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Porque dentro de un núcleo, al neutrón le "conviene" quedarse como neutrón (suma masa y energía que estabiliza al núcleo). Fuera del núcleo, solo, ya no tiene a nadie con quien ayudarse y se desintegra en 15 minutos. Es la diferencia entre tener amigos y estar solo en el patio.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          ¿Cómo saben los arqueólogos que un fósil tiene 10.000 años midiendo carbono-14?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Mientras el organismo está vivo, renueva el carbono-14 de su cuerpo comiendo y respirando. Cuando muere, deja de renovar, y el C-14 se va desintegrando por la fuerza débil, reduciéndose a la mitad cada 5.730 años. Midiendo cuánto C-14 queda, calculan el tiempo que pasó.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si la fuerza débil es la que causa la radiactividad, ¿es peligrosa?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Depende de la dosis. La radiactividad natural (rayos cósmicos, potasio-40 en bananas, radón en sótanos) nos baña a todos todo el tiempo, en dosis chiquitas que el cuerpo repara. El problema es cuando la dosis es alta, como en Chernóbil o en un tratamiento de radioterapia. Por eso los médicos y los técnicos usan protección con plomo y miden todo con cuidado.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="mt-12 pt-6 border-t border-white/10 flex flex-wrap gap-3 justify-between" style="font-family: 'Inter', sans-serif;">
+    <a href="nuclear-fuerte.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> Anterior: Nuclear fuerte
+    </a>
+    <a href="rozamiento.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">
+      Siguiente: Rozamiento <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+    </a>
+  </section>
+</article>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});}, { threshold: 0.1 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Nuclear débil",u:"Física",s:"Fuerzas",l:"nuclear-debil.html",c:"#FBBF24"},
+    {n:"Nuclear fuerte",u:"Física",s:"Fuerzas",l:"nuclear-fuerte.html",c:"#FB923C"},
+    {n:"Gravedad",u:"Física",s:"Fuerzas",l:"gravedad.html",c:"#3B82F6"},
+    {n:"Electromagnetismo",u:"Física",s:"Fuerzas",l:"electromagnetismo.html",c:"#A78BFA"},
+    {n:"Rozamiento",u:"Física",s:"Fuerzas",l:"rozamiento.html",c:"#F59E0B"},
+    {n:"Características de los seres vivos",u:"Biología",s:"Seres Vivos",l:"../../biologia/seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"}
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){
+      var a=document.createElement('a');a.href=t.l;a.className='search-result-item';
+      a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+      results.appendChild(a);
+    });}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script src="../../../assets/backgrounds/auto-toc.js" defer></script>
+</body>
+</html>

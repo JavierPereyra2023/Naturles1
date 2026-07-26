@@ -298,3 +298,59 @@ Artículos nuevos:
 - Los enlaces internos deben apuntar a archivos concretos, no solo carpetas.
 - Mantener TailwindCSS, Iconify y Google Fonts vía CDN.
 
+
+## Implementado 2026-07-26 (Las Fuerzas + Podcast completo)
+
+### Sección nueva: Las Fuerzas de la Naturaleza (sub-unidad de Física)
+
+Nueva sub-unidad dentro de Física con 5 páginas + 1 hub, todas con SVG didáctico propio como ilustración principal (estilo "libro de texto moderno", fondo oscuro + íconos vectoriales, NO fotos):
+
+- unidades/fisica/fuerzas/index.html — Hub de la sub-unidad, presenta las 4 fuerzas fundamentales + rozamiento con tabla comparativa.
+- unidades/fisica/fuerzas/gravedad.html — F = m·g, ley de Newton, peso vs masa, órbitas, mareas, agujeros negros. Experimento: caída libre con objetos del mismo tamaño.
+- unidades/fisica/fuerzas/electromagnetismo.html — Cargas (+/−), Ley de Coulomb, imanes N/S, luz como onda EM. Experimento: imán + clips.
+- unidades/fisica/fuerzas/nuclear-fuerte.html — Quarks, gluones, protón/neutrón, núcleo atómico. Por qué no se repelen los protones.
+- unidades/fisica/fuerzas/nuclear-debil.html — Decaimiento beta, bosones W/Z, datación por C-14, fusión en el Sol.
+- unidades/fisica/fuerzas/rozamiento.html — f_r = μ·N, estático vs cinético, tabla de coeficientes reales, por qué no es fundamental. Experimento: ángulo crítico por superficie.
+
+SVGs didácticos en ssets/fisica/fuerzas/ (todos con paleta unificada oscuro + color temático por fuerza):
+- svg-gravedad.svg, svg-electromagnetismo.svg, svg-nuclear-fuerte.svg, svg-nuclear-debil.svg, svg-rozamiento.svg, svg-tabla-fuerzas.svg.
+
+Cada página tiene: hero con el SVG, 3-4 secciones de contenido, experimento casero, 3 preguntas de "Para pensar" con <details>, navegación entre páginas hermanas, footer, search overlay, search topics array.
+
+**Regla de paleta confirmada para SVGs didácticos**: fondo oscuro #0E1410 → #161C18, grid sutil, tipografía Inter/Playfair, íconos geométricos. Cada fuerza tiene su color de acento: gravedad azul, electromagnetismo violeta, nuclear fuerte naranja, nuclear débil amarillo, rozamiento ámbar. La tabla comparativa los muestra todos juntos.
+
+### Podcast completo: 14 audios + 14 SVGs
+
+- **SVGs nuevos en ssets/podcast/**: 14 ilustraciones vectoriales, una por episodio. Estilo unificado: fondo oscuro con dots pattern, ícono geométrico central representativo del tema, badge de episodio en esquina superior izquierda, gradiente de color por unidad (verde química, azul física, rojo biología, turquesa ESI). Reemplazan los loremflickr.com que tenía la página (regla anti-patrón de la auditoría del 2026-07-17: nunca loremflickr con el mismo query).
+- **Audios MP3 en podcast/audio/**: 14 episodios de ~3 min cada uno, generados con edge-tts voz es-AR-TomasNeural rate +18% (misma voz que los videos Manim del usuario). Venv de Anaconda D:\Anaconda\envs\manim\python.exe.
+
+Guiones (~600-800 palabras cada uno, argentino nativo, con cierre "Chau" típico del profe Pereyra):
+- **Química**: materia-propiedades, mezclas, agua
+- **Física**: energia, calor-sonido, movimientos, sistema-solar
+- **Biología**: seres-vivos, plantas, animales, digestion, circulacion, respiracion
+- **ESI**: alimentacion
+
+Pipeline de generación: D:\naturales_1\podcast\gen_podcast_audios.py (guion completo) + egen_audios_largos.py y egen_audios_largos2.py (extensiones para los 9 que quedaron cortos en primera pasada, target 2:50-3:10).
+
+**Duraciones finales** (todas entre 2:28 y 3:30, mayoría en 2:50-3:10):
+| Archivo | Duración | Archivo | Duración |
+|---|---|---|---|
+| agua | 3:30 | animales | 2:57 |
+| alimentacion | 2:59 | calor-sonido | 2:50 |
+| circulacion | 3:11 | digestion | 2:57 |
+| energia | 3:27 | materia-propiedades | 2:57 |
+| mezclas | 3:29 | movimientos | 2:57 |
+| plantas | 3:21 | respiracion | 3:05 |
+| seres-vivos | 3:06 | sistema-solar | 3:11 |
+
+### Cambios estructurales en páginas existentes
+
+- inicio.html: link nuevo en desktop nav **y** mobile menu con badge "NUEVO" → unidades/fisica/fuerzas/. Card destacado de la sub-unidad entre Física y Biología, con gradiente azul→naranja→amarillo en la barra lateral (los 3 colores de las fuerzas fundamentales) y miniaturas de los 5 nombres de fuerza. Search topics array: 6 entradas nuevas (Las Fuerzas como hub + 5 individuales).
+- unidades/fisica/index.html: 5° card a ancho completo (md:col-span-2) con el SVG de la tabla comparativa como imagen, badge "Nuevo · 2026", y links a los 5 temas. Search topics array: 6 entradas nuevas.
+- podcast/index.html: 14 <img src="https://loremflickr.com/..."> reemplazados por ../assets/podcast/[nombre].svg. También se corrigió el loading="lazy" duplicado en cada card (regex de limpieza). Mensaje final del bloque "Para cargar tus audios" reemplazado: ya no dice "colocá los .mp3 en podcast/audio/" (ahora dice "Los 14 episodios están disponibles con audios de 3 minutos en podcast/audio/. Voz: prof. Javier Pereyra.").
+
+### Pendiente menor
+
+- El SVG de la sub-unidad de Fuerzas en inicio.html y unidades/fisica/index.html se embebe vía <object> en vez de <img>. Verificado que se renderiza bien en pruebas locales, pero conviene confirmar visualmente en el navegador del docente.
+- La sección de Fuerzas no tiene entrada propia en el "Mapa de navegación" de inicio si la hubiera — actualmente solo aparece en el nav como sub-item y como card destacado.
+- Si en algún momento se quiere extender el podcast, los scripts gen_podcast_audios.py y egen_audios_largos.py son reutilizables: solo hay que agregar entradas al dict GUIAS o EXTENSIONES y volver a correr.

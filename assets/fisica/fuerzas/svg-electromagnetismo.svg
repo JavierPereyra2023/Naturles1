@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Diagrama del electromagnetismo">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <marker id="arrowE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#A78BFA"/>
+    </marker>
+    <marker id="arrowEMag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#38BDF8"/>
+    </marker>
+    <pattern id="gridE" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg2)"/>
+  <rect width="800" height="500" fill="url(#gridE)"/>
+
+  <!-- Title -->
+  <text x="40" y="50" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3">FUERZA FUNDAMENTAL · 02</text>
+  <text x="40" y="86" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="32" font-weight="800">Electromagnetismo</text>
+  <text x="40" y="112" fill="#5A6B60" font-family="Inter, sans-serif" font-size="12">Cargas eléctricas y campos magnéticos</text>
+
+  <!-- Left half: Electric charges -->
+  <g transform="translate(60, 160)">
+    <text x="0" y="0" fill="#A78BFA" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">CARGAS ELÉCTRICAS</text>
+
+    <!-- Plus charge -->
+    <g transform="translate(40, 80)">
+      <circle r="32" fill="rgba(239,68,68,0.18)" stroke="#EF4444" stroke-width="2"/>
+      <text y="6" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="22" font-weight="800">+</text>
+      <text y="60" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="10" font-weight="600">PROTÓN</text>
+    </g>
+
+    <!-- Minus charge -->
+    <g transform="translate(220, 80)">
+      <circle r="32" fill="rgba(59,130,246,0.18)" stroke="#3B82F6" stroke-width="2"/>
+      <text y="6" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="22" font-weight="800">−</text>
+      <text y="60" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="10" font-weight="600">ELECTRÓN</text>
+    </g>
+
+    <!-- Attraction line -->
+    <line x1="72" y1="80" x2="188" y2="80" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrowE)" marker-start="url(#arrowE)"/>
+    <text x="130" y="68" text-anchor="middle" fill="#A78BFA" font-family="Inter, sans-serif" font-size="10" font-weight="600">atracción</text>
+
+    <!-- Plus-Plus repel example below -->
+    <g transform="translate(40, 200)">
+      <circle r="20" fill="rgba(239,68,68,0.15)" stroke="#EF4444" stroke-width="1.5"/>
+      <text y="5" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="14" font-weight="800">+</text>
+    </g>
+    <g transform="translate(140, 200)">
+      <circle r="20" fill="rgba(239,68,68,0.15)" stroke="#EF4444" stroke-width="1.5"/>
+      <text y="5" text-anchor="middle" fill="#EF4444" font-family="Inter, sans-serif" font-size="14" font-weight="800">+</text>
+    </g>
+    <line x1="62" y1="200" x2="38" y2="200" stroke="#A78BFA" stroke-width="1.5" marker-end="url(#arrowE)"/>
+    <line x1="118" y1="200" x2="142" y2="200" stroke="#A78BFA" stroke-width="1.5" marker-end="url(#arrowE)"/>
+    <text x="90" y="240" text-anchor="middle" fill="#A78BFA" font-family="Inter, sans-serif" font-size="10" font-weight="600">repulsión</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="400" y1="150" x2="400" y2="410" stroke="rgba(255,255,255,0.08)" stroke-dasharray="2,4"/>
+
+  <!-- Right half: Magnetic field -->
+  <g transform="translate(440, 160)">
+    <text x="0" y="0" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">CAMPO MAGNÉTICO</text>
+
+    <!-- Two magnets N-S -->
+    <g transform="translate(40, 110)">
+      <rect x="0" y="-20" width="40" height="40" fill="#EF4444" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="20" y="5" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="800">N</text>
+      <rect x="0" y="20" width="40" height="40" fill="#3B82F6" stroke="#1E40AF" stroke-width="1.5"/>
+      <text x="20" y="45" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="800">S</text>
+    </g>
+
+    <g transform="translate(240, 110)">
+      <rect x="0" y="-20" width="40" height="40" fill="#EF4444" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="20" y="5" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="800">N</text>
+      <rect x="0" y="20" width="40" height="40" fill="#3B82F6" stroke="#1E40AF" stroke-width="1.5"/>
+      <text x="20" y="45" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="800">S</text>
+    </g>
+
+    <!-- Magnetic field lines (N to S, curved) -->
+    <g fill="none" stroke="#38BDF8" stroke-width="1.2" opacity="0.8">
+      <path d="M 80 100 Q 160 50 240 100" marker-end="url(#arrowEMag)"/>
+      <path d="M 80 110 Q 160 75 240 110" marker-end="url(#arrowEMag)"/>
+      <path d="M 80 130 Q 160 110 240 130" marker-end="url(#arrowEMag)"/>
+      <path d="M 80 150 Q 160 160 240 150" marker-end="url(#arrowEMag)"/>
+    </g>
+    <text x="160" y="200" text-anchor="middle" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10" font-weight="600">líneas de campo: N → S</text>
+  </g>
+
+  <!-- Bottom: Electromagnetic wave -->
+  <g transform="translate(60, 380)">
+    <text x="0" y="0" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">LUZ = ONDA ELECTROMAGNÉTICA</text>
+
+    <!-- Wave -->
+    <g transform="translate(20, 30)" fill="none">
+      <!-- E field (red) -->
+      <path d="M 0 0 Q 30 -30 60 0 T 120 0 T 180 0 T 240 0 T 300 0 T 360 0 T 420 0 T 480 0 T 540 0 T 600 0 T 660 0" stroke="#EF4444" stroke-width="1.5"/>
+      <text x="680" y="3" fill="#EF4444" font-family="Inter, sans-serif" font-size="9" font-weight="600">E</text>
+      <!-- B field (blue, perpendicular) -->
+      <path d="M 0 25 Q 30 -5 60 25 T 120 25 T 180 25 T 240 25 T 300 25 T 360 25 T 420 25 T 480 25 T 540 25 T 600 25 T 660 25" stroke="#3B82F6" stroke-width="1.5"/>
+      <text x="680" y="28" fill="#3B82F6" font-family="Inter, sans-serif" font-size="9" font-weight="600">B</text>
+    </g>
+    <text x="0" y="78" fill="#5A6B60" font-family="Inter, sans-serif" font-size="9" font-style="italic">Campos eléctrico (E) y magnético (B) oscilando perpendicularmente</text>
+  </g>
+</svg>

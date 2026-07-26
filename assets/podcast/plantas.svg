@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Las Plantas podcast">
+  <defs>
+    <linearGradient id="bg9" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <radialGradient id="glow9" cx="0.5" cy="0.5">
+      <stop offset="0" stop-color="#DC2626" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#DC2626" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots9" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="1" fill="rgba(255,255,255,0.04)"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg9)"/>
+  <rect width="600" height="400" fill="url(#dots9)"/>
+  <rect width="600" height="400" fill="url(#glow9)"/>
+  <!-- Badge episodio -->
+  <g transform="translate(28, 28)">
+    <rect x="0" y="0" width="76" height="24" rx="2" fill="#DC2626" opacity="0.15"/>
+    <text x="38" y="16" text-anchor="middle" fill="#DC2626" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">EP 09</text>
+  </g>
+  <!-- Decoration bottom -->
+  <g transform="translate(28, 360)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#DC2626" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <g transform="translate(300, 200)">
+    <text x="0" y="-140" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="28" font-weight="800">Las Plantas</text>
+
+    <!-- Maceta -->
+    <g transform="translate(0, 50)">
+      <path d="M -50 0 L 50 0 L 40 30 L -40 30 Z" fill="#A0522D" stroke="#22C55E" stroke-width="2"/>
+      <line x1="-50" y1="0" x2="50" y2="0" stroke="#22C55E" stroke-width="1.5"/>
+    </g>
+    <!-- Tallo -->
+    <line x1="0" y1="50" x2="0" y2="-30" stroke="#22C55E" stroke-width="4"/>
+    <!-- Hojas -->
+    <ellipse cx="-30" cy="0" rx="22" ry="10" fill="#22C55E" stroke="#15803D" stroke-width="1.5" transform="rotate(-30 -30 0)"/>
+    <ellipse cx="30" cy="-20" rx="22" ry="10" fill="#22C55E" stroke="#15803D" stroke-width="1.5" transform="rotate(30 30 -20)"/>
+    <!-- Flor -->
+    <g transform="translate(0, -45)">
+      <circle r="14" fill="#FBBF24"/>
+      <circle cx="0" cy="-12" r="8" fill="#F59E0B"/>
+      <circle cx="11" cy="-4" r="8" fill="#F59E0B"/>
+      <circle cx="-11" cy="-4" r="8" fill="#F59E0B"/>
+      <circle cx="7" cy="9" r="8" fill="#F59E0B"/>
+      <circle cx="-7" cy="9" r="8" fill="#F59E0B"/>
+      <circle cx="0" cy="0" r="6" fill="#DC2626"/>
+    </g>
+  </g>
+</svg>

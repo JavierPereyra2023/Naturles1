@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuerza Nuclear Fuerte · Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { natura: { black:'#080C0A', dark:'#0E1410', gray:'#161C18', mid:'#242C28', silver:'#A8B5AD', silverLight:'#C8D4CC', silverDark:'#5A6B60', green:'#0D9488', greenLight:'#14B8A6', leaf:'#22C55E', water:'#38BDF8', energy:'#3B82F6', bio:'#DC2626', podcast:'#E8A87C' } } },
+      fontFamily: { heading: ['Playfair Display','Georgia','serif'], body: ['Cormorant Garamond','Georgia','serif'], ui: ['Inter','sans-serif'] } } }
+  </script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    ::selection { background:#FB923C; color:#080C0A; }
+    body { font-family:'Cormorant Garamond',Georgia,serif; background:#080C0A; color:#D0D8D2; }
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#080C0A; } ::-webkit-scrollbar-thumb { background:#FB923C; border-radius:3px; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .animate-fadeInUp { animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .accent-line { width:60px; height:3px; background:linear-gradient(90deg,#FB923C,#F59E0B); }
+    .content-card { border:1px solid rgba(255,255,255,0.05); transition:all 0.3s ease; }
+    .content-card:hover { border-color:rgba(251,146,60,0.3); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(251,146,60,0.5); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .hero-figure { position:relative; height:340px; overflow:hidden; border:1px solid rgba(251,146,60,0.2); background:#0E1410; }
+    .hero-figure object { width:100%; height:100%; pointer-events:none; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/responsive-fixes.css">
+  <script src="../../../assets/backgrounds/auto-toc.js?v=6"></script>
+</head>
+<body class="bg-energia">
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: gravedad, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy">Nuclear fuerte</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver a Fuerzas</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 md:pt-24 md:pb-12 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-25" style="z-index: 0;">
+    <img src="../../../assets/fisica/fuerzas/svg-nuclear-fuerte.svg" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(2px);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/30 to-natura-black" style="z-index: 1;"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="accent-line"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Fuerza fundamental · 03</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight mb-3">
+      <span class="bg-gradient-to-r from-natura-podcast to-natura-energy bg-clip-text text-transparent">Fuerza Nuclear Fuerte</span>
+    </h1>
+    <p class="text-base md:text-lg text-natura-silver max-w-2xl leading-relaxed">La más intensa de las cuatro. Mantiene pegados a los quarks dentro de cada protón y neutrón, y después mantiene juntos a protones y neutrones dentro del núcleo atómico. Si no existiera, todos los átomos del universo se desarmarían.</p>
+  </div>
+</section>
+
+<!-- DIAGRAMA -->
+<section class="py-6 md:py-8 bg-natura-dark">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="hero-figure">
+      <object data="../../../assets/fisica/fuerzas/svg-nuclear-fuerte.svg" type="image/svg+xml"></object>
+    </div>
+    <p class="text-[11px] text-natura-silverDark mt-2 italic text-center" style="font-family: 'Inter', sans-serif;">Dentro de un átomo: electrones orbitan, y en el centro el núcleo con protones (+) y neutrones (n) unidos por gluones.</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-14">
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">La fuerza que lo pega todo</h2>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">
+      Dentro del núcleo de un átomo hay <strong class="text-natura-podcast">protones</strong> (carga positiva) y <strong class="text-natura-podcast">neutrones</strong> (sin carga). Como los protones tienen carga positiva, deberían repelerse por electromagnetismo. Y sin embargo, los núcleos existen.
+    </p>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+      La responsable es la <strong class="text-natura-podcast">fuerza nuclear fuerte</strong>: una atracción mucho más intensa que la electromagnética, pero que solo actúa a distancias increíblemente pequeñas, del orden de un <strong class="text-white">femtómetro</strong> (10⁻¹⁵ m). A esa escala, la fuerza fuerte supera la repulsión eléctrica y mantiene todo pegado. Si te alejas un femtómetro más, la fuerza se cae a casi nada.
+    </p>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Dos niveles de la misma fuerza</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="content-card bg-natura-gray p-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">Nivel 1: dentro del protón</h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">Los <strong class="text-natura-podcast">quarks</strong> son las partículas más pequeñas que conocemos. Un protón está formado por 3 quarks ("up, up, down"). Los quarks tienen una propiedad llamada <strong class="text-white">"color"</strong> (rojo, verde o azul, no es color real, es solo un nombre) y se intercambian <strong class="text-natura-podcast">gluones</strong> — las partículas que transmiten la fuerza fuerte.</p>
+        <p class="text-sm text-natura-silverDark italic" style="font-family: 'Inter', sans-serif;">Los gluones son como "resortes" que unen a los quarks entre sí. Si intentás separar dos quarks, el resorte se hace más fuerte.</p>
+      </div>
+      <div class="content-card bg-natura-gray p-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">Nivel 2: dentro del núcleo</h3>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">Una <em>parte</em> de la fuerza fuerte "se escapa" del protón y del neutrón, y se nota afuera como una atracción que pega a los protones y neutrones entre sí. Es lo que mantiene al núcleo entero.</p>
+        <p class="text-sm text-natura-silverDark italic" style="font-family: 'Inter', sans-serif;">A esto lo llamamos fuerza "nuclear residual" — es lo que quedó de la fuerza fuerte entre quarks, igual que las moléculas se atraen entre sí por electromagnetismo residual.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">La más intensa, pero la más corta</h2>
+    <div class="bg-natura-gray border border-natura-podcast/30 p-5">
+      <div class="grid grid-cols-3 gap-3 text-center mb-4">
+        <div>
+          <div class="text-2xl md:text-3xl font-bold text-natura-podcast" style="font-family: 'Inter', sans-serif;">10⁻¹⁵ m</div>
+          <div class="text-[10px] uppercase tracking-wider text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Alcance</div>
+        </div>
+        <div>
+          <div class="text-2xl md:text-3xl font-bold text-natura-podcast" style="font-family: 'Inter', sans-serif;">~100×</div>
+          <div class="text-[10px] uppercase tracking-wider text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Vs electromagnetismo</div>
+        </div>
+        <div>
+          <div class="text-2xl md:text-3xl font-bold text-natura-podcast" style="font-family: 'Inter', sans-serif;">Gluón</div>
+          <div class="text-[10px] uppercase tracking-wider text-natura-silverDark mt-1" style="font-family: 'Inter', sans-serif;">Partícula mediadora</div>
+        </div>
+      </div>
+      <p class="text-base text-natura-silver leading-relaxed">
+        La fuerza fuerte es 100 veces más intensa que la electromagnética, pero solo "sirve" si estás a menos de un femtómetro de distancia. Por eso no la notás en la vida diaria: no podés estar tan cerca de los átomos como para que te afecten.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">¿Y por qué importa?</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-podcast">
+        <span class="iconify text-natura-podcast flex-shrink-0 mt-1" data-icon="lucide:atom" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Existencia de la materia</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">Si esta fuerza no existiera, no habría núcleos, ni átomos, ni moléculas, ni vos, ni el Sol, ni nada. Todo lo que existe en el universo depende de que los quarks se queden dentro de los protones.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-energy">
+        <span class="iconify text-natura-energy flex-shrink-0 mt-1" data-icon="lucide:sun" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Energía del Sol</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">En el núcleo del Sol, los núcleos de hidrógeno se fusionan gracias a esta fuerza, y parte de la masa se convierte en energía. Eso es lo que ilumina y calienta la Tierra.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-leaf">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-1" data-icon="lucide:flask-conical" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Centrales nucleares</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">En las centrales nucleares, se rompe (fisión) o se une (fusión) el núcleo de átomos pesados, liberando la energía que mantiene la fuerza fuerte junto. Atucha I y II en Argentina funcionan así.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-water">
+        <span class="iconify text-natura-water flex-shrink-0 mt-1" data-icon="lucide:microscope" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Medicina nuclear</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">La tomografía por emisión de positrones (PET) usa isótopos que se rompen por esta fuerza. Los médicos detectan esa radiación para ver qué pasa dentro del cuerpo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Para pensar</h2>
+    <div class="space-y-3">
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si los protones se repelen entre sí, ¿cómo puede existir un núcleo con muchos protones?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Porque la fuerza fuerte nuclear, a distancias del tamaño del núcleo (femtómetros), es más fuerte que la repulsión eléctrica. A medida que agregás más protones, la repulsión eléctrica crece, y por eso los núcleos muy grandes (como el uranio, con 92 protones) son inestables: les cuesta mantenerse y se rompen solos. Esa es la base de la radiactividad.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          ¿Por qué no puedo "tocar" un protón y sentir la fuerza fuerte?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Porque su alcance es de apenas 10⁻¹⁵ metros. Si trataras de acercar tu mano a esa distancia de un protón, tus átomos ya chocaron mucho antes con el protón. La fuerza fuerte es invisible en la vida diaria — solo se manifiesta en el corazón de los átomos y en las estrellas.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si un neutrón está formado por quarks pegados por la fuerza fuerte, ¿qué pasa si lo saco del núcleo?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Un neutrón solo es inestable. Vive unos 15 minutos y se desintegra solo: la fuerza nuclear débil (la otra fuerza, que vemos en otra página) lo transforma en un protón, un electrón y un antineutrino. Pero dentro del núcleo, está protegido y puede vivir eternamente.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="mt-12 pt-6 border-t border-white/10 flex flex-wrap gap-3 justify-between" style="font-family: 'Inter', sans-serif;">
+    <a href="electromagnetismo.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> Anterior: Electromagnetismo
+    </a>
+    <a href="nuclear-debil.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">
+      Siguiente: Nuclear débil <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+    </a>
+  </section>
+</article>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});}, { threshold: 0.1 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Nuclear fuerte",u:"Física",s:"Fuerzas",l:"nuclear-fuerte.html",c:"#FB923C"},
+    {n:"Nuclear débil",u:"Física",s:"Fuerzas",l:"nuclear-debil.html",c:"#FBBF24"},
+    {n:"Gravedad",u:"Física",s:"Fuerzas",l:"gravedad.html",c:"#3B82F6"},
+    {n:"Electromagnetismo",u:"Física",s:"Fuerzas",l:"electromagnetismo.html",c:"#A78BFA"},
+    {n:"Rozamiento",u:"Física",s:"Fuerzas",l:"rozamiento.html",c:"#F59E0B"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../../biologia/celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"}
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){
+      var a=document.createElement('a');a.href=t.l;a.className='search-result-item';
+      a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+      results.appendChild(a);
+    });}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script src="../../../assets/backgrounds/auto-toc.js" defer></script>
+</body>
+</html>

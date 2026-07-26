@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Rozamiento · Física 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { natura: { black:'#080C0A', dark:'#0E1410', gray:'#161C18', mid:'#242C28', silver:'#A8B5AD', silverLight:'#C8D4CC', silverDark:'#5A6B60', green:'#0D9488', greenLight:'#14B8A6', leaf:'#22C55E', water:'#38BDF8', energy:'#3B82F6', bio:'#DC2626', podcast:'#E8A87C' } } },
+      fontFamily: { heading: ['Playfair Display','Georgia','serif'], body: ['Cormorant Garamond','Georgia','serif'], ui: ['Inter','sans-serif'] } } }
+  </script>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    ::selection { background:#F59E0B; color:#080C0A; }
+    body { font-family:'Cormorant Garamond',Georgia,serif; background:#080C0A; color:#D0D8D2; }
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#080C0A; } ::-webkit-scrollbar-thumb { background:#F59E0B; border-radius:3px; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .animate-fadeInUp { animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .accent-line { width:60px; height:3px; background:linear-gradient(90deg,#F59E0B,#22C55E); }
+    .content-card { border:1px solid rgba(255,255,255,0.05); transition:all 0.3s ease; }
+    .content-card:hover { border-color:rgba(245,158,11,0.3); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(245,158,11,0.5); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .hero-figure { position:relative; height:340px; overflow:hidden; border:1px solid rgba(245,158,11,0.2); background:#0E1410; }
+    .hero-figure object { width:100%; height:100%; pointer-events:none; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/responsive-fixes.css">
+  <script src="../../../assets/backgrounds/auto-toc.js?v=6"></script>
+</head>
+<body class="bg-energia">
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: gravedad, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-energy transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Física</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-energy">Rozamiento</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver a Fuerzas</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-20 pb-10 md:pt-24 md:pb-12 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-25" style="z-index: 0;">
+    <img src="../../../assets/fisica/fuerzas/svg-rozamiento.svg" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(2px);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/30 to-natura-black" style="z-index: 1;"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="accent-line"></div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy" style="font-family: 'Inter', sans-serif;">Fuerza cotidiana · 05</span>
+    </div>
+    <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight mb-3">
+      <span class="bg-gradient-to-r from-natura-podcast to-natura-leaf bg-clip-text text-transparent">El Rozamiento</span>
+    </h1>
+    <p class="text-base md:text-lg text-natura-silver max-w-2xl leading-relaxed">La fuerza que te frena cuando pedaleás, que gasta las suelas de tus zapatillas y que hace posible que camines sin resbalar. Aunque parezca una sola fuerza, no es "fundamental": es el resultado del electromagnetismo entre los átomos de dos superficies en contacto.</p>
+  </div>
+</section>
+
+<!-- DIAGRAMA -->
+<section class="py-6 md:py-8 bg-natura-dark">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="hero-figure">
+      <object data="../../../assets/fisica/fuerzas/svg-rozamiento.svg" type="image/svg+xml"></object>
+    </div>
+    <p class="text-[11px] text-natura-silverDark mt-2 italic text-center" style="font-family: 'Inter', sans-serif;">Caja deslizándose: la fuerza de rozamiento (f_r) se opone al movimiento. La normal (N) sostiene la caja, el peso (P) tira hacia abajo.</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<article class="max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-14">
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">La fuerza que aparece cuando algo toca otra cosa</h2>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">
+      Cada vez que dos superficies se tocan y una se mueve (o intenta moverse) respecto a la otra, aparece una fuerza que se opone al movimiento. Es la <strong class="text-natura-podcast">fuerza de rozamiento</strong>, y actúa en sentido contrario al movimiento.
+    </p>
+    <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+      A escala microscópica, las superficies parecen lisas pero en realidad tienen <strong class="text-white">asperezas</strong> (irregularidades) que se traban entre sí, como dos cepillos enfrentados. Cuando intentás deslizar uno contra el otro, esas puntas se enganchan, se deforman o se rompen, y eso gasta energía. Esa energía perdida es lo que vos sentís como "fricción".
+    </p>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Estático vs. cinético</h2>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="content-card bg-natura-gray p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="iconify text-natura-podcast" data-icon="lucide:lock" data-width="20"></span>
+          <h3 class="font-heading text-lg font-bold text-white">Rozamiento estático (μₑ)</h3>
+        </div>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">Es la fuerza que <strong class="text-white">impide</strong> que un objeto empiece a moverse. Si empujás una mesa, no se mueve hasta que tu fuerza supera cierto umbral. Mientras la mesa no se mueve, el rozamiento estático equilibra exactamente tu empujón.</p>
+        <p class="text-sm text-natura-silverDark italic" style="font-family: 'Inter', sans-serif;">El coeficiente μₑ suele ser <em>mayor</em> que el cinético. Por eso cuesta más arrancar que mantener el movimiento.</p>
+      </div>
+      <div class="content-card bg-natura-gray p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="iconify text-natura-leaf" data-icon="lucide:move" data-width="20"></span>
+          <h3 class="font-heading text-lg font-bold text-white">Rozamiento cinético (μ_c)</h3>
+        </div>
+        <p class="text-base text-natura-silver leading-relaxed mb-3">Es la fuerza que <strong class="text-white">frena</strong> un objeto que ya está deslizándose. Si dejás de empujar la mesa, el rozamiento cinético la va frenando hasta que se detiene.</p>
+        <p class="text-sm text-natura-silverDark italic" style="font-family: 'Inter', sans-serif;">Por eso los autos usan aceite entre las piezas móviles: para reducir el coeficiente y que se gaste menos energía.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">La fórmula del rozamiento</h2>
+    <div class="bg-natura-gray border border-natura-podcast/30 p-5">
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed mb-3">La fuerza de rozamiento depende de dos cosas: el material de las superficies y cuánto se aprietan entre sí. La fórmula es:</p>
+      <div class="bg-natura-mid p-4 text-center font-mono text-natura-podcast text-xl my-4">f_r = μ · N</div>
+      <ul class="text-base text-natura-silver space-y-2" style="font-family: 'Cormorant Garamond', serif;">
+        <li>• <strong class="text-white">f_r</strong> = fuerza de rozamiento (en newtons)</li>
+        <li>• <strong class="text-white">μ</strong> = coeficiente de rozamiento (un número sin unidades, depende de los materiales)</li>
+        <li>• <strong class="text-white">N</strong> = fuerza normal (la fuerza perpendicular que la superficie ejerce sobre el objeto)</li>
+      </ul>
+      <p class="text-sm text-natura-silverDark mt-4 italic" style="font-family: 'Inter', sans-serif;">Dato clave: el rozamiento <em>no depende</em> del área de contacto. Da igual si la caja está parada o acostada: si pesa lo mismo, el rozamiento es el mismo. Esto es contraintuitivo pero es así.</p>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">Algunos coeficientes reales</h2>
+    <div class="content-card bg-natura-gray p-5">
+      <table class="w-full text-sm" style="font-family: 'Inter', sans-serif;">
+        <thead>
+          <tr class="text-natura-silverDark border-b border-white/10">
+            <th class="text-left py-2 font-semibold uppercase tracking-wider text-[10px]">Materiales</th>
+            <th class="text-center py-2 font-semibold uppercase tracking-wider text-[10px]">μₑ (estático)</th>
+            <th class="text-center py-2 font-semibold uppercase tracking-wider text-[10px]">μ_c (cinético)</th>
+          </tr>
+        </thead>
+        <tbody class="text-natura-silver">
+          <tr class="border-b border-white/5"><td class="py-2">Madera sobre madera</td><td class="text-center">0,5</td><td class="text-center">0,3</td></tr>
+          <tr class="border-b border-white/5"><td class="py-2">Acero sobre acero</td><td class="text-center">0,74</td><td class="text-center">0,57</td></tr>
+          <tr class="border-b border-white/5"><td class="py-2">Goma sobre concreto seco</td><td class="text-center">1,0</td><td class="text-center">0,8</td></tr>
+          <tr class="border-b border-white/5"><td class="py-2">Goma sobre concreto mojado</td><td class="text-center">0,3</td><td class="text-center">0,25</td></tr>
+          <tr class="border-b border-white/5"><td class="py-2">Teflón sobre teflón</td><td class="text-center">0,04</td><td class="text-center">0,04</td></tr>
+          <tr><td class="py-2">Hielo sobre hielo</td><td class="text-center">0,1</td><td class="text-center">0,03</td></tr>
+        </tbody>
+      </table>
+      <p class="text-sm text-natura-silverDark mt-3 italic" style="font-family: 'Inter', sans-serif;">Por eso los autos frenan mejor con goma sobre concreto seco (μ alto) que sobre hielo (μ casi cero). Y por qué el teflón se usa en sartenes y rodamientos: casi no tiene rozamiento.</p>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">¿Para qué sirve y por qué importa?</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-leaf">
+        <span class="iconify text-natura-leaf flex-shrink-0 mt-1" data-icon="lucide:footprints" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Caminar es rozamiento</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">Cuando das un paso, tu pie empuja el suelo hacia atrás, y el rozamiento del suelo con tu zapatilla te empuja hacia adelante. Si el piso está mojado o tiene hielo, el μ cae, no hay fuerza de reacción, y resbalás.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-podcast">
+        <span class="iconify text-natura-podcast flex-shrink-0 mt-1" data-icon="lucide:car" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Frenos y cubiertas</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">Los autos frenan gracias al rozamiento entre la cubierta y el asfalto. Por eso los autos de carrera usan cubiertas blandas (mayor μ) en piso seco, y los autos comunes llevan dibujo para evacuar agua en piso mojado.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-water">
+        <span class="iconify text-natura-water flex-shrink-0 mt-1" data-icon="lucide:drop" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Lubricación</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">El aceite de motor, la grasa de los rodamientos y la cera sobre los esquíes sirven para <em>reducir</em> el rozamiento. Una capa líquida entre las superficies hace que deslicen en vez de trabarse.</p>
+        </div>
+      </div>
+      <div class="flex gap-3 p-4 bg-natura-gray border-l-2 border-natura-energy">
+        <span class="iconify text-natura-energy flex-shrink-0 mt-1" data-icon="lucide:flame" data-width="20"></span>
+        <div>
+          <h4 class="font-heading text-base font-bold text-white mb-1">Calor por rozamiento</h4>
+          <p class="text-sm text-natura-silver leading-relaxed" style="font-family: 'Inter', sans-serif;">Frotar tus manos las calienta porque la energía del movimiento se transforma en calor. Por eso los frenos de auto se calientan al frenar: están convirtiendo energía cinética en calor por rozamiento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <div class="bg-gradient-to-r from-natura-podcast/10 to-transparent border border-natura-podcast/30 p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="iconify text-natura-podcast" data-icon="lucide:flask-conical" data-width="22"></span>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white">Experimento casero · Distintos μ</h2>
+      </div>
+      <p class="text-base text-natura-silver leading-relaxed mb-3">Necesitás: un objeto plano y pesado (caja de CD, libro, tabla chica), y distintas superficies (mesa, carpeta de plástico, toalla, papel de aluminio).</p>
+      <p class="text-base text-natura-silver leading-relaxed mb-3">Con el objeto plano apoyado sobre cada superficie, levantá lentamente un extremo y medí a qué ángulo empieza a deslizar. Vas a ver que en la toalla se aguanta mucho más parado (μ alto) que en el papel de aluminio (μ bajo). El ángulo en que empieza a deslizar es el ángulo crítico θ donde tan(θ) = μ.</p>
+      <p class="text-base md:text-lg text-natura-silver leading-relaxed">
+        En el hielo apenas necesita levantarse un poquito para empezar a deslizar. Por eso el hockey sobre hielo es tan rápido: μ ≈ 0,03.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-10 reveal">
+    <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">Para pensar</h2>
+    <div class="space-y-3">
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si duplico el peso de la caja, ¿el rozamiento se duplica?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Sí. La fórmula f_r = μ · N dice que el rozamiento es proporcional a la fuerza normal N. Si la caja pesa el doble, N es el doble, y el rozamiento también. Por eso cuesta más empujar un placard lleno que uno vacío.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          Si el rozamiento no depende del área, ¿por qué las gomas de los autos son anchas?
+        </summary>
+          <p class="text-base text-natura-silver leading-relaxed mt-3">La fórmula f_r = μ · N es una idealización. En la realidad, el rozamiento sí depende un poco del área: una goma más ancha tiene más puntos de contacto, se agarra mejor al piso y la goma no se gasta tanto. Por eso los autos deportivos llevan las cuatro ruedas anchas: para tener mejor agarre en curvas y frenadas.</p>
+      </details>
+      <details class="content-card bg-natura-gray p-4 group">
+        <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family: 'Inter', sans-serif;">
+          <span class="iconify text-natura-energy" data-icon="lucide:circle-help" data-width="16"></span>
+          ¿Por qué el rozamiento no es una fuerza "fundamental"?
+        </summary>
+        <p class="text-base text-natura-silver leading-relaxed mt-3">Porque es el resultado combinado de muchas interacciones electromagnéticas entre los átomos de las dos superficies. A nivel microscópico, son los enlaces electromagnéticos que se forman y se rompen entre los átomos de un material y los átomos del otro. Las 4 fuerzas fundamentales (gravedad, electromagnetismo, fuerte, débil) son las "piezas originales". El rozamiento, como la fuerza de un resorte, emerge de esas piezas.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="mt-12 pt-6 border-t border-white/10 flex flex-wrap gap-3 justify-between" style="font-family: 'Inter', sans-serif;">
+    <a href="nuclear-debil.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span> Anterior: Nuclear débil
+    </a>
+    <a href="index.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-energy hover:text-white transition-colors">
+      Volver al inicio de Fuerzas <span class="iconify" data-icon="lucide:arrow-up-right" data-width="14"></span>
+    </a>
+  </section>
+</article>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-energy flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:zap" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Inicio</a>
+        <a href="index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-energy transition-colors">Las Fuerzas</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});}, { threshold: 0.1 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var topics = [
+    {n:"Rozamiento",u:"Física",s:"Fuerzas",l:"rozamiento.html",c:"#F59E0B"},
+    {n:"Gravedad",u:"Física",s:"Fuerzas",l:"gravedad.html",c:"#3B82F6"},
+    {n:"Electromagnetismo",u:"Física",s:"Fuerzas",l:"electromagnetismo.html",c:"#A78BFA"},
+    {n:"Nuclear fuerte",u:"Física",s:"Fuerzas",l:"nuclear-fuerte.html",c:"#FB923C"},
+    {n:"Nuclear débil",u:"Física",s:"Fuerzas",l:"nuclear-debil.html",c:"#FBBF24"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../movimientos/mru.html",c:"#3B82F6"},
+    {n:"MRUV",u:"Física",s:"Movimientos",l:"../movimientos/mruv.html",c:"#3B82F6"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"}
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){
+      var a=document.createElement('a');a.href=t.l;a.className='search-result-item';
+      a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';
+      results.appendChild(a);
+    });}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script src="../../../assets/backgrounds/auto-toc.js" defer></script>
+</body>
+</html>

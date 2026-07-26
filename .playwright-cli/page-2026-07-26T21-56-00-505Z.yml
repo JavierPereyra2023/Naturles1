@@ -1,0 +1,278 @@
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "Inicio" [ref=e6] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - generic [ref=e8]: /
+        - link "Física" [ref=e9] [cursor=pointer]:
+          - /url: ../index.html
+        - generic [ref=e10]: /
+        - link "Sistema Solar" [ref=e11] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=e12]: /
+        - generic [ref=e13]: Tecnología Espacial
+      - generic [ref=e14]:
+        - generic [ref=e15]: Eje 3 · MAPI
+        - link "Volver" [ref=e16] [cursor=pointer]:
+          - /url: index.html
+        - button "Buscar tema" [ref=e268] [cursor=pointer]
+  - generic [ref=e18]:
+    - img "Cohete Falcon Heavy durante el lanzamiento" [ref=e20]
+    - generic [ref=e23]:
+      - generic [ref=e24]: Eje 3 · Tecnología Espacial
+      - heading "Tecnología Espacial" [level=1] [ref=e27]
+      - paragraph [ref=e28]: Las máquinas que llevan personas al espacio y los instrumentos que nos permiten ver y escuchar el universo. Desde los cohetes de SpaceX hasta los telescopios espaciales y los detectores de ondas gravitacionales.
+      - generic [ref=e29]:
+        - generic [ref=e30]: Cohetes
+        - generic [ref=e31]: Telescopios
+        - generic [ref=e32]: LIGO
+        - generic [ref=e33]: Radiotelescopios
+  - generic [ref=e38]:
+    - paragraph [ref=e39]: ¿Cómo se lanza un cohete al espacio? ¿Cómo un telescopio del tamaño de un colectivo puede ver galaxias a millones de años luz? ¿Y cómo "escuchamos" las ondas que produce la fusión de dos agujeros negros?
+    - paragraph [ref=e40]: "Esta sección recorre la tecnología que hace posible la exploración espacial moderna: los cohetes reutilizables de SpaceX, los grandes telescopios espaciales (Hubble y James Webb), los radiotelescopios y el detector de ondas gravitacionales LIGO."
+  - generic [ref=e42]:
+    - heading "Próximos lanzamientos de SpaceX" [level=2] [ref=e45]
+    - generic [ref=e46]:
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - generic [ref=e280]: Falcon 9
+          - generic [ref=e281]: Go for Launch
+        - heading "Falcon 9 Block 5 | Starlink Group 17-52" [level=3] [ref=e282]
+        - paragraph [ref=e283]:
+          - generic [ref=e288]: 28 de jul de 2026, 11:00 p. m.
+        - paragraph [ref=e289]:
+          - generic [ref=e294]: Space Launch Complex 4E, Vandenberg SFB, CA, USA
+      - generic [ref=e295]:
+        - generic [ref=e296]:
+          - generic [ref=e297]: Falcon 9
+          - generic [ref=e298]: Go for Launch
+        - heading "Falcon 9 Block 5 | NROL-95" [level=3] [ref=e299]
+        - paragraph [ref=e300]:
+          - generic [ref=e305]: 30 de jul de 2026, 04:09 a. m.
+        - paragraph [ref=e306]:
+          - generic [ref=e311]: Space Launch Complex 40, Cape Canaveral SFS, FL, USA
+      - generic [ref=e312]:
+        - generic [ref=e313]:
+          - generic [ref=e314]: Falcon 9
+          - generic [ref=e315]: Go for Launch
+        - heading "Falcon 9 Block 5 | Starlink Group 17-53" [level=3] [ref=e316]
+        - paragraph [ref=e317]:
+          - generic [ref=e322]: 01 de ago de 2026, 11:00 a. m.
+        - paragraph [ref=e323]:
+          - generic [ref=e328]: Space Launch Complex 4E, Vandenberg SFB, CA, USA
+      - generic [ref=e329]:
+        - generic [ref=e330]:
+          - generic [ref=e331]: Falcon Heavy
+          - generic [ref=e332]: Go for Launch
+        - heading "Falcon Heavy | Nancy Grace Roman Space Telescope" [level=3] [ref=e333]
+        - paragraph [ref=e334]:
+          - generic [ref=e339]: 30 de ago de 2026, 08:20 a. m.
+        - paragraph [ref=e340]:
+          - generic [ref=e345]: Launch Complex 39A, Kennedy Space Center, FL, USA
+    - generic [ref=e63]:
+      - paragraph [ref=e64]: Datos vía Launch Library 2 (The Space Devs)
+      - link "Ver calendario completo en SpaceX.com" [ref=e65] [cursor=pointer]:
+        - /url: https://www.spacex.com/launches/
+  - generic [ref=e68]:
+    - heading "Cohetes de SpaceX" [level=2] [ref=e71]
+    - generic [ref=e72]:
+      - article [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - img "Cohete Falcon 9 en la plataforma de lanzamiento" [ref=e77]
+              - generic [ref=e79]: Falcon 9
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: Plano y funcionamiento
+              - heading "Falcon 9" [level=3] [ref=e82]
+              - paragraph [ref=e83]: El caballo de batalla de SpaceX. Cohete de dos etapas parcialmente reutilizable. Ha completado más de 300 misiones llevando satélites, astronautas y suministros.
+              - generic [ref=e84]:
+                - generic [ref=e85]: Reutilizable
+                - generic [ref=e86]: Merlin
+                - generic [ref=e87]: Crew Dragon
+              - link "Ver plano y explicación" [ref=e88] [cursor=pointer]:
+                - /url: falcon-9.html
+          - generic [ref=e90]:
+            - generic [ref=e91]:
+              - generic [ref=e92]: Diseño terminado · 3D interactivo
+              - generic [ref=e93]:
+                - generic [ref=e94]: Arrastrá para rotar
+                - link "Ver el modelo 3D de Falcon 9 a pantalla completa" [active] [ref=e95] [cursor=pointer]:
+                  - /url: ../../../modelos3D_rocket/falcon-9/falcon9-3d.html
+                  - generic [ref=e96]: Salir de pantalla completa
+            - iframe [ref=e98]:
+              - generic [ref=f1e1]:
+                - generic [ref=f1e2]: Arrastrá para rotar · rueda para acercar · clic derecho para desplazar
+                - generic: FALCON 9 · 70 M · Y‑UP
+                - generic [ref=f1e4]:
+                  - button "FR" [ref=f1e5] [cursor=pointer]
+                  - button "DE" [ref=f1e6] [cursor=pointer]
+                  - button "AR" [ref=f1e7] [cursor=pointer]
+                  - button "AT" [ref=f1e8] [cursor=pointer]
+                  - button "IZ" [ref=f1e9] [cursor=pointer]
+                  - button "AB" [ref=f1e10] [cursor=pointer]
+                  - button "ISO · 0" [ref=f1e11] [cursor=pointer]
+                - generic: — pasá el cursor sobre una pieza
+            - generic "Especificaciones del Falcon 9" [ref=e99]:
+              - generic [ref=e100]:
+                - generic [ref=e101]: Altura
+                - strong [ref=e102]: 70 m
+              - generic [ref=e103]:
+                - generic [ref=e104]: Diámetro
+                - strong [ref=e105]: 3,7 m
+              - generic [ref=e106]:
+                - generic [ref=e107]: Carga a órbita baja
+                - strong [ref=e108]: 22.800 kg
+              - generic [ref=e109]:
+                - generic [ref=e110]: Motores
+                - strong [ref=e111]: 9 Merlin + 1 Vacuum
+      - article [ref=e112]:
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - img "Cohete Falcon Heavy en la plataforma de lanzamiento" [ref=e116]
+              - generic [ref=e118]: Falcon Heavy
+            - generic [ref=e119]:
+              - paragraph [ref=e120]: Plano y funcionamiento
+              - heading "Falcon Heavy" [level=3] [ref=e121]
+              - paragraph [ref=e122]: Tres núcleos Falcon 9 unidos. Fue el cohete más potente del mundo en operación. Capaz de enviar 64 toneladas a órbita baja o un auto al espacio profundo.
+              - generic [ref=e123]:
+                - generic [ref=e124]: 27 motores
+                - generic [ref=e125]: Carga pesada
+                - generic [ref=e126]: Tesla Roadster
+              - link "Ver plano y explicación" [ref=e127] [cursor=pointer]:
+                - /url: falcon-heavy.html
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e131]: Diseño terminado · 3D interactivo
+              - generic [ref=e132]:
+                - generic [ref=e133]: Arrastrá para rotar
+                - link "Ver el modelo 3D de Falcon Heavy a pantalla completa" [ref=e134] [cursor=pointer]:
+                  - /url: ../../../modelos3D_rocket/falcon-heavy-3d.html
+                  - generic [ref=e135]: Pantalla completa
+            - generic [ref=e136]:
+              - generic: Preparando Falcon Heavy
+              - iframe [ref=e137]:
+                
+            - generic "Especificaciones del Falcon Heavy" [ref=e138]:
+              - generic [ref=e139]:
+                - generic [ref=e140]: Altura
+                - strong [ref=e141]: 70 m
+              - generic [ref=e142]:
+                - generic [ref=e143]: Ancho
+                - strong [ref=e144]: 12,2 m
+              - generic [ref=e145]:
+                - generic [ref=e146]: Carga a órbita baja
+                - strong [ref=e147]: 63.800 kg
+              - generic [ref=e148]:
+                - generic [ref=e149]: Motores
+                - strong [ref=e150]: 27 Merlin
+      - article [ref=e151]:
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - img "Sistema Starship y Super Heavy" [ref=e155]
+              - generic [ref=e157]: Starship + Super Heavy
+            - generic [ref=e158]:
+              - paragraph [ref=e159]: Plano y funcionamiento
+              - heading "Starship y Super Heavy" [level=3] [ref=e160]
+              - paragraph [ref=e161]: El cohete más grande y poderoso jamás construido. Completamente reutilizable. Diseñado para llevar personas a la Luna y, eventualmente, a Marte.
+              - generic [ref=e162]:
+                - generic [ref=e163]: 33 Raptor
+                - generic [ref=e164]: Metano
+                - generic [ref=e165]: Marte
+              - link "Ver plano y explicación" [ref=e166] [cursor=pointer]:
+                - /url: starship.html
+          - generic [ref=e168]:
+            - generic [ref=e169]:
+              - generic [ref=e170]: Diseño terminado · 3D interactivo
+              - generic [ref=e171]:
+                - generic [ref=e172]: Arrastrá para rotar
+                - link "Ver el modelo 3D de Starship a pantalla completa" [ref=e173] [cursor=pointer]:
+                  - /url: ../../../modelos3D_rocket/starship/starship.html
+                  - generic [ref=e174]: Pantalla completa
+            - generic [ref=e175]:
+              - generic: Preparando Starship
+              - iframe [ref=e176]:
+                
+            - generic "Especificaciones de Starship" [ref=e177]:
+              - generic [ref=e178]:
+                - generic [ref=e179]: Altura total
+                - strong [ref=e180]: 124 m
+              - generic [ref=e181]:
+                - generic [ref=e182]: Diámetro
+                - strong [ref=e183]: 9 m
+              - generic [ref=e184]:
+                - generic [ref=e185]: Motores
+                - strong [ref=e186]: 33 + 6 Raptor
+              - generic [ref=e187]:
+                - generic [ref=e188]: Propelente
+                - strong [ref=e189]: Metano + oxígeno
+    - heading "Telescopios y Detectores" [level=2] [ref=e192]
+    - generic [ref=e193]:
+      - link "Telescopio Espacial Hubble en órbita Hubble Telescopio Espacial Hubble En órbita desde 1990. Más de 30 años de servicio tomando imágenes espectaculares del universo. Pionero de los telescopios espaciales. 1990 Órbita baja Luz visible Explorar tema" [ref=e194] [cursor=pointer]:
+        - /url: hubble.html
+        - generic [ref=e195]:
+          - img "Telescopio Espacial Hubble en órbita" [ref=e196]
+          - generic [ref=e198]: Hubble
+        - generic [ref=e199]:
+          - heading "Telescopio Espacial Hubble" [level=3] [ref=e200]
+          - paragraph [ref=e201]: En órbita desde 1990. Más de 30 años de servicio tomando imágenes espectaculares del universo. Pionero de los telescopios espaciales.
+          - generic [ref=e202]:
+            - generic [ref=e203]: "1990"
+            - generic [ref=e204]: Órbita baja
+            - generic [ref=e205]: Luz visible
+          - generic [ref=e206]: Explorar tema
+      - link "Telescopio espacial James Webb James Webb Telescopio James Webb (JWST) El telescopio más potente jamás construido. Lanzado en 2021. Ve el universo en infrarrojo y puede observar las primeras galaxias que se formaron. 2021 Infrarrojo Punto L2 Explorar tema" [ref=e208] [cursor=pointer]:
+        - /url: webb.html
+        - generic [ref=e209]:
+          - img "Telescopio espacial James Webb" [ref=e210]
+          - generic [ref=e212]: James Webb
+        - generic [ref=e213]:
+          - heading "Telescopio James Webb (JWST)" [level=3] [ref=e214]
+          - paragraph [ref=e215]: El telescopio más potente jamás construido. Lanzado en 2021. Ve el universo en infrarrojo y puede observar las primeras galaxias que se formaron.
+          - generic [ref=e216]:
+            - generic [ref=e217]: "2021"
+            - generic [ref=e218]: Infrarrojo
+            - generic [ref=e219]: Punto L2
+          - generic [ref=e220]: Explorar tema
+      - link "Observatorio LIGO de ondas gravitacionales LIGO LIGO — Ondas Gravitacionales Un instrumento que \"escucha\" las vibraciones del espacio-tiempo. Detectó por primera vez las ondas gravitacionales en 2015. Premio Nobel 2017. 2015 Láser Nobel Explorar tema" [ref=e222] [cursor=pointer]:
+        - /url: ligo.html
+        - generic [ref=e223]:
+          - img "Observatorio LIGO de ondas gravitacionales" [ref=e224]
+          - generic [ref=e226]: LIGO
+        - generic [ref=e227]:
+          - heading "LIGO — Ondas Gravitacionales" [level=3] [ref=e228]
+          - paragraph [ref=e229]: Un instrumento que "escucha" las vibraciones del espacio-tiempo. Detectó por primera vez las ondas gravitacionales en 2015. Premio Nobel 2017.
+          - generic [ref=e230]:
+            - generic [ref=e231]: "2015"
+            - generic [ref=e232]: Láser
+            - generic [ref=e233]: Nobel
+          - generic [ref=e234]: Explorar tema
+      - 'link "Radiotelescopio observando el cielo nocturno Radiotelescopios Radiotelescopios Antenas gigantes que captan ondas de radio del cosmos. Permiten ver cosas que los telescopios ópticos no pueden: pulsares, cuásares y la radiación de fondo. Radioondas Arecibo FAST Explorar tema" [ref=e236] [cursor=pointer]':
+        - /url: radiotelescopios.html
+        - generic [ref=e237]:
+          - img "Radiotelescopio observando el cielo nocturno" [ref=e238]
+          - generic [ref=e240]: Radiotelescopios
+        - generic [ref=e241]:
+          - heading "Radiotelescopios" [level=3] [ref=e242]
+          - paragraph [ref=e243]: "Antenas gigantes que captan ondas de radio del cosmos. Permiten ver cosas que los telescopios ópticos no pueden: pulsares, cuásares y la radiación de fondo."
+          - generic [ref=e244]:
+            - generic [ref=e245]: Radioondas
+            - generic [ref=e246]: Arecibo
+            - generic [ref=e247]: FAST
+          - generic [ref=e248]: Explorar tema
+  - contentinfo [ref=e250]:
+    - generic [ref=e252]:
+      - generic [ref=e253]:
+        - generic [ref=e255]: Cs. Naturales
+        - generic [ref=e256]: 1° Año
+      - generic [ref=e257]:
+        - link "Inicio" [ref=e258] [cursor=pointer]:
+          - /url: ../../../inicio.html
+        - link "Física" [ref=e259] [cursor=pointer]:
+          - /url: ../index.html
+        - link "Sistema Solar" [ref=e260] [cursor=pointer]:
+          - /url: index.html
+        - generic [ref=e261]: Prof. Pereyra, Javier

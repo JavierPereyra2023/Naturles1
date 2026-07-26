@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Seres Vivos podcast">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <radialGradient id="glow8" cx="0.5" cy="0.5">
+      <stop offset="0" stop-color="#DC2626" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#DC2626" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots8" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="1" fill="rgba(255,255,255,0.04)"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg8)"/>
+  <rect width="600" height="400" fill="url(#dots8)"/>
+  <rect width="600" height="400" fill="url(#glow8)"/>
+  <!-- Badge episodio -->
+  <g transform="translate(28, 28)">
+    <rect x="0" y="0" width="76" height="24" rx="2" fill="#DC2626" opacity="0.15"/>
+    <text x="38" y="16" text-anchor="middle" fill="#DC2626" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="2">EP 08</text>
+  </g>
+  <!-- Decoration bottom -->
+  <g transform="translate(28, 360)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#DC2626" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <g transform="translate(300, 200)">
+    <text x="0" y="-140" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="28" font-weight="800">Seres Vivos: Unidad y Diversidad</text>
+
+    <!-- Célula -->
+    <g transform="translate(0, 0)">
+      <!-- Membrana -->
+      <ellipse cx="0" cy="0" rx="100" ry="80" fill="rgba(220,38,38,0.06)" stroke="#DC2626" stroke-width="2.5"/>
+      <!-- Núcleo -->
+      <circle cx="-10" cy="-10" r="28" fill="rgba(220,38,38,0.25)" stroke="#DC2626" stroke-width="2"/>
+      <circle cx="-10" cy="-10" r="14" fill="#DC2626" opacity="0.6"/>
+      <!-- Mitocondria -->
+      <ellipse cx="40" cy="20" rx="20" ry="10" fill="rgba(220,38,38,0.3)" stroke="#DC2626" stroke-width="1.5" transform="rotate(30 40 20)"/>
+      <!-- Orgánulos -->
+      <circle cx="30" cy="-30" r="5" fill="#DC2626" opacity="0.6"/>
+      <circle cx="-40" cy="20" r="4" fill="#DC2626" opacity="0.5"/>
+      <circle cx="50" cy="-30" r="3" fill="#DC2626" opacity="0.5"/>
+    </g>
+  </g>
+</svg>
