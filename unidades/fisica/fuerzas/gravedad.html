@@ -35,7 +35,7 @@
     .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
     .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
     .hero-figure { position:relative; height:340px; overflow:hidden; border:1px solid rgba(59,130,246,0.2); background:#0E1410; }
-    .hero-figure object { width:100%; height:100%; pointer-events:none; }
+    .hero-figure img { width:100%; height:100%; object-fit:cover; pointer-events:none; }
     .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.visible { opacity:1; transform:translateY(0); }
   </style>
@@ -92,7 +92,7 @@
 <!-- HERO -->
 <section class="relative pt-20 pb-10 md:pt-24 md:pb-12 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 opacity-25" style="z-index: 0;">
-    <img src="../../../assets/fisica/fuerzas/svg-gravedad.svg" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(2px);">
+    <img src="../../../assets/fisica/fuerzas/gravedad.png" alt="" style="width:100%;height:100%;object-fit:cover;filter:blur(2px);">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black/80 via-natura-black/30 to-natura-black" style="z-index: 1;"></div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
@@ -111,7 +111,7 @@
 <section class="py-6 md:py-8 bg-natura-dark">
   <div class="max-w-4xl mx-auto px-4 md:px-6">
     <div class="hero-figure">
-      <object data="../../../assets/fisica/fuerzas/svg-gravedad.svg" type="image/svg+xml"></object>
+      <img src="../../../assets/fisica/fuerzas/gravedad.png" alt="Tierra y Luna en órbita con un campo gravitatorio">
     </div>
     <p class="text-[11px] text-natura-silverDark mt-2 italic text-center" style="font-family: 'Inter', sans-serif;">Diagrama: manzana cayendo bajo la atracción de la Tierra, vector de fuerza apuntando al centro del planeta.</p>
   </div>

@@ -96,6 +96,50 @@
     }
     .toc-link:hover, .toc-link.active { color: #f3f7f4; border-left-color: rgba(59,130,246,.35); background: rgba(59,130,246,.06); transform: translateX(2px); }
     .toc-link:hover::before, .toc-link.active::before { transform: scaleY(1); }
+    .wind-model-shell {
+      position: relative; overflow: hidden; border: 1px solid rgba(59,130,246,.25);
+      border-radius: 10px; background: #0d1116;
+      box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.025) inset;
+    }
+    .wind-model-frame { display: block; width: 100%; height: 660px; border: 0; background: #0d1116; }
+    .wind-model-actions {
+      position: absolute; z-index: 10; top: 118px; right: 10px;
+      display: flex; gap: 7px; font-family: 'Inter', sans-serif;
+    }
+    .wind-model-button {
+      display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.18); border-radius: 5px;
+      background: rgba(8,12,10,.82); color: #f3f7f4; backdrop-filter: blur(12px);
+      font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .wind-model-button:hover { border-color: rgba(59,130,246,.7); background: rgba(16,31,48,.92); }
+    .wind-model-back { display: none; }
+    .wind-model-shell:fullscreen {
+      width: 100vw; height: 100vh; border: 0; border-radius: 0; background: #0d1116;
+    }
+    .wind-model-shell:fullscreen .wind-model-frame { width: 100%; height: 100%; }
+    .wind-model-shell:fullscreen .wind-model-enter { display: none; }
+    .wind-model-shell:fullscreen .wind-model-back { display: inline-flex; }
+    @media (max-width: 767px) {
+      .wind-model-frame { height: 690px; }
+    }
+    @media (max-width: 420px) {
+      .wind-model-frame { height: 680px; }
+    }
+    @media (orientation: landscape) and (max-height: 620px) {
+      .wind-model-frame { height: 560px; }
+    }
+    @media (min-width: 1024px) {
+      #simulador-3d {
+        width: min(860px, calc(100vw - 440px));
+        max-width: none;
+      }
+      .wind-model-shell { width: 100%; }
+      .wind-model-frame {
+        height: clamp(500px, calc((100vw - 440px) * .62), 580px);
+      }
+    }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
@@ -168,6 +212,7 @@
       <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
       <nav class="space-y-0.5">
           <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#simulador-3d" class="toc-link" data-toc>Modelo 3D</a>
           <a href="#usos" class="toc-link" data-toc>02. Usos</a>
           <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
           <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
@@ -189,6 +234,43 @@
     <p class="text-lg leading-relaxed text-natura-silver mb-4">La cantidad de energía que puede extraerse del viento depende de la velocidad del viento elevada al cubo (<strong class="text-white">P ∝ v³</strong>): si la velocidad del viento se duplica, la potencia disponible se multiplica por ocho. Por eso la ubicación de los parques eólicos es crucial: una pequeña diferencia en la velocidad media del viento tiene un impacto enorme en la producción.</p>
     <p class="text-lg leading-relaxed text-natura-silver mb-4">Los aerogeneradores modernos son máquinas impresionantes: sus torres miden entre 80 y 120 metros de altura (como un edificio de 30 pisos) y el diámetro de sus aspas alcanza los 50 a 100 metros. Cada turbina puede generar entre 2 y 5 MW de potencia, suficiente para abastecer a cientos de hogares.</p>
     <div class="pull-quote">"Si la velocidad del viento se duplica, la potencia disponible en el aerogenerador se multiplica por ocho."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="simulador-3d">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black flex items-center justify-center rounded-sm" aria-hidden="true">
+        <span class="iconify" data-icon="lucide:wind" data-width="17"></span>
+      </span>
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-energy mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Parque eólico en 3D</h2>
+      </div>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-5">Explorá cómo el viento mueve los aerogeneradores y cómo la electricidad viaja desde el parque hasta el pueblo. Cambiá la velocidad del viento, el ciclo día/noche y la cámara para observar cada parte del sistema.</p>
+    <p class="mb-5 border-l-2 border-natura-energy/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+      <strong class="text-natura-energy">Referencia argentina:</strong> Parque Eólico Los Teros, Azul, provincia de Buenos Aires. El paisaje 3D es una recreación educativa del entorno rural y no una reproducción cartográfica exacta.
+    </p>
+    <div class="wind-model-shell" id="windModelShell">
+      <div class="wind-model-actions">
+        <button type="button" class="wind-model-button wind-model-enter" id="windModelEnter">
+          <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
+          Pantalla completa
+        </button>
+        <button type="button" class="wind-model-button wind-model-back" id="windModelBack">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          Volver a la página
+        </button>
+      </div>
+      <iframe
+        class="wind-model-frame"
+        src="../../../modelo3D_eolico/parque-eolico-3d.html"
+        title="Modelo 3D interactivo de un parque eólico"
+        loading="lazy"
+        allow="fullscreen"
+      ></iframe>
+    </div>
   </section>
 
   <div class="magazine-divider"><span>&#9670;</span></div>
@@ -414,6 +496,34 @@
   document.addEventListener('keydown',function(e){
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
     if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script>
+(function(){
+  var shell = document.getElementById('windModelShell');
+  var enter = document.getElementById('windModelEnter');
+  var back = document.getElementById('windModelBack');
+  var frame = shell ? shell.querySelector('.wind-model-frame') : null;
+  if(!shell || !enter || !back) return;
+
+  function syncCompactModel(){
+    if(!frame || !frame.contentDocument) return;
+    frame.contentDocument.documentElement.classList.toggle('natura-model-compact', window.innerWidth < 768);
+  }
+
+  if(frame) frame.addEventListener('load', syncCompactModel);
+  window.addEventListener('resize', syncCompactModel, {passive:true});
+  syncCompactModel();
+
+  enter.addEventListener('click', function(){
+    if(shell.requestFullscreen) shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+  });
+
+  back.addEventListener('click', function(){
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
 })();
 </script>
