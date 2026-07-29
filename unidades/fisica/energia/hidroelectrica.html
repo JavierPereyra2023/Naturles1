@@ -96,6 +96,49 @@
     }
     .toc-link:hover, .toc-link.active { color: #f3f7f4; border-left-color: rgba(59,130,246,.35); background: rgba(59,130,246,.06); transform: translateX(2px); }
     .toc-link:hover::before, .toc-link.active::before { transform: scaleY(1); }
+    .hydro-model-shell {
+      position: relative; overflow: hidden; border: 1px solid rgba(59,130,246,.25);
+      border-radius: 10px; background: #0d1620;
+      box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.025) inset;
+    }
+    .hydro-model-frame { display: block; width: 100%; height: 660px; border: 0; background: #0d1620; }
+    .hydro-model-actions {
+      position: absolute; z-index: 10; top: 18px; right: 18px;
+      display: flex; gap: 7px; font-family: 'Inter', sans-serif;
+    }
+    .hydro-model-button {
+      display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
+      background: rgba(8,18,28,.82); color: #f3f7f4; backdrop-filter: blur(12px);
+      font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .hydro-model-button:hover { border-color: rgba(59,130,246,.75); background: rgba(16,31,48,.94); }
+    .hydro-model-back { display: none; }
+    .hydro-model-shell:fullscreen {
+      width: 100vw; height: 100vh; border: 0; border-radius: 0; background: #0d1620;
+    }
+    .hydro-model-shell:fullscreen .hydro-model-frame { width: 100%; height: 100%; }
+    .hydro-model-shell:fullscreen .hydro-model-enter { display: none; }
+    .hydro-model-shell:fullscreen .hydro-model-back { display: inline-flex; }
+    @media (max-width: 767px) {
+      .hydro-model-frame { height: 720px; }
+      .hydro-model-actions { top: 64px; right: 10px; }
+      .hydro-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+    }
+    @media (orientation: landscape) and (max-height: 620px) {
+      .hydro-model-frame { height: 560px; }
+    }
+    @media (min-width: 1024px) {
+      #simulador-3d {
+        width: min(860px, calc(100vw - 440px));
+        max-width: none;
+      }
+      .hydro-model-shell { width: 100%; }
+      .hydro-model-frame {
+        height: clamp(500px, calc((100vw - 440px) * .62), 580px);
+      }
+    }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
@@ -168,6 +211,7 @@
       <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
       <nav class="space-y-0.5">
           <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#simulador-3d" class="toc-link" data-toc>Modelo 3D</a>
           <a href="#usos" class="toc-link" data-toc>02. Usos</a>
           <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
           <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
@@ -189,6 +233,43 @@
     <p class="text-lg leading-relaxed text-natura-silver mb-4">Existen tres tipos principales de centrales hidroeléctricas. Las <strong class="text-white">centrales de embalse</strong> almacenan grandes volúmenes de agua detrás de una represa y la liberan según la demanda, lo que permite regular la generación. Las <strong class="text-white">centrales de pasada</strong> (o filo de agua) no tienen un gran reservorio y generan según el caudal del río, sin posibilidad de almacenamiento significativo. Las <strong class="text-white">centrales de bombeo</strong> funcionan como una "batería gigante": bombean agua a un embalse superior cuando hay excedente de energía y la liberan cuando se necesita generar.</p>
     <p class="text-lg leading-relaxed text-natura-silver mb-4">La cantidad de energía que puede generar una central hidroeléctrica depende de dos factores: el <strong class="text-white">caudal</strong> (volumen de agua por segundo) y el <strong class="text-white">salto</strong> (altura desde la que cae el agua). A mayor caudal y mayor altura, más potencia disponible. Por eso las mejores ubicaciones son en valles de montaña con ríos caudalosos.</p>
     <div class="pull-quote">"La energía hidroeléctrica es la tecnología renovable más antigua, madura y eficiente, con rendimientos de hasta 90%."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="simulador-3d">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black flex items-center justify-center rounded-sm" aria-hidden="true">
+        <span class="iconify" data-icon="lucide:waves" data-width="17"></span>
+      </span>
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-energy mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Represa hidroeléctrica en 3D</h2>
+      </div>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-5">Explorá una central hidroeléctrica de embalse completa. Abrí y cerrá las compuertas para observar cómo cambian el caudal, la potencia generada y el movimiento de la turbina; recorré la presa, la casa de máquinas, el río y el pueblo desde distintos ángulos.</p>
+    <p class="mb-5 border-l-2 border-natura-energy/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+      <strong class="text-natura-energy">Modelo educativo:</strong> la escena representa el funcionamiento general de una represa y permite relacionar la energía potencial del agua con su transformación en energía eléctrica.
+    </p>
+    <div class="hydro-model-shell" id="hydroModelShell">
+      <div class="hydro-model-actions">
+        <button type="button" class="hydro-model-button hydro-model-enter" id="hydroModelEnter">
+          <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
+          Pantalla completa
+        </button>
+        <button type="button" class="hydro-model-button hydro-model-back" id="hydroModelBack">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          Volver a la página
+        </button>
+      </div>
+      <iframe
+        class="hydro-model-frame"
+        src="../../../modelo3D_represa/Represa%20Hidroelectrica%203D%20(standalone).html?v=20260729b"
+        title="Modelo 3D interactivo de una represa hidroeléctrica"
+        loading="lazy"
+        allow="fullscreen"
+      ></iframe>
+    </div>
   </section>
 
   <div class="magazine-divider"><span>&#9670;</span></div>
@@ -413,6 +494,24 @@
   document.addEventListener('keydown',function(e){
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
     if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script>
+(function(){
+  var shell = document.getElementById('hydroModelShell');
+  var enter = document.getElementById('hydroModelEnter');
+  var back = document.getElementById('hydroModelBack');
+  if(!shell || !enter || !back) return;
+
+  enter.addEventListener('click', function(){
+    if(shell.requestFullscreen) shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+  });
+
+  back.addEventListener('click', function(){
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
 })();
 </script>

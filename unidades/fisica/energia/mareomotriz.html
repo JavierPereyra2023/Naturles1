@@ -57,6 +57,49 @@
     .vent-card li::before { position: absolute; left: 0; }
     .vent-card.pros li::before { content: '+'; color: #22C55E; font-weight: 700; }
     .vent-card.cons li::before { content: '-'; color: #EF4444; font-weight: 700; }
+    .tidal-model-shell {
+      position: relative; overflow: hidden; border: 1px solid rgba(59,130,246,.25);
+      border-radius: 10px; background: #17272d;
+      box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.025) inset;
+    }
+    .tidal-model-frame { display: block; width: 100%; height: 620px; border: 0; background: #17272d; }
+    .tidal-model-actions {
+      position: absolute; z-index: 10; top: 70px; right: 12px;
+      display: flex; gap: 7px; font-family: 'Inter', sans-serif;
+    }
+    .tidal-model-button {
+      display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
+      background: rgba(8,18,28,.84); color: #f3f7f4; backdrop-filter: blur(12px);
+      font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .tidal-model-button:hover { border-color: rgba(59,130,246,.75); background: rgba(16,42,52,.94); }
+    .tidal-model-back { display: none; }
+    .tidal-model-shell:fullscreen {
+      width: 100vw; height: 100vh; border: 0; border-radius: 0; background: #17272d;
+    }
+    .tidal-model-shell:fullscreen .tidal-model-frame { width: 100%; height: 100%; }
+    .tidal-model-shell:fullscreen .tidal-model-enter { display: none; }
+    .tidal-model-shell:fullscreen .tidal-model-back { display: inline-flex; }
+    @media (max-width: 767px) {
+      .tidal-model-frame { height: 660px; }
+      .tidal-model-actions { top: 62px; right: 10px; }
+      .tidal-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+    }
+    @media (orientation: landscape) and (max-height: 620px) {
+      .tidal-model-frame { height: 560px; }
+    }
+    @media (min-width: 1024px) {
+      #simulador-3d {
+        width: min(860px, calc(100vw - 440px));
+        max-width: none;
+      }
+      .tidal-model-shell { width: 100%; }
+      .tidal-model-frame {
+        height: clamp(500px, calc((100vw - 440px) * .62), 580px);
+      }
+    }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
@@ -131,6 +174,7 @@
       <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
       <nav class="space-y-0.5">
           <a href="#que-es" class="toc-link active" data-toc>01. ¿Qué es?</a>
+          <a href="#simulador-3d" class="toc-link" data-toc>Modelo 3D</a>
           <a href="#usos" class="toc-link" data-toc>02. Usos</a>
           <a href="#rendimiento" class="toc-link" data-toc>03. Rendimiento</a>
           <a href="#lugar-geografico" class="toc-link" data-toc>04. Lugar en Argentina</a>
@@ -153,6 +197,43 @@
     <p class="text-lg leading-relaxed text-natura-silver mb-4">Existen varios tipos de aprovechamiento mareomotriz. Las <strong class="text-white">presas de marea (tidal barrage)</strong> funcionan como represas que atrapan agua en un estuario durante la pleamar y la liberan durante la bajamar, haciendo pasar el agua por turbinas. Los <strong class="text-white">generadores de corriente de marea (tidal stream)</strong> son turbinas submarinas similares a aerogeneradores que aprovechan las corrientes generadas por las mareas. La <strong class="text-white">energía undimotriz</strong> captura la energía de las olas superficiales, y la <strong class="text-white">maremotérmica</strong> aprovecha la diferencia de temperatura entre la superficie y las profundidades del océano.</p>
     <p class="text-lg leading-relaxed text-natura-silver mb-4">Un factor clave es la <strong class="text-white">amplitud de marea</strong>, es decir, la diferencia de altura entre la pleamar (marea alta) y la bajamar (marea baja). Cuanto mayor es la amplitud, mayor es el potencial energético. Las mejores ubicaciones del mundo tienen amplitudes superiores a los 5 metros.</p>
     <div class="pull-quote">"La energía mareomotriz es la única renovable cuyos ciclos pueden predecirse con exactitud con siglos de anticipación."</div>
+  </section>
+
+  <div class="magazine-divider"><span>&#9670;</span></div>
+
+  <section class="animate-fadeInUp delay-100" id="simulador-3d">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black flex items-center justify-center rounded-sm" aria-hidden="true">
+        <span class="iconify" data-icon="lucide:waves" data-width="17"></span>
+      </span>
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-energy mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Parque mareomotriz en 3D</h2>
+      </div>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-5">Recorré un parque de turbinas submarinas y seguí el circuito de la electricidad desde las corrientes de marea hasta la población costera. Podés observar las turbinas, la red eléctrica, el paisaje y los animales desde diferentes puntos de vista.</p>
+    <p class="mb-5 border-l-2 border-natura-energy/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+      <strong class="text-natura-energy">Modelo educativo:</strong> la escena representa un sistema de generadores de corriente de marea. Es una recreación conceptual y no corresponde a una instalación real de la costa argentina.
+    </p>
+    <div class="tidal-model-shell" id="tidalModelShell">
+      <div class="tidal-model-actions">
+        <button type="button" class="tidal-model-button tidal-model-enter" id="tidalModelEnter">
+          <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
+          Pantalla completa
+        </button>
+        <button type="button" class="tidal-model-button tidal-model-back" id="tidalModelBack">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          Volver a la página
+        </button>
+      </div>
+      <iframe
+        class="tidal-model-frame"
+        src="../../../modelo3D_mareomotriz/maqueta-mareomotriz-3d-v2.html?v=20260729"
+        title="Modelo 3D interactivo de un parque mareomotriz"
+        loading="lazy"
+        allow="fullscreen"
+      ></iframe>
+    </div>
   </section>
 
   <div class="magazine-divider"><span>&#9670;</span></div>
@@ -371,6 +452,24 @@
   document.addEventListener('keydown',function(e){
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
     if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script>
+(function(){
+  var shell = document.getElementById('tidalModelShell');
+  var enter = document.getElementById('tidalModelEnter');
+  var back = document.getElementById('tidalModelBack');
+  if(!shell || !enter || !back) return;
+
+  enter.addEventListener('click', function(){
+    if(shell.requestFullscreen) shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+  });
+
+  back.addEventListener('click', function(){
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
 })();
 </script>
