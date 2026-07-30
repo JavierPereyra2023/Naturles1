@@ -354,3 +354,53 @@ Pipeline de generación: D:\naturales_1\podcast\gen_podcast_audios.py (guion com
 - El SVG de la sub-unidad de Fuerzas en inicio.html y unidades/fisica/index.html se embebe vía <object> en vez de <img>. Verificado que se renderiza bien en pruebas locales, pero conviene confirmar visualmente en el navegador del docente.
 - La sección de Fuerzas no tiene entrada propia en el "Mapa de navegación" de inicio si la hubiera — actualmente solo aparece en el nav como sub-item y como card destacado.
 - Si en algún momento se quiere extender el podcast, los scripts gen_podcast_audios.py y egen_audios_largos.py son reutilizables: solo hay que agregar entradas al dict GUIAS o EXTENSIONES y volver a correr.
+
+### Maqueta 3D de energía mareomotriz — rediseño del entorno marino (2026-07-29)
+
+Archivo: `modelo3D_mareomotriz/maqueta-mareomotriz-3d-v2.html`. Problema original: la escena parecía "una pileta" (fondo plano a y=-6.2, costa como caja recta de bordes verticales, plano de agua rectangular de 124x100 con bordes visibles).
+
+Qué se cambió:
+
+- **Terreno procedural**: funciones `shoreLine(x)` (línea de costa curva, con amplitud modulada para que quede recta frente al pueblo) y `ground(x,z)` (meseta continental → playa en pendiente → plataforma → fondo profundo hasta -11). Plano de 240x230 con 150x130 segmentos y **colores por vértice** (pasto → arena → arena mojada → fondo profundo). Se eliminó la caja de costa.
+- **Mar abierto**: plano animado de 210x190 + plano `openSea` de 520x520 que sigue el nivel de marea, para que no se vea ningún borde del agua. Niebla a 0.0072.
+- **Marea visible**: amplitud subida de ±0.08 a ±0.55; la línea de agua se desplaza sobre la playa (`tideShift = seaLevel / BEACH_SLOPE`) y la espuma la sigue.
+- **Costa**: rocas dispersas, 3 islotes, líneas de rompiente (`surfLines`) que siguen la curva de la costa, espuma con textura de canvas generada por `makeFoamTexture()` (antes eran cuadrados blancos con borde duro), y olas (`waveBands`) refractadas que se desvanecen al llegar a la orilla.
+- **Turbinas**: cada una se ancla al lecho con monopilote de altura variable y el rotor queda a profundidad fija (~2.9 m). Se agregaron **boyas de señalización** amarillas en superficie. Agua a opacity .38 para que se vean.
+- **Vista submarina**: el botón "Turbinas submarinas" y la parada 2 del recorrido ahora ponen la cámara **bajo el agua**; `animate()` detecta `camera.position.y < seaLevel` y cambia fondo/niebla a tonos verdeazulados.
+- **Objetos apoyados en el terreno**: casas, árboles, vacas, postes, torres, transformador y subestación ahora usan `ground(x,z)` en vez de alturas fijas.
+- **Circuito eléctrico corregido**: se eliminó el punto fantasma en (0,·,8); el cable submarino ahora sale del colector, cruza la playa como tubo grueso y trepa a un **tablero de baja tensión** nuevo del lado del mar; de ahí puentea al transformador y sube por las boquillas a la línea de alta tensión (antes las boquillas quedaban al aire). `gridPath` y `distributionPath` se recalcularon para que los pulsos viajen **sobre un conductor real** y no por el aire entre los dos cables.
+- Las vacas tienen ojos (esclerótica + pupila + pestaña).
+
+`unidades/fisica/energia/mareomotriz.html`: cache-buster del iframe a `?v=20260729b`.
+
+Ajustes posteriores del mismo día:
+
+- **Pulsos en ambos conductores**: `buildGridPath(side)` y `buildDistributionPath(side)` generan la ruta de los cardiogramas para el conductor izquierdo y el derecho, con las mismas constantes que usan los cables dibujados (torres en `x ± 1.5`, flecha del vano en `y - 0.85`, punto medio del puente en `29 ± 1.425`). Antes viajaban por una curva central que no coincidía con ningún cable y parecían flotar.
+- **Cielo nocturno**: las estrellas existían pero estaban a 19-47° de elevación y `controls.maxPolarAngle = 0.62π` no permite levantar tanto la cámara. Se bajaron a 5-27° (y=10..74, radio 104..150), 440 en vez de 320, tamaño 2.9 px y `fog:false` (la niebla las borraba). Sol y luna también con `fog:false`.
+- **Atardecer**: el sol se desvanecía en pleno cielo (`opacity=(sun.y+6)/9`). Ahora se mantiene opaco hasta hundirse tras el horizonte del mar (`openSea` lo tapa) y sólo se atenúa en los últimos metros; además enrojece y crece con `lowSun`, tiene halo (sprite aditivo con textura de canvas, `makeGlowTexture()`) y **reflejo sobre el agua** (`sunGlitter`, plano alargado orientado hacia el azimut del sol desde la cámara, sólo visible con el sol bajo y no bajo el agua). La luna tiene su propio halo.
+
+### Atlas 3D del corazón — integración y corrección de rótulos (2026-07-29)
+
+Archivos: `modelado3D_corazon/atlas-corazon-3d-descargable.html` y `unidades/biologia/cuerpo-humano/circulacion.html`.
+
+**Integración**: sección nueva "El corazón en 3D" en `circulacion.html`, entre *Los 3 Componentes* y *Doble Circuito*, con iframe, botón de pantalla completa y entrada propia en el índice lateral. Mismo patrón que usa mareomotriz (`.heart-model-shell` / `#heartModelShell`). Cache-buster `?v=20260729c`.
+
+**Nota sobre el archivo del modelo**: la primera versión de la carpeta contenía `atlas-corazon-3d.html`, que cargaba `assets/heart.glb` — un archivo que nunca estuvo ahí, por lo que la página solo mostraba el cartel "Tu dispositivo no pudo iniciar la vista 3D". La versión que funciona es la `-descargable`, que trae el GLB embebido como data URI base64 (un solo mesh, `human_heart.1`, 8242 vértices, material `KHR_materials_pbrSpecularGlossiness` con 4 texturas de 2048²).
+
+Qué se cambió en el modelo:
+
+- **Iluminación**: sumaba intensidad 7.6 (hemi 2.15 + key 3.2 + rim 1.15 + point 1.1) con exposición 1.05, y el tejido salía fluorescente (naranja neón). Ahora hemi 0.80, key 1.45, rim 0.50, point 0.38 y exposición 0.92. Los rojos quedan anatómicos y se distinguen las coronarias.
+- **Sombras desactivadas**: `shadowMap` estaba activo con PCFSoft y `castShadow`/`receiveShadow` en la malla, pero no hay ningún plano receptor — era un pase de sombras por cuadro sin efecto visible.
+- **Rótulos, reescritos**. Los tres defectos del original: (1) `anatomicalRegion()` recalculaba `new Box3().setFromObject(heart)` recorriendo la malla completa **en cada pointermove**; (2) usaba el bounding box del mundo, que el latido escala cuadro a cuadro, corriendo los límites; (3) solo miraba x e y, así que desde la cara posterior devolvía nombres de la cara anterior. Además había dos esferas invisibles de radio 19% que interceptaban el raycast y secuestraban el nombre en una zona amplia (eliminadas).
+- **Cómo se resuelve ahora**: los límites se miden **una sola vez en el espacio local** del modelo (`measureLocalBounds()`), y el punto tocado se convierte con `heart.worldToLocal()`. El tipo de estructura lo da el **color de la textura difusa** en el UV del impacto (`sampleTexture()`, ImageData de 1024² ≈ 4 MB): azul = venas cavas, granate = arteria pulmonar y vasos coronarios, asalmonado = pared auricular, rojo intenso = aorta y miocardio. El lado y la altura los resuelven `nx`/`ny`/`nz`. Resultado: el rótulo es **independiente del ángulo de cámara**.
+- **Detalle de calibración que conviene recordar**: con `flipY === false`, la fila de la textura es `v` **directo, sin invertir**. Verificado contra el píxel realmente renderizado (`gl.readPixels` tras un `render`): 99% de coincidencia de tono con `v`, contra 81% con `1 - v`. Con la convención equivocada la vena cava salía rotulada "Arteria aorta". El azul de las cavas aparece siempre en `ny > 0.70`; un vaso azul por debajo es una vena coronaria.
+- **Verificación**: píxeles azules en pantalla rotulados como vena cava → 27/27 en vista anterior, 18/19 en posterior.
+- **Retardo por reposo** (idea del profesor): el nombre aparece cuando el puntero se queda quieto `TWEAK_DEFAULTS.labelDelay` ms (500 por defecto, regulable) en vez de desfilar durante el barrido. Al tocar con el dedo sale al instante, porque la elección ya fue deliberada.
+- **Punto de color en el rótulo**: azul si por la estructura circula sangre sin oxígeno, rojo si la lleva con oxígeno. Refuerza que la *arteria* pulmonar lleva sangre sin oxígeno y las *venas* pulmonares con oxígeno.
+- **Código muerto eliminado**: `views` quedó (se usa `views.front` para la cámara inicial) pero se borraron `buildChambers()`, `chamberMaterial()`, `buildAnatomyHotspots()`, `chamberGroup`, `chamberMeshes`, `chambersVisible`, `activeView` y `originalMaterials` (se llenaba y nunca se leía). El ancho fijo de 180 px para posicionar el rótulo se reemplazó por `offsetWidth` medido.
+
+### Pendiente menor (corazón)
+
+- El CSS del archivo trae mucho estilo sin uso (topbar, side-panel, info-panel, view-list, mode-card, switch, route, medical-note, mobile-tabs, stage-top, heartbeat-status, flow-control): el HTML quedó reducido al *immersive shell*. No molesta, pero se puede podar.
+- "Venas pulmonares" solo se rotula en la cara posterior con `nz < 0.18`; es correcto cuando aparece, pero es un rótulo esquivo.
+- El latido escala el modelo completo, incluidas la aorta y las cavas, que no deberían cambiar de tamaño. Con un solo mesh no se puede escalar solo los ventrículos; `systoleStrength` es 0.022, así que casi no se nota.

@@ -62,6 +62,37 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+.heart-model-shell {
+  position: relative; overflow: hidden; border: 1px solid rgba(220,38,38,.25);
+  border-radius: 10px; background: #12161c;
+  box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.025) inset;
+}
+.heart-model-frame { display: block; width: 100%; height: 620px; border: 0; background: #12161c; }
+.heart-model-actions {
+  position: absolute; z-index: 10; top: 12px; right: 12px;
+  display: flex; gap: 7px; font-family: 'Inter', sans-serif;
+}
+.heart-model-button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
+  background: rgba(10,14,20,.84); color: #f3f7f4; backdrop-filter: blur(12px);
+  font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; transition: border-color .2s, background .2s;
+}
+.heart-model-button:hover { border-color: rgba(220,38,38,.75); background: rgba(40,16,20,.94); }
+.heart-model-back { display: none; }
+.heart-model-shell:fullscreen { width: 100vw; height: 100vh; border: 0; border-radius: 0; background: #12161c; }
+.heart-model-shell:fullscreen .heart-model-frame { width: 100%; height: 100%; }
+.heart-model-shell:fullscreen .heart-model-enter { display: none; }
+.heart-model-shell:fullscreen .heart-model-back { display: inline-flex; }
+@media (max-width: 767px) {
+  .heart-model-frame { height: 560px; }
+  .heart-model-actions { top: 10px; right: 10px; }
+  .heart-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+}
+@media (orientation: landscape) and (max-height: 620px) {
+  .heart-model-frame { height: 480px; }
+}
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   </head>
@@ -157,6 +188,7 @@
       <nav class="space-y-0.5">
           <a href="#funcin-principal" class="toc-link active" data-toc>01. Función Principal</a>
           <a href="#los-3-componentes" class="toc-link" data-toc>02. Los 3 Componentes</a>
+          <a href="#atlas-3d" class="toc-link" data-toc>&#9670;&nbsp; Corazón en 3D</a>
           <a href="#doble-circuito" class="toc-link" data-toc>03. Doble Circuito</a>
           <a href="#el-recorrido-de-la-sangre" class="toc-link" data-toc>04. El Recorrido de la Sangre</a>
           <a href="#que-transporta-la-sangre" class="toc-link" data-toc>05. Qué Transporta la Sangre</a>
@@ -237,6 +269,41 @@
             <span class="text-[11px] uppercase tracking-wider text-natura-bio/60">~5 litros en un adulto</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- MODELO 3D: Atlas del corazón -->
+    <section class="animate-fadeInUp delay-100" id="atlas-3d">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="iconify text-natura-bio" data-icon="lucide:box" data-width="24"></span>
+        <div class="accent-line"></div>
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-bio mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+          <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">El corazón en 3D</h2>
+        </div>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5">Girá el corazón con el dedo o el mouse para verlo desde cualquier ángulo. Apoyá el puntero un instante sobre una zona (o tocala) y aparecerá su nombre. El punto de color del rótulo indica qué sangre circula por ahí: <strong class="text-natura-silverLight">roja</strong> si lleva oxígeno, <strong class="text-natura-silverLight">azul</strong> si no lo lleva.</p>
+      <p class="mb-5 border-l-2 border-natura-bio/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+        <strong class="text-natura-bio">Para tener en cuenta:</strong> fijate que las <em>venas</em> pulmonares llevan sangre con oxígeno y la <em>arteria</em> pulmonar la lleva sin oxígeno. Los vasos no se clasifican por el oxígeno que transportan, sino por la dirección: una arteria sale del corazón y una vena llega a él. Los nombres del modelo son orientativos y señalan la región, no un punto exacto.
+      </p>
+      <div class="heart-model-shell" id="heartModelShell">
+        <div class="heart-model-actions">
+          <button type="button" class="heart-model-button heart-model-enter" id="heartModelEnter">
+            <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
+            Pantalla completa
+          </button>
+          <button type="button" class="heart-model-button heart-model-back" id="heartModelBack">
+            <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+            Volver a la página
+          </button>
+        </div>
+        <iframe
+          class="heart-model-frame"
+          src="../../../modelado3D_corazon/atlas-corazon-3d-descargable.html?v=20260729c"
+          title="Modelo 3D interactivo del corazón humano"
+          loading="lazy"
+          allow="fullscreen"
+        ></iframe>
       </div>
     </section>
 
@@ -651,6 +718,24 @@
     });
   }, { threshold: 0.12 });
   els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var shell = document.getElementById('heartModelShell');
+  var enter = document.getElementById('heartModelEnter');
+  var back = document.getElementById('heartModelBack');
+  if(!shell || !enter || !back) return;
+
+  enter.addEventListener('click', function(){
+    if(shell.requestFullscreen) shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+  });
+
+  back.addEventListener('click', function(){
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+  });
 })();
 </script>
 </body>

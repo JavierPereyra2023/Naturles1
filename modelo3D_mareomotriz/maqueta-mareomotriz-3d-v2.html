@@ -203,8 +203,8 @@
     const timeIndicator = document.querySelector("#timeIndicator");
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const clamp = THREE.MathUtils.clamp;
-    let renderer, scene, camera, controls, clock, sun, hemi, water, seaWater, waterMat;
-    let sunDisc, moonDisc, stars;
+    let renderer, scene, camera, controls, clock, sun, hemi, water, seaWater, waterMat, openSea;
+    let sunDisc, moonDisc, stars, sunGlow, moonGlow, sunGlitter;
     let touring = !reducedMotion;
     let tourTime = 0;
     let lastInteraction = 0;
@@ -215,6 +215,8 @@
     const turbineRotors = [];
     const treeCanopies = [];
     const waveBands = [];
+    const surfLines = [];
+    const buoys = [];
     const powerWaves = [];
     const villageLights = [];
     const houseNightLights = [];
@@ -222,9 +224,10 @@
     const servicePaths = [];
     let powerPath, gridPath, distributionPath;
     const cameraTarget = new THREE.Vector3(0, 2, 0);
+    const underwaterTint = new THREE.Color();
     const tourStops = [
       {position:new THREE.Vector3(62,38,62),target:new THREE.Vector3(0,-1,3)},
-      {position:new THREE.Vector3(28,5,31),target:new THREE.Vector3(2,-2,8)},
+      {position:new THREE.Vector3(14,-3.1,30),target:new THREE.Vector3(0,-3.6,2)},
       {position:new THREE.Vector3(68,17,-23),target:new THREE.Vector3(42,3,-43)},
       {position:new THREE.Vector3(57,18,-24),target:new THREE.Vector3(35,2,-46)},
       {position:new THREE.Vector3(-4,8,-31),target:new THREE.Vector3(0,1.5,-46)}
@@ -256,22 +259,140 @@
       return x - Math.floor(x);
     }
 
-    function makeTerrain() {
-      const geo = new THREE.PlaneGeometry(122, 104, 70, 60);
-      const pos = geo.attributes.position;
-      for (let i=0; i<pos.count; i++) {
-        const x = pos.getX(i), y = pos.getY(i);
-        let h=-6.2+Math.sin(x*.11)*.28+Math.cos(y*.15)*.24;
-        if(y<-33) h=-2.2+(-y-33)*.2+Math.sin(x*.12)*.22;
-        pos.setZ(i, h);
+    const SHORE_BASE = -30;
+    const BEACH_SLOPE = 1.63/7;
+    function shoreLine(x) {
+      const settled=Math.exp(-Math.pow((x-38)/28,2));
+      const wildness=1-.74*settled;
+      return SHORE_BASE + wildness*(
+        Math.sin(x*.072)*3.6
+        + Math.cos(x*.039+1.7)*2.7
+        + Math.sin(x*.168+.6)*.85
+      );
+    }
+    function ground(x,z) {
+      const d = z-shoreLine(x);
+      let h;
+      if (d<-7) {
+        h = 1.18+Math.sin(x*.075)*.16+Math.cos(z*.09+x*.03)*.13;
+      } else if (d<0) {
+        const k=(d+7)/7;
+        h = THREE.MathUtils.lerp(1.18,-.45,k*k*(3-2*k));
+      } else if (d<14) {
+        const k=d/14;
+        h = THREE.MathUtils.lerp(-.45,-6,k*k*(3-2*k));
+      } else {
+        h = -6-Math.min((d-14)*.13,5);
       }
+      const rough = clamp((d-1)/5,0,1);
+      h += rough*(Math.sin(x*.38+z*.21)*.16+Math.cos(x*.12-z*.19)*.26);
+      return h;
+    }
+    const groundStops = [
+      [-10.4, new THREE.Color(0x27383a)],
+      [-6.8, new THREE.Color(0x2f4640)],
+      [-4.2, new THREE.Color(0x496054)],
+      [-1.4, new THREE.Color(0x7d7d5e)],
+      [-0.15, new THREE.Color(0xb3a077)],
+      [0.72, new THREE.Color(0xd3bd91)],
+      [0.98, new THREE.Color(0xb3b473)],
+      [1.12, new THREE.Color(0x6d8a45)],
+      [1.6, new THREE.Color(0x52703c)]
+    ];
+    function groundColor(h,target) {
+      if (h<=groundStops[0][0]) return target.copy(groundStops[0][1]);
+      for (let i=1;i<groundStops.length;i++) {
+        if (h<=groundStops[i][0]) {
+          const [h0,c0]=groundStops[i-1], [h1,c1]=groundStops[i];
+          return target.copy(c0).lerp(c1,(h-h0)/(h1-h0));
+        }
+      }
+      return target.copy(groundStops[groundStops.length-1][1]);
+    }
+
+    function makeTerrain() {
+      const geo = new THREE.PlaneGeometry(240, 230, 150, 130);
+      const pos = geo.attributes.position;
+      const colors = new Float32Array(pos.count*3);
+      const tint = new THREE.Color();
+      for (let i=0; i<pos.count; i++) {
+        const x = pos.getX(i), z = -pos.getY(i);
+        const h = ground(x,z);
+        pos.setZ(i, h);
+        groundColor(h,tint);
+        const speck = .92+seeded(i*.37)*.16;
+        colors[i*3]=tint.r*speck;
+        colors[i*3+1]=tint.g*speck;
+        colors[i*3+2]=tint.b*speck;
+      }
+      geo.setAttribute("color", new THREE.BufferAttribute(colors,3));
       geo.computeVertexNormals();
-      const terrain = new THREE.Mesh(geo, mat(0x887f68, .98));
+      const terrain = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({
+        vertexColors: true, roughness: .97, metalness: 0
+      }));
       terrain.rotation.x = -Math.PI/2;
       terrain.receiveShadow = true;
       scene.add(terrain);
-      const coast=mesh(new THREE.BoxGeometry(122,2.5,18),mat(0x60784b,.96),[0,-.2,-44],[0,0,0],false);
-      coast.receiveShadow=true;
+    }
+
+    function makeShoreDetail() {
+      const rockMat = mat(0x5c5b52,.95);
+      const darkRock = mat(0x43443f,.92);
+      const addRock=(x,z,scale,y)=>{
+        const rock=mesh(new THREE.IcosahedronGeometry(1,0),seeded(x*z)>.5?rockMat:darkRock,
+          [x,y,z],[seeded(x)*3,seeded(z)*3,seeded(x+z)*3],true);
+        rock.scale.set(scale*(.8+seeded(x+1)*.6),scale*(.55+seeded(z+2)*.5),scale*(.8+seeded(x-z)*.6));
+        return rock;
+      };
+      for (let i=0;i<22;i++) {
+        const x=-88+seeded(i*3+7)*176;
+        const z=shoreLine(x)+(seeded(i*5+11)-.45)*9;
+        addRock(x,z,.7+seeded(i+40)*1.6,ground(x,z)+.25);
+      }
+      for (let i=0;i<16;i++) {
+        const x=-80+seeded(i*7+3)*160;
+        const z=-44-seeded(i*11+5)*36;
+        addRock(x,z,.4+seeded(i+70)*.7,ground(x,z)+.15);
+      }
+      [[-46,-14,3.4],[52,4,2.6],[-12,24,2.1]].forEach(([x,z,s],i)=>{
+        const islet=new THREE.Group();
+        islet.position.set(x,-1.4,z);
+        scene.add(islet);
+        for (let k=0;k<4;k++) {
+          const chunk=addTo(islet,new THREE.IcosahedronGeometry(s,0),k?darkRock:rockMat,
+            [(seeded(k+i*9)-.5)*s*1.3,seeded(k+i*4)*s*.7,(seeded(k+i*6)-.5)*s*1.3],
+            [seeded(k)*3,seeded(k+1)*3,seeded(k+2)*3]);
+          chunk.scale.set(1,.62+seeded(k+3)*.4,1);
+        }
+      });
+    }
+
+    function makeFoamTexture() {
+      const c=document.createElement("canvas");
+      c.width=c.height=128;
+      const g=c.getContext("2d");
+      for(let i=0;i<30;i++) {
+        const r=9+seeded(i+3)*24;
+        const x=r+seeded(i*2+1)*(128-2*r);
+        const y=r+seeded(i*3+5)*(128-2*r);
+        const blob=g.createRadialGradient(x,y,0,x,y,r);
+        blob.addColorStop(0,"rgba(255,255,255,.9)");
+        blob.addColorStop(.5,"rgba(255,255,255,.4)");
+        blob.addColorStop(1,"rgba(255,255,255,0)");
+        g.fillStyle=blob;
+        g.beginPath();
+        g.arc(x,y,r,0,6.2832);
+        g.fill();
+      }
+      const edge=g.createRadialGradient(64,64,22,64,64,64);
+      edge.addColorStop(0,"rgba(0,0,0,0)");
+      edge.addColorStop(1,"rgba(0,0,0,1)");
+      g.globalCompositeOperation="destination-out";
+      g.fillStyle=edge;
+      g.fillRect(0,0,128,128);
+      const texture=new THREE.CanvasTexture(c);
+      texture.colorSpace=THREE.SRGBColorSpace;
+      return texture;
     }
 
     function makeWater() {
@@ -281,29 +402,60 @@
         metalness: .08,
         transmission: .18,
         transparent: true,
-        opacity: .67,
-        clearcoat: .5
+        opacity: .38,
+        clearcoat: .5,
+        side: THREE.DoubleSide
       });
-      water = mesh(new THREE.PlaneGeometry(124, 100, 90, 70), waterMat, [0, 0, 6], [-Math.PI/2,0,0], false);
+      water = mesh(new THREE.PlaneGeometry(210, 190, 100, 80), waterMat, [0, 0, 6], [-Math.PI/2,0,0], false);
       seaWater=water;
-      const foamMat = new THREE.MeshBasicMaterial({color:0xd7f5f1, transparent:true, opacity:.55});
-      for (let i=0;i<18;i++) {
-        const outlet=-50+seeded(i)*100;
-        const foam = mesh(new THREE.PlaneGeometry(1.8+seeded(i+30)*3.4,.08), foamMat, [outlet,.16,-29+seeded(i+4)*67], [-Math.PI/2,0,0], false);
-        foam.userData.outlet=outlet;
+      openSea = mesh(
+        new THREE.PlaneGeometry(520,520,1,1),
+        new THREE.MeshStandardMaterial({color:0x1c6c88, roughness:.24, metalness:.1, side:THREE.DoubleSide}),
+        [0,-.12,0],
+        [-Math.PI/2,0,0],
+        false
+      );
+      openSea.renderOrder=-1;
+
+      const foamMat = new THREE.MeshBasicMaterial({
+        color:0xe6fbf7,
+        map:makeFoamTexture(),
+        transparent:true,
+        opacity:.55,
+        depthWrite:false,
+        toneMapped:false
+      });
+      for (let i=0;i<26;i++) {
+        const anchor=-84+seeded(i)*168;
+        const foam = mesh(new THREE.PlaneGeometry(3.4+seeded(i+30)*5.6,1.1+seeded(i+61)*1.5), foamMat.clone(), [anchor,.16,0], [-Math.PI/2,0,0], false);
+        foam.userData.anchor=anchor;
         foam.userData.phase = seeded(i+9)*6.28;
+        foam.userData.reach = .6+seeded(i+17)*2.4;
         mixers.push(foam);
       }
-      const waveMat=new THREE.LineBasicMaterial({color:0xdaf5f2,transparent:true,opacity:.58});
-      for(let band=0;band<13;band++) {
+      const surfMat=new THREE.LineBasicMaterial({color:0xf1fffb,transparent:true,opacity:.7});
+      for (let line=0;line<3;line++) {
         const points=[];
-        const seaSide=true;
-        for(let i=0;i<=42;i++) {
-          const x=-46+i*2.2;
-          points.push(new THREE.Vector3(x,.16,Math.sin(i*.58+band)*.55));
+        for (let i=0;i<=110;i++) {
+          const x=-88+i*1.6;
+          points.push(new THREE.Vector3(x,.2,shoreLine(x)));
+        }
+        const surf=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),surfMat.clone());
+        surf.userData={phase:line*2.1,lag:line*1.35};
+        scene.add(surf);
+        surfLines.push(surf);
+      }
+
+      const waveMat=new THREE.LineBasicMaterial({color:0xdaf5f2,transparent:true,opacity:.58});
+      for(let band=0;band<15;band++) {
+        const points=[];
+        for(let i=0;i<=64;i++) {
+          const x=-86+i*2.7;
+          const refracted=(shoreLine(x)-SHORE_BASE)*.55;
+          points.push(new THREE.Vector3(x,.16,refracted+Math.sin(i*.42+band)*.6));
         }
         const wave=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),waveMat.clone());
-        wave.userData={phase:band*.73,seaSide};
+        wave.userData={phase:band*.73};
         scene.add(wave);
         waveBands.push(wave);
       }
@@ -316,16 +468,22 @@
         [-25,-2],[-8,-2],[9,-2],[26,-2],
         [-20,16],[-3,16],[14,16],[31,16]
       ];
+      const buoyMat=mat(0xf0b429,.5,.1);
+      const buoyDark=mat(0x2c3336,.6,.2);
+      const seabed=positions.map(([x,z])=>ground(x,z));
       positions.forEach((spot,index)=>{
         const [x,z]=spot;
+        const bed=seabed[index];
+        const hub=Math.max(-2.9, bed+4.2);
+        const pileTop=hub-bed;
         const turbine=new THREE.Group();
-        turbine.position.set(x,0,z);
+        turbine.position.set(x,bed,z);
         scene.add(turbine);
-        addTo(turbine,new THREE.CylinderGeometry(2.4,3.2,.7,20),foundation,[0,-5.75,0]);
-        addTo(turbine,new THREE.CylinderGeometry(.42,.62,4.5,16),steel,[0,-3.45,0]);
-        addTo(turbine,new THREE.CylinderGeometry(.62,.78,3.3,18),steel,[0,-1.25,0],[Math.PI/2,0,0]);
+        addTo(turbine,new THREE.CylinderGeometry(2.4,3.2,.7,20),foundation,[0,.35,0]);
+        addTo(turbine,new THREE.CylinderGeometry(.42,.62,pileTop-.5,16),steel,[0,(pileTop+.5)/2,0]);
+        addTo(turbine,new THREE.CylinderGeometry(.62,.78,3.3,18),steel,[0,pileTop,0],[Math.PI/2,0,0]);
         const rotor=new THREE.Group();
-        rotor.position.set(0,-1.25,1.72);
+        rotor.position.set(0,pileTop,1.72);
         turbine.add(rotor);
         addTo(rotor,new THREE.CylinderGeometry(.25,.25,.48,16),steel,[0,0,.04],[Math.PI/2,0,0]);
         for(let blade=0;blade<3;blade++) {
@@ -336,17 +494,29 @@
           prop.scale.set(1,.76,.28);
         }
         turbineRotors.push(rotor);
+
+        const buoy=new THREE.Group();
+        buoy.position.set(x+2.6,0,z+1.4);
+        scene.add(buoy);
+        addTo(buoy,new THREE.CylinderGeometry(.42,.5,.5,12),buoyMat,[0,0,0]);
+        addTo(buoy,new THREE.ConeGeometry(.34,.7,12),buoyMat,[0,.55,0]);
+        addTo(buoy,new THREE.CylinderGeometry(.05,.05,.7,6),buoyDark,[0,1.2,0]);
+        addTo(buoy,new THREE.SphereGeometry(.12,10,8),buoyDark,[0,1.6,0]);
+        buoy.userData={phase:seeded(index+77)*6.28};
+        buoys.push(buoy);
       });
+      const collectorBed=ground(38,-20);
       const collector=new THREE.Group();
-      collector.position.set(38,-4.8,-20);
+      collector.position.set(38,collectorBed+1.2,-20);
       scene.add(collector);
       addTo(collector,new THREE.BoxGeometry(4.8,2.4,4.2),foundation,[0,0,0]);
       addTo(collector,new THREE.CylinderGeometry(.24,.24,3.6,10),steel,[0,2.6,0]);
-      positions.forEach(([x,z])=>{
+      positions.forEach(([x,z],index)=>{
+        const midX=(x+38)/2, midZ=(z-20)/2;
         const cable=new THREE.CatmullRomCurve3([
-          new THREE.Vector3(x,-5.7,z),
-          new THREE.Vector3((x+38)/2,-5.6,(z-20)/2),
-          new THREE.Vector3(38,-5.5,-20)
+          new THREE.Vector3(x,seabed[index]+.4,z),
+          new THREE.Vector3(midX,ground(midX,midZ)+.3,midZ),
+          new THREE.Vector3(38,collectorBed+.5,-20)
         ]);
         scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(cable.getPoints(34)),new THREE.LineBasicMaterial({color:0x252d2f})));
       });
@@ -354,7 +524,8 @@
 
     function makeHouse(x,z,scale=1,roofColor=0x754b3a) {
       const g = new THREE.Group();
-      g.position.set(x,1.15,z);
+      const base = ground(x,z)+.1;
+      g.position.set(x,base,z);
       g.scale.setScalar(scale);
       scene.add(g);
       addTo(g,new THREE.BoxGeometry(3,2.2,2.5),mat(0xd7c5a1,.92),[0,.35,0]);
@@ -372,7 +543,7 @@
       addTo(g,new THREE.CylinderGeometry(.05,.05,.18,8),mat(0x727d78,.42,.55),[serviceX,serviceY+.23,serviceZ]);
       houseServicePoints.push(new THREE.Vector3(
         x+serviceX*scale,
-        1.15+(serviceY+.23)*scale,
+        base+(serviceY+.23)*scale,
         z+serviceZ*scale
       ));
       return g;
@@ -387,33 +558,35 @@
         houseNightLights.push(warmGlow);
       });
       const roadMat=mat(0x887c67,1);
-      mesh(new THREE.BoxGeometry(31,.12,3),roadMat,[37,1.1,-46],[0,-.08,0],false);
-      const tower = new THREE.Group(); tower.position.set(19,1.25,-46); scene.add(tower);
+      mesh(new THREE.BoxGeometry(31,.12,3),roadMat,[37,ground(37,-46)+.06,-46],[0,-.08,0],false);
+      const tower = new THREE.Group(); tower.position.set(19,ground(19,-46)+.1,-46); scene.add(tower);
       addTo(tower,new THREE.BoxGeometry(2.8,4.4,2.8),mat(0xc9b98f,.9),[0,1.4,0]);
       addTo(tower,new THREE.ConeGeometry(2.6,3.2,4),mat(0x6b4b3f,.85),[0,5,0],[0,Math.PI/4,0]);
     }
 
     function makeTree(x,z,s=1) {
-      const g=new THREE.Group(); g.position.set(x,0,z); g.scale.setScalar(s); scene.add(g);
+      const g=new THREE.Group(); g.position.set(x,ground(x,z)+.65*s,z); g.scale.setScalar(s); scene.add(g);
       addTo(g,new THREE.CylinderGeometry(.13,.2,1.8,7),mat(0x52402f,.95),[0,.25,0]);
       const crown=addTo(g,new THREE.IcosahedronGeometry(1.1,1),mat(0x355a37,.92),[0,1.65,0]);
       crown.scale.set(.85,1.25,.85); treeCanopies.push(crown); return g;
     }
     function makeVegetation() {
-      for(let i=0;i<72;i++) {
-        let x=-56+seeded(i+1)*112, z=-38-seeded(i+130)*14;
-        if (x>20&&z>-52) continue;
+      for(let i=0;i<130;i++) {
+        let x=-78+seeded(i+1)*156, z=-38-seeded(i+130)*36;
+        if (x>20&&z>-52&&z<-38) continue;
+        if (ground(x,z)<1.02) continue;
         makeTree(x,z,.65+seeded(i+260)*1.15);
       }
       const fieldMat=mat(0x7e8b43,.98);
       for(let i=0;i<8;i++) {
-        const patch=mesh(new THREE.CylinderGeometry(4+seeded(i)*4,4+seeded(i)*4,.08,12),fieldMat,[-5+seeded(i+10)*54,1.2,-43-seeded(i+20)*8],[0,seeded(i)*3,0],false);
+        const fx=-5+seeded(i+10)*54, fz=-45-seeded(i+20)*8;
+        const patch=mesh(new THREE.CylinderGeometry(4+seeded(i)*4,4+seeded(i)*4,.08,12),fieldMat,[fx,ground(fx,fz)+.05,fz],[0,seeded(i)*3,0],false);
         patch.scale.z=.55;
       }
     }
 
     function makeCow(x,z,rot=0) {
-      const g=new THREE.Group(); g.position.set(x,1.15,z); g.rotation.y=rot; scene.add(g);
+      const g=new THREE.Group(); g.position.set(x,ground(x,z)+.1,z); g.rotation.y=rot; scene.add(g);
       const hide=mat(0xd7d0bf,.92), dark=mat(0x272923,.94), muzzle=mat(0xb98e74,.9);
       const body=addTo(g,new THREE.CapsuleGeometry(.52,1.45,7,12),hide,[0,.82,0],[0,0,Math.PI/2]);
       body.scale.z=.88;
@@ -426,9 +599,15 @@
       face.scale.set(1,.9,.82);
       const nose=addTo(head,new THREE.SphereGeometry(.25,10,8),muzzle,[.32,-.12,0]);
       nose.scale.set(.72,.72,1);
+      const sclera=mat(0xf6f2e8,.42);
+      const pupil=mat(0x161512,.32);
       for(const side of [-1,1]) {
         const ear=addTo(head,new THREE.ConeGeometry(.13,.38,8),dark,[-.03,.25,side*.34],[Math.PI/2,0,side*.35]);
         const horn=addTo(head,new THREE.ConeGeometry(.055,.28,8),mat(0xe1d1a8,.75),[.08,.34,side*.2],[0,0,side*-.42]);
+        const eye=addTo(head,new THREE.SphereGeometry(.082,10,8),sclera,[.19,.11,side*.235]);
+        eye.scale.set(.85,1,1);
+        addTo(head,new THREE.SphereGeometry(.05,10,8),pupil,[.245,.105,side*.255]);
+        addTo(head,new THREE.SphereGeometry(.028,8,6),dark,[.135,.235,side*.235]);
       }
       const legs=[];
       for(const zLeg of [-.34,.34]) for(const xLeg of [-.5,.5]) {
@@ -438,7 +617,7 @@
       const tail=new THREE.Group(); tail.position.set(-1,.86,0); g.add(tail);
       addTo(tail,new THREE.CylinderGeometry(.035,.045,.75,6),dark,[-.2,-.25,0],[0,0,-.55]);
       g.userData={
-        home:new THREE.Vector3(x,1.15,z),
+        home:new THREE.Vector3(x,ground(x,z)+.1,z),
         phase:seeded(grazers.length+410)*Math.PI*2,
         speed:.13+seeded(grazers.length+430)*.07,
         radius:1.3+seeded(grazers.length+450)*1.4,
@@ -470,8 +649,9 @@
         cable.frustumCulled=false;
         return cable;
       };
+      const transformerY=ground(28,-35.8)+1.35;
       const transformer=new THREE.Group();
-      transformer.position.set(28,2.6,-35.8);
+      transformer.position.set(28,transformerY,-35.8);
       scene.add(transformer);
       addTo(transformer,new THREE.BoxGeometry(6,.45,4.2),concrete,[0,-1.15,0]);
       for(const x of [-1.35,1.35]) {
@@ -481,13 +661,26 @@
         addTo(transformer,new THREE.CylinderGeometry(.25,.3,.18,12),ceramic,[x,.78,0]);
         for(let y=1;y<2.7;y+=.42) addTo(transformer,new THREE.CylinderGeometry(.17,.27,.12,12),ceramic,[x,y,0]);
       }
+      addTo(transformer,new THREE.BoxGeometry(1.9,1.25,.75),steel,[0,-.42,1.85]);
+      addTo(transformer,new THREE.BoxGeometry(2.05,.12,.9),mat(0x333b38,.7,.4),[0,.24,1.85]);
+      for(const x of [-.5,.5]) {
+        addTo(transformer,new THREE.CylinderGeometry(.1,.13,.55,10),ceramic,[x,.5,1.85]);
+        addTo(transformer,new THREE.CylinderGeometry(.06,.06,.14,8),copper,[x,.82,1.85]);
+      }
+      const marineTerminal=new THREE.Vector3(28-.5,transformerY+.86,-35.8+1.85);
+      const marineTerminalB=new THREE.Vector3(28+.5,transformerY+.86,-35.8+1.85);
+      addCable(new THREE.CatmullRomCurve3([
+        marineTerminalB,
+        new THREE.Vector3(28.5,transformerY+1.5,-34.6),
+        new THREE.Vector3(28+1.35,transformerY+.78,-35.8)
+      ]),.03,16);
       const towerPoints=[
         new THREE.Vector3(30,7.2,-38),
         new THREE.Vector3(39,7.2,-37),
         new THREE.Vector3(48,7.2,-38)
       ];
       towerPoints.forEach((point,n)=>{
-        const x=point.x, z=point.z, g=new THREE.Group(); g.position.set(x,1.2,z); scene.add(g);
+        const x=point.x, z=point.z, g=new THREE.Group(); g.position.set(x,ground(x,z)+.15,z); scene.add(g);
         for(const side of [-1,1]) addTo(g,new THREE.BoxGeometry(.12,7,.12),steel,[side*1.45,2.6,0],[0,0,side*.28]);
         addTo(g,new THREE.BoxGeometry(4.4,.14,.14),steel,[0,6,0]);
         addTo(g,new THREE.BoxGeometry(3.4,.12,.12),steel,[0,4.6,0]);
@@ -501,9 +694,22 @@
           scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(new THREE.CatmullRomCurve3(pts).getPoints(24)),wireMat));
         }
       });
+      for(const side of [-1,1]) {
+        const bushing=new THREE.Vector3(28+side*1.35,transformerY+2.86,-35.8);
+        const attach=new THREE.Vector3(towerPoints[0].x+side*1.5,towerPoints[0].y,towerPoints[0].z);
+        addCable(new THREE.CatmullRomCurve3([
+          bushing,
+          new THREE.Vector3(
+            (bushing.x+attach.x)/2,
+            (bushing.y+attach.y)/2-.45,
+            (bushing.z+attach.z)/2
+          ),
+          attach
+        ]),.034,22);
+      }
       const substationPoint=new THREE.Vector3(54,4.8,-43);
       const substation=new THREE.Group();
-      substation.position.set(54,1.25,-43);
+      substation.position.set(54,ground(54,-43)+.2,-43);
       scene.add(substation);
       addTo(substation,new THREE.BoxGeometry(8,.35,6),concrete,[0,.05,0]);
       for(const x of [-1.6,1.6]) {
@@ -547,7 +753,7 @@
       }
       polePoints.forEach((point,index)=>{
         const pole=new THREE.Group();
-        pole.position.set(point.x,1.2,point.z);
+        pole.position.set(point.x,ground(point.x,point.z)+.15,point.z);
         scene.add(pole);
         addTo(pole,new THREE.CylinderGeometry(.1,.14,4,9),mat(0x4a3828,.95),[0,2,0]);
         addTo(pole,new THREE.BoxGeometry(2.1,.12,.12),steel,[0,4,0]);
@@ -605,31 +811,41 @@
         addCable(servicePath,.022,14);
       });
       const connectionPoints=[
-        new THREE.Vector3(0,-5.5,8),
-        new THREE.Vector3(38,-5.3,-20),
-        new THREE.Vector3(28,-4.8,-32),
-        new THREE.Vector3(28,5.4,-35.8),
-        towerPoints[0],
-        towerPoints[1],
-        towerPoints[2],
-        substationPoint
+        new THREE.Vector3(38,ground(38,-20)+.5,-20),
+        new THREE.Vector3(34,ground(34,-26)+.3,-26),
+        new THREE.Vector3(29.6,ground(29.6,-31)+.3,-31),
+        new THREE.Vector3(27.5,ground(27.5,-32.8)+.35,-32.8),
+        new THREE.Vector3(27.5,transformerY-.15,-33),
+        new THREE.Vector3(27.5,transformerY+1.3,-33.3),
+        marineTerminal
       ];
       powerPath=new THREE.CatmullRomCurve3(connectionPoints);
-      const cableGeo=new THREE.BufferGeometry().setFromPoints(powerPath.getPoints(100));
-      scene.add(new THREE.Line(cableGeo,new THREE.LineBasicMaterial({color:0x536266})));
-      gridPath=new THREE.CatmullRomCurve3([
-        new THREE.Vector3(28,5.4,-35.8),
-        towerPoints[0],
-        towerPoints[1],
-        towerPoints[2],
-        substationPoint
+      addCable(powerPath,.06,140);
+      const buildGridPath=side=>new THREE.CatmullRomCurve3([
+        new THREE.Vector3(28+side*1.35,transformerY+2.86,-35.8),
+        new THREE.Vector3(29+side*1.425,(transformerY+2.86+towerPoints[0].y)/2-.45,-36.9),
+        new THREE.Vector3(towerPoints[0].x+side*1.5,towerPoints[0].y,towerPoints[0].z),
+        new THREE.Vector3(34.5+side*1.5,towerPoints[0].y-.85,-37.5),
+        new THREE.Vector3(towerPoints[1].x+side*1.5,towerPoints[1].y,towerPoints[1].z),
+        new THREE.Vector3(43.5+side*1.5,towerPoints[1].y-.85,-37.5),
+        new THREE.Vector3(towerPoints[2].x+side*1.5,towerPoints[2].y,towerPoints[2].z),
+        new THREE.Vector3(51,6.1,-40),
+        new THREE.Vector3(substationPoint.x+side*.42,substationPoint.y,substationPoint.z)
       ]);
-      distributionPath=new THREE.CatmullRomCurve3([
-        substationPoint,
-        localTransformerInput,
+      gridPath=buildGridPath(-1);
+      const gridPathRight=buildGridPath(1);
+      const buildDistributionPath=side=>new THREE.CatmullRomCurve3([
+        new THREE.Vector3(substationPoint.x+side*.19,substationPoint.y,substationPoint.z),
+        new THREE.Vector3(52.5,4.65,-44),
+        new THREE.Vector3(localTransformerInput.x+side*.12,localTransformerInput.y,localTransformerInput.z),
+        new THREE.Vector3(51,4.46,-44.82),
+        new THREE.Vector3(51,4.18,-44.82),
         localTransformerOutput,
-        ...distributionPoints
+        distributionPoints[0],
+        ...distributionPoints.slice(1).map(p=>new THREE.Vector3(p.x+side*.55,p.y,p.z))
       ]);
+      distributionPath=buildDistributionPath(-1);
+      const distributionPathRight=buildDistributionPath(1);
       const cardiogramPoints=[
         new THREE.Vector3(-.75,0,0),
         new THREE.Vector3(-.42,0,0),
@@ -659,9 +875,29 @@
           powerWaves.push(electricWave);
         }
       };
+      addWaveSet(powerPath,6,.85,.05);
       addWaveSet(gridPath,7,1,.07);
+      addWaveSet(gridPathRight,7,1,.07);
       addWaveSet(distributionPath,7,.62,.095);
+      addWaveSet(distributionPathRight,7,.62,.095);
       servicePaths.forEach(path=>addWaveSet(path,1,.32,.13));
+    }
+
+    function makeGlowTexture() {
+      const c=document.createElement("canvas");
+      c.width=c.height=128;
+      const g=c.getContext("2d");
+      const grad=g.createRadialGradient(64,64,0,64,64,64);
+      grad.addColorStop(0,"rgba(255,255,255,1)");
+      grad.addColorStop(.11,"rgba(255,247,224,.86)");
+      grad.addColorStop(.3,"rgba(255,208,132,.4)");
+      grad.addColorStop(.6,"rgba(255,172,92,.13)");
+      grad.addColorStop(1,"rgba(255,150,80,0)");
+      g.fillStyle=grad;
+      g.fillRect(0,0,128,128);
+      const texture=new THREE.CanvasTexture(c);
+      texture.colorSpace=THREE.SRGBColorSpace;
+      return texture;
     }
 
     function makeLights() {
@@ -674,18 +910,39 @@
       scene.add(sun);
       sunDisc=mesh(
         new THREE.SphereGeometry(3.2,24,18),
-        new THREE.MeshBasicMaterial({color:0xffc76b,toneMapped:false,transparent:true}),
+        new THREE.MeshBasicMaterial({color:0xffc76b,toneMapped:false,transparent:true,fog:false}),
         [0,80,-60],
         [0,0,0],
         false
       );
       moonDisc=mesh(
         new THREE.SphereGeometry(2.1,22,16),
-        new THREE.MeshBasicMaterial({color:0xdbe8ef,toneMapped:false,transparent:true}),
+        new THREE.MeshBasicMaterial({color:0xdbe8ef,toneMapped:false,transparent:true,fog:false}),
         [0,-80,60],
         [0,0,0],
         false
       );
+      const glowTexture=makeGlowTexture();
+      sunGlow=new THREE.Sprite(new THREE.SpriteMaterial({
+        map:glowTexture,color:0xffcf8a,transparent:true,opacity:0,
+        blending:THREE.AdditiveBlending,depthWrite:false,fog:false,toneMapped:false
+      }));
+      sunGlow.scale.setScalar(30);
+      scene.add(sunGlow);
+      moonGlow=new THREE.Sprite(new THREE.SpriteMaterial({
+        map:glowTexture,color:0xc3d8e8,transparent:true,opacity:0,
+        blending:THREE.AdditiveBlending,depthWrite:false,fog:false,toneMapped:false
+      }));
+      moonGlow.scale.setScalar(16);
+      scene.add(moonGlow);
+      const glitterGeo=new THREE.PlaneGeometry(13,58,1,1);
+      glitterGeo.rotateX(-Math.PI/2);
+      sunGlitter=new THREE.Mesh(glitterGeo,new THREE.MeshBasicMaterial({
+        map:glowTexture,transparent:true,opacity:0,
+        blending:THREE.AdditiveBlending,depthWrite:false,fog:false,toneMapped:false
+      }));
+      sunGlitter.renderOrder=6;
+      scene.add(sunGlitter);
       const starCanvas=document.createElement("canvas");
       starCanvas.width=32;
       starCanvas.height=32;
@@ -698,10 +955,10 @@
       starContext.fillRect(0,0,32,32);
       const starTexture=new THREE.CanvasTexture(starCanvas);
       const starPositions=[];
-      for(let i=0;i<320;i++) {
+      for(let i=0;i<440;i++) {
         const theta=seeded(i+500)*Math.PI*2;
-        const radius=98+seeded(i+900)*18;
-        const y=34+seeded(i+1300)*70;
+        const radius=104+seeded(i+900)*46;
+        const y=10+seeded(i+1300)*64;
         starPositions.push(Math.cos(theta)*radius,y,Math.sin(theta)*radius);
       }
       const starGeo=new THREE.BufferGeometry();
@@ -709,13 +966,14 @@
       stars=new THREE.Points(starGeo,new THREE.PointsMaterial({
         color:0xf2f6ff,
         map:starTexture,
-        size:1.25,
+        size:2.9,
         sizeAttenuation:false,
-        alphaTest:.08,
+        alphaTest:.04,
         transparent:true,
         opacity:0,
         depthWrite:false,
-        toneMapped:false
+        toneMapped:false,
+        fog:false
       }));
       scene.add(stars);
     }
@@ -732,7 +990,7 @@
         tourBtn.setAttribute("aria-label",touring?"Pausar recorrido automático":"Iniciar recorrido automático");
       });
       document.querySelector("#overviewBtn").addEventListener("click",()=>setCamera(new THREE.Vector3(62,38,62),new THREE.Vector3(0,-1,3)));
-      document.querySelector("#barrageBtn").addEventListener("click",()=>setCamera(new THREE.Vector3(28,5,31),new THREE.Vector3(2,-2,8)));
+      document.querySelector("#barrageBtn").addEventListener("click",()=>setCamera(new THREE.Vector3(14,-3.1,30),new THREE.Vector3(0,-3.6,2)));
       document.querySelector("#circuitBtn").addEventListener("click",()=>setCamera(new THREE.Vector3(68,17,-23),new THREE.Vector3(42,3,-43)));
       document.querySelector("#villageBtn").addEventListener("click",()=>setCamera(new THREE.Vector3(57,18,-24),new THREE.Vector3(35,2,-46)));
       document.querySelector("#animalsBtn").addEventListener("click",()=>setCamera(new THREE.Vector3(-4,8,-31),new THREE.Vector3(0,1.5,-46)));
@@ -828,7 +1086,7 @@
       requestAnimationFrame(animate);
       const dt=Math.min(clock.getDelta(),.05), t=clock.elapsedTime;
       tourTime+=dt;
-      const day=(.35+t*.004)%1;
+      const day=(.35+t*.055)%1;
       const sunAngle=day*Math.PI*2-Math.PI/2;
       sun.position.set(Math.cos(sunAngle)*55,Math.sin(sunAngle)*42,-22);
       const daylight=clamp((sun.position.y+2)/29,0,1);
@@ -848,37 +1106,66 @@
       waterMat.color.setHSL(.53,.56,.18+daylight*.2);
       const skyRadius=96;
       sunDisc.position.copy(sun.position).normalize().multiplyScalar(skyRadius);
-      sunDisc.material.opacity=clamp((sun.position.y+6)/9,0,1);
+      const lowSun=clamp((11-sun.position.y)/17,0,1);
+      sunDisc.material.color.setRGB(1,.82-lowSun*.26,.5-lowSun*.36);
+      sunDisc.scale.setScalar(1+lowSun*.55);
+      sunDisc.material.opacity=clamp((sunDisc.position.y+2.5)/7,0,1);
+      sunGlow.position.copy(sunDisc.position);
+      sunGlow.material.color.copy(sunDisc.material.color);
+      sunGlow.material.opacity=sunDisc.material.opacity*(.3+lowSun*.55);
+      sunGlow.scale.setScalar(25+lowSun*26);
       moonDisc.position.copy(sunDisc.position).multiplyScalar(-1);
       const darkness=clamp((-sun.position.y+4)/18,0,1);
       moonDisc.material.opacity=.28+darkness*.72;
+      moonGlow.position.copy(moonDisc.position);
+      moonGlow.material.opacity=moonDisc.material.opacity*.42;
       stars.material.opacity=darkness;
       timeIndicator.style.setProperty("--sun-angle",`${day*360}deg`);
 
-      const tide=Math.sin(t*.08);
-      water.position.y=.04+tide*.08;
+      const tide=Math.sin(t*.06);
+      const seaLevel=.05+tide*.55;
+      water.position.y=seaLevel;
+      openSea.position.y=seaLevel-.12;
+      openSea.material.color.copy(waterMat.color).multiplyScalar(.78);
+      const tideShift=seaLevel/BEACH_SLOPE;
       for(const surface of [water]) {
         const pos=surface.geometry.attributes.position;
         for(let i=0;i<pos.count;i++) {
           const x=pos.getX(i), y=pos.getY(i);
-          pos.setZ(i,Math.sin(x*.28+t*1.25)*.1+Math.cos(y*.5+t)*.07);
+          pos.setZ(i,Math.sin(x*.28+t*1.25)*.1+Math.cos(y*.5+t)*.07+Math.sin(x*.07-y*.05+t*.4)*.16);
         }
         pos.needsUpdate=true;
         surface.geometry.computeVertexNormals();
       }
-      const flow=Math.cos(t*.08);
+      const flow=Math.cos(t*.06);
       waveBands.forEach((wave,i)=>{
         wave.position.x=Math.sin(t*.32+wave.userData.phase)*.55;
-        wave.position.z=46-((t*2.25+i*6.45)%84);
-        wave.position.y=water.position.y+.16;
-        wave.material.opacity=.3+.3*Math.abs(Math.sin(t*.55+i*.4));
+        wave.position.z=72-((t*2.6+i*7.4)%111);
+        wave.position.y=seaLevel+.16;
+        const reachedShore=clamp((wave.position.z+28+tideShift)/9,0,1);
+        wave.material.opacity=(.13+.19*Math.abs(Math.sin(t*.55+i*.4)))*reachedShore;
+      });
+      surfLines.forEach((surf,i)=>{
+        const swash=.5+.5*Math.sin(t*.85-surf.userData.phase);
+        surf.position.y=seaLevel+.12;
+        surf.position.z=-tideShift-swash*1.6-surf.userData.lag;
+        surf.material.opacity=.25+.5*swash;
       });
       mixers.forEach((foam,i)=>{
-        foam.position.x=foam.userData.outlet+Math.sin(t*.35+foam.userData.phase)*1.2;
-        foam.position.z=45-((t*2.1+i*5.2)%81);
-        foam.material.opacity=.2+Math.abs(flow)*.4;
+        const {anchor,phase,reach}=foam.userData;
+        const swash=.5+.5*Math.sin(t*.85+phase);
+        foam.position.x=anchor+Math.sin(t*.3+phase)*1.1;
+        foam.position.z=shoreLine(anchor)-tideShift-swash*reach+.5;
+        foam.position.y=seaLevel+.07;
+        foam.material.opacity=(.12+.5*swash)*(.55+.45*Math.abs(flow));
       });
       turbineRotors.forEach((r,i)=>r.rotation.z-=dt*Math.abs(flow)*(2.5+i*.06)*Math.sign(flow||1));
+      buoys.forEach(buoy=>{
+        const bob=Math.sin(t*1.15+buoy.userData.phase);
+        buoy.position.y=seaLevel-.18+bob*.12;
+        buoy.rotation.z=bob*.09;
+        buoy.rotation.x=Math.cos(t*.95+buoy.userData.phase)*.07;
+      });
       powerWaves.forEach((electricWave,i)=>{
         const path=electricWave.userData.path;
         const progress=(t*electricWave.userData.speed+electricWave.userData.offset)%1;
@@ -926,6 +1213,26 @@
       }
       controls.enabled=!touring;
       controls.update();
+      const submerged=camera.position.y<seaLevel-.12;
+      const glitterX=sunDisc.position.x-camera.position.x;
+      const glitterZ=sunDisc.position.z-camera.position.z;
+      const glitterLength=Math.hypot(glitterX,glitterZ)||1;
+      const glitterDX=glitterX/glitterLength, glitterDZ=glitterZ/glitterLength;
+      sunGlitter.position.set(
+        camera.position.x+glitterDX*36,
+        seaLevel+.07,
+        camera.position.z+glitterDZ*36
+      );
+      sunGlitter.rotation.y=Math.atan2(-glitterDX,-glitterDZ);
+      sunGlitter.material.opacity=submerged?0:clamp(1-Math.abs(sun.position.y)/20,0,1)*.5;
+      if(submerged) {
+        underwaterTint.setHSL(.51,.62,.1+daylight*.24);
+        scene.background.lerp(underwaterTint,.92);
+        scene.fog.color.copy(scene.background);
+        scene.fog.density=.016;
+      } else {
+        scene.fog.density=.0072;
+      }
       renderer.render(scene,camera);
     }
 
@@ -945,7 +1252,7 @@
       renderer.shadowMap.type=THREE.PCFSoftShadowMap;
       scene=new THREE.Scene();
       scene.background=new THREE.Color(0x94bbc5);
-      scene.fog=new THREE.FogExp2(0x94bbc5,.008);
+      scene.fog=new THREE.FogExp2(0x94bbc5,.0072);
       camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,260);
       camera.position.set(54,34,54);
       controls=new OrbitControls(camera,canvas);
@@ -954,7 +1261,7 @@
       controls.maxPolarAngle=Math.PI*.62;
       controls.target.set(0,-1,4);
       clock=new THREE.Clock();
-      makeLights(); makeTerrain(); makeWater(); makeTidalFarm(); makeVillage();
+      makeLights(); makeTerrain(); makeShoreDetail(); makeWater(); makeTidalFarm(); makeVillage();
       makeVegetation(); makeAnimals(); makePowerLine(); setupUI(); onResize();
       addEventListener("resize",onResize,{passive:true});
       loading.classList.add("done");
