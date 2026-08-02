@@ -62,6 +62,37 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+.lung-model-shell {
+  position: relative; overflow: hidden; border: 1px solid rgba(220,38,38,.25);
+  border-radius: 10px; background: #12161c;
+  box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.025) inset;
+}
+.lung-model-frame { display: block; width: 100%; height: 620px; border: 0; background: #12161c; }
+.lung-model-actions {
+  position: absolute; z-index: 10; top: 12px; right: 12px;
+  display: flex; gap: 7px; font-family: 'Inter', sans-serif;
+}
+.lung-model-button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
+  background: rgba(10,14,20,.84); color: #f3f7f4; backdrop-filter: blur(12px);
+  font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; transition: border-color .2s, background .2s;
+}
+.lung-model-button:hover { border-color: rgba(220,38,38,.75); background: rgba(40,16,20,.94); }
+.lung-model-back { display: none; }
+.lung-model-shell:fullscreen { width: 100vw; height: 100vh; border: 0; border-radius: 0; background: #12161c; }
+.lung-model-shell:fullscreen .lung-model-frame { width: 100%; height: 100%; }
+.lung-model-shell:fullscreen .lung-model-enter { display: none; }
+.lung-model-shell:fullscreen .lung-model-back { display: inline-flex; }
+@media (max-width: 767px) {
+  .lung-model-frame { height: 540px; }
+  .lung-model-actions { top: 10px; right: 10px; }
+  .lung-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+}
+@media (orientation: landscape) and (max-height: 620px) {
+  .lung-model-frame { height: 460px; }
+}
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   </head>
@@ -236,6 +267,42 @@
             <p class="text-base text-natura-silverLight"><strong class="text-white">Alvéolos pulmonares</strong> — pequeños sacos de aire al final de cada bronquiolo. Aquí ocurre el intercambio gaseoso con la sangre. Son el destino final del recorrido.</p>
           </div>
         </div>
+      </div>
+    </section>
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
+
+    <!-- MODELO 3D: Pulmones -->
+    <section class="animate-fadeInUp delay-200" id="pulmones-3d">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="iconify text-natura-bio" data-icon="lucide:box" data-width="24"></span>
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-bio mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+          <h2 class="font-heading text-lg md:text-xl font-bold text-white">Los pulmones en 3D</h2>
+        </div>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-4 leading-relaxed">Girá los pulmones con el dedo o el mouse para verlos desde cualquier ángulo. Tocá una parte y aparecerá su nombre. Fijate en tres detalles que los distinguen de un dibujo esquemático: el pulmón <strong class="text-natura-silverLight">derecho tiene tres lóbulos</strong> y el <strong class="text-natura-silverLight">izquierdo sólo dos</strong>, la base es <strong class="text-natura-silverLight">cóncava</strong> porque apoya sobre el diafragma, y el izquierdo tiene una muesca (la <em>escotadura cardíaca</em>) donde se acomoda el corazón.</p>
+      <p class="mb-5 border-l-2 border-natura-bio/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+        <strong class="text-natura-bio">Cómo usarlo:</strong> con <em>Respirar</em> ves cómo cambia el volumen en cada inspiración; con <em>Ver por dentro</em> el tejido se vuelve transparente y aparece el árbol bronquial con los vasos (arteria pulmonar en azul, venas en rojo); con <em>Separar lóbulos</em> se abren las cisuras para contarlos.
+      </p>
+      <div class="lung-model-shell" id="lungModelShell">
+        <div class="lung-model-actions">
+          <button type="button" class="lung-model-button lung-model-enter" id="lungModelEnter">
+            <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
+            Pantalla completa
+          </button>
+          <button type="button" class="lung-model-button lung-model-back" id="lungModelBack">
+            <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+            Volver a la página
+          </button>
+        </div>
+        <iframe
+          class="lung-model-frame"
+          src="../../../modelado3D_pulmon/pulmon-3d-interactivo.html?v=20260802a"
+          title="Modelo 3D interactivo de los pulmones humanos"
+          loading="lazy"
+          allow="fullscreen"
+        ></iframe>
       </div>
     </section>
     <div class="w-full h-px bg-gradient-to-r from-transparent via-natura-bio/10 to-transparent"></div>
@@ -740,6 +807,24 @@
     });
   }, { threshold: 0.12 });
   els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var shell = document.getElementById('lungModelShell');
+  var enter = document.getElementById('lungModelEnter');
+  var back = document.getElementById('lungModelBack');
+  if(!shell || !enter || !back) return;
+
+  enter.addEventListener('click', function(){
+    if(shell.requestFullscreen) shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+  });
+
+  back.addEventListener('click', function(){
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+  });
 })();
 </script>
 </body></html>

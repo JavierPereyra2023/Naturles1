@@ -1,6 +1,6 @@
 """
 Genera los 14 audios del podcast con edge-tts.
-Voz: es-AR-TomasNeural (argentino nativo, mismo que videos Manim)
+Voz: es-ES-AlvaroNeural (castellano peninsular masculino nativo)
 Rate: +18% (sweet spot)
 """
 import asyncio
@@ -10,7 +10,7 @@ import edge_tts
 OUT_DIR = r"D:\naturales_1\podcast\audio"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-VOICE = "es-AR-TomasNeural"
+VOICE = "es-ES-AlvaroNeural"
 RATE = "+18%"
 
 # Guiones ~750 palabras cada uno = ~3:00 a 3:30 con rate +18%

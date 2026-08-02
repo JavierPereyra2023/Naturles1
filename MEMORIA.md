@@ -404,3 +404,54 @@ Qué se cambió en el modelo:
 - El CSS del archivo trae mucho estilo sin uso (topbar, side-panel, info-panel, view-list, mode-card, switch, route, medical-note, mobile-tabs, stage-top, heartbeat-status, flow-control): el HTML quedó reducido al *immersive shell*. No molesta, pero se puede podar.
 - "Venas pulmonares" solo se rotula en la cara posterior con `nz < 0.18`; es correcto cuando aparece, pero es un rótulo esquivo.
 - El latido escala el modelo completo, incluidas la aorta y las cavas, que no deberían cambiar de tamaño. Con un solo mesh no se puede escalar solo los ventrículos; `systoleStrength` es 0.022, así que casi no se nota.
+
+## Implementado 2026-08-02 (Laboratorio Molecular integrado al sitio)
+
+- `laboratorio-molecular.html` (constructor de moléculas 3D) se adaptó a la identidad del sitio:
+  - Tailwind + Iconify + Google Fonts por CDN, paleta `natura` (verde hoja / teal de Química),
+    fondo `#080C0A`, Playfair Display para títulos e Inter para la UI.
+  - Nav fija con breadcrumb `Inicio / Química / Laboratorio Molecular` y footer estándar.
+- Responsive reescrito con tres cortes: 3 columnas (>1180px), 2 columnas con inspector abajo
+  (≤1180px) y apilado con pestañas Elementos/Análisis (≤860px). Se usa `dvh` para las alturas.
+- Bugs corregidos:
+  - El cartel "Tu mesa está preparada" nunca se ocultaba (`.empty-state` con `display:grid`
+    ganaba sobre el `[hidden]` del navegador). Ahora hay regla `.empty-state[hidden]`.
+  - En móvil `.layout` pasa a flex en columna y conservaba `align-items:start`, lo que dejaba
+    el lienzo con 2px de ancho. Se fuerza `align-items:stretch`.
+  - `--atom-size` se definía sobre `.atom` pero se leía desde `:root`; ahora vive en `:root`.
+- Mejoras funcionales: botón **Abrir** (recupera el modelo guardado, antes sólo se guardaba),
+  métricas de masa aproximada y cantidad de elementos, contador de enlace visible en móvil,
+  plantillas escaladas al ancho del lienzo, atajos Supr / Esc / Ctrl+Z, `resize` con debounce.
+- Se agregó tarjeta de acceso al laboratorio en `unidades/quimica/index.html`.
+
+## Implementado 2026-08-02 (Modelo 3D de los pulmones)
+
+- Nuevo `modelado3D_pulmon/pulmon-3d-interactivo.html`, embebido en
+  `unidades/biologia/cuerpo-humano/respiracion.html` (sección `#pulmones-3d`) con el
+  mismo patrón del corazón: `.lung-model-shell` + iframe + botón de pantalla completa
+  y cache-buster `?v=20260802a`. El archivo viejo `pulmon-3d-interactivo-antes-venas.html`
+  quedó en la raíz como respaldo.
+- Geometría rehecha desde cero (superficie paramétrica, no un elipsoide):
+  - Contorno **convexo** con ápice redondeado, no cónico: `w(t)=(1-t^1.85)^0.5`.
+  - Sección transversal en cuatro cuadrantes distintos (costal ancha, medial aplanada,
+    borde anterior fino, borde posterior grueso y redondeado).
+  - Cara diafragmática **cóncava**, hilio hundido, impresión cardíaca, y escotadura
+    cardíaca + língula sólo en el izquierdo.
+  - **Lóbulos reales**: la malla se recorta por los planos de las cisuras (oblicua +
+    horizontal a la derecha, sólo oblicua a la izquierda) con tapa triangulada por
+    `ShapeUtils.triangulateShape`. Da 3 lóbulos derechos y 2 izquierdos de verdad,
+    separables con el botón *Separar lóbulos*.
+- Texturas histológicas procedurales (1024², semilla fija): Voronoi sobre grilla
+  jitterada = lobulillos pulmonares secundarios con sus tabiques interlobulillares,
+  más moteado del parénquima, pigmento antracótico sobre los tabiques y red capilar
+  subpleural. Se generan tres mapas: color, relieve y rugosidad. Material
+  `MeshPhysicalMaterial` con clearcoat (pleura húmeda) + `RoomEnvironment` para los reflejos.
+- Vía aérea proporcionada a la anatomía real (tráquea ~11 cm × 2 cm, la mitad del alto
+  del pulmón) con anillos de cartílago **en C** abiertos por detrás, y árbol bronquial
+  recursivo + arterias/venas confinados al volumen del pulmón por `clampInside()`.
+  Sólo se ven con *Ver por dentro*.
+- La cámara se encuadra sola a partir del bounding box del modelo, usando el menor
+  entre FOV vertical y horizontal: entra completo también en el iframe angosto del celular.
+- Errores corregidos durante el armado: el árbol bronquial crecía fuera del órgano,
+  las cisuras no se veían (hacía falta separar cada lóbulo a lo largo de la normal de
+  su propio plano) y la silueta salía cónica.

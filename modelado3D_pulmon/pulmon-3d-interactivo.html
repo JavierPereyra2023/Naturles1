@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12161c">
+  <title>Pulmones en 3D — Ciencias Naturales 1°</title>
+  <style>
+    :root{
+      --bg:#12161c; --surface:#1a1f27; --fg:#eef2ef; --muted:#9aa7b2;
+      --border:rgba(255,255,255,.14); --accent:#DC2626; --accent-soft:rgba(220,38,38,.18);
+      --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+      --font-mono:ui-monospace,'Cascadia Code',Consolas,monospace;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--fg)}
+    body{font-family:var(--font-ui);font-size:15px;line-height:1.5}
+    button{font:inherit;color:inherit;cursor:pointer}
+    button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+    .viewport{position:relative;width:100%;height:100%;background:var(--bg)}
+    #scene{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none}
+    .viewport::after{
+      content:"";position:absolute;z-index:1;inset:0;pointer-events:none;
+      background:radial-gradient(ellipse at 50% 42%,transparent 0 40%,rgba(6,9,13,.62) 100%)
+    }
+    .view-label{
+      position:absolute;z-index:4;top:16px;left:18px;font-family:var(--font-mono);
+      font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);pointer-events:none
+    }
+    .view-label b{display:block;font-family:var(--font-ui);font-size:13px;letter-spacing:.02em;
+      text-transform:none;color:var(--fg);font-weight:600;margin-bottom:2px}
+    .view-label i{font-style:normal}
+    /* en marcos angostos el subtítulo choca con el botón de pantalla completa */
+    @media(max-width:560px){.view-label i{display:none}}
+
+    .toolbar{
+      position:absolute;z-index:6;left:50%;bottom:16px;transform:translateX(-50%);
+      display:flex;align-items:center;gap:4px;padding:5px;border:1px solid var(--border);border-radius:12px;
+      background:rgba(18,22,28,.86);backdrop-filter:blur(14px);box-shadow:0 18px 50px rgba(0,0,0,.55)
+    }
+    .tool{
+      min-height:42px;min-width:44px;padding:0 12px;display:flex;align-items:center;justify-content:center;gap:7px;
+      border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);
+      font-size:12px;font-weight:500;letter-spacing:.01em;white-space:nowrap;
+      transition:background .18s,color .18s,border-color .18s
+    }
+    .tool:hover{background:rgba(255,255,255,.08);color:var(--fg)}
+    .tool.on{background:var(--accent-soft);color:#ff8f8f;border-color:rgba(220,38,38,.4)}
+    .tool svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .toolbar-sep{width:1px;height:24px;background:var(--border);margin:0 3px}
+
+    .tip{
+      position:absolute;z-index:7;padding:6px 10px;border:1px solid var(--border);border-radius:8px;
+      background:rgba(18,22,28,.94);backdrop-filter:blur(10px);font-size:12px;white-space:nowrap;
+      pointer-events:none;opacity:0;transform:translate(-50%,-140%);transition:opacity .15s
+    }
+    .tip.show{opacity:1}
+    .tip b{display:block;font-weight:600;font-size:12.5px}
+    .tip span{color:var(--muted);font-size:11px}
+
+    .hint{
+      position:absolute;z-index:5;right:16px;bottom:16px;max-width:210px;padding:9px 11px;
+      border:1px solid var(--border);border-radius:9px;background:rgba(18,22,28,.86);
+      color:var(--muted);font-size:11px;line-height:1.55;backdrop-filter:blur(10px);pointer-events:none
+    }
+    .legend{
+      position:absolute;z-index:5;left:18px;bottom:74px;display:grid;gap:5px;
+      font-size:11px;color:var(--muted);pointer-events:none
+    }
+    .legend div{display:flex;align-items:center;gap:7px}
+    .legend i{width:9px;height:9px;border-radius:50%;background:var(--sw);flex:none;
+      box-shadow:0 0 0 3px color-mix(in srgb,var(--sw) 20%,transparent)}
+
+    .loading{position:absolute;z-index:30;inset:0;display:grid;place-items:center;background:var(--bg);transition:opacity .4s}
+    .loading.hidden{opacity:0;pointer-events:none}
+    .loader-copy{text-align:center}
+    .loader-copy strong{font-size:17px;font-weight:600}
+    .loader-copy span{display:block;margin-top:3px;color:var(--muted);font:11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
+    .loader-line{width:170px;height:2px;margin:14px auto 0;background:var(--border);overflow:hidden;border-radius:2px}
+    .loader-line::after{content:"";display:block;width:45%;height:100%;background:var(--accent);animation:load 1.1s ease-in-out infinite alternate}
+    @keyframes load{to{transform:translateX(125%)}}
+    .fallback{max-width:320px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6;padding:20px}
+
+    @media(max-width:760px){
+      .toolbar{left:10px;right:10px;bottom:10px;transform:none;justify-content:space-between;gap:2px}
+      .tool{flex:1;padding:0 6px;min-width:0}
+      .tool span{display:none}
+      .hint{display:none}
+      .legend{left:12px;bottom:66px;font-size:10px}
+      .view-label{left:12px;top:12px}
+    }
+    @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"https://unpkg.com/three@0.167.1/build/three.module.js","three/addons/":"https://unpkg.com/three@0.167.1/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <section class="viewport" id="viewport">
+    <canvas id="scene" aria-label="Modelo tridimensional interactivo de los pulmones humanos"></canvas>
+
+    <div class="view-label"><b>Pulmones humanos</b><i>Vista anterior · 3 lóbulos derechos · 2 izquierdos</i></div>
+
+    <div class="legend" id="legend">
+      <div><i style="--sw:#e8a6a0"></i>Pulmón derecho (3 lóbulos)</div>
+      <div><i style="--sw:#f0b8b6"></i>Pulmón izquierdo (2 lóbulos)</div>
+      <div><i style="--sw:#d9c3a8"></i>Tráquea y bronquios</div>
+    </div>
+
+    <div class="tip" id="tip"></div>
+
+    <div class="toolbar" role="toolbar" aria-label="Controles del modelo">
+      <button class="tool on" id="btnBreath" aria-pressed="true" title="Activar o pausar la respiración">
+        <svg viewBox="0 0 24 24"><path d="M12 5v6"/><path d="M12 11c0 4-3 8-6 8a3 3 0 0 1-3-3c0-3 2-5 4-6"/><path d="M12 11c0 4 3 8 6 8a3 3 0 0 0 3-3c0-3-2-5-4-6"/></svg>
+        <span>Respirar</span>
+      </button>
+      <button class="tool" id="btnInside" aria-pressed="false" title="Ver el árbol bronquial por dentro">
+        <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Ver por dentro</span>
+      </button>
+      <button class="tool" id="btnLobes" aria-pressed="false" title="Separar los lóbulos pulmonares">
+        <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
+        <span>Separar lóbulos</span>
+      </button>
+      <div class="toolbar-sep"></div>
+      <button class="tool" id="btnReset" title="Volver a la vista inicial">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        <span>Reiniciar</span>
+      </button>
+    </div>
+
+    <div class="hint">Arrastrá con el dedo o el mouse para girar · pellizcá o usá la rueda para acercar · tocá una parte para ver su nombre</div>
+
+    <div class="loading" id="loading">
+      <div class="loader-copy">
+        <strong>Preparando la anatomía 3D</strong>
+        <span>Generando tejido pulmonar</span>
+        <div class="loader-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+    const viewport = document.querySelector("#viewport");
+    const canvas = document.querySelector("#scene");
+    const loading = document.querySelector("#loading");
+    const tip = document.querySelector("#tip");
+
+    /* ---------------------------------------------------------------
+       TEXTURAS HISTOLÓGICAS
+       La superficie del pulmón no es lisa ni de un solo color: la pleura
+       es brillante y translúcida, y por debajo se ven los lobulillos
+       pulmonares secundarios, polígonos de ~1 cm delimitados por tabiques
+       interlobulillares. Ese mosaico poligonal es la firma visual del
+       tejido pulmonar real, así que lo generamos con un Voronoi de semilla
+       fija sobre una grilla jitterada (queda parejo y sin costuras).
+    --------------------------------------------------------------- */
+    function rng(seed){
+      let s = seed >>> 0 || 1;
+      return () => (((s = Math.imul(48271, s) % 2147483647) & 2147483647) / 2147483647);
+    }
+
+    function histologyTextures(seed, tint){
+      const SIZE = 1024, GRID = 13, CELL = SIZE / GRID;
+      const rnd = rng(seed);
+
+      // semillas sobre grilla jitterada -> lobulillos de tamaño parejo y textura repetible
+      const seeds = [];
+      for (let gy = 0; gy < GRID; gy++)
+        for (let gx = 0; gx < GRID; gx++)
+          seeds.push([(gx + .18 + rnd() * .64) * CELL, (gy + .18 + rnd() * .64) * CELL]);
+      const seedAt = (gx, gy) => seeds[((gy + GRID) % GRID) * GRID + ((gx + GRID) % GRID)];
+
+      const color = document.createElement("canvas"); color.width = color.height = SIZE;
+      const bump  = document.createElement("canvas"); bump.width  = bump.height  = SIZE;
+      const rough = document.createElement("canvas"); rough.width = rough.height = SIZE;
+      const cx = color.getContext("2d"), bx = bump.getContext("2d"), rx = rough.getContext("2d");
+
+      const cImg = cx.createImageData(SIZE, SIZE), cD = cImg.data;
+      const bImg = bx.createImageData(SIZE, SIZE), bD = bImg.data;
+      const rImg = rx.createImageData(SIZE, SIZE), rD = rImg.data;
+
+      // ruido de valor suave, para el moteado del parénquima
+      const nrnd = rng(seed ^ 0x9e37);
+      const N = 64, noise = new Float32Array(N * N);
+      for (let i = 0; i < N * N; i++) noise[i] = nrnd();
+      const smooth = t => t * t * (3 - 2 * t);
+      function vnoise(u, v){
+        const x = u * N, y = v * N, x0 = Math.floor(x), y0 = Math.floor(y);
+        const fx = smooth(x - x0), fy = smooth(y - y0);
+        const g = (a, b) => noise[((b % N) + N) % N * N + (((a % N) + N) % N)];
+        return (g(x0, y0) * (1 - fx) + g(x0 + 1, y0) * fx) * (1 - fy) +
+               (g(x0, y0 + 1) * (1 - fx) + g(x0 + 1, y0 + 1) * fx) * fy;
+      }
+
+      for (let py = 0; py < SIZE; py++){
+        for (let px = 0; px < SIZE; px++){
+          // dos vecinos más cercanos: la diferencia marca el borde del lobulillo
+          const gx = Math.floor(px / CELL), gy = Math.floor(py / CELL);
+          let d1 = 1e9, d2 = 1e9;
+          for (let oy = -1; oy <= 1; oy++) for (let ox = -1; ox <= 1; ox++){
+            const s = seedAt(gx + ox, gy + oy);
+            let dx = s[0] + ox * 0 - px, dy = s[1] - py;
+            // envolver para que la textura no tenga costura
+            if (gx + ox < 0) dx = s[0] - SIZE - px; else if (gx + ox >= GRID) dx = s[0] + SIZE - px;
+            if (gy + oy < 0) dy = s[1] - SIZE - py; else if (gy + oy >= GRID) dy = s[1] + SIZE - py;
+            const d = Math.hypot(dx, dy);
+            if (d < d1){ d2 = d1; d1 = d; } else if (d < d2) d2 = d;
+          }
+          const edge = Math.max(0, 1 - (d2 - d1) / 5);       // 1 justo sobre el tabique
+          const septum = Math.pow(edge, 2.2);
+
+          const u = px / SIZE, v = py / SIZE;
+          const mottle = vnoise(u * 3.1, v * 3.1) * .62 + vnoise(u * 9.3, v * 9.3) * .26 + vnoise(u * 23, v * 23) * .12;
+          const grain = (nrnd() - .5) * 9;
+
+          // rosa del parénquima aireado -> rojo del tejido más congestivo
+          const m = (mottle - .5) * 2;
+          let r = tint[0] + m * 20 + grain;
+          let g = tint[1] + m * 26 + grain * .8;
+          let b = tint[2] + m * 25 + grain * .8;
+
+          // el tabique interlobulillar dibuja una línea fina y más pálida
+          r += septum * 27; g += septum * 20; b += septum * 20;
+          // pigmento antracótico: puntitos oscuros sobre los tabiques (carbón inhalado)
+          const soot = septum > .55 && nrnd() > .986 ? .55 + nrnd() * .35 : 0;
+          r -= soot * 150; g -= soot * 130; b -= soot * 120;
+
+          const i = (py * SIZE + px) * 4;
+          cD[i] = r; cD[i + 1] = g; cD[i + 2] = b; cD[i + 3] = 255;
+
+          // relieve: los tabiques son surcos, el parénquima tiene grano fino
+          const h = 168 - septum * 96 + (mottle - .5) * 42 + grain * 1.5;
+          bD[i] = bD[i + 1] = bD[i + 2] = h; bD[i + 3] = 255;
+
+          // la pleura es húmeda y brillante; el surco retiene menos brillo
+          const rg = 44 + septum * 90 + (mottle - .5) * 34;
+          rD[i] = rD[i + 1] = rD[i + 2] = rg; rD[i + 3] = 255;
+        }
+      }
+      cx.putImageData(cImg, 0, 0); bx.putImageData(bImg, 0, 0); rx.putImageData(rImg, 0, 0);
+
+      // red capilar subpleural: hilos finos que siguen la superficie
+      cx.lineCap = "round";
+      const vrnd = rng(seed ^ 0x51ed);
+      for (let i = 0; i < 260; i++){
+        let px = vrnd() * SIZE, py = vrnd() * SIZE;
+        let ang = vrnd() * Math.PI * 2;
+        const shade = vrnd() > .5;
+        cx.strokeStyle = shade ? `rgba(150,44,52,${.05 + vrnd() * .09})` : `rgba(255,196,186,${.05 + vrnd() * .08})`;
+        cx.lineWidth = .5 + vrnd() * 1.5;
+        cx.beginPath(); cx.moveTo(px, py);
+        for (let n = 0; n < 9; n++){
+          ang += (vrnd() - .5) * 1.05;
+          px += Math.cos(ang) * (9 + vrnd() * 15);
+          py += Math.sin(ang) * (9 + vrnd() * 15);
+          cx.lineTo(px, py);
+        }
+        cx.stroke();
+      }
+
+      const make = (cv, srgb) => {
+        const t = new THREE.CanvasTexture(cv);
+        t.wrapS = t.wrapT = THREE.RepeatWrapping;
+        t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+        return t;
+      };
+      return { map: make(color, true), bumpMap: make(bump, false), roughnessMap: make(rough, false) };
+    }
+
+    /* ---------------------------------------------------------------
+       GEOMETRÍA DEL PULMÓN
+       Marco canónico de cada pulmón: +X lateral (costal), -X medial,
+       +Z anterior, -Z posterior, +Y superior. El pulmón derecho se
+       genera igual y después se espeja.
+    --------------------------------------------------------------- */
+    const PROFILE = {
+      right: { height: 6.05, yBase: -3.30, rLat: 1.66, rMed: .95, rAnt: 1.02, rPost: 1.48, dome: 1.02, cardiac: .09 },
+      left:  { height: 6.55, yBase: -3.30, rLat: 1.46, rMed: .88, rAnt: .96, rPost: 1.38, dome: .82, cardiac: .27 }
+    };
+    const RADIAL = 132, RINGS = 104, CAP_RINGS = 14;
+    const angDist = (a, b) => Math.abs(Math.atan2(Math.sin(a - b), Math.cos(a - b)));
+    const gauss = (x, s) => Math.exp(-(x * x) / (s * s));
+
+    // punto de la superficie costal, t=0 borde inferior -> t=1 vértice (ápice)
+    function surfacePoint(P, side, t, a, out){
+      // el contorno NO es un cono: la cara costal es convexa (sigue las costillas)
+      // y termina en un ápice redondeado, no en punta
+      const w = Math.pow(Math.max(0, 1 - Math.pow(t, 1.85)), .5) * (1 + .045 * gauss(t - .14, .18));
+      const ca = Math.cos(a), sa = Math.sin(a);
+      let rx = ca >= 0 ? P.rLat : P.rMed;
+      let rz = sa >= 0 ? P.rAnt : P.rPost;
+
+      // el borde anterior es fino y afilado; el posterior es grueso y redondeado
+      rz *= sa >= 0 ? (1 - .16 * Math.pow(sa, 3)) : 1;
+
+      let x = rx * ca * w, z = rz * sa * w;
+
+      // cara medial aplanada, hilio hundido (entran bronquio y vasos)
+      const dMed = angDist(a, Math.PI);
+      const hilum = .30 * gauss(t - .54, .12) * gauss(dMed, .42);
+      // impresión cardíaca: el corazón apoya sobre la cara antero-medial
+      const dCard = angDist(a, 2.42);
+      const cardiac = P.cardiac * gauss(t - .40, .19) * gauss(dCard, .72);
+      // escotadura cardíaca y língula, exclusivas del pulmón izquierdo
+      const notch = side === "left" ? .36 * gauss(t - .47, .105) * gauss(angDist(a, 2.02), .44) : 0;
+      const lingula = side === "left" ? .14 * gauss(t - .29, .08) * gauss(angDist(a, 2.02), .40) : 0;
+
+      const dent = 1 - hilum - cardiac - notch + lingula;
+      x *= dent; z *= dent;
+
+      // irregularidad orgánica, para que no se lea como un elipsoide perfecto
+      const org = .009 * Math.sin(a * 5 + t * 13) + .006 * Math.sin(a * 11 - t * 21) + .004 * Math.sin(a * 3 + t * 31);
+      x *= 1 + org; z *= 1 + org;
+
+      // el ápice se inclina hacia adentro y hacia atrás
+      x -= .34 * t * t; z -= .18 * t * t * t;
+
+      out.set(x, P.yBase + t * P.height, z);
+      return out;
+    }
+
+    // cara diafragmática: cóncava, apoyada sobre la cúpula del diafragma
+    function basePoint(P, side, rho, a, out){
+      surfacePoint(P, side, 0, a, out);
+      const k = Math.cos(rho * Math.PI / 2);
+      const lift = P.dome * Math.pow(Math.sin(rho * Math.PI / 2), .62);
+      out.set(out.x * k, out.y + lift, out.z * k);
+      return out;
+    }
+
+    function buildLungSurface(side){
+      const P = PROFILE[side];
+      const rows = RINGS + CAP_RINGS + 1;
+      const pos = [], uv = [], idx = [];
+      const v = new THREE.Vector3();
+
+      // fila 0..CAP_RINGS  -> tapa basal (del centro hacia el borde)
+      for (let i = 0; i <= CAP_RINGS; i++){
+        const rho = 1 - i / CAP_RINGS;
+        for (let ix = 0; ix <= RADIAL; ix++){
+          const a = ix / RADIAL * Math.PI * 2;
+          basePoint(P, side, rho, a, v);
+          pos.push(v.x, v.y, v.z);
+          uv.push(ix / RADIAL * 2.1, (1 - rho) * .22);
+        }
+      }
+      // resto -> cara costal hasta el ápice
+      for (let iy = 1; iy <= RINGS; iy++){
+        const t = iy / RINGS;
+        for (let ix = 0; ix <= RADIAL; ix++){
+          const a = ix / RADIAL * Math.PI * 2;
+          surfacePoint(P, side, t, a, v);
+          pos.push(v.x, v.y, v.z);
+          uv.push(ix / RADIAL * 2.1, .22 + t * 1.55);
+        }
+      }
+      for (let iy = 0; iy < rows - 1; iy++)
+        for (let ix = 0; ix < RADIAL; ix++){
+          const a0 = iy * (RADIAL + 1) + ix, b0 = a0 + RADIAL + 1;
+          idx.push(a0, b0, a0 + 1, b0, b0 + 1, a0 + 1);
+        }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+      geo.setIndex(idx);
+      geo.computeVertexNormals();
+
+      if (side === "right"){                       // espejar y corregir el sentido de las caras
+        geo.scale(-1, 1, 1);
+        const ai = geo.index.array;
+        for (let i = 0; i < ai.length; i += 3){ const t0 = ai[i]; ai[i] = ai[i + 2]; ai[i + 2] = t0; }
+        geo.computeVertexNormals();
+      }
+      return geo;
+    }
+
+    /* ---------------------------------------------------------------
+       LÓBULOS: recorte por planos (cisuras) con tapa
+       El derecho tiene cisura oblicua + horizontal (3 lóbulos);
+       el izquierdo sólo la oblicua (2 lóbulos).
+    --------------------------------------------------------------- */
+    function toTriangles(geo){
+      const p = geo.attributes.position, n = geo.attributes.normal, u = geo.attributes.uv, ix = geo.index.array;
+      const tris = [];
+      for (let i = 0; i < ix.length; i += 3){
+        const t = [];
+        for (let k = 0; k < 3; k++){
+          const j = ix[i + k];
+          t.push({ p: new THREE.Vector3(p.getX(j), p.getY(j), p.getZ(j)),
+                   n: new THREE.Vector3(n.getX(j), n.getY(j), n.getZ(j)),
+                   u: new THREE.Vector2(u.getX(j), u.getY(j)) });
+        }
+        tris.push(t);
+      }
+      return tris;
+    }
+    const mixVert = (A, B, s) => ({
+      p: A.p.clone().lerp(B.p, s), n: A.n.clone().lerp(B.n, s).normalize(), u: A.u.clone().lerp(B.u, s)
+    });
+
+    // conserva el semiespacio n·p >= d y devuelve los segmentos del corte
+    function clipTriangles(tris, plane){
+      const kept = [], cuts = [];
+      for (const tri of tris){
+        const d = [plane.n.dot(tri[0].p) - plane.d, plane.n.dot(tri[1].p) - plane.d, plane.n.dot(tri[2].p) - plane.d];
+        const inside = [d[0] >= 0, d[1] >= 0, d[2] >= 0];
+        const count = (inside[0] ? 1 : 0) + (inside[1] ? 1 : 0) + (inside[2] ? 1 : 0);
+        if (count === 3){ kept.push(tri); continue; }
+        if (count === 0) continue;
+        const poly = [], onPlane = [];
+        for (let i = 0; i < 3; i++){
+          const j = (i + 1) % 3;
+          if (inside[i]) poly.push(tri[i]);
+          if (inside[i] !== inside[j]){
+            const v = mixVert(tri[i], tri[j], d[i] / (d[i] - d[j]));
+            poly.push(v); onPlane.push(v);
+          }
+        }
+        for (let i = 1; i < poly.length - 1; i++) kept.push([poly[0], poly[i], poly[i + 1]]);
+        if (onPlane.length === 2) cuts.push([onPlane[0].p, onPlane[1].p]);
+      }
+      return { kept, cuts };
+    }
+
+    // encadena los segmentos del corte en uno o más contornos cerrados
+    function buildLoops(cuts){
+      const EPS = 1e-4, key = v => `${Math.round(v.x / EPS)},${Math.round(v.y / EPS)},${Math.round(v.z / EPS)}`;
+      const nodes = new Map(), adj = new Map();
+      const id = v => { const k = key(v); if (!nodes.has(k)){ nodes.set(k, v.clone()); adj.set(k, []); } return k; };
+      for (const [a, b] of cuts){
+        const ka = id(a), kb = id(b);
+        if (ka === kb) continue;
+        adj.get(ka).push(kb); adj.get(kb).push(ka);
+      }
+      const seen = new Set(), loops = [];
+      for (const start of nodes.keys()){
+        if (seen.has(start)) continue;
+        const loop = []; let cur = start, prev = null;
+        while (cur && !seen.has(cur)){
+          seen.add(cur); loop.push(nodes.get(cur));
+          const next = (adj.get(cur) || []).find(k => k !== prev && !seen.has(k));
+          prev = cur; cur = next;
+        }
+        if (loop.length >= 3) loops.push(loop);
+      }
+      return loops;
+    }
+
+    // tapa la cisura: la cara interlobar es lisa y mira hacia -n
+    function capLoops(loops, plane){
+      const tris = [];
+      const nrm = plane.n.clone().negate();
+      const ex = new THREE.Vector3(1, 0, 0);
+      if (Math.abs(plane.n.x) > .9) ex.set(0, 1, 0);
+      const bx = new THREE.Vector3().crossVectors(plane.n, ex).normalize();
+      const bz = new THREE.Vector3().crossVectors(plane.n, bx).normalize();
+      for (const loop of loops){
+        if (loop.length < 3) continue;
+        const flat = loop.map(p => new THREE.Vector2(p.dot(bx), p.dot(bz)));
+        let faces;
+        try { faces = THREE.ShapeUtils.triangulateShape(flat, []); } catch (e) { faces = null; }
+        if (!faces || !faces.length){                       // reserva: abanico desde el centro
+          const c = new THREE.Vector3();
+          loop.forEach(p => c.add(p)); c.divideScalar(loop.length);
+          faces = []; const cIdx = loop.length; loop.push(c); flat.push(new THREE.Vector2(c.dot(bx), c.dot(bz)));
+          for (let i = 0; i < cIdx; i++) faces.push([i, (i + 1) % cIdx, cIdx]);
+        }
+        for (const f of faces){
+          const vs = f.map(i => ({ p: loop[i], n: nrm.clone(),
+            u: new THREE.Vector2(flat[i].x * .34 + .5, flat[i].y * .34 + .5) }));
+          // orientar siempre hacia -n
+          const e1 = vs[1].p.clone().sub(vs[0].p), e2 = vs[2].p.clone().sub(vs[0].p);
+          if (e1.cross(e2).dot(nrm) < 0) vs.reverse();
+          tris.push(vs);
+        }
+      }
+      return tris;
+    }
+
+    function trisToGeometry(surface, caps){
+      const pos = [], nor = [], uv = [];
+      const push = t => t.forEach(v => { pos.push(v.p.x, v.p.y, v.p.z); nor.push(v.n.x, v.n.y, v.n.z); uv.push(v.u.x, v.u.y); });
+      surface.forEach(push);
+      const split = pos.length / 3;
+      caps.forEach(push);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+      geo.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+      geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+      geo.addGroup(0, split, 0);
+      geo.addGroup(split, pos.length / 3 - split, 1);
+      geo.computeBoundingSphere();
+      return geo;
+    }
+
+    // planos de las cisuras (ya en coordenadas del mundo de cada pulmón)
+    function makePlane(nx, ny, nz, px, py, pz){
+      const n = new THREE.Vector3(nx, ny, nz).normalize();
+      return { n, d: n.dot(new THREE.Vector3(px, py, pz)) };
+    }
+    const flip = pl => ({ n: pl.n.clone().negate(), d: -pl.d });
+
+    function carveLobe(baseTris, planes){
+      let tris = baseTris, caps = [];
+      for (const pl of planes){
+        const { kept, cuts } = clipTriangles(tris, pl);
+        tris = kept;
+        caps = caps.concat(capLoops(buildLoops(cuts), pl));
+      }
+      return trisToGeometry(tris, caps);
+    }
+
+    /* --------------------------- ESCENA --------------------------- */
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.06;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x12161c);
+    scene.fog = new THREE.FogExp2(0x12161c, .022);
+
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture;
+
+    const camera = new THREE.PerspectiveCamera(38, 1, .1, 120);
+    camera.position.set(.6, .8, 14.5);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true; controls.dampingFactor = .075;
+    controls.minDistance = 7; controls.maxDistance = 24;
+    controls.target.set(0, .3, 0);
+    controls.enablePan = false;
+
+    scene.add(new THREE.HemisphereLight(0xdfe9f2, 0x2a1512, .85));
+    const key = new THREE.DirectionalLight(0xfff0e6, 2.6);
+    key.position.set(-6, 8, 9); key.castShadow = true;
+    key.shadow.mapSize.set(1024, 1024);
+    key.shadow.camera.near = 1; key.shadow.camera.far = 40;
+    key.shadow.camera.left = -9; key.shadow.camera.right = 9;
+    key.shadow.camera.top = 10; key.shadow.camera.bottom = -9;
+    key.shadow.bias = -.0016;
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0x8fc0da, 1.5); rim.position.set(7, 2, -6); scene.add(rim);
+    const fill = new THREE.PointLight(0xffb6a4, 22, 22, 2); fill.position.set(0, -4, 5); scene.add(fill);
+
+    const organ = new THREE.Group(); organ.rotation.x = -.03; scene.add(organ);
+
+    /* --------------------------- MATERIALES --------------------------- */
+    const texR = histologyTextures(4931, [196, 116, 110]);
+    const texL = histologyTextures(7183, [201, 123, 118]);
+
+    function pleuraMaterial(tex){
+      return new THREE.MeshPhysicalMaterial({
+        map: tex.map, bumpMap: tex.bumpMap, bumpScale: .15,
+        roughnessMap: tex.roughnessMap, roughness: 1, metalness: 0,
+        clearcoat: .38, clearcoatRoughness: .38,         // la pleura es una membrana húmeda y brillante
+        sheen: .7, sheenRoughness: .55, sheenColor: new THREE.Color(0x8d4a4c),
+        envMapIntensity: .65
+      });
+    }
+    // cara de la cisura: tejido cortado, más pálido y menos brillante
+    const fissureMat = new THREE.MeshPhysicalMaterial({
+      color: 0x9d5f5c, roughness: .68, metalness: 0, clearcoat: .2, clearcoatRoughness: .55,
+      sheen: .35, sheenColor: new THREE.Color(0x8d4a4c), envMapIntensity: .28
+    });
+
+    const LOBES = [
+      { side: "right", name: "Lóbulo superior derecho", note: "Cisura horizontal por debajo",
+        planes: [makePlane(.10, 1, .95, 0, .16, 0), flip(makePlane(0, 1, .17, 0, .72, .1))], dir: [-.45, .95, .1] },
+      { side: "right", name: "Lóbulo medio derecho", note: "Sólo existe en el pulmón derecho",
+        planes: [makePlane(.10, 1, .95, 0, .16, 0), makePlane(0, 1, .17, 0, .72, .1)], dir: [-.95, -.05, .45] },
+      { side: "right", name: "Lóbulo inferior derecho", note: "El más grande de los tres",
+        planes: [flip(makePlane(.10, 1, .95, 0, .16, 0))], dir: [-.25, -.95, -.3] },
+      { side: "left", name: "Lóbulo superior izquierdo", note: "Incluye la língula y la escotadura cardíaca",
+        planes: [makePlane(-.08, 1, 1.02, 0, -.02, 0)], dir: [.45, .95, .1] },
+      { side: "left", name: "Lóbulo inferior izquierdo", note: "Apoya sobre el diafragma",
+        planes: [flip(makePlane(-.08, 1, 1.02, 0, -.02, 0))], dir: [.25, -.95, -.3] }
+    ];
+
+    const lungOffset = { right: -1.52, left: 1.52 };
+    const lobeMeshes = [];
+    for (const side of ["right", "left"]){
+      const surf = buildLungSurface(side);
+      const tris = toTriangles(surf);
+      surf.dispose();
+      const mat = pleuraMaterial(side === "right" ? texR : texL);
+      for (const L of LOBES.filter(l => l.side === side)){
+        const geo = carveLobe(tris, L.planes);
+        const mesh = new THREE.Mesh(geo, [mat, fissureMat]);
+        const dir = new THREE.Vector3(...L.dir).normalize();
+        // separación mínima a lo largo de las normales de sus cisuras: es lo que
+        // dibuja el surco entre lóbulos sin necesidad de vista explotada
+        mesh.position.set(lungOffset[side], 0, 0);
+        L.planes.forEach(pl => mesh.position.addScaledVector(pl.n, .028));
+        mesh.rotation.z = side === "right" ? -.02 : .02;
+        mesh.castShadow = mesh.receiveShadow = true;
+        mesh.userData = { name: L.name, note: L.note, home: mesh.position.clone(), dir };
+        organ.add(mesh); lobeMeshes.push(mesh);
+      }
+    }
+
+    // ¿el punto cae dentro del volumen pulmonar? Se usa para que el árbol
+    // bronquial y los vasos crezcan por dentro del órgano y no por fuera.
+    const lungFrame = {
+      right: { P: PROFILE.right, side: "right", ox: lungOffset.right, sx: -1 },
+      left:  { P: PROFILE.left,  side: "left",  ox: lungOffset.left,  sx: 1 }
+    };
+    const _sp = new THREE.Vector3();
+    function clampInside(f, p, tubeR){
+      const lx = (p.x - f.ox) * f.sx, lz = p.z;
+      const t = THREE.MathUtils.clamp((p.y - f.P.yBase) / f.P.height, .06, .90);
+      surfacePoint(f.P, f.side, t, Math.atan2(lz, lx), _sp);
+      // el eje del conducto tiene que quedar a más de un radio de la superficie
+      const R = Math.max(.12, Math.hypot(_sp.x, _sp.z) * .86 - tubeR * 3.5), r = Math.hypot(lx, lz);
+      const k = r > R ? R / r : 1;
+      p.set(f.ox + lx * k * f.sx, THREE.MathUtils.clamp(p.y, f.P.yBase + .5, f.P.yBase + f.P.height * .90), lz * k);
+      return p;
+    }
+
+    /* --------------------------- VÍA AÉREA --------------------------- */
+    const airwayMat = new THREE.MeshPhysicalMaterial({
+      color: 0xdcc0ac, roughness: .48, metalness: 0, clearcoat: .35, clearcoatRoughness: .35, envMapIntensity: .5
+    });
+    const cartilageMat = new THREE.MeshStandardMaterial({ color: 0xc9a68e, roughness: .55, envMapIntensity: .45 });
+
+    const airways = new THREE.Group(); organ.add(airways);
+    airways.userData = { name: "Tráquea y bronquios", note: "Anillos de cartílago en forma de C" };
+
+    // tráquea: ~11 cm de largo por 2 cm de ancho, la mitad de la altura del pulmón
+    const trachea = new THREE.Mesh(new THREE.CylinderGeometry(.24, .27, 2.6, 36, 10), airwayMat);
+    trachea.position.set(0, 3.75, -.06); trachea.castShadow = true; airways.add(trachea);
+    // anillos de cartílago ABIERTOS por detrás, como los reales (forma de C)
+    for (let i = 0; i < 13; i++){
+      const y = 2.62 + i * .2;
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(.257 - i * .0018, .028, 9, 30, Math.PI * 1.32), cartilageMat);
+      ring.rotation.x = Math.PI / 2; ring.rotation.z = -Math.PI * .66 - Math.PI / 2;
+      ring.position.set(0, y, -.06); ring.castShadow = true; airways.add(ring);
+    }
+
+    function tube(points, r0, r1, mat, seg){
+      const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p)));
+      const geo = new THREE.TubeGeometry(curve, seg || 26, 1, 12, false);
+      // afinar el conducto a lo largo del recorrido (los bronquios se estrechan al ramificarse)
+      const pos = geo.attributes.position, nor = geo.attributes.normal;
+      const radial = 13, rows = pos.count / radial;
+      for (let i = 0; i < pos.count; i++){
+        const t = Math.floor(i / radial) / (rows - 1);
+        const r = r0 + (r1 - r0) * t;
+        const c = curve.getPoint(t);
+        pos.setXYZ(i, c.x + nor.getX(i) * r, c.y + nor.getY(i) * r, c.z + nor.getZ(i) * r);
+      }
+      geo.computeVertexNormals();
+      const m = new THREE.Mesh(geo, mat); m.castShadow = true;
+      return { mesh: m, curve };
+    }
+
+    // bronquios principales: el derecho es más ancho, corto y vertical que el izquierdo
+    const hilumR = new THREE.Vector3(-1.00, .95, .06), hilumL = new THREE.Vector3(.98, 1.15, .08);
+    const mainR = tube([[0, 2.46, -.06], [-.24, 2.10, -.03], [-.64, 1.55, .01], [hilumR.x, hilumR.y, hilumR.z]], .19, .16, airwayMat);
+    const mainL = tube([[0, 2.46, -.06], [.22, 2.16, -.03], [.60, 1.74, .01], [hilumL.x, hilumL.y, hilumL.z]], .165, .14, airwayMat);
+    airways.add(mainR.mesh, mainL.mesh);
+    for (const { curve, n } of [{ curve: mainR.curve, n: 4 }, { curve: mainL.curve, n: 5 }]){
+      for (let i = 1; i <= n; i++){
+        const t = .26 + i / (n + 1) * .58;
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(.172, .019, 8, 24, Math.PI * 1.4), cartilageMat);
+        ring.position.copy(curve.getPoint(t));
+        ring.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), curve.getTangent(t).normalize());
+        airways.add(ring);
+      }
+    }
+
+    // árbol bronquial: ramificación dicotómica recursiva, confinada al volumen del pulmón
+    const bronchial = new THREE.Group(); airways.add(bronchial);
+    const brnd = rng(20260802);
+    function growTree(target, frame, origin, dir, len, radius, depth, mat, jitter){
+      if (depth === 0 || radius < .011) return;
+      const pts = [origin.clone()];
+      let p = origin.clone(), d = dir.clone().normalize();
+      for (let i = 0; i < 3; i++){
+        d.x += (brnd() - .5) * jitter; d.y += (brnd() - .5) * jitter * .8; d.z += (brnd() - .5) * jitter;
+        d.normalize();
+        p = clampInside(frame, p.clone().addScaledVector(d, len / 3), radius);
+        pts.push(p.clone());
+      }
+      const t = tube(pts.map(v => [v.x, v.y, v.z]), radius, radius * .74, mat, 10);
+      t.mesh.castShadow = false; target.add(t.mesh);
+      const axis = new THREE.Vector3(brnd() - .5, brnd() - .5, brnd() - .5).normalize();
+      for (const s of [1, -1])
+        growTree(target, frame, p, d.clone().applyAxisAngle(axis, s * (.44 + brnd() * .3)),
+                 len * (.74 + brnd() * .1), radius * .70, depth - 1, mat, jitter);
+    }
+    // desde cada hilio: una rama hacia el lóbulo inferior y otra hacia el superior
+    growTree(bronchial, lungFrame.right, hilumR, new THREE.Vector3(-.30, -.70, .16), 1.15, .155, 5, airwayMat, .24);
+    growTree(bronchial, lungFrame.right, hilumR, new THREE.Vector3(-.24, .72, .12), .90, .115, 4, airwayMat, .24);
+    growTree(bronchial, lungFrame.left,  hilumL, new THREE.Vector3(.30, -.72, .16), 1.10, .145, 5, airwayMat, .24);
+    growTree(bronchial, lungFrame.left,  hilumL, new THREE.Vector3(.24, .70, .12), .85, .105, 4, airwayMat, .24);
+
+    /* --------------------------- VASOS --------------------------- */
+    const arteryMat = new THREE.MeshPhysicalMaterial({ color: 0x5b8fc9, roughness: .45, clearcoat: .3, envMapIntensity: .5 });
+    const veinMat   = new THREE.MeshPhysicalMaterial({ color: 0xc4525c, roughness: .45, clearcoat: .3, envMapIntensity: .5 });
+    const vessels = new THREE.Group(); airways.add(vessels);
+    vessels.userData = { name: "Vasos pulmonares", note: "Arteria pulmonar (azul) y venas (rojo)" };
+    // la arteria entra por detrás del bronquio y las venas salen por delante y abajo
+    growTree(vessels, lungFrame.right, hilumR.clone().add(new THREE.Vector3(-.05, .22, -.34)),
+             new THREE.Vector3(-.42, -.48, -.2), 1.05, .105, 4, arteryMat, .3);
+    growTree(vessels, lungFrame.right, hilumR.clone().add(new THREE.Vector3(-.05, -.34, .34)),
+             new THREE.Vector3(-.42, -.55, .28), 1.0, .095, 4, veinMat, .3);
+    growTree(vessels, lungFrame.left, hilumL.clone().add(new THREE.Vector3(.05, .22, -.34)),
+             new THREE.Vector3(.42, -.48, -.2), 1.0, .1, 4, arteryMat, .3);
+    growTree(vessels, lungFrame.left, hilumL.clone().add(new THREE.Vector3(.05, -.34, .34)),
+             new THREE.Vector3(.42, -.55, .28), .95, .09, 4, veinMat, .3);
+
+    /* --------------------------- PISO --------------------------- */
+    const ground = new THREE.Mesh(
+      new THREE.CircleGeometry(7.5, 72),
+      new THREE.MeshStandardMaterial({ color: 0x11151b, roughness: 1, transparent: true, opacity: .7 })
+    );
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -4.55; ground.receiveShadow = true; scene.add(ground);
+    const grid = new THREE.GridHelper(20, 20, 0x2f3742, 0x212831);
+    grid.position.y = -4.53; grid.material.transparent = true; grid.material.opacity = .3; scene.add(grid);
+
+    /* --------------------------- ENCUADRE --------------------------- */
+    // la cámara se calcula a partir del tamaño real del modelo, así entra
+    // completo en cualquier proporción de pantalla (celular incluido)
+    const bounds = new THREE.Box3().setFromObject(organ);
+    const center = bounds.getCenter(new THREE.Vector3());
+    const radius = bounds.getBoundingSphere(new THREE.Sphere()).radius;
+    function frameCamera(){
+      const vFov = camera.fov * Math.PI / 180;
+      const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+      const dist = radius / Math.sin(Math.min(vFov, hFov) / 2) * 1.06;
+      controls.target.copy(center);
+      camera.position.set(center.x + dist * .06, center.y + dist * .05, center.z + dist);
+      controls.minDistance = dist * .45; controls.maxDistance = dist * 1.9;
+      camera.near = Math.max(.1, dist * .02); camera.far = dist * 6;
+      camera.updateProjectionMatrix();
+      controls.update(); controls.saveState();
+    }
+
+    /* --------------------------- INTERACCIÓN --------------------------- */
+    let breathing = true, inside = false, exploded = 0, explodedTarget = 0;
+    const btnBreath = document.getElementById("btnBreath");
+    const btnInside = document.getElementById("btnInside");
+    const btnLobes = document.getElementById("btnLobes");
+    const btnReset = document.getElementById("btnReset");
+
+    const toggle = (btn, on) => { btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", String(on)); };
+    btnBreath.onclick = () => { breathing = !breathing; toggle(btnBreath, breathing); };
+    btnLobes.onclick = () => { explodedTarget = explodedTarget > .5 ? 0 : 1; toggle(btnLobes, explodedTarget > .5); };
+    // el árbol bronquial y los vasos viven DENTRO del pulmón: sólo se muestran
+    // cuando el tejido se vuelve translúcido
+    bronchial.visible = vessels.visible = false;
+    btnInside.onclick = () => {
+      inside = !inside; toggle(btnInside, inside);
+      bronchial.visible = vessels.visible = inside;
+      document.getElementById("legend").style.opacity = inside ? ".35" : "1";
+      for (const m of lobeMeshes){
+        const mats = Array.isArray(m.material) ? m.material : [m.material];
+        for (const mm of mats){ mm.transparent = inside; mm.opacity = inside ? .24 : 1; mm.depthWrite = !inside; }
+        m.castShadow = !inside;
+      }
+    };
+    btnReset.onclick = () => controls.reset();
+    canvas.addEventListener("dblclick", () => controls.reset());
+    addEventListener("keydown", e => { if (e.key.toLowerCase() === "r") controls.reset(); });
+
+    const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+    let hovered = null;
+    function pick(clientX, clientY){
+      const r = canvas.getBoundingClientRect();
+      ptr.set((clientX - r.left) / r.width * 2 - 1, -((clientY - r.top) / r.height * 2 - 1));
+      ray.setFromCamera(ptr, camera);
+      const hits = ray.intersectObjects([...lobeMeshes, airways], true);
+      let found = null;
+      for (const h of hits){
+        let o = h.object;
+        while (o && o !== organ && !(o.userData && o.userData.name)) o = o.parent;
+        if (o && o.userData && o.userData.name){ found = o; break; }
+      }
+      if (!found){ tip.classList.remove("show"); hovered = null; return; }
+      hovered = found;
+      tip.innerHTML = `<b>${found.userData.name}</b><span>${found.userData.note || ""}</span>`;
+      tip.style.left = (clientX - r.left) + "px";
+      tip.style.top = (clientY - r.top) + "px";
+      tip.classList.add("show");
+    }
+    canvas.addEventListener("pointermove", e => { if (e.pointerType === "mouse") pick(e.clientX, e.clientY); });
+    canvas.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") pick(e.clientX, e.clientY); });
+    canvas.addEventListener("pointerleave", () => { tip.classList.remove("show"); });
+
+    let touched = false;
+    controls.addEventListener("start", () => { touched = true; });
+    function resize(){
+      const w = viewport.clientWidth, h = viewport.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      // mientras nadie haya girado el modelo, reencuadrar al cambiar la pantalla
+      if (!touched) frameCamera();
+    }
+    new ResizeObserver(resize).observe(viewport); resize(); frameCamera();
+
+    const clock = new THREE.Clock();
+    function animate(){
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      // la respiración no es simétrica: la inspiración es más corta que la espiración
+      const phase = (t * .42) % 1;
+      const cycle = phase < .4 ? Math.sin(phase / .4 * Math.PI / 2) : Math.cos((phase - .4) / .6 * Math.PI / 2);
+      const s = breathing ? 1 + cycle * .035 : 1;
+      exploded += (explodedTarget - exploded) * .07;
+      for (const m of lobeMeshes){
+        m.scale.setScalar(s);
+        m.position.copy(m.userData.home).addScaledVector(m.userData.dir, exploded * 1.5);
+        // al inspirar, la base desciende sobre el diafragma
+        if (breathing) m.position.y -= cycle * .08;
+      }
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+    requestAnimationFrame(() => loading.classList.add("hidden"));
+  </script>
+  <noscript>
+    <div class="fallback">Este modelo 3D necesita JavaScript y un navegador con WebGL para funcionar.</div>
+  </noscript>
+</body>
+</html>
