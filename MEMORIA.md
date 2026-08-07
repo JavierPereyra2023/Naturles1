@@ -455,3 +455,36 @@ Qué se cambió en el modelo:
 - Errores corregidos durante el armado: el árbol bronquial crecía fuera del órgano,
   las cisuras no se veían (hacía falta separar cada lóbulo a lo largo de la normal de
   su propio plano) y la silueta salía cónica.
+
+## Parque eólico 3D — paisaje mejorado (2026-08-06)
+
+`modelo3D_eolico/parque-eolico-3d.html` es un bundle: el código de la escena viaja
+como JSON dentro de `<script type="__bundler/template">` (última línea del archivo).
+Para editarlo hay que decodificar ese JSON, tocar el HTML y volver a codificarlo
+**escapando `</` como `<\u002F`**, si no el `</script>` interno corta el tag.
+
+- **Montañas**: se reemplazaron las tres crestas de seno único por cinco cordones
+  generados con varias octavas. Cada uno es un plano acostado y desplazado: cara
+  frontal empinada hasta una cresta que serpentea en profundidad, y contrapendiente
+  que baja casi hasta el suelo (una meseta plana muestra su borde lejano como una
+  línea horizontal contra el cielo — ése fue el defecto a corregir). Colores por
+  vértice: roca iluminada ↔ roca en sombra, y nieve arriba de una línea irregular.
+  Además 46 afloramientos rocosos instanciados en el valle.
+  Las cordilleras laterales se probaron y se descartaron: en órbitas de costado se
+  ven de canto y quedan como láminas flotando.
+- **Casas**: techo a dos aguas con `BufferGeometry` explícita (`ConeGeometry(...,4)`
+  sólo da pirámide), alero, cumbrera, zócalo de piedra, chimenea, puerta con marco y
+  escalón, ventanas con marco/parteluz/antepecho, postes de esquina y arbustos.
+  17 casas + granero + iglesia con campanario y aguja + silo + dos corrales con
+  alambrado (postes instanciados).
+- **Animales**: de 16 a 44, en cinco especies con builders propios — ovejas, vacas,
+  caballos, cabras y teros (por el nombre del parque). Las patas cuelgan de un grupo
+  pivote para que la marcha rote desde la cadera; cola y cuello animados. Cada manada
+  tiene un centro y un radio de vagabundeo, así no se dispersan por todo el mapa.
+  Se sumaron 16 aves planeando en tres bandadas con aleteo.
+- El preset de cámara `pueblo` se corrió afuera del caserío: con el pueblo ampliado
+  quedaba adentro de una casa.
+- Se agregó el cache-buster `?v=20260806` al iframe en `unidades/fisica/energia/eolica.html`
+  (era el único modelo que no lo tenía).
+- Medido 59.6 fps después de los cambios. Ojo: al medir fps en un tab que no está al
+  frente el navegador lo estrangula a ~1 fps y parece un problema de rendimiento.

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="Comparación de ovíparos, vivíparos y ovovivíparos">
+  <defs>
+    <linearGradient id="bgR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <pattern id="gridR" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22C55E"/>
+      <stop offset="1" stop-color="#16A34A"/>
+    </linearGradient>
+    <linearGradient id="gWater" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="gEnergy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="520" fill="url(#bgR)"/>
+  <rect width="900" height="520" fill="url(#gridR)"/>
+
+  <text x="40" y="42" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3">EJE 4 · ANIMALES</text>
+  <text x="40" y="78" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="28" font-weight="800">¿Dónde se desarrolla el embrión?</text>
+  <text x="40" y="104" fill="#5A6B60" font-family="Inter, sans-serif" font-size="13">Tres estrategias de nacimiento en el reino animal</text>
+
+  <!-- Card 1: Ovíparo -->
+  <g transform="translate(40, 140)">
+    <rect width="260" height="340" rx="10" fill="rgba(34,197,94,0.06)" stroke="rgba(34,197,94,0.35)" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="6" rx="3" fill="url(#gLeaf)"/>
+    <circle cx="130" cy="52" r="28" fill="rgba(34,197,94,0.15)" stroke="#22C55E" stroke-width="2"/>
+    <!-- egg icon -->
+    <ellipse cx="130" cy="52" rx="12" ry="16" fill="none" stroke="#22C55E" stroke-width="2.2"/>
+    <path d="M124 48 Q130 42 136 48" fill="none" stroke="#22C55E" stroke-width="1.5" opacity="0.7"/>
+    <text x="130" y="100" text-anchor="middle" fill="#22C55E" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">OVÍPARO</text>
+    <text x="130" y="128" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="15" font-weight="700">Nace de un huevo</text>
+    <text x="130" y="148" text-anchor="middle" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="12">puesto afuera</text>
+
+    <line x1="40" y1="170" x2="220" y2="170" stroke="rgba(34,197,94,0.2)"/>
+
+    <text x="30" y="200" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Embrión fuera de la madre</text>
+    <text x="30" y="226" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Se alimenta de la yema</text>
+    <text x="30" y="252" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Rompe el cascarón</text>
+    <text x="30" y="278" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Cáscara o gelatina</text>
+
+    <rect x="30" y="300" width="200" height="28" rx="6" fill="rgba(34,197,94,0.12)"/>
+    <text x="130" y="319" text-anchor="middle" fill="#22C55E" font-family="Inter, sans-serif" font-size="11" font-weight="600">aves · reptiles · peces · insectos</text>
+  </g>
+
+  <!-- Card 2: Vivíparo -->
+  <g transform="translate(320, 140)">
+    <rect width="260" height="340" rx="10" fill="rgba(56,189,248,0.06)" stroke="rgba(56,189,248,0.35)" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="6" rx="3" fill="url(#gWater)"/>
+    <circle cx="130" cy="52" r="28" fill="rgba(56,189,248,0.15)" stroke="#38BDF8" stroke-width="2"/>
+    <!-- mother + baby icon -->
+    <circle cx="122" cy="48" r="9" fill="none" stroke="#38BDF8" stroke-width="2"/>
+    <path d="M110 68 Q122 58 134 68" fill="none" stroke="#38BDF8" stroke-width="2"/>
+    <circle cx="142" cy="56" r="5" fill="none" stroke="#38BDF8" stroke-width="1.8"/>
+    <text x="130" y="100" text-anchor="middle" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="2">VIVÍPARO</text>
+    <text x="130" y="128" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="15" font-weight="700">Nace vivo</text>
+    <text x="130" y="148" text-anchor="middle" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="12">del cuerpo materno</text>
+
+    <line x1="40" y1="170" x2="220" y2="170" stroke="rgba(56,189,248,0.2)"/>
+
+    <text x="30" y="200" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Embrión en el útero</text>
+    <text x="30" y="226" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Nutrientes vía placenta</text>
+    <text x="30" y="252" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Nace ya formado</text>
+    <text x="30" y="278" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Mama leche al nacer</text>
+
+    <rect x="30" y="300" width="200" height="28" rx="6" fill="rgba(56,189,248,0.12)"/>
+    <text x="130" y="319" text-anchor="middle" fill="#38BDF8" font-family="Inter, sans-serif" font-size="11" font-weight="600">casi todos los mamíferos</text>
+  </g>
+
+  <!-- Card 3: Ovovivíparo -->
+  <g transform="translate(600, 140)">
+    <rect width="260" height="340" rx="10" fill="rgba(59,130,246,0.06)" stroke="rgba(59,130,246,0.35)" stroke-width="1.5"/>
+    <rect x="0" y="0" width="260" height="6" rx="3" fill="url(#gEnergy)"/>
+    <circle cx="130" cy="52" r="28" fill="rgba(59,130,246,0.15)" stroke="#3B82F6" stroke-width="2"/>
+    <!-- egg inside body icon -->
+    <ellipse cx="130" cy="52" rx="16" ry="12" fill="none" stroke="#3B82F6" stroke-width="2"/>
+    <ellipse cx="130" cy="52" rx="7" ry="9" fill="none" stroke="#3B82F6" stroke-width="1.8"/>
+    <text x="130" y="100" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="1">OVOVIVÍPARO</text>
+    <text x="130" y="128" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="15" font-weight="700">Huevo adentro</text>
+    <text x="130" y="148" text-anchor="middle" fill="#A8B5AD" font-family="Inter, sans-serif" font-size="12">eclosiona y nace vivo</text>
+
+    <line x1="40" y1="170" x2="220" y2="170" stroke="rgba(59,130,246,0.2)"/>
+
+    <text x="30" y="200" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Huevo retenido adentro</text>
+    <text x="30" y="226" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Se alimenta de la yema</text>
+    <text x="30" y="252" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Sin placenta</text>
+    <text x="30" y="278" fill="#C8D4CC" font-family="Inter, sans-serif" font-size="12">• Nace vivo al eclosionar</text>
+
+    <rect x="30" y="300" width="200" height="28" rx="6" fill="rgba(59,130,246,0.12)"/>
+    <text x="130" y="319" text-anchor="middle" fill="#3B82F6" font-family="Inter, sans-serif" font-size="11" font-weight="600">tiburón · boa · víbora de la cruz</text>
+  </g>
+</svg>

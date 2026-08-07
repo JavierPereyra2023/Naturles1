@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproducción en Animales — Ovíparos, Vivíparos y Ovovivíparos | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; } .delay-600 { animation-delay: 600ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .accent-line-bio { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+    .sidebar-note { border: 1px solid rgba(255,255,255,0.08); background: rgba(22,28,24,0.7); }
+    .pull-quote {
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; font-style: italic;
+      color: #DC2626; border-left: 3px solid #DC2626; padding-left: 1.5rem;
+    }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.85; color: #DC2626;
+      padding-right: 0.5rem; padding-top: 0.1rem;
+    }
+    .figure-frame { border: 1px solid rgba(255,255,255,0.06); background: rgba(22,28,24,0.5); overflow: hidden; }
+    .figure-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .figure-frame figcaption { font-family: 'Inter', sans-serif; font-size: 11px; color: #5A6B60; padding: 8px 12px; line-height: 1.5; }
+    .grain-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 2; opacity: 0.32; mix-blend-mode: overlay;
+    }
+    .grain-overlay::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.45'/%3E%3C/svg%3E");
+      background-size: 96px 96px;
+      animation: grainShift 0.4s steps(4) infinite;
+    }
+    @keyframes grainShift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-3px, 2px); }
+      50% { transform: translate(2px, -3px); }
+      75% { transform: translate(-1px, -1px); }
+    }
+    .sabias-que { border-left:3px solid #DC2626; background:rgba(220,38,38,0.05); padding:14px 18px; margin:24px 0; border-radius:0 8px 8px 0; }
+    .sabias-que .sq-label { font-family:'Inter',sans-serif; font-size:9px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:6px; display:block; color:#DC2626; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+    details.content-card summary { list-style: none; }
+    details.content-card summary::-webkit-details-marker { display: none; }
+    details.content-card[open] { border-color: rgba(220,38,38,0.25); }
+    .classify-chip {
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      padding: 10px 14px; border-radius: 8px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.08); background: rgba(22,28,24,0.9);
+      color: #C8D4CC; transition: all 0.2s ease; user-select: none;
+    }
+    .classify-chip:hover { border-color: rgba(220,38,38,0.4); color: #fff; transform: translateY(-1px); }
+    .classify-chip.used { opacity: 0.35; pointer-events: none; }
+    .classify-zone {
+      min-height: 120px; border: 1px dashed rgba(255,255,255,0.12); border-radius: 10px;
+      padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .classify-zone.drag-over { border-style: solid; }
+    .classify-zone[data-type="oviparo"] { border-color: rgba(34,197,94,0.35); }
+    .classify-zone[data-type="viviparo"] { border-color: rgba(56,189,248,0.35); }
+    .classify-zone[data-type="ovoviviparo"] { border-color: rgba(59,130,246,0.35); }
+    .classify-zone[data-type="oviparo"].drag-over { background: rgba(34,197,94,0.08); }
+    .classify-zone[data-type="viviparo"].drag-over { background: rgba(56,189,248,0.08); }
+    .classify-zone[data-type="ovoviviparo"].drag-over { background: rgba(59,130,246,0.08); }
+    .classify-chip.in-zone { cursor: grab; }
+    .classify-chip.correct { border-color: rgba(34,197,94,0.6); background: rgba(34,197,94,0.12); color: #86EFAC; }
+    .classify-chip.wrong { border-color: rgba(220,38,38,0.6); background: rgba(220,38,38,0.12); color: #FCA5A5; }
+    .classify-btn {
+      font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 10px 18px; border-radius: 8px; cursor: pointer;
+      border: 1px solid rgba(220,38,38,0.4); background: rgba(220,38,38,0.12); color: #FCA5A5;
+      transition: all 0.2s;
+    }
+    .classify-btn:hover { background: rgba(220,38,38,0.22); color: #fff; }
+    .classify-btn.secondary { border-color: rgba(255,255,255,0.12); background: transparent; color: #A8B5AD; }
+    .classify-btn.secondary:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+    #classifyFeedback { font-family: 'Inter', sans-serif; font-size: 13px; min-height: 1.4em; }
+.search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+.search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+.search-overlay-input::placeholder { color:#5A6B60; }
+.search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+.search-overlay-results.active { display:block; }
+.search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+.search-result-item:last-child { border-bottom:none; }
+.search-result-item:hover { background:rgba(255,255,255,0.04); }
+.sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+.sr-name { flex:1; }
+.sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+.search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  </head>
+<body class="bg-natura-black text-natura-silver font-body bg-ecosistemas">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Animales</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">Reproducción</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · Animales</span>
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="../../../assets/biologia/animales/hero-eclosion-tortugas.jpg" alt="Crías de tortuga marina recién nacidas avanzando por la arena hacia el mar" class="w-full h-full object-cover" style="filter: grayscale(8%) brightness(0.78) contrast(1.08);">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line-bio"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · Animales</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        Reproducción en Animales — <span class="text-natura-bio">Ovíparos, Vivíparos y Ovovivíparos</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Todos los animales se reproducen, pero no todos nacen de la misma manera. Algunos salen de un huevo puesto por su madre; otros se desarrollan dentro del cuerpo materno. Conocé las tres estrategias y sus ejemplos en distintas especies.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Ovíparos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Vivíparos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Ovovivíparos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Ejemplos por especie</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-7xl mx-auto px-4 md:px-6">
+  <hr class="border-white/5">
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <!-- SIDEBAR TOC -->
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#como-nacen-los-animales" class="toc-link active" data-toc>01. ¿Cómo nacen los animales?</a>
+          <a href="#oviparos" class="toc-link" data-toc>02. Ovíparos</a>
+          <a href="#viviparos" class="toc-link" data-toc>03. Vivíparos</a>
+          <a href="#ovoviviparos" class="toc-link" data-toc>04. Ovovivíparos</a>
+          <a href="#diagrama" class="toc-link" data-toc>05. Diagrama</a>
+          <a href="#tabla-comparativa" class="toc-link" data-toc>06. Tabla Comparativa</a>
+          <a href="#practica" class="toc-link" data-toc>07. Clasificá</a>
+          <a href="#excepciones" class="toc-link" data-toc>08. Excepciones</a>
+          <a href="#preguntas-para-pensar" class="toc-link" data-toc>09. Preguntas para Pensar</a>
+      </nav>
+    </div>
+  </aside>
+<main class="flex-1 min-w-0 space-y-12">
+
+    <!-- SECTION 1: ¿Cómo nacen los animales? -->
+    <section class="animate-fadeInUp" id="como-nacen-los-animales">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">¿Cómo nacen los animales?</h2>
+      </div>
+      <div class="highlight-box p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify mt-0.5 shrink-0 text-natura-bio" data-icon="lucide:heart-pulse" data-width="22"></span>
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+            La reproducción es una función vital: sin ella las especies desaparecen. En la mayoría de los animales la reproducción es sexual: una célula femenina (óvulo) se une con una masculina (espermatozoide) y se forma un nuevo ser.
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-lg text-natura-silverDark leading-relaxed">
+        Después de la fecundación, el embrión empieza a desarrollarse. La gran pregunta es: <strong class="text-natura-silverLight">¿dónde y cómo se desarrolla ese embrión hasta el nacimiento?</strong> Según la respuesta, los animales se clasifican en tres grupos: <strong class="text-natura-silverLight">ovíparos</strong> (nacen de huevos que la madre pone), <strong class="text-natura-silverLight">vivíparos</strong> (nacen vivos del cuerpo de la madre) y <strong class="text-natura-silverLight">ovovivíparos</strong> (nacen de huevos que se abren dentro del cuerpo de la madre). Las palabras vienen del latín: <em>ovum</em> (huevo), <em>vivus</em> (vivo) y <em>parire</em> (parir, dar a luz).
+      </p>
+      <div class="mt-5 pull-quote text-base md:text-xl leading-relaxed max-w-2xl">
+        «Cada estrategia de nacimiento es una solución distinta al mismo problema: proteger al embrión hasta que pueda valerse por sí mismo.»
+      </div>
+      <div class="grid sm:grid-cols-3 gap-3 mt-6">
+        <a href="#oviparos" class="stat-box bg-natura-dark p-4 no-underline block">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-natura-leaf" style="font-family:'Inter',sans-serif;">Ovíparo</span>
+          <p class="text-sm text-white font-semibold mt-1">Huevo afuera</p>
+          <p class="text-xs text-natura-silverDark mt-1">Gallina, tortuga, rana</p>
+        </a>
+        <a href="#viviparos" class="stat-box bg-natura-dark p-4 no-underline block">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-natura-water" style="font-family:'Inter',sans-serif;">Vivíparo</span>
+          <p class="text-sm text-white font-semibold mt-1">Nace vivo · placenta</p>
+          <p class="text-xs text-natura-silverDark mt-1">Humano, elefante, perro</p>
+        </a>
+        <a href="#ovoviviparos" class="stat-box bg-natura-dark p-4 no-underline block">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-natura-energy" style="font-family:'Inter',sans-serif;">Ovovivíparo</span>
+          <p class="text-sm text-white font-semibold mt-1">Huevo adentro</p>
+          <p class="text-xs text-natura-silverDark mt-1">Tiburón, boa, víbora</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Ovíparos -->
+    <section class="animate-fadeInUp delay-100" id="oviparos">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Ovíparos</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Son los animales que ponen huevos. El embrión se desarrolla dentro del huevo, fuera del cuerpo de la madre, y se alimenta de la yema que viene adentro. Cuando el embrión termina de formarse, rompe el cascarón y nace. Son ovíparos todas las aves, la mayoría de los reptiles, los anfibios, la mayoría de los peces y casi todos los insectos.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-leaf" data-icon="lucide:egg" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">¿Cómo es el huevo?</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-natura-silverLight">Cáscara dura</strong> (aves y reptiles) o <strong class="text-natura-silverLight">cubierta gelatinosa</strong> (anfibios y peces)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> La <strong class="text-natura-silverLight">yema</strong> es el alimento del embrión durante todo el desarrollo</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> La cáscara protege y deja pasar el oxígeno que el embrión necesita</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Los huevos de anfibios y peces necesitan estar en el agua para no secarse</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:shield" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Dos estrategias</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> <strong class="text-natura-silverLight">Muchos huevos, poco cuidado</strong>: peces y anfibios ponen miles; la mayoría no sobrevive</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> <strong class="text-natura-silverLight">Pocos huevos, mucho cuidado</strong>: las aves incuban y protegen a sus crías al nacer</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> Algunas aves hacen nidos; las tortugas entierran sus huevos en la arena</li>
+            <li class="flex items-start gap-2"><span class="text-natura-energy mt-0.5">•</span> El calor de la incubación es clave: sin temperatura adecuada, el embrión no se desarrolla</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <figure class="figure-frame">
+          <div class="h-36 md:h-40"><img src="../../../assets/biologia/animales/gallina-pollitos.jpg" alt="Gallina junto a sus pollitos recién nacidos" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Gallina</strong> — ave ovípara: incuba unos 21 días hasta que nace el pollito.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-36 md:h-40"><img src="../../../assets/biologia/animales/nandu-huevos.jpg" alt="Nido de ñandú con huevos" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Ñandú</strong> — ave argentina; el macho incuba los huevos y cuida a los charabones.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-36 md:h-40"><img src="../../../assets/biologia/animales/huevos-rana.jpg" alt="Desove de rana: huevos gelatinosos en el agua" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Rana</strong> — anfibio: pone cientos de huevos gelatinosos en el agua.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-36 md:h-40"><img src="../../../assets/biologia/animales/coral-fish.jpg" alt="Peces de arrecife sobre huevos de coral" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Peces</strong> — la mayoría libera miles de huevos en el agua, sin cáscara.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-36 md:h-40"><img src="../../../assets/biologia/animales/butterfly.jpg" alt="Mariposa sobre una flor" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Mariposa</strong> — insecto ovíparo: pone huevos sobre las hojas que comerá la oruga.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-36 md:h-40"><img src="../../../assets/biologia/animales/hero-eclosion-tortugas.jpg" alt="Crías de tortuga marina recién nacidas camino al mar" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Tortuga marina</strong> — entierra sus huevos en la arena; las crías corren al mar al nacer.</figcaption>
+        </figure>
+      </div>
+
+      <div class="sabias-que" style="max-width:640px;margin-left:auto;margin-right:auto;">
+        <span class="sq-label">Sabías que...</span>
+        <p>En el ñandú, el macho es el que incuba: junta en su nido los huevos de varias hembras (¡más de 30!) y los empolla durante unos 40 días. Después también cuida solo a los charabones durante meses.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Vivíparos -->
+    <section class="animate-fadeInUp delay-200" id="viviparos">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Vivíparos</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Son los animales cuyas crías se desarrollan dentro del cuerpo de la madre, en un órgano llamado útero. El embrión no está en un huevo: recibe alimento y oxígeno directamente del cuerpo materno a través de la placenta. Cuando la cría está lista, nace viva. Casi todos los mamíferos son vivíparos.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:baby" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">La placenta y la gestación</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> La <strong class="text-natura-silverLight">placenta</strong> conecta a la cría con la madre: le pasa nutrientes y oxígeno, y retira los desechos</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> El tiempo dentro de la madre se llama <strong class="text-natura-silverLight">gestación</strong> o embarazo</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Al nacer, la cría se alimenta de la <strong class="text-natura-silverLight">leche materna</strong> (glándulas mamarias)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Dentro del cuerpo materno el embrión está protegido y a temperatura constante</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-water" data-icon="lucide:clock" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Gestación según la especie</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Ratón</strong> — unos 20 días</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Perro</strong> — unos 2 meses (63 días)</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Ser humano</strong> — 9 meses</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Ballena azul</strong> — 11 meses</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Elefante</strong> — 22 meses: ¡el embarazo más largo del reino animal!</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <figure class="figure-frame">
+          <div class="h-48 md:h-56"><img src="../../../assets/biologia/animales/elefante-cria.jpg" alt="Elefanta caminando junto a su cría" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Elefanta y su cría</strong> — la gestación dura 22 meses y casi siempre nace una sola cría, que mama durante años.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-48 md:h-56"><img src="../../../assets/biologia/animales/ballena-cria.jpg" alt="Ballena jorobada nadando junto a su ballenato en la superficie" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Ballena jorobada y su ballenato</strong> — mamífero marino vivíparo: la cría nace viva y toma leche bajo el agua.</figcaption>
+        </figure>
+      </div>
+
+      <div class="content-card bg-natura-dark p-5 mt-4">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="iconify text-natura-leaf" data-icon="lucide:package" data-width="20"></span>
+          <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Un caso especial: los marsupiales</h3>
+        </div>
+        <p class="text-sm text-natura-silver leading-relaxed">
+          Los marsupiales son mamíferos vivíparos, pero su cría nace muy prematura, casi sin formarse, y completa su desarrollo trepando hasta una bolsa externa llamada <strong class="text-natura-silverLight">marsupio</strong>, donde se prende a una tetilla. Ejemplos: el <strong class="text-natura-silverLight">canguro</strong>, el <strong class="text-natura-silverLight">koala</strong> y, en Argentina, la <strong class="text-natura-silverLight">comadreja overa</strong>, muy común en el conurbano bonaerense.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Ovovivíparos -->
+    <section class="animate-fadeInUp delay-300" id="ovoviviparos">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Ovovivíparos</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 article-dropcap">
+        Son una estrategia intermedia. La madre produce huevos, pero no los pone afuera: los retiene dentro de su cuerpo. El embrión se desarrolla dentro del huevo y se alimenta de la yema, igual que en los ovíparos, pero protegido dentro del cuerpo materno. Cuando el huevo eclosiona, la cría nace viva. No hay placenta: la madre solo da refugio, no alimento directo.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-energy" data-icon="lucide:git-compare" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">¿En qué se diferencia?</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-natura-silverLight">Vs. ovíparo</strong>: no pone huevos; las crías nacen vivas</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> <strong class="text-natura-silverLight">Vs. vivíparo</strong>: no hay placenta; el embrión se alimenta solo de la yema del huevo</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Ventaja: el embrión está más protegido que en un huevo puesto afuera</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Es frecuente en ambientes fríos o acuáticos, donde un huevo externo no sobreviviría</li>
+          </ul>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-water" data-icon="lucide:list" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Ejemplos</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Tiburón toro (sarda)</strong> — las crías eclosionan dentro del útero materno</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Boa constrictor</strong> — serpiente que pare crías vivas</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Víbora de la cruz</strong> — serpiente venenosa argentina, ovovivípara</li>
+            <li class="flex items-start gap-2"><span class="text-natura-water mt-0.5">•</span> <strong class="text-natura-silverLight">Lución</strong> — lagarto sin patas que retiene sus huevos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <figure class="figure-frame">
+          <div class="h-40 md:h-44"><img src="../../../assets/biologia/animales/tiburon-toro.jpg" alt="Tiburón toro o sarda nadando en un acuario" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Tiburón toro (sarda)</strong> — tiburón ovovivíparo: los huevos eclosionan dentro de la madre.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-40 md:h-44"><img src="../../../assets/biologia/animales/boa-constrictor.jpg" alt="Boa constrictor enroscada" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Boa constrictor</strong> — no pone huevos: pare crías vivas, ya formadas.</figcaption>
+        </figure>
+        <figure class="figure-frame">
+          <div class="h-40 md:h-44"><img src="../../../assets/biologia/animales/caballito-de-mar.jpg" alt="Caballito de mar prendido de un alga" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Caballito de mar</strong> — caso único: es el macho el que incuba los huevos en su bolsa ventral.</figcaption>
+        </figure>
+      </div>
+
+      <div class="sabias-que" style="max-width:640px;margin-left:auto;margin-right:auto;">
+        <span class="sq-label">Sabías que...</span>
+        <p>En el caballito de mar, ¡el que queda «embarazado» es el macho! La hembra deposita los huevos dentro de una bolsa que el macho tiene en el vientre, y es él quien los incuba hasta que eclosionan y libera a las crías.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Diagrama -->
+    <section class="animate-fadeInUp delay-350" id="diagrama">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Diagrama Comparativo</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 leading-relaxed">
+        Las tres estrategias lado a lado. Prestá atención a <strong class="text-natura-silverLight">dónde</strong> se desarrolla el embrión y <strong class="text-natura-silverLight">de qué</strong> se alimenta: ahí está la clave para no confundirlas.
+      </p>
+      <figure class="figure-frame">
+        <object type="image/svg+xml" data="../../../assets/biologia/animales/svg-reproduccion-comparativa.svg" class="w-full" style="min-height:280px;background:#0E1410;" aria-label="Diagrama comparativo de ovíparos, vivíparos y ovovivíparos">
+          <img src="../../../assets/biologia/animales/svg-reproduccion-comparativa.svg" alt="Diagrama: ovíparo, vivíparo y ovovivíparo">
+        </object>
+        <figcaption><strong class="text-natura-silver">Resumen visual</strong> — ovíparo (verde), vivíparo (celeste) y ovovivíparo (azul). La diferencia clave: yema vs. placenta, y huevo afuera vs. adentro.</figcaption>
+      </figure>
+    </section>
+
+    <!-- SECTION 6: Tabla comparativa -->
+    <section class="animate-fadeInUp delay-400" id="tabla-comparativa">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Tabla Comparativa</h2>
+      </div>
+      <div class="sidebar-note p-5 md:p-6 overflow-x-auto">
+        <table class="w-full text-sm text-natura-silver">
+          <thead>
+            <tr class="border-b border-white/10 text-natura-bio uppercase tracking-wider text-[11px]">
+              <th class="text-left py-2 pr-4">Tipo</th>
+              <th class="text-left py-2 pr-4">¿Dónde se desarrolla el embrión?</th>
+              <th class="text-left py-2 pr-4">¿De qué se alimenta?</th>
+              <th class="text-left py-2 pr-4">¿Cómo nace?</th>
+              <th class="text-left py-2">Ejemplos</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm">
+            <tr class="border-b border-white/5">
+              <td class="py-2.5 pr-4 font-semibold text-natura-leaf">Ovíparo</td>
+              <td class="py-2.5 pr-4">En un huevo, fuera del cuerpo de la madre</td>
+              <td class="py-2.5 pr-4">De la yema del huevo</td>
+              <td class="py-2.5 pr-4">Rompe el cascarón</td>
+              <td class="py-2.5">Gallina, tortuga, rana, pez, mariposa</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2.5 pr-4 font-semibold text-natura-water">Vivíparo</td>
+              <td class="py-2.5 pr-4">En el útero de la madre</td>
+              <td class="py-2.5 pr-4">De la madre, vía placenta</td>
+              <td class="py-2.5 pr-4">Nace vivo</td>
+              <td class="py-2.5">Ser humano, elefante, ballena, perro</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2.5 pr-4 font-semibold text-natura-energy">Ovovivíparo</td>
+              <td class="py-2.5 pr-4">En un huevo retenido dentro de la madre</td>
+              <td class="py-2.5 pr-4">De la yema del huevo</td>
+              <td class="py-2.5 pr-4">El huevo eclosiona adentro; nace vivo</td>
+              <td class="py-2.5">Tiburón toro, boa, víbora de la cruz</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 7: Práctica clasificar -->
+    <section class="animate-fadeInUp delay-450" id="practica">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Clasificá estos animales</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5 leading-relaxed">
+        Arrastrá cada animal a la caja correcta (o tocá el animal y después la caja). Cuando termines, tocá <strong class="text-natura-silverLight">Comprobar</strong>.
+      </p>
+
+      <div class="content-card bg-natura-dark p-5 md:p-6">
+        <p class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark mb-3" style="font-family:'Inter',sans-serif;">Animales para clasificar</p>
+        <div id="classifyPool" class="flex flex-wrap gap-2 mb-6 min-h-[52px]"></div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-5">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-natura-leaf"></span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-natura-leaf" style="font-family:'Inter',sans-serif;">Ovíparo</span>
+            </div>
+            <div class="classify-zone" data-type="oviparo" id="zone-oviparo"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-natura-water"></span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-natura-water" style="font-family:'Inter',sans-serif;">Vivíparo</span>
+            </div>
+            <div class="classify-zone" data-type="viviparo" id="zone-viviparo"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-natura-energy"></span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-natura-energy" style="font-family:'Inter',sans-serif;">Ovovivíparo</span>
+            </div>
+            <div class="classify-zone" data-type="ovoviviparo" id="zone-ovoviviparo"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="button" class="classify-btn" id="classifyCheck">Comprobar</button>
+          <button type="button" class="classify-btn secondary" id="classifyReset">Reiniciar</button>
+          <p id="classifyFeedback" class="text-natura-silver"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: Excepciones -->
+    <section class="animate-fadeInUp delay-500" id="excepciones">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">08</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Excepciones y Curiosidades</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-5">
+        En biología, toda regla tiene su excepción. Acá van dos casos que rompen el molde:
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <figure class="figure-frame">
+          <div class="h-48 md:h-56"><img src="../../../assets/biologia/animales/ornitorrinco.jpg" alt="Ornitorrinco nadando" loading="lazy"></div>
+          <figcaption><strong class="text-natura-silver">Ornitorrinco</strong> — mamífero monotrema de Australia: pone huevos, pero amamanta a sus crías con leche.</figcaption>
+        </figure>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:sparkles" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Casos que sorprenden</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-natura-silver">
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Los <strong class="text-natura-silverLight">monotremas</strong> (ornitorrinco y equidna) son mamíferos que ponen huevos: ¡son ovíparos que dan leche!</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> Los <strong class="text-natura-silverLight">pulgones</strong> pueden tener crías sin fecundación, un fenómeno llamado partenogénesis</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> En las <strong class="text-natura-silverLight">abejas</strong>, los zánganos (machos) nacen de huevos sin fecundar; las obreras y reinas, de huevos fecundados</li>
+            <li class="flex items-start gap-2"><span class="text-natura-bio mt-0.5">•</span> El <strong class="text-natura-silverLight">sapo de Surinam</strong> incuba sus huevos en cavidades de la espalda de la hembra</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: Preguntas para pensar -->
+    <section class="animate-fadeInUp delay-600" id="preguntas-para-pensar">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">09</span>
+        <div class="accent-line-bio"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Preguntas para Pensar</h2>
+      </div>
+      <p class="text-sm text-natura-silverDark mb-4" style="font-family:'Inter',sans-serif;">Tocá cada pregunta para revelar la respuesta.</p>
+      <div class="space-y-3">
+        <details class="content-card bg-natura-dark p-4 group">
+          <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+            <span class="iconify text-natura-bio shrink-0" data-icon="lucide:circle-help" data-width="16"></span>
+            ¿Por qué una rana pone cientos de huevos y una elefanta tiene una sola cría por vez?
+          </summary>
+          <p class="text-base md:text-lg text-natura-silver leading-relaxed mt-3">Los huevos puestos en el agua están expuestos a depredadores y peligros: la mayoría no llega a adulto, por eso se producen muchísimos. La elefanta protege a su cría dentro del cuerpo y después la cuida durante años: con una cría bien protegida alcanza.</p>
+        </details>
+        <details class="content-card bg-natura-dark p-4 group">
+          <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+            <span class="iconify text-natura-bio shrink-0" data-icon="lucide:circle-help" data-width="16"></span>
+            Si el ornitorrinco pone huevos, ¿por qué es un mamífero y no un reptil?
+          </summary>
+          <p class="text-base md:text-lg text-natura-silver leading-relaxed mt-3">Porque tiene pelo y alimenta a sus crías con leche de glándulas mamarias: esas dos características definen a los mamíferos. Poner huevos es un rasgo ancestral que este grupo conservó.</p>
+        </details>
+        <details class="content-card bg-natura-dark p-4 group">
+          <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+            <span class="iconify text-natura-bio shrink-0" data-icon="lucide:circle-help" data-width="16"></span>
+            ¿Qué ventaja tiene desarrollarse dentro del cuerpo de la madre? ¿Y qué desventaja?
+          </summary>
+          <p class="text-base md:text-lg text-natura-silver leading-relaxed mt-3">Ventajas: protección, temperatura constante y alimento asegurado. Desventajas: la madre gasta mucha energía, no puede tener muchas crías a la vez y queda más expuesta mientras gesta. Ninguna estrategia es «mejor» en absoluto: cada una funciona para el ambiente de cada especie.</p>
+        </details>
+        <details class="content-card bg-natura-dark p-4 group">
+          <summary class="cursor-pointer text-base font-bold text-white flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+            <span class="iconify text-natura-bio shrink-0" data-icon="lucide:circle-help" data-width="16"></span>
+            Un tiburón nace vivo. ¿Es vivíparo?
+          </summary>
+          <p class="text-base md:text-lg text-natura-silver leading-relaxed mt-3">No necesariamente. Muchos tiburones son <strong class="text-white">ovovivíparos</strong>: el embrión se desarrolla en un huevo dentro de la madre y se alimenta de la yema, no de una placenta. Nacer vivo no alcanza: hay que mirar de dónde salen los nutrientes.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <a href="fauna-local.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="iconify group-hover:-translate-x-1 transition-transform" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Fauna Local</span>
+      </a>
+      <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">
+        <span class="iconify" data-icon="lucide:layout-grid" data-width="16"></span>
+        <span class="ml-1">Todos los temas</span>
+      </a>
+      <a href="../cuerpo-humano/reproductor.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Reproductor humano</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+
+  </main></div></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"Reproducción en animales",u:"Biología",s:"Animales",l:"reproduccion.html",c:"#DC2626"},
+    {n:"Alimentación animal",u:"Biología",s:"Animales",l:"alimentacion.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"vertebrados.html",c:"#DC2626"},
+    {n:"Invertebrados",u:"Biología",s:"Animales",l:"invertebrados.html",c:"#DC2626"},
+    {n:"Fauna local",u:"Biología",s:"Animales",l:"fauna-local.html",c:"#DC2626"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/clasificacion.html",c:"#DC2626"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../seres-vivos/ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Organelas",u:"Biología",s:"Células",l:"../celulas/organelas.html",c:"#DC2626"},
+    {n:"Niveles organización",u:"Biología",s:"Células",l:"../celulas/niveles-organizacion.html",c:"#DC2626"},
+    {n:"Poblaciones",u:"Biología",s:"Ecología",l:"../ecologia/poblaciones.html",c:"#DC2626"},
+    {n:"Relaciones interespecíficas",u:"Biología",s:"Ecología",l:"../ecologia/relaciones-interespecificas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Germinación",u:"Biología",s:"Plantas",l:"../plantas/germinacion.html",c:"#DC2626"},
+    {n:"Circulación",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/circulacion.html",c:"#DC2626"},
+    {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Respiración",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/respiracion.html",c:"#DC2626"},
+    {n:"Sistema reproductor humano",u:"Biología",s:"Cuerpo Humano",l:"../cuerpo-humano/reproductor.html",c:"#DC2626"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../esi.html",c:"#14B8A6"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../podcast/index.html",c:"#E8A87C"}
+  ];
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';a.innerHTML='<span class="sr-unit-badge" style="background:'+t.c+'20;color:'+t.c+'">'+t.u+'</span><span class="sr-name">'+t.n+'</span><span class="sr-subhub">'+t.s+'</span>';results.appendChild(a);});}
+    results.classList.add('active');
+  }
+
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script>
+(function(){
+  var animals = [
+    { name: 'Gallina', type: 'oviparo' },
+    { name: 'Elefante', type: 'viviparo' },
+    { name: 'Boa constrictor', type: 'ovoviviparo' },
+    { name: 'Rana', type: 'oviparo' },
+    { name: 'Ser humano', type: 'viviparo' },
+    { name: 'Tiburón toro', type: 'ovoviviparo' },
+    { name: 'Tortuga marina', type: 'oviparo' },
+    { name: 'Perro', type: 'viviparo' },
+    { name: 'Víbora de la cruz', type: 'ovoviviparo' }
+  ];
+  var pool = document.getElementById('classifyPool');
+  var feedback = document.getElementById('classifyFeedback');
+  var zones = {
+    oviparo: document.getElementById('zone-oviparo'),
+    viviparo: document.getElementById('zone-viviparo'),
+    ovoviviparo: document.getElementById('zone-ovoviviparo')
+  };
+  if (!pool || !feedback || !zones.oviparo) return;
+
+  var selected = null;
+  var dragId = null;
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function clearFeedback(){
+    feedback.textContent = '';
+    feedback.style.color = '';
+    document.querySelectorAll('.classify-chip').forEach(function(c){
+      c.classList.remove('correct', 'wrong');
+    });
+  }
+
+  function makeChip(item, id){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'classify-chip';
+    btn.textContent = item.name;
+    btn.dataset.id = id;
+    btn.dataset.type = item.type;
+    btn.draggable = true;
+
+    btn.addEventListener('dragstart', function(e){
+      dragId = id;
+      e.dataTransfer.setData('text/plain', id);
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(function(){ btn.style.opacity = '0.4'; }, 0);
+    });
+    btn.addEventListener('dragend', function(){
+      btn.style.opacity = '';
+      dragId = null;
+      Object.keys(zones).forEach(function(k){ zones[k].classList.remove('drag-over'); });
+    });
+
+    btn.addEventListener('click', function(){
+      clearFeedback();
+      if (selected === btn) {
+        btn.style.outline = '';
+        selected = null;
+        return;
+      }
+      document.querySelectorAll('.classify-chip').forEach(function(c){ c.style.outline = ''; });
+      selected = btn;
+      btn.style.outline = '2px solid #DC2626';
+      btn.style.outlineOffset = '2px';
+    });
+    return btn;
+  }
+
+  function placeInZone(chip, zone){
+    if (!chip || !zone) return;
+    chip.classList.add('in-zone');
+    chip.style.outline = '';
+    zone.appendChild(chip);
+    selected = null;
+    clearFeedback();
+  }
+
+  function bindZone(zone){
+    zone.addEventListener('dragover', function(e){
+      e.preventDefault();
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', function(){ zone.classList.remove('drag-over'); });
+    zone.addEventListener('drop', function(e){
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      var id = e.dataTransfer.getData('text/plain') || dragId;
+      var chip = document.querySelector('.classify-chip[data-id="' + id + '"]');
+      placeInZone(chip, zone);
+    });
+    zone.addEventListener('click', function(){
+      if (selected) placeInZone(selected, zone);
+    });
+  }
+
+  function reset(){
+    pool.innerHTML = '';
+    Object.keys(zones).forEach(function(k){ zones[k].innerHTML = ''; });
+    selected = null;
+    clearFeedback();
+    shuffle(animals).forEach(function(item, i){
+      pool.appendChild(makeChip(item, String(i)));
+    });
+  }
+
+  Object.keys(zones).forEach(function(k){ bindZone(zones[k]); });
+
+  document.getElementById('classifyCheck').addEventListener('click', function(){
+    var chips = document.querySelectorAll('.classify-chip');
+    var total = chips.length;
+    var placed = 0;
+    var ok = 0;
+    chips.forEach(function(chip){
+      var parent = chip.parentElement;
+      if (!parent || !parent.classList.contains('classify-zone')) return;
+      placed++;
+      var right = parent.getAttribute('data-type') === chip.dataset.type;
+      chip.classList.remove('correct', 'wrong');
+      chip.classList.add(right ? 'correct' : 'wrong');
+      if (right) ok++;
+    });
+    if (placed < total) {
+      feedback.textContent = 'Faltan ' + (total - placed) + ' animal(es) por clasificar.';
+      feedback.style.color = '#FBBF24';
+      return;
+    }
+    if (ok === total) {
+      feedback.textContent = '¡Perfecto! Las 9 clasificaciones son correctas.';
+      feedback.style.color = '#86EFAC';
+    } else {
+      feedback.textContent = 'Bien: ' + ok + ' de ' + total + '. Revisá los que quedaron en rojo.';
+      feedback.style.color = '#FCA5A5';
+    }
+  });
+
+  document.getElementById('classifyReset').addEventListener('click', reset);
+  reset();
+})();
+</script>
+<script src="../../../assets/backgrounds/auto-toc.js" defer></script>
+</body>
+</html>
