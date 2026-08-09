@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12161c">
+<title>Sistema digestivo — modelo 3D</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js",
+    "three/addons/environments/RoomEnvironment.js": "https://unpkg.com/three@0.184.0/examples/jsm/environments/RoomEnvironment.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<style>
+  :root{
+    --bg:#12161c; --fg:#eef2ef; --muted:#9aa7b2;
+    --border:rgba(255,255,255,.14); --accent:#DC2626; --accent-soft:rgba(220,38,38,.18);
+    --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-mono:ui-monospace,'Cascadia Code',Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html, body { margin: 0; height: 100%; background: var(--bg); overflow: hidden; }
+  body{ font-family: var(--font-ui); color: var(--fg); }
+  button{ font: inherit; color: inherit; cursor: pointer; }
+  button:focus-visible{ outline: 2px solid var(--fg); outline-offset: 2px; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  three-d-stage { display: block; width: 100vw; height: 100vh; --stage-bg: #12161c; }
+
+  .view-label{
+    position:fixed; z-index:4; top:16px; left:18px; font-family:var(--font-mono);
+    font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); pointer-events:none
+  }
+  .view-label b{ display:block; font-family:var(--font-ui); font-size:13px; letter-spacing:.02em;
+    text-transform:none; color:var(--fg); font-weight:600; margin-bottom:2px }
+  .view-label i{ font-style:normal }
+  @media(max-width:600px){ .view-label i{ display:none } }
+
+  /* ficha del tránsito del bolo: es OPCIONAL, aparece con el botón Recorrido */
+  #hud {
+    position: fixed; left: 18px; bottom: 76px; width: 320px; max-width: calc(100vw - 36px); z-index: 5;
+    background: rgba(18,22,28,.9); backdrop-filter: blur(12px);
+    border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px 12px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.55);
+    display: none;
+  }
+  #hud.on { display: block; }
+  #hud .kicker {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; color: #ff8f8f; margin-bottom: 7px;
+  }
+  #fase { font-size: 15px; line-height: 1.3; margin: 0 0 7px; font-weight: 600; color: var(--fg); }
+  #txt { font-size: 12.5px; line-height: 1.55; margin: 0; color: var(--muted); text-wrap: pretty; }
+  #track { height: 3px; background: rgba(255,255,255,.1); margin: 12px 0 10px; border-radius: 2px; }
+  #bar { height: 100%; width: 0; background: var(--accent); border-radius: 2px; }
+  #hud .row { display: flex; gap: 7px; }
+  #hud button {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
+    padding: 7px 12px; border: 1px solid var(--border); background: rgba(255,255,255,.05);
+    color: var(--muted); border-radius: 6px;
+  }
+  #hud button:hover { background: rgba(255,255,255,.1); color: var(--fg); }
+
+  /* arriba y al centro: abajo a la derecha vive la barra de descarga del
+     visor (OBJ / GLB) y las dos se pisaban */
+  .toolbar{
+    position:fixed; z-index:6; left:50%; top:14px; transform:translateX(-50%);
+    display:flex; align-items:center; gap:4px; padding:5px; border:1px solid var(--border);
+    border-radius:12px; background:rgba(18,22,28,.86); backdrop-filter:blur(14px);
+    box-shadow:0 18px 50px rgba(0,0,0,.55)
+  }
+  .tool{
+    min-height:42px; min-width:44px; padding:0 12px; display:flex; align-items:center;
+    justify-content:center; gap:7px; border:1px solid transparent; border-radius:9px;
+    background:transparent; color:var(--muted); font-size:12px; font-weight:500; white-space:nowrap;
+    transition:background .18s,color .18s,border-color .18s
+  }
+  .tool:hover{ background:rgba(255,255,255,.08); color:var(--fg) }
+  .tool.on{ background:var(--accent-soft); color:#ff8f8f; border-color:rgba(220,38,38,.4) }
+  .tool svg{ width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round }
+  .toolbar-sep{ width:1px;height:24px;background:var(--border);margin:0 3px }
+
+  .tip{
+    position:fixed; z-index:7; padding:6px 10px; border:1px solid var(--border); border-radius:8px;
+    background:rgba(18,22,28,.94); backdrop-filter:blur(10px); font-size:12px; white-space:nowrap;
+    pointer-events:none; opacity:0; transform:translate(-50%,-140%); transition:opacity .15s
+  }
+  .tip.show{ opacity:1 }
+  .tip b{ display:block; font-weight:600; font-size:12.5px }
+  .tip span{ color:var(--muted); font-size:11px }
+
+  .legend{
+    position:fixed; z-index:5; left:18px; bottom:76px; display:grid; gap:5px;
+    font-size:11px; color:var(--muted); pointer-events:none; transition:opacity .25s
+  }
+  .legend.hide{ opacity:0 }
+  .legend div{ display:flex; align-items:center; gap:7px }
+  .legend i{ width:9px;height:9px;border-radius:50%;background:var(--sw);flex:none;
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--sw) 20%,transparent) }
+
+  /* La barra de descarga del visor (OBJ / GLB) es fija abajo a la derecha:
+     los controles viven siempre arriba para no pisarla, y la leyenda y la
+     ficha se apoyan por encima de ella. */
+  .view-label{ top:74px }
+  .legend, #hud{ bottom:66px }
+  @media(max-width:780px){
+    .toolbar{ left:10px; right:10px; transform:none; justify-content:space-between; gap:2px }
+    .tool{ flex:1; padding:0 6px; min-width:0 }
+    .legend{ left:12px; font-size:10px }
+    #hud{ left:12px; right:12px; width:auto; padding:12px 13px 10px }
+    .view-label{ left:12px; top:70px }
+  }
+  @media(max-width:560px){
+    .tool span{ display:none }
+    .legend{ bottom:120px }
+    #hud{ bottom:120px }
+  }
+</style>
+</head>
+<body>
+
+<three-d-stage name="sistema-digestivo" background="#12161c"></three-d-stage>
+
+<div class="view-label"><b>Sistema digestivo</b><i>Vista anterior · tocá un órgano para ver su nombre</i></div>
+
+<div class="legend" id="legend">
+  <div><i style="--sw:#d0998b"></i>Boca, faringe y esófago</div>
+  <div><i style="--sw:#e8a894"></i>Estómago</div>
+  <div><i style="--sw:#d1836f"></i>Intestino delgado</div>
+  <div><i style="--sw:#b98a5e"></i>Intestino grueso</div>
+  <div><i style="--sw:#8b382c"></i>Hígado y vesícula</div>
+  <div><i style="--sw:#d6a95f"></i>Páncreas</div>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<div id="hud">
+  <div class="kicker">Tránsito del bolo alimenticio</div>
+  <h2 id="fase">Deglución — esófago</h2>
+  <p id="txt"></p>
+  <div id="track"><div id="bar"></div></div>
+  <div class="row">
+    <button id="play" type="button">Pausa</button>
+    <button id="vel" type="button">×1</button>
+  </div>
+</div>
+
+<div class="toolbar" role="toolbar" aria-label="Controles del modelo">
+  <button class="tool" id="btnTravel" aria-pressed="false" title="Seguir el recorrido del bolo alimenticio">
+    <svg viewBox="0 0 24 24"><path d="M4 19h4l10-10a2.8 2.8 0 0 0-4-4L4 15v4Z"/><path d="m13.5 6.5 4 4"/></svg>
+    <span>Recorrido</span>
+  </button>
+  <button class="tool" id="btnInside" aria-pressed="false" title="Volver transparentes los órganos del frente">
+    <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+    <span>Ver por dentro</span>
+  </button>
+  <button class="tool on" id="btnGlands" aria-pressed="true" title="Mostrar u ocultar hígado, vesícula y páncreas">
+    <svg viewBox="0 0 24 24"><path d="M9 3v6l-5 8a3 3 0 0 0 2.6 4.5h10.8A3 3 0 0 0 20 17l-5-8V3"/><path d="M8 3h8"/></svg>
+    <span>Órganos anexos</span>
+  </button>
+  <div class="toolbar-sep"></div>
+  <button class="tool" id="btnReset" title="Volver a la vista inicial">
+    <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+    <span>Reiniciar</span>
+  </button>
+</div>
+
+<script src="three-d-stage.js"></script>
+<script type="module">
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const stage = document.querySelector('three-d-stage');
+const { THREE } = await stage.ready;
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+
+/* El modelo está en metros reales: el esófago mide ~1,25 cm de radio y
+   ~21 cm de largo, el colon ~3 cm de radio. Respetar la escala es lo que
+   hace que las proporciones entre órganos sean correctas. */
+
+/* tube of varying radius swept along a curve, with end caps */
+function varTube(curve, radiusAt, tubular = 220, radial = 26) {
+  const frames = curve.computeFrenetFrames(tubular, false);
+  const pos = [], nor = [], uv = [], idx = [];
+  const ring = radial + 1;
+  for (let i = 0; i <= tubular; i++) {
+    const t = i / tubular;
+    const P = curve.getPointAt(t);
+    const N = frames.normals[i], B = frames.binormals[i];
+    const r = radiusAt(t);
+    for (let j = 0; j <= radial; j++) {
+      const v = j / radial * Math.PI * 2;
+      const c = Math.cos(v), s = Math.sin(v);
+      const nx = c * N.x + s * B.x, ny = c * N.y + s * B.y, nz = c * N.z + s * B.z;
+      pos.push(P.x + r * nx, P.y + r * ny, P.z + r * nz);
+      nor.push(nx, ny, nz);
+      uv.push(t, j / radial);
+    }
+  }
+  for (let i = 0; i < tubular; i++) {
+    for (let j = 0; j < radial; j++) {
+      const a = i * ring + j, b = a + ring, c = b + 1, d = a + 1;
+      idx.push(a, b, d, b, c, d);
+    }
+  }
+  // caps
+  [0, tubular].forEach((i, k) => {
+    const P = curve.getPointAt(i / tubular);
+    const T = curve.getTangentAt(i / tubular).multiplyScalar(k === 0 ? -1 : 1);
+    const center = pos.length / 3;
+    pos.push(P.x, P.y, P.z); nor.push(T.x, T.y, T.z); uv.push(0.5, 0.5);
+    for (let j = 0; j < radial; j++) {
+      const a = i * ring + j, b = i * ring + j + 1;
+      k === 0 ? idx.push(center, a, b) : idx.push(center, b, a);
+    }
+  });
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  return g;
+}
+
+/* ── texturas de tejido: manchado parenquimatoso + red vascular ──
+   Lo que hace que un órgano se lea como tejido humano y no como plástico
+   son cuatro capas, y las cuatro se generan por procedimiento:
+     · manchado difuso del parénquima / la serosa
+     · mosaico de lobulillos (hígado y páncreas)
+     · árbol vascular, con las ARCADAS que nacen del borde mesentérico
+       y rodean el intestino (los vasos rectos) — la firma visual de un
+       asa intestinal en una lámina o en un quirófano
+     · relieve mucoso: vellosidades, criptas glandulares y pliegues     */
+let seed = 20260807;
+const rnd = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
+
+function tissueMaps({ base, blotch, vessel, vesselCount = 0, blotchCount = 420,
+                      grain = 0.10, lobules = 0, repeat = [1, 1], size = 768,
+                      micro = 0, microScale = 1, rugae = 0, crypts = 0,
+                      arcades = 0, taeniae = false }) {
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const x = c.getContext('2d');
+  const b = document.createElement('canvas'); b.width = b.height = size;
+  const y = b.getContext('2d');
+  x.fillStyle = base; x.fillRect(0, 0, size, size);
+  y.fillStyle = '#808080'; y.fillRect(0, 0, size, size);
+
+  // manchado difuso (parénquima / serosa)
+  for (let i = 0; i < blotchCount; i++) {
+    const px = rnd() * size, py = rnd() * size, r = size * (0.012 + rnd() * 0.075);
+    const g = x.createRadialGradient(px, py, 0, px, py, r);
+    g.addColorStop(0, blotch); g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.globalAlpha = 0.14 + rnd() * 0.30; x.fillStyle = g; x.beginPath();
+    x.arc(px, py, r, 0, 6.2832); x.fill();
+    const gb = y.createRadialGradient(px, py, 0, px, py, r);
+    const sh = rnd() > 0.5 ? '#ffffff' : '#3a3a3a';
+    gb.addColorStop(0, sh); gb.addColorStop(1, 'rgba(128,128,128,0)');
+    y.globalAlpha = 0.28; y.fillStyle = gb; y.beginPath();
+    y.arc(px, py, r, 0, 6.2832); y.fill();
+  }
+  x.globalAlpha = 1; y.globalAlpha = 1;
+
+  // tenias del colon: tres bandas longitudinales de músculo liso.
+  // Con repeat[1] = 1 la textura da una sola vuelta al tubo, así que
+  // estas bandas horizontales quedan como tres cintas a lo largo del colon.
+  if (taeniae) {
+    for (let k = 0; k < 3; k++) {
+      const py = k * size / 3;
+      for (const off of [-size, 0, size]) {
+        const g = x.createLinearGradient(0, py + off - 34, 0, py + off + 34);
+        g.addColorStop(0, 'rgba(226,196,158,0)');
+        g.addColorStop(0.5, 'rgba(226,196,158,0.34)');
+        g.addColorStop(1, 'rgba(226,196,158,0)');
+        x.fillStyle = g; x.fillRect(0, py + off - 34, size, 68);
+        const gb = y.createLinearGradient(0, py + off - 34, 0, py + off + 34);
+        gb.addColorStop(0, 'rgba(128,128,128,0)');
+        gb.addColorStop(0.5, 'rgba(235,235,235,0.42)');
+        gb.addColorStop(1, 'rgba(128,128,128,0)');
+        y.fillStyle = gb; y.fillRect(0, py + off - 34, size, 68);
+      }
+    }
+  }
+
+  // lobulillos (hígado): mosaico poligonal tenue
+  for (let i = 0; i < lobules; i++) {
+    const px = rnd() * size, py = rnd() * size, r = size * (0.014 + rnd() * 0.012);
+    x.strokeStyle = 'rgba(70,28,24,0.20)'; x.lineWidth = 1.4;
+    y.strokeStyle = 'rgba(40,40,40,0.35)'; y.lineWidth = 1.6;
+    x.beginPath(); y.beginPath();
+    for (let k = 0; k <= 6; k++) {
+      const a = k / 6 * 6.2832 + rnd() * 0.2;
+      const qx = px + Math.cos(a) * r, qy = py + Math.sin(a) * r;
+      k ? (x.lineTo(qx, qy), y.lineTo(qx, qy)) : (x.moveTo(qx, qy), y.moveTo(qx, qy));
+    }
+    x.stroke(); y.stroke();
+  }
+
+  // vasos: troncos con ramificación
+  const branch = (px, py, ang, w, depth) => {
+    if (w < 0.7 || depth > 5) return;
+    const len = size * (0.03 + rnd() * 0.07);
+    const nx = px + Math.cos(ang) * len, ny = py + Math.sin(ang) * len;
+    const mx = (px + nx) / 2 + (rnd() - 0.5) * len * 0.5;
+    const my = (py + ny) / 2 + (rnd() - 0.5) * len * 0.5;
+    x.strokeStyle = vessel; x.lineWidth = w; x.lineCap = 'round';
+    x.globalAlpha = 0.45 + 0.45 / depth;
+    x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(mx, my, nx, ny); x.stroke();
+    y.strokeStyle = 'rgba(220,220,220,0.5)'; y.lineWidth = w * 0.8; y.lineCap = 'round';
+    y.beginPath(); y.moveTo(px, py); y.quadraticCurveTo(mx, my, nx, ny); y.stroke();
+    branch(nx, ny, ang + (rnd() - 0.5) * 1.1, w * 0.72, depth + 1);
+    if (rnd() > 0.35) branch(nx, ny, ang + (rnd() - 0.5) * 1.6, w * 0.55, depth + 1);
+  };
+  for (let i = 0; i < vesselCount; i++) branch(rnd() * size, rnd() * size, rnd() * 6.2832, 5.5 + rnd() * 3.5, 1);
+
+  // arcadas vasculares: nacen del borde mesentérico (v = 0) y abrazan el asa
+  for (let i = 0; i < arcades; i++) {
+    const px = rnd() * size;
+    branch(px, 0,    Math.PI / 2 + (rnd() - 0.5) * 0.6, 4.5 + rnd() * 2.5, 1);
+    branch(px, size, -Math.PI / 2 + (rnd() - 0.5) * 0.6, 4.5 + rnd() * 2.5, 1);
+  }
+  x.globalAlpha = 1;
+
+  // grano celular fino
+  const img = x.getImageData(0, 0, size, size), d = img.data;
+  const bimg = y.getImageData(0, 0, size, size), bd = bimg.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const n = (rnd() - 0.5) * 255 * grain;
+    d[i] += n; d[i + 1] += n * 0.85; d[i + 2] += n * 0.7;
+    bd[i] = bd[i + 1] = bd[i + 2] = Math.max(0, Math.min(255, bd[i] + n * 1.3));
+  }
+  x.putImageData(img, 0, 0); y.putImageData(bimg, 0, 0);
+
+  // relieve mucoso: vellosidades / microvellosidades (puntillado denso en el bump)
+  for (let i = 0; i < micro; i++) {
+    const px = rnd() * size, py = rnd() * size;
+    const r = size * 0.0022 * microScale * (0.6 + rnd());
+    const g = y.createRadialGradient(px - r * 0.3, py - r * 0.3, 0, px, py, r * 1.8);
+    g.addColorStop(0, 'rgba(255,255,255,0.55)');
+    g.addColorStop(0.55, 'rgba(128,128,128,0.15)');
+    g.addColorStop(1, 'rgba(20,20,20,0.30)');
+    y.fillStyle = g; y.beginPath(); y.arc(px, py, r * 1.8, 0, 6.2832); y.fill();
+    x.fillStyle = rnd() > 0.5 ? 'rgba(255,225,215,0.10)' : 'rgba(110,40,38,0.09)';
+    x.beginPath(); x.arc(px, py, r * 1.5, 0, 6.2832); x.fill();
+  }
+
+  // criptas glandulares: anillos oscuros diminutos
+  for (let i = 0; i < crypts; i++) {
+    const px = rnd() * size, py = rnd() * size, r = size * 0.004 * (0.5 + rnd());
+    y.strokeStyle = 'rgba(30,30,30,0.45)'; y.lineWidth = 1;
+    y.beginPath(); y.arc(px, py, r, 0, 6.2832); y.stroke();
+    x.strokeStyle = 'rgba(120,52,46,0.16)'; x.lineWidth = 1;
+    x.beginPath(); x.arc(px, py, r, 0, 6.2832); x.stroke();
+  }
+
+  // pliegues (rugae gástricas / válvulas conniventes)
+  for (let i = 0; i < rugae; i++) {
+    const py = rnd() * size, amp = size * (0.02 + rnd() * 0.05);
+    const w = 2 + rnd() * 5;
+    y.lineWidth = w; x.lineWidth = w;
+    y.strokeStyle = 'rgba(245,245,245,0.30)';
+    x.strokeStyle = 'rgba(255,220,208,0.10)';
+    y.beginPath(); x.beginPath();
+    for (let k = 0; k <= 24; k++) {
+      const qx = k / 24 * size;
+      const qy = py + amp * Math.sin(k / 24 * Math.PI * (1.5 + rnd() * 0.02) + i);
+      k ? (y.lineTo(qx, qy), x.lineTo(qx, qy)) : (y.moveTo(qx, qy), x.moveTo(qx, qy));
+    }
+    y.stroke(); x.stroke();
+    y.lineWidth = w * 0.6; y.strokeStyle = 'rgba(25,25,25,0.30)';
+    y.translate(0, w); y.stroke(); y.setTransform(1, 0, 0, 1, 0, 0);
+  }
+
+  const mk = (canvas, srgb) => {
+    const t = new THREE.CanvasTexture(canvas);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repeat[0], repeat[1]);
+    t.anisotropy = 8;
+    if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  };
+  return { map: mk(c, true), bumpMap: mk(b, false) };
+}
+
+const mat = (name, _color, rough, tex, opts = {}) => {
+  const maps = tissueMaps(tex);
+  const m = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff, roughness: rough, metalness: 0,
+    map: maps.map, bumpMap: maps.bumpMap, bumpScale: 2.2,
+    clearcoat: 0.22, clearcoatRoughness: 0.45,   // brillo húmedo de la serosa
+    sheen: 0.12, sheenRoughness: 0.85, sheenColor: new THREE.Color(0xffd6cc),
+    envMapIntensity: 0.35,
+    ...opts
+  });
+  m.name = name;
+  return m;
+};
+
+const M = {
+  esofago: mat('esofago', 0xd6a496, 0.55, {
+    base: '#d0998b', blotch: '#f0cabb', vessel: 'rgba(150,58,52,0.55)',
+    vesselCount: 8, grain: 0.08, repeat: [7, 1],
+    micro: 4000, microScale: 0.8, rugae: 26, crypts: 700
+  }),
+  estomago: mat('estomago', 0xc07f74, 0.45, {
+    base: '#e8a894', blotch: '#f8ccb9', vessel: 'rgba(170,70,62,0.5)',
+    vesselCount: 22, arcades: 7, blotchCount: 520, grain: 0.09, repeat: [3, 1],
+    micro: 9000, microScale: 1.1, rugae: 30, crypts: 2600
+  }, { color: 0xf0b5a2 }),
+  delgado: mat('intestino_delgado', 0xd0897a, 0.48, {
+    base: '#d1836f', blotch: '#f2ad97', vessel: 'rgba(148,40,38,0.65)',
+    vesselCount: 22, arcades: 14, blotchCount: 380, grain: 0.11, repeat: [26, 1],
+    micro: 14000, microScale: 0.7, rugae: 34, crypts: 1800
+  }),
+  grueso: mat('intestino_grueso', 0xb3a08d, 0.6, {
+    base: '#b98a5e', blotch: '#d6b184', vessel: 'rgba(140,64,44,0.55)',
+    vesselCount: 14, arcades: 9, taeniae: true, blotchCount: 460, grain: 0.10, repeat: [20, 1],
+    micro: 6000, microScale: 1.4, crypts: 3000
+  }, { color: 0xc09a6e }),
+  higado: mat('higado', 0x7d3630, 0.42, {
+    base: '#8b382c', blotch: '#b85744', vessel: 'rgba(60,18,18,0.7)',
+    vesselCount: 16, blotchCount: 560, lobules: 900, grain: 0.10, repeat: [2, 2],
+    micro: 7000, microScale: 0.6
+  }),
+  vesicula: mat('vesicula_biliar', 0x707d3e, 0.35, {
+    base: '#6e7c3e', blotch: '#93a054', vessel: 'rgba(45,60,26,0.6)',
+    vesselCount: 10, grain: 0.07, repeat: [3, 1]
+  }, { clearcoat: 0.7, clearcoatRoughness: 0.3 }),
+  pancreas: mat('pancreas', 0xd3ae7c, 0.62, {
+    base: '#d6a95f', blotch: '#f7dfa8', vessel: 'rgba(150,86,50,0.5)',
+    vesselCount: 12, blotchCount: 700, lobules: 700, grain: 0.13, repeat: [5, 1],
+    micro: 9000, microScale: 1.6
+  }, { clearcoat: 0.25 }),
+  // mucosa oral, esmalte dental, músculo lingual y glándulas salivales
+  mucosa: mat('mucosa_oral', 0xd7a493, 0.5, {
+    base: '#c9897d', blotch: '#eab9a8', vessel: 'rgba(150,50,48,0.6)',
+    vesselCount: 12, grain: 0.08, repeat: [2, 2], micro: 5000, microScale: 0.9, crypts: 900
+  }),
+  lengua: mat('lengua', 0xb35a60, 0.45, {
+    base: '#b3555f', blotch: '#d98189', vessel: 'rgba(120,26,36,0.6)',
+    vesselCount: 10, grain: 0.09, repeat: [2, 2],
+    // papilas linguales: puntillado denso y grueso
+    micro: 16000, microScale: 1.5, crypts: 400
+  }, { clearcoat: 0.45 }),
+  esmalte: new THREE.MeshPhysicalMaterial({
+    color: 0xf3edde, roughness: 0.22, metalness: 0,
+    clearcoat: 0.85, clearcoatRoughness: 0.18, envMapIntensity: 0.6, name: 'esmalte'
+  }),
+  salival: mat('glandulas_salivales', 0xdfc0a8, 0.55, {
+    base: '#dcbca4', blotch: '#f2dcc8', vessel: 'rgba(160,90,70,0.45)',
+    vesselCount: 8, blotchCount: 500, lobules: 420, grain: 0.11, repeat: [2, 2], micro: 5000
+  }),
+  grasa: mat('grasa', 0xd8bd85, 0.6, {
+    base: '#cbae7d', blotch: '#e6d2a4', vessel: 'rgba(150,104,54,0.45)',
+    vesselCount: 6, blotchCount: 320, lobules: 300, grain: 0.09, repeat: [1, 1]
+  }, { clearcoat: 0.1 })
+};
+
+const root = new THREE.Group();
+root.name = 'sistema_digestivo';
+const add = (name, geo, material) => {
+  const m = new THREE.Mesh(geo, material);
+  m.name = name; m.castShadow = true; m.receiveShadow = true;
+  root.add(m); return m;
+};
+const curveOf = (pts, tension = 0.5) => new THREE.CatmullRomCurve3(pts, false, 'catmullrom', tension);
+
+/* ── boca: donde realmente empieza la digestión ─────────── */
+/* La versión anterior arrancaba en el esófago, así que faltaba la primera
+   etapa: masticación (mecánica) y amilasa salival (química). */
+const boca = new THREE.Group();
+boca.name = 'boca';
+// a escala estrictamente anatómica la boca queda diminuta frente al abdomen
+// y no se distingue: la agrandamos un 30 % para que se lea en clase
+boca.scale.setScalar(1.3);
+boca.position.y = -0.178;
+root.add(boca);
+
+// arcadas dentarias: incisivos adelante, molares atrás
+function arcada(y, rx, rz, tilt, count, size) {
+  const g = new THREE.Group();
+  for (let i = 0; i < count; i++) {
+    const a = -Math.PI * 0.78 + (i / (count - 1)) * Math.PI * 1.56;
+    const back = Math.abs(a) / (Math.PI * 0.78);          // 0 incisivo, 1 molar
+    const d = new THREE.Mesh(
+      new THREE.BoxGeometry(size * (1 + back * 0.55), size * 1.45, size * (0.72 + back * 0.6)),
+      M.esmalte);
+    d.name = 'dientes';
+    d.position.set(Math.sin(a) * rx, y, Math.cos(a) * rz + 0.020);
+    d.rotation.y = a; d.rotation.x = tilt;
+    d.castShadow = true;
+    g.add(d);
+  }
+  return g;
+}
+boca.add(arcada(0.5985, 0.0255, 0.0215,  0.12, 14, 0.0062));
+boca.add(arcada(0.5845, 0.0235, 0.0198, -0.12, 14, 0.0058));
+
+const lengua = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 28), M.lengua);
+lengua.name = 'lengua';
+lengua.scale.set(0.0165, 0.0062, 0.0245);
+lengua.position.set(0, 0.5875, 0.0245);
+lengua.rotation.x = -0.12;
+lengua.castShadow = true;
+boca.add(lengua);
+
+// paladar: la bóveda por encima de la lengua
+const paladar = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 40, 24, 0, Math.PI * 2, 0, Math.PI / 2), M.mucosa);
+paladar.name = 'paladar';
+paladar.scale.set(0.0250, 0.0100, 0.0285);
+paladar.position.set(0, 0.6045, 0.0215);
+paladar.rotation.x = Math.PI;
+boca.add(paladar);
+
+// glándulas salivales (parótidas), a los costados de la mandíbula
+for (const sx of [-1, 1]) {
+  const gl = new THREE.Mesh(new THREE.SphereGeometry(0.0125, 24, 18), M.salival);
+  gl.name = 'glandulas_salivales';
+  gl.scale.set(1, 0.85, 0.9);
+  gl.position.set(sx * 0.0375, 0.5925, 0.0015);
+  gl.castShadow = true;
+  boca.add(gl);
+}
+
+// faringe: el conducto que une la boca con el esófago
+const cFar = curveOf([
+  V(0.000, 0.5900, 0.0155), V(0.000, 0.5800, 0.0040), V(0.000, 0.5700, -0.0060)
+]);
+const mFar = add('faringe', varTube(cFar, () => 0.0135, 60, 20), M.mucosa);
+
+/* ── esófago ───────────────────────────────────────────── */
+const cEso = curveOf([
+  V(0.00, 0.56, -0.010), V(0.005, 0.48, -0.014), V(0.00, 0.44, -0.012),
+  V(-0.012, 0.38, -0.006), V(-0.028, 0.345, 0.000)
+]);
+const mEso = add('esofago', varTube(cEso, t => 0.0125 + 0.002 * Math.sin(t * 9), 120, 24), M.esofago);
+
+/* ── estómago (cardias → fundus → cuerpo → antro → píloro) ─ */
+const est = curveOf([
+  V(-0.030, 0.352, 0.000), V(-0.075, 0.392, -0.010), V(-0.112, 0.352, -0.006),
+  V(-0.108, 0.282, 0.010), V(-0.070, 0.220, 0.022), V(-0.010, 0.196, 0.018),
+  V(0.042, 0.206, 0.006), V(0.068, 0.238, -0.004)
+], 0.45);
+const mEst = add('estomago', varTube(est, t => {
+  const bulge = Math.exp(-Math.pow((t - 0.34) / 0.30, 2));
+  return 0.017 + 0.048 * bulge - 0.004 * Math.max(0, t - 0.8) * 5 + 0.0015 * Math.sin(t * 26);
+}, 260, 34), M.estomago);
+
+/* ── duodeno (C) + yeyuno-íleon en asas ─────────────────── */
+const duo = [
+  V(0.068, 0.238, -0.004), V(0.098, 0.212, -0.014), V(0.112, 0.160, -0.020),
+  V(0.092, 0.112, -0.024), V(0.040, 0.100, -0.026), V(0.004, 0.128, -0.024),
+  V(-0.004, 0.160, -0.018)
+];
+const cDuo = curveOf(duo);
+const mDuo = add('duodeno', varTube(cDuo, t => 0.0165 + 0.0018 * Math.sin(t * 30), 160, 26), M.delgado);
+
+const pts = [V(-0.004, 0.160, -0.018), V(-0.010, 0.150, 0.005)];
+const rows = 6, top = 0.132, bot = -0.070;
+for (let r = 0; r < rows; r++) {
+  const y0 = top + (bot - top) * r / (rows - 1);
+  const dir = r % 2 === 0 ? 1 : -1;
+  const a = 0.104 * (1 - 0.07 * r);
+  const n = 16;
+  for (let k = 0; k <= n; k++) {
+    const u = k / n;
+    const w = Math.sin(u * 12.9898 + r * 78.233) * 43758.5453;
+    const j = w - Math.floor(w) - 0.5;
+    pts.push(V(
+      dir * (-a + 2 * a * u) + 0.010 * j,
+      y0 + 0.017 * Math.sin(u * Math.PI * 4 + r * 1.7) + 0.008 * j,
+      0.026 + 0.040 * Math.sin(u * Math.PI * 2.3 + r * 2.1) + 0.012 * j
+    ));
+  }
+  if (r < rows - 1) {
+    const y1 = top + (bot - top) * (r + 1) / (rows - 1);
+    pts.push(V(dir * a * 1.14, (y0 + y1) / 2, 0.018));
+  }
+}
+pts.push(V(0.086, -0.088, 0.010), V(0.104, -0.100, 0.000));
+const cDel = curveOf(pts, 0.5);
+const mDel = add('intestino_delgado', varTube(cDel,
+  t => 0.0165 + 0.0020 * Math.sin(t * 210), 1400, 22), M.delgado);
+
+/* ── intestino grueso: ciego → ascendente → transverso → descendente → sigmoide ─ */
+const colon = curveOf([
+  V(0.108, -0.150, -0.004), V(0.126, -0.108, -0.006), V(0.134, -0.030, -0.008),
+  V(0.136, 0.060, -0.010), V(0.132, 0.150, -0.014), V(0.112, 0.212, -0.008),
+  V(0.060, 0.226, 0.026), V(-0.010, 0.198, 0.034), V(-0.080, 0.214, 0.020),
+  V(-0.126, 0.246, -0.006), V(-0.140, 0.180, -0.014), V(-0.138, 0.080, -0.014),
+  V(-0.132, -0.020, -0.012), V(-0.116, -0.090, -0.010), V(-0.062, -0.126, 0.000),
+  V(-0.020, -0.096, 0.010), V(0.004, -0.140, 0.000), V(0.002, -0.196, -0.012)
+], 0.5);
+const mCol = add('intestino_grueso', varTube(colon, t => {
+  const taper = t < 0.06 ? 0.006 * (0.06 - t) / 0.06 : 0;
+  const shrink = t > 0.72 ? 0.008 * (t - 0.72) / 0.28 : 0;
+  // las haustras marcadas son lo que distingue de lejos el grueso del delgado
+  return 0.030 + taper - shrink + 0.0060 * Math.sin(t * 150);
+}, 900, 30), M.grueso);
+
+const cRec = curveOf([
+  V(0.002, -0.192, -0.012), V(0.000, -0.230, -0.004), V(0.000, -0.272, 0.004)
+]);
+const mRec = add('recto', varTube(cRec, t => 0.026 - 0.010 * t * t, 90, 26), M.grueso);
+
+add('apendice', varTube(curveOf([
+  V(0.104, -0.158, 0.004), V(0.086, -0.190, 0.014), V(0.062, -0.206, 0.026)
+]), () => 0.0065, 60, 16), M.grueso);
+
+/* apéndices epiploicos: los colgajos de grasa que cuelgan del colon.
+   Detalle chico, pero junto con las tenias y las haustras es lo que
+   identifica el intestino grueso en una lámina de anatomía. */
+{
+  const up = V(0, 1, 0), n1 = new THREE.Vector3(), n2 = new THREE.Vector3();
+  for (let i = 0; i < 20; i++) {
+    const t = 0.04 + (i / 20) * 0.84;
+    const P = colon.getPointAt(t);
+    const T = colon.getTangentAt(t).normalize();
+    n1.crossVectors(T, up).normalize();
+    n2.crossVectors(T, n1).normalize();
+    const a = rnd() * 6.2832, r = 0.028;
+    const tag = new THREE.Mesh(new THREE.SphereGeometry(0.0034 + rnd() * 0.0022, 14, 10), M.grasa);
+    tag.name = 'apendices_epiploicos';
+    tag.scale.set(1, 1.6 + rnd(), 0.75);
+    tag.position.copy(P).addScaledVector(n1, Math.cos(a) * r).addScaledVector(n2, Math.sin(a) * r);
+    tag.castShadow = true;
+    root.add(tag);
+  }
+}
+
+/* ── hígado: esfera deformada en cuña, lóbulo derecho dominante ─ */
+{
+  const g = new THREE.SphereGeometry(1, 96, 72);
+  const p = g.attributes.position;
+  const v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) {
+    v.fromBufferAttribute(p, i);
+    v.set(v.x * 0.150, v.y * 0.082, v.z * 0.098);
+    const leftT = Math.min(1, Math.max(0, (-v.x + 0.02) / 0.14));
+    v.y *= 1 - 0.52 * leftT * leftT;
+    v.z *= 1 - 0.30 * leftT;
+    if (v.y < -0.012) v.y = -0.012 + (v.y + 0.012) * 0.34;
+    v.z -= 0.055 * Math.max(0, v.y / 0.082) * Math.max(0, v.y / 0.082);
+    // escotadura del ligamento falciforme: el surco que separa los lóbulos
+    const notch = 0.5 * Math.exp(-Math.pow((v.x + 0.012) / 0.016, 2)) *
+                  Math.max(0, v.z / 0.098) * Math.max(0, 1 - Math.abs(v.y) / 0.055);
+    v.z *= 1 - 0.30 * notch;
+    p.setXYZ(i, v.x, v.y, v.z);
+  }
+  g.computeVertexNormals();
+  const liver = add('higado', g, M.higado);
+  liver.position.set(0.048, 0.322, 0.020);
+  liver.rotation.set(0.10, 0.05, -0.07);
+}
+
+/* ── vesícula biliar ───────────────────────────────────── */
+const mVes = add('vesicula_biliar', varTube(curveOf([
+  V(0.072, 0.286, 0.062), V(0.062, 0.256, 0.058), V(0.046, 0.238, 0.040),
+  V(0.036, 0.234, 0.014)
+]), t => 0.020 * Math.pow(Math.max(0.0001, 1 - t), 0.55) + 0.0035, 100, 24), M.vesicula);
+
+/* ── páncreas ──────────────────────────────────────────── */
+const mPan = add('pancreas', varTube(curveOf([
+  V(0.052, 0.140, -0.030), V(0.020, 0.156, -0.036), V(-0.032, 0.178, -0.042),
+  V(-0.086, 0.196, -0.042), V(-0.122, 0.214, -0.036)
+]), t => 0.020 * (1 - 0.62 * t) + 0.0015 * Math.sin(t * 18), 160, 24), M.pancreas);
+
+/* ── peristaltismo: onda de constricción viajera + abultamiento del bolo ── */
+function peristaltic(mesh, amp, width) {
+  const m = mesh.material.clone();
+  m.name = mesh.material.name;
+  mesh.material = m;
+  const u = {
+    uB: { value: -1 }, uBA: { value: 0 }, uWA: { value: 0 },
+    uW: { value: new THREE.Vector4(-1, -1, -1, -1) }
+  };
+  m.onBeforeCompile = (sh) => {
+    Object.assign(sh.uniforms, u);
+    sh.vertexShader = sh.vertexShader
+      .replace('#include <common>',
+        '#include <common>\nuniform float uB;\nuniform float uBA;\nuniform float uWA;\nuniform vec4 uW;')
+      .replace('#include <begin_vertex>', `#include <begin_vertex>
+        float tt = uv.x;
+        float d = uBA * exp(-pow((tt - uB) / ${(width * 1.6).toFixed(4)}, 2.0));
+        for (int i = 0; i < 4; i++)
+          d -= uWA * ${amp.toFixed(5)} * exp(-pow((tt - uW[i]) / ${width.toFixed(4)}, 2.0));
+        transformed += normal * d;`);
+  };
+  m.customProgramCacheKey = () => 'per_' + mesh.name;
+  return u;
+}
+
+const SEG = [
+  { m: mFar, c: cFar, u: peristaltic(mFar, 0.0040, 0.120), dur: 2, sp: 0.5,
+    r0: 0.0085, r1: 0.0090, c0: '#c9a05c', c1: '#c4904e',
+    fase: 'Masticación y deglución — boca',
+    txt: 'Los dientes trituran el alimento (digestión mecánica) mientras la lengua lo mezcla con saliva. La amilasa salival empieza a romper el almidón: es la primera digestión química. Así se forma el bolo alimenticio.' },
+
+  { m: mEso, c: cEso, u: peristaltic(mEso, 0.0055, 0.030), dur: 4.5, sp: 0.42,
+    r0: 0.0090, r1: 0.0090, c0: '#c4904e', c1: '#bc8747',
+    fase: 'Deglución — esófago',
+    txt: 'El bolo, ya humedecido por la saliva, es empujado por ondas peristálticas de la musculatura esofágica. La amilasa salival sigue hidrolizando el almidón mientras desciende.' },
+
+  { m: mEst, c: est, u: peristaltic(mEst, 0.0110, 0.045), dur: 9, sp: 0.20,
+    r0: 0.0155, r1: 0.0135, c0: '#bc8747', c1: '#9d7c3a',
+    fase: 'Digestión gástrica — estómago',
+    txt: 'Las ondas de mezcla del antro baten el alimento con el jugo gástrico: ácido clorhídrico (pH 1,5–3) y pepsina. Las proteínas se desnaturalizan y el bolo se transforma en quimo.' },
+
+  { m: mDuo, c: cDuo, u: peristaltic(mDuo, 0.0060, 0.035), dur: 6, sp: 0.30,
+    r0: 0.0125, r1: 0.0120, c0: '#9d7c3a', c1: '#a89055',
+    fase: 'Neutralización — duodeno',
+    txt: 'El píloro libera el quimo en porciones. La bilis del hígado y la vesícula emulsiona las grasas; el jugo pancreático aporta bicarbonato, lipasa, amilasa y proteasas.' },
+
+  { m: mDel, c: cDel, u: peristaltic(mDel, 0.0055, 0.006), dur: 20, sp: 0.055,
+    r0: 0.0120, r1: 0.0095, c0: '#a89055', c1: '#c0ad7d',
+    fase: 'Absorción — yeyuno e íleon',
+    txt: 'Segmentación y peristaltismo lento exponen el quilo a las vellosidades. Azúcares simples y aminoácidos pasan a la sangre; los ácidos grasos, a los vasos quilíferos.' },
+
+  { m: mCol, c: colon, u: peristaltic(mCol, 0.0105, 0.010), dur: 16, sp: 0.055,
+    r0: 0.0150, r1: 0.0175, c0: '#8f7a4a', c1: '#5f4327',
+    fase: 'Reabsorción — intestino grueso',
+    txt: 'Se reabsorben agua y electrolitos. La flora bacteriana fermenta los residuos y sintetiza vitamina K y del grupo B; el contenido se compacta y oscurece.' },
+
+  { m: mRec, c: cRec, u: peristaltic(mRec, 0.0080, 0.060), dur: 4, sp: 0.25,
+    r0: 0.0170, r1: 0.0165, c0: '#5f4327', c1: '#523821',
+    fase: 'Almacenamiento — recto',
+    txt: 'La materia fecal formada distiende la ampolla rectal y desencadena el reflejo de la defecación.' }
+];
+
+/* bolo: esfera irregular */
+const bg = new THREE.IcosahedronGeometry(1, 4);
+{
+  const p = bg.attributes.position, v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) {
+    v.fromBufferAttribute(p, i);
+    const n = 1 + 0.16 * Math.sin(v.x * 9.1) * Math.cos(v.y * 7.7) + 0.10 * Math.sin(v.z * 13.3);
+    p.setXYZ(i, v.x * n, v.y * n, v.z * n);
+  }
+  bg.computeVertexNormals();
+}
+const boloMat = new THREE.MeshPhysicalMaterial({
+  color: new THREE.Color('#c4904e'), roughness: 0.5, metalness: 0,
+  clearcoat: 0.6, clearcoatRoughness: 0.35
+});
+boloMat.name = 'bolo';
+const bolo = new THREE.Mesh(bg, boloMat);
+bolo.name = 'bolo_alimenticio';
+bolo.castShadow = true;
+bolo.visible = false;           // el recorrido es opcional: arranca apagado
+bolo.scale.setScalar(0.012);    // la esfera nace de radio 1 m: sin esto agranda los límites
+root.add(bolo);
+
+/* Límites del MODELO, sin contar el bolo: es un objeto móvil y de tamaño
+   variable, y si entra en el cálculo el encuadre queda mirando al vacío. */
+function modelBox() {
+  root.updateMatrixWorld(true);
+  const b = new THREE.Box3();
+  root.traverse(o => { if (o.isMesh && o !== bolo) b.expandByObject(o); });
+  return b;
+}
+
+const higado = root.getObjectByName('higado');
+[higado.material, mVes.material, mPan.material].forEach(m => {
+  m.emissive = new THREE.Color(0xffcf6a); m.emissiveIntensity = 0;
+});
+
+/* ── ficha del recorrido (opcional) ─────────────────────── */
+const TOTAL = SEG.reduce((s, g) => s + g.dur, 0);
+const hudEl = document.getElementById('hud');
+const hud = {
+  fase: document.getElementById('fase'),
+  txt: document.getElementById('txt'),
+  bar: document.getElementById('bar'),
+  play: document.getElementById('play')
+};
+let clock = 0, last = performance.now(), playing = true, speed = 1, shown = -1;
+let travel = false;             // ← el tránsito del bolo arranca desactivado
+const tmpA = new THREE.Color(), tmpB = new THREE.Color();
+
+function tick(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+
+  if (!travel) {
+    // sin recorrido: todos los tramos vuelven suavemente al reposo
+    SEG.forEach(g => {
+      g.u.uWA.value += (0 - g.u.uWA.value) * Math.min(1, dt * 3.5);
+      g.u.uB.value = -1; g.u.uBA.value = 0;
+    });
+    higado.material.emissiveIntensity = 0;
+    mVes.material.emissiveIntensity = 0;
+    mPan.material.emissiveIntensity = 0;
+    if (window.__frameFit) window.__frameFit(now);
+    requestAnimationFrame(tick);
+    return;
+  }
+
+  if (playing) clock = (clock + dt * speed) % TOTAL;
+
+  let acc = 0, active = 0, local = 0;
+  for (let i = 0; i < SEG.length; i++) {
+    if (clock < acc + SEG[i].dur) { active = i; local = (clock - acc) / SEG[i].dur; break; }
+    acc += SEG[i].dur;
+  }
+
+  SEG.forEach((g, i) => {
+    const on = i === active;
+    // solo el segmento con contenido se contrae; el resto queda en reposo
+    g.u.uWA.value += ((on ? 1 : 0) - g.u.uWA.value) * Math.min(1, dt * 3.5);
+    if (on) {
+      const w = g.u.uW.value;
+      for (let k = 0; k < 4; k++) w.setComponent(k, (local - 0.06 - k * 0.07 + 1) % 1);
+    }
+    g.u.uB.value = on ? local : -1;
+    g.u.uBA.value = on ? (g.m === mEst ? 0.010 : 0.008) : 0;
+  });
+
+  const g = SEG[active];
+  const p = g.c.getPointAt(Math.min(0.999, Math.max(0.001, local)));
+  const churn = g.m === mEst ? 0.010 * Math.sin(now / 260) : 0;
+  bolo.position.set(p.x + churn, p.y + churn * 0.6, p.z + churn * 0.5);
+  const r = g.r0 + (g.r1 - g.r0) * local;
+  bolo.scale.setScalar(r * (1 + 0.10 * Math.sin(now / 190)));
+  bolo.rotation.set(now / 2600, now / 1900, now / 3300);
+  boloMat.color.copy(tmpA.set(g.c0).lerp(tmpB.set(g.c1), local));
+
+  // secreción biliar y pancreática al llegar el quimo al duodeno
+  const sec = active === 3 ? Math.max(0, Math.sin(local * Math.PI)) * (0.55 + 0.45 * Math.sin(now / 220)) : 0;
+  higado.material.emissiveIntensity = sec * 0.30;
+  mVes.material.emissiveIntensity = sec * 0.75;
+  mPan.material.emissiveIntensity = sec * 0.60;
+
+  if (hud.bar) hud.bar.style.width = (clock / TOTAL * 100).toFixed(2) + '%';
+  if (window.__frameFit) window.__frameFit(now);
+  if (shown !== active && hud.fase) {
+    shown = active;
+    hud.fase.textContent = g.fase;
+    hud.txt.textContent = g.txt;
+  }
+  requestAnimationFrame(tick);
+}
+hud.fase.textContent = SEG[0].fase;
+hud.txt.textContent = SEG[0].txt;
+requestAnimationFrame(tick);
+
+hud.play?.addEventListener('click', () => {
+  playing = !playing;
+  hud.play.textContent = playing ? 'Pausa' : 'Reanudar';
+});
+document.getElementById('vel')?.addEventListener('click', (e) => {
+  speed = speed === 1 ? 2 : speed === 2 ? 4 : 1;
+  e.currentTarget.textContent = '×' + speed;
+});
+
+/* centrar en x/z, apoyar la base en y = 0 */
+const S = 6;
+const box = modelBox();
+const c = box.getCenter(new THREE.Vector3());
+root.scale.setScalar(S);
+root.position.set(-c.x * S, -box.min.y * S, -c.z * S);
+
+stage.setObject(root);
+
+/* ── ambiente y luz: sin mapa de entorno el tejido se ve de plástico ── */
+if (stage._renderer && stage._scene) {
+  const pmrem = new THREE.PMREMGenerator(stage._renderer);
+  stage._scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  stage._scene.background = new THREE.Color(0x12161c);
+  stage._renderer.toneMappingExposure = 1.05;
+}
+
+/* ── nombres de los órganos: tocar una parte y saber qué es ── */
+const INFO = {
+  boca: ['Boca', 'Dientes, lengua y saliva: acá empieza la digestión'],
+  dientes: ['Dientes', 'Trituran el alimento · digestión mecánica'],
+  lengua: ['Lengua', 'Mezcla el alimento con la saliva y forma el bolo'],
+  paladar: ['Paladar', 'Techo de la cavidad bucal'],
+  glandulas_salivales: ['Glándulas salivales', 'Producen saliva con amilasa'],
+  faringe: ['Faringe', 'Conducto compartido con el aparato respiratorio'],
+  esofago: ['Esófago', 'Empuja el bolo con ondas peristálticas'],
+  estomago: ['Estómago', 'Bate el bolo y lo vuelve quimo (pH 1,5–3)'],
+  duodeno: ['Duodeno', 'Recibe la bilis y el jugo pancreático'],
+  intestino_delgado: ['Intestino delgado', 'Yeyuno e íleon · casi 6 m · acá se absorbe'],
+  intestino_grueso: ['Intestino grueso', 'Ciego y colon · reabsorbe agua y sales'],
+  apendices_epiploicos: ['Apéndices epiploicos', 'Colgajos de grasa propios del intestino grueso'],
+  apendice: ['Apéndice', 'Pequeño saco del ciego'],
+  recto: ['Recto', 'Almacena la materia fecal'],
+  higado: ['Hígado', 'Fabrica la bilis · el órgano interno más grande'],
+  vesicula_biliar: ['Vesícula biliar', 'Almacena la bilis y la vuelca en el duodeno'],
+  pancreas: ['Páncreas', 'Jugo pancreático con enzimas · también insulina'],
+  bolo_alimenticio: ['Bolo alimenticio', 'El alimento en tránsito']
+};
+const tip = document.getElementById('tip');
+const glCanvas = stage.shadowRoot ? stage.shadowRoot.querySelector('canvas') : null;
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+
+function pick(clientX, clientY) {
+  const cam = stage._camera;
+  if (!cam || !glCanvas) return;
+  const r = glCanvas.getBoundingClientRect();
+  ptr.set((clientX - r.left) / r.width * 2 - 1, -((clientY - r.top) / r.height * 2 - 1));
+  ray.setFromCamera(ptr, cam);
+  const hits = ray.intersectObject(root, true);
+  let found = null;
+  for (const h of hits) {
+    let o = h.object;
+    while (o && o !== root && !INFO[o.name]) o = o.parent;
+    if (o && INFO[o.name]) { found = INFO[o.name]; break; }
+  }
+  if (!found) { tip.classList.remove('show'); return; }
+  tip.innerHTML = `<b>${found[0]}</b><span>${found[1]}</span>`;
+  tip.style.left = clientX + 'px';
+  tip.style.top = clientY + 'px';
+  tip.classList.add('show');
+}
+if (glCanvas) {
+  glCanvas.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') pick(e.clientX, e.clientY); });
+  glCanvas.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') pick(e.clientX, e.clientY); });
+  glCanvas.addEventListener('pointerleave', () => tip.classList.remove('show'));
+}
+
+/* ── controles ──────────────────────────────────────────── */
+const legendEl = document.getElementById('legend');
+const btnTravel = document.getElementById('btnTravel');
+const btnInside = document.getElementById('btnInside');
+const btnGlands = document.getElementById('btnGlands');
+const btnReset = document.getElementById('btnReset');
+const setOn = (btn, on) => { btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); };
+
+// El recorrido del bolo (la ficha con las etapas) es opcional: se enciende
+// desde acá y con él aparecen el bolo, el peristaltismo y la ficha.
+btnTravel.onclick = () => {
+  travel = !travel;
+  setOn(btnTravel, travel);
+  bolo.visible = travel;
+  hudEl.classList.toggle('on', travel);
+  legendEl.classList.toggle('hide', travel);   // la ficha ocupa el mismo lugar
+  if (travel) { clock = 0; shown = -1; playing = true; hud.play.textContent = 'Pausa'; }
+  framedUntil = performance.now() + 700;       // reencuadrar: la ficha tapa la izquierda
+};
+
+const skinMats = [M.esofago, M.estomago, M.delgado, M.grueso, M.higado, M.vesicula,
+                  M.pancreas, M.mucosa, M.lengua, M.salival, M.grasa];
+let inside = false;
+btnInside.onclick = () => {
+  inside = !inside;
+  setOn(btnInside, inside);
+  // los materiales de los tramos animados son clones, así que hay que
+  // recorrer las mallas y no la tabla M
+  root.traverse(o => {
+    if (!o.isMesh || o === bolo) return;
+    const mats = Array.isArray(o.material) ? o.material : [o.material];
+    for (const m of mats) {
+      if (m === M.esmalte) continue;           // los dientes quedan opacos
+      m.transparent = inside;
+      m.opacity = inside ? 0.22 : 1;
+      m.depthWrite = !inside;
+    }
+    o.castShadow = !inside;
+  });
+};
+
+const anexos = ['higado', 'vesicula_biliar', 'pancreas'];
+let showGlands = true;
+btnGlands.onclick = () => {
+  showGlands = !showGlands;
+  setOn(btnGlands, showGlands);
+  anexos.forEach(n => { const o = root.getObjectByName(n); if (o) o.visible = showGlands; });
+};
+
+btnReset.onclick = () => { framedUntil = performance.now() + 600; };
+
+/* encuadre explícito: el modelo llena la altura del viewport y se corre a
+   la derecha sólo cuando la ficha del recorrido ocupa la esquina izquierda */
+function frame() {
+  const cam = stage._camera, ctr = stage._controls;
+  if (!cam || !ctr) return;
+  const bx = modelBox();
+  const ctrPt = bx.getCenter(new THREE.Vector3());
+  const size = bx.getSize(new THREE.Vector3());
+  const aspect = cam.aspect || 1;
+  const vFov = THREE.MathUtils.degToRad(cam.fov);
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
+  // Encuadre por las medidas reales de la caja, no por la esfera que la
+  // contiene: el modelo es alto y angosto, y la esfera desperdicia tanto
+  // aire a los costados que arriba y abajo terminaba cortándose. Se suma
+  // parte de la profundidad porque al girar el modelo esa dimensión pasa
+  // a ser la altura o el ancho.
+  const halfH = size.y / 2 + size.z * 0.2;
+  const halfW = size.x / 2 + size.z * 0.2;
+  const d = Math.max(halfH / Math.tan(vFov / 2), halfW / Math.tan(hFov / 2)) * 1.18;
+  const shift = (travel && window.innerWidth > 780) ? size.x * 0.35 : 0;
+  // la barra de controles tapa la franja superior: subiendo el punto de mira
+  // el modelo baja en pantalla y la boca queda despejada
+  const drop = size.y * 0.055;
+  ctr.target.set(ctrPt.x - shift, ctrPt.y + drop, ctrPt.z);
+  cam.position.set(ctr.target.x + d * 0.10, ctr.target.y + d * 0.10, ctrPt.z + d * 0.97);
+  cam.near = d / 200; cam.far = d * 12;
+  cam.updateProjectionMatrix();
+  ctr.update();
+}
+frame();
+let framedUntil = performance.now() + 2200;
+window.addEventListener('resize', () => { framedUntil = performance.now() + 500; });
+stage.addEventListener('pointerdown', () => { framedUntil = 0; });
+window.__frameFit = (now) => { if (now < framedUntil) frame(); };
+</script>
+
+</body></html>

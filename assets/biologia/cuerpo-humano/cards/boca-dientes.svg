@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" role="img" aria-label="Ilustración didáctica de una boca abierta con la dentadura completa y las referencias de incisivos, caninos, premolares y molares">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1410"/>
+      <stop offset="1" stop-color="#161C18"/>
+    </linearGradient>
+    <radialGradient id="mouthGrad" cx="0.5" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#3A1214"/>
+      <stop offset="0.75" stop-color="#2A0D0F"/>
+      <stop offset="1" stop-color="#1C0809"/>
+    </radialGradient>
+    <linearGradient id="toothGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6F1E7"/>
+      <stop offset="1" stop-color="#D8D0BC"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <style>
+      .t-label { font-family: Inter, Arial, sans-serif; font-weight: 700; }
+      .t-sub { font-family: Inter, Arial, sans-serif; font-weight: 400; }
+    </style>
+  </defs>
+
+  <!-- fondo -->
+  <rect width="1280" height="360" fill="url(#bgGrad)"/>
+
+  <!-- halo suave detrás de la boca -->
+  <ellipse cx="640" cy="195" rx="420" ry="150" fill="rgba(220,38,38,0.05)"/>
+
+  <!-- labios -->
+  <path d="M640 30 C830 30 960 78 1010 148 C1060 220 970 238 880 228 C810 220 700 234 640 246 C580 234 470 220 400 228 C310 238 220 220 270 148 C320 78 450 30 640 30 Z" fill="#6B2022" stroke="#8E2B2D" stroke-width="2"/>
+  <path d="M640 276 C700 262 810 248 880 258 C970 268 1060 250 1010 330 C960 402 830 380 640 364 C450 380 320 402 270 330 C220 250 310 268 400 258 C470 248 580 262 640 276 Z" fill="#6B2022" stroke="#8E2B2D" stroke-width="2"/>
+
+  <!-- cavidad oral -->
+  <path d="M318 156 C460 198 540 212 640 214 C740 212 820 198 962 156 C930 268 820 300 640 302 C460 300 350 268 318 156 Z" fill="url(#mouthGrad)"/>
+
+  <!-- ================= ARCADA SUPERIOR ================= -->
+  <g filter="url(#softShadow)">
+    <!-- molares superiores -->
+    <g fill="url(#toothGrad)" stroke="#B9AE98" stroke-width="1.5">
+      <rect x="352" y="106" width="34" height="48" rx="7"/>
+      <rect x="392" y="96" width="36" height="56" rx="8"/>
+      <rect x="852" y="96" width="36" height="56" rx="8"/>
+      <rect x="894" y="106" width="34" height="48" rx="7"/>
+    </g>
+    <!-- premolares superiores -->
+    <g fill="url(#toothGrad)" stroke="#B9AE98" stroke-width="1.5">
+      <rect x="434" y="90" width="34" height="62" rx="8"/>
+      <rect x="812" y="90" width="34" height="62" rx="8"/>
+    </g>
+    <!-- caninos superiores -->
+    <g fill="#F3ECD9" stroke="#B9AE98" stroke-width="1.5">
+      <path d="M476 84 L494 60 L512 84 L508 148 L482 148 Z"/>
+      <path d="M768 84 L786 60 L804 84 L800 148 L774 148 Z"/>
+    </g>
+    <!-- incisivos superiores -->
+    <g fill="#F8F3E9" stroke="#B9AE98" stroke-width="1.5">
+      <rect x="522" y="82" width="28" height="66" rx="5"/>
+      <rect x="556" y="76" width="28" height="72" rx="5"/>
+      <rect x="590" y="74" width="28" height="74" rx="5"/>
+      <rect x="624" y="74" width="28" height="74" rx="5"/>
+      <rect x="658" y="76" width="28" height="72" rx="5"/>
+      <rect x="692" y="82" width="28" height="66" rx="5"/>
+    </g>
+    <!-- encía superior -->
+    <path d="M344 100 C480 72 800 72 936 100 L928 116 C800 86 480 86 352 116 Z" fill="#8E3033"/>
+  </g>
+
+  <!-- ================= ARCADA INFERIOR ================= -->
+  <g filter="url(#softShadow)">
+    <!-- incisivos inferiores -->
+    <g fill="#F8F3E9" stroke="#B9AE98" stroke-width="1.5">
+      <rect x="522" y="256" width="28" height="66" rx="5"/>
+      <rect x="556" y="262" width="28" height="72" rx="5"/>
+      <rect x="590" y="264" width="28" height="74" rx="5"/>
+      <rect x="624" y="264" width="28" height="74" rx="5"/>
+      <rect x="658" y="262" width="28" height="72" rx="5"/>
+      <rect x="692" y="256" width="28" height="66" rx="5"/>
+    </g>
+    <!-- caninos inferiores -->
+    <g fill="#F3ECD9" stroke="#B9AE98" stroke-width="1.5">
+      <path d="M474 246 L492 270 L510 246 L506 312 L480 312 Z"/>
+      <path d="M770 246 L788 270 L806 246 L802 312 L776 312 Z"/>
+    </g>
+    <!-- premolares inferiores -->
+    <g fill="url(#toothGrad)" stroke="#B9AE98" stroke-width="1.5">
+      <rect x="434" y="242" width="34" height="62" rx="8"/>
+      <rect x="812" y="242" width="34" height="62" rx="8"/>
+    </g>
+    <!-- molares inferiores -->
+    <g fill="url(#toothGrad)" stroke="#B9AE98" stroke-width="1.5">
+      <rect x="352" y="238" width="34" height="48" rx="7"/>
+      <rect x="392" y="236" width="36" height="56" rx="8"/>
+      <rect x="852" y="236" width="36" height="56" rx="8"/>
+      <rect x="894" y="238" width="34" height="48" rx="7"/>
+    </g>
+    <!-- encía inferior -->
+    <path d="M344 292 C480 318 800 318 936 292 L928 276 C800 306 480 306 352 276 Z" fill="#8E3033"/>
+  </g>
+
+  <!-- ================= REFERENCIAS ================= -->
+
+  <!-- INCISIVOS -->
+  <g>
+    <line x1="640" y1="172" x2="640" y2="34" stroke="#DC2626" stroke-width="2" stroke-dasharray="5 5"/>
+    <rect x="600" y="22" width="80" height="20" rx="4" fill="#DC2626"/>
+    <text x="640" y="36" text-anchor="middle" fill="#080C0A" class="t-label" font-size="11">INCISIVOS</text>
+    <text x="640" y="12" text-anchor="middle" fill="#A8B5AD" class="t-sub" font-size="9">8 · cortan</text>
+  </g>
+
+  <!-- CANINOS (derecho) -->
+  <g>
+    <line x1="786" y1="116" x2="1055" y2="52" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="786" cy="116" r="4" fill="#DC2626"/>
+    <rect x="1008" y="34" width="94" height="20" rx="4" fill="#DC2626"/>
+    <text x="1055" y="48" text-anchor="middle" fill="#080C0A" class="t-label" font-size="11">CANINOS</text>
+    <text x="1055" y="26" text-anchor="middle" fill="#A8B5AD" class="t-sub" font-size="9">4 · desgarran</text>
+  </g>
+
+  <!-- PREMOLARES (izquierdo) -->
+  <g>
+    <line x1="451" y1="121" x2="215" y2="58" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="451" cy="121" r="4" fill="#DC2626"/>
+    <rect x="142" y="40" width="146" height="20" rx="4" fill="#DC2626"/>
+    <text x="215" y="54" text-anchor="middle" fill="#080C0A" class="t-label" font-size="11">PREMOLARES</text>
+    <text x="215" y="32" text-anchor="middle" fill="#A8B5AD" class="t-sub" font-size="9">8 · trituran</text>
+  </g>
+
+  <!-- MOLARES (izquierdo) -->
+  <g>
+    <line x1="352" y1="133" x2="112" y2="132" stroke="#DC2626" stroke-width="2"/>
+    <circle cx="352" cy="133" r="4" fill="#DC2626"/>
+    <rect x="48" y="120" width="128" height="20" rx="4" fill="#DC2626"/>
+    <text x="112" y="134" text-anchor="middle" fill="#080C0A" class="t-label" font-size="11">MOLARES</text>
+    <text x="112" y="112" text-anchor="middle" fill="#A8B5AD" class="t-sub" font-size="9">12 · muelen</text>
+  </g>
+
+  <!-- título inferior -->
+  <text x="640" y="348" text-anchor="middle" fill="#5A6B60" class="t-sub" font-size="10">La boca: comienzo de la digestión mecánica</text>
+</svg>

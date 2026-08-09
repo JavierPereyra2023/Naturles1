@@ -488,3 +488,49 @@ Para editarlo hay que decodificar ese JSON, tocar el HTML y volver a codificarlo
   (era el único modelo que no lo tenía).
 - Medido 59.6 fps después de los cambios. Ojo: al medir fps en un tab que no está al
   frente el navegador lo estrangula a ~1 fps y parece un problema de rendimiento.
+
+## Modelo 3D del sistema digestivo (2026-08-08)
+
+Se partió del modelo que ya estaba en `modelo3D-digestivo/sistema-digestivo-standalone.html`:
+un HTML autocontenido que traía el runtime `<three-d-stage>` y toda la página empaquetados
+en base64 dentro del propio archivo, así que no se podía editar. Se desempaquetó y quedó:
+
+- `modelo3D-digestivo/three-d-stage.js` — el visor (escena, luces, OrbitControls, sombra
+  de piso y la barra de descarga OBJ/GLB), ya editable.
+- `modelo3D-digestivo/sistema-digestivo-3d.html` — el modelo, ya editable.
+- `modelo3D-digestivo/sistema-digestivo-standalone.html` — se conserva sin tocar como
+  respaldo offline.
+
+Mejoras sobre el modelo original:
+
+- **Boca**: antes el modelo arrancaba en el esófago y faltaba la primera etapa de la
+  digestión. Se agregaron arcadas dentarias (incisivos adelante, molares atrás), lengua
+  con papilas, paladar, glándulas salivales y faringe, más una etapa nueva en el
+  recorrido ("Masticación y deglución"). La boca va escalada 1,3× porque a escala
+  estrictamente anatómica no se distinguía.
+- **Textura histológica**: se sumaron a las texturas procedurales las *arcadas vasculares*
+  que nacen del borde mesentérico (los vasos rectos), las *tenias* del colon y los
+  *apéndices epiploicos* (grasa) como geometría. Junto con las haustras, más marcadas,
+  es lo que distingue de un vistazo el intestino grueso del delgado.
+- Se agregó mapa de entorno (`RoomEnvironment`) al visor: sin él las serosas se veían
+  de plástico. También `colorSpace` sRGB en los mapas de color.
+- **Nombres de los órganos**: raycast sobre el canvas del shadow DOM del visor; al tocar
+  una parte aparece su nombre y una nota. 18 piezas etiquetadas.
+- **El recorrido del bolo es OPCIONAL**: arranca apagado. El botón `Recorrido` enciende
+  el bolo, el peristaltismo y la ficha con las etapas.
+- Botones nuevos: `Ver por dentro` (translucidez) y `Órganos anexos` (oculta hígado,
+  vesícula y páncreas).
+- Interfaz pasada al tema oscuro del sitio (#12161c, acento #DC2626), en español y
+  responsive.
+
+Dos correcciones de encuadre, por si reaparecen:
+
+- El bolo es una esfera de radio 1 m escalada en el tick. Como arranca oculto y sin
+  escalar, entraba en `Box3.setFromObject` (que NO ignora objetos invisibles) y el
+  encuadre miraba al vacío. Se calcula la caja con `modelBox()`, que excluye el bolo.
+- El encuadre por esfera envolvente desperdicia aire a los costados en un modelo alto
+  y angosto, y arriba se cortaba la boca. Ahora se encuadra por las medidas de la caja.
+
+Embebido en `unidades/biologia/cuerpo-humano/digestion.html` (sección `#modelo-3d`,
+después del recorrido del alimento) con el patrón iframe + cache-buster `?v=20260808a`
+y botón de pantalla completa, igual que corazón y pulmón.

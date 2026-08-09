@@ -60,6 +60,37 @@
 .sr-name { flex:1; }
 .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
 .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+.gut-model-shell {
+  position: relative; overflow: hidden; border: 1px solid rgba(220,38,38,.25);
+  border-radius: 10px; background: #12161c;
+  box-shadow: 0 24px 70px rgba(0,0,0,.38), 0 0 0 1px rgba(255,255,255,.025) inset;
+}
+.gut-model-frame { display: block; width: 100%; height: 660px; border: 0; background: #12161c; }
+.gut-model-actions {
+  position: absolute; z-index: 10; left: 12px; bottom: 12px;
+  display: flex; gap: 7px; font-family: 'Inter', sans-serif;
+}
+.gut-model-button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
+  background: rgba(10,14,20,.84); color: #f3f7f4; backdrop-filter: blur(12px);
+  font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; transition: border-color .2s, background .2s;
+}
+.gut-model-button:hover { border-color: rgba(220,38,38,.75); background: rgba(40,16,20,.94); }
+.gut-model-back { display: none; }
+.gut-model-shell:fullscreen { width: 100vw; height: 100vh; border: 0; border-radius: 0; background: #12161c; }
+.gut-model-shell:fullscreen .gut-model-frame { width: 100%; height: 100%; }
+.gut-model-shell:fullscreen .gut-model-enter { display: none; }
+.gut-model-shell:fullscreen .gut-model-back { display: inline-flex; }
+@media (max-width: 767px) {
+  .gut-model-frame { height: 560px; }
+  .gut-model-actions { left: 10px; bottom: 10px; }
+  .gut-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+}
+@media (orientation: landscape) and (max-height: 620px) {
+  .gut-model-frame { height: 480px; }
+}
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   </head>
@@ -157,6 +188,7 @@
           <a href="#funcin-principal" class="toc-link active" data-toc>01. Función Principal</a>
           <a href="#mecanica-y-quimica" class="toc-link" data-toc>02. Mecánica y Química</a>
           <a href="#recorrido-del-alimento" class="toc-link" data-toc>03. Recorrido del Alimento</a>
+          <a href="#modelo-3d" class="toc-link" data-toc>· El sistema digestivo en 3D</a>
           <a href="#rganos-anexos" class="toc-link" data-toc>04. Órganos Anexos</a>
           <a href="#absorcion" class="toc-link" data-toc>05. La Absorción</a>
           <a href="#dato-curioso" class="toc-link" data-toc>06. Dato Curioso</a>
@@ -278,7 +310,7 @@
           <div>
             <h3 class="font-heading text-base font-semibold text-white mb-2">Boca</h3>
             <p class="text-lg text-natura-silver leading-relaxed">
-              Masticación mecánica. Los dientes trituran el alimento mientras la lengua lo mezcla con saliva. La saliva contiene <strong class="text-natura-silverLight">amilasa</strong>, una enzima que empieza a digerir los carbohidratos. Aquí se forma el <strong class="text-natura-silverLight">bolo alimenticio</strong>, una masa blanda lista para ser tragada.
+              Masticación mecánica. Los dientes trituran el alimento mientras la lengua lo mezcla con saliva. La saliva contiene <strong class="text-natura-silverLight">amilasa</strong>, una enzima que empieza a digerir los carbohidratos. Aquí se forma el <strong class="text-natura-silverLight">bolo alimenticio</strong>, una masa blanda lista para ser tragada. <a href="boca-masticacion.html" class="text-natura-bio underline decoration-dotted underline-offset-2">Ver el detalle: dientes, saliva y amilasa →</a>
             </p>
           </div>
         </div>
@@ -428,6 +460,41 @@
         requestAnimationFrame(frame);
       })();
       </script>
+    </section>
+
+    <!-- MODELO 3D INTERACTIVO -->
+    <section class="animate-fadeInUp delay-200" id="modelo-3d">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="iconify text-natura-bio" data-icon="lucide:box" data-width="24"></span>
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-bio mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+          <h2 class="font-heading text-lg md:text-xl font-bold text-white">El sistema digestivo en 3D</h2>
+        </div>
+      </div>
+      <div class="accent-line mb-5"></div>
+      <p class="text-base text-natura-silver mb-4 leading-relaxed">Girá el modelo con el dedo o el mouse para verlo desde cualquier ángulo y tocá un órgano para que aparezca su nombre. Fijate en los detalles que distinguen este modelo de un dibujo esquemático: el estómago tiene forma de <strong class="text-natura-silverLight">«J»</strong> y está a la izquierda, el <strong class="text-natura-silverLight">duodeno</strong> forma una «C» que abraza la cabeza del páncreas, y el intestino grueso rodea al delgado como un marco, con sus <strong class="text-natura-silverLight">haustras</strong> (los abultamientos) y sus colgajos de grasa: por eso se distingue de un vistazo del intestino delgado.</p>
+      <p class="mb-5 border-l-2 border-natura-bio/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
+        <strong class="text-natura-bio">Cómo usarlo:</strong> con <em>Recorrido</em> se enciende el viaje del bolo alimenticio —vas viendo el peristaltismo tramo por tramo y una ficha explica qué ocurre en cada etapa—; con <em>Ver por dentro</em> los órganos se vuelven transparentes y aparecen los de atrás, como el páncreas; con <em>Órganos anexos</em> se ocultan hígado, vesícula y páncreas para ver el tubo digestivo completo.
+      </p>
+      <div class="gut-model-shell" id="gutModelShell">
+        <div class="gut-model-actions">
+          <button type="button" class="gut-model-button gut-model-enter" id="gutModelEnter">
+            <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
+            Pantalla completa
+          </button>
+          <button type="button" class="gut-model-button gut-model-back" id="gutModelBack">
+            <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+            Volver a la página
+          </button>
+        </div>
+        <iframe
+          class="gut-model-frame"
+          src="../../../modelo3D-digestivo/sistema-digestivo-3d.html?v=20260808a"
+          title="Modelo 3D interactivo del sistema digestivo humano"
+          loading="lazy"
+          allow="fullscreen"
+        ></iframe>
+      </div>
     </section>
 
     <!-- SECTION 4: Órganos anexos -->
@@ -683,6 +750,24 @@
     });
   }, { threshold: 0.12 });
   els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var shell = document.getElementById('gutModelShell');
+  var enter = document.getElementById('gutModelEnter');
+  var back = document.getElementById('gutModelBack');
+  if(!shell || !enter || !back) return;
+
+  enter.addEventListener('click', function(){
+    if(shell.requestFullscreen) shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
+  });
+
+  back.addEventListener('click', function(){
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+  });
 })();
 </script>
 </body>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sistema digestivo — modelo 3D</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #faf9f5; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #faf9f5; z-index: 9999; }
+    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    #__bundler_placeholder { color: #999; font-size: 14px; }
+  </style>
+  <noscript>
+    <style>#__bundler_loading { display: none; }</style>
+    <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
+      This page requires JavaScript to display.
+    </div>
+  </noscript>
+</head>
+<body>
+  <div id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#7d3630"></rect>
+  <path d="M50 30 v14 c0 8 -12 8 -12 16 s12 8 12 16" fill="none" stroke="#f0c9b8" stroke-width="6" stroke-linecap="round"></path>
+  <circle cx="50" cy="30" r="6" fill="#d6a95f"></circle>
+</svg>
+</div>
+  <div id="__bundler_loading">Unpacking...</div>
+
+  <script>
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
+
+  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
+  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
+  function toBase64(bytes) {
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    // Failed resource loads (CSP-blocked links, scripts, images) fire plain
+    // events at the element — warn only; real JS errors carry message/error.
+    if (!e.message && !e.error && e.target && e.target !== window) {
+      console.warn('[bundle] resource failed to load:',
+        e.target.tagName, String(e.target.src || e.target.href || ''));
+      return;
+    }
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
+
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
+
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
+
+    // Nested page bundles (iframe targets). Each ships ONCE, in the ROOT
+    // document's manifest; frame srcs carry an about:blank#<uuid> marker
+    // instead of a substitutable uuid. Every document mints the blobs for
+    // its OWN frames — from local text at the root, or text obtained from
+    // its DIRECT parent over the relay protocol below — so each frame
+    // navigation stays same-origin with its initiator and a deduped page
+    // loads at any depth on any host, including a file:// download's
+    // opaque origins (where a blob minted by one document cannot be
+    // navigated to by another).
+    const pageOrderEl = document.querySelector('script[type="__bundler/page_order"]');
+    const pageOrder = pageOrderEl ? JSON.parse(pageOrderEl.textContent) : [];
+    const pageSet = new Set(pageOrder);
+    const pageTexts = {};
+
+    // ── Nested-page text protocol (parent-chain relay) ──
+    // Page bundles ship once, in the ROOT document's manifest. Every
+    // document mints the blobs for its OWN frames, obtaining page text
+    // through a strict parent-chain relay: a document only ever SENDS to
+    // its direct parent (which, for every document the publisher's own
+    // runtime minted, is another publisher document) and only ACCEPTS
+    // text from that direct parent; requests from below are honored only
+    // for the document's own child frames, and the ROOT never sends
+    // upward at all. That last rule is load-bearing: the artifact host's
+    // frame-ancestors allows claude.ai (and friends) to frame an
+    // artifact, so window.top can be a FOREIGN document — a top-addressed
+    // protocol would hand page uuids to that ancestor and accept forged
+    // "page text" from it, minting attacker HTML as an artifact-origin
+    // blob document. The chain never touches the ancestor: requests stop
+    // at the root, replies are origin-addressed per hop (never '*' when
+    // an origin exists), and both directions are origin-gated (on https
+    // a foreign sender's origin can never equal this document's; in
+    // opaque contexts — file:// — everything serializes as 'null', where
+    // an embedded EXTERNAL frame still fails the gate by carrying its
+    // own real origin, and a sandboxed child of such a frame is excluded
+    // by the own-child-frames check plus uuid unguessability). Shape is
+    // deny-by-default: one request form, one reply form, no error
+    // replies.
+    // window.origin is the SERIALIZED SECURITY origin ('null' in opaque
+    // contexts such as a sandboxed preview iframe) — location.origin is
+    // computed from the URL and stays 'https://…' even when the document
+    // is sandboxed, which would misgate every opaque chain.
+    const OWN_TARGET = /^https?:[/][/]/.test(window.origin || '')
+      ? window.origin
+      : '*';
+    function trustedOrigin(e) {
+      if (e.origin === window.origin) return true; // https chains; opaque==opaque
+      // file:// trees: Chrome serializes the file document's origin as
+      // 'file://' while the blob: documents it mints serialize as 'null',
+      // so the two legitimate shapes can never string-match — accept the
+      // pair in both directions. https origins never serialize as either,
+      // and sender identity (own child frame / direct parent) is checked
+      // separately.
+      return (
+        (e.origin === 'null' &&
+          (window.origin === 'file://' ||
+            window.location.protocol === 'file:')) ||
+        (/^file:/.test(e.origin) && window.origin === 'null')
+      );
+    }
+    // Non-empty only in the root document (nested bundles ship an empty
+    // island), so it doubles as the root marker: the root answers from
+    // local text and treats a miss as authoritative — never relaying to
+    // its (possibly foreign) parent.
+    const isPageRoot = pageOrder.length > 0;
+    const blobUrls = {};
+    const resourceBlobs = {};
+    const UUID_SHAPE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+    const pendingFrames = {}; // uuid -> [{el, frag}] awaiting text for own frames
+    const pendingRelays = {}; // uuid -> [childWindow] awaiting text to pass down
+    function mountPage(el, frag, text) {
+      const pageBlob = new Blob([text], { type: 'text/html' });
+      const u = URL.createObjectURL(pageBlob);
+      resourceBlobs[u] = pageBlob;
+      el.src = u + frag;
+    }
+    function deliverPage(uuid, text) {
+      const frames = pendingFrames[uuid];
+      delete pendingFrames[uuid];
+      if (frames) for (const f of frames) mountPage(f.el, f.frag, text);
+      const relays = pendingRelays[uuid];
+      delete pendingRelays[uuid];
+      if (relays) {
+        for (const cw of relays) {
+          try { cw.postMessage({ __bundler_page: uuid, __bundler_text: text }, OWN_TARGET); } catch (err) { /* gone */ }
+        }
+      }
+    }
+    function ownFrameWindows() {
+      const out = [];
+      for (const f of Array.from(document.querySelectorAll('iframe'))) {
+        try { if (f.contentWindow) out.push(f.contentWindow); } catch (err) { /* detached */ }
+      }
+      return out;
+    }
+    window.addEventListener('message', function (e) {
+      const d = e.data;
+      if (!d || typeof d !== 'object' || !e.source) return;
+      // Origin gate first; the structural checks below (own-child-frames
+      // for requests, direct-parent + solicited-uuid for replies, the
+      // root's never-relay rule) are what hold in fully opaque chains
+      // where origin strings can't discriminate — a sandboxed root's
+      // FOREIGN wrapper still fails all three even though both serialize
+      // as real-vs-'null' rather than matching.
+      if (!trustedOrigin(e)) return;
+      if (typeof d.__bundler_need === 'string' && UUID_SHAPE.test(d.__bundler_need)) {
+        // Requests are honored only for this document's own child frames.
+        if (ownFrameWindows().indexOf(e.source) < 0) return;
+        const uuid = d.__bundler_need;
+        const text = pageTexts[uuid];
+        if (typeof text === 'string') {
+          try { e.source.postMessage({ __bundler_page: uuid, __bundler_text: text }, OWN_TARGET); } catch (err) { /* gone */ }
+          return;
+        }
+        if (isPageRoot || window.parent === window) return; // authoritative miss
+        const waiting = pendingRelays[uuid];
+        if (waiting) {
+          if (waiting.indexOf(e.source) < 0) waiting.push(e.source);
+          return;
+        }
+        // Never-answered uuids would otherwise accumulate forever under a
+        // request spray; past the cap (far above any real page count) new
+        // relays are dropped rather than remembered.
+        if (Object.keys(pendingRelays).length >= 128) return;
+        pendingRelays[uuid] = [e.source];
+        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
+      } else if (
+        typeof d.__bundler_page === 'string' &&
+        UUID_SHAPE.test(d.__bundler_page) &&
+        typeof d.__bundler_text === 'string'
+      ) {
+        // The shape test is load-bearing beyond tidiness: the solicited
+        // check below uses the in operator, which matches prototype keys
+        // ('__proto__', 'constructor') — an unshaped key would reach
+        // deliverPage and throw, painting the error banner.
+        // Text is accepted only from the direct parent — the document
+        // that minted this one.
+        if (e.source !== window.parent || window.parent === window) return;
+        if (!(d.__bundler_page in pendingFrames) && !(d.__bundler_page in pendingRelays)) return;
+        deliverPage(d.__bundler_page, d.__bundler_text);
+      }
+    });
+
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
+
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
+
+        if (pageSet.has(uuid)) {
+          pageTexts[uuid] = new TextDecoder().decode(finalBytes);
+          return;
+        }
+        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
+          // Strict artifact hosts allow font-src data: but not blob:.
+          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
+            (entry.compressed ? toBase64(finalBytes) : entry.data);
+        } else {
+          const blob = new Blob([finalBytes], { type: entry.mime });
+          blobUrls[uuid] = URL.createObjectURL(blob);
+          resourceBlobs[blobUrls[uuid]] = blob;
+        }
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        const blob = new Blob([], { type: entry.mime });
+        blobUrls[uuid] = URL.createObjectURL(blob);
+        resourceBlobs[blobUrls[uuid]] = blob;
+      }
+    }));
+
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
+
+    // Artifact-host CSP (connect-src 'self') refuses fetch() of blob: URLs —
+    // consumers read these Blobs directly. Survives the swap like the error sink.
+    window.__resourceBlobs = resourceBlobs;
+
+    setStatus('Rendering...');
+    // Page uuids have no blob here — they ride inside about:blank#<uuid>
+    // frame markers the pass below resolves after the swap.
+    for (const uuid of uuids) {
+      if (pageSet.has(uuid)) continue;
+      template = template.split(uuid).join(blobUrls[uuid]);
+    }
+
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
+
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).replace(/<\//g, '<\\/') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
+
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+
+    // Resolve page-frame markers: mint this document's own blob for each
+    // framed page — from local text when this is the root, otherwise by
+    // asking the direct parent over the relay protocol above. An
+    // unanswered request leaves the frame on about:blank, the same
+    // degraded state as a refused embed.
+    {
+      const MARKER = /^about:blank#([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(#.*)?$/;
+      const needed = [];
+      for (const el of Array.from(document.querySelectorAll('iframe'))) {
+        const m = MARKER.exec(el.getAttribute('src') || '');
+        if (!m) continue;
+        const text = pageTexts[m[1]];
+        if (typeof text === 'string') {
+          mountPage(el, m[2] || '', text);
+        } else if (window.parent !== window && !isPageRoot) {
+          const had = pendingFrames[m[1]];
+          (pendingFrames[m[1]] = had || []).push({ el: el, frag: m[2] || '' });
+          if (!had) needed.push(m[1]);
+        }
+      }
+      for (const uuid of needed) {
+        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
+      }
+    }
+
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: read and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const pre = resourceBlobs[s.src.split('#')[0]];
+        s.textContent = pre ? await pre.text() : await (await fetch(s.src)).text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
+  }
+});
+
+  </script>
+
+  <script type="__bundler/manifest">
+{"7ed6305d-8d28-4889-ac6d-185f4472af01":{"mime":"text/javascript","compressed":true,"data":"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"}}
+  </script>
+
+  <script type="__bundler/ext_resources">
+[]
+  </script>
+
+  <script type="__bundler/page_order">
+[]
+  </script>
+
+  <script type="__bundler/template">
+"<!DOCTYPE html>\n<html lang=\"es\"><head>\n<meta charset=\"utf-8\">\n<title>Sistema digestivo — modelo 3D<\u002Ftitle>\n<script type=\"importmap\">\n{\n  \"imports\": {\n    \"three\": \"https://unpkg.com/three@0.184.0/build/three.module.js\",\n    \"three/addons/controls/OrbitControls.js\": \"https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js\",\n    \"three/addons/exporters/OBJExporter.js\": \"https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js\",\n    \"three/addons/exporters/GLTFExporter.js\": \"https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js\"\n  },\n  \"integrity\": {\n    \"https://unpkg.com/three@0.184.0/build/three.module.js\": \"sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J\",\n    \"https://unpkg.com/three@0.184.0/build/three.core.js\": \"sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT\",\n    \"https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js\": \"sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9\",\n    \"https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js\": \"sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3\",\n    \"https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js\": \"sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ\"\n  }\n}\n<\u002Fscript>\n<style>\n  html, body { margin: 0; height: 100%; background: #f2ece4; }\n  three-d-stage:not(:defined) { visibility: hidden; }\n  three-d-stage { display: block; width: 100vw; height: 100vh; }\n  #hud {\n    position: fixed; left: 20px; bottom: 20px; width: 340px; z-index: 5;\n    background: rgba(252, 249, 244, 0.92); backdrop-filter: blur(6px);\n    border: 1px solid #ded3c4; border-radius: 4px; padding: 16px 18px 14px;\n    font-family: ui-serif, Georgia, 'Times New Roman', serif; color: #2e2a25;\n    box-shadow: 0 6px 28px rgba(70, 50, 30, 0.14);\n  }\n  #hud .kicker {\n    font-family: ui-monospace, 'SF Mono', Menlo, monospace;\n    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;\n    color: #9a6a3c; margin-bottom: 8px;\n  }\n  #fase { font-size: 19px; line-height: 1.25; margin: 0 0 8px; font-weight: 600; }\n  #txt { font-size: 13.5px; line-height: 1.55; margin: 0; color: #4c463e; text-wrap: pretty; }\n  #track { height: 3px; background: #e4dbcd; margin: 14px 0 12px; border-radius: 2px; }\n  #bar { height: 100%; width: 0; background: #9a6a3c; border-radius: 2px; }\n  #hud .row { display: flex; gap: 8px; }\n  #hud button {\n    font-family: ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em;\n    padding: 6px 12px; border: 1px solid #d3c6b4; background: #fff; color: #4c463e;\n    border-radius: 3px; cursor: pointer;\n  }\n  #hud button:hover { background: #f4eee4; }\n<\u002Fstyle>\n<\u002Fhead>\n<body>\n\n<three-d-stage name=\"sistema-digestivo\" background=\"#f2ece4\" autorotate=\"\"><\u002Fthree-d-stage>\n<div id=\"hud\">\n  <div class=\"kicker\">Tránsito del bolo alimenticio<\u002Fdiv>\n  <h2 id=\"fase\">Deglución — esófago<\u002Fh2>\n  <p id=\"txt\"><\u002Fp>\n  <div id=\"track\"><div id=\"bar\"><\u002Fdiv><\u002Fdiv>\n  <div class=\"row\">\n    <button id=\"play\" type=\"button\">Pausa<\u002Fbutton>\n    <button id=\"vel\" type=\"button\">×1<\u002Fbutton>\n  <\u002Fdiv>\n<\u002Fdiv>\n<script src=\"7ed6305d-8d28-4889-ac6d-185f4472af01\"><\u002Fscript>\n<script type=\"module\">\nconst stage = document.querySelector('three-d-stage');\nconst { THREE } = await stage.ready;\nconst V = (x, y, z) => new THREE.Vector3(x, y, z);\n\n/* tube of varying radius swept along a curve, with end caps */\nfunction varTube(curve, radiusAt, tubular = 220, radial = 26) {\n  const frames = curve.computeFrenetFrames(tubular, false);\n  const pos = [], nor = [], uv = [], idx = [];\n  const ring = radial + 1;\n  for (let i = 0; i <= tubular; i++) {\n    const t = i / tubular;\n    const P = curve.getPointAt(t);\n    const N = frames.normals[i], B = frames.binormals[i];\n    const r = radiusAt(t);\n    for (let j = 0; j <= radial; j++) {\n      const v = j / radial * Math.PI * 2;\n      const c = Math.cos(v), s = Math.sin(v);\n      const nx = c * N.x + s * B.x, ny = c * N.y + s * B.y, nz = c * N.z + s * B.z;\n      pos.push(P.x + r * nx, P.y + r * ny, P.z + r * nz);\n      nor.push(nx, ny, nz);\n      uv.push(t, j / radial);\n    }\n  }\n  for (let i = 0; i < tubular; i++) {\n    for (let j = 0; j < radial; j++) {\n      const a = i * ring + j, b = a + ring, c = b + 1, d = a + 1;\n      idx.push(a, b, d, b, c, d);\n    }\n  }\n  // caps\n  [0, tubular].forEach((i, k) => {\n    const P = curve.getPointAt(i / tubular);\n    const T = curve.getTangentAt(i / tubular).multiplyScalar(k === 0 ? -1 : 1);\n    const center = pos.length / 3;\n    pos.push(P.x, P.y, P.z); nor.push(T.x, T.y, T.z); uv.push(0.5, 0.5);\n    for (let j = 0; j < radial; j++) {\n      const a = i * ring + j, b = i * ring + j + 1;\n      k === 0 ? idx.push(center, a, b) : idx.push(center, b, a);\n    }\n  });\n  const g = new THREE.BufferGeometry();\n  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));\n  g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));\n  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));\n  g.setIndex(idx);\n  return g;\n}\n\n/* ── texturas de tejido: manchado parenquimatoso + red vascular ── */\nlet seed = 20260807;\nconst rnd = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;\n\nfunction tissueMaps({ base, blotch, vessel, vesselCount = 0, blotchCount = 420,\n                      grain = 0.10, lobules = 0, repeat = [1, 1], size = 768,\n                      micro = 0, microScale = 1, rugae = 0, crypts = 0 }) {\n  const c = document.createElement('canvas'); c.width = c.height = size;\n  const x = c.getContext('2d');\n  const b = document.createElement('canvas'); b.width = b.height = size;\n  const y = b.getContext('2d');\n  x.fillStyle = base; x.fillRect(0, 0, size, size);\n  y.fillStyle = '#808080'; y.fillRect(0, 0, size, size);\n\n  // manchado difuso (parénquima / serosa)\n  for (let i = 0; i < blotchCount; i++) {\n    const px = rnd() * size, py = rnd() * size, r = size * (0.012 + rnd() * 0.075);\n    const g = x.createRadialGradient(px, py, 0, px, py, r);\n    g.addColorStop(0, blotch); g.addColorStop(1, 'rgba(0,0,0,0)');\n    x.globalAlpha = 0.14 + rnd() * 0.30; x.fillStyle = g; x.beginPath();\n    x.arc(px, py, r, 0, 6.2832); x.fill();\n    const gb = y.createRadialGradient(px, py, 0, px, py, r);\n    const sh = rnd() > 0.5 ? '#ffffff' : '#3a3a3a';\n    gb.addColorStop(0, sh); gb.addColorStop(1, 'rgba(128,128,128,0)');\n    y.globalAlpha = 0.28; y.fillStyle = gb; y.beginPath();\n    y.arc(px, py, r, 0, 6.2832); y.fill();\n  }\n  x.globalAlpha = 1; y.globalAlpha = 1;\n\n  // lobulillos (hígado): mosaico poligonal tenue\n  for (let i = 0; i < lobules; i++) {\n    const px = rnd() * size, py = rnd() * size, r = size * (0.014 + rnd() * 0.012);\n    x.strokeStyle = 'rgba(70,28,24,0.20)'; x.lineWidth = 1.4;\n    y.strokeStyle = 'rgba(40,40,40,0.35)'; y.lineWidth = 1.6;\n    x.beginPath(); y.beginPath();\n    for (let k = 0; k <= 6; k++) {\n      const a = k / 6 * 6.2832 + rnd() * 0.2;\n      const qx = px + Math.cos(a) * r, qy = py + Math.sin(a) * r;\n      k ? (x.lineTo(qx, qy), y.lineTo(qx, qy)) : (x.moveTo(qx, qy), y.moveTo(qx, qy));\n    }\n    x.stroke(); y.stroke();\n  }\n\n  // vasos: troncos con ramificación\n  const branch = (px, py, ang, w, depth) => {\n    if (w < 0.7 || depth > 5) return;\n    const len = size * (0.03 + rnd() * 0.07);\n    const nx = px + Math.cos(ang) * len, ny = py + Math.sin(ang) * len;\n    const mx = (px + nx) / 2 + (rnd() - 0.5) * len * 0.5;\n    const my = (py + ny) / 2 + (rnd() - 0.5) * len * 0.5;\n    x.strokeStyle = vessel; x.lineWidth = w; x.lineCap = 'round';\n    x.globalAlpha = 0.45 + 0.45 / depth;\n    x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(mx, my, nx, ny); x.stroke();\n    y.strokeStyle = 'rgba(220,220,220,0.5)'; y.lineWidth = w * 0.8; y.lineCap = 'round';\n    y.beginPath(); y.moveTo(px, py); y.quadraticCurveTo(mx, my, nx, ny); y.stroke();\n    branch(nx, ny, ang + (rnd() - 0.5) * 1.1, w * 0.72, depth + 1);\n    if (rnd() > 0.35) branch(nx, ny, ang + (rnd() - 0.5) * 1.6, w * 0.55, depth + 1);\n  };\n  for (let i = 0; i < vesselCount; i++) branch(rnd() * size, rnd() * size, rnd() * 6.2832, 5.5 + rnd() * 3.5, 1);\n  x.globalAlpha = 1;\n\n  // grano celular fino\n  const img = x.getImageData(0, 0, size, size), d = img.data;\n  const bimg = y.getImageData(0, 0, size, size), bd = bimg.data;\n  for (let i = 0; i < d.length; i += 4) {\n    const n = (rnd() - 0.5) * 255 * grain;\n    d[i] += n; d[i + 1] += n * 0.85; d[i + 2] += n * 0.7;\n    bd[i] = bd[i + 1] = bd[i + 2] = Math.max(0, Math.min(255, bd[i] + n * 1.3));\n  }\n  x.putImageData(img, 0, 0); y.putImageData(bimg, 0, 0);\n\n  // relieve mucoso: vellosidades / microvellosidades (puntillado denso en el bump)\n  for (let i = 0; i < micro; i++) {\n    const px = rnd() * size, py = rnd() * size;\n    const r = size * 0.0022 * microScale * (0.6 + rnd());\n    const g = y.createRadialGradient(px - r * 0.3, py - r * 0.3, 0, px, py, r * 1.8);\n    g.addColorStop(0, 'rgba(255,255,255,0.55)');\n    g.addColorStop(0.55, 'rgba(128,128,128,0.15)');\n    g.addColorStop(1, 'rgba(20,20,20,0.30)');\n    y.fillStyle = g; y.beginPath(); y.arc(px, py, r * 1.8, 0, 6.2832); y.fill();\n    x.fillStyle = rnd() > 0.5 ? 'rgba(255,225,215,0.10)' : 'rgba(110,40,38,0.09)';\n    x.beginPath(); x.arc(px, py, r * 1.5, 0, 6.2832); x.fill();\n  }\n\n  // criptas glandulares: anillos oscuros diminutos\n  for (let i = 0; i < crypts; i++) {\n    const px = rnd() * size, py = rnd() * size, r = size * 0.004 * (0.5 + rnd());\n    y.strokeStyle = 'rgba(30,30,30,0.45)'; y.lineWidth = 1;\n    y.beginPath(); y.arc(px, py, r, 0, 6.2832); y.stroke();\n    x.strokeStyle = 'rgba(120,52,46,0.16)'; x.lineWidth = 1;\n    x.beginPath(); x.arc(px, py, r, 0, 6.2832); x.stroke();\n  }\n\n  // pliegues (rugae gástricas / válvulas conniventes)\n  for (let i = 0; i < rugae; i++) {\n    const py = rnd() * size, amp = size * (0.02 + rnd() * 0.05);\n    const w = 2 + rnd() * 5;\n    y.lineWidth = w; x.lineWidth = w;\n    y.strokeStyle = 'rgba(245,245,245,0.30)';\n    x.strokeStyle = 'rgba(255,220,208,0.10)';\n    y.beginPath(); x.beginPath();\n    for (let k = 0; k <= 24; k++) {\n      const qx = k / 24 * size;\n      const qy = py + amp * Math.sin(k / 24 * Math.PI * (1.5 + rnd() * 0.02) + i);\n      k ? (y.lineTo(qx, qy), x.lineTo(qx, qy)) : (y.moveTo(qx, qy), x.moveTo(qx, qy));\n    }\n    y.stroke(); x.stroke();\n    y.lineWidth = w * 0.6; y.strokeStyle = 'rgba(25,25,25,0.30)';\n    y.translate(0, w); y.stroke(); y.setTransform(1, 0, 0, 1, 0, 0);\n  }\n\n  const mk = (canvas) => {\n    const t = new THREE.CanvasTexture(canvas);\n    t.wrapS = t.wrapT = THREE.RepeatWrapping;\n    t.repeat.set(repeat[0], repeat[1]);\n    t.anisotropy = 8;\n    return t;\n  };\n  return { map: mk(c), bumpMap: mk(b) };\n}\n\nconst mat = (name, _color, rough, tex, opts = {}) => {\n  const maps = tissueMaps(tex);\n  const m = new THREE.MeshPhysicalMaterial({\n    color: 0xffffff, roughness: rough, metalness: 0,\n    map: maps.map, bumpMap: maps.bumpMap, bumpScale: 2.2,\n    clearcoat: 0.22, clearcoatRoughness: 0.45,   // brillo húmedo de la serosa\n    sheen: 0.12, sheenRoughness: 0.85, sheenColor: new THREE.Color(0xffd6cc),\n    ...opts\n  });\n  m.name = name;\n  return m;\n};\n\nconst M = {\n  esofago: mat('esofago', 0xd6a496, 0.55, {\n    base: '#d0998b', blotch: '#f0cabb', vessel: 'rgba(150,58,52,0.55)',\n    vesselCount: 8, grain: 0.08, repeat: [7, 1],\n    micro: 4000, microScale: 0.8, rugae: 26, crypts: 700\n  }),\n  estomago: mat('estomago', 0xc07f74, 0.45, {\n    base: '#e8a894', blotch: '#f8ccb9', vessel: 'rgba(170,70,62,0.5)',\n    vesselCount: 26, blotchCount: 520, grain: 0.09, repeat: [3, 4],\n    micro: 9000, microScale: 1.1, rugae: 30, crypts: 2600\n  }, { color: 0xf0b5a2 }),\n  delgado: mat('intestino_delgado', 0xd0897a, 0.48, {\n    base: '#d1836f', blotch: '#f2ad97', vessel: 'rgba(148,40,38,0.65)',\n    vesselCount: 34, blotchCount: 380, grain: 0.11, repeat: [26, 2],\n    micro: 14000, microScale: 0.7, rugae: 34, crypts: 1800\n  }),\n  grueso: mat('intestino_grueso', 0xb3a08d, 0.6, {\n    base: '#b98a5e', blotch: '#d6b184', vessel: 'rgba(140,64,44,0.55)',\n    vesselCount: 22, blotchCount: 460, grain: 0.10, repeat: [20, 2],\n    micro: 6000, microScale: 1.4, crypts: 3000\n  }, { color: 0xc09a6e }),\n  higado: mat('higado', 0x7d3630, 0.42, {\n    base: '#8b382c', blotch: '#b85744', vessel: 'rgba(60,18,18,0.7)',\n    vesselCount: 16, blotchCount: 560, lobules: 900, grain: 0.10, repeat: [2, 2],\n    micro: 7000, microScale: 0.6\n  }),\n  vesicula: mat('vesicula_biliar', 0x707d3e, 0.35, {\n    base: '#6e7c3e', blotch: '#93a054', vessel: 'rgba(45,60,26,0.6)',\n    vesselCount: 10, grain: 0.07, repeat: [3, 1]\n  }, { clearcoat: 0.7, clearcoatRoughness: 0.3 }),\n  pancreas: mat('pancreas', 0xd3ae7c, 0.62, {\n    base: '#d6a95f', blotch: '#f7dfa8', vessel: 'rgba(150,86,50,0.5)',\n    vesselCount: 12, blotchCount: 700, lobules: 700, grain: 0.13, repeat: [5, 1],\n    micro: 9000, microScale: 1.6\n  }, { clearcoat: 0.25 })\n};\n\nconst root = new THREE.Group();\nroot.name = 'sistema_digestivo';\nconst add = (name, geo, material) => {\n  const m = new THREE.Mesh(geo, material);\n  m.name = name; m.castShadow = true; m.receiveShadow = true;\n  root.add(m); return m;\n};\nconst curveOf = (pts, tension = 0.5) => new THREE.CatmullRomCurve3(pts, false, 'catmullrom', tension);\n\n/* ── esófago ───────────────────────────────────────────── */\nconst cEso = curveOf([\n  V(0.00, 0.56, -0.010), V(0.005, 0.48, -0.014), V(0.00, 0.44, -0.012),\n  V(-0.012, 0.38, -0.006), V(-0.028, 0.345, 0.000)\n]);\nconst mEso = add('esofago', varTube(cEso, t => 0.0125 + 0.002 * Math.sin(t * 9), 120, 24), M.esofago);\n\n/* ── estómago (cardias → fundus → cuerpo → antro → píloro) ─ */\nconst est = curveOf([\n  V(-0.030, 0.352, 0.000), V(-0.075, 0.392, -0.010), V(-0.112, 0.352, -0.006),\n  V(-0.108, 0.282, 0.010), V(-0.070, 0.220, 0.022), V(-0.010, 0.196, 0.018),\n  V(0.042, 0.206, 0.006), V(0.068, 0.238, -0.004)\n], 0.45);\nconst mEst = add('estomago', varTube(est, t => {\n  const bulge = Math.exp(-Math.pow((t - 0.34) / 0.30, 2));\n  return 0.017 + 0.048 * bulge - 0.004 * Math.max(0, t - 0.8) * 5 + 0.0015 * Math.sin(t * 26);\n}, 260, 34), M.estomago);\n\n/* ── duodeno (C) + yeyuno-íleon en asas ─────────────────── */\nconst duo = [\n  V(0.068, 0.238, -0.004), V(0.098, 0.212, -0.014), V(0.112, 0.160, -0.020),\n  V(0.092, 0.112, -0.024), V(0.040, 0.100, -0.026), V(0.004, 0.128, -0.024),\n  V(-0.004, 0.160, -0.018)\n];\nconst cDuo = curveOf(duo);\nconst mDuo = add('duodeno', varTube(cDuo, t => 0.0165 + 0.0018 * Math.sin(t * 30), 160, 26), M.delgado);\n\nconst pts = [V(-0.004, 0.160, -0.018), V(-0.010, 0.150, 0.005)];\nconst rows = 6, top = 0.132, bot = -0.070;\nfor (let r = 0; r < rows; r++) {\n  const y0 = top + (bot - top) * r / (rows - 1);\n  const dir = r % 2 === 0 ? 1 : -1;\n  const a = 0.104 * (1 - 0.07 * r);\n  const n = 16;\n  for (let k = 0; k <= n; k++) {\n    const u = k / n;\n    const w = Math.sin(u * 12.9898 + r * 78.233) * 43758.5453;\n    const j = w - Math.floor(w) - 0.5;\n    pts.push(V(\n      dir * (-a + 2 * a * u) + 0.010 * j,\n      y0 + 0.017 * Math.sin(u * Math.PI * 4 + r * 1.7) + 0.008 * j,\n      0.026 + 0.040 * Math.sin(u * Math.PI * 2.3 + r * 2.1) + 0.012 * j\n    ));\n  }\n  if (r < rows - 1) {\n    const y1 = top + (bot - top) * (r + 1) / (rows - 1);\n    pts.push(V(dir * a * 1.14, (y0 + y1) / 2, 0.018));\n  }\n}\npts.push(V(0.086, -0.088, 0.010), V(0.104, -0.100, 0.000));\nconst cDel = curveOf(pts, 0.5);\nconst mDel = add('intestino_delgado', varTube(cDel,\n  t => 0.0165 + 0.0020 * Math.sin(t * 210), 1400, 22), M.delgado);\n\n/* ── intestino grueso: ciego → ascendente → transverso → descendente → sigmoide ─ */\nconst colon = curveOf([\n  V(0.108, -0.150, -0.004), V(0.126, -0.108, -0.006), V(0.134, -0.030, -0.008),\n  V(0.136, 0.060, -0.010), V(0.132, 0.150, -0.014), V(0.112, 0.212, -0.008),\n  V(0.060, 0.226, 0.026), V(-0.010, 0.198, 0.034), V(-0.080, 0.214, 0.020),\n  V(-0.126, 0.246, -0.006), V(-0.140, 0.180, -0.014), V(-0.138, 0.080, -0.014),\n  V(-0.132, -0.020, -0.012), V(-0.116, -0.090, -0.010), V(-0.062, -0.126, 0.000),\n  V(-0.020, -0.096, 0.010), V(0.004, -0.140, 0.000), V(0.002, -0.196, -0.012)\n], 0.5);\nconst mCol = add('intestino_grueso', varTube(colon, t => {\n  const taper = t < 0.06 ? 0.006 * (0.06 - t) / 0.06 : 0;\n  const shrink = t > 0.72 ? 0.008 * (t - 0.72) / 0.28 : 0;\n  return 0.030 + taper - shrink + 0.0045 * Math.sin(t * 150);\n}, 900, 30), M.grueso);\n\nconst cRec = curveOf([\n  V(0.002, -0.192, -0.012), V(0.000, -0.230, -0.004), V(0.000, -0.272, 0.004)\n]);\nconst mRec = add('recto', varTube(cRec, t => 0.026 - 0.010 * t * t, 90, 26), M.grueso);\n\nadd('apendice', varTube(curveOf([\n  V(0.104, -0.158, 0.004), V(0.086, -0.190, 0.014), V(0.062, -0.206, 0.026)\n]), () => 0.0065, 60, 16), M.grueso);\n\n/* ── hígado: esfera deformada en cuña, lóbulo derecho dominante ─ */\n{\n  const g = new THREE.SphereGeometry(1, 72, 52);\n  const p = g.attributes.position;\n  const v = new THREE.Vector3();\n  for (let i = 0; i < p.count; i++) {\n    v.fromBufferAttribute(p, i);\n    v.set(v.x * 0.150, v.y * 0.082, v.z * 0.098);\n    const leftT = Math.min(1, Math.max(0, (-v.x + 0.02) / 0.14));\n    v.y *= 1 - 0.52 * leftT * leftT;\n    v.z *= 1 - 0.30 * leftT;\n    if (v.y < -0.012) v.y = -0.012 + (v.y + 0.012) * 0.34;\n    v.z -= 0.055 * Math.max(0, v.y / 0.082) * Math.max(0, v.y / 0.082);\n    p.setXYZ(i, v.x, v.y, v.z);\n  }\n  g.computeVertexNormals();\n  const liver = add('higado', g, M.higado);\n  liver.position.set(0.048, 0.322, 0.020);\n  liver.rotation.set(0.10, 0.05, -0.07);\n}\n\n/* ── vesícula biliar ───────────────────────────────────── */\nconst mVes = add('vesicula_biliar', varTube(curveOf([\n  V(0.072, 0.286, 0.062), V(0.062, 0.256, 0.058), V(0.046, 0.238, 0.040),\n  V(0.036, 0.234, 0.014)\n]), t => 0.020 * Math.pow(Math.max(0.0001, 1 - t), 0.55) + 0.0035, 100, 24), M.vesicula);\n\n/* ── páncreas ──────────────────────────────────────────── */\nconst mPan = add('pancreas', varTube(curveOf([\n  V(0.052, 0.140, -0.030), V(0.020, 0.156, -0.036), V(-0.032, 0.178, -0.042),\n  V(-0.086, 0.196, -0.042), V(-0.122, 0.214, -0.036)\n]), t => 0.020 * (1 - 0.62 * t) + 0.0015 * Math.sin(t * 18), 160, 24), M.pancreas);\n\n/* ── peristaltismo: onda de constricción viajera + abultamiento del bolo ── */\nfunction peristaltic(mesh, amp, width) {\n  const m = mesh.material.clone();\n  m.name = mesh.material.name;\n  mesh.material = m;\n  const u = {\n    uB: { value: -1 }, uBA: { value: 0 }, uWA: { value: 0 },\n    uW: { value: new THREE.Vector4(-1, -1, -1, -1) }\n  };\n  m.onBeforeCompile = (sh) => {\n    Object.assign(sh.uniforms, u);\n    sh.vertexShader = sh.vertexShader\n      .replace('#include <common>',\n        '#include <common>\\nuniform float uB;\\nuniform float uBA;\\nuniform float uWA;\\nuniform vec4 uW;')\n      .replace('#include <begin_vertex>', `#include <begin_vertex>\n        float tt = uv.x;\n        float d = uBA * exp(-pow((tt - uB) / ${(width * 1.6).toFixed(4)}, 2.0));\n        for (int i = 0; i < 4; i++)\n          d -= uWA * ${amp.toFixed(5)} * exp(-pow((tt - uW[i]) / ${width.toFixed(4)}, 2.0));\n        transformed += normal * d;`);\n  };\n  m.customProgramCacheKey = () => 'per_' + mesh.name;\n  return u;\n}\n\nconst SEG = [\n  { m: mEso, c: cEso, u: peristaltic(mEso, 0.0055, 0.030), dur: 4.5, sp: 0.42,\n    r0: 0.0090, r1: 0.0090, c0: '#c4904e', c1: '#bc8747',\n    fase: 'Deglución — esófago',\n    txt: 'El bolo, ya humedecido por la saliva, es empujado por ondas peristálticas de la musculatura esofágica. La amilasa salival sigue hidrolizando el almidón mientras desciende.' },\n\n  { m: mEst, c: est, u: peristaltic(mEst, 0.0110, 0.045), dur: 9, sp: 0.20,\n    r0: 0.0155, r1: 0.0135, c0: '#bc8747', c1: '#9d7c3a',\n    fase: 'Digestión gástrica — estómago',\n    txt: 'Las ondas de mezcla del antro baten el alimento con el jugo gástrico: ácido clorhídrico (pH 1,5–3) y pepsina. Las proteínas se desnaturalizan y el bolo se transforma en quimo.' },\n\n  { m: mDuo, c: cDuo, u: peristaltic(mDuo, 0.0060, 0.035), dur: 6, sp: 0.30,\n    r0: 0.0125, r1: 0.0120, c0: '#9d7c3a', c1: '#a89055',\n    fase: 'Neutralización — duodeno',\n    txt: 'El píloro libera el quimo en porciones. La bilis del hígado y la vesícula emulsiona las grasas; el jugo pancreático aporta bicarbonato, lipasa, amilasa y proteasas.' },\n\n  { m: mDel, c: cDel, u: peristaltic(mDel, 0.0055, 0.006), dur: 20, sp: 0.055,\n    r0: 0.0120, r1: 0.0095, c0: '#a89055', c1: '#c0ad7d',\n    fase: 'Absorción — yeyuno e íleon',\n    txt: 'Segmentación y peristaltismo lento exponen el quilo a las vellosidades. Azúcares simples y aminoácidos pasan a la sangre; los ácidos grasos, a los vasos quilíferos.' },\n\n  { m: mCol, c: colon, u: peristaltic(mCol, 0.0105, 0.010), dur: 16, sp: 0.055,\n    r0: 0.0150, r1: 0.0175, c0: '#8f7a4a', c1: '#5f4327',\n    fase: 'Reabsorción — intestino grueso',\n    txt: 'Se reabsorben agua y electrolitos. La flora bacteriana fermenta los residuos y sintetiza vitamina K y del grupo B; el contenido se compacta y oscurece.' },\n\n  { m: mRec, c: cRec, u: peristaltic(mRec, 0.0080, 0.060), dur: 4, sp: 0.25,\n    r0: 0.0170, r1: 0.0165, c0: '#5f4327', c1: '#523821',\n    fase: 'Almacenamiento — recto',\n    txt: 'La materia fecal formada distiende la ampolla rectal y desencadena el reflejo de la defecación.' }\n];\n\n/* bolo: esfera irregular */\nconst bg = new THREE.IcosahedronGeometry(1, 4);\n{\n  const p = bg.attributes.position, v = new THREE.Vector3();\n  for (let i = 0; i < p.count; i++) {\n    v.fromBufferAttribute(p, i);\n    const n = 1 + 0.16 * Math.sin(v.x * 9.1) * Math.cos(v.y * 7.7) + 0.10 * Math.sin(v.z * 13.3);\n    p.setXYZ(i, v.x * n, v.y * n, v.z * n);\n  }\n  bg.computeVertexNormals();\n}\nconst boloMat = new THREE.MeshPhysicalMaterial({\n  color: new THREE.Color('#c4904e'), roughness: 0.5, metalness: 0,\n  clearcoat: 0.6, clearcoatRoughness: 0.35\n});\nboloMat.name = 'bolo';\nconst bolo = new THREE.Mesh(bg, boloMat);\nbolo.name = 'bolo_alimenticio';\nbolo.castShadow = true;\nroot.add(bolo);\n\nconst higado = root.getObjectByName('higado');\n[higado.material, mVes.material, mPan.material].forEach(m => {\n  m.emissive = new THREE.Color(0xffcf6a); m.emissiveIntensity = 0;\n});\n\nconst TOTAL = SEG.reduce((s, g) => s + g.dur, 0);\nconst hud = {\n  fase: document.getElementById('fase'),\n  txt: document.getElementById('txt'),\n  bar: document.getElementById('bar'),\n  play: document.getElementById('play')\n};\nlet clock = 0, last = performance.now(), playing = true, speed = 1, shown = -1;\nconst tmpA = new THREE.Color(), tmpB = new THREE.Color();\n\nfunction tick(now) {\n  const dt = Math.min(0.05, (now - last) / 1000);\n  last = now;\n  if (playing) clock = (clock + dt * speed) % TOTAL;\n\n  let acc = 0, active = 0, local = 0;\n  for (let i = 0; i < SEG.length; i++) {\n    if (clock < acc + SEG[i].dur) { active = i; local = (clock - acc) / SEG[i].dur; break; }\n    acc += SEG[i].dur;\n  }\n\n  SEG.forEach((g, i) => {\n    const on = i === active;\n    // solo el segmento con contenido se contrae; el resto queda en reposo\n    g.u.uWA.value += ((on ? 1 : 0) - g.u.uWA.value) * Math.min(1, dt * 3.5);\n    if (on) {\n      const w = g.u.uW.value;\n      for (let k = 0; k < 4; k++) w.setComponent(k, (local - 0.06 - k * 0.07 + 1) % 1);\n    }\n    g.u.uB.value = on ? local : -1;\n    g.u.uBA.value = on ? (g.m === mEst ? 0.010 : 0.008) : 0;\n  });\n\n  const g = SEG[active];\n  const p = g.c.getPointAt(Math.min(0.999, Math.max(0.001, local)));\n  const churn = g.m === mEst ? 0.010 * Math.sin(now / 260) : 0;\n  bolo.position.set(p.x + churn, p.y + churn * 0.6, p.z + churn * 0.5);\n  const r = g.r0 + (g.r1 - g.r0) * local;\n  bolo.scale.setScalar(r * (1 + 0.10 * Math.sin(now / 190)));\n  bolo.rotation.set(now / 2600, now / 1900, now / 3300);\n  boloMat.color.copy(tmpA.set(g.c0).lerp(tmpB.set(g.c1), local));\n\n  // secreción biliar y pancreática al llegar el quimo al duodeno\n  const sec = active === 2 ? Math.max(0, Math.sin(local * Math.PI)) * (0.55 + 0.45 * Math.sin(now / 220)) : 0;\n  higado.material.emissiveIntensity = sec * 0.30;\n  mVes.material.emissiveIntensity = sec * 0.75;\n  mPan.material.emissiveIntensity = sec * 0.60;\n\n  if (hud.bar) hud.bar.style.width = (clock / TOTAL * 100).toFixed(2) + '%';\n  if (window.__frameFit) window.__frameFit(now);\n  if (shown !== active && hud.fase) {\n    shown = active;\n    hud.fase.textContent = g.fase;\n    hud.txt.textContent = g.txt;\n  }\n  requestAnimationFrame(tick);\n}\nhud.fase.textContent = SEG[0].fase;\nhud.txt.textContent = SEG[0].txt;\nrequestAnimationFrame(tick);\n\nhud.play?.addEventListener('click', () => {\n  playing = !playing;\n  hud.play.textContent = playing ? 'Pausa' : 'Reanudar';\n});\ndocument.getElementById('vel')?.addEventListener('click', (e) => {\n  speed = speed === 1 ? 2 : speed === 2 ? 4 : 1;\n  e.currentTarget.textContent = '×' + speed;\n});\n\n/* centrar en x/z, apoyar la base en y = 0 */\nconst S = 6;\nconst box = new THREE.Box3().setFromObject(root);\nconst c = box.getCenter(new THREE.Vector3());\nroot.scale.setScalar(S);\nroot.position.set(-c.x * S, -box.min.y * S, -c.z * S);\n\nstage.setObject(root);\n\n/* encuadre expl\\u00edcito: el modelo llena la altura del viewport, desplazado a la\\n   derecha para no quedar bajo la ficha informativa */\nfunction frame() {\n  const sph = new THREE.Box3().setFromObject(root).getBoundingSphere(new THREE.Sphere());\n  const cam = stage._camera, ctr = stage._controls;\n  if (!cam || !ctr) return;\n  const aspect = cam.aspect || 1;\n  const vFov = THREE.MathUtils.degToRad(cam.fov);\n  const dV = sph.radius / Math.sin(vFov / 2);\n  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);\n  const d = Math.max(dV, sph.radius / Math.sin(hFov / 2)) * 1.05;\n  ctr.target.set(sph.center.x - sph.radius * 0.30, sph.center.y, sph.center.z);\n  cam.position.set(ctr.target.x + d * 0.10, sph.center.y + d * 0.10, sph.center.z + d * 0.97);\n  cam.near = d / 200; cam.far = d * 12;\n  cam.updateProjectionMatrix();\n  ctr.update();\n}\nframe();\nlet framedUntil = performance.now() + 2200;\nwindow.addEventListener('resize', () => { framedUntil = performance.now() + 500; });\nstage.addEventListener('pointerdown', () => { framedUntil = 0; });\nwindow.__frameFit = (now) => { if (now < framedUntil) frame(); };\n<\u002Fscript>\n\n\n<\u002Fbody><\u002Fhtml>"
+  </script>
+</body>
+</html>

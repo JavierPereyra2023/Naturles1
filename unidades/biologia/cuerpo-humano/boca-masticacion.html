@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Boca y la Masticación — Dientes, Saliva y Bolo Alimenticio | Ciencias Naturales 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 100ms; } .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; } .delay-400 { animation-delay: 400ms; }
+    .accent-line { width: 60px; height: 3px; background: linear-gradient(90deg, #DC2626, #0D9488); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220, 38, 38, 0.25); }
+    .highlight-box { border-left: 3px solid #DC2626; background: rgba(220, 38, 38, 0.05); }
+    .highlight-box-warn { border-left: 3px solid #3B82F6; background: rgba(59, 130, 246, 0.05); }
+    .stat-box { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.06); }
+    .stat-box:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; transition:border-color 0.3s,background 0.3s; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; text-decoration:none; color:#C8D4CC; }
+    .search-result-item:last-child { border-bottom:none; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .tooth-tab { cursor: pointer; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.08); }
+    .tooth-tab:hover { border-color: rgba(220, 38, 38, 0.4); transform: translateY(-2px); }
+    .tooth-tab.active { border-color: rgba(220, 38, 38, 0.55); background: rgba(220, 38, 38, 0.08); }
+  </style>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  </head>
+<body class="bg-natura-black text-natura-silver font-body bg-cuerpo-humano">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: célula, MRU, fotosíntesis)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow='';" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <div class="flex items-center gap-2 text-xs">
+        <a href="../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Cuerpo Humano</a>
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio font-semibold">La Boca y la Masticación</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2.5 py-1 hidden sm:inline">Eje 4 · Digestión</span>
+        <a href="digestion.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span>Volver a Digestión</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative pt-24 pb-10 md:pt-28 md:pb-14 bg-natura-black overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <img src="../../../assets/biologia/cuerpo-humano/cards/boca-masticacion-fotorealista.png" alt="" class="w-full h-full object-cover object-right">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-natura-black via-natura-black/95 to-natura-black"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-bio">Eje 4 · La Digestión</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.05] tracking-tight text-white mb-4">
+        La Boca y la <span class="text-natura-bio">Masticación</span>
+      </h1>
+      <p class="text-sm md:text-lg text-natura-silver max-w-xl leading-relaxed">
+        Dientes, lengua y saliva trabajan juntos desde el primer bocado. Así comienza la digestión: el alimento se tritura, se humedece y se transforma en bolo alimenticio.
+      </p>
+      <div class="flex flex-wrap gap-3 mt-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Incisivos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Caninos</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Premolares</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Molares</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Saliva</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Amilasa</span>
+        <span class="text-[11px] font-semibold uppercase tracking-wider bg-natura-bio/10 text-natura-bio px-3 py-1.5 border border-natura-bio/20">Bolo alimenticio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-7xl mx-auto px-4 md:px-6">
+  <hr class="border-white/5">
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+  <div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <!-- SIDEBAR TOC -->
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta página</h3>
+      <nav class="space-y-0.5">
+          <a href="#la-masticacion" class="toc-link active" data-toc>01. La Masticación</a>
+          <a href="#los-dientes" class="toc-link" data-toc>02. Los Dientes</a>
+          <a href="#la-saliva" class="toc-link" data-toc>03. La Saliva</a>
+          <a href="#la-amilasa" class="toc-link" data-toc>04. La Amilasa</a>
+          <a href="#el-bolo-alimenticio" class="toc-link" data-toc>05. El Bolo Alimenticio</a>
+          <a href="#dato-curioso" class="toc-link" data-toc>06. Dato Curioso</a>
+          <a href="#preguntas-para-pensar" class="toc-link" data-toc>07. Preguntas para Pensar</a>
+      </nav>
+    </div>
+  </aside>
+<main class="flex-1 min-w-0 space-y-12">
+
+    <!-- SECTION 1: La masticación -->
+    <section class="animate-fadeInUp" id="la-masticacion">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">01</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">La Masticación: el primer paso</h2>
+      </div>
+      <div class="highlight-box p-5 md:p-6">
+        <div class="flex items-start gap-3">
+          <span class="iconify mt-0.5 shrink-0 text-natura-bio" data-icon="lucide:utensils" data-width="22"></span>
+          <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+            La digestión no empieza en el estómago: empieza en la boca, en el instante mismo en que damos el primer mordisco. La masticación es la <strong class="text-natura-silverLight">digestión mecánica</strong> que inicia todo el proceso.
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-lg text-natura-silverDark leading-relaxed">
+        Al masticar, los dientes cortan y trituran el alimento en pedazos cada vez más pequeños, mientras la lengua lo mezcla y lo empuja contra el paladar. Pero masticar no es solo «hacer pedazos»: cada bocado que se reduce a partículas pequeñas <strong class="text-natura-silverLight">multiplica la superficie de contacto</strong> con la saliva. Y cuanto mayor es esa superficie, más rápido y más fácil trabajan las enzimas. Es lo mismo que pasa con el azúcar: un terrón entero tarda en disolverse, pero molido se disuelve enseguida.
+      </p>
+      <div class="content-card bg-natura-dark p-5 md:p-6 mt-5">
+        <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-3">Los tres movimientos de la masticación</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-bio mt-0.5" data-icon="lucide:scissors" data-width="20"></span>
+            <div>
+              <h4 class="text-natura-silverLight font-semibold" style="font-family:'Inter',sans-serif;font-size:13px;">Cortar</h4>
+              <p class="text-sm text-natura-silver leading-relaxed">Los incisivos y caninos cortan el alimento en trozos manejables al morder.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-bio mt-0.5" data-icon="lucide:more-horizontal" data-width="20"></span>
+            <div>
+              <h4 class="text-natura-silverLight font-semibold" style="font-family:'Inter',sans-serif;font-size:13px;">Triturar</h4>
+              <p class="text-sm text-natura-silver leading-relaxed">Los premolares y molares muelen y deshacen el alimento con movimientos circulares.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="iconify text-natura-bio mt-0.5" data-icon="lucide:refresh-cw" data-width="20"></span>
+            <div>
+              <h4 class="text-natura-silverLight font-semibold" style="font-family:'Inter',sans-serif;font-size:13px;">Mezclar</h4>
+              <p class="text-sm text-natura-silver leading-relaxed">La lengua mezcla el alimento triturado con la saliva para humedecerlo y ablandarlo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Los dientes -->
+    <section class="animate-fadeInUp delay-100" id="los-dientes">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">02</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Los Dientes: cuatro herramientas</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-6">Un adulto tiene <strong class="text-natura-silverLight">32 dientes</strong>, cada uno especializado en un trabajo distinto. No todos mastican igual: es como un juego de herramientas donde cada pieza tiene su función.</p>
+
+      <!-- SVG: dentadura -->
+      <div class="content-card bg-natura-dark rounded-sm overflow-hidden mb-6" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:scan" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Diagrama · La dentadura humana y sus cuatro tipos de dientes</span>
+        </div>
+        <div class="px-5 pb-5">
+          <svg viewBox="0 0 640 320" class="w-full max-w-3xl mx-auto" role="img" aria-label="Arcada dentaria humana con los cuatro tipos de dientes señalados: incisivos (8), caninos (4), premolares (8) y molares (12)">
+            <!-- arcada superior -->
+            <path d="M110 90 Q320 34 530 90" fill="none" stroke="rgba(220,38,38,0.55)" stroke-width="2"/>
+            <!-- incisivos superiores -->
+            <g fill="#E8E3D9" stroke="#B8AFA0" stroke-width="1">
+              <rect x="255" y="58" width="22" height="34" rx="3"/><rect x="285" y="52" width="22" height="38" rx="3"/>
+              <rect x="315" y="52" width="22" height="38" rx="3"/><rect x="345" y="58" width="22" height="34" rx="3"/>
+            </g>
+            <!-- caninos superiores -->
+            <g fill="#F3EBD9" stroke="#B8AFA0" stroke-width="1">
+              <path d="M238 62 L252 44 L266 62 L262 94 L242 94 Z"/>
+              <path d="M374 62 L388 44 L402 62 L398 94 L378 94 Z"/>
+            </g>
+            <!-- premolares superiores -->
+            <g fill="#EDE5D2" stroke="#B8AFA0" stroke-width="1">
+              <rect x="205" y="74" width="26" height="30" rx="5"/><rect x="235" y="74" width="26" height="30" rx="5"/>
+              <rect x="379" y="74" width="26" height="30" rx="5"/><rect x="409" y="74" width="26" height="30" rx="5"/>
+            </g>
+            <!-- molares superiores -->
+            <g fill="#E5DCC8" stroke="#B8AFA0" stroke-width="1">
+              <rect x="120" y="84" width="30" height="34" rx="6"/><rect x="155" y="84" width="30" height="34" rx="6"/>
+              <rect x="185" y="84" width="30" height="34" rx="6"/>
+              <rect x="425" y="84" width="30" height="34" rx="6"/>
+              <rect x="455" y="84" width="30" height="34" rx="6"/>
+              <rect x="485" y="84" width="30" height="34" rx="6"/>
+            </g>
+            <!-- arcada inferior -->
+            <path d="M110 240 Q320 296 530 240" fill="none" stroke="rgba(220,38,38,0.55)" stroke-width="2"/>
+            <!-- molares inferiores -->
+            <g fill="#E5DCC8" stroke="#B8AFA0" stroke-width="1">
+              <rect x="120" y="200" width="30" height="34" rx="6"/><rect x="155" y="200" width="30" height="34" rx="6"/>
+              <rect x="185" y="200" width="30" height="34" rx="6"/>
+              <rect x="425" y="200" width="30" height="34" rx="6"/>
+              <rect x="455" y="200" width="30" height="34" rx="6"/>
+              <rect x="485" y="200" width="30" height="34" rx="6"/>
+            </g>
+            <!-- premolares inferiores -->
+            <g fill="#EDE5D2" stroke="#B8AFA0" stroke-width="1">
+              <rect x="205" y="206" width="26" height="30" rx="5"/><rect x="235" y="206" width="26" height="30" rx="5"/>
+              <rect x="379" y="206" width="26" height="30" rx="5"/><rect x="409" y="206" width="26" height="30" rx="5"/>
+            </g>
+            <!-- caninos inferiores -->
+            <g fill="#F3EBD9" stroke="#B8AFA0" stroke-width="1">
+              <path d="M239 214 L252 232 L265 214 L260 250 L244 250 Z"/>
+              <path d="M375 214 L388 232 L401 214 L396 250 L380 250 Z"/>
+            </g>
+            <!-- incisivos inferiores -->
+            <g fill="#E8E3D9" stroke="#B8AFA0" stroke-width="1">
+              <rect x="255" y="218" width="22" height="34" rx="3"/><rect x="285" y="224" width="22" height="38" rx="3"/>
+              <rect x="315" y="224" width="22" height="38" rx="3"/><rect x="345" y="218" width="22" height="34" rx="3"/>
+            </g>
+            <!-- etiquetas -->
+            <g font-family="Inter,sans-serif" font-weight="700">
+              <text x="320" y="30" text-anchor="middle" fill="#C8D4CC" font-size="11">INCISIVOS</text>
+              <text x="320" y="44" text-anchor="middle" fill="#7E9188" font-size="9.5" font-weight="400">8 · cortan el alimento</text>
+              <text x="604" y="90" fill="#C8D4CC" font-size="11">CANINOS</text>
+              <text x="604" y="104" fill="#7E9188" font-size="9.5" font-weight="400">4 · desgarran</text>
+              <text x="604" y="150" fill="#C8D4CC" font-size="11">PREMOLARES</text>
+              <text x="604" y="164" fill="#7E9188" font-size="9.5" font-weight="400">8 · trituran</text>
+              <text x="604" y="210" fill="#C8D4CC" font-size="11">MOLARES</text>
+              <text x="604" y="224" fill="#7E9188" font-size="9.5" font-weight="400">12 · muelen</text>
+              <text x="320" y="310" text-anchor="middle" fill="#5A6B60" font-size="10" font-weight="400">cada tipo de diente está especializado en un movimiento distinto</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Tabs de dientes -->
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <button class="tooth-tab active text-left bg-natura-dark p-5" onclick="showTooth('incisivos')" id="tab-incisivos">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-bio" data-icon="lucide:scissors" data-width="18"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Incisivos</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">8 en total · Los cuatro dientes delanteros de cada arcada, con borde afilado como el de una pala.</p>
+        </button>
+        <button class="tooth-tab text-left bg-natura-dark p-5" onclick="showTooth('caninos')" id="tab-caninos">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-bio" data-icon="lucide:zap" data-width="18"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Caninos</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">4 en total · Dos en cada arcada, puntiagudos y alargados. Son los «colmillos».</p>
+        </button>
+        <button class="tooth-tab text-left bg-natura-dark p-5" onclick="showTooth('premolares')" id="tab-premolares">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-bio" data-icon="lucide:layers" data-width="18"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Premolares</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">8 en total · Con la corona aplanada y dos cúspides, parecen «montañas gemelas».</p>
+        </button>
+        <button class="tooth-tab text-left bg-natura-dark p-5" onclick="showTooth('molares')" id="tab-molares">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-bio" data-icon="lucide:circle-dot" data-width="18"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Molares</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">12 en total · Los más grandes y anchos, con una superficie llena de surcos y cúspides.</p>
+        </button>
+      </div>
+
+      <div class="content-card bg-natura-dark rounded-sm overflow-hidden" style="border-color:rgba(220,38,38,0.25);">
+        <div class="grid md:grid-cols-5" style="font-family:'Inter',sans-serif;">
+          <div class="md:col-span-2 p-5 md:p-6 flex items-center justify-center" id="tooth-svg-wrap">
+            <svg id="toothSvg" viewBox="0 0 120 120" class="w-24 md:w-28" role="img" aria-label="Silueta de un diente">
+              <g id="toothShape">
+                <path d="M40 30 L60 18 L80 30 L80 70 C80 92 60 104 60 104 C60 104 40 92 40 70 Z" fill="#E8E3D9" stroke="#B8AFA0" stroke-width="2"/>
+                <path d="M60 18 L60 104" stroke="rgba(184,175,160,0.7)" stroke-width="2"/>
+                <path d="M42 30 L48 34 M78 30 L72 34" stroke="rgba(184,175,160,0.5)" stroke-width="1.5"/>
+              </g>
+              <text id="toothName" x="60" y="18" text-anchor="middle" fill="#DC2626" font-size="9" font-weight="700">INCISIVO</text>
+            </svg>
+          </div>
+          <div class="md:col-span-3 p-5 md:p-6 border-t md:border-t-0 md:border-l border-white/5">
+            <h3 class="font-heading text-lg font-semibold text-white mb-2" id="tooth-title">Incisivos</h3>
+            <p class="text-sm text-natura-silver leading-relaxed mb-3" id="tooth-desc">Tienen el borde afilado como una pala. Su función es <strong class="text-natura-silverLight">cortar</strong> el alimento en trozos: son los que dan el primer «mordisco» a la manzana o al sándwich. Por eso son los primeros en aparecer en los bebés y los que nos permiten sonreír.</p>
+            <div class="flex flex-wrap gap-2" id="tooth-tags">
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-1">Cortar</span>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-1">8 dientes</span>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-1">Borde afilado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: La saliva -->
+    <section class="animate-fadeInUp delay-200" id="la-saliva">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">03</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">La Saliva: mucho más que agua</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-6">La saliva es un líquido que se produce en la boca y que cumple al menos <strong class="text-natura-silverLight">cuatro funciones</strong> al mismo tiempo. La producen tres pares de glándulas salivales: las <strong class="text-natura-silverLight">parótidas</strong> (a los costados de la cara), las <strong class="text-natura-silverLight">submaxilares</strong> (bajo la mandíbula) y las <strong class="text-natura-silverLight">sublinguales</strong> (bajo la lengua). Cada día producimos entre 1 y 1,5 litros.</p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:droplets" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Humedecer</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">Ablanda el alimento seco y lo humedece para que la lengua pueda mezclarlo y el bolo pueda deslizarse por el esófago sin lastimarlo. Probá comer galletitas sin tomar agua: esa sensación de sequedad es justamente la falta de saliva.</p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:flask-conical" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Digerir</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">Contiene la <strong class="text-natura-silverLight">amilasa salival</strong> (también llamada ptialina), la primera enzima del cuerpo humano en acción. Inicia la digestión química de los carbohidratos directamente en la boca.</p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:shield" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Proteger</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">Contiene <strong class="text-natura-silverLight">lisozima</strong>, una sustancia que destruye muchas bacterias que entran con los alimentos. Por eso la boca está llena de gérmenes pero rara vez se infecta: la saliva es una barrera de defensa.</p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="iconify text-natura-bio" data-icon="lucide:smile" data-width="20"></span>
+            <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider">Gustar</h3>
+          </div>
+          <p class="text-sm text-natura-silver leading-relaxed">Para que un alimento tenga sabor, sus moléculas deben <strong class="text-natura-silverLight">disolverse en la saliva</strong> y alcanzar los botones gustativos de la lengua. Sin saliva, la comida no tendría sabor.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box p-5">
+        <p class="text-base text-natura-silver leading-relaxed"><strong class="text-natura-silverLight">¿Por qué se hace agua la boca?</strong> Al ver, oler o incluso imaginar comida, el cerebro ordena a las glándulas salivales producir más saliva. Es un reflejo de anticipación: el cuerpo se prepara para comer. La producción de saliva aumenta cuando masticamos y también ante alimentos ácidos.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: La amilasa -->
+    <section class="animate-fadeInUp delay-200" id="la-amilasa">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">04</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">La Amilasa: la enzima que rompe el almidón</h2>
+      </div>
+      <p class="text-lg text-natura-silverDark mb-6">Las <strong class="text-natura-silverLight">enzimas</strong> son proteínas que aceleran las reacciones químicas del cuerpo. Cada una trabaja sobre un nutriente específico, como una llave que solo abre una cerradura. La <strong class="text-natura-silverLight">amilasa salival</strong> es la encargada de romper el <strong class="text-natura-silverLight">almidón</strong>, el carbohidrato que forma el pan, la papa, el arroz y las pastas.</p>
+
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-4">
+        <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-3">¿Qué hace exactamente?</h3>
+        <p class="text-sm md:text-base text-natura-silver leading-relaxed">
+          El almidón es una molécula gigante formada por cientos de unidades de glucosa encadenadas, como un collar de cientos de cuentas. La amilasa «corta» esas cadenas en pedazos cada vez más cortos, hasta convertirlos en <strong class="text-natura-silverLight">maltosa</strong> (dos cuentas unidas) y otros azúcares simples. No termina el trabajo sola: en el intestino delgado, otras enzimas terminarán de romper esos pedazos hasta dejarlos en glucosa lista para ser absorbida.
+        </p>
+      </div>
+
+      <!-- SVG: almidón → maltosa -->
+      <div class="content-card bg-natura-dark rounded-sm overflow-hidden mb-4" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:scissors" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Diagrama · La amilasa corta el almidón en azúcares más simples</span>
+        </div>
+        <div class="px-5 pb-5">
+          <svg viewBox="0 0 640 190" class="w-full max-w-2xl mx-auto" role="img" aria-label="Cadena de almidón representada como un collar de unidades de glucosa. La enzima amilasa la corta en cadenas más cortas llamadas maltosa.">
+            <!-- cadena original -->
+            <text x="16" y="30" fill="#C8D4CC" font-size="10" font-family="Inter,sans-serif" font-weight="700">ALMIDÓN</text>
+            <text x="16" y="44" fill="#7E9188" font-size="9" font-family="Inter,sans-serif">collar de cientos de glucosas</text>
+            <g>
+              <rect x="60" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="78" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="96" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="114" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="132" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="150" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="168" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="186" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="204" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="222" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="240" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="258" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <text x="270" y="32" fill="#5A6B60" font-size="9" font-family="Inter,sans-serif">…</text>
+              <rect x="282" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="300" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="318" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="336" y="20" width="14" height="14" rx="4" fill="#34D399"/>
+            </g>
+            <!-- la enzima -->
+            <g transform="translate(196,86)">
+              <path d="M0 10 C18 -8 44 -8 62 10 C44 26 18 26 0 10 Z" fill="#DC2626" opacity="0.85"/>
+              <text x="31" y="14" text-anchor="middle" fill="#080C0A" font-size="8" font-family="Inter,sans-serif" font-weight="700">AMILASA</text>
+              <text x="31" y="-10" text-anchor="middle" fill="#DC2626" font-size="8" font-family="Inter,sans-serif" font-weight="700">enzima</text>
+              <path d="M0 10 C9 16 23 16 31 10 M31 10 C39 16 53 16 62 10" stroke="#080C0A" stroke-width="1.4" fill="none" opacity="0.5"/>
+            </g>
+            <!-- cortes -->
+            <g stroke="#DC2626" stroke-width="2" stroke-dasharray="3 3">
+              <line x1="86" y1="52" x2="86" y2="80"/>
+              <line x1="151" y1="52" x2="151" y2="80"/>
+              <line x1="216" y1="52" x2="216" y2="80"/>
+              <line x1="281" y1="52" x2="281" y2="80"/>
+            </g>
+            <!-- resultado -->
+            <text x="16" y="138" fill="#C8D4CC" font-size="10" font-family="Inter,sans-serif" font-weight="700">MALTOSA y azúcares simples</text>
+            <text x="16" y="152" fill="#7E9188" font-size="9" font-family="Inter,sans-serif">cadenas cortas listas para seguir digiriéndose</text>
+            <g>
+              <rect x="60" y="128" width="14" height="14" rx="4" fill="#EAB308"/>
+              <rect x="78" y="128" width="14" height="14" rx="4" fill="#EAB308"/>
+              <rect x="96" y="128" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="114" y="128" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="132" y="128" width="14" height="14" rx="4" fill="#EAB308"/>
+              <rect x="150" y="128" width="14" height="14" rx="4" fill="#EAB308"/>
+              <rect x="168" y="128" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="186" y="128" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="204" y="128" width="14" height="14" rx="4" fill="#EAB308"/>
+              <rect x="222" y="128" width="14" height="14" rx="4" fill="#EAB308"/>
+              <rect x="240" y="128" width="14" height="14" rx="4" fill="#34D399"/>
+              <rect x="258" y="128" width="14" height="14" rx="4" fill="#34D399"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="highlight-box p-5">
+        <p class="text-base text-natura-silver leading-relaxed"><strong class="text-natura-silverLight">Un experimento casero:</strong> si masticás un trozo de pan sin tragar, en unos segundos va a empezar a saber dulce. No se trata de magia: la amilasa de tu saliva está rompiendo el almidón del pan en azúcares. Es la digestión química trabajando delante de tus propios dientes.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 5: El bolo alimenticio -->
+    <section class="animate-fadeInUp delay-300" id="el-bolo-alimenticio">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">05</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">El Bolo Alimenticio: el resultado</h2>
+      </div>
+
+      <div class="highlight-box p-5 md:p-6 mb-6">
+        <p class="text-sm md:text-lg text-natura-silver leading-relaxed">
+          Cuando los dientes ya trituraron el alimento y la lengua lo mezcló con saliva hasta formar una masa blanda y homogénea, se forma el <strong class="text-white">bolo alimenticio</strong>: una «bolita» de comida humedecida, lista para ser tragada.
+        </p>
+      </div>
+
+      <div class="content-card bg-natura-dark p-5 md:p-6 mb-6">
+        <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-4">Los pasos hasta llegar al bolo</h3>
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center rounded-full mb-2"><span class="font-heading text-sm font-bold text-natura-bio" style="font-family:'Inter',sans-serif;">1</span></div>
+            <h4 class="text-natura-silverLight font-semibold text-sm mb-1">Corte</h4>
+            <p class="text-xs text-natura-silver leading-relaxed">Incisivos y caninos cortan el alimento en trozos.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center rounded-full mb-2"><span class="font-heading text-sm font-bold text-natura-bio" style="font-family:'Inter',sans-serif;">2</span></div>
+            <h4 class="text-natura-silverLight font-semibold text-sm mb-1">Trituración</h4>
+            <p class="text-xs text-natura-silver leading-relaxed">Premolares y molares muelen hasta hacer una papilla.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center rounded-full mb-2"><span class="font-heading text-sm font-bold text-natura-bio" style="font-family:'Inter',sans-serif;">3</span></div>
+            <h4 class="text-natura-silverLight font-semibold text-sm mb-1">Mezcla con saliva</h4>
+            <p class="text-xs text-natura-silver leading-relaxed">La lengua mezcla y la amilasa empieza a digerir.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-10 h-10 mx-auto bg-natura-bio/15 border border-natura-bio/30 flex items-center justify-center rounded-full mb-2"><span class="font-heading text-sm font-bold text-natura-bio" style="font-family:'Inter',sans-serif;">4</span></div>
+            <h4 class="text-natura-silverLight font-semibold text-sm mb-1">Deglución</h4>
+            <p class="text-xs text-natura-silver leading-relaxed">La lengua empuja el bolo hacia la faringe para tragar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card bg-natura-dark rounded-sm overflow-hidden mb-6" style="border-color:rgba(220,38,38,0.25);">
+        <div class="p-5 pb-2 flex items-center gap-2" style="font-family:'Inter',sans-serif;">
+          <span class="iconify text-natura-bio" data-icon="lucide:git-compare" data-width="16"></span>
+          <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-natura-bio">Seguí el viaje del bolo</span>
+        </div>
+        <div class="px-5 pb-5">
+          <div class="flex flex-wrap items-center gap-2 text-sm text-natura-silver" style="font-family:'Inter',sans-serif;">
+            <span class="bg-natura-bio/15 text-natura-bio px-3 py-1.5 border border-natura-bio/30 font-semibold">BOCA</span>
+            <span class="iconify text-natura-silverDark" data-icon="lucide:arrow-right" data-width="14"></span>
+            <span class="bg-natura-bio/10 text-natura-silverLight px-3 py-1.5 border border-white/10">FARINGE</span>
+            <span class="iconify text-natura-silverDark" data-icon="lucide:arrow-right" data-width="14"></span>
+            <span class="bg-natura-bio/10 text-natura-silverLight px-3 py-1.5 border border-white/10">ESÓFAGO</span>
+            <span class="iconify text-natura-silverDark" data-icon="lucide:arrow-right" data-width="14"></span>
+            <span class="bg-natura-bio/10 text-natura-silverLight px-3 py-1.5 border border-white/10">ESTÓMAGO</span>
+            <span class="iconify text-natura-silverDark" data-icon="lucide:arrow-right" data-width="14"></span>
+            <span class="bg-natura-bio/10 text-natura-silverDark px-3 py-1.5 border border-white/10">se vuelve QUIMO</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="content-card bg-natura-dark p-5">
+          <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-3">Masticar bien importa</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">Si tragamos el alimento apenas cortado, el bolo llega al estómago en trozos grandes y las enzimas tardan mucho más en digerirlo. Comer despacio y masticar bien hace la digestión más liviana y le da tiempo al cerebro a registrar la <strong class="text-natura-silverLight">saciedad</strong>: ayuda a comer la cantidad justa.</p>
+        </div>
+        <div class="content-card bg-natura-dark p-5">
+          <h3 class="font-heading text-sm font-semibold text-white uppercase tracking-wider mb-3">Continuá el viaje</h3>
+          <p class="text-sm text-natura-silver leading-relaxed">El bolo no termina en la boca: baja por la faringe y el esófago mediante movimientos peristálticos, llega al estómago y se transforma en quimo. Seguí todo el recorrido en la página de <a href="digestion.html#recorrido-del-alimento" class="text-natura-bio underline decoration-dotted underline-offset-2">la Digestión</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Dato curioso -->
+    <section class="animate-fadeInUp delay-300" id="dato-curioso">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">06</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Dato Curioso</h2>
+      </div>
+      <div class="stat-box bg-natura-dark p-6 md:p-8 text-center">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <span class="iconify text-natura-bio" data-icon="lucide:repeat-2" data-width="24"></span>
+          <span class="font-heading text-4xl md:text-5xl font-bold text-natura-bio">2 juegos</span>
+        </div>
+        <p class="text-sm text-natura-silver max-w-lg mx-auto leading-relaxed">
+          A lo largo de la vida tenemos <strong class="text-natura-silverLight">dos dentaduras</strong>. La primera, la de leche, tiene 20 dientes y se completa alrededor de los 3 años. Desde los 6 años se empieza a reemplazar por la definitiva, que a los 18 años suma las <strong class="text-natura-silverLight">muelas del juicio</strong> (los molares más atrasados). El esmalte que las recubre es la sustancia más dura del cuerpo humano: más resistente que los huesos.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 7: Preguntas para pensar -->
+    <section class="animate-fadeInUp delay-400" id="preguntas-para-pensar">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="font-heading text-2xl font-bold text-natura-bio/40">07</span>
+        <div class="accent-line"></div>
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-white uppercase tracking-tight">Preguntas para Pensar</h2>
+      </div>
+      <div class="space-y-3">
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Por qué el pan cambia de sabor mientras lo masticamos?</span> — La amilasa salival corta el almidón en azúcares simples. Esos azúcares activan los receptores del sabor dulce: la digestión química comienza en la boca y se nota en el gusto.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Qué pasaría si no tuviéramos dientes?</span> — Sin la trituración mecánica, el alimento llegaría al estómago en trozos grandes. La superficie de contacto con las enzimas sería pequeña, la digestión se haría mucho más lenta y el estómago tendría que esforzarse mucho más.
+          </p>
+        </div>
+        <div class="highlight-box-warn p-4 md:p-5">
+          <p class="text-lg text-natura-silver leading-relaxed">
+            <span class="font-semibold text-natura-energy">¿Por qué cada tipo de diente tiene una forma distinta?</span> — Cada forma está adaptada a un trabajo: el borde afilado de los incisivos corta, la punta de los caninos desgarra, y las superficies planas y rugosas de premolares y molares trituran. La forma de los dientes es una adaptación a la forma de alimentarse.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+      <div></div>
+      <a href="digestion.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">
+        <span class="iconify" data-icon="lucide:arrow-left" data-width="16"></span>
+        <span class="ml-1">La Digestión</span>
+      </a>
+      <a href="circulacion.html" class="flex items-center gap-2 text-natura-silver hover:text-natura-bio transition-colors group">
+        <span class="text-[11px] font-semibold uppercase tracking-wider">Circulación</span>
+        <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="16"></span>
+      </a>
+    </div>
+
+  </main></div></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white uppercase">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <a href="../../../esi.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">ESI</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toothData = {
+    incisivos: {
+      title: 'Incisivos',
+      desc: 'Tienen el borde afilado como una pala. Su función es <strong class="text-natura-silverLight">cortar</strong> el alimento en trozos: son los que dan el primer «mordisco» a la manzana o al sándwich. Por eso son los primeros en aparecer en los bebés y los que nos permiten sonreír.',
+      tags: ['Cortar', '8 dientes', 'Borde afilado'],
+      path: 'M40 30 L60 18 L80 30 L80 70 C80 92 60 104 60 104 C60 104 40 92 40 70 Z'
+    },
+    caninos: {
+      title: 'Caninos',
+      desc: 'Son los <strong class="text-natura-silverLight">colmillos</strong>: puntiagudos y alargados, con una sola cúspide. Su función es <strong class="text-natura-silverLight">desgarrar</strong> alimentos fibrosos y firmes como la carne. En los animales carnívoros están especialmente desarrollados.',
+      tags: ['Desgarrar', '4 dientes', 'Puntiagudos'],
+      path: 'M48 30 L60 14 L72 30 L76 74 C76 94 60 104 60 104 C60 104 44 94 44 74 Z'
+    },
+    premolares: {
+      title: 'Premolares',
+      desc: 'Están entre los caninos y los molares. Tienen la corona aplanada con <strong class="text-natura-silverLight">dos cúspides</strong> (parecen «montañas gemelas»). Su función es <strong class="text-natura-silverLight">triturar</strong> y comenzar a moler el alimento.',
+      tags: ['Triturar', '8 dientes', 'Dos cúspides'],
+      path: 'M42 26 C42 14 60 16 60 16 C60 16 78 14 78 26 L80 72 C80 94 60 104 60 104 C60 104 40 94 40 72 Z'
+    },
+    molares: {
+      title: 'Molares',
+      desc: 'Son los dientes <strong class="text-natura-silverLight">más grandes y anchos</strong>. Su superficie es ancha y está llena de surcos y cúspides, como una muela de molino. Su función es <strong class="text-natura-silverLight">moler</strong> el alimento hasta convertirlo en una papilla fina. Las muelas del juicio son molares.',
+      tags: ['Moler', '12 dientes', 'Superficie ancha'],
+      path: 'M38 24 C38 12 60 14 60 14 C60 14 82 12 82 24 L84 74 C84 96 60 104 60 104 C60 104 36 96 36 74 Z'
+    }
+  };
+  function showTooth(name) {
+    var d = toothData[name];
+    if (!d) return;
+    document.querySelectorAll('.tooth-tab').forEach(function(t){ t.classList.remove('active'); });
+    var tab = document.getElementById('tab-' + name);
+    if (tab) tab.classList.add('active');
+    var title = document.getElementById('tooth-title');
+    var desc = document.getElementById('tooth-desc');
+    var tags = document.getElementById('tooth-tags');
+    var shape = document.getElementById('toothShape');
+    var nameL = document.getElementById('toothName');
+    if (title) title.textContent = d.title;
+    if (desc) desc.innerHTML = d.desc;
+    if (tags) {
+      tags.innerHTML = '';
+      d.tags.forEach(function(t){
+        var s = document.createElement('span');
+        s.className = 'text-[9px] font-bold uppercase tracking-wider bg-natura-bio/15 text-natura-bio px-2 py-1';
+        s.textContent = t;
+        tags.appendChild(s);
+      });
+    }
+    if (shape) {
+      var p = shape.querySelector('path');
+      if (p) p.setAttribute('d', d.path);
+    }
+    if (nameL) nameL.textContent = d.title.toUpperCase();
+  }
+  window.showTooth = showTooth;
+})();
+</script>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.remove('animate-fadeInUp','delay-100','delay-200'); el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+</body>
+</html>

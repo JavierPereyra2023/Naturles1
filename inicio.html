@@ -1032,6 +1032,7 @@
     {n:"Alimentación humana",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/alimentacion.html",c:"#DC2626"},
     {n:"Circulación sanguínea",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/circulacion.html",c:"#DC2626"},
     {n:"Digestión",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/digestion.html",c:"#DC2626"},
+    {n:"Boca y masticación",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/boca-masticacion.html",c:"#DC2626"},
     {n:"Sistema endocrino",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/endocrino.html",c:"#DC2626"},
     {n:"Esqueleto",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/esqueleto.html",c:"#DC2626"},
     {n:"Músculos",u:"Biología",s:"Cuerpo Humano",l:"unidades/biologia/cuerpo-humano/musculos.html",c:"#DC2626"},
@@ -1098,7 +1099,8 @@
     var sEl = document.getElementById('clima-svg');
     if(!wgt||!tEl||!sEl)return;
 
-    var CK = 'clima-bsas-v1';
+    // v2 invalida la caché anterior, que usaba una longitud incorrecta.
+    var CK = 'clima-bsas-v2';
     var TTL = 30*60*1e3; // 30 min
 
     // Loading state visible immediately
@@ -1151,7 +1153,7 @@
 
     async function fetchWeather(){
       try{
-        var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.61&longitude=-38.38&current=temperature_2m,weather_code,is_day&timezone=America%2FArgentina%2FBuenos_Aires');
+        var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.61&longitude=-58.38&current=temperature_2m,weather_code,is_day&timezone=America%2FArgentina%2FBuenos_Aires');
         if(!r.ok)throw Error('status '+r.status);
         var j=await r.json();
         var c=j.current;
