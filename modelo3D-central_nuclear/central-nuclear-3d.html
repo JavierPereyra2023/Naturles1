@@ -29,108 +29,107 @@
   html,body{margin:0;height:100%}
   body{
     font-family:'Instrument Sans',system-ui,sans-serif;
-    background:#f2efe8;color:#1d201c;
-    display:grid;grid-template-columns:352px 1fr;height:100vh;overflow:hidden;
+    background:#071018;color:#eef6f2;height:100vh;overflow:hidden;
   }
-  a{color:oklch(0.52 0.11 155)}
-  a:hover{color:oklch(0.42 0.11 155)}
   three-d-stage:not(:defined){visibility:hidden}
   three-d-stage{width:100%;height:100%;display:block}
-  .stage-wrap{position:relative;min-width:0}
+  .stage-wrap{position:absolute;inset:0;min-width:0}
   aside{
-    border-right:1px solid #ddd8cc;background:#f8f6f1;
-    display:flex;flex-direction:column;min-height:0;
+    position:fixed;inset:0;z-index:20;pointer-events:none;
   }
-  header{padding:22px 24px 16px;border-bottom:1px solid #e5e0d4}
-  h1{font-size:20px;line-height:1.15;margin:0 0 6px;letter-spacing:-0.01em}
-  header p{margin:0;font-size:13px;line-height:1.45;color:#6b6b62}
-  .modes{display:flex;gap:8px;padding:14px 24px 0}
-  .modes button{
-    flex:1;font:inherit;font-size:12.5px;padding:8px 6px;cursor:pointer;
-    border:1px solid #d9d3c6;background:#fff;border-radius:7px;color:#43443d;
+  header{
+    position:absolute;top:16px;left:16px;width:min(430px,calc(100vw - 32px));
+    padding:15px 17px;border:1px solid rgba(255,255,255,.14);border-radius:10px;
+    background:rgba(7,16,24,.86);backdrop-filter:blur(16px);box-shadow:0 16px 42px rgba(0,0,0,.28);
+    pointer-events:auto;
   }
-  .modes button[aria-pressed="true"]{
-    background:oklch(0.52 0.11 155);border-color:oklch(0.52 0.11 155);color:#fff;
+  .heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  h1{font-size:18px;line-height:1.15;margin:0;letter-spacing:-.01em}
+  .status{font:600 9px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#86efac;display:flex;align-items:center;gap:6px;white-space:nowrap}
+  .status::before{content:'';width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.14)}
+  header p{margin:7px 0 0;font-size:12px;line-height:1.4;color:#9fb0a8}
+  .controls{
+    position:absolute;top:105px;left:16px;width:min(430px,calc(100vw - 32px));
+    display:grid;grid-template-columns:auto auto minmax(170px,1fr);gap:8px;
+    padding:10px;border:1px solid rgba(255,255,255,.12);border-radius:10px;
+    background:rgba(7,16,24,.82);backdrop-filter:blur(16px);pointer-events:auto;
   }
-  .modes.escena{padding-top:8px}
-  .modes.escena button[aria-pressed="true"]{
-    background:oklch(0.46 0.09 250);border-color:oklch(0.46 0.09 250);
+  .modes{display:flex;gap:4px;padding:3px;border:1px solid rgba(255,255,255,.12);border-radius:7px;background:rgba(255,255,255,.04)}
+  button,select{font:inherit}
+  .modes button,.scene-button{
+    min-height:34px;padding:7px 10px;cursor:pointer;border:0;border-radius:5px;
+    background:transparent;color:#b8c6c0;font-size:11px;font-weight:600;white-space:nowrap;
   }
-  .list{overflow-y:auto;padding:14px 16px 8px;display:flex;flex-direction:column;gap:3px;flex:1;min-height:0}
-  .list button{
-    display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:center;
-    text-align:left;font:inherit;font-size:14px;padding:9px 10px;border:0;border-radius:8px;
-    background:transparent;cursor:pointer;color:#252722;width:100%;
+  .modes button[aria-pressed="true"]{background:#3b82f6;color:#fff;box-shadow:0 4px 14px rgba(59,130,246,.28)}
+  .scene-button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
+  .scene-button:hover{border-color:rgba(96,165,250,.58);color:#fff}
+  .sector{position:relative;min-width:0}
+  .sector label{position:absolute;left:10px;top:5px;z-index:1;font:500 8px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#7f948a;pointer-events:none}
+  .sector select{
+    width:100%;height:40px;padding:15px 30px 3px 10px;border:1px solid rgba(255,255,255,.12);border-radius:7px;
+    background:#111d24;color:#eef6f2;font-size:11px;font-weight:600;outline:none;cursor:pointer;
   }
-  .list button:hover{background:#ece8dd}
-  .list button[aria-current="true"]{background:oklch(0.52 0.11 155);color:#fff}
-  .list .num{
-    font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8d8d83;
-    border:1px solid #ddd8cc;border-radius:5px;padding:2px 0;text-align:center;
+  .sector select:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(59,130,246,.16)}
+  .info{
+    position:absolute;left:16px;bottom:16px;width:min(430px,calc(100vw - 32px));
+    padding:16px 18px 17px;border:1px solid rgba(255,255,255,.14);border-radius:10px;
+    background:rgba(7,16,24,.88);backdrop-filter:blur(18px);box-shadow:0 18px 48px rgba(0,0,0,.32);
+    pointer-events:auto;
   }
-  .list button[aria-current="true"] .num{color:#fff;border-color:rgba(255,255,255,.45)}
-  .list .circ{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#9a9a90;letter-spacing:.04em}
-  .list button[aria-current="true"] .circ{color:rgba(255,255,255,.8)}
-  .info{border-top:1px solid #e5e0d4;padding:18px 24px 22px;background:#fff}
-  .info h2{margin:0 0 4px;font-size:16px;letter-spacing:-0.01em}
+  .info h2{margin:0 0 7px;font-size:17px;letter-spacing:-.01em;color:#fff}
   .info .tag{
-    font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;
-    letter-spacing:.08em;color:oklch(0.52 0.11 155);margin:0 0 10px;
+    font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;
+    letter-spacing:.1em;color:#60a5fa;margin:0 0 7px;
   }
-  .info p{margin:0;font-size:13.5px;line-height:1.55;color:#4a4c45;text-wrap:pretty}
-  .info .nav{display:flex;gap:8px;margin-top:14px}
-  .info .nav button{
-    font:inherit;font-size:12.5px;padding:7px 12px;border:1px solid #d9d3c6;
-    background:#fbfaf7;border-radius:7px;cursor:pointer;color:#43443d;
-  }
-  .info .nav button:hover{background:#f1eee6}
+  .info p{margin:0;font-size:12.5px;line-height:1.5;color:#b8c6c0;text-wrap:pretty}
   .hint{
-    position:absolute;left:18px;top:18px;font-family:'IBM Plex Mono',monospace;
-    font-size:11px;color:#7d7d73;background:rgba(255,255,255,.78);
-    padding:7px 11px;border-radius:6px;border:1px solid #e3ded1;
-    pointer-events:none;transition:color .4s,background .4s,border-color .4s;
+    position:absolute;right:16px;bottom:16px;font-family:'IBM Plex Mono',monospace;
+    font-size:9px;color:#a7b8b0;background:rgba(7,16,24,.72);padding:7px 10px;
+    border-radius:6px;border:1px solid rgba(255,255,255,.11);pointer-events:none;
   }
-  .hint.oscuro{color:#c6d2e0;background:rgba(12,20,32,.6);border-color:rgba(160,185,215,.28)}
-  @media (max-width:900px){
-    body{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
-    aside{border-right:0;border-bottom:1px solid #ddd8cc;max-height:48vh}
-    header{padding:16px 18px 12px}
-    .modes{padding:10px 18px 0}
-    .list{padding:10px 12px 6px}
-    .info{padding:14px 18px 16px}
-    .stage-wrap{min-height:52vh}
+  .hint.oscuro{color:#d7e4ee;background:rgba(5,10,18,.76);border-color:rgba(148,178,209,.24)}
+  @media (max-width:700px){
+    header{top:10px;left:10px;width:calc(100vw - 20px);padding:12px 13px}
+    header p{display:none}
+    .controls{top:67px;left:10px;width:calc(100vw - 20px);grid-template-columns:1fr auto;padding:8px}
+    .sector{grid-column:1/-1}
+    .info{left:10px;bottom:10px;width:calc(100vw - 20px);padding:12px 14px 13px;max-height:158px;overflow:auto}
+    .info h2{font-size:15px;margin-bottom:5px}
+    .info p{font-size:11.5px;line-height:1.42}
+    .hint{display:none}
+  }
+  @media (max-width:430px){
+    .status{font-size:8px}
+    .modes button,.scene-button{font-size:10px;padding:6px 8px}
   }
 </style>
 </head>
 <body>
 <aside>
   <header>
-    <h1>Central nuclear</h1>
-    <p>Modelo 3D para recorrer las partes de una central de agua a presión (PWR). Hacé clic en el modelo o en la lista.</p>
+    <div class="heading-row"><h1>Central nuclear</h1><span class="status">En operación</span></div>
+    <p>Recorré una central de agua a presión (PWR). Elegí un sector o tocá directamente una parte del modelo.</p>
   </header>
-  <div class="modes">
-    <button id="btn-ext" aria-pressed="true">Vista exterior</button>
-    <button id="btn-int" aria-pressed="false">Ver interior</button>
-  </div>
-  <div class="modes escena">
-    <button id="btn-noche" aria-pressed="false">Noche</button>
-    <button id="btn-marcha" aria-pressed="true">Central en marcha</button>
-  </div>
-  <div class="list" id="list"></div>
-  <div class="info">
-    <p class="tag" id="tag">Circuito primario</p>
-    <h2 id="title">Elegí una parte</h2>
-    <p id="desc">Arrastrá para girar, rueda para acercar. Cada parte muestra su función dentro del proceso de generación eléctrica.</p>
-    <div class="nav">
-      <button id="prev">← Anterior</button>
-      <button id="next">Siguiente →</button>
-      <button id="reset">Vista general</button>
+  <div class="controls" aria-label="Controles del modelo">
+    <div class="modes" aria-label="Vista del modelo">
+      <button id="btn-ext" aria-pressed="true">Exterior</button>
+      <button id="btn-int" aria-pressed="false">Interior</button>
     </div>
+    <button class="scene-button" id="btn-noche" aria-pressed="false">Modo noche</button>
+    <div class="sector">
+      <label for="sector-select">Sector</label>
+      <select id="sector-select"><option value="">Vista general · Central y ciudad</option></select>
+    </div>
+  </div>
+  <div class="info">
+    <p class="tag" id="tag">Recorrido</p>
+    <h2 id="title">Vista general</h2>
+    <p id="desc">La central convierte el calor de la fisión en electricidad mediante tres circuitos de agua. La red lleva esa electricidad hasta la ciudad.</p>
   </div>
 </aside>
 <div class="stage-wrap">
-  <three-d-stage id="stage" name="central-nuclear" background="#eceadf"></three-d-stage>
-  <div class="hint" id="hint">arrastrar: girar · rueda: zoom · clic derecho: desplazar</div>
+  <three-d-stage id="stage" name="central-nuclear" background="#0b1822"></three-d-stage>
+  <div class="hint" id="hint">arrastrar: girar · rueda: zoom · clic derecho: mover</div>
 </div>
 
 <script src="./three-d-stage.js"></script>
@@ -785,7 +784,7 @@ key.shadow.camera.near = 80;
 key.shadow.camera.far = 1200;
 key.shadow.camera.updateProjectionMatrix();
 
-scene.fog = new THREE.Fog(0xcfe1ec, 420, 1600);
+scene.fog = new THREE.Fog(0xa9c5d4, 1450, 3600);
 
 /* estrellas: solo visibles de noche, sin niebla ni sombras */
 const estrellas = (() => {
@@ -819,17 +818,17 @@ disco.renderOrder = -1;
 scene.add(disco);
 
 const DIA = {
-  cielo: ['#5d9bcd', '#a8cee6', '#e6ede4'],
-  fog: '#cfe1ec', fogCerca: 430, fogLejos: 1700,
-  hemiCielo: 0xffffff, hemiSuelo: 0xd8d2c4, hemiInt: 1.0,
-  keyCol: 0xfff5e2, keyInt: 2.3,
-  fillCol: 0xdfe9ff, fillInt: 0.55,
+  cielo: ['#2d6f9f', '#73acd0', '#c5d7d5'],
+  fog: '#a9c5d4', fogCerca: 1450, fogLejos: 3600,
+  hemiCielo: 0xeaf6ff, hemiSuelo: 0x819076, hemiInt: 0.82,
+  keyCol: 0xffedcf, keyInt: 1.75,
+  fillCol: 0xbfd9ef, fillInt: 0.34,
   disco: 0xfff4d6, discoR: 30,
   dir: new THREE.Vector3(0.42, 0.82, 0.36).normalize(),
 };
 const NOCHE = {
   cielo: ['#05080f', '#0b1425', '#1e2d42'],
-  fog: '#14212f', fogCerca: 240, fogLejos: 1250,
+  fog: '#14212f', fogCerca: 1150, fogLejos: 3000,
   hemiCielo: 0x35496b, hemiSuelo: 0x0d1117, hemiInt: 0.40,
   keyCol: 0x9db6e8, keyInt: 0.40,
   fillCol: 0x35507e, fillInt: 0.16,
@@ -894,15 +893,14 @@ const INFO = [
 ];
 
 /* ── UI ──────────────────────────────────────────────── */
-const listEl = document.getElementById('list');
+const sectorSelect = document.getElementById('sector-select');
 INFO.forEach(([id, title, circ], i) => {
-  const b = document.createElement('button');
-  b.dataset.id = id;
-  b.innerHTML = `<span class="num">${String(i + 1).padStart(2, '0')}</span>
-    <span><span style="display:block">${title}</span><span class="circ">${circ}</span></span>`;
-  b.addEventListener('click', () => select(id));
-  listEl.appendChild(b);
+  const option = document.createElement('option');
+  option.value = id;
+  option.textContent = `${String(i + 1).padStart(2, '0')} · ${title} · ${circ}`;
+  sectorSelect.appendChild(option);
 });
+sectorSelect.addEventListener('change', () => sectorSelect.value ? select(sectorSelect.value) : vistaGeneral());
 
 let current = null;
 
@@ -941,7 +939,7 @@ function select(id) {
   document.getElementById('title').textContent = row[1];
   document.getElementById('tag').textContent = row[2];
   document.getElementById('desc').textContent = row[3];
-  [...listEl.children].forEach((b) => b.setAttribute('aria-current', String(b.dataset.id === id)));
+  sectorSelect.value = id;
   const inside = ['reactor', 'barras', 'generador_vapor', 'turbina', 'generador_electrico', 'condensador', 'combustible_gastado'];
   if (inside.includes(id)) setInterior(true);
   flyTo(new THREE.Box3().setFromObject(parts[id]));
@@ -966,36 +964,25 @@ document.getElementById('btn-ext').addEventListener('click', () => setInterior(f
 
 /* día / noche y marcha de la central */
 let nocheObjetivo = 0, noche = 0;
-let enMarcha = true;
+const enMarcha = true;
 const btnNoche = document.getElementById('btn-noche');
-const btnMarcha = document.getElementById('btn-marcha');
 btnNoche.addEventListener('click', () => {
   nocheObjetivo = nocheObjetivo > 0.5 ? 0 : 1;
   btnNoche.setAttribute('aria-pressed', String(nocheObjetivo > 0.5));
-  btnNoche.textContent = nocheObjetivo > 0.5 ? 'Día' : 'Noche';
-});
-btnMarcha.addEventListener('click', () => {
-  enMarcha = !enMarcha;
-  btnMarcha.setAttribute('aria-pressed', String(enMarcha));
-  btnMarcha.textContent = enMarcha ? 'Central en marcha' : 'Central detenida';
+  btnNoche.textContent = nocheObjetivo > 0.5 ? 'Modo día' : 'Modo noche';
 });
 aplicarCielo(0);
 
-/* navegación */
-const idx = () => INFO.findIndex((r) => r[0] === current);
-document.getElementById('next').addEventListener('click', () => select(INFO[(idx() + 1 + INFO.length) % INFO.length][0]));
-document.getElementById('prev').addEventListener('click', () => select(INFO[(idx() - 1 + INFO.length) % INFO.length][0]));
 function vistaGeneral() {
   if (current) setHighlight(current, false);
   current = null;
   setInterior(false);
-  [...listEl.children].forEach((b) => b.setAttribute('aria-current', 'false'));
+  sectorSelect.value = '';
   document.getElementById('title').textContent = 'Vista general';
   document.getElementById('tag').textContent = 'Recorrido';
   document.getElementById('desc').textContent = 'La central convierte el calor de la fisión en electricidad a través de tres circuitos de agua independientes: primario, secundario y de refrigeración. La línea de alta tensión lleva esa electricidad hasta la ciudad.';
   flyTo(cajaGeneral.clone());
 }
-document.getElementById('reset').addEventListener('click', vistaGeneral);
 
 /* ── sombras: fuera del vapor, las luces y los pulsos ── */
 model.traverse((o) => {
@@ -1006,8 +993,8 @@ model.traverse((o) => {
 {
   const esf = cajaGeneral.getBoundingSphere(new THREE.Sphere());
   const cam = stage._camera;
-  const dist = (esf.radius / Math.tan((cam.fov * Math.PI) / 360)) * 1.25;
-  cam.position.copy(esf.center).add(new THREE.Vector3(0.75, 0.55, 1.15).normalize().multiplyScalar(dist));
+  const dist = (esf.radius / Math.tan((cam.fov * Math.PI) / 360)) * 1.02;
+  cam.position.copy(esf.center).add(new THREE.Vector3(0.72, 0.50, 1.08).normalize().multiplyScalar(dist));
   cam.near = 1;
   cam.far = 6000;
   cam.updateProjectionMatrix();

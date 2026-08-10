@@ -502,7 +502,18 @@ function arcada(y, rx, rz, tilt, count, size) {
   return g;
 }
 boca.add(arcada(0.5985, 0.0255, 0.0215,  0.12, 14, 0.0062));
-boca.add(arcada(0.5845, 0.0235, 0.0198, -0.12, 14, 0.0058));
+
+/* La arcada inferior cuelga de un grupo con el pivote en la articulación
+   temporomandibular (por detrás de los molares): así al masticar la mandíbula
+   gira como en la realidad, en vez de bajar en bloque. El hijo se compensa
+   con el offset opuesto para no mover los dientes de su sitio. */
+const mandibula = new THREE.Group();
+mandibula.name = 'mandibula';
+mandibula.position.set(0, 0.5930, -0.0250);
+const arcInf = arcada(0.5845, 0.0235, 0.0198, -0.12, 14, 0.0058);
+arcInf.position.set(0, -0.5930, 0.0250);
+mandibula.add(arcInf);
+boca.add(mandibula);
 
 const lengua = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 28), M.lengua);
 lengua.name = 'lengua';
@@ -700,37 +711,43 @@ function peristaltic(mesh, amp, width) {
 }
 
 const SEG = [
-  { m: mFar, c: cFar, u: peristaltic(mFar, 0.0040, 0.120), dur: 2, sp: 0.5,
-    r0: 0.0085, r1: 0.0090, c0: '#c9a05c', c1: '#c4904e',
-    fase: 'Masticación y deglución — boca',
-    txt: 'Los dientes trituran el alimento (digestión mecánica) mientras la lengua lo mezcla con saliva. La amilasa salival empieza a romper el almidón: es la primera digestión química. Así se forma el bolo alimenticio.' },
+  /* Fase de masticación: el bolo no viaja, se forma. Un solo bolo por ciclo. */
+  { chew: true, dur: 6, chews: 7,
+    r0: 0.0098, r1: 0.0080, c0: '#cfa246', c1: '#c9a05c',
+    fase: 'Masticación — boca',
+    txt: 'Los dientes trituran el alimento (digestión mecánica) mientras la lengua lo mezcla con saliva. La amilasa salival empieza a romper el almidón: es la primera digestión química. De cada masticación sale un único bolo alimenticio.' },
 
-  { m: mEso, c: cEso, u: peristaltic(mEso, 0.0055, 0.030), dur: 4.5, sp: 0.42,
+  { m: mFar, c: cFar, u: peristaltic(mFar, 0.0040, 0.120), pw: 0.120, dur: 2, sp: 0.5,
+    r0: 0.0086, r1: 0.0090, c0: '#c9a05c', c1: '#c4904e',
+    fase: 'Deglución — faringe',
+    txt: 'La lengua empuja el bolo hacia atrás. La epiglotis cierra la vía respiratoria y la faringe lo pasa al esófago: es el momento en que tragamos.' },
+
+  { m: mEso, c: cEso, u: peristaltic(mEso, 0.0055, 0.030), pw: 0.030, dur: 4.5, sp: 0.42,
     r0: 0.0090, r1: 0.0090, c0: '#c4904e', c1: '#bc8747',
     fase: 'Deglución — esófago',
     txt: 'El bolo, ya humedecido por la saliva, es empujado por ondas peristálticas de la musculatura esofágica. La amilasa salival sigue hidrolizando el almidón mientras desciende.' },
 
-  { m: mEst, c: est, u: peristaltic(mEst, 0.0110, 0.045), dur: 9, sp: 0.20,
+  { m: mEst, c: est, u: peristaltic(mEst, 0.0110, 0.045), pw: 0.045, dur: 9, sp: 0.20,
     r0: 0.0155, r1: 0.0135, c0: '#bc8747', c1: '#9d7c3a',
     fase: 'Digestión gástrica — estómago',
     txt: 'Las ondas de mezcla del antro baten el alimento con el jugo gástrico: ácido clorhídrico (pH 1,5–3) y pepsina. Las proteínas se desnaturalizan y el bolo se transforma en quimo.' },
 
-  { m: mDuo, c: cDuo, u: peristaltic(mDuo, 0.0060, 0.035), dur: 6, sp: 0.30,
+  { m: mDuo, c: cDuo, u: peristaltic(mDuo, 0.0060, 0.035), pw: 0.035, dur: 6, sp: 0.30,
     r0: 0.0125, r1: 0.0120, c0: '#9d7c3a', c1: '#a89055',
     fase: 'Neutralización — duodeno',
     txt: 'El píloro libera el quimo en porciones. La bilis del hígado y la vesícula emulsiona las grasas; el jugo pancreático aporta bicarbonato, lipasa, amilasa y proteasas.' },
 
-  { m: mDel, c: cDel, u: peristaltic(mDel, 0.0055, 0.006), dur: 20, sp: 0.055,
+  { m: mDel, c: cDel, u: peristaltic(mDel, 0.0055, 0.006), pw: 0.006, dur: 20, sp: 0.055,
     r0: 0.0120, r1: 0.0095, c0: '#a89055', c1: '#c0ad7d',
     fase: 'Absorción — yeyuno e íleon',
     txt: 'Segmentación y peristaltismo lento exponen el quilo a las vellosidades. Azúcares simples y aminoácidos pasan a la sangre; los ácidos grasos, a los vasos quilíferos.' },
 
-  { m: mCol, c: colon, u: peristaltic(mCol, 0.0105, 0.010), dur: 16, sp: 0.055,
+  { m: mCol, c: colon, u: peristaltic(mCol, 0.0105, 0.010), pw: 0.010, dur: 16, sp: 0.055,
     r0: 0.0150, r1: 0.0175, c0: '#8f7a4a', c1: '#5f4327',
     fase: 'Reabsorción — intestino grueso',
     txt: 'Se reabsorben agua y electrolitos. La flora bacteriana fermenta los residuos y sintetiza vitamina K y del grupo B; el contenido se compacta y oscurece.' },
 
-  { m: mRec, c: cRec, u: peristaltic(mRec, 0.0080, 0.060), dur: 4, sp: 0.25,
+  { m: mRec, c: cRec, u: peristaltic(mRec, 0.0080, 0.060), pw: 0.060, dur: 4, sp: 0.25,
     r0: 0.0170, r1: 0.0165, c0: '#5f4327', c1: '#523821',
     fase: 'Almacenamiento — recto',
     txt: 'La materia fecal formada distiende la ampolla rectal y desencadena el reflejo de la defecación.' }
@@ -785,6 +802,28 @@ const hud = {
 let clock = 0, last = performance.now(), playing = true, speed = 1, shown = -1;
 let travel = false;             // ← el tránsito del bolo arranca desactivado
 const tmpA = new THREE.Color(), tmpB = new THREE.Color();
+const lenguaY0 = lengua.position.y, lenguaZ0 = lengua.position.z;
+const bocaEnd = cFar.getPointAt(0);            // dónde entrega la boca el bolo
+/* El bolo apoyado sobre la lengua, entre las dos arcadas. La boca real es
+   estrechísima a esta escala: si se lo baja un milímetro queda enterrado
+   dentro de la lengua y no se ve masticar nada. */
+const BOCA_P = V(0, 0.5962, 0.0360);
+
+/* Deja todo el tubo digestivo en reposo. Se usa con el recorrido apagado y
+   durante la masticación: mientras el bolo se está formando en la boca,
+   ningún órgano de más abajo tiene por qué moverse. */
+function relajarTodo(dt) {
+  SEG.forEach(g => {
+    if (!g.u) return;
+    g.u.uWA.value += (0 - g.u.uWA.value) * Math.min(1, dt * 3.5);
+    g.u.uB.value = -1; g.u.uBA.value = 0;
+  });
+}
+function cerrarBoca(dt) {
+  mandibula.rotation.x += (0 - mandibula.rotation.x) * Math.min(1, dt * 5);
+  lengua.position.y += (lenguaY0 - lengua.position.y) * Math.min(1, dt * 5);
+  lengua.position.z += (lenguaZ0 - lengua.position.z) * Math.min(1, dt * 5);
+}
 
 function tick(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
@@ -792,10 +831,8 @@ function tick(now) {
 
   if (!travel) {
     // sin recorrido: todos los tramos vuelven suavemente al reposo
-    SEG.forEach(g => {
-      g.u.uWA.value += (0 - g.u.uWA.value) * Math.min(1, dt * 3.5);
-      g.u.uB.value = -1; g.u.uBA.value = 0;
-    });
+    relajarTodo(dt);
+    cerrarBoca(dt);
     higado.material.emissiveIntensity = 0;
     mVes.material.emissiveIntensity = 0;
     mPan.material.emissiveIntensity = 0;
@@ -812,19 +849,56 @@ function tick(now) {
     acc += SEG[i].dur;
   }
 
-  SEG.forEach((g, i) => {
+  const g = SEG[active];
+
+  if (g.chew) {
+    /* MASTICACIÓN. Nada se mueve aguas abajo: el bolo todavía no existe como
+       tal, se está formando. La mandíbula gira, la lengua amasa y el trozo de
+       alimento se aplasta contra los molares en cada golpe de masticación. */
+    relajarTodo(dt);
+    const ph = local * g.chews * Math.PI * 2;
+    const open = 0.5 - 0.5 * Math.cos(ph);        // 0 cerrado · 1 abierto
+    const apriete = 1 - open;                     // cuánto muerde
+    mandibula.rotation.x = 0.34 * open;
+    lengua.position.y = lenguaY0 - 0.0016 * open;
+    lengua.position.z = lenguaZ0 + 0.0022 * Math.sin(ph * 0.5);
+
+    const r = g.r0 + (g.r1 - g.r0) * local;       // se va desmenuzando
+    bolo.scale.set(r * (1 + 0.22 * apriete), r * (1 - 0.20 * apriete), r * (1 + 0.12 * apriete));
+    bolo.rotation.set(now / 1400, now / 1100, now / 1700);
+    boloMat.color.copy(tmpA.set(g.c0).lerp(tmpB.set(g.c1), local));
+
+    // en el último tramo la lengua ya lo empuja hacia la faringe
+    const salida = Math.max(0, (local - 0.86) / 0.14);
+    bolo.position.copy(BOCA_P).lerp(bocaEnd, salida * salida);
+    bolo.position.x += 0.0018 * Math.sin(ph);
+
+    higado.material.emissiveIntensity = 0;
+    mVes.material.emissiveIntensity = 0;
+    mPan.material.emissiveIntensity = 0;
+  } else {
+  cerrarBoca(dt);
+  SEG.forEach((s, i) => {
+    if (!s.u) return;
     const on = i === active;
     // solo el segmento con contenido se contrae; el resto queda en reposo
-    g.u.uWA.value += ((on ? 1 : 0) - g.u.uWA.value) * Math.min(1, dt * 3.5);
+    s.u.uWA.value += ((on ? 1 : 0) - s.u.uWA.value) * Math.min(1, dt * 3.5);
     if (on) {
-      const w = g.u.uW.value;
-      for (let k = 0; k < 4; k++) w.setComponent(k, (local - 0.06 - k * 0.07 + 1) % 1);
+      /* Las ondas van DETRÁS del bolo y viajan con él: el músculo se contrae
+         donde el bolo acaba de pasar y lo empuja hacia adelante. Delante del
+         bolo el tubo está relajado (por eso el contenido puede avanzar), y una
+         vez que la onda pasó, ese tramo vuelve al reposo y no se mueve más. */
+      const w = s.u.uW.value;
+      const paso = s.pw * 2.5, atras = s.pw * 1.3;
+      for (let k = 0; k < 4; k++) {
+        const q = local - atras - k * paso;
+        w.setComponent(k, q < 0 ? -9 : q);        // -9 = fuera del tubo, sin efecto
+      }
     }
-    g.u.uB.value = on ? local : -1;
-    g.u.uBA.value = on ? (g.m === mEst ? 0.010 : 0.008) : 0;
+    s.u.uB.value = on ? local : -1;
+    s.u.uBA.value = on ? (s.m === mEst ? 0.010 : 0.008) : 0;
   });
 
-  const g = SEG[active];
   const p = g.c.getPointAt(Math.min(0.999, Math.max(0.001, local)));
   const churn = g.m === mEst ? 0.010 * Math.sin(now / 260) : 0;
   bolo.position.set(p.x + churn, p.y + churn * 0.6, p.z + churn * 0.5);
@@ -834,10 +908,11 @@ function tick(now) {
   boloMat.color.copy(tmpA.set(g.c0).lerp(tmpB.set(g.c1), local));
 
   // secreción biliar y pancreática al llegar el quimo al duodeno
-  const sec = active === 3 ? Math.max(0, Math.sin(local * Math.PI)) * (0.55 + 0.45 * Math.sin(now / 220)) : 0;
+  const sec = g.m === mDuo ? Math.max(0, Math.sin(local * Math.PI)) * (0.55 + 0.45 * Math.sin(now / 220)) : 0;
   higado.material.emissiveIntensity = sec * 0.30;
   mVes.material.emissiveIntensity = sec * 0.75;
   mPan.material.emissiveIntensity = sec * 0.60;
+  }
 
   if (hud.bar) hud.bar.style.width = (clock / TOTAL * 100).toFixed(2) + '%';
   if (window.__frameFit) window.__frameFit(now);

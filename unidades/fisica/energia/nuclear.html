@@ -56,6 +56,18 @@
     .vent-card li::before { position: absolute; left: 0; }
     .vent-card.pros li::before { content: '+'; color: #22C55E; font-weight: 700; }
     .vent-card.cons li::before { content: '-'; color: #EF4444; font-weight: 700; }
+    .nuclear-model-shell { position:relative; overflow:hidden; border:1px solid rgba(59,130,246,.25); border-radius:10px; background:#071018; box-shadow:0 24px 70px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.025) inset; }
+    .nuclear-model-frame { display:block; width:100%; height:620px; border:0; background:#071018; }
+    .nuclear-model-actions { position:absolute; z-index:10; top:12px; right:12px; display:flex; gap:7px; font-family:'Inter',sans-serif; }
+    .nuclear-model-button { display:inline-flex; align-items:center; gap:6px; min-height:38px; padding:8px 11px; border:1px solid rgba(255,255,255,.22); border-radius:6px; background:rgba(8,18,28,.84); color:#f3f7f4; backdrop-filter:blur(12px); font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:border-color .2s,background .2s; }
+    .nuclear-model-button:hover { border-color:rgba(59,130,246,.75); background:rgba(16,42,52,.94); }
+    .nuclear-model-back { display:none; }
+    .nuclear-model-shell:fullscreen { width:100vw; height:100vh; border:0; border-radius:0; background:#071018; }
+    .nuclear-model-shell:fullscreen .nuclear-model-frame { width:100%; height:100%; }
+    .nuclear-model-shell:fullscreen .nuclear-model-enter { display:none; }
+    .nuclear-model-shell:fullscreen .nuclear-model-back { display:inline-flex; }
+    @media (max-width:767px) { .nuclear-model-frame{height:660px} .nuclear-model-actions{top:10px;right:10px} .nuclear-model-button{min-height:34px;padding:7px 9px;font-size:9px} }
+    @media (orientation:landscape) and (max-height:620px) { .nuclear-model-frame{height:560px} }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
@@ -131,6 +143,7 @@
       <div class="auto-toc-title">Contenidos</div>
       <nav>
         <a href="#que-es" class="toc-link">¿Qué es?</a>
+        <a href="#simulador-3d" class="toc-link">Modelo 3D</a>
         <a href="#usos" class="toc-link">Usos</a>
         <a href="#rendimiento" class="toc-link">Rendimiento</a>
         <a href="#argentina" class="toc-link">Lugar en Argentina</a>
@@ -157,6 +170,30 @@
 
   <div class="magazine-divider">
     <span class="divider-icon"><span class="iconify" data-icon="lucide:zap" data-width="16"></span></span>
+  </div>
+
+  <section id="simulador-3d" class="mb-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-8 h-8 bg-natura-energy text-natura-black flex items-center justify-center rounded-sm" aria-hidden="true"><span class="iconify" data-icon="lucide:atom" data-width="17"></span></span>
+      <div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-natura-energy mb-1" style="font-family:'Inter',sans-serif;">Laboratorio interactivo</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Central nuclear en 3D</h2>
+      </div>
+    </div>
+    <p class="text-lg leading-relaxed text-natura-silver mb-3">Recorré una central nuclear de agua a presión y reconocé cómo se conectan el reactor, los tres circuitos de agua, la turbina, la subestación y la ciudad que recibe la electricidad.</p>
+    <p class="mb-5 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;"><strong class="text-natura-energy">Controles:</strong> elegí un sector, alterná entre vista exterior e interior y usá el modo nocturno para seguir la energía hasta la ciudad. Arrastrá para girar; usá la rueda o dos dedos para acercarte.</p>
+    <p class="mb-5 border-l-2 border-natura-energy/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;"><strong class="text-natura-energy">Modelo educativo:</strong> representa una central PWR conceptual. No reproduce exactamente Atucha, Embalse ni una instalación nuclear específica.</p>
+    <div class="nuclear-model-shell" id="nuclearModelShell">
+      <div class="nuclear-model-actions">
+        <button type="button" class="nuclear-model-button nuclear-model-enter" id="nuclearModelEnter"><span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>Pantalla completa</button>
+        <button type="button" class="nuclear-model-button nuclear-model-back" id="nuclearModelBack"><span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>Volver a la página</button>
+      </div>
+      <iframe class="nuclear-model-frame" src="../../../modelo3D-central_nuclear/central-nuclear-3d.html?v=20260808b" title="Modelo 3D interactivo de una central nuclear de agua a presión" loading="lazy" allow="fullscreen"></iframe>
+    </div>
+  </section>
+
+  <div class="magazine-divider">
+    <span class="divider-icon"><span class="iconify" data-icon="lucide:activity" data-width="16"></span></span>
   </div>
 
   <section id="usos" class="mb-8">
@@ -394,6 +431,22 @@
   document.addEventListener('keydown',function(e){
     if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
     if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+<script>
+(function(){
+  var shell=document.getElementById('nuclearModelShell');
+  var enter=document.getElementById('nuclearModelEnter');
+  var back=document.getElementById('nuclearModelBack');
+  if(!shell||!enter||!back)return;
+  enter.addEventListener('click',function(){
+    if(shell.requestFullscreen)shell.requestFullscreen();
+    else if(shell.webkitRequestFullscreen)shell.webkitRequestFullscreen();
+  });
+  back.addEventListener('click',function(){
+    if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen();
+    else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();
   });
 })();
 </script>
