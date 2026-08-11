@@ -1,0 +1,23 @@
+# Dependencias y estado local
+node_modules/
+.vercel/
+.playwright-cli/
+
+# Evidencias y archivos temporales de desarrollo
+output/
+tmp/
+_screens/
+__previews/
+__server.log
+__server.err
+
+# Configuracion local de herramientas
+.claude/
+.codex/
+.commandcode/
+.vscode/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+

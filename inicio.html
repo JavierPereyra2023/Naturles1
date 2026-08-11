@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ciencias Naturales — 1° Año</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script defer src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -187,7 +190,6 @@
   </style>
   <link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
   <link rel="stylesheet" href="assets/responsive-fixes.css">
-  <script src="assets/backgrounds/auto-toc.js?v=6"></script>
 </head>
 <body>
   <script>
@@ -197,9 +199,6 @@
       if (isReload) window.location.replace('index.html');
   })();
   </script>
-
-</body>
-</html>
 
   <!-- Navigation -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: rgba(8,12,10,0.9); backdrop-filter: blur(12px);">
@@ -244,7 +243,7 @@
             <span id="clima-temp" class="text-[11px] font-semibold text-natura-silverLight" style="font-family:'Inter',sans-serif;min-width:28px;"></span>
             <div id="clima-svg" class="w-7 h-7 flex items-center justify-center"></div>
           </div>
-          <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-white hover:text-natura-green transition-colors">
+          <button id="menuToggle" type="button" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false" class="lg:hidden w-10 h-10 flex items-center justify-center text-white hover:text-natura-green transition-colors">
             <span class="iconify" data-icon="lucide:menu" data-width="24" id="menuIcon"></span>
           </button>
         </div>
@@ -252,10 +251,10 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-natura-black border-l border-white/5 z-50">
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 max-w-full h-screen bg-natura-black border-l border-white/5 z-50" aria-hidden="true" inert>
       <div class="p-6">
         <div class="flex justify-end mb-10">
-          <button id="menuClose" class="w-10 h-10 flex items-center justify-center text-white hover:text-natura-green transition-colors">
+          <button id="menuClose" type="button" aria-label="Cerrar menú" class="w-10 h-10 flex items-center justify-center text-white hover:text-natura-green transition-colors">
             <span class="iconify" data-icon="lucide:x" data-width="24"></span>
           </button>
         </div>
@@ -293,7 +292,7 @@
   <!-- ============================================ -->
   <section class="relative min-h-screen flex items-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src="assets/hero-ciencias-naturales.png" alt="Paisaje natural con montañas, lago y vegetación, símbolo de la exploración científica" class="hero-img w-full h-full object-cover">
+      <img src="assets/hero-ciencias-naturales.webp" alt="Paisaje natural con montañas, lago y vegetación, símbolo de la exploración científica" width="1600" height="900" fetchpriority="high" class="hero-img w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-r from-natura-black via-natura-black/90 to-natura-black/40"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-natura-black via-transparent to-natura-black/40"></div>
       <div class="absolute inset-0" style="background: radial-gradient(ellipse 60% 55% at 20% 40%, rgba(13,148,136,0.25) 0%, transparent 65%); pointer-events: none;"></div>
@@ -367,7 +366,7 @@
   </section>
 
   <!-- Marquee Banner -->
-  <div class="relative bg-natura-green py-3 overflow-hidden z-10">
+  <div class="relative bg-natura-green py-3 overflow-hidden z-10" style="contain:inline-size;">
     <div class="flex whitespace-nowrap">
       <div class="marquee-track flex items-center gap-8">
         <span class="font-heading text-sm font-bold uppercase tracking-wider text-natura-black">Células y Organismos</span>
@@ -453,7 +452,7 @@
             </div>
             <!-- Right visual -->
             <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden">
-              <img src="assets/unidad-quimica-card.png" alt="Química" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
+              <img src="assets/unidad-quimica-card.webp" alt="Química" width="1448" height="1086" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
               <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/60 to-transparent"></div>
               
               <div class="absolute bottom-0 left-0 right-0 p-4 md:hidden">
@@ -502,7 +501,7 @@
               </div>
             </div>
             <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden md:order-2 order-2">
-              <img src="assets/unidad-fisica-card.png" alt="Física" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
+              <img src="assets/unidad-fisica-card.webp" alt="Física" width="1536" height="1024" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
               <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/60 to-transparent"></div>
               
               <div class="absolute right-4 bottom-4 hidden md:flex items-center gap-2 text-natura-energy group-hover:gap-3 transition-all">
@@ -553,7 +552,7 @@
               </div>
             </div>
             <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden">
-              <img src="assets/fisica/fuerzas/fuerzas-overview.png" alt="Resumen visual de las fuerzas fundamentales" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:brightness(0.65) saturate(1.1);">
+              <img src="assets/fisica/fuerzas/fuerzas-overview.webp" alt="Resumen visual de las fuerzas fundamentales" width="1600" height="900" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;filter:brightness(0.65) saturate(1.1);">
               <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/50 to-transparent"></div>
               <div class="absolute right-4 bottom-4 hidden md:flex items-center gap-2 text-natura-energy group-hover:gap-3 transition-all">
                 <span class="text-xs font-bold uppercase tracking-wider">Ver Las Fuerzas</span>
@@ -598,7 +597,7 @@
               </div>
             </div>
             <div class="md:col-span-4 relative h-48 md:h-auto overflow-hidden">
-              <img src="assets/unidad-biologia-card.png" alt="Biología" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
+              <img src="assets/unidad-biologia-card.webp" alt="Biología" width="1536" height="1024" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" style="filter: brightness(0.6);">
               <div class="absolute inset-0 bg-gradient-to-l from-natura-dark via-natura-dark/60 to-transparent"></div>
               
               <div class="absolute right-4 bottom-4 hidden md:flex items-center gap-2 text-natura-bio group-hover:gap-3 transition-all">
@@ -646,7 +645,7 @@
         <div class="grid gap-3">
           <a href="revista/rana-levitacion.html" class="revista-card block bg-[#141A16] overflow-hidden group no-underline">
             <div class="relative h-40 overflow-hidden">
-              <img src="assets/card-revista-index.png" alt="Revista - La rana que voló" class="w-full h-full object-cover object-right-top group-hover:scale-105 transition-transform duration-500">
+              <img src="assets/card-revista-index.webp" alt="Revista - La rana que voló" width="1491" height="1055" loading="lazy" decoding="async" class="w-full h-full object-cover object-right-top group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-[#141A16] via-[#141A16]/40 to-transparent"></div>
               <div class="absolute top-3 left-3">
                 <span class="text-[9px] font-bold uppercase tracking-wider bg-violet-400/20 text-violet-400 px-2.5 py-1">Destacado</span>
@@ -919,20 +918,31 @@
 
     function openMenu() {
       mobileMenu.classList.add('open');
+      mobileMenu.removeAttribute('inert');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      menuToggle.setAttribute('aria-expanded', 'true');
       menuOverlay.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+      menuClose.focus();
     }
-    function closeMenu() {
+    function closeMenu(restoreFocus = true) {
       mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('inert', '');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      menuToggle.setAttribute('aria-expanded', 'false');
       menuOverlay.classList.add('hidden');
       document.body.style.overflow = '';
+      if (restoreFocus) menuToggle.focus();
     }
 
     menuToggle.addEventListener('click', openMenu);
     menuClose.addEventListener('click', closeMenu);
     menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+    });
     document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', () => closeMenu(false));
     });
 
     // Navbar scroll effect

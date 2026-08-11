@@ -69,9 +69,9 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
-  <link rel="stylesheet" href="../../assets/backgrounds/backgrounds.css">
-  <link rel="stylesheet" href="../../assets/responsive-fixes.css">
-  <script src="../../assets/backgrounds/auto-toc.js?v=6"></script>
+  <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../assets/responsive-fixes.css">
+  <script defer src="../../../assets/backgrounds/auto-toc.js?v=6"></script>
 </head>
 <body class="bg-energia">
 
@@ -121,7 +121,7 @@
 <!-- HERO -->
 <section class="relative pt-20 pb-10 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
   <div class="absolute inset-0 pointer-events-none" style="z-index: 0;">
-    <img src="../../../assets/fisica/fuerzas/fuerzas-overview.png" alt="Composición visual de las fuerzas fundamentales" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.65;">
+    <img src="../../../assets/fisica/fuerzas/fuerzas-overview.webp" alt="Composición visual de las fuerzas fundamentales" width="1600" height="900" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.65;">
   </div>
   <div class="absolute inset-0 bg-gradient-to-b from-natura-black/60 via-natura-black/50 to-natura-black" style="z-index: 1;"></div>
   <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
@@ -324,7 +324,7 @@
     <!-- Card resumen / tabla -->
     <div class="content-card topic-card relative bg-natura-gray overflow-hidden group reveal md:col-span-2">
       <div class="topic-card-image" style="height: 280px;">
-        <img src="../../../assets/fisica/fuerzas/fuerzas-overview.png" alt="Resumen visual de las cuatro fuerzas fundamentales" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+        <img src="../../../assets/fisica/fuerzas/fuerzas-overview.webp" alt="Resumen visual de las cuatro fuerzas fundamentales" width="1600" height="900" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
       </div>
       <div class="topic-card-body p-5">
         <h3 class="font-heading text-xl font-bold mb-2 text-white">Tabla comparativa</h3>
@@ -437,6 +437,5 @@
   });
 })();
 </script>
-<script src="../../assets/backgrounds/auto-toc.js" defer></script>
 </body>
 </html>

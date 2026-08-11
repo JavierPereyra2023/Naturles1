@@ -233,44 +233,44 @@ body[class*="bg-"] section.relative[class*="bg-natura-dark"]:first-of-type {
 
 /* === Temas Biologia === */
 body.bg-ecosistemas {
-  background-image: url('../backgrounds/bg-ecosistemas-bosque.png');
+  background-image: url('../backgrounds/bg-ecosistemas-bosque.webp');
 }
 body.bg-celulas {
-  background-image: url('../backgrounds/bg-celulas-microscopio.png');
+  background-image: url('../backgrounds/bg-celulas-microscopio.webp');
 }
 body.bg-fotosintesis {
-  background-image: url('../backgrounds/bg-fotosintesis-planta.png');
+  background-image: url('../backgrounds/bg-fotosintesis-planta.webp');
 }
 body.bg-cuerpo-humano {
-  background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.png');
+  background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.webp');
 }
 
 /* === Temas Fisica === */
 body.bg-sistema-solar {
-  background-image: url('../backgrounds/bg-sistema-solar-espacio.png');
+  background-image: url('../backgrounds/bg-sistema-solar-espacio.webp');
 }
 body.bg-calor {
-  background-image: url('../backgrounds/bg-calor-llamas.png');
+  background-image: url('../backgrounds/bg-calor-llamas.webp');
 }
 body.bg-sonido {
-  background-image: url('../backgrounds/bg-sonido-ondas.png');
+  background-image: url('../backgrounds/bg-sonido-ondas.webp');
 }
 body.bg-movimiento {
-  background-image: url('../backgrounds/bg-movimiento-velocidad.png');
+  background-image: url('../backgrounds/bg-movimiento-velocidad.webp');
 }
 body.bg-luz {
-  background-image: url('../backgrounds/bg-luz-espectro.png');
+  background-image: url('../backgrounds/bg-luz-espectro.webp');
 }
 
 /* === Temas Quimica === */
 body.bg-agua {
-  background-image: url('../backgrounds/bg-agua-gotas.png');
+  background-image: url('../backgrounds/bg-agua-gotas.webp');
 }
 body.bg-quimica {
-  background-image: url('../backgrounds/bg-quimica-matraz.png');
+  background-image: url('../backgrounds/bg-quimica-matraz.webp');
 }
 body.bg-moleculas {
-  background-image: url('../backgrounds/bg-moleculas-atomos.png');
+  background-image: url('../backgrounds/bg-moleculas-atomos.webp');
 }
 
 /* === Corrección de composición =================================================
@@ -299,18 +299,18 @@ body[class*="bg-"] > section.relative.overflow-hidden:first-of-type::after {
   background: linear-gradient(90deg, rgba(8,12,10,0.88) 0%, rgba(8,12,10,0.62) 52%, rgba(8,12,10,0.36) 100%), linear-gradient(180deg, rgba(8,12,10,0.24), rgba(8,12,10,0.88));
 }
 
-body.bg-ecosistemas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-ecosistemas-bosque.png') !important; }
-body.bg-celulas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-celulas-microscopio.png') !important; }
-body.bg-fotosintesis > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-fotosintesis-planta.png') !important; }
-body.bg-cuerpo-humano > section.relative.overflow-hidden:first-of-type:not(:has(> div.absolute img)) { background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.png') !important; }
-body.bg-sistema-solar > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sistema-solar-espacio.png') !important; }
-body.bg-calor > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-calor-llamas.png') !important; }
-body.bg-sonido > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sonido-ondas.png') !important; }
-body.bg-movimiento > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-movimiento-velocidad.png') !important; }
-body.bg-luz > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-luz-espectro.png') !important; }
-body.bg-agua > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-agua-gotas.png') !important; }
-body.bg-quimica > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-quimica-matraz.png') !important; }
-body.bg-moleculas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-moleculas-atomos.png') !important; }
+body.bg-ecosistemas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-ecosistemas-bosque.webp') !important; }
+body.bg-celulas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-celulas-microscopio.webp') !important; }
+body.bg-fotosintesis > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-fotosintesis-planta.webp') !important; }
+body.bg-cuerpo-humano > section.relative.overflow-hidden:first-of-type:not(:has(> div.absolute img)) { background-image: url('../backgrounds/bg-cuerpo-humano-anatomia.webp') !important; }
+body.bg-sistema-solar > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sistema-solar-espacio.webp') !important; }
+body.bg-calor > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-calor-llamas.webp') !important; }
+body.bg-sonido > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-sonido-ondas.webp') !important; }
+body.bg-movimiento > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-movimiento-velocidad.webp') !important; }
+body.bg-luz > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-luz-espectro.webp') !important; }
+body.bg-agua > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-agua-gotas.webp') !important; }
+body.bg-quimica > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-quimica-matraz.webp') !important; }
+body.bg-moleculas > section.relative.overflow-hidden:first-of-type { background-image: url('../backgrounds/bg-moleculas-atomos.webp') !important; }
 body.bg-energia > section.relative.overflow-hidden:first-of-type {
   background-color: #080C0A !important;
   background-image: none !important;

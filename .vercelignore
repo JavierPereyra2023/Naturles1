@@ -1,0 +1,49 @@
+# Solo se excluyen archivos de trabajo; el contenido educativo queda publico.
+node_modules/
+.playwright-cli/
+output/
+tmp/
+_screens/
+__previews/
+.claude/
+.codex/
+.commandcode/
+.vscode/
+
+# Servidor y verificaciones locales
+__server.js
+__server.log
+__server.err
+verify_*.cjs
+debug_*.cjs
+audit_site.ps1
+fix_*.py
+fix_*.ps1
+replace_images*.ps1
+patch_*.py
+__fix_images.ps1
+**/*.py
+**/*.ps1
+**/*.cjs
+**/*.log
+**/*.err
+f.getAttribute('src')
+pulmon-3d-interactivo-antes-venas.html
+
+# Documentacion interna que no forma parte del sitio
+AGENTS.md
+AGENTS_STYLE.md
+MEMORIA.md
+AUDITORIA_SITIO.md
+README.md
+planificacion_1.4_2026_Naturales.pdf
+
+# Originales reemplazados por WebP optimizados
+assets/hero-ciencias-naturales.png
+assets/fisica/fuerzas/fuerzas-overview.png
+assets/backgrounds/*.png
+
+# Exportaciones fuente no utilizadas por las paginas publicas
+modelos3D_rocket/**/*.obj
+modelos3D_rocket/**/*.glb
+modelos3D_rocket/**/*.zip

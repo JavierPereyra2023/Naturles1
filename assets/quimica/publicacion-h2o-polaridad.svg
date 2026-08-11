@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Molécula de agua y su polaridad</title>
+  <desc id="desc">Diagrama de una molécula de agua con ángulo de 104,5 grados, oxígeno con carga parcial negativa e hidrógenos con carga parcial positiva.</desc>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#07151b"/><stop offset="1" stop-color="#12383d"/></linearGradient><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0L9 3 0 6z" fill="#38bdf8"/></marker></defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <text x="60" y="70" fill="#86efac" font-family="Arial,sans-serif" font-size="30" font-weight="700">H₂O: UNA MOLÉCULA POLAR</text>
+  <text x="60" y="108" fill="#c8d4cc" font-family="Arial,sans-serif" font-size="20">La distribución de cargas no es simétrica.</text>
+  <g stroke="#d9f6ff" stroke-width="18" stroke-linecap="round"><path d="M600 340L390 485"/><path d="M600 340L810 485"/></g>
+  <circle cx="600" cy="315" r="105" fill="#ef4444" stroke="#fecaca" stroke-width="5"/><circle cx="360" cy="505" r="70" fill="#e5e7eb" stroke="#fff" stroke-width="5"/><circle cx="840" cy="505" r="70" fill="#e5e7eb" stroke="#fff" stroke-width="5"/>
+  <g font-family="Arial,sans-serif" font-weight="700" text-anchor="middle"><text x="600" y="338" fill="#fff" font-size="62">O</text><text x="360" y="526" fill="#17202a" font-size="50">H</text><text x="840" y="526" fill="#17202a" font-size="50">H</text><text x="600" y="185" fill="#fca5a5" font-size="31">δ−</text><text x="275" y="450" fill="#bae6fd" font-size="31">δ+</text><text x="925" y="450" fill="#bae6fd" font-size="31">δ+</text></g>
+  <path d="M488 420A155 155 0 0 1 712 420" fill="none" stroke="#facc15" stroke-width="4" stroke-dasharray="10 8"/><text x="600" y="485" fill="#fde68a" font-family="Arial,sans-serif" font-size="26" text-anchor="middle">104,5°</text>
+  <path d="M600 390V175" stroke="#38bdf8" stroke-width="6" marker-end="url(#arrow)"/><text x="625" y="158" fill="#7dd3fc" font-family="Arial,sans-serif" font-size="22">dipolo neto</text>
+  <rect x="60" y="570" width="1080" height="64" rx="16" fill="#081f25" stroke="#22c55e"/><text x="600" y="611" fill="#dcfce7" font-family="Arial,sans-serif" font-size="22" text-anchor="middle">El oxígeno atrae con más fuerza los electrones: queda δ− y los hidrógenos, δ+.</text>
+</svg>
