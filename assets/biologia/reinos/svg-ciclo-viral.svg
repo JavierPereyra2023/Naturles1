@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="t d">
+  <title id="t">Ciclo viral simplificado</title>
+  <desc id="d">Cinco pasos: adsorción, entrada, replicación, ensamblaje y salida.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0E1410}
+      .box{fill:#161C18;stroke:rgba(255,255,255,0.1);stroke-width:1}
+      .n{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:700;fill:#FCA5A5;letter-spacing:0.12em}
+      .t{font-family:Georgia,serif;font-size:15px;font-weight:700;fill:#fff}
+      .d{font-family:Inter,system-ui,sans-serif;font-size:11px;fill:#A8B5AD}
+      .title{font-family:Georgia,serif;font-size:20px;font-weight:700;fill:#fff}
+      .sub{font-family:Inter,system-ui,sans-serif;font-size:11px;fill:#5A6B60}
+      .arr{fill:#5A6B60}
+    </style>
+  </defs>
+  <rect width="900" height="360" class="bg" rx="12"/>
+  <text x="36" y="40" class="title">Ciclo viral (simplificado)</text>
+  <text x="36" y="62" class="sub">El virus usa la maquinaria de la célula huésped</text>
+
+  <!-- step boxes -->
+  <g transform="translate(30,100)">
+    <rect width="140" height="180" class="box" rx="10"/>
+    <text x="16" y="28" class="n">01</text>
+    <text x="16" y="56" class="t">Adsorción</text>
+    <text x="16" y="88" class="d">El virus se pega</text>
+    <text x="16" y="106" class="d">a la superficie</text>
+    <text x="16" y="124" class="d">de la célula.</text>
+    <circle cx="70" cy="155" r="14" fill="#DC2626" opacity="0.85"/>
+    <rect x="50" y="168" width="40" height="8" rx="2" fill="#14B8A6" opacity="0.7"/>
+  </g>
+  <polygon points="182,190 198,180 198,200" class="arr"/>
+
+  <g transform="translate(210,100)">
+    <rect width="140" height="180" class="box" rx="10"/>
+    <text x="16" y="28" class="n">02</text>
+    <text x="16" y="56" class="t">Entrada</text>
+    <text x="16" y="88" class="d">Inyecta o introduce</text>
+    <text x="16" y="106" class="d">su material</text>
+    <text x="16" y="124" class="d">genético.</text>
+    <rect x="48" y="148" width="50" height="36" rx="6" fill="#0D9488" opacity="0.35" stroke="#14B8A6"/>
+    <path d="M73 148 L73 130" stroke="#38BDF8" stroke-width="3"/>
+    <circle cx="73" cy="126" r="5" fill="#38BDF8"/>
+  </g>
+  <polygon points="362,190 378,180 378,200" class="arr"/>
+
+  <g transform="translate(390,100)">
+    <rect width="140" height="180" class="box" rx="10"/>
+    <text x="16" y="28" class="n">03</text>
+    <text x="16" y="56" class="t">Replicación</text>
+    <text x="16" y="88" class="d">La célula copia</text>
+    <text x="16" y="106" class="d">el genoma y fabrica</text>
+    <text x="16" y="124" class="d">proteínas virales.</text>
+    <path d="M45 155 C60 140,90 140,105 155 C90 170,60 170,45 155" fill="none" stroke="#38BDF8" stroke-width="3"/>
+    <path d="M55 165 C70 150,95 180,110 165" fill="none" stroke="#F87171" stroke-width="2"/>
+  </g>
+  <polygon points="542,190 558,180 558,200" class="arr"/>
+
+  <g transform="translate(570,100)">
+    <rect width="140" height="180" class="box" rx="10"/>
+    <text x="16" y="28" class="n">04</text>
+    <text x="16" y="56" class="t">Ensamblaje</text>
+    <text x="16" y="88" class="d">Se arman nuevas</text>
+    <text x="16" y="106" class="d">partículas virales</text>
+    <text x="16" y="124" class="d">dentro de la célula.</text>
+    <g fill="#DC2626" opacity="0.8">
+      <circle cx="55" cy="158" r="7"/>
+      <circle cx="78" cy="150" r="7"/>
+      <circle cx="100" cy="160" r="7"/>
+      <circle cx="70" cy="172" r="7"/>
+    </g>
+  </g>
+  <polygon points="722,190 738,180 738,200" class="arr"/>
+
+  <g transform="translate(750,100)">
+    <rect width="120" height="180" class="box" rx="10"/>
+    <text x="14" y="28" class="n">05</text>
+    <text x="14" y="56" class="t">Salida</text>
+    <text x="14" y="88" class="d">Los virus salen</text>
+    <text x="14" y="106" class="d">e infectan otras</text>
+    <text x="14" y="124" class="d">células.</text>
+    <circle cx="40" cy="158" r="6" fill="#F87171"/>
+    <circle cx="62" cy="148" r="6" fill="#F87171"/>
+    <circle cx="84" cy="160" r="6" fill="#F87171"/>
+    <path d="M30 175 L90 175" stroke="#5A6B60" stroke-width="2" stroke-dasharray="4 3"/>
+  </g>
+</svg>

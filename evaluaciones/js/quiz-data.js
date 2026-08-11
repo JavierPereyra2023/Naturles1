@@ -143,18 +143,18 @@ const RAW = {
   },
   'seres-vivos': {
     area: 'biologia', title: 'Seres vivos', icon: 'lucide:sprout',
-    topics: ['Características', 'Clasificación', 'Biodiversidad'],
+    topics: ['Características', 'Clasificación', 'Reinos', 'Virus'],
     questions: [
       ['Una característica compartida por los seres vivos es...', ['Estar hechos de metal', 'Intercambiar materia y energía', 'No cambiar nunca', 'Vivir todos en tierra'], 1, 'Los seres vivos se nutren, se relacionan y se reproducen.', 0],
       ['Clasificar seres vivos permite...', ['Ordenar y comparar su diversidad', 'Cambiar sus genes', 'Hacerlos iguales', 'Evitar observarlos'], 0, 'La clasificación usa criterios para estudiar la biodiversidad.', 0],
       ['La biodiversidad es...', ['La variedad de seres vivos', 'Un tipo de célula', 'Un planeta', 'Una mezcla'], 0, 'Incluye diversidad de especies, genes y ecosistemas.', 0],
-      ['La nutrición de un ser vivo incluye...', ['Obtener y utilizar materia y energía', 'Solo dormir', 'Cambiar de especie', 'No intercambiar sustancias'], 0, 'La nutrición permite incorporar materia y obtener energía para las funciones vitales.', 0],
-      ['Una adaptación es...', ['Una característica que favorece la vida en un ambiente', 'Un cambio instantáneo elegido por un individuo', 'Una enfermedad siempre', 'Una clasificación sin criterio'], 0, 'Las adaptaciones son características que pueden favorecer la supervivencia y reproducción.', 1],
-      ['Un ecosistema está formado por...', ['Seres vivos y factores no vivos que interactúan', 'Solo animales', 'Solo agua', 'Una única especie aislada'], 0, 'Incluye componentes bióticos y abióticos, además de sus relaciones.', 1],
+      ['El Reino Monera agrupa principalmente a...', ['Bacterias procariotas', 'Hongos con quitina', 'Plantas con flor', 'Animales con columna'], 0, 'Monera son unicelulares sin núcleo (procariotas).', 0],
+      ['Los hongos se diferencian de las plantas porque...', ['Son heterótrofos por absorción y tienen pared de quitina', 'Hacen fotosíntesis con cloroplastos', 'No tienen células', 'Siempre son animales'], 0, 'Fungi no fotosintetiza; digiere afuera y absorbe.', 1],
+      ['Un virus no se clasifica en un reino porque...', ['No es una célula (es acelular)', 'Es siempre una planta', 'Vive solo en el espacio', 'No tiene material genético'], 0, 'Los virus son partículas acelulares fuera de los 5 reinos.', 1],
       ['Los seres vivos se reproducen para...', ['Dar continuidad a su especie', 'Dejar de nutrirse', 'Eliminar el agua del planeta', 'Dejar de relacionarse con el medio'], 0, 'La reproducción permite el nacimiento de nuevos individuos.', 0],
-      ['Un criterio útil para clasificar puede ser...', ['Tipo de nutrición o presencia de columna vertebral', 'El color favorito del observador', 'El día de la semana', 'El precio en el supermercado'], 0, 'Los criterios científicos se basan en características observables y comparables.', 1],
+      ['Un criterio útil para clasificar en reinos es...', ['Tipo de célula y forma de nutrición', 'El color favorito del observador', 'El día de la semana', 'El precio en el supermercado'], 0, 'Whittaker usó célula, organización y nutrición.', 1],
       ['Las plantas y los animales se diferencian, entre otras cosas, en que...', ['Muchas plantas fabrican su alimento por fotosíntesis', 'Los animales siempre tienen raíces', 'Las plantas nunca se relacionan con el medio', 'Solo los animales están formados por células'], 0, 'Las plantas son autótrofas; los animales son heterótrofos.', 1],
-      ['Observar seres vivos del patio escolar sirve para...', ['Estudiar biodiversidad local con evidencia real', 'Evitar aprender biología', 'Reemplazar al microscopio siempre', 'Demostrar que no hay vida cerca'], 0, 'El entorno cercano es un laboratorio natural.', 1]
+      ['Fuera de una célula, un virus está...', ['Inerte (sin metabolismo propio)', 'Creciendo como una planta', 'Respirando oxígeno', 'Formando tejidos'], 0, 'Solo se multiplica usando la maquinaria de un huésped.', 1]
     ]
   },
   celulas: {

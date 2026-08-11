@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virus: ¿vivos o no? | Biología 1°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            natura: {
+              black: '#080C0A', dark: '#0E1410', gray: '#161C18', mid: '#242C28',
+              silver: '#A8B5AD', silverLight: '#C8D4CC', silverDark: '#5A6B60',
+              green: '#0D9488', greenLight: '#14B8A6', greenDark: '#0F766E',
+              leaf: '#22C55E', water: '#38BDF8', energy: '#3B82F6', bio: '#DC2626',
+            }
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Cormorant Garamond', 'Georgia', 'serif'],
+            ui: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: #DC2626; color: #080C0A; }
+    body { font-family: 'Cormorant Garamond', Georgia, serif; background: #080C0A; color: #D0D8D2; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080C0A; }
+    ::-webkit-scrollbar-thumb { background: #DC2626; border-radius: 3px; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .article-dropcap::first-letter {
+      float: left; font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4.5rem; line-height: 0.7; padding: 8px 12px 0 0;
+      color: #DC2626; font-weight: 700;
+    }
+    .pull-quote {
+      border-left: 3px solid #DC2626; padding: 12px 20px; margin: 28px 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem;
+      font-style: italic; color: #C8D4CC; background: rgba(220,38,38,0.04);
+    }
+    .sidebar-note {
+      float: right; width: 240px; margin: 4px 0 20px 24px; padding: 16px;
+      border: 1px solid rgba(220,38,38,0.15); font-size: 0.8rem;
+      line-height: 1.55; background: rgba(220,38,38,0.03); clear: right;
+    }
+    .sidebar-note .note-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 8px; display: block; color: #DC2626;
+      font-family: 'Inter', sans-serif;
+    }
+    @media (max-width: 640px) { .sidebar-note { float: none; width: 100%; margin: 16px 0; } }
+    .accent-line-bio { width: 60px; height: 2px; background: linear-gradient(90deg, #DC2626, transparent); }
+    .content-card { border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+    .content-card:hover { border-color: rgba(220,38,38,0.25); transform: translateY(-3px); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .search-overlay-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 48px; color:#C8D4CC; font-family:'Inter',sans-serif; font-size:15px; border-radius:8px; outline:none; }
+    .search-overlay-input:focus { border-color:rgba(13,148,136,0.4); background:rgba(255,255,255,0.06); }
+    .search-overlay-input::placeholder { color:#5A6B60; }
+    .search-overlay-results { margin-top:8px; background:#0E1410; border:1px solid rgba(255,255,255,0.08); border-radius:8px; max-height:380px; overflow-y:auto; display:none; }
+    .search-overlay-results.active { display:block; }
+    .search-result-item { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.03); text-decoration:none; color:#C8D4CC; }
+    .search-result-item:hover { background:rgba(255,255,255,0.04); }
+    .sr-unit-badge { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+    .sr-name { flex:1; }
+    .sr-subhub { font-size:11px; color:#5A6B60; margin-left:auto; }
+    .search-no-results { padding:16px; text-align:center; color:#5A6B60; font-family:'Inter',sans-serif; font-size:13px; }
+    .cmp-table { width:100%; border-collapse:collapse; font-family:'Inter',sans-serif; font-size:12px; }
+    .cmp-table th, .cmp-table td { padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.06); text-align:left; }
+    .cmp-table th { color:#5A6B60; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; }
+    .cmp-table td { color:#C8D4CC; }
+    .stat-box { border:1px solid rgba(255,255,255,0.06); transition:all 0.3s ease; }
+    .stat-box:hover { border-color:rgba(220,38,38,0.35); }
+</style>
+  <link rel="stylesheet" href="../../../../assets/backgrounds/backgrounds.css">
+  <link rel="stylesheet" href="../../../../assets/responsive-fixes.css">
+</head>
+<body class="bg-ecosistemas">
+<div id="reading-bar" class="fixed top-0 left-0 h-[3px] z-[9999]" style="background:#DC2626;width:0%;transition:width 0.15s ease-out;"></div>
+
+<div id="searchOverlay" class="fixed inset-0 z-[9999]" style="background:rgba(8,12,10,0.94);backdrop-filter:blur(16px);display:none;" onclick="if(event.target===this){this.style.display='none';document.body.style.overflow='';}">
+  <div class="flex items-start justify-center pt-24 px-4">
+    <div class="w-full max-w-lg">
+      <div class="relative">
+        <span class="iconify absolute left-4 top-1/2 -translate-y-1/2 text-natura-silverDark" data-icon="lucide:search" data-width="18"></span>
+        <input type="text" id="globalSearch" class="search-overlay-input" placeholder="Buscar tema... (ej: monera, virus, hongos)" autocomplete="off">
+        <button onclick="document.getElementById('searchOverlay').style.display='none';document.body.style.overflow=''" class="absolute right-3 top-1/2 -translate-y-1/2 text-natura-silverDark hover:text-white transition-colors" aria-label="Cerrar búsqueda">
+          <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+      </div>
+      <div class="search-overlay-results" id="searchOverlayResults"></div>
+    </div>
+  </div>
+</div>
+
+<nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(8,12,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between h-14">
+      <div class="flex items-center gap-2" style="font-family: 'Inter', sans-serif; font-size: 12px;">
+        <a href="../../../../inicio.html" class="text-natura-silverDark hover:text-natura-bio transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:home" data-width="14"></span>
+          <span class="hidden sm:inline">Inicio</span>
+        </a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="../index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Seres Vivos</a>
+        <span class="text-natura-silverDark">/</span>
+        <a href="index.html" class="text-natura-silverDark hover:text-natura-bio transition-colors">Reinos</a>
+        
+        <span class="text-natura-silverDark">/</span>
+        <span class="text-natura-bio">Virus</span>
+      </div>
+      <div class="flex items-center gap-3" style="font-family: 'Inter', sans-serif;">
+        <a href="index.html" class="text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-white transition-colors flex items-center gap-1">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+          <span class="hidden sm:inline">Reinos</span>
+        </a>
+        <button onclick="var s=document.getElementById('searchOverlay');s.style.display='flex';setTimeout(function(){document.getElementById('globalSearch').focus();},100);document.body.style.overflow='hidden';" class="text-natura-silverDark hover:text-white transition-colors" aria-label="Buscar tema" title="Buscar (Ctrl+K)">
+          <span class="iconify" data-icon="lucide:search" data-width="15"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="relative pt-28 pb-12 overflow-hidden">
+  <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 15%, rgba(248,113,113,0.14) 0%, transparent 70%);"></div>
+  <div class="max-w-4xl mx-auto px-4 md:px-6 relative">
+    <div class="animate-fadeInUp">
+      <div class="accent-line-bio mb-4"></div>
+      <div class="flex items-center gap-3 mb-2" style="font-family: 'Inter', sans-serif;">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-red-300">Frontera de la vida</span>
+        <span class="text-[9px] text-natura-silverDark uppercase tracking-wider">Seres Vivos</span>
+      </div>
+      <h1 class="font-heading text-4xl md:text-6xl font-bold leading-tight mb-4">
+        <span class="bg-gradient-to-r from-red-300 via-natura-bio to-natura-energy bg-clip-text text-transparent">Virus:</span>
+        <span class="text-white"> ¿vivos o no?</span>
+      </h1>
+      <p class="font-body text-lg text-natura-silver italic max-w-xl">La pregunta que pone a prueba nuestra definición de vida.</p>
+    </div>
+  </div>
+</section>
+
+<div class="max-w-4xl mx-auto px-4 md:px-6 py-10 lg:py-14"><div class="lg:flex gap-10">
+  <aside class="hidden lg:block w-52 flex-shrink-0">
+    <div class="sticky top-24">
+      <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-natura-silverDark mb-4" style="font-family: 'Inter', sans-serif;">En esta pagina</h3>
+      <nav class="space-y-0.5">
+          <a href="#que-es" class="toc-link" data-toc>01. ¿Qué es un virus?</a>
+          <a href="#estructura" class="toc-link" data-toc>02. Estructura</a>
+          <a href="#caracteristicas" class="toc-link" data-toc>03. ¿Cumple las 7 características?</a>
+          <a href="#ciclo" class="toc-link" data-toc>04. Ciclo viral</a>
+          <a href="#debate" class="toc-link" data-toc>05. El debate</a>
+          <a href="#salud" class="toc-link" data-toc>06. Virus y salud</a>
+          <a href="#preguntas" class="toc-link" data-toc>07. Preguntas</a>
+      </nav>
+    </div>
+  </aside>
+<article class="flex-1 min-w-0 space-y-12">
+
+  <section class="mb-14" id="que-es">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Qué es un virus?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="sidebar-note"><span class="note-label">Dato clave</span>Los virus son 10 a 100 veces más chicos que una bacteria. Se ven con microscopio electrónico.</div>
+      <p class="article-dropcap text-base leading-relaxed text-natura-silverLight mb-5">
+        Un virus es una <strong class="text-white">partícula acelular</strong>: no es una célula. Está formado por material genético (ADN o ARN) envuelto en una <strong class="text-white">cápside</strong> de proteínas. Algunos tienen además una envoltura de membrana.
+      </p>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">
+        No pertenecen a ninguno de los 5 reinos. Ocupan una <strong class="text-white">zona gris</strong> entre lo vivo y lo no vivo.
+      </p>
+      <div class="pull-quote">“Un virus es como una carta sin cartero: tiene la información, pero no puede entregarla solo. Necesita a la célula.”</div>
+    </div>
+  </section>
+
+  <section class="mb-14" id="estructura">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Estructura básica</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="my-6 rounded-xl border border-white/5 bg-natura-dark p-3 overflow-hidden">
+        <object data="../../../../assets/biologia/reinos/svg-virus-estructura.svg" type="image/svg+xml" class="w-full" style="min-height:260px;" aria-label="Estructura de un virus"></object>
+      </div>
+      <ul class="space-y-3 text-base text-natura-silverLight">
+        <li class="flex gap-3"><span class="text-red-300 font-bold">·</span><span><strong class="text-white">Material genético</strong> — ADN o ARN.</span></li>
+        <li class="flex gap-3"><span class="text-red-300 font-bold">·</span><span><strong class="text-white">Cápside</strong> — capa proteica protectora.</span></li>
+        <li class="flex gap-3"><span class="text-red-300 font-bold">·</span><span><strong class="text-white">Espículas</strong> — reconocen al huésped.</span></li>
+        <li class="flex gap-3"><span class="text-red-300 font-bold">·</span><span><strong class="text-white">Envoltura</strong> (opcional) — membrana del huésped.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mb-14" id="caracteristicas">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">¿Cumple las 7 características de la vida?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">Compará con <a href="../caracteristicas.html" class="text-natura-bio underline underline-offset-2">Características de la vida</a>:</p>
+      <div class="overflow-x-auto rounded-xl border border-white/5 mb-5">
+        <table class="cmp-table">
+          <thead><tr><th>Característica</th><th>¿El virus?</th></tr></thead>
+          <tbody>
+            <tr><td>Organización celular</td><td><span class="text-red-300 font-bold">No</span> — es acelular</td></tr>
+            <tr><td>Metabolismo propio</td><td><span class="text-red-300 font-bold">No</span></td></tr>
+            <tr><td>Crecimiento y desarrollo</td><td><span class="text-red-300 font-bold">No</span></td></tr>
+            <tr><td>Respuesta a estímulos</td><td><span class="text-natura-silverDark">Muy limitada / discutible</span></td></tr>
+            <tr><td>Reproducción</td><td><span class="text-amber-300 font-bold">Solo dentro de una célula</span></td></tr>
+            <tr><td>Homeostasis</td><td><span class="text-red-300 font-bold">No</span></td></tr>
+            <tr><td>Evolución / adaptación</td><td><span class="text-natura-leaf font-bold">Sí</span> — mutan y se seleccionan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-base leading-relaxed text-natura-silverLight">Fuera de una célula, un virus es <strong class="text-white">inerte</strong>. Solo “cobra actividad” al infectar un huésped.</p>
+    </div>
+  </section>
+
+  <section class="mb-14" id="ciclo">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Ciclo viral (simplificado)</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="my-6 rounded-xl border border-white/5 bg-natura-dark p-3 overflow-hidden">
+        <object data="../../../../assets/biologia/reinos/svg-ciclo-viral.svg" type="image/svg+xml" class="w-full" style="min-height:240px;" aria-label="Ciclo viral simplificado"></object>
+      </div>
+      <ol class="space-y-3 text-base text-natura-silverLight list-decimal pl-5">
+        <li><strong class="text-white">Adsorción</strong> — se pega a la célula.</li>
+        <li><strong class="text-white">Entrada</strong> — introduce su material genético.</li>
+        <li><strong class="text-white">Replicación</strong> — la célula copia el genoma y fabrica proteínas virales.</li>
+        <li><strong class="text-white">Ensamblaje</strong> — se arman nuevas partículas.</li>
+        <li><strong class="text-white">Salida</strong> — salen e infectan otras células.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="mb-14" id="debate">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">El debate: ¿vivos o no?</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+        <div class="p-5 bg-natura-dark border-t-2 border-natura-leaf">
+          <h3 class="font-heading text-lg font-bold text-white mb-3">A favor de “vivos”</h3>
+          <ul class="space-y-2 text-base text-natura-silverDark">
+            <li>· Tienen material genético.</li>
+            <li>· Evolucionan y se adaptan.</li>
+            <li>· Se multiplican (con ayuda).</li>
+            <li>· Interactúan con huéspedes de forma específica.</li>
+          </ul>
+        </div>
+        <div class="p-5 bg-natura-dark border-t-2 border-natura-bio">
+          <h3 class="font-heading text-lg font-bold text-white mb-3">En contra</h3>
+          <ul class="space-y-2 text-base text-natura-silverDark">
+            <li>· No son células.</li>
+            <li>· Sin metabolismo propio.</li>
+            <li>· Inertes fuera del huésped.</li>
+            <li>· No crecen ni se desarrollan.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-base leading-relaxed text-natura-silverLight">La mayoría de los textos escolares los trata como <strong class="text-white">partículas biológicas</strong> o <strong class="text-white">agentes infecciosos acelulares</strong>. El debate sigue abierto… y eso enseña que la naturaleza no siempre cabe en cajas.</p>
+    </div>
+  </section>
+
+  <section class="mb-14" id="salud">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Virus y salud (sin alarmismo)</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <p class="text-base leading-relaxed text-natura-silverLight mb-5">Hay virus que causan resfríos, gripe, varicela, COVID-19… y también bacteriófagos que infectan bacterias.</p>
+      <div class="p-5 bg-natura-dark border border-white/5 mb-5">
+        <h3 class="font-heading text-lg font-bold text-white mb-2">Prevención básica</h3>
+        <ul class="space-y-2 text-base text-natura-silverDark">
+          <li>· Lavado de manos con agua y jabón.</li>
+          <li>· Vacunación según el calendario nacional.</li>
+          <li>· Ventilar ambientes y cubrirse al toser.</li>
+          <li>· No automedicarse con antibióticos: <strong class="text-white">no matan virus</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-14" id="preguntas">
+    <div style="max-width: 640px;">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6">Preguntas para pensar</h2>
+      <div class="accent-line-bio mb-6"></div>
+      <div class="space-y-4">
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed"><span style="color:#F87171" class="font-bold mr-2">1.</span>Si un virus tiene genoma y evoluciona, ¿alcanza eso para considerarlo vivo? Defendé tu postura con dos argumentos.</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed"><span style="color:#F87171" class="font-bold mr-2">2.</span>¿Por qué un antibiótico no sirve contra un resfrío viral?</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed"><span style="color:#F87171" class="font-bold mr-2">3.</span>Compará un virus con una semilla en latencia y con un cristal de sal.</p>
+        </div>
+        <div class="p-5 bg-natura-dark border border-white/5">
+          <p class="text-lg text-natura-silverLight leading-relaxed"><span style="color:#F87171" class="font-bold mr-2">4.</span>¿En qué reino ubicarías a un virus? ¿Por qué la respuesta correcta es “en ninguno”?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flex justify-between mt-16 pt-8 border-t border-white/5" style="font-family: 'Inter', sans-serif;">
+    <a href="animalia.html" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-natura-bio transition-colors">
+      <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+      <span>Anterior: Animalia</span>
+    </a>
+    <a href="index.html" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-silver hover:text-natura-bio transition-colors">
+      <span>Volver al hub de Reinos</span>
+      <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+    </a>
+  </div>
+
+</article></div></div>
+
+<footer class="relative py-8 bg-natura-black border-t border-white/5 mt-8">
+  <div class="max-w-4xl mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4" style="font-family: 'Inter', sans-serif;">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-natura-bio flex items-center justify-center rounded-sm">
+          <span class="iconify text-natura-black" data-icon="lucide:heart-pulse" data-width="14"></span>
+        </div>
+        <span class="font-heading font-bold text-sm tracking-wider text-white">Cs. Naturales</span>
+        <span class="text-[11px] text-natura-silverDark ml-2">1° Año</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="../../../../inicio.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Inicio</a>
+        <a href="../../index.html" class="text-[11px] uppercase tracking-wider text-natura-silverDark hover:text-natura-bio transition-colors">Biología</a>
+        <span class="text-[11px] uppercase tracking-wider text-natura-silverDark">Prof. Pereyra, Javier</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var b=document.getElementById('reading-bar');if(!b)return;function u(){var t=document.documentElement,h=t.scrollHeight-t.clientHeight;if(h<=0)return;b.style.width=Math.min(100,Math.round(window.scrollY/h*100))+'%';}window.addEventListener('scroll',u,{passive:true});u();})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('section');
+  if (!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ el.classList.add('reveal'); obs.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var topics = [
+    {n:"¿Qué es la materia?",u:"Química",s:"Materia",l:"../../../quimica/materia-propiedades/que-es-la-materia.html",c:"#22C55E"},
+    {n:"Formas de energía",u:"Física",s:"Energía",l:"../../../fisica/energia/formas-energia.html",c:"#3B82F6"},
+    {n:"MRU",u:"Física",s:"Movimientos",l:"../../../fisica/movimientos/mru.html",c:"#3B82F6"},
+    {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"../caracteristicas.html",c:"#DC2626"},
+    {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"../clasificacion.html",c:"#DC2626"},
+    {n:"Los 5 reinos",u:"Biología",s:"Reinos",l:"index.html",c:"#DC2626"},
+    {n:"Reino Monera",u:"Biología",s:"Reinos",l:"monera.html",c:"#DC2626"},
+    {n:"Reino Protista",u:"Biología",s:"Reinos",l:"protista.html",c:"#14B8A6"},
+    {n:"Reino Fungi",u:"Biología",s:"Reinos",l:"fungi.html",c:"#3B82F6"},
+    {n:"Reino Plantae",u:"Biología",s:"Reinos",l:"plantae.html",c:"#22C55E"},
+    {n:"Reino Animalia",u:"Biología",s:"Reinos",l:"animalia.html",c:"#38BDF8"},
+    {n:"Virus: ¿vivos o no?",u:"Biología",s:"Reinos",l:"virus.html",c:"#F87171"},
+    {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"../ecosistemas.html",c:"#DC2626"},
+    {n:"Tipos de células",u:"Biología",s:"Células",l:"../../celulas/tipos-celulas.html",c:"#DC2626"},
+    {n:"Fotosíntesis",u:"Biología",s:"Plantas",l:"../../plantas/fotosintesis.html",c:"#DC2626"},
+    {n:"Vertebrados",u:"Biología",s:"Animales",l:"../../animales/vertebrados.html",c:"#DC2626"},
+    {n:"Podcast",u:"Podcast",s:"Podcast",l:"../../../../podcast/index.html",c:"#E8A87C"},
+    {n:"ESI",u:"ESI",s:"ESI",l:"../../../../esi.html",c:"#14B8A6"},
+    {n:"EAI",u:"EAI",s:"EAI",l:"../../../../eai.html",c:"#22C55E"}
+
+  ];
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('globalSearch');
+  var results = document.getElementById('searchOverlayResults');
+  if(!overlay||!input||!results)return;
+  function filter(val){
+    results.innerHTML='';
+    if(!val.trim()){results.classList.remove('active');return;}
+    var q=val.toLowerCase().trim();
+    var m=topics.filter(function(t){return t.n.toLowerCase().indexOf(q)!==-1||t.u.toLowerCase().indexOf(q)!==-1||t.s.toLowerCase().indexOf(q)!==-1;});
+    if(!m.length){results.innerHTML='<div class="search-no-results">No se encontraron temas.</div>';}
+    else{m.slice(0,12).forEach(function(t){var a=document.createElement('a');a.href=t.l;a.className='search-result-item';
+      var badge=document.createElement('span');badge.className='sr-unit-badge';badge.style.background=t.c+'20';badge.style.color=t.c;badge.textContent=t.u;
+      var name=document.createElement('span');name.className='sr-name';name.textContent=t.n;
+      var sub=document.createElement('span');sub.className='sr-subhub';sub.textContent=t.s;
+      a.appendChild(badge);a.appendChild(name);a.appendChild(sub);results.appendChild(a);});}
+    results.classList.add('active');
+  }
+  input.addEventListener('input',function(){filter(this.value);});
+  input.addEventListener('focus',function(){if(this.value.trim())filter(this.value);});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.style.display='flex';setTimeout(function(){input.focus();},100);document.body.style.overflow='hidden';}
+    if(e.key==='Escape'){overlay.style.display='none';document.body.style.overflow='';}
+  });
+})();
+</script>
+</body></html>

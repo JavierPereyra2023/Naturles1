@@ -194,57 +194,58 @@
         La clasificación más usada en la escuela secundaria divide a los seres vivos en cinco grandes reinos, propuesta por el ecólogo Robert Whittaker en 1969. Cada reino agrupa organismos con características comunes en cuanto a su tipo de célula, su nutrición y su organización.
       </p>
 
-      <div class="space-y-5">
-        <div class="p-5 bg-natura-dark border-t-2 border-natura-bio">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-bio" data-icon="lucide:microscope" data-width="22"></span>
-            <h3 class="font-heading text-xl font-bold text-white">Reino Monera</h3>
-          </div>
-          <p class="text-lg text-natura-silverDark leading-relaxed">
-            Organismos <strong class="text-white">unicelulares procariotas</strong>. Son los más antiguos y abundantes del planeta. Incluye a las <strong class="text-white">bacterias</strong> y a las cianobacterias (algas verde-azuladas). Algunas bacterias son beneficiosas (flora intestinal), otras causan enfermedades. Se reproducen por bipartición y pueden vivir en casi cualquier ambiente.
-          </p>
-        </div>
-
-        <div class="p-5 bg-natura-dark border-t-2 border-natura-green">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-green" data-icon="lucide:droplets" data-width="22"></span>
-            <h3 class="font-heading text-xl font-bold text-white">Reino Protista</h3>
-          </div>
-          <p class="text-lg text-natura-silverDark leading-relaxed">
-            Organismos <strong class="text-white">unicelulares y pluricelulares simples eucariotas</strong>. Es un grupo muy diverso que incluye protozoos (como la ameba y el paramecio) y algas unicelulares (como las diatomeas). Son acuáticos en su mayoría. Algunos son autótrofos, otros heterótrofos. Es el reino más heterogéneo.
-          </p>
-        </div>
-
-        <div class="p-5 bg-natura-dark border-t-2 border-natura-energy">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-energy" data-icon="lucide:bean" data-width="22"></span>
-            <h3 class="font-heading text-xl font-bold text-white">Reino Fungi</h3>
-          </div>
-          <p class="text-lg text-natura-silverDark leading-relaxed">
-            Los <strong class="text-white">hongos</strong>. Son eucariotas, unicelulares (levaduras) o pluricelulares (mohos, setas). Son <strong class="text-white">heterótrofos por absorción</strong>: secretan enzimas al exterior, digieren el alimento fuera de su cuerpo y luego absorben los nutrientes. Tienen pared celular de quitina. Son grandes descomponedores de los ecosistemas.
-          </p>
-        </div>
-
-        <div class="p-5 bg-natura-dark border-t-2 border-natura-leaf">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-leaf" data-icon="lucide:leafy-green" data-width="22"></span>
-            <h3 class="font-heading text-xl font-bold text-white">Reino Plantae</h3>
-          </div>
-          <p class="text-lg text-natura-silverDark leading-relaxed">
-            Las <strong class="text-white">plantas</strong>. Eucariotas pluricelulares, <strong class="text-white">autótrofas</strong>: realizan fotosíntesis gracias a los cloroplastos. Tienen pared celular de celulosa. Incluye musgos, helechos, gimnospermas (coníferas) y angiospermas (plantas con flor). Son la base de la mayoría de las cadenas tróficas terrestres.
-          </p>
-        </div>
-
-        <div class="p-5 bg-natura-dark border-t-2 border-natura-water">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="iconify text-natura-water" data-icon="lucide:paw-print" data-width="22"></span>
-            <h3 class="font-heading text-xl font-bold text-white">Reino Animalia</h3>
-          </div>
-          <p class="text-lg text-natura-silverDark leading-relaxed">
-            Los <strong class="text-white">animales</strong>. Eucariotas pluricelulares, <strong class="text-white">heterótrofos por ingestión</strong>. Sin pared celular. La mayoría tiene capacidad de movimiento en alguna etapa de su vida. Incluye desde esponjas y medusas hasta insectos, peces, aves y mamíferos. Es el reino con mayor número de especies descritas.
-          </p>
-        </div>
+      <div class="mb-6 rounded-xl border border-white/5 bg-natura-dark p-3 overflow-hidden">
+        <object data="../../../assets/biologia/reinos/svg-tabla-reinos.svg" type="image/svg+xml" class="w-full" style="min-height:240px;" aria-label="Tabla comparativa de los 5 reinos"></object>
       </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        <a href="reinos/monera.html" class="p-4 bg-natura-dark border-t-2 border-natura-bio block hover:bg-natura-gray transition-colors">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-bio" data-icon="lucide:microscope" data-width="18"></span>
+            <h3 class="font-heading text-lg font-bold text-white">Monera</h3>
+          </div>
+          <p class="text-sm text-natura-silverDark">Procariotas unicelulares: bacterias y cianobacterias.</p>
+        </a>
+        <a href="reinos/protista.html" class="p-4 bg-natura-dark border-t-2 border-natura-greenLight block hover:bg-natura-gray transition-colors">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-greenLight" data-icon="lucide:droplets" data-width="18"></span>
+            <h3 class="font-heading text-lg font-bold text-white">Protista</h3>
+          </div>
+          <p class="text-sm text-natura-silverDark">Eucariotas diversos: amebas, paramecios, diatomeas.</p>
+        </a>
+        <a href="reinos/fungi.html" class="p-4 bg-natura-dark border-t-2 border-natura-energy block hover:bg-natura-gray transition-colors">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-energy" data-icon="lucide:bean" data-width="18"></span>
+            <h3 class="font-heading text-lg font-bold text-white">Fungi</h3>
+          </div>
+          <p class="text-sm text-natura-silverDark">Hongos: absorción, pared de quitina, descomponedores.</p>
+        </a>
+        <a href="reinos/plantae.html" class="p-4 bg-natura-dark border-t-2 border-natura-leaf block hover:bg-natura-gray transition-colors">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-leaf" data-icon="lucide:leafy-green" data-width="18"></span>
+            <h3 class="font-heading text-lg font-bold text-white">Plantae</h3>
+          </div>
+          <p class="text-sm text-natura-silverDark">Plantas autótrofas con cloroplastos y celulosa.</p>
+        </a>
+        <a href="reinos/animalia.html" class="p-4 bg-natura-dark border-t-2 border-natura-water block hover:bg-natura-gray transition-colors">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-natura-water" data-icon="lucide:paw-print" data-width="18"></span>
+            <h3 class="font-heading text-lg font-bold text-white">Animalia</h3>
+          </div>
+          <p class="text-sm text-natura-silverDark">Animales: ingestión, sin pared, con movimiento.</p>
+        </a>
+        <a href="reinos/virus.html" class="p-4 bg-natura-dark border-t-2 border-red-400 block hover:bg-natura-gray transition-colors">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="iconify text-red-300" data-icon="lucide:shield-question" data-width="18"></span>
+            <h3 class="font-heading text-lg font-bold text-white">Virus</h3>
+          </div>
+          <p class="text-sm text-natura-silverDark">No son un reino. ¿Vivos o no? El gran debate.</p>
+        </a>
+      </div>
+
+      <a href="reinos/index.html" class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-natura-bio border border-natura-bio/30 px-4 py-2.5 hover:bg-natura-bio/10 transition-colors" style="font-family:'Inter',sans-serif;">
+        Explorar hub de Reinos <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+      </a>
     </div>
   </section>
 
@@ -396,6 +397,13 @@
     {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
     {n:"Seres vivos - características",u:"Biología",s:"Seres Vivos",l:"caracteristicas.html",c:"#DC2626"},
     {n:"Clasificación de seres vivos",u:"Biología",s:"Seres Vivos",l:"clasificacion.html",c:"#DC2626"},
+    {n:"Los 5 reinos",u:"Biología",s:"Reinos",l:"reinos/index.html",c:"#DC2626"},
+    {n:"Reino Monera",u:"Biología",s:"Reinos",l:"reinos/monera.html",c:"#DC2626"},
+    {n:"Reino Protista",u:"Biología",s:"Reinos",l:"reinos/protista.html",c:"#14B8A6"},
+    {n:"Reino Fungi",u:"Biología",s:"Reinos",l:"reinos/fungi.html",c:"#3B82F6"},
+    {n:"Reino Plantae",u:"Biología",s:"Reinos",l:"reinos/plantae.html",c:"#22C55E"},
+    {n:"Reino Animalia",u:"Biología",s:"Reinos",l:"reinos/animalia.html",c:"#38BDF8"},
+    {n:"Virus: ¿vivos o no?",u:"Biología",s:"Reinos",l:"reinos/virus.html",c:"#F87171"},
     {n:"Ecosistemas",u:"Biología",s:"Seres Vivos",l:"ecosistemas.html",c:"#DC2626"},
     {n:"Tipos de células",u:"Biología",s:"Células",l:"../celulas/tipos-celulas.html",c:"#DC2626"},
     {n:"Organelas",u:"Biología",s:"Células",l:"../celulas/organelas.html",c:"#DC2626"},

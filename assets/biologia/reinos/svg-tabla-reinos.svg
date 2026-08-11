@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" role="img" aria-labelledby="t d">
+  <title id="t">Tabla comparativa de los 5 reinos</title>
+  <desc id="d">Comparación de Monera, Protista, Fungi, Plantae y Animalia por tipo de célula, organización, nutrición y pared celular.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0E1410}
+      .card{fill:#161C18;stroke:rgba(255,255,255,0.08);stroke-width:1}
+      .h{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+      .b{font-family:Inter,system-ui,sans-serif;font-size:12px;fill:#C8D4CC}
+      .m{font-family:Inter,system-ui,sans-serif;font-size:11px;fill:#A8B5AD}
+      .title{font-family:Georgia,serif;font-size:20px;font-weight:700;fill:#fff}
+      .sub{font-family:Inter,system-ui,sans-serif;font-size:11px;fill:#5A6B60}
+    </style>
+  </defs>
+  <rect width="920" height="420" class="bg" rx="12"/>
+  <text x="40" y="42" class="title">Los 5 reinos · comparación rápida</text>
+  <text x="40" y="64" class="sub">Modelo escolar de Whittaker (1969) · Biología 1°</text>
+
+  <!-- headers -->
+  <g transform="translate(40,90)">
+    <text x="0" y="0" class="h" fill="#5A6B60">Reino</text>
+    <text x="150" y="0" class="h" fill="#5A6B60">Célula</text>
+    <text x="280" y="0" class="h" fill="#5A6B60">Organización</text>
+    <text x="450" y="0" class="h" fill="#5A6B60">Nutrición</text>
+    <text x="640" y="0" class="h" fill="#5A6B60">Pared celular</text>
+  </g>
+
+  <!-- rows -->
+  <g transform="translate(40,110)">
+    <rect width="840" height="52" class="card" rx="8"/>
+    <circle cx="18" cy="26" r="6" fill="#DC2626"/>
+    <text x="34" y="30" class="b" fill="#FCA5A5" font-weight="700">Monera</text>
+    <text x="150" y="30" class="m">Procariota</text>
+    <text x="280" y="30" class="m">Unicelular</text>
+    <text x="450" y="30" class="m">Auto / hetero</text>
+    <text x="640" y="30" class="m">Peptidoglicano</text>
+  </g>
+
+  <g transform="translate(40,172)">
+    <rect width="840" height="52" class="card" rx="8"/>
+    <circle cx="18" cy="26" r="6" fill="#14B8A6"/>
+    <text x="34" y="30" class="b" fill="#5EEAD4" font-weight="700">Protista</text>
+    <text x="150" y="30" class="m">Eucariota</text>
+    <text x="280" y="30" class="m">Uni / pluri simple</text>
+    <text x="450" y="30" class="m">Auto / hetero</text>
+    <text x="640" y="30" class="m">Variable / a veces no</text>
+  </g>
+
+  <g transform="translate(40,234)">
+    <rect width="840" height="52" class="card" rx="8"/>
+    <circle cx="18" cy="26" r="6" fill="#3B82F6"/>
+    <text x="34" y="30" class="b" fill="#93C5FD" font-weight="700">Fungi</text>
+    <text x="150" y="30" class="m">Eucariota</text>
+    <text x="280" y="30" class="m">Uni / pluricelular</text>
+    <text x="450" y="30" class="m">Heterótrofo (absorción)</text>
+    <text x="640" y="30" class="m">Quitina</text>
+  </g>
+
+  <g transform="translate(40,296)">
+    <rect width="840" height="52" class="card" rx="8"/>
+    <circle cx="18" cy="26" r="6" fill="#22C55E"/>
+    <text x="34" y="30" class="b" fill="#86EFAC" font-weight="700">Plantae</text>
+    <text x="150" y="30" class="m">Eucariota</text>
+    <text x="280" y="30" class="m">Pluricelular</text>
+    <text x="450" y="30" class="m">Autótrofo (fotosíntesis)</text>
+    <text x="640" y="30" class="m">Celulosa</text>
+  </g>
+
+  <g transform="translate(40,358)">
+    <rect width="840" height="52" class="card" rx="8"/>
+    <circle cx="18" cy="26" r="6" fill="#38BDF8"/>
+    <text x="34" y="30" class="b" fill="#7DD3FC" font-weight="700">Animalia</text>
+    <text x="150" y="30" class="m">Eucariota</text>
+    <text x="280" y="30" class="m">Pluricelular</text>
+    <text x="450" y="30" class="m">Heterótrofo (ingestión)</text>
+    <text x="640" y="30" class="m">Sin pared</text>
+  </g>
+</svg>
