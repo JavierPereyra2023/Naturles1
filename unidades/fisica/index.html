@@ -140,7 +140,7 @@
   <!-- ===================================================== -->
   <section class="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-natura-black overflow-hidden">
     <div class="absolute inset-0 opacity-[0.50]">
-      <img src="../../assets/fisica/index/physics-hero.jpg" alt="Bobina de Tesla con arcos eléctricos: la física en acción" class="w-full h-full object-cover" style="filter: grayscale(15%) brightness(0.78) contrast(1.08);">
+      <img src="../../assets/fisica/index/physics-hero.jpg" alt="Bobina de Tesla con arcos eléctricos: la física en acción" class="w-full h-full object-cover" style="object-position: 50% 42%; filter: grayscale(15%) brightness(0.78) contrast(1.08);">
     </div>
     <div class="absolute inset-0 bg-gradient-to-b from-natura-black/40 via-natura-black/10 to-natura-black/60"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
@@ -176,12 +176,12 @@
         <span class="text-[11px] font-bold uppercase tracking-[0.3em] text-natura-energy">Temas de la Unidad</span>
       </div>
 
-      <div class="topic-grid grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+      <div class="topic-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 md:gap-5">
 
         <!-- Card 1: Las Energías -->
-        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-100 block">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-100 block lg:col-span-2">
           <div class="topic-card-image h-44 md:h-48 overflow-hidden">
-            <img src="../../assets/fisica/index/energia-card.jpg" alt="Paneles solares al atardecer: las energías renovables en la vida cotidiana" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(30%);">
+            <img src="../../assets/fisica/index/energia-card.jpg" alt="Paneles solares al atardecer: las energías renovables en la vida cotidiana" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="object-position: 50% 58%; filter: grayscale(30%);">
             <div class="grain-overlay"></div>
           </div>
           <div class="topic-card-body p-5 md:p-6">
@@ -214,9 +214,9 @@
         </article>
 
         <!-- Card 2: Intercambios de Energía -->
-        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-200 block">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-200 block lg:col-span-2">
           <div class="topic-card-image h-44 md:h-48 overflow-hidden">
-            <img src="../../assets/fisica/index/calor-card.jpg" alt="Lava volcánica: ejemplo extremo de transferencia de calor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(30%);">
+            <img src="../../assets/fisica/index/calor-card.jpg" alt="Lava volcánica: ejemplo extremo de transferencia de calor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="object-position: 50% 62%; filter: grayscale(30%);">
             <div class="grain-overlay"></div>
           </div>
           <div class="topic-card-body p-5 md:p-6">
@@ -237,9 +237,9 @@
         </article>
 
         <!-- Card 3: Los Movimientos -->
-        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block lg:col-span-2">
           <div class="topic-card-image h-44 md:h-48 overflow-hidden">
-            <img src="../../assets/fisica/movimientos/xy-graph.jpg" alt="Movimientos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(30%);">
+            <img src="../../assets/fisica/movimientos/xy-graph.jpg" alt="Movimientos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="object-position: 50% 45%; filter: grayscale(30%);">
             <div class="grain-overlay"></div>
           </div>
           <div class="topic-card-body p-5 md:p-6">
@@ -260,9 +260,9 @@
         </article>
 
         <!-- Card 4: El Sistema Solar -->
-        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block">
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block lg:col-span-3">
           <div class="topic-card-image h-44 md:h-48 overflow-hidden">
-            <img src="../../assets/fisica/sistema-solar/solar-system-hub.jpg" alt="El Sistema Solar con el Sol y los planetas en sus órbitas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="filter: grayscale(12%);">
+            <img src="../../assets/fisica/sistema-solar/solar-system-hub.jpg" alt="El Sistema Solar con el Sol y los planetas en sus órbitas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="object-position: 50% 52%; filter: grayscale(12%);">
             <div class="grain-overlay"></div>
           </div>
           <div class="topic-card-body p-5 md:p-6">
@@ -282,21 +282,20 @@
           </div>
         </article>
 
-        <!-- Card 5: Las Fuerzas (NUEVA) -->
-        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block md:col-span-2" style="border: 1px solid rgba(59,130,246,0.35);">
-          <div class="topic-card-image h-44 md:h-56 overflow-hidden">
-            <img src="../../assets/fisica/fuerzas/fuerzas-overview.webp" alt="Resumen visual de las fuerzas fundamentales" width="1600" height="900" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;pointer-events:none;">
+        <!-- Card 5: Las Fuerzas -->
+        <article class="content-card topic-card relative bg-natura-gray overflow-hidden group opacity-0 animate-fadeInUp delay-300 block lg:col-span-3">
+          <div class="topic-card-image h-44 md:h-48 overflow-hidden">
+            <img src="../../assets/fisica/fuerzas/fuerzas-overview.webp" alt="Resumen visual de las fuerzas fundamentales" width="1600" height="900" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style="object-position: 50% 34%; pointer-events:none;">
             <div class="grain-overlay"></div>
           </div>
           <div class="topic-card-body p-5 md:p-6">
             <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-energy/15 text-natura-energy px-2 py-0.5">Fuerzas</span>
-                <span class="text-[9px] font-bold uppercase tracking-wider bg-natura-leaf/20 text-natura-leaf px-2 py-0.5">Nuevo · 2026</span>
               </div>
               <span class="iconify text-natura-energy opacity-0 group-hover:opacity-100 transition-opacity" data-icon="lucide:arrow-up-right" data-width="16"></span>
             </div>
-            <h3 class="font-heading text-lg md:text-xl font-bold mb-2"><a href="fuerzas/index.html" class="topic-card-title">Las Fuerzas de la Naturaleza</a></h3>
+            <h3 class="font-heading text-lg md:text-xl font-bold mb-2"><a href="fuerzas/index.html" class="topic-card-title">Fuerzas fundamentales y rozamiento</a></h3>
             <p class="text-xs text-natura-silver leading-relaxed mb-4">
               Las 4 fuerzas fundamentales que rigen todo el universo: gravedad, electromagnetismo, nuclear fuerte y nuclear débil. Más el rozamiento, una fuerza cotidiana que aparece en todo lo que se mueve por contacto. Cada fuerza tiene su página con diagramas y experimentos.
             </p>
@@ -433,7 +432,7 @@
     {n:"LIGO y ondas gravitacionales",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/ligo.html",c:"#3B82F6"},
     {n:"Radiotelescopios",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/radiotelescopios.html",c:"#3B82F6"},
     {n:"Proyecto MAPI",u:"Física",s:"Sistema Solar",l:"../fisica/sistema-solar/mapi.html",c:"#3B82F6"},
-    {n:"Las Fuerzas (sub-unidad)",u:"Física",s:"Fuerzas",l:"../fisica/fuerzas/index.html",c:"#3B82F6"},
+    {n:"Fuerzas fundamentales y rozamiento",u:"Física",s:"Física",l:"../fisica/fuerzas/index.html",c:"#3B82F6"},
     {n:"Gravedad",u:"Física",s:"Fuerzas",l:"../fisica/fuerzas/gravedad.html",c:"#3B82F6"},
     {n:"Electromagnetismo",u:"Física",s:"Fuerzas",l:"../fisica/fuerzas/electromagnetismo.html",c:"#A78BFA"},
     {n:"Fuerza nuclear fuerte",u:"Física",s:"Fuerzas",l:"../fisica/fuerzas/nuclear-fuerte.html",c:"#FB923C"},
