@@ -295,7 +295,23 @@ document.addEventListener('DOMContentLoaded', async function() {
       ';</' + 'script>';
     const responsiveScript = `<script>
       (function () {
+        function removeDownloadControls() {
+          var roots = [document];
+          document.querySelectorAll('*').forEach(function (element) {
+            if (element.shadowRoot) roots.push(element.shadowRoot);
+          });
+          roots.forEach(function (root) {
+            root.querySelectorAll('a[download], button, a').forEach(function (control) {
+              var label = (control.textContent || '').trim();
+              var upperLabel = label.toUpperCase();
+              var isExport = /download|descargar|exportar|export/i.test(label);
+              if (isExport && (upperLabel.indexOf('OBJ') >= 0 || upperLabel.indexOf('GLB') >= 0)) control.remove();
+            });
+          });
+        }
+
         function mountControlsToggle() {
+          removeDownloadControls();
           var panel = document.querySelector('[data-dc-tpl="10"]');
           if (!panel) return false;
           if (document.getElementById('natura-controls-toggle')) return true;
@@ -320,21 +336,29 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         if (!mountControlsToggle()) {
           var observer = new MutationObserver(function () {
-            if (mountControlsToggle()) observer.disconnect();
+            removeDownloadControls();
+            mountControlsToggle();
           });
           observer.observe(document.documentElement, { childList: true, subtree: true });
         }
+        var cleanupAttempts = 0;
+        var cleanupTimer = setInterval(function () {
+          removeDownloadControls();
+          cleanupAttempts += 1;
+          if (cleanupAttempts >= 24) clearInterval(cleanupTimer);
+        }, 250);
       })();
     </` + `script>`;
     const responsiveStyles = `<style id="natura-responsive">
       * { box-sizing: border-box; }
       button, input { touch-action: manipulation; }
+      a[download] { display: none !important; }
       #natura-controls-toggle { display: none; }
       @media (max-width: 700px) {
         #natura-controls-toggle {
           position: fixed; z-index: 8; left: 10px; bottom: 82px;
           display: inline-flex; align-items: center; justify-content: center;
-          min-height: 40px; padding: 8px 13px;
+          min-height: 44px; padding: 8px 13px;
           border: 1px solid rgba(255,255,255,.45); border-radius: 8px;
           background: rgba(12,30,42,.88); color: #fff;
           box-shadow: 0 8px 24px rgba(0,0,0,.28); backdrop-filter: blur(10px);
@@ -381,7 +405,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
         [data-dc-tpl="44"], [data-dc-tpl="45"], [data-dc-tpl="46"],
         [data-dc-tpl="47"], [data-dc-tpl="48"] {
-          min-width: 0 !important; min-height: 42px !important; padding: 4px 2px !important;
+          min-width: 0 !important; min-height: 44px !important; padding: 4px 2px !important;
           font-size: 8px !important; line-height: 1.15 !important;
         }
       }

@@ -73,7 +73,7 @@
   display: flex; gap: 7px; font-family: 'Inter', sans-serif;
 }
 .heart-model-button {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 12px;
   border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
   background: rgba(10,14,20,.84); color: #f3f7f4; backdrop-filter: blur(12px);
   font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
@@ -86,12 +86,12 @@
 .heart-model-shell:fullscreen .heart-model-enter { display: none; }
 .heart-model-shell:fullscreen .heart-model-back { display: inline-flex; }
 @media (max-width: 767px) {
-  .heart-model-frame { height: 560px; }
+  .heart-model-frame { height: clamp(440px, 62svh, 560px); }
   .heart-model-actions { top: 10px; right: 10px; }
-  .heart-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+  .heart-model-button { min-height: 44px; padding: 10px 12px; font-size: 10px; }
 }
 @media (orientation: landscape) and (max-height: 620px) {
-  .heart-model-frame { height: 480px; }
+  .heart-model-frame { height: clamp(360px, calc(100svh - 96px), 480px); }
 }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
@@ -288,17 +288,18 @@
       </p>
       <div class="heart-model-shell" id="heartModelShell">
         <div class="heart-model-actions">
-          <button type="button" class="heart-model-button heart-model-enter" id="heartModelEnter">
+          <button type="button" class="heart-model-button heart-model-enter" id="heartModelEnter" aria-controls="heartModelFrame" aria-expanded="false">
             <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
             Pantalla completa
           </button>
-          <button type="button" class="heart-model-button heart-model-back" id="heartModelBack">
+          <button type="button" class="heart-model-button heart-model-back" id="heartModelBack" aria-controls="heartModelFrame">
             <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
             Volver a la página
           </button>
         </div>
         <iframe
           class="heart-model-frame"
+          id="heartModelFrame"
           src="../../../modelado3D_corazon/atlas-corazon-3d-descargable.html?v=20260729c"
           title="Modelo 3D interactivo del corazón humano"
           loading="lazy"
@@ -727,6 +728,11 @@
   var back = document.getElementById('heartModelBack');
   if(!shell || !enter || !back) return;
 
+  function syncFullscreenState(){
+    var expanded = document.fullscreenElement === shell || document.webkitFullscreenElement === shell;
+    enter.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }
+
   enter.addEventListener('click', function(){
     if(shell.requestFullscreen) shell.requestFullscreen();
     else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
@@ -736,6 +742,9 @@
     if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
     else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
+  document.addEventListener('fullscreenchange', syncFullscreenState);
+  document.addEventListener('webkitfullscreenchange', syncFullscreenState);
+  syncFullscreenState();
 })();
 </script>
 </body>

@@ -68,7 +68,7 @@
       display: flex; gap: 7px; font-family: 'Inter', sans-serif;
     }
     .tidal-model-button {
-      display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+      display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 12px;
       border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
       background: rgba(8,18,28,.84); color: #f3f7f4; backdrop-filter: blur(12px);
       font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
@@ -83,17 +83,17 @@
     .tidal-model-shell:fullscreen .tidal-model-enter { display: none; }
     .tidal-model-shell:fullscreen .tidal-model-back { display: inline-flex; }
     @media (max-width: 767px) {
-      .tidal-model-frame { height: 660px; }
+      .tidal-model-frame { height: clamp(440px, 62svh, 560px); }
       .tidal-model-actions { top: 62px; right: 10px; }
-      .tidal-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+      .tidal-model-button { min-height: 44px; padding: 10px 12px; font-size: 10px; }
     }
     @media (orientation: landscape) and (max-height: 620px) {
-      .tidal-model-frame { height: 560px; }
+      .tidal-model-frame { height: clamp(360px, calc(100svh - 96px), 480px); }
     }
     @media (min-width: 1024px) {
       #simulador-3d {
-        width: min(860px, calc(100vw - 440px));
-        max-width: none;
+        width: min(860px, 100%);
+        max-width: 100%;
       }
       .tidal-model-shell { width: 100%; }
       .tidal-model-frame {
@@ -217,17 +217,18 @@
     </p>
     <div class="tidal-model-shell" id="tidalModelShell">
       <div class="tidal-model-actions">
-        <button type="button" class="tidal-model-button tidal-model-enter" id="tidalModelEnter">
+        <button type="button" class="tidal-model-button tidal-model-enter" id="tidalModelEnter" aria-controls="tidalModelFrame" aria-expanded="false">
           <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
           Pantalla completa
         </button>
-        <button type="button" class="tidal-model-button tidal-model-back" id="tidalModelBack">
+        <button type="button" class="tidal-model-button tidal-model-back" id="tidalModelBack" aria-controls="tidalModelFrame">
           <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
           Volver a la página
         </button>
       </div>
       <iframe
         class="tidal-model-frame"
+        id="tidalModelFrame"
         src="../../../modelo3D_mareomotriz/maqueta-mareomotriz-3d-v2.html?v=20260729b"
         title="Modelo 3D interactivo de un parque mareomotriz"
         loading="lazy"
@@ -462,6 +463,11 @@
   var back = document.getElementById('tidalModelBack');
   if(!shell || !enter || !back) return;
 
+  function syncFullscreenState(){
+    var expanded = document.fullscreenElement === shell || document.webkitFullscreenElement === shell;
+    enter.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }
+
   enter.addEventListener('click', function(){
     if(shell.requestFullscreen) shell.requestFullscreen();
     else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
@@ -471,6 +477,9 @@
     if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
     else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
+  document.addEventListener('fullscreenchange', syncFullscreenState);
+  document.addEventListener('webkitfullscreenchange', syncFullscreenState);
+  syncFullscreenState();
 })();
 </script>
 </body>

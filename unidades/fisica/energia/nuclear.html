@@ -59,15 +59,15 @@
     .nuclear-model-shell { position:relative; overflow:hidden; border:1px solid rgba(59,130,246,.25); border-radius:10px; background:#071018; box-shadow:0 24px 70px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.025) inset; }
     .nuclear-model-frame { display:block; width:100%; height:620px; border:0; background:#071018; }
     .nuclear-model-actions { position:absolute; z-index:10; top:12px; right:12px; display:flex; gap:7px; font-family:'Inter',sans-serif; }
-    .nuclear-model-button { display:inline-flex; align-items:center; gap:6px; min-height:38px; padding:8px 11px; border:1px solid rgba(255,255,255,.22); border-radius:6px; background:rgba(8,18,28,.84); color:#f3f7f4; backdrop-filter:blur(12px); font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:border-color .2s,background .2s; }
+    .nuclear-model-button { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:10px 12px; border:1px solid rgba(255,255,255,.22); border-radius:6px; background:rgba(8,18,28,.84); color:#f3f7f4; backdrop-filter:blur(12px); font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:border-color .2s,background .2s; }
     .nuclear-model-button:hover { border-color:rgba(59,130,246,.75); background:rgba(16,42,52,.94); }
     .nuclear-model-back { display:none; }
     .nuclear-model-shell:fullscreen { width:100vw; height:100vh; border:0; border-radius:0; background:#071018; }
     .nuclear-model-shell:fullscreen .nuclear-model-frame { width:100%; height:100%; }
     .nuclear-model-shell:fullscreen .nuclear-model-enter { display:none; }
     .nuclear-model-shell:fullscreen .nuclear-model-back { display:inline-flex; }
-    @media (max-width:767px) { .nuclear-model-frame{height:660px} .nuclear-model-actions{top:10px;right:10px} .nuclear-model-button{min-height:34px;padding:7px 9px;font-size:9px} }
-    @media (orientation:landscape) and (max-height:620px) { .nuclear-model-frame{height:560px} }
+    @media (max-width:767px) { .nuclear-model-frame{height:clamp(440px,62svh,560px)} .nuclear-model-actions{top:10px;right:10px} .nuclear-model-button{min-height:44px;padding:10px 12px;font-size:10px} }
+    @media (orientation:landscape) and (max-height:620px) { .nuclear-model-frame{height:clamp(360px,calc(100svh - 96px),480px)} }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
   <link rel="stylesheet" href="../../../assets/fisica/energia/energy-hero.css">
@@ -185,10 +185,10 @@
     <p class="mb-5 border-l-2 border-natura-energy/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;"><strong class="text-natura-energy">Modelo educativo:</strong> representa una central PWR conceptual. No reproduce exactamente Atucha, Embalse ni una instalación nuclear específica.</p>
     <div class="nuclear-model-shell" id="nuclearModelShell">
       <div class="nuclear-model-actions">
-        <button type="button" class="nuclear-model-button nuclear-model-enter" id="nuclearModelEnter"><span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>Pantalla completa</button>
-        <button type="button" class="nuclear-model-button nuclear-model-back" id="nuclearModelBack"><span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>Volver a la página</button>
+        <button type="button" class="nuclear-model-button nuclear-model-enter" id="nuclearModelEnter" aria-controls="nuclearModelFrame" aria-expanded="false"><span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>Pantalla completa</button>
+        <button type="button" class="nuclear-model-button nuclear-model-back" id="nuclearModelBack" aria-controls="nuclearModelFrame"><span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>Volver a la página</button>
       </div>
-      <iframe class="nuclear-model-frame" src="../../../modelo3D-central_nuclear/central-nuclear-3d.html?v=20260808b" title="Modelo 3D interactivo de una central nuclear de agua a presión" loading="lazy" allow="fullscreen"></iframe>
+      <iframe class="nuclear-model-frame" id="nuclearModelFrame" src="../../../modelo3D-central_nuclear/central-nuclear-3d.html?v=20260811d" title="Modelo 3D interactivo de una central nuclear de agua a presión" loading="lazy" allow="fullscreen"></iframe>
     </div>
   </section>
 
@@ -440,6 +440,10 @@
   var enter=document.getElementById('nuclearModelEnter');
   var back=document.getElementById('nuclearModelBack');
   if(!shell||!enter||!back)return;
+  function syncFullscreenState(){
+    var expanded=document.fullscreenElement===shell||document.webkitFullscreenElement===shell;
+    enter.setAttribute('aria-expanded',expanded?'true':'false');
+  }
   enter.addEventListener('click',function(){
     if(shell.requestFullscreen)shell.requestFullscreen();
     else if(shell.webkitRequestFullscreen)shell.webkitRequestFullscreen();
@@ -448,6 +452,9 @@
     if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen();
     else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();
   });
+  document.addEventListener('fullscreenchange',syncFullscreenState);
+  document.addEventListener('webkitfullscreenchange',syncFullscreenState);
+  syncFullscreenState();
 })();
 </script>
 </body>

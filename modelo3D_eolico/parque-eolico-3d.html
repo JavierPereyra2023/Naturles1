@@ -289,6 +289,19 @@ document.addEventListener('DOMContentLoaded', async function() {
     // The manifest bytes are ours; SRI protects against CDN compromise, not this.
     template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
     template = template.replace('Parque Eólico Valle Norte', 'Parque Eólico Los Teros');
+    template = template.replace('Cámaras cinematográficas', 'Vistas del parque');
+    template = template.replace('Flujo ambiental', 'Cómo circula el viento');
+    template = template.replace('Viento natural', 'Velocidad del viento');
+    template = template.replace('línea AT → reductora → pueblo', 'línea de alta tensión → subestación que baja la tensión → pueblo');
+    template = template.replace('preserveDrawingBuffer: true', 'preserveDrawingBuffer: false');
+    template = template.replace(
+      'Math.min(window.devicePixelRatio || 1, 1.75)',
+      'Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.25 : 1.75)'
+    );
+    template = template.replace(
+      "this.renderer.setSize(w, h); this.camera.aspect = w / h; this.camera.updateProjectionMatrix();",
+      "this.renderer.setSize(w, h); const compact = window.innerWidth < 700; const topBand = compact ? 155 : 0; const bottomBand = compact ? 225 : 0; const sceneH = Math.max(240, h - topBand - bottomBand); this.renderer.setScissorTest(compact); this.renderer.setViewport(0, bottomBand, w, sceneH); this.renderer.setScissor(0, bottomBand, w, sceneH); this.camera.aspect = w / sceneH; this.camera.updateProjectionMatrix();"
+    );
 
     const resourceScript = '<script>window.__resources = ' +
       JSON.stringify(resourceMap).replace(/<\//g, '<\\/') +
@@ -310,41 +323,41 @@ document.addEventListener('DOMContentLoaded', async function() {
         text-decoration: none; white-space: nowrap; cursor: pointer;
       }
       .natura-model-nav-button:hover { border-color: rgba(232,180,106,.75); background: rgba(37,31,25,.92); }
-      .natura-model-compact [data-dc-tpl="19"],
       .natura-model-compact [data-dc-tpl="54"] { display: none !important; }
       @media (max-width: 700px) {
-        .natura-model-standalone [data-dc-tpl="19"],
         .natura-model-standalone [data-dc-tpl="54"] { display: none !important; }
         #natura-model-nav { top: 118px; width: calc(100% - 20px); }
-        .natura-model-nav-button { flex: 1; padding: 7px 8px; font-size: 8.5px; white-space: normal; text-align: center; }
+        .natura-model-nav-button { flex: 1; min-height: 44px; padding: 8px; font-size: 10px; white-space: normal; text-align: center; }
         [data-dc-tpl="7"] { padding: 10px !important; gap: 8px !important; }
         [data-dc-tpl="8"] { width: 42% !important; max-width: 155px !important; padding: 9px 10px 10px !important; gap: 3px !important; }
-        [data-dc-tpl="9"] { font-size: 8px !important; line-height: 1.25 !important; letter-spacing: .16em !important; }
+        [data-dc-tpl="9"] { font-size: 10px !important; line-height: 1.25 !important; letter-spacing: .12em !important; }
         [data-dc-tpl="10"] { font-size: 18px !important; line-height: 1.08 !important; }
         [data-dc-tpl="11"] { width: 55% !important; gap: 5px !important; }
         [data-dc-tpl="12"] { display: none !important; }
         [data-dc-tpl="13"] { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; width: 100% !important; gap: 4px !important; }
         [data-dc-tpl="14"], [data-dc-tpl="15"], [data-dc-tpl="16"], [data-dc-tpl="17"] {
-          min-height: 38px !important; padding: 6px 5px !important; font-size: 9px !important;
+          min-height: 44px !important; padding: 7px 6px !important; font-size: 10px !important;
           line-height: 1.12 !important; letter-spacing: .01em !important;
         }
-        [data-dc-tpl="18"] { font-size: 8px !important; line-height: 1.25 !important; padding: 4px 6px !important; text-align: right !important; }
+        [data-dc-tpl="18"] { font-size: 10px !important; line-height: 1.25 !important; padding: 5px 7px !important; text-align: right !important; }
         [data-dc-tpl="19"] {
-          left: 10px !important; right: 10px !important; bottom: 68px !important; width: auto !important;
-          padding: 11px 12px !important; gap: 8px !important;
+          left: 10px !important; right: 10px !important; bottom: 10px !important; width: auto !important;
+          max-height: 215px !important; overflow-y: auto !important;
+          padding: 12px !important; gap: 9px !important;
+          background: rgba(13,17,22,.96) !important; backdrop-filter: none !important;
         }
         [data-dc-tpl="20"], [data-dc-tpl="31"] { gap: 6px !important; }
-        [data-dc-tpl="22"], [data-dc-tpl="33"], [data-dc-tpl="41"] { font-size: 8.5px !important; letter-spacing: .14em !important; }
-        [data-dc-tpl="23"], [data-dc-tpl="34"] { font-size: 11px !important; }
-        [data-dc-tpl="24"], [data-dc-tpl="36"] { min-height: 22px !important; }
-        [data-dc-tpl="25"] { font-size: 9px !important; }
-        [data-dc-tpl="30"], [data-dc-tpl="38"] { display: none !important; }
+        [data-dc-tpl="22"], [data-dc-tpl="33"], [data-dc-tpl="41"] { font-size: 10px !important; letter-spacing: .12em !important; }
+        [data-dc-tpl="23"], [data-dc-tpl="34"] { font-size: 12px !important; }
+        [data-dc-tpl="24"], [data-dc-tpl="36"] { min-height: 44px !important; }
+        [data-dc-tpl="25"] { font-size: 10px !important; }
+        [data-dc-tpl="30"], [data-dc-tpl="31"], [data-dc-tpl="38"] { display: none !important; }
         [data-dc-tpl="39"] { gap: 10px !important; }
         [data-dc-tpl="43"] { font-size: 27px !important; }
         [data-dc-tpl="45"] { height: 38px !important; }
         [data-dc-tpl="46"] { gap: 7px !important; }
         [data-dc-tpl="47"], [data-dc-tpl="51"] { padding: 6px 7px !important; }
-        [data-dc-tpl="48"], [data-dc-tpl="52"] { font-size: 8px !important; letter-spacing: .1em !important; }
+        [data-dc-tpl="48"], [data-dc-tpl="52"] { font-size: 9.5px !important; letter-spacing: .08em !important; }
         [data-dc-tpl="49"] { font-size: 12px !important; }
         [data-dc-tpl="53"] { font-size: 10px !important; }
         [data-dc-tpl="54"] {
@@ -380,6 +393,22 @@ document.addEventListener('DOMContentLoaded', async function() {
     // createElement so they execute, awaiting onload for src scripts to
     // preserve ordering (React before ReactDOM before Babel before text/babel).
     const doc = new DOMParser().parseFromString(template, 'text/html');
+    doc.title = 'Parque Eólico Los Teros — modelo 3D interactivo';
+    const windRange = doc.querySelector('input[type="range"][max="3"]');
+    if (windRange) {
+      windRange.setAttribute('aria-label', 'Velocidad del viento');
+      windRange.setAttribute('aria-valuetext', 'Baja, media, alta o tormenta');
+    }
+    const hourRange = doc.querySelector('input[type="range"][max="23.9"]');
+    if (hourRange) {
+      hourRange.setAttribute('aria-label', 'Hora del día, control visual');
+      hourRange.setAttribute('aria-description', 'Cambia la iluminación, no la potencia del viento');
+    }
+    const powerChart = doc.querySelector('canvas');
+    if (powerChart) {
+      powerChart.setAttribute('role', 'img');
+      powerChart.setAttribute('aria-label', 'Evolución reciente de la potencia del parque en megavatios');
+    }
     doc.body.insertAdjacentHTML('beforeend', standaloneControls);
     if (window.self === window.top) doc.documentElement.classList.add('natura-model-standalone');
     document.documentElement.replaceWith(doc.documentElement);
@@ -432,6 +461,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
       window.Babel.transformScriptTags();
     }
+    let modelInViewport = true;
+    function syncModelActivity() {
+      const modelActive = modelInViewport && !document.hidden;
+      const model = window.__eol;
+      if (!model || !model.renderer) return;
+      if (!modelActive) {
+        cancelAnimationFrame(model.raf);
+        model.raf = 0;
+      } else if (!model.raf) {
+        if (model.clock) model.clock.getDelta();
+        model.loop();
+      }
+    }
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'natura:model-visibility') {
+        modelInViewport = event.data.active !== false;
+        syncModelActivity();
+      }
+    });
+    document.addEventListener('visibilitychange', syncModelActivity);
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);
     console.error('Bundle unpack error:', err);

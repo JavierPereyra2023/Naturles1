@@ -71,7 +71,7 @@
   display: flex; gap: 7px; font-family: 'Inter', sans-serif;
 }
 .gut-model-button {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 12px;
   border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
   background: rgba(10,14,20,.84); color: #f3f7f4; backdrop-filter: blur(12px);
   font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
@@ -84,12 +84,12 @@
 .gut-model-shell:fullscreen .gut-model-enter { display: none; }
 .gut-model-shell:fullscreen .gut-model-back { display: inline-flex; }
 @media (max-width: 767px) {
-  .gut-model-frame { height: 560px; }
+  .gut-model-frame { height: clamp(440px, 62svh, 560px); }
   .gut-model-actions { left: 10px; bottom: 10px; }
-  .gut-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+  .gut-model-button { min-height: 44px; padding: 10px 12px; font-size: 10px; }
 }
 @media (orientation: landscape) and (max-height: 620px) {
-  .gut-model-frame { height: 480px; }
+  .gut-model-frame { height: clamp(360px, calc(100svh - 96px), 480px); }
 }
   </style>
   <link rel="stylesheet" href="../../../assets/backgrounds/backgrounds.css">
@@ -478,18 +478,19 @@
       </p>
       <div class="gut-model-shell" id="gutModelShell">
         <div class="gut-model-actions">
-          <button type="button" class="gut-model-button gut-model-enter" id="gutModelEnter">
+          <button type="button" class="gut-model-button gut-model-enter" id="gutModelEnter" aria-controls="gutModelFrame" aria-expanded="false">
             <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
             Pantalla completa
           </button>
-          <button type="button" class="gut-model-button gut-model-back" id="gutModelBack">
+          <button type="button" class="gut-model-button gut-model-back" id="gutModelBack" aria-controls="gutModelFrame">
             <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
             Volver a la página
           </button>
         </div>
         <iframe
           class="gut-model-frame"
-          src="../../../modelo3D-digestivo/sistema-digestivo-3d.html?v=20260810a"
+          id="gutModelFrame"
+          src="../../../modelo3D-digestivo/sistema-digestivo-3d.html?v=20260811d"
           title="Modelo 3D interactivo del sistema digestivo humano"
           loading="lazy"
           allow="fullscreen"
@@ -759,6 +760,11 @@
   var back = document.getElementById('gutModelBack');
   if(!shell || !enter || !back) return;
 
+  function syncFullscreenState(){
+    var expanded = document.fullscreenElement === shell || document.webkitFullscreenElement === shell;
+    enter.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }
+
   enter.addEventListener('click', function(){
     if(shell.requestFullscreen) shell.requestFullscreen();
     else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
@@ -768,6 +774,9 @@
     if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
     else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
+  document.addEventListener('fullscreenchange', syncFullscreenState);
+  document.addEventListener('webkitfullscreenchange', syncFullscreenState);
+  syncFullscreenState();
 })();
 </script>
 </body>

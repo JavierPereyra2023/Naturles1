@@ -107,7 +107,7 @@
       display: flex; gap: 7px; font-family: 'Inter', sans-serif;
     }
     .wind-model-button {
-      display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+      display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 9px 12px;
       border: 1px solid rgba(255,255,255,.18); border-radius: 5px;
       background: rgba(8,12,10,.82); color: #f3f7f4; backdrop-filter: blur(12px);
       font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
@@ -132,8 +132,8 @@
     }
     @media (min-width: 1024px) {
       #simulador-3d {
-        width: min(860px, calc(100vw - 440px));
-        max-width: none;
+        width: min(860px, 100%);
+        max-width: 100%;
       }
       .wind-model-shell { width: 100%; }
       .wind-model-frame {
@@ -231,7 +231,7 @@
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">¿Qué es?</h2>
     </div>
     <p class="article-dropcap text-lg leading-relaxed text-natura-silverLight mb-5">La energía eólica aprovecha la energía cinética del viento para generar electricidad. El viento mueve las aspas de un aerogenerador, que están conectadas a un rotor. Este rotor hace girar un generador eléctrico, produciendo electricidad. Es una de las tecnologías renovables de más rápido crecimiento en el mundo y Argentina es uno de los países con mayor potencial.</p>
-    <p class="text-lg leading-relaxed text-natura-silver mb-4">La cantidad de energía que puede extraerse del viento depende de la velocidad del viento elevada al cubo (<strong class="text-white">P ∝ v³</strong>): si la velocidad del viento se duplica, la potencia disponible se multiplica por ocho. Por eso la ubicación de los parques eólicos es crucial: una pequeña diferencia en la velocidad media del viento tiene un impacto enorme en la producción.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">La cantidad de energía disponible en el viento depende de su velocidad elevada al cubo (<strong class="text-white">P ∝ v³</strong>): si la velocidad del viento se duplica, la potencia disponible se multiplica por ocho. Esta relación es un modelo simplificado para comprender la tendencia general; la potencia real también depende del diseño y de los límites de funcionamiento del aerogenerador. Por eso la ubicación de los parques eólicos es crucial: una pequeña diferencia en la velocidad media del viento puede tener un gran impacto en la producción.</p>
     <p class="text-lg leading-relaxed text-natura-silver mb-4">Los aerogeneradores modernos son máquinas impresionantes: sus torres miden entre 80 y 120 metros de altura (como un edificio de 30 pisos) y el diámetro de sus aspas alcanza los 50 a 100 metros. Cada turbina puede generar entre 2 y 5 MW de potencia, suficiente para abastecer a cientos de hogares.</p>
     <div class="pull-quote">"Si la velocidad del viento se duplica, la potencia disponible en el aerogenerador se multiplica por ocho."</div>
   </section>
@@ -248,24 +248,26 @@
         <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Parque eólico en 3D</h2>
       </div>
     </div>
-    <p class="text-lg leading-relaxed text-natura-silver mb-5">Explorá cómo el viento mueve los aerogeneradores y cómo la electricidad viaja desde el parque hasta el pueblo. Cambiá la velocidad del viento, el ciclo día/noche y la cámara para observar cada parte del sistema.</p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-3">Explorá cómo el viento mueve los aerogeneradores y cómo la electricidad viaja desde el parque hasta el pueblo. Cambiá la velocidad del viento y observá qué sucede con la potencia generada. El control día/noche sólo modifica el aspecto visual de la escena: no cambia la producción eléctrica.</p>
+    <p class="mb-5 border-l-2 border-natura-energy pl-3 text-sm leading-relaxed text-natura-silver" style="font-family:'Inter',sans-serif;"><strong class="text-white">Consigna:</strong> compará una velocidad baja, media y alta. ¿Cómo cambia la potencia cuando aumenta el viento?</p>
     <p class="mb-5 border-l-2 border-natura-energy/60 pl-3 text-xs leading-relaxed text-natura-silverDark" style="font-family:'Inter',sans-serif;">
       <strong class="text-natura-energy">Referencia argentina:</strong> Parque Eólico Los Teros, Azul, provincia de Buenos Aires. El paisaje 3D es una recreación educativa del entorno rural y no una reproducción cartográfica exacta.
     </p>
     <div class="wind-model-shell" id="windModelShell">
       <div class="wind-model-actions">
-        <button type="button" class="wind-model-button wind-model-enter" id="windModelEnter">
+        <button type="button" class="wind-model-button wind-model-enter" id="windModelEnter" aria-controls="windModelFrame" aria-expanded="false">
           <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
           Pantalla completa
         </button>
-        <button type="button" class="wind-model-button wind-model-back" id="windModelBack">
+        <button type="button" class="wind-model-button wind-model-back" id="windModelBack" aria-controls="windModelFrame">
           <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
           Volver a la página
         </button>
       </div>
       <iframe
+        id="windModelFrame"
         class="wind-model-frame"
-        src="../../../modelo3D_eolico/parque-eolico-3d.html?v=20260806"
+        src="../../../modelo3D_eolico/parque-eolico-3d.html?v=20260811c"
         title="Modelo 3D interactivo de un parque eólico"
         loading="lazy"
         allow="fullscreen"
@@ -280,7 +282,7 @@
       <span class="w-8 h-8 bg-natura-energy text-natura-black font-heading font-bold text-sm flex items-center justify-center rounded-sm">2</span>
       <h2 class="font-heading text-2xl md:text-3xl font-bold text-white">Usos</h2>
     </div>
-    <p class="text-lg leading-relaxed text-natura-silver mb-4">El uso principal de la energía eólica es la <strong class="text-white">generación eléctrica</strong> en parques eólicos, que pueden estar en tierra (onshore) o en el mar (offshore). En Argentina, todos los parques eólicos son onshore y se concentran en la Patagonia, aunque también hay proyectos en Buenos Aires y La Rioja.</li></p>
+    <p class="text-lg leading-relaxed text-natura-silver mb-4">El uso principal de la energía eólica es la <strong class="text-white">generación eléctrica</strong> en parques eólicos, que pueden estar en tierra (onshore) o en el mar (offshore). En Argentina, todos los parques eólicos son onshore y se concentran en la Patagonia, aunque también hay proyectos en Buenos Aires y La Rioja.</p>
     <aside class="sidebar-note"><span class="note-label">Molinos tradicionales</span>Antes de la electricidad, los molinos de viento se usaban para moler granos y bombear agua. En Argentina todavía se ven molinos multipala en zonas rurales para extraer agua de pozos, una aplicación clásica de la energía eólica.</aside>
     <ul class="space-y-3 mb-4" style="font-size:1.05rem;line-height:1.6;">
       <li class="flex gap-3"><span class="text-natura-energy mt-1">&#9656;</span><span><strong class="text-white">Parque Eólico Rawson</strong> (Chubut): 250 MW de capacidad, uno de los más grandes del país. Ubicado en la costa atlántica, donde los vientos superan los 11 m/s de promedio.</span></li>
@@ -362,7 +364,7 @@
           <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Bajo costo operativo una vez instalado el aerogenerador.</span></li>
           <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>No emite CO₂ ni contaminantes durante su operación.</span></li>
           <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Crea empleo local en regiones con baja industrialización.</span></li>
-          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Puede generar electricidad las 24 horas (a diferencia de la solar).</span></li>
+          <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>Puede generar electricidad de día y de noche, siempre que haya suficiente viento.</span></li>
           <li class="flex gap-2"><span class="text-natura-greenLight mt-0.5">&#10003;</span><span>El terreno de los parques eólicos puede compartirse con ganadería.</span></li>
         </ul>
       </div>
@@ -508,13 +510,22 @@
   if(!shell || !enter || !back) return;
 
   function syncCompactModel(){
-    if(!frame || !frame.contentDocument) return;
+    if(!frame || !frame.contentDocument || !frame.contentDocument.documentElement) return;
     frame.contentDocument.documentElement.classList.toggle('natura-model-compact', window.innerWidth < 768);
   }
 
   if(frame) frame.addEventListener('load', syncCompactModel);
   window.addEventListener('resize', syncCompactModel, {passive:true});
   syncCompactModel();
+
+  if(frame && 'IntersectionObserver' in window){
+    var modelVisibility = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        frame.contentWindow && frame.contentWindow.postMessage({type:'natura:model-visibility', active:entry.isIntersecting}, '*');
+      });
+    }, {rootMargin:'120px 0px', threshold:0.01});
+    modelVisibility.observe(frame);
+  }
 
   enter.addEventListener('click', function(){
     if(shell.requestFullscreen) shell.requestFullscreen();
@@ -525,6 +536,14 @@
     if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
     else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
+
+  function syncFullscreenState(){
+    var active = document.fullscreenElement === shell || document.webkitFullscreenElement === shell;
+    enter.setAttribute('aria-expanded', active ? 'true' : 'false');
+  }
+  document.addEventListener('fullscreenchange', syncFullscreenState);
+  document.addEventListener('webkitfullscreenchange', syncFullscreenState);
+  syncFullscreenState();
 })();
 </script>
 </body>

@@ -107,7 +107,7 @@
       display: flex; gap: 7px; font-family: 'Inter', sans-serif;
     }
     .solar-model-button {
-      display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 11px;
+      display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 12px;
       border: 1px solid rgba(255,255,255,.22); border-radius: 6px;
       background: rgba(8,18,28,.84); color: #f3f7f4; backdrop-filter: blur(12px);
       font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
@@ -122,17 +122,17 @@
     .solar-model-shell:fullscreen .solar-model-enter { display: none; }
     .solar-model-shell:fullscreen .solar-model-back { display: inline-flex; }
     @media (max-width: 767px) {
-      .solar-model-frame { height: 660px; }
+      .solar-model-frame { height: clamp(440px, 62svh, 560px); }
       .solar-model-actions { top: 62px; right: 10px; }
-      .solar-model-button { min-height: 34px; padding: 7px 9px; font-size: 9px; }
+      .solar-model-button { min-height: 44px; padding: 10px 12px; font-size: 10px; }
     }
     @media (orientation: landscape) and (max-height: 620px) {
-      .solar-model-frame { height: 560px; }
+      .solar-model-frame { height: clamp(360px, calc(100svh - 96px), 480px); }
     }
     @media (min-width: 1024px) {
       #simulador-3d {
-        width: min(860px, calc(100vw - 440px));
-        max-width: none;
+        width: min(860px, 100%);
+        max-width: 100%;
       }
       .solar-model-shell { width: 100%; }
       .solar-model-frame {
@@ -256,17 +256,18 @@
     </p>
     <div class="solar-model-shell" id="solarModelShell">
       <div class="solar-model-actions">
-        <button type="button" class="solar-model-button solar-model-enter" id="solarModelEnter">
+        <button type="button" class="solar-model-button solar-model-enter" id="solarModelEnter" aria-controls="solarModelFrame" aria-expanded="false">
           <span class="iconify" data-icon="lucide:maximize-2" data-width="14"></span>
           Pantalla completa
         </button>
-        <button type="button" class="solar-model-button solar-model-back" id="solarModelBack">
+        <button type="button" class="solar-model-button solar-model-back" id="solarModelBack" aria-controls="solarModelFrame">
           <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
           Volver a la página
         </button>
       </div>
       <iframe
         class="solar-model-frame"
+        id="solarModelFrame"
         src="../../../modelo3D_parque_solar/Parque%20Solar%203D%20(descarga).html?v=20260730"
         title="Modelo 3D interactivo de un parque solar fotovoltaico"
         loading="lazy"
@@ -508,6 +509,11 @@
   var back = document.getElementById('solarModelBack');
   if(!shell || !enter || !back) return;
 
+  function syncFullscreenState(){
+    var expanded = document.fullscreenElement === shell || document.webkitFullscreenElement === shell;
+    enter.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  }
+
   enter.addEventListener('click', function(){
     if(shell.requestFullscreen) shell.requestFullscreen();
     else if(shell.webkitRequestFullscreen) shell.webkitRequestFullscreen();
@@ -517,6 +523,9 @@
     if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
     else if(document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
   });
+  document.addEventListener('fullscreenchange', syncFullscreenState);
+  document.addEventListener('webkitfullscreenchange', syncFullscreenState);
+  syncFullscreenState();
 })();
 </script>
 </body>
