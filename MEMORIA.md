@@ -534,3 +534,54 @@ Dos correcciones de encuadre, por si reaparecen:
 Embebido en `unidades/biologia/cuerpo-humano/digestion.html` (sección `#modelo-3d`,
 después del recorrido del alimento) con el patrón iframe + cache-buster `?v=20260808a`
 y botón de pantalla completa, igual que corazón y pulmón.
+
+---
+
+## Parque eólico 3D: no arrancaba en celulares (2026-08-14)
+
+Síntoma: el modelo se veía perfecto en la computadora y en el celular no cargaba,
+mientras que solar, hidroeléctrico y mareomotriz andaban bien en el mismo teléfono.
+Eso descartó el desempaquetador del bundle (`DecompressionStream`, que faltaría en
+iOS ≤16.3): solar e hidroeléctrico usan exactamente el mismo empaquetador.
+
+Era el costo de dibujado. Medido sobre la escena real, lienzo de 375×690, llamando
+`render()` a mano 40 veces:
+
+| | draw calls | ms/frame |
+|---|---|---|
+| antes | 1548 | 7,56 |
+| ahora (móvil) | 736 | 3,77 |
+
+De dónde salían las 1548: pueblo 640, **hacienda 583**, detalles sueltos 111,
+líneas de viento 65, resto ~149. Contraintuitivo: el pueblo tiene más draw calls
+que la hacienda pero cuesta medio milisegundo, mientras que sacar la hacienda baja
+el frame un 41%. Por eso se ralea la hacienda y **el pueblo se queda entero** — la
+vista "Pueblo" y el recorrido de la electricidad lo necesitan.
+
+Los árboles ya estaban instanciados (3 draw calls para 150 árboles); no eran ellos.
+
+Parches nuevos en la capa de `template.replace(...)` de `parque-eolico-3d.html`,
+todos condicionados a `window.innerWidth < 700`, así que **el escritorio no cambia**
+(verificado: 55 animales, sombras 2048, antialias, 1548 calls, igual que antes):
+
+- Hacienda al 28% (55 → 15 animales). Quedan animales a la vista.
+- `antialias: false` y sombras apagadas.
+- `mapSize` 1024 en vez de 2048 (inerte con sombras apagadas, queda por las dudas).
+
+Y uno para todos los dispositivos: manejador de `webglcontextlost` que muestra
+"El modelo 3D se detuvo…" en castellano. Sin él, un contexto perdido dejaba un
+rectángulo negro y mudo, indistinguible de una página que todavía carga. Probado
+forzando la pérdida con `WEBGL_lose_context`.
+
+Cache-buster del iframe en `unidades/fisica/energia/eolica.html` → `?v=20260814a`.
+
+**Sin verificar en un teléfono real**: las mediciones son de GPU de escritorio con
+el lienzo achicado. La mitad de costo es un hecho; que alcance en el celular del
+profe, no.
+
+### Pendiente, aparte: la curva de potencia
+`P = 3,2 · ((v−3)/9)³` es una cúbica *desplazada*, no la ley cúbica. Da 0,11 MW a
+5 m/s (real ~1,3) y hace que de 5 a 9 m/s la potencia se multiplique por 26 en vez
+de por 5,8 — justo lo que la consigna de la página le pide deducir al alumno.
+Arreglo de una línea, en los dos lugares donde aparece: `3,2 · min(1, v/12)³` con
+corte de arranque en 3 m/s. Mantiene la nominal en "Alta". Sin aplicar.

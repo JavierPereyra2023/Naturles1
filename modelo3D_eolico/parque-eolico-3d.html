@@ -303,6 +303,39 @@ document.addEventListener('DOMContentLoaded', async function() {
       "this.renderer.setSize(w, h); const compact = window.innerWidth < 700; const topBand = compact ? 155 : 0; const bottomBand = compact ? 225 : 0; const sceneH = Math.max(240, h - topBand - bottomBand); this.renderer.setScissorTest(compact); this.renderer.setViewport(0, bottomBand, w, sceneH); this.renderer.setScissor(0, bottomBand, w, sceneH); this.camera.aspect = w / sceneH; this.camera.updateProjectionMatrix();"
     );
 
+    // ── Presupuesto gráfico para teléfonos ──
+    // Medido sobre la escena real (lienzo de 375x690, render directo, 40 frames):
+    // base 7.6 ms/frame · sin hacienda 4.5 ms (-41%) · sin sombras -10%.
+    // El pueblo, pese a sus ~640 draw calls, cuesta medio milisegundo: se queda
+    // entero porque la vista "Pueblo" y el recorrido de la electricidad lo
+    // necesitan. La hacienda es decorativa y es el término dominante, así que
+    // en pantallas chicas se ralea en vez de eliminarse: quedan animales a la
+    // vista, a un cuarto del costo.
+    template = template.replace(
+      "antialias: true, powerPreference: 'high-performance'",
+      "antialias: window.innerWidth >= 700, powerPreference: 'high-performance'"
+    );
+    template = template.replace(
+      'renderer.shadowMap.enabled = true;',
+      'renderer.shadowMap.enabled = window.innerWidth >= 700;'
+    );
+    template = template.replace(
+      'sun.shadow.mapSize.set(2048, 2048);',
+      'sun.shadow.mapSize.set(window.innerWidth < 700 ? 1024 : 2048, window.innerWidth < 700 ? 1024 : 2048);'
+    );
+    template = template.replace(
+      'let ai = 0;\n    for (const f of flocks) {\n      for (let k = 0; k < f.n; k++) {',
+      'let ai = 0;\n    const naturaHerd = window.innerWidth < 700 ? 0.28 : 1;\n    for (const f of flocks) {\n      const naturaN = Math.max(1, Math.round(f.n * naturaHerd));\n      for (let k = 0; k < naturaN; k++) {'
+    );
+
+    // Sin esto, un contexto WebGL perdido (lo que hace un teléfono saturado o
+    // con poca memoria) deja un rectángulo negro y mudo: el alumno no sabe si
+    // la página falló o si todavía está cargando.
+    template = template.replace(
+      'host.appendChild(renderer.domElement);',
+      "host.appendChild(renderer.domElement);\n    renderer.domElement.addEventListener('webglcontextlost', (ev) => {\n      ev.preventDefault();\n      cancelAnimationFrame(this.raf);\n      const aviso = document.createElement('div');\n      aviso.setAttribute('role', 'alert');\n      aviso.style.cssText = 'position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:#0d1116;color:#f4f1ea;font:14px/1.5 Helvetica,Arial,sans-serif;';\n      aviso.innerHTML = '<strong style=\"font-size:16px;\">El modelo 3D se detuvo</strong><span style=\"max-width:34ch;color:rgba(244,241,234,.72);\">Este dispositivo se quedó sin memoria de video. Recargá la página o abrila desde una computadora.</span>';\n      host.appendChild(aviso);\n    });"
+    );
+
     const resourceScript = '<script>window.__resources = ' +
       JSON.stringify(resourceMap).replace(/<\//g, '<\\/') +
       ';</' + 'script>';
@@ -439,10 +472,31 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     const dead = Array.from(document.scripts);
+    const directPackedScripts = new Map([
+      [blobUrls['505cbed0-af35-4d45-891b-a9bac9cdc0ce'], 'three-r137.min.js'],
+      [blobUrls['a7480c4c-0667-4b19-939e-a40a539a420d'], 'OrbitControls.js']
+    ]);
     for (const old of dead) {
       const s = document.createElement('script');
       for (const a of old.attributes) s.setAttribute(a.name, a.value);
       s.textContent = old.textContent;
+      // Los navegadores móviles no siempre ejecutan de forma fiable una
+      // biblioteca grande (Three.js) servida como blob:, aunque luego sí
+      // ejecuten OrbitControls. El resultado es "THREE is not defined".
+      // Ejecutamos solo esos dos recursos directamente desde sus bytes ya
+      // descomprimidos. No se crean nodos script con el código de Three: el
+      // runtime visual reescribe identificadores camelCase dentro de esos
+      // nodos y puede romper shaders. El eval indirecto corre en window y
+      // conserva la semántica global de los scripts clásicos originales.
+      const packedName = directPackedScripts.get(s.src.split('#')[0]);
+      if (packedName) {
+        const packedScript = resourceBlobs[s.src.split('#')[0]];
+        const packedText = packedScript ? await packedScript.text() : '';
+        if (!packedText) throw new Error('No se pudo cargar ' + packedName);
+        (0, eval)(packedText + '\n//# sourceURL=' + packedName);
+        old.remove();
+        continue;
+      }
       // text/babel scripts with a src: read and inline. transformScriptTags
       // does XHR against the src, but blob:null/ from a file:// origin is
       // silently dropped. Inlining makes it a plain inline babel script,
