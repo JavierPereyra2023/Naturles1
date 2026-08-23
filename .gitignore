@@ -11,6 +11,15 @@ __previews/
 __server.log
 __server.err
 
+# Servidor local y utilidades de desarrollo (no forman parte del sitio)
+__server.js
+f.getAttribute('src')
+fresh_screenshot.cjs
+verify_screenshots.cjs
+_test_*.png
+_test_poster*
+neurona-poster-*.png
+
 # Configuracion local de herramientas
 .claude/
 .codex/

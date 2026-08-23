@@ -100,7 +100,7 @@
             .map((u) => {
               const p = d.units[u.id]?.best || 0;
               const level = p >= prize ? 'Premio' : p >= pass ? 'Aprobada' : 'Pendiente';
-              return `<a href="quiz.html?unidad=${u.id}" class="quiz-card" style="--area:${area[u.area].color}"><span class="iconify" data-icon="${u.icon}"></span><div><small>${area[u.area].name} · ${level}</small><h3>${u.title}</h3><p>${p ? `Mejor: ${Math.round(p)} pts · ${d.units[u.id]?.attempts || 0} intentos` : `${u.questions.length} preguntas · 100 pts`}</p></div><b>${p >= pass ? '✓' : '→'}</b></a>`;
+              return `<a href="quiz.html?unidad=${esc(u.id)}" class="quiz-card" style="--area:${esc(area[u.area].color)}"><span class="iconify" data-icon="${esc(u.icon)}"></span><div><small>${esc(area[u.area].name)} · ${esc(level)}</small><h3>${esc(u.title)}</h3><p>${p ? `Mejor: ${Math.round(p)} pts · ${d.units[u.id]?.attempts || 0} intentos` : `${u.questions.length} preguntas · 100 pts`}</p></div><b>${p >= pass ? '✓' : '→'}</b></a>`;
             })
             .join('')
       )
@@ -151,6 +151,7 @@
   };
 
   window.QuizProgress.achievement = achievement;
+  window.QuizProgress.esc = esc;
 
   function diplomaToPDF(svgContent, filename) {
     if (typeof html2pdf === 'undefined') {
@@ -266,7 +267,7 @@
       ? `<p class="text-[11px] font-bold uppercase tracking-[.2em] text-teal-300">Consultar respuestas guardadas</p><div class="mt-3 flex flex-wrap gap-2">${saved
           .map(
             (u) =>
-              `<a href="resultado.html?unidad=${encodeURIComponent(u.id)}" class="rounded-sm border border-teal-300/25 bg-teal-300/5 px-4 py-3 text-xs font-bold text-teal-200 hover:bg-teal-300/10">${u.title} · Ver análisis</a>`
+              `<a href="resultado.html?unidad=${encodeURIComponent(u.id)}" class="rounded-sm border border-teal-300/25 bg-teal-300/5 px-4 py-3 text-xs font-bold text-teal-200 hover:bg-teal-300/10">${esc(u.title)} · Ver análisis</a>`
           )
           .join('')}</div>`
       : '';
